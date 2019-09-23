@@ -7,7 +7,7 @@
  
 
 9/19일
-희준: Direct12를 이용한 3D게임프로그래밍 공부(Vector Part)
+희준: Direct12를 이용한 3D게임프로그래밍 공부(Vector Part), 클라이언트 역할 분담.
 
 시영:
 
