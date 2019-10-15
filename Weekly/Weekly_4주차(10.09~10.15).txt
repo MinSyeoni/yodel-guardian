@@ -5,6 +5,7 @@
 배경 : 전투가 이루어 지는 화성 기지 - 화성 컨셉의 게임 planetbase , 
         전투 시 주변 오브젝트 - 메스 이펙트
         게임 시작 시 총 선택 장소 - 우주선 실내 통로 사진들 처럼
+        미래의 화성 거주지 http://www.techdaily.co.kr/news/articleView.html?idxno=422
         
 
 <다음주 할 것>
