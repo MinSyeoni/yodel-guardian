@@ -14,5 +14,9 @@ UI : 인벤토리 창, 게임 시스템 창 등 플레이어가 켜야 하는 UI
        미니 맵, 체력 바, 총알 등등 플레이 할 때 UI - 콜 오브 듀티3, 배틀필드 4 참고
        http://blog.naver.com/PostView.nhn?blogId=kjm00006&logNo=220742493181&redirect=Dlog&widgetTypeCall=true
 
+Player: TPS 모델 MaseEffect 참고.(다양한 지형과 상호작용 가능)
+Monster: 몬스터,보스 선택(메스이팩트,EarthFall 참고)
+전투 스타일및 보스 :https://youtu.be/23aEBQygx-Q
+
 <다음주 할 것>
 중간고사
