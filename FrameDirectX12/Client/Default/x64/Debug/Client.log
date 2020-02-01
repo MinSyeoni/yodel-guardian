@@ -1,1 +1,17 @@
-﻿  Client.vcxproj -> C:\Users\user\Desktop\FrameDirectX12\Client\Default\../Bin\Client.exe
+﻿  stdafx.cpp
+  BackGround.cpp
+  CubeObject.cpp
+  DynamicCamera.cpp
+  Loading.cpp
+  MainApp.cpp
+  RectObject.cpp
+  Scene_Logo.cpp
+  Scene_Menu.cpp
+  Scene_Stage.cpp
+  StaticObject.cpp
+  Terrain.cpp
+  Client.cpp
+  코드를 생성하고 있습니다...
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\StaticObject.cpp(71): warning C4715: 'CStaticObject::LateInit_GameObject': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  LINK : ..\Bin\Client.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
+  Client.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Default\../Bin\Client.exe

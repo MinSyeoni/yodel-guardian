@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="00.MainFrm">
+      <UniqueIdentifier>{e12ce794-f328-4058-892c-db603d0d9a06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.ToolView">
+      <UniqueIdentifier>{3a302023-1eb4-4748-8685-b6a52bbda229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.ToolDoc">
+      <UniqueIdentifier>{45b590a8-4ff4-41f1-b4e0-ad7bc664d70d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Default">
+      <UniqueIdentifier>{c59e6be1-393a-425c-8b20-09180eec4430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.Header">
+      <UniqueIdentifier>{56de13bf-90d9-4d1e-8987-286d8d21e53c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Tool">
+      <UniqueIdentifier>{30c69d24-5bda-4f11-bd07-7876e855ee38}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainFrm.h">
+      <Filter>00.MainFrm</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolDoc.h">
+      <Filter>02.ToolDoc</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolView.h">
+      <Filter>01.ToolView</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Tool.h">
+      <Filter>03.Tool</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>00.MainFrm</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolDoc.cpp">
+      <Filter>02.ToolDoc</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolView.cpp">
+      <Filter>01.ToolView</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>99.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Tool.cpp">
+      <Filter>03.Tool</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\Tool.ico">
+      <Filter>99.Default</Filter>
+    </Image>
+    <Image Include="res\ToolDoc.ico">
+      <Filter>99.Default</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>99.Default</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Tool.rc">
+      <Filter>99.Default</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\Tool.rc2">
+      <Filter>99.Default</Filter>
+    </None>
+  </ItemGroup>
+</Project>
