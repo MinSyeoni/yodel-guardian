@@ -1,0 +1,44 @@
+﻿  compilation object save succeeded; see C:\Users\user\Desktop\FrameDirectX12\Engine\Bin\Shader_ColorBuffer.cso
+  compilation object save succeeded; see C:\Users\user\Desktop\FrameDirectX12\Engine\Bin\Shader_Default.cso
+  Base.cpp
+  Camera.cpp
+  Component.cpp
+  ComponentMgr.cpp
+  CubeTex.cpp
+  DDSTextureLoader.cpp
+  DirectInput.cpp
+  DirectSound.cpp
+  DynamicMesh.cpp
+  Frame.cpp
+  FrameMgr.cpp
+  GameObject.cpp
+  GraphicDevice.cpp
+C:\Users\user\Desktop\FrameDirectX12\Engine\Code\GraphicDevice.cpp(536,77): error C2664: 'HANDLE CreateEventExW(LPSECURITY_ATTRIBUTES,LPCWSTR,DWORD,DWORD)': 인수 2을(를) 'bool'에서 'LPCWSTR'(으)로 변환할 수 없습니다.
+C:\Users\user\Desktop\FrameDirectX12\Engine\Code\GraphicDevice.cpp(536,47): message : 정수 계열 형식에서 포인터 형식으로 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\synchapi.h(647,1): message : 'CreateEventExW' 선언을 참조하십시오.
+  Info.cpp
+  Layer.cpp
+  Management.cpp
+  MathMgr.cpp
+  ObjectMgr.cpp
+  RcTex.cpp
+  Renderer.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  Scene.cpp
+  Shader.cpp
+  Shader_ColorBuffer.cpp
+  Shader_Default.cpp
+C:\Users\user\Desktop\FrameDirectX12\Engine\Code\Shader_Default.cpp(60,35): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Shader_DefaultTex.cpp
+C:\Users\user\Desktop\FrameDirectX12\Engine\Code\Shader_DefaultTex.cpp(60,35): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  StaticMesh.cpp
+C:\Users\user\Desktop\FrameDirectX12\Engine\Code\StaticMesh.cpp(58,42): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\FrameDirectX12\Engine\Code\StaticMesh.cpp(98,75): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  TerrainTex.cpp
+  Texture.cpp
+  TimeMgr.cpp
+  Timer.cpp
+  Transform.cpp
+  VIBuffer.cpp
+  코드를 생성하고 있습니다...

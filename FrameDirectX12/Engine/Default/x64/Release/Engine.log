@@ -1,0 +1,47 @@
+﻿  GameObject.cpp
+  Management.cpp
+  ObjectMgr.cpp
+  Scene.cpp
+     ../Release\Engine.lib 라이브러리 및 ../Release\Engine.exp 개체를 생성하고 있습니다.
+  코드를 생성하고 있습니다.
+  4 of 2546 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  코드를 생성했습니다.
+  Engine.vcxproj -> D:\02. KPU\00.Project\FrameDirectX12\Engine\Default\../Release\Engine.dll
+  '//'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+  배치 파일이 아닙니다.
+          1개 파일이 복사되었습니다.
+          1개 파일이 복사되었습니다.
+          1개 파일이 복사되었습니다.
+  .\Engine\Code\Base.h
+  .\Engine\Code\Camera.h
+  .\Engine\Code\Component.h
+  .\Engine\Code\ComponentMgr.h
+  .\Engine\Code\DirectInput.h
+  .\Engine\Code\DirectSound.h
+  .\Engine\Code\Frame.h
+  .\Engine\Code\FrameMgr.h
+  .\Engine\Code\GameObject.h
+  .\Engine\Code\GraphicDevice.h
+  .\Engine\Code\GraphicInterface.h
+  .\Engine\Code\Info.h
+  .\Engine\Code\Layer.h
+  .\Engine\Code\Management.h
+  .\Engine\Code\MathMgr.h
+  .\Engine\Code\ObjectMgr.h
+  .\Engine\Code\Renderer.h
+  .\Engine\Code\Scene.h
+  .\Engine\Code\TimeMgr.h
+  .\Engine\Code\Timer.h
+  .\Engine\Code\Transform.h
+         21개 파일이 복사되었습니다.
+  .\Engine\Header\Engine_Const.h
+  .\Engine\Header\Engine_Enum.h
+  .\Engine\Header\Engine_Function.h
+  .\Engine\Header\Engine_Functor.h
+  .\Engine\Header\Engine_Include.h
+  .\Engine\Header\Engine_Macro.h
+  .\Engine\Header\Engine_Struct.h
+  .\Engine\Header\Engine_Typedef.h
+          8개 파일이 복사되었습니다.

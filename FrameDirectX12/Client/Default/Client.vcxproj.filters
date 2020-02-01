@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="99.Etc">
+      <UniqueIdentifier>{e427639d-e918-4a32-949d-9561326119a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.Header">
+      <UniqueIdentifier>{6f905f50-11c2-45a4-91f5-7c78a86264b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.MainApp">
+      <UniqueIdentifier>{d44c419a-06e7-4459-aa0b-865fac6ecdc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Mgr">
+      <UniqueIdentifier>{27876c48-0016-46b3-87e1-89e8fb599f1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene">
+      <UniqueIdentifier>{256c4ed2-d49e-45f9-a77a-d6dfb12066fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject">
+      <UniqueIdentifier>{ca6f4b3b-0852-42ed-89f9-fb933331dd10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.Logo">
+      <UniqueIdentifier>{e1830c16-2d13-49f7-8572-3acdd2330b3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01.Environment">
+      <UniqueIdentifier>{c032b6d9-f4d5-4740-9507-36a2e633f142}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\02.Menu">
+      <UniqueIdentifier>{51fd0ff7-39a3-4557-b9b9-cc8eb69fb283}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\01.Logo">
+      <UniqueIdentifier>{fd93da88-aeef-4df4-a63a-e362f97fa376}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\00.Loading">
+      <UniqueIdentifier>{414ce8cb-454b-482a-95af-49b027ded482}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\03.Stage">
+      <UniqueIdentifier>{af574c80-212e-42e6-9a44-0bbdcdee06c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="96.Camera">
+      <UniqueIdentifier>{fd951fef-76fb-4e49-bf03-6a0843ab4a01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\03.CubeObject">
+      <UniqueIdentifier>{7af8cf58-650d-4246-acac-5d8f4c1df892}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.RectObject">
+      <UniqueIdentifier>{851722c3-688d-47c2-9258-f83785e0772a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\04.Terrain">
+      <UniqueIdentifier>{d57d42e9-c1d5-4ae7-ab26-0bfd6e3d02a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01.Environment\00.StaticObject">
+      <UniqueIdentifier>{b19a86a4-68df-4d09-bad3-6b3ffcf7d9c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.Logo\00.BackGround">
+      <UniqueIdentifier>{95c01a6b-2044-48ee-bb1a-8dfc8e67e3c0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Client.h">
+      <Filter>99.Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>99.Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>99.Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>99.Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Include.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Macro.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Typedef.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Function.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Define.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Const.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\MainApp.h">
+      <Filter>00.MainApp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Extern.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Struct.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Scene_Logo.h">
+      <Filter>01.Scene\01.Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Scene_Menu.h">
+      <Filter>01.Scene\02.Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Scene_Stage.h">
+      <Filter>01.Scene\03.Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\DynamicCamera.h">
+      <Filter>96.Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\CubeObject.h">
+      <Filter>02.GameObject\03.CubeObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\RectObject.h">
+      <Filter>02.GameObject\02.RectObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Terrain.h">
+      <Filter>02.GameObject\04.Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\StaticObject.h">
+      <Filter>02.GameObject\01.Environment\00.StaticObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Loading.h">
+      <Filter>01.Scene\00.Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\BackGround.h">
+      <Filter>02.GameObject\00.Logo\00.BackGround</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Client.cpp">
+      <Filter>99.Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>99.Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MainApp.cpp">
+      <Filter>00.MainApp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_Logo.cpp">
+      <Filter>01.Scene\01.Logo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_Menu.cpp">
+      <Filter>01.Scene\02.Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_Stage.cpp">
+      <Filter>01.Scene\03.Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DynamicCamera.cpp">
+      <Filter>96.Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CubeObject.cpp">
+      <Filter>02.GameObject\03.CubeObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RectObject.cpp">
+      <Filter>02.GameObject\02.RectObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Terrain.cpp">
+      <Filter>02.GameObject\04.Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StaticObject.cpp">
+      <Filter>02.GameObject\01.Environment\00.StaticObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Loading.cpp">
+      <Filter>01.Scene\00.Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BackGround.cpp">
+      <Filter>02.GameObject\00.Logo\00.BackGround</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Client.ico">
+      <Filter>99.Etc</Filter>
+    </Image>
+    <Image Include="small.ico">
+      <Filter>99.Etc</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Client.rc">
+      <Filter>99.Etc</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

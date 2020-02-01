@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="99.Header">
+      <UniqueIdentifier>{27a4b60c-2936-44ba-a483-6cda39601e9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.System">
+      <UniqueIdentifier>{e9687ef1-840a-43c5-9d6f-9240100c6635}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.System\01.Timer">
+      <UniqueIdentifier>{59f0d8ce-d282-4de3-8a79-d28f380e70fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.System\02.Frame">
+      <UniqueIdentifier>{6cfc3cd7-b856-427a-8588-c5467aa5bc53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.System\03.Font">
+      <UniqueIdentifier>{39d6bcd8-e4ce-406b-9f83-cf5404180f7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.System\04.DirectInput">
+      <UniqueIdentifier>{d787cd32-3025-4126-afa6-ee3445effca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.System\05.DirectSound">
+      <UniqueIdentifier>{2d949b41-b890-4c7d-9605-44f008804e85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility">
+      <UniqueIdentifier>{25d15806-6753-4698-8252-0d259d186107}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.System\00.GraphicDevice">
+      <UniqueIdentifier>{63498eec-442d-4828-97f4-b35fe4d7f73e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\00.Management">
+      <UniqueIdentifier>{3af95890-89fd-4754-b51d-1598ed115dc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\01.Renderer">
+      <UniqueIdentifier>{c4f09e6e-bfaf-44b5-bd1e-1a0fa586e987}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass">
+      <UniqueIdentifier>{8c53826b-d37b-42d5-9442-cb6a22eb8a11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\00.Scene">
+      <UniqueIdentifier>{73f22853-33a6-4206-a964-d6609d83bb80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\01.ObjectMgr">
+      <UniqueIdentifier>{8ea3fbfb-05f9-471e-8a6d-a992df398391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\02.Layer">
+      <UniqueIdentifier>{ccde5037-aeeb-4d79-bed0-9bbe0ead1970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\03.GameObject">
+      <UniqueIdentifier>{844fb067-0493-4cd3-8a6e-cd6351d36b0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component">
+      <UniqueIdentifier>{8739d43f-a2fa-4003-b81b-b9b97989c024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\03.GameObject\Camera">
+      <UniqueIdentifier>{39491b50-9171-478f-bbd9-cd30107ea05e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.SuperClass">
+      <UniqueIdentifier>{a98cec93-288d-40fd-86a5-817872ac510a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\01.Info">
+      <UniqueIdentifier>{ff2f22a9-7aaf-44e5-a645-fbd8b39f16fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\00.Transform">
+      <UniqueIdentifier>{bfc722dd-6a69-4fa1-ba0f-8a206d87e6e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Mgr">
+      <UniqueIdentifier>{37799aed-be29-4cee-8d59-a49c737f5a54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Mgr\01.MathMgr">
+      <UniqueIdentifier>{12ba79eb-3f19-453e-a53b-bfefe320abdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource">
+      <UniqueIdentifier>{84853c63-f59c-4543-959f-240d1e1cc6ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer">
+      <UniqueIdentifier>{4b038a91-5bc0-4235-b0cf-5cb34bf59bc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\00.RcTex">
+      <UniqueIdentifier>{cf31403f-662b-4d90-8d05-193ecf22fc04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\01.TerrainTex">
+      <UniqueIdentifier>{f783f647-fb48-49d4-b8fa-24cb5194ecfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\02.CubeTex">
+      <UniqueIdentifier>{cd676057-26bf-45cc-9c4e-1af514e2c740}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\03.ScreenTex">
+      <UniqueIdentifier>{8e5e92b5-85ee-46fe-b9c1-a9f40cd070b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\01.Texture">
+      <UniqueIdentifier>{e872ba81-fc89-4dcb-9be6-5b57b47e1e76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader">
+      <UniqueIdentifier>{25632ef7-3f05-4319-9771-036ac9cca6b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh">
+      <UniqueIdentifier>{6138650a-e956-4cdd-a1d7-5402f2177516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\00.Shader_ColorBuffer">
+      <UniqueIdentifier>{ec387493-e82b-409b-8aab-4896b9e9d296}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\01.Shader_Default">
+      <UniqueIdentifier>{501cf58f-257f-4537-b11b-692fdefa37a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\00.StaticMesh">
+      <UniqueIdentifier>{0f2566a2-3fad-47ad-b19b-4d287efadb58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\01.DynamicMesh">
+      <UniqueIdentifier>{3b1d54a2-0a1d-4fe0-ae6a-942d94b802ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\01.Shader_Default\00.MeshShader">
+      <UniqueIdentifier>{e9bf2008-be75-4086-893e-4effc3d2fe2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\01.Shader_Default\01.RcTexShader">
+      <UniqueIdentifier>{61350154-0d6a-454e-95a0-81e7cdddc074}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Header\Engine_Functor.h">
+      <Filter>99.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Engine_Include.h">
+      <Filter>99.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Engine_Macro.h">
+      <Filter>99.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Engine_Struct.h">
+      <Filter>99.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Engine_Typedef.h">
+      <Filter>99.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Engine_Enum.h">
+      <Filter>99.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Engine_Function.h">
+      <Filter>99.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\DirectInput.h">
+      <Filter>00.System\04.DirectInput</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\DirectSound.h">
+      <Filter>00.System\05.DirectSound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Frame.h">
+      <Filter>00.System\02.Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\FrameMgr.h">
+      <Filter>00.System\02.Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Timer.h">
+      <Filter>00.System\01.Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\TimeMgr.h">
+      <Filter>00.System\01.Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\MathMgr.h">
+      <Filter>97.Mgr\01.MathMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\GraphicDevice.h">
+      <Filter>00.System\00.GraphicDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Component.h">
+      <Filter>01.Utility\02.SuperClass\04.Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Transform.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\00.Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\GameObject.h">
+      <Filter>01.Utility\02.SuperClass\03.GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Info.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\01.Info</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Layer.h">
+      <Filter>01.Utility\02.SuperClass\02.Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\ComponentMgr.h">
+      <Filter>01.Utility\02.SuperClass\04.Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Engine_Const.h">
+      <Filter>99.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\ObjectMgr.h">
+      <Filter>01.Utility\02.SuperClass\01.ObjectMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Scene.h">
+      <Filter>01.Utility\02.SuperClass\00.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Management.h">
+      <Filter>01.Utility\00.Management</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Renderer.h">
+      <Filter>01.Utility\01.Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Camera.h">
+      <Filter>01.Utility\02.SuperClass\03.GameObject\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Base.h">
+      <Filter>98.SuperClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\VIBuffer.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\RcTex.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\00.RcTex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Shader.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Shader_ColorBuffer.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\00.Shader_ColorBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Engine_Template.h">
+      <Filter>99.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\CubeTex.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\02.CubeTex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\TerrainTex.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\01.TerrainTex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Engine_Geometry.h">
+      <Filter>99.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Texture.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\01.Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\DDSTextureLoader.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\01.Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\StaticMesh.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\00.StaticMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Shader_Default.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\01.Shader_Default\00.MeshShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Shader_DefaultTex.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\01.Shader_Default\01.RcTexShader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\DynamicMesh.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\01.DynamicMesh</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Code\DirectInput.cpp">
+      <Filter>00.System\04.DirectInput</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DirectSound.cpp">
+      <Filter>00.System\05.DirectSound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FrameMgr.cpp">
+      <Filter>00.System\02.Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Frame.cpp">
+      <Filter>00.System\02.Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Timer.cpp">
+      <Filter>00.System\01.Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TimeMgr.cpp">
+      <Filter>00.System\01.Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MathMgr.cpp">
+      <Filter>97.Mgr\01.MathMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GraphicDevice.cpp">
+      <Filter>00.System\00.GraphicDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Component.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Transform.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\00.Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GameObject.cpp">
+      <Filter>01.Utility\02.SuperClass\03.GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Info.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\01.Info</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Layer.cpp">
+      <Filter>01.Utility\02.SuperClass\02.Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ComponentMgr.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ObjectMgr.cpp">
+      <Filter>01.Utility\02.SuperClass\01.ObjectMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene.cpp">
+      <Filter>01.Utility\02.SuperClass\00.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Management.cpp">
+      <Filter>01.Utility\00.Management</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Renderer.cpp">
+      <Filter>01.Utility\01.Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Camera.cpp">
+      <Filter>01.Utility\02.SuperClass\03.GameObject\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Base.cpp">
+      <Filter>98.SuperClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\VIBuffer.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RcTex.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\00.RcTex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shader.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shader_ColorBuffer.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\00.Shader_ColorBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CubeTex.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\02.CubeTex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TerrainTex.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\01.TerrainTex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Texture.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\01.Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DDSTextureLoader.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\01.Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StaticMesh.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\00.StaticMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shader_Default.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\01.Shader_Default\00.MeshShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shader_DefaultTex.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\01.Shader_Default\01.RcTexShader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DynamicMesh.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\01.DynamicMesh</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\..\Bin\Shader\Shader_ColorBuffer.hlsl">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\00.Shader_ColorBuffer</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Bin\Shader\Shader_Default.hlsl">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\01.Shader_Default</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
