@@ -11,6 +11,10 @@
 
 #include "ToolDoc.h"
 #include "ToolView.h"
+#include "MyForm.h"
+
+#include "TimeMgr.h"
+#include "FrameMgr.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -132,6 +136,25 @@ int CToolApp::ExitInstance()
 	//TODO: 추가한 추가 리소스를 처리합니다.
 	AfxOleTerm(FALSE);
 
+#ifdef _DEBUG
+	COUT_STR("-------------------------");
+	COUT_STR("Destroy Singleton Object");
+	COUT_STR("-------------------------");
+#endif
+
+	_ulong dwRefCnt = 0;
+	if (dwRefCnt = Engine::CFrameMgr::Get_Instance()->Destroy_Instance())
+	{
+		MSG_BOX(L"CFrameMgr Release Failed");
+		return dwRefCnt;
+	}
+
+	if (dwRefCnt = Engine::CTimerMgr::Get_Instance()->Destroy_Instance())
+	{
+		MSG_BOX(L"CTimerMgr Release Failed");
+		return dwRefCnt;
+	}
+
 	return CWinApp::ExitInstance();
 }
 
@@ -181,3 +204,46 @@ void CToolApp::OnAppAbout()
 
 
 
+
+
+BOOL CToolApp::OnIdle(LONG lCount)
+{
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+	if (this->m_pMainWnd->IsIconic())
+	{
+		return FALSE;
+	}
+	else
+	{
+		CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
+		CToolView* pToolView = dynamic_cast<CToolView*>(pMainFrm->m_MainSplitWnd.GetPane(0, 1));
+		CMyForm* pMyForm = dynamic_cast<CMyForm*>(pMainFrm->m_MainSplitWnd.GetPane(0, 0));
+
+		/*____________________________________________________________________
+		프레임 제한에 사용할 Timer를 갱신. (Timer_FPS60)
+		______________________________________________________________________*/
+		Engine::CTimerMgr::Get_Instance()->SetUp_TimeDelta(L"Timer_FPS60");
+		_float fTime_FPS60 = Engine::CTimerMgr::Get_Instance()->Get_TimeDelta(L"Timer_FPS60");
+
+		/*____________________________________________________________________
+		1초에 60번만 호출되도록 조건문 사용.
+		______________________________________________________________________*/
+		if (Engine::CFrameMgr::Get_Instance()->IsPermit_Call(L"Frame60", fTime_FPS60))
+		{
+			/*____________________________________________________________________
+			GameObject들이 공통적으로 사용할 Timer 갱신. (Timer_TimeDelta)
+			______________________________________________________________________*/
+			Engine::CTimerMgr::Get_Instance()->SetUp_TimeDelta(L"Timer_TimeDelta");
+			_float fTime_TimeDelta = Engine::CTimerMgr::Get_Instance()->Get_TimeDelta(L"Timer_TimeDelta");
+
+			pToolView->Update_MainApp(fTime_TimeDelta);
+			pToolView->LateUpdate_MainApp(fTime_TimeDelta);
+			pToolView->Render_MainApp(fTime_TimeDelta);
+
+			pToolView->Invalidate(FALSE);
+		}
+	}
+
+
+	return CWinApp::OnIdle(lCount);
+}

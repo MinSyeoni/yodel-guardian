@@ -3,7 +3,19 @@
 //
 
 #pragma once
+//#include "Base.h"
+#include "GraphicDevice.h"
 
+BEGIN(Engine)
+class CComponentMgr;
+class CObjectMgr;
+class CManagement;
+class CRenderer;
+END
+
+class CToolDoc;
+class CMainFrame;
+class CMyForm;
 
 class CToolView : public CView
 {
@@ -35,11 +47,38 @@ public:
 	virtual void Dump(CDumpContext& dc) const;
 #endif
 
+public:
+	HRESULT			Ready_MainApp();
+	_int			Update_MainApp(const _float& fTimeDelta);
+	_int			LateUpdate_MainApp(const _float& fTimeDelta);
+	HRESULT			Render_MainApp(const _float& fTimeDelta);
+
+
+	Engine::CGraphicDevice*		m_pDeviceClass = nullptr;
+	ID3D12Device*				m_pGraphicDevice = nullptr;
+	ID3D12GraphicsCommandList*	m_pCommandList = nullptr;
+
+private:
+	HRESULT		SetUp_DefaultSetting(CGraphicDevice::WINMODE eMode, const _uint& dwWidth, const _uint& dwHeight);
+
+
+private:
+	CManagement*	m_pManagement = nullptr;
+	CRenderer*		m_pRenderer = nullptr;
+	CObjectMgr*		m_pObjectMgr = nullptr;
+	CComponentMgr*	m_pComponentMgr = nullptr;
+
+	CMainFrame* m_pMainFrm = nullptr;
+	CToolView*	m_pToolView = nullptr;
+	CMyForm*	m_pMyForm = nullptr;
+
 protected:
 
 // 생성된 메시지 맵 함수
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	virtual void OnInitialUpdate();
 };
 
 #ifndef _DEBUG  // ToolView.cpp의 디버그 버전

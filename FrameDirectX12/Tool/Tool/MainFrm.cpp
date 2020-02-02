@@ -7,6 +7,8 @@
 #include "Tool.h"
 
 #include "MainFrm.h"
+#include "MyForm.h"
+#include "ToolView.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -44,6 +46,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
+	SetMenu(NULL);
+
 	//if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP | CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
 	//	!m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
 	//{
@@ -74,11 +78,11 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 	// TODO: CREATESTRUCT cs를 수정하여 여기에서
 	//  Window 클래스 또는 스타일을 수정합니다.
 
-	if (NULL != cs.hMenu)
-	{
-		::DestroyMenu(cs.hMenu);
-		cs.hMenu = NULL;
-	}
+	//if (NULL != cs.hMenu)
+	//{
+	//	::DestroyMenu(cs.hMenu);
+	//	cs.hMenu = NULL;
+	//}
 
 	return TRUE;
 }
@@ -100,3 +104,19 @@ void CMainFrame::Dump(CDumpContext& dc) const
 
 // CMainFrame 메시지 처리기
 
+
+
+BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
+{
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+
+	// 1. 창을 2개로 분할.
+	// CreateStatic: 분할 윈도우를 몇개로 쪼개어 생성할지.
+	m_MainSplitWnd.CreateStatic(this, 1, 2);
+
+	// CreateView: 쪼개진 분할 윈도우 어느 영역에 어떤 뷰를 생성하여 배치할 것인가.
+	m_MainSplitWnd.CreateView(0, 0, RUNTIME_CLASS(CMyForm), CSize(600, g_iWinCY), pContext);
+	m_MainSplitWnd.CreateView(0, 1, RUNTIME_CLASS(CToolView), CSize(g_iWinCX, g_iWinCY), pContext);
+
+	return TRUE/* CFrameWnd::OnCreateClient(lpcs, pContext)*/;
+}

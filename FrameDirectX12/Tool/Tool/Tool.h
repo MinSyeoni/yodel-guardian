@@ -9,7 +9,6 @@
 
 #include "resource.h"       // 주 기호입니다.
 
-
 // CToolApp:
 // 이 클래스의 구현에 대해서는 Tool.cpp을(를) 참조하세요.
 //
@@ -28,6 +27,8 @@ public:
 // 구현입니다.
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
+
+	virtual BOOL OnIdle(LONG lCount);
 };
 
 extern CToolApp theApp;
