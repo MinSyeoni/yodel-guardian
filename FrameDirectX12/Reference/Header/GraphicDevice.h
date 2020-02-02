@@ -40,6 +40,7 @@ private:
 	HRESULT Create_RtvAndDsvDescriptorHeaps();
 	HRESULT Create_RootSig();
 	HRESULT Create_TextureRoot();
+	HRESULT Create_MeshRoot();
 	HRESULT OnResize(const _uint& iWidth, const _uint& iHeight);
 public:
 	ID3D12RootSignature* GetLootSig(_uint eType) { return m_arrSig[eType]; }

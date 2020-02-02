@@ -44,9 +44,15 @@ HRESULT CLoading::Mesh_ForStage(void)
 {
 	Engine::CComponent* pComponent = nullptr;
 
-	pComponent = Engine::CStaticMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Missile/", L"B.X", 1);
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Missile/", L"B.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Missile", ID_STATIC, pComponent), E_FAIL);
+
+
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/DynamicMesh/Weapon/", L"Weapon.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Pig", ID_STATIC, pComponent), E_FAIL);
+
 
 	return S_OK;
 }

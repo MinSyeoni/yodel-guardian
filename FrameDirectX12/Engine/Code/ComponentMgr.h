@@ -10,7 +10,11 @@
 #include "Shader_Default.h"
 #include "Texture.h"
 #include "Shader_DefaultTex.h"
+#include "Shader_Mesh.h"
 #include "StaticMesh.h"
+#include "Mesh.h"
+#include"AnimationControl.h"
+#include "MeshComponent.h"
 BEGIN(Engine)
 
 class ENGINE_DLL CComponentMgr : public CBase

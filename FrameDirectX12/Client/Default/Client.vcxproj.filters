@@ -55,6 +55,12 @@
     <Filter Include="02.GameObject\00.Logo\00.BackGround">
       <UniqueIdentifier>{95c01a6b-2044-48ee-bb1a-8dfc8e67e3c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\05.Stage1">
+      <UniqueIdentifier>{e9df7a78-eb23-40d0-b55e-67f6c4606d8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\05.Stage1\00.DynamicObject">
+      <UniqueIdentifier>{69455796-45a0-4f52-bc51-98c8745c8d9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -126,6 +132,9 @@
     <ClInclude Include="..\Code\BackGround.h">
       <Filter>02.GameObject\00.Logo\00.BackGround</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Dynamic_Object.h">
+      <Filter>02.GameObject\05.Stage1\00.DynamicObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -166,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\BackGround.cpp">
       <Filter>02.GameObject\00.Logo\00.BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Dynamic_Object.cpp">
+      <Filter>02.GameObject\05.Stage1\00.DynamicObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

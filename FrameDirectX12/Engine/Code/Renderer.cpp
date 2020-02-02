@@ -113,6 +113,12 @@ HRESULT CRenderer::Ready_ShaderPrototype()
 	NULL_CHECK_RETURN(pShader, E_FAIL);
 	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_DefaultTex", ID_STATIC, pShader), E_FAIL);
 
+
+	pShader = CShader_Mesh::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pShader, E_FAIL);
+	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_Mesh", ID_STATIC, pShader), E_FAIL);
+
+
 	return S_OK;
 }
 

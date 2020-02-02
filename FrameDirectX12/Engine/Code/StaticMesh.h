@@ -1,9 +1,7 @@
 #pragma once
 
 #include "Component.h"
-#include "VIBuffer.h"
 #include "Shader.h"
-#include "Texture.h"
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
@@ -31,7 +29,7 @@ public:
 		std::vector<_vec3>& vecNormals,
 		std::vector<_vec2>& vecTexCoords,
 		std::vector<unsigned int>& _uiIndices);
-	    vector<CTexture*> GetTexture() { return m_vecTexture; };
+	
 public:
 	D3D12_VERTEX_BUFFER_VIEW Get_VertexBufferView(_uint iIndex) const;
 	D3D12_INDEX_BUFFER_VIEW  Get_IndexBufferView(_uint iIndex)	const;
@@ -42,8 +40,7 @@ private:
 	const aiScene* m_pScene = nullptr;
 	Assimp::Importer m_Importer;
 	vector<MeshEntry> m_entries;
-	vector<CTexture*> m_vecTexture;
-
+	
 
 private:
 	vector<ID3DBlob*>		m_vecVB_CPU;

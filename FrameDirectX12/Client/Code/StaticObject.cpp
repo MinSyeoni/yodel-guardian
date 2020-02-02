@@ -36,7 +36,7 @@ HRESULT CStaticObject::Ready_GameObject()
 
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 	// Buffer
-	m_pMeshCom = static_cast<Engine::CStaticMesh*>(m_pComponentMgr->Clone_Component(m_tMeshInfo.MeshTag.c_str(), COMPONENTID::ID_STATIC));
+	m_pMeshCom = static_cast<Engine::CMesh*>(m_pComponentMgr->Clone_Component(m_tMeshInfo.MeshTag.c_str(), COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pMeshCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Mesh", m_pMeshCom);
 #ifdef _DEBUG
@@ -68,6 +68,7 @@ HRESULT CStaticObject::LateInit_GameObject()
 
 	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture());
 
+	return S_OK;
 }
 
 _int CStaticObject::Update_GameObject(const _float & fTimeDelta)
@@ -111,8 +112,6 @@ void CStaticObject::Render_GameObject(const _float & fTimeDelta)
 
 	m_pMeshCom->Render_Mesh(m_pShaderCom);
 
-
-	//CGraphicDevice::Get_Instance()->Wait_ForGpuComplete();
 }
 
 HRESULT CStaticObject::Add_Component()
@@ -121,7 +120,7 @@ HRESULT CStaticObject::Add_Component()
 
 
 // Shader
-	m_pShaderCom = static_cast<Engine::CShader_Default*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_Default", COMPONENTID::ID_STATIC));
+	m_pShaderCom = static_cast<Engine::CShader_Mesh*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_Mesh", COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
 #ifdef _DEBUG

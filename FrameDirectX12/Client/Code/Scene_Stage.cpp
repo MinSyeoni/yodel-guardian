@@ -5,6 +5,7 @@
 #include "CubeObject.h"
 #include "Terrain.h"
 #include "StaticObject.h"
+#include "Dynamic_Object.h"
 
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
@@ -72,7 +73,9 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_StaticObject", pGameObject), E_FAIL);
 
-
+	pGameObject = CDynamicObject::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_DynamicObject", pGameObject), E_FAIL);
 	return S_OK;
 }
 
@@ -144,6 +147,12 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	tMeshInfo.Scale = _vec3(0.01f, 0.01f, 0.01f);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_StaticObject", L"Missile", &tMeshInfo), E_FAIL);
+
+
+	tMeshInfo.MeshTag = L"Prototype_Pig";
+	tMeshInfo.Pos = _vec3(8.f, 1.f, 0.f);
+	tMeshInfo.Scale = _vec3(0.1f, 0.1f, 0.1f);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_DynamicObject", L"Pig", &tMeshInfo), E_FAIL);
 	return S_OK;
 }
 

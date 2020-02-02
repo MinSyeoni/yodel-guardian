@@ -106,14 +106,26 @@
     <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\00.StaticMesh">
       <UniqueIdentifier>{0f2566a2-3fad-47ad-b19b-4d287efadb58}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\01.DynamicMesh">
-      <UniqueIdentifier>{3b1d54a2-0a1d-4fe0-ae6a-942d94b802ea}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\01.Shader_Default\00.MeshShader">
       <UniqueIdentifier>{e9bf2008-be75-4086-893e-4effc3d2fe2a}</UniqueIdentifier>
     </Filter>
     <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\01.Shader_Default\01.RcTexShader">
       <UniqueIdentifier>{61350154-0d6a-454e-95a0-81e7cdddc074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\02.Shader_Dynamic">
+      <UniqueIdentifier>{e2743817-9917-4051-87b7-f49d1d313e7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\00.AnimationControl">
+      <UniqueIdentifier>{ae4c9109-7d0b-496f-81d6-3b80bf3675fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\01.MeshComponent">
+      <UniqueIdentifier>{fb7024d3-a453-46ea-b304-a6a0c5dec9b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\99.Mesh">
+      <UniqueIdentifier>{391ac4be-4465-41bc-b459-872ad4cf9a87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\02.NaviMesh">
+      <UniqueIdentifier>{c084b9be-8e28-4c55-9aa7-4b3e4b2bc6b8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -240,8 +252,17 @@
     <ClInclude Include="..\Code\Shader_DefaultTex.h">
       <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\01.Shader_Default\01.RcTexShader</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\DynamicMesh.h">
-      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\01.DynamicMesh</Filter>
+    <ClInclude Include="..\Code\MeshComponent.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\01.MeshComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Mesh.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\99.Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Shader_Mesh.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\02.Shader_Dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\AnimationControl.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\00.AnimationControl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -338,8 +359,17 @@
     <ClCompile Include="..\Code\Shader_DefaultTex.cpp">
       <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\01.Shader_Default\01.RcTexShader</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\DynamicMesh.cpp">
-      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\01.DynamicMesh</Filter>
+    <ClCompile Include="..\Code\MeshComponent.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\01.MeshComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Mesh.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\99.Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shader_Mesh.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\02.Shader_Dynamic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\AnimationControl.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\02.Mesh\00.AnimationControl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -348,6 +378,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Bin\Shader\Shader_Default.hlsl">
       <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\01.Shader_Default</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Bin\Shader\Shader_Mesh.hlsl">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\03.Shader\02.Shader_Dynamic</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

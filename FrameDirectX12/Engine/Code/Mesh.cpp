@@ -1,0 +1,86 @@
+#include "Mesh.h"
+
+USING(Engine)
+
+CMesh::CMesh(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
+	:CComponent(pGraphicDevice, pCommandList)
+{
+}
+
+CMesh::CMesh(const CMesh & rhs)
+	:m_pScene(rhs.m_pScene)
+	,m_pMeshComponent(rhs.m_pMeshComponent)
+	, m_pAnimationComponent(rhs.m_pAnimationComponent)
+{
+	m_pMeshComponent->AddRef();
+	m_pAnimationComponent->AddRef();
+}
+
+
+
+vector<_matrix> CMesh::ExtractBoneTransforms(float fanimationTime, const int animationIndex)
+{
+	return m_pAnimationComponent->ExtractBoneTransforms(fanimationTime, animationIndex);
+}
+
+HRESULT CMesh::Ready_Mesh(const _tchar * pFilePath, const _tchar * pFileName)
+{
+	lstrcpy(m_szFileName, pFilePath);
+	lstrcat(m_szFileName, pFileName);
+	lstrcpy(m_szFilePath, pFilePath);
+
+	int len = wcslen((wchar_t*)m_szFileName);
+	char* psz = new char[2 * len + 1];
+	wcstombs(psz, (wchar_t*)m_szFileName, 2 * len + 1);
+	string szFullPath = psz;
+	delete[] psz;
+
+	m_pScene = m_Importer.ReadFile(szFullPath.c_str(), aiProcess_Triangulate | aiProcess_GenSmoothNormals
+		| aiProcess_FlipUVs
+		| aiProcess_JoinIdenticalVertices
+		| aiPostProcessSteps::aiProcess_FlipWindingOrder);
+
+	if (m_pScene->mNumMeshes)
+	{
+		m_pMeshComponent = new CMeshComponent(m_pScene, m_pGraphicDevice, m_pCommandList, m_szFilePath);
+
+	}
+	if (m_pScene->mNumAnimations)
+	{
+		m_pAnimationComponent = new CAnimationControl(m_pScene);
+	}
+
+	return S_OK;
+}
+
+void CMesh::Render_Mesh(CShader * pMesh)
+{
+	m_pMeshComponent->Render_Mesh(pMesh);
+
+}
+
+
+CMesh * CMesh::Create(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList, const _tchar * pFilePath, const _tchar * pFileName)
+{
+	CMesh* pInstance = new CMesh(pGraphicDevice, pCommandList);
+
+	if (FAILED(pInstance->Ready_Mesh(pFilePath, pFileName)))
+		Engine::Safe_Release(pInstance);
+
+	return pInstance;
+
+}
+
+CComponent * CMesh::Clone()
+{
+	return new CMesh(*this);
+}
+
+void CMesh::Free()
+{
+	if(m_pAnimationComponent!=nullptr)
+	Safe_Release(m_pAnimationComponent);
+
+	Safe_Release(m_pMeshComponent);
+
+}

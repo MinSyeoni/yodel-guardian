@@ -111,28 +111,19 @@ HRESULT CTerrain::Add_Component()
 	m_pBufferCom = static_cast<Engine::CTerrainTex*>(m_pComponentMgr->Clone_Component(L"Prototype_TerrainTex", COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pBufferCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Buffer", m_pBufferCom);
-#ifdef _DEBUG
-	COUT_STR("Success CubeObject - Clone BufferCom");
-#endif
 
 	// Shader
 	m_pShaderCom = static_cast<Engine::CShader_Default*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_Default", COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
 
-#ifdef _DEBUG
-	COUT_STR("Success CubeObject - Clone ShaderCom");
-#endif
+
 	//Texture
 	
 	m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture", COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pTexture, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
 
-
-#ifdef _DEBUG
-	COUT_STR("Success CubeObject - Clone TextureCom");
-#endif
 	return S_OK;
 }
 
