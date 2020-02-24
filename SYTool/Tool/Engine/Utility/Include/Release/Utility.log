@@ -1,0 +1,83 @@
+﻿  Calculator.cpp
+..\Code\Calculator.cpp(372): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Code\Calculator.cpp(383): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Code\Calculator.cpp(393): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Code\Calculator.cpp(404): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Code\Calculator.cpp(415): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Code\Calculator.cpp(425): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Code\Calculator.cpp(435): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Code\Calculator.cpp(445): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Code\Calculator.cpp(456): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Code\Calculator.cpp(466): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Code\Calculator.cpp(478): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Code\Calculator.cpp(487): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Code\Calculator.cpp(489): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Camera.cpp
+  Collider.cpp
+  Component.cpp
+  CSCollider.cpp
+  Frustum.cpp
+  GameObject.cpp
+  Layer.cpp
+..\Code\Layer.cpp(22): warning C4101: 'isEnd' :참조되지 않은 지역 변수입니다.
+  Light.cpp
+  LightMgr.cpp
+  Management.cpp
+  Optimization.cpp
+  ProtoMgr.cpp
+  QuadTree.cpp
+  Renderer.cpp
+  RenderTarget.cpp
+  RenderTargetMgr.cpp
+  Scene.cpp
+  Shader.cpp
+  TrailColor.cpp
+  컴파일하고 있습니다...
+  Transform.cpp
+     ../Bin\Utility.lib 라이브러리 및 ../Bin\Utility.exp 개체를 생성하고 있습니다.
+  코드를 생성하고 있습니다.
+  2129 of 2129 functions (100.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  코드를 생성했습니다.
+  Utility.vcxproj -> C:\Users\Leeso\Downloads\Earthfall3\Engine\Utility\Include\../Bin\Utility.dll
+  Utility.vcxproj -> ../Bin\Utility.pdb (Full PDB)
+  .\Engine\Utility\Code\Calculator.h
+  .\Engine\Utility\Code\Camera.h
+  .\Engine\Utility\Code\Collider.h
+  .\Engine\Utility\Code\Component.h
+  .\Engine\Utility\Code\CSCollider.h
+  .\Engine\Utility\Code\Frustum.h
+  .\Engine\Utility\Code\GameObject.h
+  .\Engine\Utility\Code\Layer.h
+  .\Engine\Utility\Code\Light.h
+  .\Engine\Utility\Code\LightMgr.h
+  .\Engine\Utility\Code\Management.h
+  .\Engine\Utility\Code\Optimization.h
+  .\Engine\Utility\Code\ProtoMgr.h
+  .\Engine\Utility\Code\QuadTree.h
+  .\Engine\Utility\Code\Renderer.h
+  .\Engine\Utility\Code\RenderTarget.h
+  .\Engine\Utility\Code\RenderTargetMgr.h
+  .\Engine\Utility\Code\Scene.h
+  .\Engine\Utility\Code\Shader.h
+  .\Engine\Utility\Code\TrailColor.h
+  .\Engine\Utility\Code\Transform.h
+         21개 파일이 복사되었습니다.
+          1개 파일이 복사되었습니다.
+          1개 파일이 복사되었습니다.
+  .\Engine\Headers\Engine_Defines.h
+  .\Engine\Headers\Engine_Enum.h
+  .\Engine\Headers\Engine_Function.h
+  .\Engine\Headers\Engine_Macro.h
+  .\Engine\Headers\Engine_Struct.h
+  .\Engine\Headers\Engine_Typedef.h
+  .\Engine\Headers\Export_Function.h
+  .\Engine\Headers\Export_Resources.h
+  .\Engine\Headers\Export_System.h
+  .\Engine\Headers\Export_Utility.h
+         10개 파일이 복사되었습니다.
+  .\Engine\Headers\Export_Resources.inl
+  .\Engine\Headers\Export_System.inl
+  .\Engine\Headers\Export_Utility.inl
+          3개 파일이 복사되었습니다.
