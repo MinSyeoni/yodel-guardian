@@ -58,6 +58,70 @@ void Engine::CInputDev::Set_InputDev(void)
 	m_pMouse->GetDeviceState(sizeof(m_tMouseState), &m_tMouseState);
 }
 
+HRESULT CInputDev::Inquire_Input_State()
+{
+	if (nullptr == m_pKeyBoard ||
+		nullptr == m_pMouse)
+		return E_FAIL;
+
+	// m_byKeyState배열 중, 누른 키에 해당하는 인덱스배열에 음수를 채운다. 
+	// 단, 눌리지않은 키들에대해서는 항상 0의 값이 담긴다.
+	m_pKeyBoard->GetDeviceState(256, m_byKeyState);
+
+	m_pMouse->GetDeviceState(sizeof(DIMOUSESTATE), &m_tMouseState);
+
+	return NOERROR;
+}
+
+_bool CInputDev::Get_DIKeyUp(_ubyte byKeyID)
+{
+	if (m_byKeyState[byKeyID] & 0x80)
+	{
+		m_bIsKeyPressed[byKeyID] = true;
+		return false;
+	}
+	else if (m_bIsKeyPressed[byKeyID])
+	{
+		m_bIsKeyPressed[byKeyID] = false;
+		return true;
+	}
+
+	return false;
+}
+
+_bool CInputDev::Get_DIKeyDown(_ubyte byKeyID)
+{
+	// 이전에 누른적 없고 현재 눌렸을 때
+	if (!(m_bIsKeyDown[byKeyID]) && (m_byKeyState[byKeyID] & 0x80))
+	{
+		m_bIsKeyDown[byKeyID] = true;
+		return true;
+	}
+	// 현재 누른적 없으나 기존에 눌렸을 때
+	else if (!(m_byKeyState[byKeyID] & 0x80) && (m_bIsKeyDown[byKeyID]))
+	{
+		m_bIsKeyDown[byKeyID] = false;
+		return false;
+	}
+	return false;
+}
+
+_bool CInputDev::Get_DIKeyPressing(_ubyte byKeyID)
+{
+	if (m_byKeyState[byKeyID] & 0x80)
+		return true;
+
+	return false;
+}
+
+_bool CInputDev::Get_DIKeyCombined(_ubyte byFirst, _ubyte bySecond)
+{
+	if (Get_DIKeyDown(bySecond) && (m_byKeyState[byFirst] & 0x80))
+		return true;
+
+	return false;
+}
+
 void Engine::CInputDev::Free(void)
 {
 	Engine::Safe_Release(m_pKeyBoard);

@@ -8,10 +8,31 @@
 #define PCH_H
 
 // 여기에 미리 컴파일하려는 헤더 추가
-
 #include "framework.h"
 #include <afxext.h>
 
+#ifdef _UNICODE
+#if defined _M_IX86
+#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#elif defined _M_X64
+#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='amd64' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#else
+#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#endif
+#endif
+
+// C++ library
+#include <string>
+#include <list>
+#include <vector>
+#include <map>
+#include <algorithm>
+#include <functional>
+#include <fstream>
+
+using namespace std;
+
+// Directx
 #include <d3d9.h>
 #include <d3dx9.h>
 
@@ -19,10 +40,11 @@
 #pragma comment(lib, "d3dx9.lib")
 
 
-#include <string.h>
+// User Headers
 #include "GraphicDev.h"
-//#include "ObjMgr.h"
-
-using namespace std;
+#include "Defines.h"
+#include "Enum.h"
+//#include "PickingMgr.h"
+//#include "CursorMgr.h"
 
 #endif //PCH_H

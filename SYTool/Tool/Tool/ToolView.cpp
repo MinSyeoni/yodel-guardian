@@ -19,6 +19,8 @@
 
 
 // CToolView
+HINSTANCE g_hInst;
+HWND	  g_hWnd;
 
 IMPLEMENT_DYNCREATE(CToolView, CView)
 
@@ -39,6 +41,12 @@ CToolView::CToolView() noexcept
 
 CToolView::~CToolView()
 {
+	Engine::Safe_Release(m_pManagement);
+	Engine::Safe_Release(m_pDevice);
+	Engine::Safe_Release(m_pGraphicDev);
+	Engine::DestroyUtility();
+	Engine::DestroyResources();
+	Engine::DestroySystem();
 }
 
 BOOL CToolView::PreCreateWindow(CREATESTRUCT& cs)
@@ -59,6 +67,7 @@ void CToolView::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
+	Render_MainApp();
 }
 
 
@@ -104,10 +113,73 @@ CToolDoc* CToolView::GetDocument() const // 디버그되지 않은 버전은 인
 
 // CToolView 메시지 처리기
 
+HRESULT CToolView::Render_MainApp()
+{
+	_int			iExitCode = 0;
+
+	if (nullptr == m_pGraphicDev ||
+		nullptr == m_pDevice ||
+		nullptr == m_pManagement )
+		return E_FAIL;
+
+	m_pDevice->SetRenderState(D3DRS_LIGHTING, false);
+	m_pGraphicDev->Render_Begin(D3DXCOLOR(0.f, 0.f, 1.f, 1.f));
+	m_pGraphicDev->Render_End();
+
+	return iExitCode;
+}
+
+_int CToolView::Update_MainApp(const _float& fTimeDelta)
+{
+	_int			iExitCode = 0;
+
+	if (nullptr == m_pManagement)
+		return -1;
+
+	m_pManagement->Update_Scene(fTimeDelta);
+
+	return iExitCode;
+}
+
+HRESULT CToolView::Ready_MainApp()
+{
+	if (FAILED(Ready_Default_Setting(CGraphicDev::MODE_WIN, g_iWinCX, g_iWinCY)))
+		return E_FAIL;
+}
+
+HRESULT  CToolView::Ready_Default_Setting(CGraphicDev::WINMODE eMode, 
+										const _uint& iWinCX,
+										const _uint& iWinCY)
+{
+	if (nullptr == m_pManagement)
+		return E_FAIL;
+
+	if (FAILED(Engine::Ready_GraphicDev(g_hWnd, eMode, iWinCX, iWinCY, &m_pGraphicDev)))
+		return E_FAIL;
+
+	m_pDevice = m_pGraphicDev->GetDevice();
+	NULL_CHECK_RETURN(m_pDevice, E_FAIL);
+	m_pDevice->AddRef();
+
+	if (FAILED(Engine::Ready_Input_Device(g_hInst, g_hWnd)))
+		return E_FAIL;
+
+	return NOERROR;
+}
 
 void CToolView::OnInitialUpdate()
 {
 	CView::OnInitialUpdate();
 
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+	g_hWnd = m_hWnd;
+	g_hInst = AfxGetInstanceHandle();
+
+	m_pManagement = Engine::CManagement::GetInstance();
+	m_pManagement->AddRef();
+
+	//Engine::Create_Management(m_pDevice, &m_pManagement);
+	//m_pManagement->AddRef();
+
+	Ready_MainApp();
 }

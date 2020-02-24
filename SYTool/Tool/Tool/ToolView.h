@@ -5,7 +5,11 @@
 #pragma once
 
 #include "ToolDoc.h"
-#include "Engine_Defines.h"
+#include "Export_Function.h"
+
+BEGIN(Engine)
+class CManagement;
+END
 
 class CToolView : public CView
 {
@@ -43,7 +47,16 @@ protected:
 protected:
 	DECLARE_MESSAGE_MAP()
 public:
+	HRESULT Render_MainApp();
+	_int	Update_MainApp(const _float& fTimeDelta);
+	HRESULT Ready_MainApp();
+	HRESULT Ready_Default_Setting(CGraphicDev::WINMODE eMode, const _uint& iWinCX, const _uint& iWinCY);
 	virtual void OnInitialUpdate();
+
+private:
+	Engine::CGraphicDev*	m_pGraphicDev = nullptr;
+	LPDIRECT3DDEVICE9       m_pDevice = nullptr;
+	CManagement*			m_pManagement = nullptr;
 };
 
 #ifndef _DEBUG  // ToolView.cpp의 디버그 버전

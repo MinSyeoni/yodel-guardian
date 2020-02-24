@@ -23,8 +23,6 @@ CLayer * CManagement::Get_Layer(const _tchar * pLayertag)
 	return nullptr;
 
 	return m_pScene->Get_Layer(pLayertag);
-
-
 }
 
 HRESULT Engine::CManagement::Set_Scene(CScene* pScene)

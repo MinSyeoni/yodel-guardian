@@ -16,7 +16,7 @@ public:
 	void	Set_TimeDelta(void);
 	_float	Get_TimeDelta(void) const;
 	HRESULT	Ready_Timer(void);
-	
+	_float  Compute_TimeDelta();
 
 private:
 	LARGE_INTEGER		m_FrameTime;

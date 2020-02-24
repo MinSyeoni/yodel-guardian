@@ -64,3 +64,22 @@ _float Engine::CTimer::Get_TimeDelta(void) const
 	 return m_fTimeDelta;
 }
 
+
+// 매 프레임마다 한번씩 무한으로 호출된다.
+_float CTimer::Compute_TimeDelta()
+{
+	QueryPerformanceCounter(&m_FrameTime);
+
+	m_fTimeDelta = _float(m_FrameTime.QuadPart - m_FixTime.QuadPart) / _float(m_CpuTick.QuadPart);
+
+	m_FixTime.QuadPart = m_FrameTime.QuadPart;
+
+	// 1초에 한번씩 
+	if ((m_FrameTime.QuadPart - m_LastTime.QuadPart) > m_CpuTick.QuadPart)
+	{
+		QueryPerformanceFrequency(&m_CpuTick);
+		m_LastTime = m_FrameTime;
+	}
+
+	return _float(m_fTimeDelta);
+}

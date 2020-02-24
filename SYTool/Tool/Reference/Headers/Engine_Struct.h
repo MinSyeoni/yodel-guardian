@@ -80,18 +80,13 @@ namespace Engine
 
 	}D3DXMESHCONTAINER_DERIVED;
 
+	//typedef struct tagMeshPath
+	//{
+	//	wstring wstrObjKey = L"";
+	//	wstring wstrName = L"";
+	//	wstring wstrFullpath = L"";
 
-
-	typedef struct tagMeshPath
-	{
-		wstring wstrObjKey = L"";
-		wstring wstrName = L"";
-		wstring wstrFullpath = L"";
-
-	}IMG_PATH;
-
-
-
+	//}IMG_PATH;
 
 }
 

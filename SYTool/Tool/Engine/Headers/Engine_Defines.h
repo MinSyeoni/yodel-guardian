@@ -14,16 +14,20 @@
 #include <process.h>
 #include <iostream>
 #pragma warning(disable : 4251)
-using namespace std;
 
 #define	DIRECTINPUT_VERSION		0x0800
 #include <dinput.h>
+
 
 #include "Engine_Macro.h"
 #include "Engine_Typedef.h"
 #include "Engine_Function.h"
 #include "Engine_Struct.h"
+#include "Engine_Function.h"
 #include "Engine_Enum.h"
+
+using namespace Engine;
+using namespace std;
 
 
 #endif // Engine_Defines_h__
