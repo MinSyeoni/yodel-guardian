@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="99.Default">
+      <UniqueIdentifier>{5a8a4b0f-322a-4238-a339-1ce74fabee59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.Header">
+      <UniqueIdentifier>{500b3138-3960-4dfe-9559-6fbcaea1b66a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.ToolView">
+      <UniqueIdentifier>{f8379048-d574-4455-835f-252d9a22d747}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.MainFrm">
+      <UniqueIdentifier>{0c9acd07-0859-4de6-9608-f8562918f613}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.MainFrm\00.ToolDoc">
+      <UniqueIdentifier>{9c990696-b38f-401e-b565-717ff0dd0c3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.ToolApp">
+      <UniqueIdentifier>{0669c778-0fee-4b43-8991-a1fca6b2f2c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Main">
+      <UniqueIdentifier>{98e0837d-328b-420a-b7de-2b067f83adcb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainFrm.h">
+      <Filter>02.MainFrm</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolDoc.h">
+      <Filter>02.MainFrm\00.ToolDoc</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolView.h">
+      <Filter>01.ToolView</Filter>
+    </ClInclude>
+    <ClInclude Include="Tool.h">
+      <Filter>00.ToolApp</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="MyForm.h">
+      <Filter>03.Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Defines.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Enum.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Function.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Macro.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Typedef.h">
+      <Filter>98.Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>02.MainFrm</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolDoc.cpp">
+      <Filter>02.MainFrm\00.ToolDoc</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolView.cpp">
+      <Filter>01.ToolView</Filter>
+    </ClCompile>
+    <ClCompile Include="Tool.cpp">
+      <Filter>00.ToolApp</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>99.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="MyForm.cpp">
+      <Filter>03.Main</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\Tool.ico">
+      <Filter>99.Default</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>99.Default</Filter>
+    </Image>
+    <Image Include="res\ToolDoc.ico">
+      <Filter>99.Default</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Tool.rc">
+      <Filter>99.Default</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\Tool.rc2">
+      <Filter>99.Default</Filter>
+    </None>
+  </ItemGroup>
+</Project>

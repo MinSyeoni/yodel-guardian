@@ -1,0 +1,2 @@
+﻿  pch.cpp
+c:\users\huijun\desktop\tool\tool\targetver.h(8): fatal error C1083: 포함 파일을 열 수 없습니다. 'SDKDDKVer.h': No such file or directory

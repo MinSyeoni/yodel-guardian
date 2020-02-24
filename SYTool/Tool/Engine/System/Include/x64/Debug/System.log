@@ -1,0 +1,26 @@
+﻿  Font.cpp
+c:\users\huijun\desktop\tool\engine\system\code\font.cpp(31): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+c:\users\huijun\desktop\tool\engine\system\code\font.cpp(31): error C2059: 구문 오류: '상수'
+c:\users\huijun\desktop\tool\engine\system\code\font.cpp(32): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+c:\users\huijun\desktop\tool\engine\system\code\font.cpp(32): error C2059: 구문 오류: '상수'
+  FontMgr.cpp
+  Frame.cpp
+  FrameMgr.cpp
+  GraphicDev.cpp
+  InputDev.cpp
+c:\users\huijun\desktop\tool\engine\system\code\inputdev.cpp(24): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+c:\users\huijun\desktop\tool\engine\system\code\inputdev.cpp(24): error C2059: 구문 오류: '상수'
+c:\users\huijun\desktop\tool\engine\system\code\inputdev.cpp(27): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+c:\users\huijun\desktop\tool\engine\system\code\inputdev.cpp(27): error C2059: 구문 오류: '상수'
+c:\users\huijun\desktop\tool\engine\system\code\inputdev.cpp(40): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+c:\users\huijun\desktop\tool\engine\system\code\inputdev.cpp(40): error C2059: 구문 오류: '상수'
+  KeyMgr.cpp
+  Timer.cpp
+  TimerMgr.cpp
+c:\users\huijun\desktop\tool\engine\system\code\timermgr.cpp(19): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+c:\users\huijun\desktop\tool\engine\system\code\timermgr.cpp(19): error C2059: 구문 오류: '상수'
+c:\users\huijun\desktop\tool\engine\system\code\timermgr.cpp(27): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+c:\users\huijun\desktop\tool\engine\system\code\timermgr.cpp(27): error C2059: 구문 오류: '상수'
+c:\users\huijun\desktop\tool\engine\system\code\timermgr.cpp(46): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+c:\users\huijun\desktop\tool\engine\system\code\timermgr.cpp(46): error C2059: 구문 오류: '상수'
+  코드를 생성하고 있습니다...
