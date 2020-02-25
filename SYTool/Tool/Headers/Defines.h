@@ -8,7 +8,7 @@ using namespace std;
 #include "Function.h"
 #include "Enum.h"
 
-extern	HWND		g_hWnd;
+extern HWND			g_hWnd;
 extern HINSTANCE	g_hInst;
 
 

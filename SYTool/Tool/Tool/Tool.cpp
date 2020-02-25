@@ -11,6 +11,7 @@
 
 #include "ToolDoc.h"
 #include "ToolView.h"
+#include "MyForm.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -129,7 +130,7 @@ BOOL CToolApp::InitInstance()
 
 int CToolApp::ExitInstance()
 {
-	//TODO: 추가한 추가 리소스를 처리합니다.
+	//TODO: 추가한 추가 리소스를 처리합니다.5
 	AfxOleTerm(FALSE);
 
 	return CWinApp::ExitInstance();
@@ -181,3 +182,32 @@ void CToolApp::OnAppAbout()
 
 
 
+
+
+BOOL CToolApp::OnIdle(LONG lCount)
+{
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+	if (this->m_pMainWnd->IsIconic())
+	{
+		return FALSE;
+	}
+	else
+	{
+		CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
+		CToolView* pToolView = dynamic_cast<CToolView*>(pMainFrm->m_MainSplitWnd.GetPane(0, 1));
+		CMyForm* pMyForm = dynamic_cast<CMyForm*>(pMainFrm->m_MainSplitWnd.GetPane(0, 0));
+
+		_float		fTimeDelta_Default = Engine::Compute_Timer(L"Timer_Default");
+
+		if (Engine::IsPermit_Call(L"Frame60", fTimeDelta_Default))
+		{
+			_float		fTimeDelta_60 = Engine::Compute_Timer(L"Timer_60");
+
+			pToolView->Update_MainApp(fTimeDelta_60);
+
+			pToolView->Invalidate(FALSE);
+		}
+	}
+
+	return CWinApp::OnIdle(0);
+}

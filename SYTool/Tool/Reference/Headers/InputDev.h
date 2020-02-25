@@ -19,17 +19,32 @@ private:
 	virtual ~CInputDev(void);
 
 public:
-	_byte	Get_DIKeyState(_ubyte byKeyID) {return m_byKeyState[byKeyID];	}
-	_byte	Get_DIMouseState(MOUSEKEYSTATE eMouse){	return m_tMouseState.rgbButtons[eMouse]; }
-	_long	Get_DIMouseMove(MOUSEMOVESTATE eMouseState)
+	_bool	Get_DIKeyUp(_ubyte byKeyID);
+	_bool	Get_DIKeyDown(_ubyte byKeyID);
+	_bool	Get_DIKeyPressing(_ubyte byKeyID);
+	_bool	Get_DIKeyCombined(_ubyte byFirst, _ubyte bySecond);
+
+public:
+	_byte Get_DIKeyState(_ubyte byKeyID) const
 	{
-		return *(((_long*)&m_tMouseState) + eMouseState);
+		return m_byKeyState[byKeyID];
+	}
+
+	_byte Get_DIMouseState(MOUSEKEYSTATE eMouseBtID) const
+	{
+		return m_tMouseState.rgbButtons[eMouseBtID];
+	}
+
+	_long Get_DIMouseMove(MOUSEMOVESTATE eMouseMoveID) const
+	{
+		return *((_long*)&m_tMouseState + eMouseMoveID);
 	}
 
 
 public:
 	HRESULT Ready_InputDev(HINSTANCE hInst, HWND hWnd);
 	void	Set_InputDev(void);
+	HRESULT Inquire_Input_State();
 
 private:
 	LPDIRECTINPUT8			m_pInputSDK = nullptr;
@@ -40,6 +55,9 @@ private:
 private:
 	_byte					m_byKeyState[256];
 	DIMOUSESTATE			m_tMouseState;
+
+	_bool					m_bIsKeyPressed[256];
+	_bool					m_bIsKeyDown[256];
 
 public:
 	virtual void	Free(void);

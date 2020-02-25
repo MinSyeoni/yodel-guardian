@@ -122,6 +122,50 @@ namespace Engine
 				Pair.second = NULL;
 		}
 	};
+
+	class CFinder_Enum
+	{
+	public:
+		explicit CFinder_Enum(const _uint& pTag)
+			: m_pTargetTag(pTag) {		}
+		~CFinder_Enum() {		}
+	public:
+		template<typename T>
+		bool operator()(const T& pair)
+		{
+			if (m_pTargetTag == pair.first)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+	private:
+		const _uint		m_pTargetTag = -1;
+	};
+
+	class CFinder_Tag
+	{
+	public:
+		explicit CFinder_Tag(const _tchar* pTag)
+			: m_pTargetTag(pTag) {		}
+		~CFinder_Tag() {		}
+	public:
+		template<typename T>
+		bool operator()(const T& pair)
+		{
+			if (0 == lstrcmpW(m_pTargetTag, pair.first))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+	private:
+		const _tchar* m_pTargetTag = nullptr;
+	};
 }
 
 

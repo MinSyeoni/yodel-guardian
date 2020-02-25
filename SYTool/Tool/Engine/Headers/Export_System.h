@@ -4,11 +4,10 @@
 #include "Engine_Defines.h"
 
 #include "GraphicDev.h"
+#include "InputDev.h"
 #include "TimerMgr.h"
 #include "FrameMgr.h"
 #include "FontMgr.h"
-#include "InputDev.h"
-#include "KeyMgr.h"
 
 BEGIN(Engine)
 
@@ -22,14 +21,18 @@ inline HRESULT		Ready_GraphicDev(HWND hWnd,
 	const _uint& iSizeY,
 	Engine::CGraphicDev** ppGraphicDev);
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // TimeMgr
 // Get
 inline _float		Get_TimeDelta(const _tchar* pTimerTag);
 // Set
-inline void		Set_TimeDelta(const _tchar* pTimerTag);
 // General
-inline HRESULT		Ready_Timer(const _tchar* pTimerTag);
+inline HRESULT Add_Timer(const _tchar* pTimerTag);
+inline _float Compute_Timer(const _tchar* pTimerTag);
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // FrameMgr
 // Get
 inline _bool	IsPermit_Call(const _tchar* pFrameTag, const _float& fTimeDelta);
@@ -37,6 +40,8 @@ inline _bool	IsPermit_Call(const _tchar* pFrameTag, const _float& fTimeDelta);
 // General
 inline HRESULT	Ready_Frame(const _tchar* pFrameTag, const _float& fCallLimit);
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // FontMgr
 // Get
 // Set
@@ -53,20 +58,31 @@ inline void		Render_Font(const _tchar* pFontTag,
 	const _vec2* pPos,
 	D3DXCOLOR Color);
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // InputDev
 // Get
 inline _byte	Get_DIKeyState(_ubyte byKeyID);
-inline _byte	Get_DIMouseState(CInputDev::MOUSEKEYSTATE eMouse);
-inline _long	Get_DIMouseMove(CInputDev::MOUSEMOVESTATE eMouseState);
+inline _bool	Get_DIKeyUp(_ubyte byKeyID);
+inline _bool	Get_DIKeyDown(_ubyte byKeyID);
+inline _bool	Get_DIKeyPressing(_ubyte byKeyID);
+inline _bool	Get_DIKeyCombined(_ubyte byFirst, _ubyte bySecond);
+
+inline _byte	Get_DIKeyState(_ubyte byKeyID);
+inline _byte	Get_DIMouseState(CInputDev::MOUSEKEYSTATE eMouseBtID);
+inline _long	Get_DIMouseMove(CInputDev::MOUSEMOVESTATE eMouseMoveID);
+
 // Set
-inline void	Set_InputDev(void);
 // General
-inline HRESULT Ready_InputDev(HINSTANCE hInst, HWND hWnd);
+inline HRESULT Ready_Input_Device(HINSTANCE hInst, HWND hWnd);
+inline HRESULT Inquire_Input_State();
 
 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Destroy
 inline void		DestroySystem(void);
-
 
 #include "Export_System.inl"
 
