@@ -6,6 +6,7 @@
 
 #include "ToolDoc.h"
 #include "Export_Function.h"
+#include "Terrain.h"
 
 BEGIN(Engine)
 class CManagement;
@@ -51,12 +52,16 @@ public:
 	_int	Update_MainApp(const _float& fTimeDelta);
 	HRESULT Ready_MainApp();
 	HRESULT Ready_Default_Setting(CGraphicDev::WINMODE eMode, const _uint& iWinCX, const _uint& iWinCY);
+	
 	virtual void OnInitialUpdate();
+	void		 Ready_Buffer_Setting();
 
 private:
 	Engine::CGraphicDev*	m_pGraphicDev = nullptr;
 	LPDIRECT3DDEVICE9       m_pDevice = nullptr;
 	CManagement*			m_pManagement = nullptr;
+
+	Engine::CGameObject*	m_pTerrain = nullptr;		// 나중에 매니저로 합칠것.
 };
 
 #ifndef _DEBUG  // ToolView.cpp의 디버그 버전

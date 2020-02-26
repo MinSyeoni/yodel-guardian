@@ -7,7 +7,7 @@
 #include "Tool.h"
 
 #include "MainFrm.h"
-#include "MyForm.h"
+#include "Myform.h"
 #include "ToolView.h"
 
 #ifdef _DEBUG
@@ -77,6 +77,8 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 		return FALSE;
 	// TODO: CREATESTRUCT cs를 수정하여 여기에서
 	//  Window 클래스 또는 스타일을 수정합니다.
+	cs.cx = g_iWinCX;
+	cs.cy = g_iWinCY;
 
 	return TRUE;
 }
@@ -109,9 +111,8 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 	m_MainSplitWnd.CreateStatic(this, 1, 2);
 
 	// CreateView: 쪼개진 분할 윈도우 어느 영역에 어떤 뷰를 생성하여 배치할 것인가.
-	m_MainSplitWnd.CreateView(0, 0, RUNTIME_CLASS(CMyForm), CSize(600, 1080), pContext);
-	m_MainSplitWnd.CreateView(0, 1, RUNTIME_CLASS(CToolView), CSize(1920, 1080), pContext);
-
+	m_MainSplitWnd.CreateView(0, 0, RUNTIME_CLASS(CMyform), CSize(600, g_iWinCY), pContext);
+	m_MainSplitWnd.CreateView(0, 1, RUNTIME_CLASS(CToolView), CSize(g_iWinCX, g_iWinCY), pContext);
 
 	return TRUE;
 }

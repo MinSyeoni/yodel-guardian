@@ -2,7 +2,7 @@
 #define Macro_h__
 
 const unsigned int g_iWinCX = 1920;
-const unsigned int g_iWinCY = 1080;
+const unsigned int g_iWinCY = 1000;
 
 #define			USING(NAMESPACE)	using namespace NAMESPACE;
 

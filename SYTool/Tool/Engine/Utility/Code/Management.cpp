@@ -9,7 +9,6 @@ IMPLEMENT_SINGLETON(CManagement)
 Engine::CManagement::CManagement(void)
 	: m_pScene(nullptr)
 {
-
 }
 
 Engine::CManagement::~CManagement(void)
@@ -55,7 +54,6 @@ void Engine::CManagement::Render_Scene(LPDIRECT3DDEVICE9 pGraphicDev)
 
 	m_pScene->Render_Scene();
 
-
 }
 
 void Engine::CManagement::Free(void)
@@ -63,50 +61,41 @@ void Engine::CManagement::Free(void)
 	Safe_Release(m_pScene);
 }
 
-
-
 HRESULT Engine::CManagement::Ready_Management(LPDIRECT3DDEVICE9 pGraphicDev)
 {
 	CShader*		pShader = nullptr;
 
-	pShader = CShader::Create(pGraphicDev, L"../../Engine/Utility/Code/Shader_Texture.hpp");
+	pShader = CShader::Create(pGraphicDev, L"../Engine/Utility/Code/Shader_Texture.hpp");
 	NULL_CHECK_RETURN(pShader, E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_Prototype(L"Proto_ShaderSample", pShader), E_FAIL);
 
-	pShader = CShader::Create(pGraphicDev, L"../../Engine/Utility/Code/Shader_Terrain.hpp");
+	pShader = CShader::Create(pGraphicDev, L"../Engine/Utility/Code/Shader_Terrain.hpp");
 	NULL_CHECK_RETURN(pShader, E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_Prototype(L"Proto_ShaderTerrain", pShader), E_FAIL);
 
-
-
-	pShader = CShader::Create(pGraphicDev, L"../../Engine/Utility/Code/Shader_ToolTerrain.hpp");
+	pShader = CShader::Create(pGraphicDev, L"../Engine/Utility/Code/Shader_ToolTerrain.hpp");
 	NULL_CHECK_RETURN(pShader, E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_Prototype(L"Proto_ShaderToolTerrain", pShader), E_FAIL);
 
-
-
-
-
-	pShader = CShader::Create(pGraphicDev, L"../../Engine/Utility/Code/Shader_Mesh.hpp");
+	pShader = CShader::Create(pGraphicDev, L"../Engine/Utility/Code/Shader_Mesh.hpp");
 	NULL_CHECK_RETURN(pShader, E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_Prototype(L"Proto_ShaderMesh", pShader), E_FAIL);
 
-	pShader = CShader::Create(pGraphicDev, L"../../Engine/Utility/Code/Shader_Shade.hpp");
+	pShader = CShader::Create(pGraphicDev, L"../Engine/Utility/Code/Shader_Shade.hpp");
 	NULL_CHECK_RETURN(pShader, E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_Prototype(L"Proto_ShaderShade", pShader), E_FAIL);
 
-	pShader = CShader::Create(pGraphicDev, L"../../Engine/Utility/Code/Shader_Blend.hpp");
+	pShader = CShader::Create(pGraphicDev, L"../Engine/Utility/Code/Shader_Blend.hpp");
 	NULL_CHECK_RETURN(pShader, E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_Prototype(L"Proto_ShaderBlend", pShader), E_FAIL);
 
-	pShader = CShader::Create(pGraphicDev, L"../../Engine/Utility/Code/Shader_Monster.hpp");
+	pShader = CShader::Create(pGraphicDev, L"../Engine/Utility/Code/Shader_Monster.hpp");
 	NULL_CHECK_RETURN(pShader, E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_Prototype(L"Proto_ShaderMonster", pShader), E_FAIL);
 
-	pShader = CShader::Create(pGraphicDev, L"../../Engine/Utility/Code/Shader_Trail.hpp");
+	pShader = CShader::Create(pGraphicDev, L"../Engine/Utility/Code/Shader_Trail.hpp");
 	NULL_CHECK_RETURN(pShader, E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_Prototype(L"Proto_Trail", pShader), E_FAIL);
-
 
 	D3DVIEWPORT9			ViewPort;
 	pGraphicDev->GetViewport(&ViewPort);
@@ -127,27 +116,18 @@ HRESULT Engine::CManagement::Ready_Management(LPDIRECT3DDEVICE9 pGraphicDev)
 	FAILED_CHECK_RETURN(Engine::Ready_RenderTarget(L"Target_Depth", pGraphicDev, ViewPort.Width, ViewPort.Height, D3DFMT_A32B32G32R32F, D3DXCOLOR(0.f, 0.f, 0.f, 1.f)), E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_DebugBuffer(L"Target_Depth", 0.f, 200.f, 100.f, 100.f), E_FAIL);
 
-
 	FAILED_CHECK_RETURN(Engine::Ready_RenderTarget(L"Target_Lim", pGraphicDev, ViewPort.Width, ViewPort.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0.f, 0.f, 0.f, 1.f)), E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_DebugBuffer(L"Target_Lim", 100.f, 100.f, 100.f, 100.f), E_FAIL);
 
-
 	FAILED_CHECK_RETURN(Engine::Ready_RenderTarget(L"Target_light", pGraphicDev, ViewPort.Width, ViewPort.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0.f, 0.f, 0.f, 1.f)), E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_DebugBuffer(L"Target_light", 100.f, 200.f, 100.f, 100.f), E_FAIL);
-
 
 	FAILED_CHECK_RETURN(Engine::Ready_MRT(L"MRT_Defferd", L"Target_Albedo"), E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_MRT(L"MRT_Defferd", L"Target_Normal"), E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_MRT(L"MRT_Defferd", L"Target_Depth"), E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_MRT(L"MRT_Defferd", L"Target_Lim"), E_FAIL);
 	
-
 	FAILED_CHECK_RETURN(Engine::Ready_MRT(L"MRT_ConeLight", L"Target_light"), E_FAIL);
-
-
-
-
-
 	FAILED_CHECK_RETURN(Engine::Ready_MRT(L"MRT_LightAcc", L"Target_Shade"), E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_MRT(L"MRT_GodRay", L"Target_GodRay"), E_FAIL);
 	return S_OK;

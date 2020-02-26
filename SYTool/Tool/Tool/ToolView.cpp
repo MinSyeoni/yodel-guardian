@@ -41,12 +41,14 @@ CToolView::CToolView() noexcept
 
 CToolView::~CToolView()
 {
+	Engine::Safe_Delete(m_pTerrain);
 	Engine::Safe_Release(m_pManagement);
 	Engine::Safe_Release(m_pDevice);
-	Engine::Safe_Release(m_pGraphicDev);
 	Engine::DestroyUtility();
 	Engine::DestroyResources();
 	Engine::DestroySystem();
+
+	Engine::CGraphicDev::GetInstance()->DestroyInstance();
 }
 
 BOOL CToolView::PreCreateWindow(CREATESTRUCT& cs)
@@ -123,7 +125,11 @@ HRESULT CToolView::Render_MainApp()
 		return E_FAIL;
 
 	m_pDevice->SetRenderState(D3DRS_LIGHTING, false);
-	m_pGraphicDev->Render_Begin(D3DXCOLOR(0.f, 0.f, 1.f, 1.f));
+	m_pGraphicDev->Render_Begin(D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.f));
+	
+	if (m_pTerrain != nullptr)
+		m_pTerrain->Render_Object();
+
 	m_pGraphicDev->Render_End();
 
 	return iExitCode;
@@ -138,6 +144,9 @@ _int CToolView::Update_MainApp(const _float& fTimeDelta)
 
 	m_pManagement->Update_Scene(fTimeDelta);
 
+	if(m_pTerrain != nullptr)
+		m_pTerrain->Update_Object(fTimeDelta);
+
 	return iExitCode;
 }
 
@@ -151,9 +160,6 @@ HRESULT  CToolView::Ready_Default_Setting(CGraphicDev::WINMODE eMode,
 										const _uint& iWinCX,
 										const _uint& iWinCY)
 {
-	if (nullptr == m_pManagement)
-		return E_FAIL;
-
 	if (FAILED(Engine::Ready_GraphicDev(g_hWnd, eMode, iWinCX, iWinCY, &m_pGraphicDev)))
 		return E_FAIL;
 
@@ -175,11 +181,63 @@ void CToolView::OnInitialUpdate()
 	g_hWnd = m_hWnd;
 	g_hInst = AfxGetInstanceHandle();
 
-	m_pManagement = Engine::CManagement::GetInstance();
+	Ready_MainApp();
+	Ready_Buffer_Setting();
+
+	Engine::Create_Management(m_pDevice, &m_pManagement);
 	m_pManagement->AddRef();
 
-	//Engine::Create_Management(m_pDevice, &m_pManagement);
-	//m_pManagement->AddRef();
+	//////////////테스트/////////////////
+	m_pTerrain = CTerrain::Create(m_pDevice);
 
-	Ready_MainApp();
+	D3DXMATRIX matProj;
+	D3DXMatrixPerspectiveFovLH(&matProj, D3DXToRadian(45.f), float(g_iWinCX) / float(g_iWinCY), 1.f, 1000.f);
+	m_pDevice->SetTransform(D3DTS_PROJECTION, &matProj);
+}
+
+void CToolView::Ready_Buffer_Setting()
+{
+	if (FAILED(Engine::Reserve_ContainerSize(RESOURCE_END), E_FAIL));
+
+	if (FAILED(Engine::Ready_Buffer(m_pDevice,
+		RESOURCE_STATIC,
+		L"Buffer_RcTex",
+		Engine::BUFFER_RCTEX)))
+		return;
+
+	if (FAILED(Engine::Ready_Buffer(m_pDevice,
+		RESOURCE_STATIC,
+		L"Buffer_Terrain",
+		Engine::BUFFER_TERRAINTEX,
+		129,
+		129,
+		1)))
+		return;
+
+	//if (FAILED(Engine::Ready_Mesh(m_pDevice,
+	//	RESOURCE_STAGE,
+	//	L"Mesh_Navigation",
+	//	Engine::TYPE_NAVI,
+	//	NULL,
+	//	NULL)));
+
+	if (FAILED((Engine::Ready_Buffer(m_pDevice,
+		RESOURCE_STATIC,
+		L"Buffer_CubeTex",
+		Engine::BUFFER_CUBETEX))))
+		return;
+
+	if (FAILED(Engine::Ready_Texture(m_pDevice,
+		RESOURCE_STAGE,
+		L"Texture_Terrain",
+		Engine::TEX_NORMAL,
+		L"../Resources/Texture/Terrain/Terrain%d.png", 1)))
+		return;
+
+	//if (FAILED(Engine::Ready_Texture(m_pDevice,
+	//	RESOURCE_STAGE,
+	//	L"Texture_Brush",
+	//	Engine::TEX_NORMAL,
+	//	L"../../../Resource/Texture/Brush/Brush%d.tga", 2)))
+	//	return;
 }

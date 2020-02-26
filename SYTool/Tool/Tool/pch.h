@@ -44,6 +44,7 @@ using namespace std;
 #include "GraphicDev.h"
 #include "Defines.h"
 #include "Enum.h"
+#include <afxcontrolbars.h>
 //#include "PickingMgr.h"
 //#include "CursorMgr.h"
 

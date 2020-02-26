@@ -102,4 +102,3 @@ void Engine::CGraphicDev::Free(void)
 	if (dwRefCnt = Engine::Safe_Release(m_pSDK))
 		MSG_BOX("m_pSDK Release Failed");
 }
-
