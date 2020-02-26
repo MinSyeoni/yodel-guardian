@@ -68,10 +68,6 @@ HRESULT Engine::CTerrainTex::Ready_Buffer(const _ulong& dwCntX,
 
 	D3DXSaveTextureToFile(L"../Bin/TestHeight.bmp", D3DXIFF_BMP, pTexture, NULL);*/
 
-
-
-
-
 	m_dwTriCnt = (dwCntX - 1) * (dwCntZ - 1) * 2;
 	m_dwVtxCnt = dwCntX * dwCntZ;
 
@@ -87,25 +83,21 @@ HRESULT Engine::CTerrainTex::Ready_Buffer(const _ulong& dwCntX,
 
 	_ulong		dwByte = 0;
 
-	m_hFile = CreateFile(L"../../Data/Terrain/HeightMap.bmp", 
+	m_hFile = CreateFile(L"../Data/Terrain/HeightMap.bmp", 
 							GENERIC_READ, 
 							0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	
 	ReadFile(m_hFile, &m_fH, sizeof(BITMAPFILEHEADER), &dwByte, NULL);
 	ReadFile(m_hFile, &m_iH, sizeof(BITMAPINFOHEADER), &dwByte, NULL);
 
-
-	
 	m_dwVtxCntZ = 129;
 	m_dwVtxCntX = 129;
-
 
 	_ulong*		pPixel = new _ulong[m_iH.biWidth * m_iH.biHeight];
 
 	ReadFile(m_hFile, pPixel, sizeof(_ulong) * m_iH.biHeight * m_iH.biWidth, &dwByte, NULL);
 
 	CloseHandle(m_hFile);
-
 
 	//m_pVtxTex =  new VTXTEX[dwCntX*dwCntZ];
 
@@ -130,7 +122,6 @@ HRESULT Engine::CTerrainTex::Ready_Buffer(const _ulong& dwCntX,
 				_float(i) / (dwCntZ - 1));
 		}
 	}
-
 
 	Safe_Delete_Array(pPixel);
 

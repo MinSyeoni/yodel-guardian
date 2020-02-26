@@ -22,6 +22,18 @@
     <Filter Include="03.Main">
       <UniqueIdentifier>{98e0837d-328b-420a-b7de-2b067f83adcb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Tab">
+      <UniqueIdentifier>{c094409f-7f4c-46aa-8901-03b00b645d5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Tab\00.MapTool">
+      <UniqueIdentifier>{4fd26e32-655c-4c51-bf90-0bccf2e6446a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.GameObject">
+      <UniqueIdentifier>{5455bdc9-1146-476c-98f7-62cca0e0b79a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.GameObject\00.Terrain">
+      <UniqueIdentifier>{c157514e-9aff-45f9-a2a7-7b436a972a04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainFrm.h">
@@ -48,9 +60,6 @@
     <ClInclude Include="pch.h">
       <Filter>99.Default</Filter>
     </ClInclude>
-    <ClInclude Include="MyForm.h">
-      <Filter>03.Main</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\Defines.h">
       <Filter>98.Header</Filter>
     </ClInclude>
@@ -65,6 +74,15 @@
     </ClInclude>
     <ClInclude Include="..\Headers\Typedef.h">
       <Filter>98.Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Myform.h">
+      <Filter>03.Main</Filter>
+    </ClInclude>
+    <ClInclude Include="MapTab.h">
+      <Filter>04.Tab\00.MapTool</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>05.GameObject\00.Terrain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,8 +101,14 @@
     <ClCompile Include="pch.cpp">
       <Filter>99.Default</Filter>
     </ClCompile>
-    <ClCompile Include="MyForm.cpp">
+    <ClCompile Include="Myform.cpp">
       <Filter>03.Main</Filter>
+    </ClCompile>
+    <ClCompile Include="MapTab.cpp">
+      <Filter>04.Tab\00.MapTool</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>05.GameObject\00.Terrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

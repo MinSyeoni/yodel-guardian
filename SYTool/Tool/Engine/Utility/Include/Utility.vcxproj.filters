@@ -46,12 +46,6 @@
     <Filter Include="07.ProtoMgr">
       <UniqueIdentifier>{7a3e3a2c-9463-4ded-b374-f254a02bc9e2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="08.Shader">
-      <UniqueIdentifier>{f5f5885f-3766-4f58-8a6f-f3367cc494b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="08.Shader\hpp">
-      <UniqueIdentifier>{3db5d189-9e89-4be8-9ab6-2bc6e2027795}</UniqueIdentifier>
-    </Filter>
     <Filter Include="09.RenderTarget">
       <UniqueIdentifier>{eac3f766-287f-48af-91ba-00cf9e3ef0a2}</UniqueIdentifier>
     </Filter>
@@ -60,6 +54,12 @@
     </Filter>
     <Filter Include="10.Opti">
       <UniqueIdentifier>{1824d04e-2783-47b2-992b-17071a2f1a0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08.Shader">
+      <UniqueIdentifier>{8a103488-4d5a-4ca3-96f6-0ebb981416c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08.Shader\hpp">
+      <UniqueIdentifier>{007fc488-9198-4cfb-a704-aac6c845b748}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -105,9 +105,6 @@
     <ClCompile Include="..\Code\ProtoMgr.cpp">
       <Filter>07.ProtoMgr</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Shader.cpp">
-      <Filter>08.Shader</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\RenderTargetMgr.cpp">
       <Filter>09.RenderTarget\Manager</Filter>
     </ClCompile>
@@ -125,6 +122,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\TrailColor.cpp">
       <Filter>06. Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shader.cpp">
+      <Filter>08.Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,23 +173,11 @@
     <ClInclude Include="..\Code\ProtoMgr.h">
       <Filter>07.ProtoMgr</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Shader.h">
-      <Filter>08.Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\Shader_Mesh.hpp">
-      <Filter>08.Shader\hpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\RenderTargetMgr.h">
       <Filter>09.RenderTarget\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\RenderTarget.h">
       <Filter>09.RenderTarget</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\Shader_ToolTerrain.hpp">
-      <Filter>08.Shader\hpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\Shader_Texture.hpp">
-      <Filter>08.Shader\hpp</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Optimization.h">
       <Filter>10.Opti</Filter>
@@ -202,6 +190,18 @@
     </ClInclude>
     <ClInclude Include="..\Code\TrailColor.h">
       <Filter>06. Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Shader.h">
+      <Filter>08.Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Shader_Mesh.hpp">
+      <Filter>08.Shader\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Shader_Texture.hpp">
+      <Filter>08.Shader\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Shader_ToolTerrain.hpp">
+      <Filter>08.Shader\hpp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

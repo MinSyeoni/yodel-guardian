@@ -157,6 +157,7 @@ protected:
 // 구현입니다.
 protected:
 	DECLARE_MESSAGE_MAP()
+
 };
 
 CAboutDlg::CAboutDlg() noexcept : CDialogEx(IDD_ABOUTBOX)
@@ -195,7 +196,7 @@ BOOL CToolApp::OnIdle(LONG lCount)
 	{
 		CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
 		CToolView* pToolView = dynamic_cast<CToolView*>(pMainFrm->m_MainSplitWnd.GetPane(0, 1));
-		CMyForm* pMyForm = dynamic_cast<CMyForm*>(pMainFrm->m_MainSplitWnd.GetPane(0, 0));
+		//CMyForm* pMyForm = dynamic_cast<CMyForm*>(pMainFrm->m_MainSplitWnd.GetPane(0, 0));
 
 		_float		fTimeDelta_Default = Engine::Compute_Timer(L"Timer_Default");
 
