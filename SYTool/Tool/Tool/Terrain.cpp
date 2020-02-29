@@ -10,45 +10,12 @@ CTerrain::CTerrain(LPDIRECT3DDEVICE9 pGraphicDev)
 
 CTerrain::~CTerrain(void)
 {
-	Free();
+	m_bIsReset = false;
 }
 
 HRESULT CTerrain::Ready_Object(void)
 {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
-
-	m_eState = STATE_SOLID;
-
-	_int iVtxCntX = 0, iVtxCntZ = 0;
-	iVtxCntX = dynamic_cast<Engine::CTerrainTex*>(m_pBufferCom)->Get_VtxCntX();
-	iVtxCntZ = dynamic_cast<Engine::CTerrainTex*>(m_pBufferCom)->Get_VtxCntZ();
-
-//	m_pGraphicDev->CreateTexture(iVtxCntX, iVtxCntZ, 1, 0, D3DFMT_A8B8G8R8, D3DPOOL_MANAGED, &m_pTerrainTex, NULL);
-	
-	D3DLOCKED_RECT		LockRect;
-	ZeroMemory(&LockRect, sizeof(D3DLOCKED_RECT));
-
-	//m_pTerrainTex->LockRect(0, &LockRect, NULL, 0);
-	//DWORD* pDwColor = (DWORD*)LockRect.pBits;
-	//int iWidth = iVtxCntX;
-	//int iHeight = iVtxCntZ;
-	//for (int y = 0.f; y < iHeight; ++y)
-	//{
-	//	for (int x = 0.f; x < iWidth; ++x)
-	//	{
-	//		int iIdx = y * iWidth + x;
-
-	//		D3DXCOLOR tColor = pDwColor[iIdx];
-
-	//		tColor.a = 0.0f;
-	//		tColor.r = 1.0f;
-	//		tColor.g = 1.0f;
-	//		tColor.b = 1.0f;
-
-	//		pDwColor[iIdx] = tColor;
-	//	}
-	//}
-	//m_pTerrainTex->UnlockRect(0);
 
 	return S_OK;
 }
@@ -75,11 +42,10 @@ void CTerrain::Render_Object(void)
 		m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 
 	m_pGraphicDev->SetTransform(D3DTS_WORLD, m_pTransCom->Get_WorldMatrix());
-	m_pGraphicDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+	m_pGraphicDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
-	_uint uiPass = 0;
-	tEffect->Begin(&uiPass, 0);
-	tEffect->BeginPass(1);
+	tEffect->Begin(nullptr, 0);
+	tEffect->BeginPass(0);
 
 	m_pBufferCom->Render();
 
@@ -96,6 +62,7 @@ HRESULT CTerrain::Add_Component(void)
 		(Engine::Clone_Resources(RESOURCE_STATIC, L"Buffer_Terrain"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);
+
 
 	// TransCom;
 	pComponent = m_pTransCom = Engine::CTransform::Create();
@@ -114,7 +81,7 @@ HRESULT CTerrain::Add_Component(void)
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Calculator", pComponent);
 
 	// ShaderCom
-	pComponent = m_pShaderCom = dynamic_cast<Engine::CShader*>(Engine::Clone_Prototype(L"Proto_ShaderToolTerrain"));
+	pComponent = m_pShaderCom = dynamic_cast<Engine::CShader*>(Engine::Clone_Prototype(L"Proto_ShaderSample"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Shader", pComponent);
 
@@ -138,6 +105,9 @@ HRESULT CTerrain::Set_Material(void)
 
 HRESULT CTerrain::Set_ConstantTable(LPD3DXEFFECT pEffect)
 {
+	if (nullptr == pEffect)
+		return E_FAIL;
+
 	_matrix matWorld, matView, matProj;
 
 	m_pTransCom->Get_WorldMatrix2(&matWorld);
@@ -148,9 +118,11 @@ HRESULT CTerrain::Set_ConstantTable(LPD3DXEFFECT pEffect)
 	pEffect->SetMatrix("g_matView", &matView);
 	pEffect->SetMatrix("g_matProj", &matProj);
 
-	m_pTextureCom->Set_Texture(pEffect, "g_BaseTexture", 0);
-
 	D3DXMatrixInverse(&matView, NULL, &matView);
+	
+	m_pTextureCom->Set_Texture(pEffect, "g_BaseTexture", m_iDrawID);
+
+	pEffect->SetVector("g_vCamPos", (_vec4*)&matView._41);
 
 	return S_OK;
 }
@@ -167,6 +139,12 @@ CTerrain* CTerrain::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 
 void CTerrain::Free(void)
 {
-	//Engine::Safe_Release(m_pTerrainTex);
+	Engine::Safe_Release(m_pTerrainTex);
+	Engine::Safe_Release(m_pShaderCom);
+	Engine::Safe_Release(m_pTextureCom);
+	Engine::Safe_Release(m_pBufferCom);
+	Engine::Safe_Release(m_pTransCom);
+	Engine::Safe_Release(m_pCalculCom);
+
 	Engine::CGameObject::Free();
 }

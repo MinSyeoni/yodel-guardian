@@ -11,5 +11,4 @@ using namespace std;
 extern HWND			g_hWnd;
 extern HINSTANCE	g_hInst;
 
-
 #endif // Defines_h__

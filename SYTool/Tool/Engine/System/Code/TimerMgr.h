@@ -15,7 +15,7 @@ class ENGINE_DLL CTimerMgr final : public CBase
 
 private:
 	explicit CTimerMgr();
-	virtual ~CTimerMgr() = default;
+	virtual ~CTimerMgr();
 
 public:
 	_float	Get_TimeDelta(const _tchar * pTimerTag);

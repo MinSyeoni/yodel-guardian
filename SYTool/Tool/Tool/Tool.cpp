@@ -17,7 +17,6 @@
 #define new DEBUG_NEW
 #endif
 
-
 // CToolApp
 
 BEGIN_MESSAGE_MAP(CToolApp, CWinApp)
@@ -71,7 +70,8 @@ BOOL CToolApp::InitInstance()
 	InitCommonControlsEx(&InitCtrls);
 
 	CWinApp::InitInstance();
-
+	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	//_CrtSetBreakAlloc(643);
 
 	// OLE 라이브러리를 초기화합니다.
 	if (!AfxOleInit())
@@ -196,7 +196,6 @@ BOOL CToolApp::OnIdle(LONG lCount)
 	{
 		CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
 		CToolView* pToolView = dynamic_cast<CToolView*>(pMainFrm->m_MainSplitWnd.GetPane(0, 1));
-		//CMyForm* pMyForm = dynamic_cast<CMyForm*>(pMainFrm->m_MainSplitWnd.GetPane(0, 0));
 
 		_float		fTimeDelta_Default = Engine::Compute_Timer(L"Timer_Default");
 

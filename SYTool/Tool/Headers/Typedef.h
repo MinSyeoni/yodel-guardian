@@ -27,13 +27,11 @@ typedef		D3DXVECTOR4				_vec4;
 
 typedef		D3DXMATRIX				_matrix;
 
-//typedef	 struct tagMyVector3 : public D3DXVECTOR3
-//{
-//public:
-//	_float		Get_Length();
-//	_float		Get_Distance(const _vec3& vDest);
-//
-//}_vec3;
 
+typedef struct tagRay
+{
+	D3DXVECTOR3 vOri;
+	D3DXVECTOR3 vDir;
+}RAY;
 
 #endif // Typedef_h__

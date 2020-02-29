@@ -45,28 +45,90 @@ HRESULT Engine::CTerrainTex::Ready_Buffer(const _ulong& dwCntX,
 										  const _ulong& dwCntZ,
 										  const _ulong& dwVtxItv)
 {
-	///////////////////////////////////////////////////////////////////////
-	/*LPDIRECT3DTEXTURE9			pTexture = nullptr;
+	m_dwVtxCntX = dwCntX;
+	m_dwVtxCntZ = dwCntZ;
+	m_dwVtxItv = dwVtxItv;
 
-	D3DXCreateTexture(m_pGraphicDev, 129, 129, 1, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, &pTexture);
+	m_dwVtxCnt = m_dwVtxCntX * m_dwVtxCntZ;
 
-	D3DLOCKED_RECT LockRect;
+	m_pVtxTex = new VTXTEX[m_dwVtxCnt];
 
-	pTexture->LockRect(0, &LockRect, NULL, 0);
+	m_dwVtxSize = sizeof(VTXTEX);
+	m_dwVtxFVF = FVF_TEX/* | D3DFVF_TEXCOORDSIZE2(0)*/;
+	m_dwTriCnt = (m_dwVtxCntX - 1) * (m_dwVtxCntZ - 1) * 2;
 
-	for (_int i = 0; i < 129; ++i)
+	m_dwIdxSize = sizeof(INDEX32);
+	m_IdxFmt = D3DFMT_INDEX32;
+
+	if (FAILED(CVIBuffer::Ready_Buffer()))
+		return E_FAIL;
+
+	VTXTEX* pVertices = nullptr;
+
+	m_pVB->Lock(0, 0, (void**)&pVertices, 0);
+
+	for (size_t i = 0; i < m_dwVtxCntZ; i++)
 	{
-		for (_int j = 0; j < 129; ++j)
+		for (size_t j = 0; j < m_dwVtxCntX; j++)
 		{
-			_int	iIndex = i * 129 + j;
+			_uint		iIndex = i * m_dwVtxCntX + j;
 
-			*(((_ulong*)LockRect.pBits) + iIndex) = D3DCOLOR_ARGB(255, 0, 0, 0);
+			pVertices[iIndex].vPos = _vec3(j * m_dwVtxItv, 0.0f, i * m_dwVtxItv);
+			pVertices[iIndex].vTexUV = _vec2(j / (m_dwVtxCntX - 1.f), i / (m_dwVtxCntZ - 1.f));
+
+			m_pVtxTex[iIndex].vPos = pVertices[iIndex].vPos;
 		}
 	}
 
-	pTexture->UnlockRect(0);
+	Safe_Delete_Array(m_pVtxTex);
 
-	D3DXSaveTextureToFile(L"../Bin/TestHeight.bmp", D3DXIFF_BMP, pTexture, NULL);*/
+	INDEX32* pIndices = nullptr;
+
+	m_pIB->Lock(0, 0, (void**)&pIndices, 0);
+
+	_uint			iPolygonIndex = 0;
+
+	for (size_t i = 0; i < m_dwVtxCntZ - 1; i++)
+	{
+		for (size_t j = 0; j < m_dwVtxCntX - 1; j++)
+		{
+			size_t iIndex = i * m_dwVtxCntX + j;
+
+			// 우.상
+			pIndices[iPolygonIndex]._0 = iIndex + m_dwVtxCntX;
+			pIndices[iPolygonIndex]._1 = iIndex + m_dwVtxCntX + 1;
+			pIndices[iPolygonIndex]._2 = iIndex + 1;
+
+			_vec3		vSour, vDest;
+			_vec3		vNormal;
+
+			vSour = pVertices[pIndices[iPolygonIndex]._1].vPos - pVertices[pIndices[iPolygonIndex]._0].vPos;
+			vDest = pVertices[pIndices[iPolygonIndex]._2].vPos - pVertices[pIndices[iPolygonIndex]._1].vPos;
+
+			++iPolygonIndex;
+
+			// 좌.하
+			pIndices[iPolygonIndex]._0 = iIndex + m_dwVtxCntX;
+			pIndices[iPolygonIndex]._1 = iIndex + 1;
+			pIndices[iPolygonIndex]._2 = iIndex;
+
+			vSour = pVertices[pIndices[iPolygonIndex]._1].vPos - pVertices[pIndices[iPolygonIndex]._0].vPos;
+			vDest = pVertices[pIndices[iPolygonIndex]._2].vPos - pVertices[pIndices[iPolygonIndex]._1].vPos;
+
+			++iPolygonIndex;
+		}
+	}
+
+	m_pVB->Unlock();
+	m_pIB->Unlock();
+
+	return NOERROR;
+}
+
+HRESULT CTerrainTex::Ready_Buffer(const _tchar* pHeightMap, const _ulong& dwVtxItv)
+{
+	_ulong dwCntX = 129;
+	_ulong dwCntZ = 129;
 
 	m_dwTriCnt = (dwCntX - 1) * (dwCntZ - 1) * 2;
 	m_dwVtxCnt = dwCntX * dwCntZ;
@@ -75,29 +137,33 @@ HRESULT Engine::CTerrainTex::Ready_Buffer(const _ulong& dwCntX,
 
 	m_dwVtxFVF = FVF_TEX;
 	m_dwVtxSize = sizeof(VTXTEX);
-	
+
 	m_dwIdxSize = sizeof(INDEX32);
 	m_IdxFmt = D3DFMT_INDEX32;
-	
+
 	FAILED_CHECK(CVIBuffer::Ready_Buffer());
 
 	_ulong		dwByte = 0;
 
-	m_hFile = CreateFile(L"../Data/Terrain/HeightMap.bmp", 
-							GENERIC_READ, 
-							0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
-	
+	m_hFile = CreateFile(pHeightMap,
+		GENERIC_READ,
+		0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+
 	ReadFile(m_hFile, &m_fH, sizeof(BITMAPFILEHEADER), &dwByte, NULL);
 	ReadFile(m_hFile, &m_iH, sizeof(BITMAPINFOHEADER), &dwByte, NULL);
+
+
 
 	m_dwVtxCntZ = 129;
 	m_dwVtxCntX = 129;
 
-	_ulong*		pPixel = new _ulong[m_iH.biWidth * m_iH.biHeight];
+
+	_ulong* pPixel = new _ulong[m_iH.biWidth * m_iH.biHeight];
 
 	ReadFile(m_hFile, pPixel, sizeof(_ulong) * m_iH.biHeight * m_iH.biWidth, &dwByte, NULL);
 
 	CloseHandle(m_hFile);
+
 
 	//m_pVtxTex =  new VTXTEX[dwCntX*dwCntZ];
 
@@ -110,22 +176,21 @@ HRESULT Engine::CTerrainTex::Ready_Buffer(const _ulong& dwCntX,
 		for (_ulong j = 0; j < dwCntX; ++j)
 		{
 			dwIndex = i * dwCntX + j;
-			
-			m_pVtxTex[dwIndex].vPos   = _vec3((_float(j) * dwVtxItv), 
-				                         ((pPixel[dwIndex]&0x000000ff)/255.f)*7.f,
-											(_float(i) * dwVtxItv));
+
+			m_pVtxTex[dwIndex].vPos = _vec3((_float(j) * dwVtxItv),
+				((pPixel[dwIndex] & 0x000000ff) / 255.f) * 7.f,
+				(_float(i) * dwVtxItv));
 
 			m_pPos[dwIndex] = m_pVtxTex[dwIndex].vPos;
-			
-			m_pVtxTex[dwIndex].vNormal = _vec3(0.f, 0.f, 0.f);
 			m_pVtxTex[dwIndex].vTexUV = _vec2(_float(j) / (dwCntX - 1),
 				_float(i) / (dwCntZ - 1));
 		}
 	}
 
+
 	Safe_Delete_Array(pPixel);
 
-	INDEX32*		pIndex = NULL;
+	INDEX32* pIndex = NULL;
 
 	m_pIB->Lock(0, 0, (void**)&pIndex, 0);
 
@@ -147,10 +212,6 @@ HRESULT Engine::CTerrainTex::Ready_Buffer(const _ulong& dwCntX,
 			vSour = m_pVtxTex[pIndex[dwTriIdx]._2].vPos - m_pVtxTex[pIndex[dwTriIdx]._1].vPos;
 			D3DXVec3Cross(&vNormal, &vDest, &vSour);
 
-			m_pVtxTex[pIndex[dwTriIdx]._0].vNormal += vNormal;
-			m_pVtxTex[pIndex[dwTriIdx]._1].vNormal += vNormal;
-			m_pVtxTex[pIndex[dwTriIdx]._2].vNormal += vNormal;
-
 			++dwTriIdx;
 
 			pIndex[dwTriIdx]._0 = dwIndex + dwCntX;
@@ -161,16 +222,9 @@ HRESULT Engine::CTerrainTex::Ready_Buffer(const _ulong& dwCntX,
 			vSour = m_pVtxTex[pIndex[dwTriIdx]._2].vPos - m_pVtxTex[pIndex[dwTriIdx]._1].vPos;
 			D3DXVec3Cross(&vNormal, &vDest, &vSour);
 
-			m_pVtxTex[pIndex[dwTriIdx]._0].vNormal += vNormal;
-			m_pVtxTex[pIndex[dwTriIdx]._1].vNormal += vNormal;
-			m_pVtxTex[pIndex[dwTriIdx]._2].vNormal += vNormal;
-
 			++dwTriIdx;
 		}
-	}	
-
-	for (_ulong i = 0; i < m_dwVtxCnt; ++i)
-		D3DXVec3Normalize(&m_pVtxTex[i].vNormal, &m_pVtxTex[i].vNormal);
+	}
 
 	m_pVB->Unlock();
 	m_pIB->Unlock();
@@ -180,7 +234,8 @@ HRESULT Engine::CTerrainTex::Ready_Buffer(const _ulong& dwCntX,
 
 HRESULT CTerrainTex::Reset_Buffer(const _ulong & dwCntX, const _ulong & dwCntZ, const _ulong & dwVtxItv)
 {
-	return E_NOTIMPL;
+
+	return S_OK;
 }
 
 void CTerrainTex::SetTextureHeight(_vec3* pPos, float fRange)
@@ -368,10 +423,6 @@ void CTerrainTex::SetTextureHeight(_vec3* pPos, float fRange)
 			vSour = pVtxTex[pIndex[dwTriIdx]._2].vPos - pVtxTex[pIndex[dwTriIdx]._1].vPos;
 			D3DXVec3Cross(&vNormal, &vDest, &vSour);
 
-			pVtxTex[pIndex[dwTriIdx]._0].vNormal += vNormal;
-			pVtxTex[pIndex[dwTriIdx]._1].vNormal += vNormal;
-			pVtxTex[pIndex[dwTriIdx]._2].vNormal += vNormal;
-
 			++dwTriIdx;
 
 			// 외적 연산으로 면 버텍스의 법선벡터 구하기
@@ -379,27 +430,13 @@ void CTerrainTex::SetTextureHeight(_vec3* pPos, float fRange)
 			vSour = pVtxTex[pIndex[dwTriIdx]._2].vPos - pVtxTex[pIndex[dwTriIdx]._1].vPos;
 			D3DXVec3Cross(&vNormal, &vDest, &vSour);
 
-			pVtxTex[pIndex[dwTriIdx]._0].vNormal += vNormal;
-			pVtxTex[pIndex[dwTriIdx]._1].vNormal += vNormal;
-			pVtxTex[pIndex[dwTriIdx]._2].vNormal += vNormal;
-
 			++dwTriIdx;
 		}
 	}
 
-	// 법선벡터 정규화
-	for (_ulong i = 0; i < m_dwVtxCnt; ++i)
-	{
-		D3DXVec3Normalize(&pVtxTex[i].vNormal, &pVtxTex[i].vNormal);
-	}
 
 	m_pIB->Unlock();
 	m_pVB->Unlock();
-
-
-
-
-	
 }
 
 void CTerrainTex::SetHeight(_int iIndex, _float fHeight)
@@ -435,7 +472,7 @@ void Engine::CTerrainTex::Free(void)
 	CVIBuffer::Free();
 	if (false == m_bClone)
 	{
-	    //Safe_Delete_Array(m_pVtxTex);
+	    Safe_Delete_Array(m_pVtxTex);
 		Safe_Delete_Array(m_pPos);
 	}
 

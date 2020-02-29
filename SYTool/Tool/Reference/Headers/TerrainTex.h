@@ -26,6 +26,9 @@ public:
 	HRESULT	Ready_Buffer(const _ulong& dwCntX, 
 						 const _ulong& dwCntZ, 
 						 const _ulong& dwVtxItv);
+	
+	HRESULT	Ready_Buffer(const _tchar* pHeightMap, 
+						const _ulong& dwVtxItv);
 
 	HRESULT Reset_Buffer(const _ulong& dwCntX, const _ulong& dwCntZ, const _ulong& dwVtxItv);
 
@@ -44,8 +47,9 @@ private:
 	_vec3*				m_pPos;
 	_bool				m_bClone;
 
-	_ulong            m_dwVtxCntZ;
-	_ulong            m_dwVtxCntX;
+	_ulong				m_dwVtxCntZ;
+	_ulong				m_dwVtxCntX;
+	_ulong				m_dwVtxItv;
 
 private:
 	VTXTEX*		m_pVtxTex = nullptr;

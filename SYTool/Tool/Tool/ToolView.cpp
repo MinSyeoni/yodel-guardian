@@ -29,6 +29,8 @@ BEGIN_MESSAGE_MAP(CToolView, CView)
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
+	ON_WM_RBUTTONDOWN()
+	ON_WM_RBUTTONUP()
 END_MESSAGE_MAP()
 
 // CToolView 생성/소멸
@@ -40,14 +42,18 @@ CToolView::CToolView() noexcept
 }
 
 CToolView::~CToolView()
-{
-	Engine::Safe_Delete(m_pTerrain);
+{	
+	CObjMgr::GetInstance()->DestroyInstance();
+	CToolCamera::GetInstance()->DestroyInstance();
+
 	Engine::Safe_Release(m_pManagement);
 	Engine::Safe_Release(m_pDevice);
+
 	Engine::DestroyUtility();
 	Engine::DestroyResources();
 	Engine::DestroySystem();
 
+	Engine::CKeyMgr::GetInstance()->DestroyInstance();
 	Engine::CGraphicDev::GetInstance()->DestroyInstance();
 }
 
@@ -124,11 +130,12 @@ HRESULT CToolView::Render_MainApp()
 		nullptr == m_pManagement )
 		return E_FAIL;
 
-	m_pDevice->SetRenderState(D3DRS_LIGHTING, false);
-	m_pGraphicDev->Render_Begin(D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.f));
+	m_pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
 	
-	if (m_pTerrain != nullptr)
-		m_pTerrain->Render_Object();
+	m_pGraphicDev->Render_Begin(D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.f));
+
+	m_pManagement->Render_Scene(m_pDevice);
+	CObjMgr::GetInstance()->Render_Object();
 
 	m_pGraphicDev->Render_End();
 
@@ -144,8 +151,10 @@ _int CToolView::Update_MainApp(const _float& fTimeDelta)
 
 	m_pManagement->Update_Scene(fTimeDelta);
 
-	if(m_pTerrain != nullptr)
-		m_pTerrain->Update_Object(fTimeDelta);
+	Engine::CKeyMgr::GetInstance()->KeyCheck();
+	CObjMgr::GetInstance()->Update_Object(fTimeDelta);
+	CToolCamera::GetInstance()->Update_Camera(fTimeDelta);
+
 
 	return iExitCode;
 }
@@ -154,6 +163,7 @@ HRESULT CToolView::Ready_MainApp()
 {
 	if (FAILED(Ready_Default_Setting(CGraphicDev::MODE_WIN, g_iWinCX, g_iWinCY)))
 		return E_FAIL;
+	return NOERROR;
 }
 
 HRESULT  CToolView::Ready_Default_Setting(CGraphicDev::WINMODE eMode, 
@@ -187,12 +197,28 @@ void CToolView::OnInitialUpdate()
 	Engine::Create_Management(m_pDevice, &m_pManagement);
 	m_pManagement->AddRef();
 
-	//////////////테스트/////////////////
-	m_pTerrain = CTerrain::Create(m_pDevice);
+	Initalize_Object();
+}
+
+void CToolView::Initalize_Object()
+{
+	CToolCamera::GetInstance()->SetGrapicDevice(m_pDevice);
 
 	D3DXMATRIX matProj;
 	D3DXMatrixPerspectiveFovLH(&matProj, D3DXToRadian(45.f), float(g_iWinCX) / float(g_iWinCY), 1.f, 1000.f);
 	m_pDevice->SetTransform(D3DTS_PROJECTION, &matProj);
+
+	// For.Timer_Default
+	if (FAILED(Engine::Add_Timer(L"Timer_Default")))
+		return;
+	// For.Timer_60
+	if (FAILED(Engine::Add_Timer(L"Timer_60")))
+		return;
+	// For.Timer_60
+	if (FAILED(Engine::Ready_Frame(L"Frame60", 60.f)))
+		return;
+	// For.Font
+	if (FAILED(Engine::Ready_Font(m_pDevice, L"Font_Default", L"바탕", 15, 20, FW_HEAVY), E_FAIL));
 }
 
 void CToolView::Ready_Buffer_Setting()
@@ -231,7 +257,7 @@ void CToolView::Ready_Buffer_Setting()
 		RESOURCE_STAGE,
 		L"Texture_Terrain",
 		Engine::TEX_NORMAL,
-		L"../Resources/Texture/Terrain/Terrain%d.png", 1)))
+		L"../Resources/Texture/Terrain/Terrain%d.png", 2)))
 		return;
 
 	//if (FAILED(Engine::Ready_Texture(m_pDevice,
@@ -240,4 +266,21 @@ void CToolView::Ready_Buffer_Setting()
 	//	Engine::TEX_NORMAL,
 	//	L"../../../Resource/Texture/Brush/Brush%d.tga", 2)))
 	//	return;
+}
+
+
+void CToolView::OnRButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+
+	CView::OnRButtonDown(nFlags, point);
+}
+
+
+void CToolView::OnRButtonUp(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+	CView::OnRButtonUp(nFlags, point);
 }

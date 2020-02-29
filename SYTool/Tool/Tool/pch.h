@@ -29,6 +29,8 @@
 #include <algorithm>
 #include <functional>
 #include <fstream>
+#include <crtdbg.h>
+#include <Windows.h>
 
 using namespace std;
 
@@ -41,11 +43,12 @@ using namespace std;
 
 
 // User Headers
+#include <afxcontrolbars.h>
+
 #include "GraphicDev.h"
 #include "Defines.h"
 #include "Enum.h"
-#include <afxcontrolbars.h>
-//#include "PickingMgr.h"
-//#include "CursorMgr.h"
+#include "ObjMgr.h"
+#include "KeyMgr.h"
 
 #endif //PCH_H

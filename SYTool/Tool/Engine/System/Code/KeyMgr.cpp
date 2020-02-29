@@ -12,6 +12,7 @@ Engine::CKeyMgr::CKeyMgr()
 
 Engine::CKeyMgr::~CKeyMgr()
 {
+	Free();
 }
 
 // 매 프레임마다 호출
