@@ -5,6 +5,7 @@
 #include "Terrain.h"
 #include "MainFrm.h"
 #include "ToolView.h"
+#include "StaticObject.h"
 
 BEGIN(Engine)
 class CComponent;
@@ -36,13 +37,12 @@ public:
 	virtual BOOL OnInitDialog();
 
 private:
-	void					Load_TerrainTexture(CString strPath, CListBox* pListBox, CString pDir);
+	void					Load_ResourceList(CString strPath, CListBox* pListBox, CString pDir);
 	void					Change_TerrainTexture();
-	
 	void					Change_HeightMapTexture();
+	void					ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta);
 
 private:
-	_bool					m_bIsMode;
 	Engine::CComponent*		m_pComponent = nullptr;
 
 private:
@@ -55,11 +55,55 @@ private:
 	CListBox				m_TexListBox;
 	CListBox				m_HeightTexLst;
 	CString					m_strTexList;
+	CListBox				m_StaticObjLst;
 
 	CMainFrame*				m_pMainFrm = nullptr;
 	CToolView*				m_pToolView = nullptr;
 
+	_uint					m_iTexToolMode = 0;	// 0-TEX, 1-HEIGHT, 2-SPLATTING
+	_uint					m_iObjToolMode = 0;	// 0-CREATE, 1-MODY, 2-DEL
 
+	// object
+	CEdit					m_EditPosX;
+	CEdit					m_EditPosY;
+	CEdit					m_EditPosZ;
+	CEdit					m_EditScaleX;
+	CEdit					m_EditScaleY;
+	CEdit					m_EditScaleZ;
+	CEdit					m_EditRotX;
+	CEdit					m_EditRotY;
+	CEdit					m_EditRotZ;
+
+	float					m_fPosX;
+	float					m_fPosY;
+	float					m_fPosZ;
+	float					m_fScaleX;
+	float					m_fScaleY;
+	float					m_fScaleZ;
+	float					m_fRotX;
+	float					m_fRotY;
+	float					m_fRotZ;
+
+	_vec3					m_vMeshPos = { 0.f,0.f,0.f };
+	_vec3					m_vMeshRot = { 0.f,0.f,0.f };
+	_vec3					m_vMeshScale = { 0.f,0.f,0.f };
+
+	MESHDATA*				m_pMeshData = nullptr;
+	CString					m_strPath = L"";
 public:
 
+	afx_msg void OnBnClickedTextureMode();
+	afx_msg void OnBnClickedHeightMode();
+	afx_msg void OnBnClickedSplattingMode();
+
+	afx_msg void OnBnClickedStaticWireMode();
+	afx_msg void OnBnClickedStaticSolidMode();
+	afx_msg void OnBnClickedStaticCreateMode();
+	afx_msg void OnBnClickedStaticModyMode();
+	afx_msg void OnBnClickedStaticDeleteMode();
+	afx_msg void OnBnClickedStaticCreate();
+	afx_msg void OnBnClickedStaticDelete();
+	afx_msg void OnBnClickedStaticSet();
+
+	afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
 };

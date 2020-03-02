@@ -22,17 +22,17 @@ HRESULT Engine::CResourcesMgr::Reserve_ContainerSize(const _ushort& wSize)
 	m_pmatResource = new MAPRESOURCES[wSize];
 
 	m_wCount = wSize;
-
+	
 	return S_OK;
 }
 
-HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
-	const _ushort& wContainerIdx,
-	const _tchar* pBufferTag,
-	BUFFERID eID,
-	const _ulong& dwCntX,
-	const _ulong& dwCntZ,
-	const _ulong& dwVtxItv)
+HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev, 
+											const _ushort& wContainerIdx, 
+											const _tchar* pBufferTag, 
+											BUFFERID eID,
+											const _ulong& dwCntX,
+											const _ulong& dwCntZ,
+											const _ulong& dwVtxItv)
 {
 	if (nullptr == m_pmatResource)
 	{
@@ -72,12 +72,12 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 		return E_FAIL;
 
 	m_pmatResource[wContainerIdx].emplace(pBufferTag, pResources);
-
+	
 	return S_OK;
 }
 
-Engine::CResources* Engine::CResourcesMgr::Find_Resources(const _ushort& wContainerIdx,
-	const _tchar* pResourcesTag)
+Engine::CResources* Engine::CResourcesMgr::Find_Resources(const _ushort& wContainerIdx, 
+															const _tchar* pResourcesTag)
 {
 	auto		iter = find_if(m_pmatResource[wContainerIdx].begin(),
 		m_pmatResource[wContainerIdx].end(), CTag_Finder(pResourcesTag));
@@ -96,12 +96,12 @@ void Engine::CResourcesMgr::Free(void)
 		for_each(m_pmatResource[i].begin(), m_pmatResource[i].end(), CDeleteMap());
 		m_pmatResource[i].clear();
 	}
-
+		
 	Safe_Delete_Array(m_pmatResource);
 }
 
-void Engine::CResourcesMgr::Render_Buffer(const _ushort& wContainerIdx,
-	const _tchar* pBufferTag)
+void Engine::CResourcesMgr::Render_Buffer(const _ushort& wContainerIdx, 
+											const _tchar* pBufferTag)
 {
 	CResources*	pResources = Find_Resources(wContainerIdx, pBufferTag);
 
@@ -111,8 +111,8 @@ void Engine::CResourcesMgr::Render_Buffer(const _ushort& wContainerIdx,
 	dynamic_cast<CVIBuffer*>(pResources)->Render();
 }
 
-Engine::CResources* Engine::CResourcesMgr::Clone_Resources(const _ushort& wContainerIdx,
-	const _tchar* pResourceTag)
+Engine::CResources* Engine::CResourcesMgr::Clone_Resources(const _ushort& wContainerIdx, 
+															const _tchar* pResourceTag)
 {
 	if (nullptr == m_pmatResource)
 		return nullptr;
@@ -123,14 +123,14 @@ Engine::CResources* Engine::CResourcesMgr::Clone_Resources(const _ushort& wConta
 
 }
 
-HRESULT Engine::CResourcesMgr::Ready_Texture(LPDIRECT3DDEVICE9 pGraphicDev,
-	const _ushort& wContainerIdx,
-	const _tchar* pTextureTag,
-	TEXTURETYPE eType,
-	const _tchar* pPath,
-	const _uint& iCnt /*= 1*/)
+HRESULT Engine::CResourcesMgr::Ready_Texture(LPDIRECT3DDEVICE9 pGraphicDev, 
+											const _ushort& wContainerIdx, 
+											const _tchar* pTextureTag, 
+											TEXTURETYPE eType, 
+											const _tchar* pPath, 
+											const _uint& iCnt /*= 1*/)
 {
-	if (nullptr == m_pmatResource)
+	if(nullptr == m_pmatResource)
 	{
 		MSG_BOX("Resource Container not Reserved");
 		return E_FAIL;
@@ -145,7 +145,7 @@ HRESULT Engine::CResourcesMgr::Ready_Texture(LPDIRECT3DDEVICE9 pGraphicDev,
 		return E_FAIL;
 
 	m_pmatResource[wContainerIdx].emplace(pTextureTag, pResource);
-
+	
 	return S_OK;
 }
 

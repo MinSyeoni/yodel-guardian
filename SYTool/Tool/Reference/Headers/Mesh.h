@@ -3,7 +3,6 @@
 
 #include "Resources.h"
 
-
 BEGIN(Engine)
 
 class ENGINE_DLL CMesh : public CResources
@@ -12,16 +11,15 @@ protected:
 	explicit CMesh(LPDIRECT3DDEVICE9 pGraphicDev);
 	explicit CMesh(const CMesh& rhs);
 	virtual ~CMesh(void);
+
 protected:
 	_bool			m_bClone;
+
 public:
-	virtual CResources*   Clone(void)PURE;
-	virtual void          Free(void);
+	virtual CResources*		Clone(void)PURE;
+	virtual void			Free(void);
 
 };
+
 END
-
-
-
-
 #endif // Mesh_h__

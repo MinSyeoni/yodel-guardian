@@ -240,6 +240,11 @@ void CToolView::Ready_Buffer_Setting()
 		1)))
 		return;
 
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"TombStone.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"TombStone.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Tree01.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Tree01.x"), E_FAIL))
+		return;
+
 	//if (FAILED(Engine::Ready_Mesh(m_pDevice,
 	//	RESOURCE_STAGE,
 	//	L"Mesh_Navigation",

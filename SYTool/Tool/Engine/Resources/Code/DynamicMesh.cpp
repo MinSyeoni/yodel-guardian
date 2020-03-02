@@ -12,12 +12,10 @@ Engine::CDynamicMesh::CDynamicMesh(LPDIRECT3DDEVICE9 pGraphicDev)
 
 Engine::CDynamicMesh::CDynamicMesh(const CDynamicMesh& rhs)
 	: CMesh(rhs)
-	,m_pRootFrame(rhs.m_pRootFrame)
+	, m_pRootFrame(rhs.m_pRootFrame)
 	, m_MeshContainerList(rhs.m_MeshContainerList)
 	, m_pLoader(rhs.m_pLoader)
-
 {
-
 	m_pAniCtrl = CAniCtrl::Create(*rhs.m_pAniCtrl);
 }
 
@@ -39,14 +37,14 @@ HRESULT Engine::CDynamicMesh::Ready_Mesh(const _tchar* pFilePath, const _tchar* 
 
 	LPD3DXANIMATIONCONTROLLER  pAniCtrl = NULL;
 
-	FAILED_CHECK_RETURN(D3DXLoadMeshHierarchyFromX(szFullPath,
-		D3DXMESH_MANAGED,
-		m_pGraphicDev,
-		m_pLoader, // Hierarchy Loader
-		NULL,
-		&m_pRootFrame,
-		&pAniCtrl), // aniCtrl
-		E_FAIL);
+	FAILED_CHECK_RETURN(D3DXLoadMeshHierarchyFromX(szFullPath, 
+													D3DXMESH_MANAGED, 
+													m_pGraphicDev,
+													m_pLoader, // Hierarchy Loader
+													NULL,
+													&m_pRootFrame,
+													&pAniCtrl), // aniCtrl
+													E_FAIL);
 
 	m_pAniCtrl = CAniCtrl::Create(pAniCtrl);
 	if (nullptr == m_pAniCtrl)
@@ -65,7 +63,7 @@ HRESULT Engine::CDynamicMesh::Ready_Mesh(const _tchar* pFilePath, const _tchar* 
 }
 
 void Engine::CDynamicMesh::Render_Mesh(void)
-{
+{	
 	auto	iter = m_MeshContainerList.begin();
 	auto	iter_end = m_MeshContainerList.end();
 
@@ -77,7 +75,7 @@ void Engine::CDynamicMesh::Render_Mesh(void)
 		{
 			pMeshContainer->pRenderingMatrix[i] = pMeshContainer->pFrameOffeSetMatrix[i] *
 				(*pMeshContainer->ppFrameCombinedMatrix[i]);
-		}
+		}	
 
 		void*		pSrcVtx = nullptr;
 		void*		pDestVtx = nullptr;
@@ -109,20 +107,9 @@ const D3DXFRAME_DERIVED* Engine::CDynamicMesh::Get_FrameByName(const char* pFram
 	return (D3DXFRAME_DERIVED*)D3DXFrameFind(m_pRootFrame, pFrameName);
 }
 
-D3DXFRAME_DERIVED * CDynamicMesh::Get_FrameByName2(const char * pFrameName)
-{
-	return (D3DXFRAME_DERIVED*)D3DXFrameFind(m_pRootFrame, pFrameName);
-}
-
 _bool Engine::CDynamicMesh::Is_AnimationSetEnd(void)
 {
-
 	return m_pAniCtrl->Is_AnimationSetEnd();
-}
-
-_bool CDynamicMesh::Is_AnimationSetStart(void)
-{
-	return m_pAniCtrl->is_AnimationSetStart();
 }
 
 void Engine::CDynamicMesh::Render_Mesh(LPD3DXEFFECT pEffect)
@@ -149,15 +136,10 @@ void Engine::CDynamicMesh::Render_Mesh(LPD3DXEFFECT pEffect)
 		pMeshContainer->MeshData.pMesh->LockVertexBuffer(0, &pDestVtx);
 
 		pMeshContainer->pSkinInfo->UpdateSkinnedMesh(pMeshContainer->pRenderingMatrix, nullptr, pSrcVtx, pDestVtx);
-
+		
 		for (_ulong i = 0; i < pMeshContainer->NumMaterials; ++i)
 		{
 			pEffect->SetTexture("g_BaseTexture", pMeshContainer->ppTexture[i]);
-			if(pMeshContainer->ppNormalTexture[i]!=nullptr)
-				pEffect->SetTexture("g_NormalTexture", pMeshContainer->ppNormalTexture[i]);
-			else
-				pEffect->BeginPass(5);
-
 			pEffect->CommitChanges();		// 변경된 사항을 다시 세팅해주는 함수
 
 			pMeshContainer->MeshData.pMesh->DrawSubset(i);
@@ -174,11 +156,6 @@ void CDynamicMesh::Set_AnimationSet(const _uint & iIndex)
 	m_pAniCtrl->Set_AnimationSet(iIndex);
 }
 
-void CDynamicMesh::Set_AnimationSetTime(const _uint & iIndex, float fTime)
-{
-	m_pAniCtrl->Set_AnimationTimeSet(iIndex, fTime);
-}
-
 void CDynamicMesh::Play_Animation(const _float & fTimeDelta)
 {
 	m_pAniCtrl->Play_Animation(fTimeDelta);
@@ -188,14 +165,6 @@ void CDynamicMesh::Play_Animation(const _float & fTimeDelta)
 	D3DXMatrixRotationY(&matTemp, D3DXToRadian(180.f));
 
 	Update_FrameMatrix((D3DXFRAME_DERIVED*)m_pRootFrame, &matTemp);
-}
-
-void CDynamicMesh::TimeReset(_double dTime)
-{
-
-	m_pAniCtrl->TimeReset(dTime);
-
-
 }
 
 void Engine::CDynamicMesh::Update_FrameMatrix(D3DXFRAME_DERIVED* pFrame, const _matrix* pParentMatrix)
@@ -262,7 +231,7 @@ void Engine::CDynamicMesh::SetUp_FrameMatrixPointer(D3DXFRAME_DERIVED* pFrame)
 	if (nullptr != pFrame->pFrameSibling)
 		SetUp_FrameMatrixPointer((D3DXFRAME_DERIVED*)pFrame->pFrameSibling);
 
-	if (nullptr != pFrame->pFrameFirstChild)
+	if(nullptr != pFrame->pFrameFirstChild)
 		SetUp_FrameMatrixPointer((D3DXFRAME_DERIVED*)pFrame->pFrameFirstChild);
 
 }

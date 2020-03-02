@@ -26,9 +26,9 @@ Engine::CTexture::~CTexture(void)
 
 }
 
-HRESULT Engine::CTexture::Ready_Texture(const _tchar* pPath,
-	TEXTURETYPE eType,
-	const _uint& iCnt)
+HRESULT Engine::CTexture::Ready_Texture(const _tchar* pPath, 
+										TEXTURETYPE eType, 
+										const _uint& iCnt)
 {
 	m_vecTexture.reserve(iCnt);
 
@@ -43,17 +43,17 @@ HRESULT Engine::CTexture::Ready_Texture(const _tchar* pPath,
 		switch (eType)
 		{
 		case TEX_NORMAL:
-			FAILED_CHECK_RETURN(D3DXCreateTextureFromFile(m_pGraphicDev,
-				szFileName,
-				(LPDIRECT3DTEXTURE9*)&pTexture),
-				E_FAIL);
+			FAILED_CHECK_RETURN(D3DXCreateTextureFromFile(m_pGraphicDev, 
+														  szFileName, 
+														  (LPDIRECT3DTEXTURE9*)&pTexture), 
+														  E_FAIL);
 			break;
 
 		case TEX_CUBE:
 			FAILED_CHECK_RETURN(D3DXCreateCubeTextureFromFile(m_pGraphicDev,
-				szFileName,
-				(LPDIRECT3DCUBETEXTURE9*)&pTexture),
-				E_FAIL);
+															szFileName,
+															(LPDIRECT3DCUBETEXTURE9*)&pTexture),
+															E_FAIL);
 			break;
 		}
 
@@ -80,7 +80,7 @@ Engine::CTexture* Engine::CTexture::Create(LPDIRECT3DDEVICE9 pGraphicDev, const 
 
 	if (FAILED(pInstance->Ready_Texture(pPath, eType, iCnt)))
 		Safe_Release(pInstance);
-
+	
 	return pInstance;
 }
 

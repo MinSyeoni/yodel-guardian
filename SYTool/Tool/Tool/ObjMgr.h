@@ -20,14 +20,15 @@ private:
 	virtual ~CObjMgr(void);
 
 public:
-	void					Load_Object(const _tchar* pFilePath);
+	void						Load_Object(const _tchar* pFilePath);
 
-	void					AddObject(Engine::CGameObject*pObject, OBJ_ID eId);
-	void					Update_Object(const _float& fTimeDelta);
-	void					Render_Object();
-	void					ReleaseGroup(OBJ_ID _iD);
+	void						AddObject(Engine::CGameObject*pObject, OBJ_ID eId);
+	void						Update_Object(const _float& fTimeDelta);
+	void						Render_Object();
+	void						ReleaseGroup(OBJ_ID _iD);
 	
-	Engine::CGameObject*	GetGameObject(OBJ_ID eId);
+	Engine::CGameObject*		GetGameObject(OBJ_ID eId);
+	list<Engine::CGameObject*>	GetGameObjectLst(OBJ_ID eId) { return m_ObjLst[eId]; };
 
 private:
 	void Release();

@@ -71,9 +71,6 @@ void CMyform::OnInitialUpdate()
 	m_pMapTab->MoveWindow(0, 25, rc.Width(), rc.Height());
 	m_pMapTab->ShowWindow(SW_SHOW);
 
-	//_CrtSetBreakAlloc(643);
-	//_CrtMemDumpAllObjectsSince(0);
-
 }
 
 void CMyform::Free()
