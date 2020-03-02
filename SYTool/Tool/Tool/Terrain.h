@@ -2,14 +2,14 @@
 
 #include "GameObject.h"
 
-namespace Engine
-{
-	class CTransform;
-	class CTerrainTex;
-	class CTexture;
-	class CCalculator;
-	class CShader;
-}
+BEGIN(Engine)
+class CTransform;
+class CTerrainTex;
+class CTexture;
+class CCalculator;
+class CShader;
+class CRenderer;
+END
 
 class CTerrain :public Engine::CGameObject
 {
@@ -24,6 +24,10 @@ public:
 	virtual HRESULT		Ready_Object(void);
 	virtual _int		Update_Object(const _float& fTimeDelta);
 	virtual void		Render_Object(void);
+	
+	void				Set_TerrainCurState(TERRAIN_STATE eState) { m_eState = eState; };
+
+	void				Set_TerrainDrawID(_int iDrawID) { m_iDrawID = iDrawID; };
 
 private:
 	HRESULT				Add_Component(void);
@@ -46,7 +50,8 @@ private:
 	Engine::CShader*		m_pShaderCom = nullptr;
 
 private:
-	TERRAIN_STATE			m_eState = STATE_END;
-
+	TERRAIN_STATE			m_eState = STATE_SOLID;
+	_bool					m_bIsReset = false;
+	_int					m_iDrawID = 0;
 };
 

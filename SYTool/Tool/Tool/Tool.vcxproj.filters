@@ -34,6 +34,18 @@
     <Filter Include="05.GameObject\00.Terrain">
       <UniqueIdentifier>{c157514e-9aff-45f9-a2a7-7b436a972a04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06.Manager">
+      <UniqueIdentifier>{29bd5270-d021-4c6f-9177-9bfdcdc61503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Manager\00.ObjectMgr">
+      <UniqueIdentifier>{094900c0-5b25-4938-8852-f3475c8c4e15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.GameObject\99.ToolCamera">
+      <UniqueIdentifier>{8a49024f-b11f-4f51-a45e-bcae65da3c30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.GameObject\01.StaticObject">
+      <UniqueIdentifier>{8ddb5f9f-3367-4ea0-8ec1-1b086585e63c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainFrm.h">
@@ -84,6 +96,15 @@
     <ClInclude Include="Terrain.h">
       <Filter>05.GameObject\00.Terrain</Filter>
     </ClInclude>
+    <ClInclude Include="ObjMgr.h">
+      <Filter>06.Manager\00.ObjectMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolCamera.h">
+      <Filter>05.GameObject\99.ToolCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticObject.h">
+      <Filter>05.GameObject\01.StaticObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainFrm.cpp">
@@ -109,6 +130,15 @@
     </ClCompile>
     <ClCompile Include="Terrain.cpp">
       <Filter>05.GameObject\00.Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMgr.cpp">
+      <Filter>06.Manager\00.ObjectMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolCamera.cpp">
+      <Filter>05.GameObject\99.ToolCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticObject.cpp">
+      <Filter>05.GameObject\01.StaticObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

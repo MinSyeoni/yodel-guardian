@@ -7,6 +7,11 @@ CTimerMgr::CTimerMgr()
 {
 }
 
+CTimerMgr::~CTimerMgr()
+{
+	Free();
+}
+
 _float CTimerMgr::Get_TimeDelta(const _tchar* pTimerTag)
 {
 	CTimer* pTimer = Find_Timer(pTimerTag);

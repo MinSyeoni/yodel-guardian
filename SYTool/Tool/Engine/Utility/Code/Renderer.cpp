@@ -28,31 +28,7 @@ void Engine::CRenderer::Render_GameObject(LPDIRECT3DDEVICE9 pGraphicDev)
 	/*Render_Prioristy(pGraphicDev);*/
 
 	Render_Defferd(pGraphicDev);
-	Render_Light(pGraphicDev);
-	pGraphicDev->Clear(0, nullptr, D3DCLEAR_STENCIL | D3DCLEAR_ZBUFFER, D3DXCOLOR{ 1.0,1.0,1.0,1.0 }, 1.f, 0);
-	Render_Flash(pGraphicDev);
-	Render_LightAcc(pGraphicDev);
-	Render_Blend(pGraphicDev);
-
-    
-
-
-
-
-
-
-
-	//Engine::Render_DebugBuffer(L"MRT_Defferd");
-	//Engine::Render_DebugBuffer(L"MRT_LightAcc");
-	//Engine::Render_DebugBuffer(L"MRT_GodRay");
-	//Engine::Render_DebugBuffer(L"MRT_Depth");
-	//Engine::Render_DebugBuffer(L"MRT_ConeLight");
-
 	Render_UI(pGraphicDev);
-
-
-
-
 	Clear_RenderGroup();
 }
 
@@ -289,8 +265,6 @@ void Engine::CRenderer::Render_LightAcc(LPDIRECT3DDEVICE9 pGraphicDev)
 
 void Engine::CRenderer::Render_Defferd(LPDIRECT3DDEVICE9 pGraphicDev)
 {
-	Engine::Begin_MRT(L"MRT_Defferd");
-
 
 	Render_Priority(pGraphicDev);
 	Render_NonAlpha(pGraphicDev);
@@ -298,7 +272,6 @@ void Engine::CRenderer::Render_Defferd(LPDIRECT3DDEVICE9 pGraphicDev)
 	Render_Alpha(pGraphicDev);
 
 	Render_Player(pGraphicDev);
-	Engine::End_MRT(L"MRT_Defferd");
 }
 
 

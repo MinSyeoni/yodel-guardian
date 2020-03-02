@@ -75,13 +75,6 @@ STDMETHODIMP Engine::CHierarchyLoader::CreateMeshContainer(THIS_ LPCSTR Name,
 	pNewMeshContainer->ppTexture = new LPDIRECT3DTEXTURE9[pNewMeshContainer->NumMaterials];
 	ZeroMemory(pNewMeshContainer->ppTexture, sizeof(LPDIRECT3DTEXTURE9) * pNewMeshContainer->NumMaterials);
 
-	pNewMeshContainer->ppNormalTexture = new LPDIRECT3DTEXTURE9[pNewMeshContainer->NumMaterials];
-	ZeroMemory(pNewMeshContainer->ppNormalTexture, sizeof(LPDIRECT3DTEXTURE9) * pNewMeshContainer->NumMaterials);
-
-
-
-
-
 	if (0 != NumMaterials)
 	{
 		memcpy(pNewMeshContainer->pMaterials, pMaterials, sizeof(D3DXMATERIAL) * pNewMeshContainer->NumMaterials);
@@ -90,39 +83,18 @@ STDMETHODIMP Engine::CHierarchyLoader::CreateMeshContainer(THIS_ LPCSTR Name,
 		{
 			_tchar		szFullPath[128] = L"";
 			_tchar		szFileName[128] = L"";
-			wstring      wstrNomal = L"";
-			_tchar  szNomalFileName[128] = L"";
 
 			MultiByteToWideChar(CP_ACP, 0, pNewMeshContainer->pMaterials[i].pTextureFilename, 
 				strlen(pNewMeshContainer->pMaterials[i].pTextureFilename), szFileName, 128);
 
 			lstrcpy(szFullPath, m_pPath);
 			lstrcat(szFullPath, szFileName);
-			wstrNomal = szFileName;
-			for (_int i = 0; i < 5; ++i)
-				wstrNomal.pop_back();
-			wstrNomal += L"N.tga";
-
-
-			lstrcpy(szNomalFileName, wstrNomal.c_str());
-
-
 
 			if (FAILED(D3DXCreateTextureFromFile(m_pGraphicDev, szFullPath, &pNewMeshContainer->ppTexture[i])))
 			{
 				MSG_BOX("DynamicMesh`s Texture Create Failed");
 				return E_FAIL;
 			} 
-			lstrcpy(szFullPath, m_pPath);
-			lstrcat(szFullPath, szNomalFileName);
-
-			if (FAILED(D3DXCreateTextureFromFile(m_pGraphicDev, szFullPath, &pNewMeshContainer->ppNormalTexture[i])))
-			{
-				pNewMeshContainer->ppNormalTexture[i] = nullptr;
-			}
-
-
-
 		}
 	}
 
@@ -197,11 +169,7 @@ STDMETHODIMP Engine::CHierarchyLoader::DestroyMeshContainer(THIS_ LPD3DXMESHCONT
 	for (_ulong i = 0; i < pMeshContainer->NumMaterials; ++i)
 		Safe_Release(pMeshContainer->ppTexture[i]);
 
-	for (_ulong i = 0; i < pMeshContainer->NumMaterials; ++i)
-		Safe_Release(pMeshContainer->ppNormalTexture[i]);
-
 	Safe_Delete_Array(pMeshContainer->ppTexture);
-	Safe_Delete_Array(pMeshContainer->ppNormalTexture);
 
 	Safe_Delete_Array(pMeshContainer->pMaterials);
 	Safe_Delete_Array(pMeshContainer->pFrameOffeSetMatrix);

@@ -19,11 +19,8 @@ public:
 public:
 	HRESULT	Ready_AniCtrl(void);
 	void	Set_AnimationSet(const _uint& iIndex);
-	void    Set_AnimationTimeSet(const _uint&iIndex, float fTime);
 	void	Play_Animation(const _float& fTimeDelta);
 	_bool						Is_AnimationSetEnd(void);
-	_bool                       is_AnimationSetStart(void);
-	void     TimeReset(_double AniTime);
 private:
 	LPD3DXANIMATIONCONTROLLER			m_pAniCtrl;
 	_uint								m_iCurrentTrack;

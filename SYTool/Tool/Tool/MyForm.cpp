@@ -5,6 +5,9 @@
 #include "Tool.h"
 #include "Myform.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#endif
 
 // CMyform
 
@@ -67,8 +70,6 @@ void CMyform::OnInitialUpdate()
 	m_pMapTab->Create(IDD_DIALOG1, &m_MainTab);
 	m_pMapTab->MoveWindow(0, 25, rc.Width(), rc.Height());
 	m_pMapTab->ShowWindow(SW_SHOW);
-
-
 
 }
 

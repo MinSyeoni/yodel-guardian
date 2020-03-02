@@ -123,7 +123,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>../Reference/Headers;../Headers;../Base;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -214,11 +214,14 @@
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MapTab.h" />
     <ClInclude Include="Myform.h" />
+    <ClInclude Include="ObjMgr.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="StaticObject.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Tool.h" />
+    <ClInclude Include="ToolCamera.h" />
     <ClInclude Include="ToolDoc.h" />
     <ClInclude Include="ToolView.h" />
   </ItemGroup>
@@ -226,14 +229,17 @@
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MapTab.cpp" />
     <ClCompile Include="Myform.cpp" />
+    <ClCompile Include="ObjMgr.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Tool.cpp" />
+    <ClCompile Include="ToolCamera.cpp" />
     <ClCompile Include="ToolDoc.cpp" />
     <ClCompile Include="ToolView.cpp" />
   </ItemGroup>

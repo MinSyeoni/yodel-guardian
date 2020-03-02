@@ -5,6 +5,7 @@
 // CMyform 폼 보기
 #include "MapTab.h"
 
+class CMapTab;
 class CMyform : public CFormView
 {
 	DECLARE_DYNCREATE(CMyform)
@@ -36,7 +37,7 @@ private:
 
 private:
 	CTabCtrl	m_MainTab;
-	CMapTab*	m_pMapTab;
+	CMapTab*	m_pMapTab = nullptr;
 
 };
 
