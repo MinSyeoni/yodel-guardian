@@ -1,7 +1,7 @@
-#pragma
+#pragma once
 
 #include "Base.h"
-
+#include "Font.h"
 class CLoading : public CBase
 {
 public:
@@ -15,11 +15,11 @@ public:
 	LOADINGID			Get_LoadingID(void) const { return m_LoadingID; }
 	CRITICAL_SECTION*	Get_Crt(void) { return &m_Crt; }
 	_bool				Get_Finish(void) const { return m_bFinish; }
-
+	
 public:
 	HRESULT				Ready_Loading(LOADINGID eLoadingID);
 	_uint				Loading_ForStage(void);
-
+	HRESULT             Load_Shader();
 	HRESULT             Mesh_ForStage(void);
 	HRESULT             Texture_ForStage(void);
 

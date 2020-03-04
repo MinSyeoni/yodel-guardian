@@ -24,6 +24,8 @@ public:
 	ID3D12GraphicsCommandList*	Get_CommandListThread() { return m_pCommandListThread; }
 
 	const D3D12_VIEWPORT&		Get_Viewport()						{ return m_Viewport; }
+	const D3D12_RECT&    Get_ScissorRect() { return m_ScissorRect; };
+
 	const _bool&				Get_MSAA4X_Enable()					{ return m_bIsMSAA4X_Enable; }
 	const _uint&				Get_MSAA4X_QualityLevels()			{ return m_uiMSAA4X_QualityLevels; }
 	const _uint&				Get_CBV_SRV_UAV_DescriptorSize()	{ return m_uiCBV_SRV_UAV_DescriptorSize; }
@@ -32,15 +34,28 @@ public:
 public:
 	HRESULT Ready_GraphicDevice(HWND hWnd, HANDLE hHandle, WINMODE eMode, const _uint& iWidth, const _uint& iHeight);
 	HRESULT	Render_Begin(const _rgba& vRGBA);
+	HRESULT Render_TextBegin();
+	HRESULT Render_TextEnd();
 	HRESULT	Render_End();
+
+	CD3DX12_CPU_DESCRIPTOR_HANDLE Get_DepthBuffer_handle();
+	HRESULT BackBufferSettingBegin();
+	HRESULT BackBufferSettingEnd();
+
 private:
 	HRESULT	Create_GraphicDevice(const _uint& iWidth, const _uint& iHeight);
 	HRESULT	Create_CommandQueueAndList();
 	HRESULT	Create_SwapChain(HWND hWnd, WINMODE eMode, const _uint& iWidth, const _uint& iHeight);
 	HRESULT Create_RtvAndDsvDescriptorHeaps();
+
+
 	HRESULT Create_RootSig();
 	HRESULT Create_TextureRoot();
 	HRESULT Create_MeshRoot();
+	HRESULT Create_LightRoot();
+	HRESULT Create_BlendRoot();
+	HRESULT Create_TerrainRoot();
+	HRESULT Create_ShadowDepthRoot();
 	HRESULT OnResize(const _uint& iWidth, const _uint& iHeight);
 public:
 	ID3D12RootSignature* GetLootSig(_uint eType) { return m_arrSig[eType]; }
@@ -61,7 +76,7 @@ private:
 	void	Log_OutputDisplayModes(IDXGIOutput* output, DXGI_FORMAT format);
 
 private:
-	array<const CD3DX12_STATIC_SAMPLER_DESC, 6> GetStaticSamplers();
+	array<const CD3DX12_STATIC_SAMPLER_DESC, 1> GetStaticSamplers();
 
 
 private:
@@ -119,6 +134,8 @@ private:
 	static const _int		m_iSwapChainBufferCount = 2;
 	_int					m_iCurrBackBuffer		= 0;
 
+
+
 	ID3D12Resource*			m_ppSwapChainBuffer[m_iSwapChainBufferCount];
 	ID3D12Resource*			m_pDepthStencilBuffer = nullptr;
 
@@ -148,11 +165,54 @@ private:
 	D3D12_VIEWPORT	m_Viewport;		// 뷰포트.
 	D3D12_RECT		m_ScissorRect;	// 씨저 사각형.
 
+
+private:
+
 	/*____________________________________________________________________
 	4X MSAA 품질 수준 지원 점검.
 	______________________________________________________________________*/
 	_bool m_bIsMSAA4X_Enable		= false;
 	_uint m_uiMSAA4X_QualityLevels	= 0;
+
+	public:
+		_matrix GetViewMatrix() { return m_matView; };
+		_matrix GetProjMatrix() { return m_matProj; };
+
+		void SetViewMatrix(_matrix matView) { m_matView = matView; }
+		void SetProjMatrix(_matrix matProj) { m_matProj = matProj; }
+
+		/*__________________________________________________________________________________________________________
+			[ DirectX 11 GraphicDevice ]
+			- D2D / TextFont Render.
+			____________________________________________________________________________________________________________*/
+private:
+
+	HRESULT	Create_11On12GraphicDevice();
+
+public:
+    /*__________________________________________________________________________________________________________
+    [ DirectX 11 ]
+    ____________________________________________________________________________________________________________*/
+    ID2D1DeviceContext2*		Get_D2DContext() { return m_pD2D_Context; }
+    IDWriteFactory2*			Get_DWriteFactory() { return m_pDWriteFactory; }
+private: 
+	ID3D11Device*			m_p11Device = nullptr;
+	ID3D11DeviceContext*	m_p11Context = nullptr;
+	ID3D11On12Device*		m_p11On12Device = nullptr;
+
+	ID2D1Factory3*			m_pD2D_Factory = nullptr;
+	ID2D1Device2*			m_pD2D_Device = nullptr;
+	ID2D1DeviceContext2*	m_pD2D_Context = nullptr;
+	IDWriteFactory2*		m_pDWriteFactory = nullptr;
+
+	ID3D11Resource*			m_pWrappedBackBuffers[m_iSwapChainBufferCount];
+	ID2D1Bitmap1*			m_pD2DRenderTargets[m_iSwapChainBufferCount];
+
+
+
+private:
+	_matrix m_matView = INIT_MATRIX;
+	_matrix m_matProj = INIT_MATRIX;
 
 private:
 	virtual void Free();

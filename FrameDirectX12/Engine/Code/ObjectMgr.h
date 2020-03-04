@@ -23,6 +23,9 @@ public:
 public:
 	void			Add_Layer(wstring wstrLayerTag, CLayer* pLayer) { m_mapLayer.emplace(wstrLayerTag, pLayer); }
 	HRESULT			Add_GameObject(wstring wstrLayerTag, wstring wstrPrototypeTag, wstring wstrObjTag, void* pArg);
+
+	CGameObject*	Get_NewGameObject(wstring wstrPrototypeTag, wstring wstrObjTag, void* pArg);
+
 public:
 	_int			Update_ObjectMgr(const _float& fTimeDelta);
 	_int			LateUpdate_ObjectMgr(const _float& fTimeDelta);

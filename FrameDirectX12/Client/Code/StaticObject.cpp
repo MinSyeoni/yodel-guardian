@@ -3,6 +3,7 @@
 #include "ObjectMgr.h"
 #include "DynamicCamera.h"
 #include "GraphicDevice.h"
+#include "Frustom.h"
 CStaticObject::CStaticObject(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -66,7 +67,7 @@ HRESULT CStaticObject::LateInit_GameObject()
 	COUT_STR("Success Get DynamicCamera");
 #endif
 
-	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture());
+	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(),m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture());
 
 	return S_OK;
 }
@@ -95,7 +96,7 @@ _int CStaticObject::LateUpdate_GameObject(const _float & fTimeDelta)
 	[ Renderer - Add Render Group ]
 	______________________________________________________________________*/
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
-
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	/*____________________________________________________________________
 	[ Set PipelineState ]
 	______________________________________________________________________*/
@@ -111,6 +112,15 @@ void CStaticObject::Render_GameObject(const _float & fTimeDelta)
 	m_pShaderCom->Begin_Shader();
 
 	m_pMeshCom->Render_Mesh(m_pShaderCom);
+
+}
+
+void CStaticObject::Render_ShadowDepth(CShader_Shadow * pShader)
+{
+	Set_ShadowTable(pShader);
+	m_pMeshCom->Render_ShadowMesh(pShader);
+	pShader->Set_ShadowFinish();
+
 
 }
 
@@ -146,8 +156,39 @@ void CStaticObject::Set_ConstantTable()
 
 	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_pTransCom->m_matWorld));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
 
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
+}
+
+void CStaticObject::Set_ShadowTable(CShader_Shadow * pShader)
+{
+
+	_matrix matRotY = XMMatrixRotationY(XMConvertToRadians(-90));
+
+	_matrix matView = INIT_MATRIX;
+	_matrix matProj = INIT_MATRIX;
+
+	CB_SHADOW_INFO	tCB_MatrixInfo;
+
+	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_SHADOW_INFO));
+
+	matView = CFrustom::Get_Instance()->Get_LightView();
+	matProj = CFrustom::Get_Instance()->Get_LightProj();
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(matRotY*m_pTransCom->m_matWorld));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
+	tCB_MatrixInfo.blsMesh = true;
+
+
+	_int offset = pShader->Get_CBMeshCount();
+	pShader->Get_UploadBuffer_ShadowInfo()->CopyData(offset, tCB_MatrixInfo);
+
+
+
+
 }
 
 CGameObject * CStaticObject::Clone_GameObject(void * prg)

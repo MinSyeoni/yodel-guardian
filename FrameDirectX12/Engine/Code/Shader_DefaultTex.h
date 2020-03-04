@@ -15,7 +15,7 @@ private:
 public:
 	HRESULT			Ready_Shader();
 	virtual void	Begin_Shader();
-	virtual void	End_Shader(_uint Texnum = 0);
+	virtual void	End_Shader(_uint uiOffset=0, _uint Texnum = 0);
 
 public:
 	void Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture);

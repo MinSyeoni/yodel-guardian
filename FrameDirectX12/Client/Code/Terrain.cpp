@@ -3,7 +3,7 @@
 #include "ObjectMgr.h"
 #include "DynamicCamera.h"
 #include "GraphicDevice.h"
-
+#include "Frustom.h"
 
 CTerrain::CTerrain(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -46,11 +46,9 @@ HRESULT CTerrain::LateInit_GameObject()
 #ifdef _DEBUG
 	COUT_STR("LateInit CubeObject");
 #endif
+	m_pTransCom->m_vScale = _vec3{ 10.f,10.f,10.f };
 
-	m_pDynamicCamera = static_cast<CDynamicCamera*>(m_pObjectMgr->Get_GameObject(L"Layer_Camera", L"DynamicCamera"));
-	NULL_CHECK_RETURN(m_pDynamicCamera, E_FAIL);
-
-	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());
+	m_pShaderCom->Set_Shader_Texture(m_pDiffuseTexture->Get_Texture(), m_pNormalTexture->Get_Texture());
 	return S_OK;
 }
 
@@ -75,9 +73,7 @@ _int CTerrain::LateUpdate_GameObject(const _float & fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
-	/*____________________________________________________________________
-	[ Renderer - Add Render Group ]
-	______________________________________________________________________*/
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 
 	/*____________________________________________________________________
@@ -103,6 +99,16 @@ void CTerrain::Render_GameObject(const _float & fTimeDelta)
 
 }
 
+void CTerrain::Render_ShadowDepth(CShader_Shadow * pShader)
+{
+	Set_ShadowTable(pShader);
+	m_pBufferCom->Begin_Buffer();
+	pShader->End_ShadowShader(false);
+	m_pBufferCom->Render_Buffer();
+	pShader->Set_ShadowFinish();
+
+}
+
 HRESULT CTerrain::Add_Component()
 {
 	NULL_CHECK_RETURN(m_pComponentMgr, E_FAIL);
@@ -113,18 +119,47 @@ HRESULT CTerrain::Add_Component()
 	m_mapComponent[ID_STATIC].emplace(L"Com_Buffer", m_pBufferCom);
 
 	// Shader
-	m_pShaderCom = static_cast<Engine::CShader_Default*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_Default", COMPONENTID::ID_STATIC));
+	m_pShaderCom = static_cast<Engine::CShader_Terrain*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_Terrain", COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
 
 
 	//Texture
 	
-	m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture", COMPONENTID::ID_STATIC));
-	NULL_CHECK_RETURN(m_pTexture, E_FAIL);
-	m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
+	m_pDiffuseTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_Terrain", COMPONENTID::ID_STATIC));
+	NULL_CHECK_RETURN(m_pDiffuseTexture, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_DiffuseTexture", m_pDiffuseTexture);
+
+	m_pNormalTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_TerrainN", COMPONENTID::ID_STATIC));
+	NULL_CHECK_RETURN(m_pNormalTexture, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_NormalTexture", m_pNormalTexture);
 
 	return S_OK;
+}
+
+void CTerrain::Set_ShadowTable(CShader_Shadow * pShader)
+{
+	_matrix matView = INIT_MATRIX;
+	_matrix matProj = INIT_MATRIX;
+
+	CB_SHADOW_INFO	tCB_MatrixInfo;
+
+	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_SHADOW_INFO));
+
+	matView = CFrustom::Get_Instance()->Get_LightView();
+	matProj = CFrustom::Get_Instance()->Get_LightProj();
+
+
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_pTransCom->m_matWorld));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
+	tCB_MatrixInfo.blsMesh = false;
+
+
+	_int offset = pShader->Get_CBMeshCount();
+	pShader->Get_UploadBuffer_ShadowInfo()->CopyData(offset, tCB_MatrixInfo);
+
+
 }
 
 void CTerrain::Set_ConstantTable()
@@ -136,16 +171,28 @@ void CTerrain::Set_ConstantTable()
 	CB_MATRIX_INFO	tCB_MatrixInfo;
 	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
 
-	if (nullptr != m_pDynamicCamera)
-	{
-		matView = m_pDynamicCamera->Get_CameraInfo().matView;
-		matProj = m_pDynamicCamera->Get_ProjInfo().matProj;
-	}
+
+	matView = CGraphicDevice::Get_Instance()->GetViewMatrix();
+	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
 
 	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
-
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_pTransCom->m_matWorld));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
+
+
+	_matrix matLightView = INIT_MATRIX;
+	_matrix matLightProj = INIT_MATRIX;
+
+	CB_LIGHTMATRIX_INFO	tCB_LightMatrixInfo;
+	ZeroMemory(&tCB_LightMatrixInfo, sizeof(CB_LIGHTMATRIX_INFO));
+	XMStoreFloat4x4(&tCB_LightMatrixInfo.matLightView, XMMatrixTranspose(CFrustom::Get_Instance()->Get_LightView()));
+	XMStoreFloat4x4(&tCB_LightMatrixInfo.matLightProj, XMMatrixTranspose(CFrustom::Get_Instance()->Get_LightProj()));
+
+	m_pShaderCom->Get_UploadBuffer_LightMatrixInfo()->CopyData(0, tCB_LightMatrixInfo);
+
 }
 
 CGameObject * CTerrain::Clone_GameObject(void* pArg)
@@ -175,5 +222,6 @@ void CTerrain::Free()
 
 	Engine::Safe_Release(m_pBufferCom);
 	Engine::Safe_Release(m_pShaderCom);
-	Engine::Safe_Release(m_pTexture);
+	Engine::Safe_Release(m_pDiffuseTexture);
+	Engine::Safe_Release(m_pNormalTexture);
 }

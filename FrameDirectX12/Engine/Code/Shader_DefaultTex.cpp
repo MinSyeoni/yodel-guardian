@@ -37,27 +37,29 @@ void CShader_DefaultTex::Begin_Shader()
 {
 	ID3D12DescriptorHeap* pDescriptorHeaps[] = { m_pCBV_DescriptorHeap };
 	m_pCommandList->SetDescriptorHeaps(_countof(pDescriptorHeaps), pDescriptorHeaps);
-	int i = _countof(pDescriptorHeaps);
 	m_pCommandList->SetPipelineState(m_pPipelineState);
 	m_pCommandList->SetGraphicsRootSignature(CGraphicDevice::Get_Instance()->GetLootSig((_uint)ROOT_SIG_TYPE::INPUT_TEXTURE));
 
 }
 
-void CShader_DefaultTex::End_Shader(_uint Texnum)
+void CShader_DefaultTex::End_Shader(_uint uiOffset, _uint Texnum)
 {
 
+	UINT objCBByteSize = (sizeof(CB_MATRIX_INFO) + 255) & ~255;
+
+	D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = m_pCB_MatrixInfo->Resource()->GetGPUVirtualAddress() + uiOffset *objCBByteSize;
+
 	CD3DX12_GPU_DESCRIPTOR_HANDLE tex(m_pCBV_DescriptorHeap->GetGPUDescriptorHandleForHeapStart());
-	int i = CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize();
 	tex.Offset(Texnum, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 	m_pCommandList->SetGraphicsRootDescriptorTable(0, tex);
-	m_pCommandList->SetGraphicsRootConstantBufferView(1, m_pCB_MatrixInfo->Resource()->GetGPUVirtualAddress());
+	m_pCommandList->SetGraphicsRootConstantBufferView(1,objCBAddress);
 
 }
 
 void CShader_DefaultTex::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture)
 {
 	CGraphicDevice::Get_Instance()->Begin_ResetCmdList();
-	int iTexSize = pVecTexture.size();
+	int iTexSize = (int)pVecTexture.size();
 
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
 	srvHeapDesc.NumDescriptors = iTexSize;
@@ -80,7 +82,7 @@ void CShader_DefaultTex::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVec
 		hDescriptor.Offset(1, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 	}
 
-	m_pCB_MatrixInfo = new CUploadBuffer<CB_MATRIX_INFO>(DEVICE, 1, true);
+	m_pCB_MatrixInfo = new CUploadBuffer<CB_MATRIX_INFO>(DEVICE, 5, true);
 	_uint uiCB_ByteSize = INIT_CB_256(CB_MATRIX_INFO);
 
 	CGraphicDevice::Get_Instance()->End_ResetCmdList();

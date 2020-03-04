@@ -47,7 +47,6 @@ void CShader_Default::End_Shader(_uint Texnum)
 {
 
 	CD3DX12_GPU_DESCRIPTOR_HANDLE tex(m_pCBV_DescriptorHeap->GetGPUDescriptorHandleForHeapStart());
-	int i =CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize();
 	tex.Offset(Texnum, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 	m_pCommandList->SetGraphicsRootDescriptorTable(0, tex);
 	m_pCommandList->SetGraphicsRootConstantBufferView(1, m_pCB_MatrixInfo->Resource()->GetGPUVirtualAddress());
@@ -56,8 +55,8 @@ void CShader_Default::End_Shader(_uint Texnum)
 
 void CShader_Default::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture)
 {
-	;
-	int iTexSize = pVecTexture.size();
+	
+	int iTexSize = (int)pVecTexture.size();
 
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
 	srvHeapDesc.NumDescriptors = iTexSize;

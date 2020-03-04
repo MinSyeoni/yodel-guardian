@@ -1,17 +1,12 @@
 Texture2D gTexture : register(t0);
-
-SamplerState gsamPointWrap        : register(s0);
-SamplerState gsamPointClamp       : register(s1);
-SamplerState gsamLinearWrap       : register(s2);
-SamplerState gsamLinearClamp      : register(s3);
-SamplerState gsamAnisotropicWrap  : register(s4);
-SamplerState gsamAnisotropicClamp : register(s5);
-
+SamplerState gsamLinearWrap       : register(s0);
 
 cbuffer cbMatrixInfo	: register(b0)
 {
-	float4x4 matWVP		: packoffset(c0);
-
+    float4x4 matWorld : packoffset(c0);
+    float4x4 matView : packoffset(c4);
+    float4x4 matProj : packoffset(c8);
+    float4x4 matWVP : packoffset(c12);
 };
 
 struct VS_TEXTURED_INPUT

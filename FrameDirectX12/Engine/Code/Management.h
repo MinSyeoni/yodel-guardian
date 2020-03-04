@@ -20,7 +20,7 @@ public:
 	_int	Update_Management(const _float& fTimeDelta);
 	_int	LateUpdate_Management(const _float& fTimeDelta);
 	void	Render_Management(const _float& fTimeDelta);
-
+	CScene*  Get_CurScene() { return m_pCurrentScene; };
 protected:
 	CScene* m_pCurrentScene = nullptr;
 

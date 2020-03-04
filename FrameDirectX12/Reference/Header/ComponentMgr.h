@@ -8,6 +8,8 @@
 #include "TerrainTex.h"
 #include "Shader_ColorBuffer.h"
 #include "Shader_Default.h"
+#include "Shader_LightAcc.h"
+#include "Shader_Terrain.h"
 #include "Texture.h"
 #include "Shader_DefaultTex.h"
 #include "Shader_Mesh.h"
@@ -15,6 +17,7 @@
 #include "Mesh.h"
 #include"AnimationControl.h"
 #include "MeshComponent.h"
+#include "NaviMesh.h"
 BEGIN(Engine)
 
 class ENGINE_DLL CComponentMgr : public CBase

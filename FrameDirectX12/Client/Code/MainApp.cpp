@@ -10,6 +10,7 @@
 #include "Scene_Menu.h"
 #include "Scene_Stage.h"
 #include "DynamicCamera.h"
+#include "Font.h"
 CMainApp::CMainApp()
 	: m_pDeviceClass(CGraphicDevice::Get_Instance())
 	, m_pComponentMgr(CComponentMgr::Get_Instance())
@@ -29,13 +30,41 @@ HRESULT CMainApp::Ready_MainApp()
 {
 	srand(unsigned int(time(nullptr)));
 
-	FAILED_CHECK_RETURN(SetUp_DefaultSetting(CGraphicDevice::MODE_WIN, WINCX, WINCY), E_FAIL);
+	FAILED_CHECK_RETURN(SetUp_DefaultSetting(CGraphicDevice::MODE_FULL, WINCX, WINCY), E_FAIL);
 	FAILED_CHECK_RETURN(SetUp_ComponentPrototype(), E_FAIL);
 	FAILED_CHECK_RETURN(SetUp_Resource(),E_FAIL);
+	FAILED_CHECK_RETURN(SetUp_Font(),E_FAIL);
 	FAILED_CHECK_RETURN(SetUp_StartScene(Engine::SCENEID::SCENE_LOGO), E_FAIL);
 	return S_OK;
 }
+HRESULT CMainApp::SetUp_Font()
+{
+	/*__________________________________________________________________________________________________________
+	[ Font ]
+	____________________________________________________________________________________________________________*/
 
+	AddFontResourceEx(L"../../Resource/Font/netmarbleL.ttf", FR_PRIVATE, 0);
+
+
+	/*__________________________________________________________________________________________________________
+	[ Font Prototype ]
+	____________________________________________________________________________________________________________*/
+	Engine::CGameObject* pGameObject = nullptr;
+
+	// NetmarbleLight
+	pGameObject = CFont::Create_Prototype(m_pGraphicDevice, m_pCommandList,
+		L"netmarble Light",	// Font Type
+		15.f,					// Font Size
+		D2D1::ColorF::White);	// Font Color
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Font_NetmarbleLight", pGameObject);
+
+
+
+	m_pFont_FPS = static_cast<CFont*>(CObjectMgr::Get_Instance()->Get_NewGameObject(L"Prototype_Font_NetmarbleLight", L"fuck", nullptr));
+	FAILED_CHECK_RETURN(m_pFont_FPS->Ready_GameObjectClone(L"", _vec2(1400.f, 850.f), D2D1::ColorF::SpringGreen), E_FAIL);
+	return S_OK;
+}
 _int CMainApp::Update_MainApp(const _float & fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pManagement, -1);
@@ -44,13 +73,31 @@ _int CMainApp::Update_MainApp(const _float & fTimeDelta)
 	Direct Input
 	______________________________________________________________________*/
 	Engine::CDirectInput::Get_Instance()->SetUp_InputState();
-	
+
+
+	m_pFont_FPS->Update_GameObject(fTimeDelta);
+
+	m_fTime += fTimeDelta;
+	++m_uiFPS;
+
+	if (m_fTime >= 1.0f)
+	{
+		wsprintf(m_szFPS, L"FPS : %d", m_uiFPS);
+		m_pFont_FPS->Set_Text(wstring(m_szFPS));
+
+		m_fTime = 0.0f;
+		m_uiFPS = 0;
+	}
+
+
 	return m_pManagement->Update_Management(fTimeDelta);
 }
 
 _int CMainApp::LateUpdate_MainApp(const _float & fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pManagement, -1);
+
+	m_pFont_FPS->LateUpdate_GameObject(fTimeDelta);
 
 	return m_pManagement->LateUpdate_Management(fTimeDelta);
 }
@@ -139,6 +186,12 @@ HRESULT CMainApp::SetUp_ComponentPrototype()
 	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_TerrainTex", ID_STATIC, pComponent), E_FAIL);
 
 
+	//pComponent = Engine::CNaviMesh::Create(m_pGraphicDevice, m_pCommandList);
+	//NULL_CHECK_RETURN(pComponent, E_FAIL);
+	//FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_NaviMesh", ID_STATIC, pComponent), E_FAIL);
+
+
+
 
 
 	return S_OK;
@@ -203,4 +256,6 @@ CMainApp * CMainApp::Create()
 
 void CMainApp::Free()
 {
+	Safe_Release(m_pFont_FPS);
+	
 }

@@ -55,7 +55,7 @@ HRESULT CStaticMesh::Ready_Mesh(const _tchar* pFilePath, const _tchar* pFileName
 
 	lstrcpy(m_szFilePath, pFilePath);
    
-	int len = wcslen((wchar_t*)m_szFileName);
+	int len = (int)wcslen((wchar_t*)m_szFileName);
 	char* psz = new char[2 * len + 1];
 	wcstombs(psz, (wchar_t*)m_szFileName, 2 * len + 1);
 	string szFullPath = psz;
@@ -95,7 +95,7 @@ HRESULT CStaticMesh::Ready_Mesh(const _tchar* pFilePath, const _tchar* pFileName
 			vecIndices.reserve(numIndices);
 
 			const aiMesh* paiMesh = m_pScene->mMeshes[i];
-			InitMesh(i, paiMesh, vecPositions, vecNormals, vecTexCoords, vecIndices);
+			InitMesh((int)i, paiMesh, vecPositions, vecNormals, vecTexCoords, vecIndices);
 
 			vector<VTXTEX> Vertices;
 			Vertices.resize(vecPositions.size());
@@ -210,7 +210,7 @@ HRESULT CStaticMesh::Ready_Texture()
 
 
 
-void CStaticMesh::Render_Mesh(CShader* pShader)
+void CStaticMesh::Render_Mesh(CShader* pShader,vector<vector<_matrix>> vecBoneMatrix)
 {
 	for (int i = 0; i < m_entries.size(); i++)
 	{

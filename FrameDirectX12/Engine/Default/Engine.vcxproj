@@ -101,7 +101,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>d3dcompiler.lib;D3D12.lib;dxgi.lib;dxguid.lib;dinput8.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3dcompiler.lib;D3D12.lib;dxgi.lib;dxguid.lib;dinput8.lib;assimp-vc140-mt.lib;d3d12.lib;d3d11.lib;d2d1.lib;dwrite.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <LargeAddressAware>true</LargeAddressAware>
       <AdditionalLibraryDirectories>../../libarary/Assimp/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
@@ -182,38 +182,53 @@ call CopyEngine.bat</Command>
     <ClInclude Include="..\Code\AnimationControl.h" />
     <ClInclude Include="..\Code\Base.h" />
     <ClInclude Include="..\Code\Camera.h" />
+    <ClInclude Include="..\Code\Cell.h" />
     <ClInclude Include="..\Code\Component.h" />
     <ClInclude Include="..\Code\ComponentMgr.h" />
     <ClInclude Include="..\Code\CubeTex.h" />
     <ClInclude Include="..\Code\DDSTextureLoader.h" />
     <ClInclude Include="..\Code\DirectInput.h" />
     <ClInclude Include="..\Code\DirectSound.h" />
+    <ClInclude Include="..\Code\Font.h" />
     <ClInclude Include="..\Code\Frame.h" />
     <ClInclude Include="..\Code\FrameMgr.h" />
+    <ClInclude Include="..\Code\Frustom.h" />
     <ClInclude Include="..\Code\GameObject.h" />
     <ClInclude Include="..\Code\GraphicDevice.h" />
     <ClInclude Include="..\Code\Info.h" />
     <ClInclude Include="..\Code\Layer.h" />
+    <ClInclude Include="..\Code\Light.h" />
+    <ClInclude Include="..\Code\LightMgr.h" />
+    <ClInclude Include="..\Code\LightTarget.h" />
+    <ClInclude Include="..\Code\Line.h" />
     <ClInclude Include="..\Code\Management.h" />
     <ClInclude Include="..\Code\MathMgr.h" />
     <ClInclude Include="..\Code\Mesh.h" />
     <ClInclude Include="..\Code\MeshComponent.h" />
+    <ClInclude Include="..\Code\NaviMesh.h" />
     <ClInclude Include="..\Code\ObjectMgr.h" />
     <ClInclude Include="..\Code\RcTex.h" />
     <ClInclude Include="..\Code\Renderer.h" />
     <ClInclude Include="..\Code\Scene.h" />
     <ClInclude Include="..\Code\Shader.h" />
+    <ClInclude Include="..\Code\Shader_Blend.h" />
     <ClInclude Include="..\Code\Shader_ColorBuffer.h" />
     <ClInclude Include="..\Code\Shader_Default.h" />
     <ClInclude Include="..\Code\Shader_DefaultTex.h" />
+    <ClInclude Include="..\Code\Shader_LightAcc.h" />
     <ClInclude Include="..\Code\Shader_Mesh.h" />
-    <ClInclude Include="..\Code\StaticMesh.h" />
+    <ClInclude Include="..\Code\Shader_Shadow.h" />
+    <ClInclude Include="..\Code\Shader_Terrain.h" />
+    <ClInclude Include="..\Code\ShadowDepthTarget.h" />
+    <ClInclude Include="..\Code\Target.h" />
+    <ClInclude Include="..\Code\TargetMgr.h" />
     <ClInclude Include="..\Code\TerrainTex.h" />
     <ClInclude Include="..\Code\Texture.h" />
     <ClInclude Include="..\Code\TimeMgr.h" />
     <ClInclude Include="..\Code\Timer.h" />
     <ClInclude Include="..\Code\Transform.h" />
     <ClInclude Include="..\Code\VIBuffer.h" />
+    <ClInclude Include="..\Code\VlLine.h" />
     <ClInclude Include="..\Header\Engine_Const.h" />
     <ClInclude Include="..\Header\Engine_Enum.h" />
     <ClInclude Include="..\Header\Engine_Function.h" />
@@ -229,43 +244,62 @@ call CopyEngine.bat</Command>
     <ClCompile Include="..\Code\AnimationControl.cpp" />
     <ClCompile Include="..\Code\Base.cpp" />
     <ClCompile Include="..\Code\Camera.cpp" />
+    <ClCompile Include="..\Code\Cell.cpp" />
     <ClCompile Include="..\Code\Component.cpp" />
     <ClCompile Include="..\Code\ComponentMgr.cpp" />
     <ClCompile Include="..\Code\CubeTex.cpp" />
     <ClCompile Include="..\Code\DDSTextureLoader.cpp" />
     <ClCompile Include="..\Code\DirectInput.cpp" />
     <ClCompile Include="..\Code\DirectSound.cpp" />
+    <ClCompile Include="..\Code\Font.cpp" />
     <ClCompile Include="..\Code\Frame.cpp" />
     <ClCompile Include="..\Code\FrameMgr.cpp" />
+    <ClCompile Include="..\Code\Frustom.cpp" />
     <ClCompile Include="..\Code\GameObject.cpp" />
     <ClCompile Include="..\Code\GraphicDevice.cpp" />
     <ClCompile Include="..\Code\Info.cpp" />
     <ClCompile Include="..\Code\Layer.cpp" />
+    <ClCompile Include="..\Code\Light.cpp" />
+    <ClCompile Include="..\Code\LightMgr.cpp" />
+    <ClCompile Include="..\Code\LightTarget.cpp" />
+    <ClCompile Include="..\Code\Line.cpp" />
     <ClCompile Include="..\Code\Management.cpp" />
     <ClCompile Include="..\Code\MathMgr.cpp" />
     <ClCompile Include="..\Code\Mesh.cpp" />
     <ClCompile Include="..\Code\MeshComponent.cpp" />
+    <ClCompile Include="..\Code\NaviMesh.cpp" />
     <ClCompile Include="..\Code\ObjectMgr.cpp" />
     <ClCompile Include="..\Code\RcTex.cpp" />
     <ClCompile Include="..\Code\Renderer.cpp" />
     <ClCompile Include="..\Code\Scene.cpp" />
     <ClCompile Include="..\Code\Shader.cpp" />
+    <ClCompile Include="..\Code\Shader_Blend.cpp" />
     <ClCompile Include="..\Code\Shader_ColorBuffer.cpp" />
     <ClCompile Include="..\Code\Shader_Default.cpp" />
     <ClCompile Include="..\Code\Shader_DefaultTex.cpp" />
+    <ClCompile Include="..\Code\Shader_LightAcc.cpp" />
     <ClCompile Include="..\Code\Shader_Mesh.cpp" />
-    <ClCompile Include="..\Code\StaticMesh.cpp" />
+    <ClCompile Include="..\Code\Shader_Shadow.cpp" />
+    <ClCompile Include="..\Code\Shader_Terrain.cpp" />
+    <ClCompile Include="..\Code\ShadowDepthTarget.cpp" />
+    <ClCompile Include="..\Code\Target.cpp" />
+    <ClCompile Include="..\Code\TargetMgr.cpp" />
     <ClCompile Include="..\Code\TerrainTex.cpp" />
     <ClCompile Include="..\Code\Texture.cpp" />
     <ClCompile Include="..\Code\TimeMgr.cpp" />
     <ClCompile Include="..\Code\Timer.cpp" />
     <ClCompile Include="..\Code\Transform.cpp" />
     <ClCompile Include="..\Code\VIBuffer.cpp" />
+    <ClCompile Include="..\Code\VlLine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\..\Bin\Shader\Shader_Blend.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_ColorBuffer.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_Default.hlsl" />
+    <FxCompile Include="..\..\Bin\Shader\Shader_LightAcc.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_Mesh.hlsl" />
+    <FxCompile Include="..\..\Bin\Shader\Shader_ShadowDepth.hlsl" />
+    <FxCompile Include="..\..\Bin\Shader\Shader_Terrain.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

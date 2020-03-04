@@ -1,207 +1,504 @@
 #include "AnimationControl.h"
 
 USING(Engine)
-CAnimationControl::CAnimationControl(const aiScene * scene)
-	:m_pScene(scene)
+
+CAniCtrl::CAniCtrl(const aiScene * pScene)
+	: m_pScene(pScene)
 {
-	aiMesh* mesh = scene->mMeshes[0];
-	cout << "mesh num: " << scene->mNumMeshes << endl;
-	cout << "bone num: " << mesh->mNumBones << endl;
+}
+
+HRESULT CAniCtrl::Ready_AniCtrl()
+{
 
 
-	m_vecBoneTransform.resize(mesh->mNumBones);
-	int inumBones = 0;
-	for (int i = 0; i < mesh->mNumBones; i++)
+	m_vecBoneTransform.resize(m_pScene->mNumMeshes);
+	m_vecBoneNameMap.resize(m_pScene->mNumMeshes);
+	m_vecBoneInfo.resize(m_pScene->mNumMeshes);
+
+	for (_uint i = 0; i < m_pScene->mNumMeshes; ++i)
 	{
-		_uint uiboneindex = 0;
-		string boneName(mesh->mBones[i]->mName.data);
+		_int   iNumBones = 0;
+		aiMesh* pSubsetMesh = m_pScene->mMeshes[i];
+		cout << m_pScene->mMeshes[i]->mNumBones << endl;
+		/*__________________________________________________________________________________________________________
+		- 뼈 행렬을 담아둘 컨테이너 초기화.
+		____________________________________________________________________________________________________________*/
+		m_vecBoneTransform[i].resize(pSubsetMesh->mNumBones);
 
-		assert(m_boneMap.find(boneName) == m_boneMap.end());
-		uiboneindex = 0;
-		uiboneindex = inumBones;
-		inumBones += 1;
-		BoneInfo tBoneInfo;
-		m_vecBoneInfo.push_back(tBoneInfo);
+		for (_uint j = 0; j < pSubsetMesh->mNumBones; ++j, ++iNumBones)
+		{
+			_uint   uiboneindex = 0;
+			string   strBoneName(pSubsetMesh->mBones[j]->mName.data);
 
-		m_boneMap[boneName] = uiboneindex;
-		m_vecBoneInfo[uiboneindex].matboneOffset = AiToMat4(mesh->mBones[i]->mOffsetMatrix);
+			uiboneindex = iNumBones;
+
+			BONE_INFO tBoneInfo;
+			m_vecBoneInfo[i].push_back(tBoneInfo);
+
+			m_vecBoneNameMap[i][strBoneName] = uiboneindex;
+			m_vecBoneInfo[i][uiboneindex].matboneOffset = Convert_AiToMat4(pSubsetMesh->mBones[j]->mOffsetMatrix);
+		
+		}
+
+	}
+
+
+	/*__________________________________________________________________________________________________________
+	[ Hierarchy 정보 ]
+	- BoneNameMap안에 각 Node의 Name이 어디에 들어있는지 판단.
+	- Animation Index별로 갹 Node에 aiNodeAnim가 들어있는지 탐색.
+	____________________________________________________________________________________________________________*/
+	Ready_NodeHierarchy(m_pScene->mRootNode);
+
+	return S_OK;
+}
+
+void CAniCtrl::Ready_NodeHierarchy(const aiNode * pNode)
+{
+	string strNodeName(pNode->mName.data);
+
+	HIERARCHY_INFO* pNodeHierarchy = new HIERARCHY_INFO(pNode);
+
+	// 1. BoneNameMap안에 각 Node의 Name이 어디에 들어있는지 판단.
+	for (_uint i = 0; i < m_vecBoneNameMap.size(); ++i)
+	{
+		if (m_vecBoneNameMap[i].find(strNodeName) != m_vecBoneNameMap[i].end())
+		{
+			// 속해이는 BoneNameMap의 Index 정보.
+			pNodeHierarchy->vecBoneMapIdx.push_back(i);
+		}
+	}
+
+	// 2. Animation Index별로 각 Node에 aiNodeAnim가 들어있는지 탐색.
+	for (_uint i = 0; i < m_pScene->mNumAnimations; ++i)
+	{
+		const aiAnimation*   pAnimation = m_pScene->mAnimations[i];
+		const aiNodeAnim*   pNodeAnimation = Find_NodeAnimation(pAnimation, strNodeName);
+
+		pNodeHierarchy->mapNodeAnim.emplace(i, pNodeAnimation);
+	}
+
+
+	m_mapNodeHierarchy.emplace(strNodeName, pNodeHierarchy);
+
+	/*__________________________________________________________________________________________________________
+	[ 모든 자식 노드에 대해 재귀호출 ]
+	____________________________________________________________________________________________________________*/
+	for (_uint i = 0; i < pNode->mNumChildren; ++i)
+		Ready_NodeHierarchy(pNode->mChildren[i]);
+
+}
+
+void CAniCtrl::Set_AnimationKey(_int AniKey)
+{
+	if (m_uiNewAniIndex != AniKey )
+	{
+		m_uiNewAniIndex = AniKey;
+		m_fBlendAnimationTime = m_fAnimationTime;
+		m_fBlendingTime = 1.0f;
+		
 	}
 
 }
 
-CAnimationControl::~CAnimationControl()
+
+vector<VECTOR_MATRIX> CAniCtrl::Extract_BoneTransform(_float fAnimationTime, STATE eState,_float fAngle)
 {
 
-}
+	m_eState = eState;
+	m_fAngle = fAngle;
+	/*__________________________________________________________________________________________________________
+	[ Extract_BoneTransform ]
+	- 특정 시간(fAnimationTime)과 특정 애니메이션 인덱스(uiAnimationIdx)를 넘겨주면
+	각 Bone의 형태를 Matrix 형식으로 리턴하는 함수.
+	- 매 프레임마다 호출됨.
+	____________________________________________________________________________________________________________*/
+	if  (m_uiCurAniIndex >= m_pScene->mNumAnimations)
+		return vector<VECTOR_MATRIX>();
 
-vector<_matrix> CAnimationControl::ExtractBoneTransforms(float fanimationTime, const int animationIndex)
-{
-	if (animationIndex != m_iCurAniIndex)
-		m_iPreAniIndex = m_iCurAniIndex;
+	/*__________________________________________________________________________________________________________
+	- 애니메이션이 계속 반복되도록 fmod 연산을 취함.
+	____________________________________________________________________________________________________________*/
+	m_fAnimationTime += fAnimationTime;
 
-	m_iCurAniIndex = animationIndex;
-	fanimationTime = fmod(fanimationTime, m_pScene->mAnimations[animationIndex]->mDuration);
-	_matrix matIdentity = INIT_MATRIX;
-	ReadNodeHierarchy(fanimationTime, m_pScene->mRootNode, matIdentity);
+	m_fAnimationTime = (_float)(fmod(m_fAnimationTime, (m_pScene->mAnimations[m_uiCurAniIndex]->mDuration)));
 
-	for (int i = 0; i < m_pScene->mMeshes[0]->mNumBones; i++)
+
+
+	if (m_uiNewAniIndex != m_uiCurAniIndex)
 	{
-		m_vecBoneTransform[i] = m_vecBoneInfo[i].matfinalTransform;
+		m_fAnimationTime = m_fBlendAnimationTime;
+		m_fAnimationTime = (_float)(fmod(m_fAnimationTime, (m_pScene->mAnimations[m_uiCurAniIndex]->mDuration)));
+		m_fBlendingTime -= 0.002*fAnimationTime;
+	}
+	if (m_fBlendingTime <= 0)
+	{
+		m_fBlendingTime = 0.f;
+	}
+	/*__________________________________________________________________________________________________________
+	- Root Node와 단위 행렬을 인자로 넘겨주면 재귀 호출을 통하여 BONE_INFO에 데이터를 저장하는 함수.
+	- Read_NodeHierarchy() 함수 호출이 끝나고 나면, 멤버 변수인 m_vecBoneTransform배열에 데이터를 채우고 리턴.
+	____________________________________________________________________________________________________________*/
+	_matrix matIdentity = INIT_MATRIX;
+	Update_NodeHierarchy(m_fAnimationTime, m_pScene->mRootNode, matIdentity);
+
+	if (m_fBlendingTime <= 0)
+	{
+		m_fBlendingTime = 0.f;
+		m_uiCurAniIndex = m_uiNewAniIndex;
+		m_fBlendingTime = 1.f;
+		m_fAnimationTime = 0.f;
+
 	}
 
 	return m_vecBoneTransform;
 }
 
-void CAnimationControl::Update(float fTime)
+void CAniCtrl::Update_NodeHierarchy(_float fAnimationTime,
+	const aiNode * pNode,
+	const _matrix & matParentTransform)
 {
+	/*__________________________________________________________________________________________________________
+	[ Update_NodeHierarchy ]
+	- Bone의 Transform을 구하는 함수.
+	- 내부적으로 재귀호출하여 BONE_INFO배열의 matFinalTransform변수에 데이터를 채운다.
+	- 재귀호출을 통해 자식 노드로 내려가면서, 각각 매칭된 boneTransformation을 저장.
+	____________________________________________________________________________________________________________*/
+	string strNodeName(pNode->mName.data);
+
+	auto            iter_find = m_mapNodeHierarchy.find(strNodeName);
+	const aiNodeAnim*   pNodeAnimation = iter_find->second->mapNodeAnim[m_uiCurAniIndex];
+	const aiNodeAnim*   pNewNodeAnimation = iter_find->second->mapNodeAnim[m_uiNewAniIndex];
+
+	_matrix            matNodeTransform = Convert_AiToMat4(pNode->mTransformation);
+
+	/*__________________________________________________________________________________________________________
+	- 애니메이션 정보가 있는 노드일 경우.
+	____________________________________________________________________________________________________________*/
+	if (pNodeAnimation)
+	{
+		/*__________________________________________________________________________________________________________
+		- 주어진 KeyFrame의 정보와 AnimationTime정보를 이용해 Interpolation(보간)을 하고 값을 저장.
+		____________________________________________________________________________________________________________*/
+		// Scale
+		const aiVector3D&   vScale = Calc_InterPolatedValue_From_Key(fAnimationTime, pNodeAnimation->mNumScalingKeys, pNodeAnimation->mScalingKeys, pNewNodeAnimation->mNumScalingKeys, pNewNodeAnimation->mScalingKeys);
+
+		// Rotation
+		const aiQuaternion& vRotate = Calc_InterPolatedValue_From_Key(fAnimationTime, pNodeAnimation->mNumRotationKeys, pNodeAnimation->mRotationKeys, pNewNodeAnimation->mNumRotationKeys, pNewNodeAnimation->mRotationKeys);
+	
+
+		// Trans
+		const aiVector3D&   vTrans = Calc_InterPolatedValue_From_Key(fAnimationTime, pNodeAnimation->mNumPositionKeys, pNodeAnimation->mPositionKeys, pNewNodeAnimation->mNumPositionKeys, pNewNodeAnimation->mPositionKeys);
+
+		// Scale * Rotation * Trans
+		_matrix   matScale = XMMatrixScaling(vScale.x, vScale.y, vScale.z);
+		_matrix   matRotate = Convert_AiToMat3(vRotate.GetMatrix());
+		_matrix   matTrans = XMMatrixTranslation(vTrans.x, vTrans.y, vTrans.z);
+
+
+		if (m_eState == PLAYER && strNodeName == "Chest")
+		{
+			_matrix            matRotationX = XMMatrixRotationX( XMConvertToRadians(m_fAngle));
+
+			matRotate = matRotationX * matRotate;
+		}
+
+		/*__________________________________________________________________________________________________________
+		- 각각의 vector와 quaternion은 matrix로 변환되고, 이동/회전/크기 변환을 통해 NodeTransform(Bone Transform)이 완성.
+		- 이 NodeTransform은 Bone Space에서 정의되었던 정점들을 Parent Bone Space에서 정의되도록 하는 변환임과 동시에,
+		Parent Bone Space에서 정의된 정점들에게 취하는 변환이다.
+
+		- 예를 들어 상완의 좌표계에서 특정 정점들에 변환을 취해서 전완에 위치하도록 만드는 것.
+		____________________________________________________________________________________________________________*/
+		matNodeTransform = matScale * matRotate * matTrans;
+	}
+
+	/*__________________________________________________________________________________________________________
+	[ 구한 Transformation을 이용해서 Bone Transformation을 설정하고, 자식 Node에 전파하는 부분 ]
+
+	- matGlobalTransform   : Bone Space에서 정의되었던 정점들을 Model Space에서 정의도도록 함.
+	- matParentTransform   : 부모 Bone Space에서 정의되었던 정점들을 Model Space에서 정의되도록 함.
+	- matNodeTransform      : Bone Space에서 정의되었던 정점들을 부모 Bone Space에서 정의되도록 함.
+					  혹은 부모 bone Space를 기준으로 한 일종의 변환.
+	____________________________________________________________________________________________________________*/
+	_matrix matGlobalTransform = matNodeTransform * matParentTransform;
+
+	if (strNodeName == "root")
+	{
+		m_matRootFinal = matGlobalTransform* Convert_AiToMat4(m_pScene->mRootNode->mTransformation);
+	}
+	/*__________________________________________________________________________________________________________
+	- Bone이 있는 노드에 대해서만 Bone Transform을 저장.
+	- m_vecBoneNameMap은 map<string, _uint>타입으로, bone의 이름과 index를 저장.
+	- mapBone을 살펴보는 이유는, 모든 Bone은 Node이지만, 모든 Node가 Bone은 아니기 때문.
+	____________________________________________________________________________________________________________*/
+	for (_uint& iIdx : iter_find->second->vecBoneMapIdx)
+	{
+		_uint uiBoneIdx = m_vecBoneNameMap[iIdx][strNodeName];
+		{
+			/*__________________________________________________________________________________________________________
+			- matBoneOffset은 Model Space에서 정의되었던 정점들을 Bone Space에서 정의되도록 만드는 것.
+			- matGlobalTransform = matNodeTransform * matParentTransform -> ParentTransform을 통해 다시 Model Space에서 정의.
+			- GlobalTransform을 따로 저장하는 이유는 자식 노드에 ParentTransform으로 보내주기 위함.
+			____________________________________________________________________________________________________________*/
+			m_vecBoneInfo[iIdx][uiBoneIdx].matfinalTransform = m_vecBoneInfo[iIdx][uiBoneIdx].matboneOffset
+				* matGlobalTransform
+				* Convert_AiToMat4(m_pScene->mRootNode->mTransformation);
+
+			m_vecBoneTransform[iIdx][uiBoneIdx] = m_vecBoneInfo[iIdx][uiBoneIdx].matfinalTransform;
+		}
+
+	}
+
+	/*__________________________________________________________________________________________________________
+	[ 모든 자식 노드에 대해 재귀호출 ]
+	____________________________________________________________________________________________________________*/
+	for (_uint i = 0; i < pNode->mNumChildren; ++i)
+		Update_NodeHierarchy(fAnimationTime, pNode->mChildren[i], matGlobalTransform);
+
 }
 
-aiNodeAnim * CAnimationControl::FindNodeAnim(const aiAnimation * animation, const string nodeName)
+aiNodeAnim * CAniCtrl::Find_NodeAnimation(const aiAnimation * pAnimation,
+	const string strNodeName)
 {
-	for (int i = 0; i < animation->mNumChannels; i++)
+	for (_uint i = 0; i < pAnimation->mNumChannels; ++i)
 	{
-		if (animation->mChannels[i]->mNodeName.data == nodeName)
-			return animation->mChannels[i];
+		if (strNodeName == pAnimation->mChannels[i]->mNodeName.data)
+			return pAnimation->mChannels[i];
 	}
+
 	return nullptr;
-
 }
 
-void CAnimationControl::ReadNodeHierarchy(float fanimationTime, const aiNode * node, const _matrix & parentTransform)
+
+/*__________________________________________________________________________________________________________
+- Key Frame이란, 애니메이션을 표현하는 Frame들 중 몇 개만 추려서 만든 Frame을 뜻한다.
+
+- Animation의 모든 Frame들을 만들기에는 메모리 낭비도 심하고, 시간도 오래걸리기 때문에,
+Key Frame만 만들고 자연스러운 움직임을 위해 그 사이의 값들은 보간해서 얻어낸다.
+
+- Translation과 Scale은 vector 형태로 되어있고, 방향을 뜻하는 Rotation은 quaternion 형태로 되어있다.
+- vector와 quaternion은 보간 방식이 다르기 때문에, 함수를 오버로딩하여 구현.
+____________________________________________________________________________________________________________*/
+aiVector3D CAniCtrl::Calc_InterPolatedValue_From_Key(const _float & fAnimationTime,
+	const _uint & uiNumKeys,
+	const aiVectorKey * pVectorKey, 
+	const _uint & uiNewNumKeys,
+	const aiVectorKey* pNewVectorKey)
 {
-	string nodeName(node->mName.data);
-
-	const aiAnimation* animation = m_pScene->mAnimations[m_iCurAniIndex];
-	_matrix nodeTransform = AiToMat4(node->mTransformation);
-
-	const aiNodeAnim* nodeAnim = FindNodeAnim(animation, nodeName);
-
-	if (nodeAnim)
-	{
-		const aiVector3D& vScale = CalcInterPolatedValueFromKey(fanimationTime, nodeAnim->mNumScalingKeys, nodeAnim->mScalingKeys);
-		_matrix matScale = XMMatrixScaling(vScale.x, vScale.y, vScale.z);
-
-		const aiQuaternion&vRotate = CalcInterPolatedValueFromKey(fanimationTime, nodeAnim->mNumRotationKeys, nodeAnim->mRotationKeys);
-		_matrix matRotationX = XMMatrixRotationX(vRotate.x);
-		_matrix matRotationY = XMMatrixRotationX(vRotate.y);
-		_matrix matRotationZ = XMMatrixRotationX(vRotate.z);
-
-		_matrix matRotate = AiToMat3(vRotate.GetMatrix());
-
-		const aiVector3D& vTrans = CalcInterPolatedValueFromKey(fanimationTime, nodeAnim->mNumPositionKeys, nodeAnim->mPositionKeys);
-		_matrix matTrans = XMMatrixTranslation(vTrans.x, vTrans.y, vTrans.z);
-
-		nodeTransform = matScale * matRotate*matTrans;
-	}
-	_matrix globalTransfomation =  nodeTransform*parentTransform;
-
-	if (m_boneMap.find(nodeName) != m_boneMap.end())
-	{
-		_uint uiboneIndex = m_boneMap[nodeName];
-		m_vecBoneInfo[uiboneIndex].matfinalTransform = m_vecBoneInfo[uiboneIndex].matboneOffset*
-			globalTransfomation*AiToMat4(m_pScene->mRootNode->mTransformation);
-	}
-
-	for (int i = 0; i < node->mNumChildren; i++)
-		ReadNodeHierarchy(fanimationTime, node->mChildren[i], globalTransfomation);
-
-
-}
-
-aiVector3D CAnimationControl::CalcInterPolatedValueFromKey(float fanimationTime, const int numKeys, const aiVectorKey * vectorKey)
-{
-
 	aiVector3D ret;
-	if (numKeys == 1)
+	aiVector3D Preret;
+
+	_uint uiKeyindex = Find_KeyIndex(fAnimationTime, uiNumKeys, pVectorKey);
+	_uint uiNextKeyIndex = uiKeyindex + 1;
+
+
+	/*__________________________________________________________________________________________________________
+	[ Key Frame 사이를 보간하여 특정 시간의 Node의 Transformation을 구하는 부분 ]
+	____________________________________________________________________________________________________________*/
+	// assert(uiNextKeyIndex < uiNumKeys);
+
+	_float fTimeDelta = (_float)(pVectorKey[uiNextKeyIndex].mTime - pVectorKey[uiKeyindex].mTime);
+	_float fFactor = (fAnimationTime - (_float)pVectorKey[uiKeyindex].mTime) / fTimeDelta;
+
+	// assert(fFactor >= 0.0f && fFactor <= 1.0f);
+
+	const aiVector3D& StartValue = pVectorKey[uiKeyindex].mValue;
+	const aiVector3D& EndValue = pVectorKey[uiNextKeyIndex].mValue;
+
+	ret.x = StartValue.x + (EndValue.x - StartValue.x) * fFactor;
+	ret.y = StartValue.y + (EndValue.y - StartValue.y) * fFactor;
+	ret.z = StartValue.z + (EndValue.z - StartValue.z) * fFactor;
+
+
+	if (m_uiCurAniIndex != m_uiNewAniIndex)
 	{
-		ret = vectorKey[0].mValue;
-		return ret;
 
+		uiKeyindex = Find_KeyIndex(0, uiNewNumKeys, pNewVectorKey);
+		uiNextKeyIndex = uiKeyindex + 1;
+
+
+		_float fTimeDelta = (_float)(pNewVectorKey[uiNextKeyIndex].mTime - pNewVectorKey[uiKeyindex].mTime);
+		_float fFactor = (0 - (_float)pNewVectorKey[uiKeyindex].mTime) / fTimeDelta;
+
+		// assert(fFactor >= 0.0f && fFactor <= 1.0f);
+
+		const aiVector3D& StartValue = pNewVectorKey[uiKeyindex].mValue;
+		const aiVector3D& EndValue = pNewVectorKey[uiNextKeyIndex].mValue;
+
+		Preret.x = StartValue.x + (EndValue.x - StartValue.x) * fFactor;
+		Preret.y = StartValue.y + (EndValue.y - StartValue.y) * fFactor;
+		Preret.z = StartValue.z + (EndValue.z - StartValue.z) * fFactor;
+
+
+		ret = ret * m_fBlendingTime + Preret * (1.f - m_fBlendingTime);
 	}
-	_uint uiKeyindex = FindKeyIndex(fanimationTime, numKeys, vectorKey);
-	_uint uinextKeyIndex = uiKeyindex + 1;
 
-	assert(uinextKeyIndex < numKeys);
-
-	_float fdeltaTime = vectorKey[uinextKeyIndex].mTime - vectorKey[uiKeyindex].mTime;
-	_float factor = (fanimationTime - (float)vectorKey[uiKeyindex].mTime) / fdeltaTime;
-
-	assert(factor >= 0.0f && factor <= 1.0f);
-
-	const aiVector3D& startValue = vectorKey[uiKeyindex].mValue;
-	const aiVector3D& endValue = vectorKey[uinextKeyIndex].mValue;
-
-	ret.x = startValue.x + (endValue.x - startValue.x) * factor;
-	ret.y = startValue.y + (endValue.y - startValue.y) * factor;
-	ret.z = startValue.z + (endValue.z - startValue.z) * factor;
 
 	return ret;
 }
 
-aiQuaternion CAnimationControl::CalcInterPolatedValueFromKey(float animationTime, const int numKeys, const aiQuatKey * quatKey)
+aiQuaternion CAniCtrl::Calc_InterPolatedValue_From_Key(const _float & fAnimationTime,
+	const _uint & uiNumKeys,
+	const aiQuatKey * pQuatKey,const _uint & uiNewNumKeys, 
+	const aiQuatKey* pNewQuatKey)
 {
+	
 	aiQuaternion ret;
-	if (numKeys == 1)
-	{
-		ret = quatKey[0].mValue;
-		return ret;
-	}
+	aiQuaternion ret2;
+	aiQuaternion ret3;
 
-	unsigned int keyIndex = FindKeyIndex(animationTime, numKeys, quatKey);
-	unsigned int nextKeyIndex = keyIndex + 1;
+	_uint uiKeyIndex = Find_KeyIndex(fAnimationTime, uiNumKeys, pQuatKey);
+	_uint uiNextKeyIndex = uiKeyIndex + 1;
 
-	assert(nextKeyIndex < numKeys);
+	// assert(uiNextKeyIndex < uiNumKeys);
 
-	float deltaTime = quatKey[nextKeyIndex].mTime - quatKey[keyIndex].mTime;
-	float factor = (animationTime - (float)quatKey[keyIndex].mTime) / deltaTime;
+	_float fTimeDelta = (_float)(pQuatKey[uiNextKeyIndex].mTime - pQuatKey[uiKeyIndex].mTime);
+	_float fFactor = (fAnimationTime - (_float)pQuatKey[uiKeyIndex].mTime) / fTimeDelta;
 
-	assert(factor >= 0.0f && factor <= 1.0f);
+	// assert(fFactor >= 0.0f && fFactor <= 1.0f);
 
-	const aiQuaternion& startValue = quatKey[keyIndex].mValue;
-	const aiQuaternion& endValue = quatKey[nextKeyIndex].mValue;
-	aiQuaternion::Interpolate(ret, startValue, endValue, factor);
+	const aiQuaternion& StartValue = pQuatKey[uiKeyIndex].mValue;
+	const aiQuaternion& EndValue = pQuatKey[uiNextKeyIndex].mValue;
+
+	aiQuaternion::Interpolate(ret, StartValue, EndValue, fFactor);
+
 	ret = ret.Normalize();
 
+	if (m_uiCurAniIndex != m_uiNewAniIndex)
+	{
+		_uint uiKeyIndex = Find_KeyIndex(0, uiNewNumKeys, pNewQuatKey);
+		_uint uiNextKeyIndex = uiKeyIndex + 1;
+
+		// assert(uiNextKeyIndex < uiNumKeys);
+
+		_float fTimeDelta = (_float)(pNewQuatKey[uiNextKeyIndex].mTime - pNewQuatKey[uiKeyIndex].mTime);
+		_float fFactor = (0 - (_float)pNewQuatKey[uiKeyIndex].mTime) / fTimeDelta;
+
+		// assert(fFactor >= 0.0f && fFactor <= 1.0f);
+
+		const aiQuaternion& StartValue = pNewQuatKey[uiKeyIndex].mValue;
+		const aiQuaternion& EndValue = pNewQuatKey[uiNextKeyIndex].mValue;
+
+		aiQuaternion::Interpolate(ret2, StartValue, EndValue, fFactor);
+
+		ret2 = ret2.Normalize();
+
+
+		aiQuaternion::Interpolate(ret, ret2 , ret, m_fBlendingTime);
+
+		ret = ret.Normalize();
+	}
+
+
+
+
 	return ret;
 }
 
-_matrix CAnimationControl::AiToMat4(const aiMatrix4x4 & m)
+_matrix * CAniCtrl::Find_BoneMatrix(string strBoneName)
 {
-	_matrix ret;
+	/*__________________________________________________________________________________________________________
+	[ Key값 탐색 ]
+	- vector<MAP_BONENAME> m_vecBoneNameMap을 순회하면서 strBoneName Key값이 있는지 탐색.
+	____________________________________________________________________________________________________________*/
+	for (_uint i = 0; i < m_vecBoneNameMap.size(); ++i)
+	{
+		auto iter_find = m_vecBoneNameMap[i].find(strBoneName);
 
-	ret.m[0][0] = m[0][0];  ret.m[0][1] = m[1][0];  ret.m[0][2] = m[2][0];  ret.m[0][3] = m[3][0];
-	ret.m[1][0] = m[0][1];  ret.m[1][1] = m[1][1];  ret.m[1][2] = m[2][1];  ret.m[1][3] = m[3][1];
-	ret.m[2][0] = m[0][2];  ret.m[2][1] = m[1][2];  ret.m[2][2] = m[2][2];  ret.m[2][3] = m[3][2];
-	ret.m[3][0] = m[0][3];  ret.m[3][1] = m[1][3];  ret.m[3][2] = m[2][3];  ret.m[3][3] = m[3][3];
-	return ret;
+		/*__________________________________________________________________________________________________________
+		[ 탐색 성공 ]
+		- Bone의 m_vecBoneInfo에서 FinalTransform 반환.
+		____________________________________________________________________________________________________________*/
+		if (iter_find->first == strBoneName)
+		{
+			return &(m_vecBoneInfo[i][iter_find->second].matfinalTransform);
+		}
 
+		/*__________________________________________________________________________________________________________
+		[ 탐색 실패 ]
+		- nullptr 반환.
+		____________________________________________________________________________________________________________*/
+		if (iter_find == m_vecBoneNameMap[m_vecBoneNameMap.size() - 1].end())
+			return nullptr;
+
+	}
+
+	return nullptr;
 }
-_matrix CAnimationControl::AiToMat3(const aiMatrix3x3 & m)
+
+_uint CAniCtrl::Find_KeyIndex(const _float & fAnimationTime,
+	const _uint & uiNumKey,
+	const aiVectorKey * pVectorKey)
 {
-	_matrix ret;
+	// assert(uiNumKey > 0);
 
-	ret.m[0][0] = m[0][0];  ret.m[0][1] = m[1][0];  ret.m[0][2] = m[2][0];  ret.m[0][3] = 0;
-	ret.m[1][0] = m[0][1];  ret.m[1][1] = m[1][1];  ret.m[1][2] = m[2][1];  ret.m[1][3] = 0;
-	ret.m[2][0] = m[0][2];  ret.m[2][1] = m[1][2];  ret.m[2][2] = m[2][2];  ret.m[2][3] = 0;
-	ret.m[3][0] =0;  ret.m[3][1] = 0;  ret.m[3][2] = 0;  ret.m[3][3] =1.0f;
-	return ret;
-
-}
-
-_uint CAnimationControl::FindKeyIndex(float fanimationTime, int inumkey, const aiVectorKey * vectorkey)
-{
-	assert(inumkey > 0);
-	for (int i = 0; i < inumkey - 1; i++)
-		if (fanimationTime < (float)vectorkey[i + 1].mTime)
+	for (_uint i = 0; i < uiNumKey - 1; ++i)
+	{
+		if (fAnimationTime < (_float)pVectorKey[i + 1].mTime)
 			return i;
-	assert(0);
+	}
+
+	// assert(0);
+
+	return S_OK;
 }
 
-_uint CAnimationControl::FindKeyIndex(const float animationTime, int numKeys, const aiQuatKey * quatKey)
+_uint CAniCtrl::Find_KeyIndex(const _float & fAnimationTime,
+	const _uint & uiNumKey,
+	const aiQuatKey * pQuatKey)
 {
-	assert(numKeys > 0);
-	for (int i = 0; i < numKeys - 1; i++)
-		if (animationTime < (float)quatKey[i + 1].mTime)
+	// assert(uiNumKey > 0);
+
+	for (_uint i = 0; i < uiNumKey - 1; ++i)
+	{
+		if (fAnimationTime < (_float)pQuatKey[i + 1].mTime)
 			return i;
-	assert(0);
+	}
+
+	// assert(0);
+
+	return S_OK;
+}
+
+_matrix CAniCtrl::Convert_AiToMat4(const aiMatrix4x4 & m)
+{
+	_matrix matResult;
+
+	matResult.m[0][0] = m[0][0];   matResult.m[0][1] = m[1][0];   matResult.m[0][2] = m[2][0];   matResult.m[0][3] = m[3][0];
+	matResult.m[1][0] = m[0][1];   matResult.m[1][1] = m[1][1];   matResult.m[1][2] = m[2][1];   matResult.m[1][3] = m[3][1];
+	matResult.m[2][0] = m[0][2];   matResult.m[2][1] = m[1][2];   matResult.m[2][2] = m[2][2];   matResult.m[2][3] = m[3][2];
+	matResult.m[3][0] = m[0][3];   matResult.m[3][1] = m[1][3];   matResult.m[3][2] = m[2][3];   matResult.m[3][3] = m[3][3];
+
+	return matResult;
+}
+
+_matrix CAniCtrl::Convert_AiToMat3(const aiMatrix3x3 & m)
+{
+	_matrix matResult;
+
+	matResult.m[0][0] = m[0][0];   matResult.m[0][1] = m[1][0];   matResult.m[0][2] = m[2][0];   matResult.m[0][3] = 0;
+	matResult.m[1][0] = m[0][1];   matResult.m[1][1] = m[1][1];   matResult.m[1][2] = m[2][1];   matResult.m[1][3] = 0;
+	matResult.m[2][0] = m[0][2];   matResult.m[2][1] = m[1][2];   matResult.m[2][2] = m[2][2];   matResult.m[2][3] = 0;
+	matResult.m[3][0] = 0;         matResult.m[3][1] = 0;         matResult.m[3][2] = 0;         matResult.m[3][3] = 1.0f;
+
+	return matResult;
+}
+
+CAniCtrl * CAniCtrl::Create(const aiScene * pScece)
+{
+	CAniCtrl* pInstance = new CAniCtrl(pScece);
+
+	if (FAILED(pInstance->Ready_AniCtrl()))
+		Engine::Safe_Release(pInstance);
+
+	return pInstance;
+}
+
+void CAniCtrl::Free()
+{
+	for (auto& MyPair : m_mapNodeHierarchy)
+		Safe_Delete(MyPair.second);
+
+	m_mapNodeHierarchy.clear();
 }

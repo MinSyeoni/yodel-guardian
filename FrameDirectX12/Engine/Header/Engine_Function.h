@@ -61,6 +61,6 @@ namespace Engine
 			pointer = NULL;
 		}
 	}
-
 }
+
 #endif // Engine_Function_h__

@@ -260,7 +260,7 @@ typedef struct tagVector3 : public XMFLOAT3
 
 	void TransformCoord(const tagVector3& input, const _matrix& matrix)
 	{
-		XMVECTOR vIn	= XMVectorSet(input.x, input.y, input.z, 0.f);
+		XMVECTOR vIn	= XMVectorSet(input.x, input.y, input.z, 1.f);
 		XMVECTOR vOut	= XMVector3TransformCoord(vIn, matrix);
 
 		this->x = XMVectorGetX(vOut);
@@ -502,7 +502,7 @@ typedef struct tagPerspectiveInfo
 		fFarZ	= 0.f;
 		matProj = XMMatrixIdentity();
 	}
-	tagPerspectiveInfo(_float _fovY, _float _aspect, _float _near = 0.1f, _float _far = 1000.f)
+	tagPerspectiveInfo(_float _fovY, _float _aspect, _float _near = 0.1f, _float _far = 500.f)
 		: fFovY(_fovY), fAspect(_aspect), fNearZ(_near), fFarZ(_far)
 	{
 		matProj = XMMatrixIdentity();
@@ -555,23 +555,56 @@ typedef struct tagOrthographicInfo
 ______________________________________________________________________*/
 typedef struct tagCBMatrixInfo
 {
+	XMFLOAT4X4 matWorld;
+	XMFLOAT4X4 matView;
+	XMFLOAT4X4 matProj;
 	XMFLOAT4X4 matWVP;
-	//XMFLOAT4X4 matWorld;
-	//XMFLOAT4X4 matView;
-	//XMFLOAT4X4 matProj;
 
-}CB_MATRIX_INFO;
+}CB_MATRIX_INFO;//오브젝트
 typedef struct tagCBBoneInfo
 {
 	XMFLOAT4X4 matbone[64];
 
-}CB_BONE_INFO;
+}CB_BONE_INFO;//다이나믹매쉬
+typedef struct tagCBShadowInfo
+{
+	XMFLOAT4X4 matWorld;
+	XMFLOAT4X4 matView;
+	XMFLOAT4X4 matProj;
+	bool blsMesh;
+}CB_SHADOW_INFO;//세도우 댑스용
 
-struct BoneInfo
+typedef struct tagCBLIGHTMATRIXInfo
+{
+	XMFLOAT4X4 matLightView;
+	XMFLOAT4X4 matLightProj;
+}CB_LIGHTMATRIX_INFO;//그림자 용
+
+typedef struct tagCBINVERSEInfo
+{
+	XMFLOAT4X4 matViewInv;
+	XMFLOAT4X4 matProjInv;
+	XMFLOAT4   vCamPos;
+}CB_INVERSEMATRIX_INFO;
+
+
+typedef struct tagCBLightInfo
+{
+	XMFLOAT4  g_vLightDir;
+	XMFLOAT4  g_vLightDiffuse;
+	XMFLOAT4  g_vLightAmibient;
+	XMFLOAT4  g_vLightSpecular;
+	XMFLOAT4  g_vLightPos;
+	float     g_fRange;
+}CB_LIGHT_INFO;//조명용
+
+
+typedef struct BoneInfo
 {
 	_matrix matboneOffset;
 	_matrix matfinalTransform;
-};
+}BONE_INFO;
+
 typedef struct tagSubmeshGeometry
 {
 	_uint	uiIndexCount			= 0;
@@ -665,6 +698,10 @@ enum class ROOT_SIG_TYPE
 	INPUT_OBJECT,
 	INPUT_TEXTURE,
 	INPUT_MESH,
+	INPUT_TERRAIN,
+	INPUT_LIGHT,
+	INPUT_BLEND,
+	INPUT_SHADOWDEPTH,
 	ENDSIG,
 };
 
@@ -684,4 +721,24 @@ struct MeshEntry {
 	unsigned int MaterialIndex;
 	bool m_blsTexture;
 };
+
+typedef enum _D3DLIGHTTYPE {
+	D3DLIGHT_POINT = 1,
+	D3DLIGHT_SPOT = 2,
+	D3DLIGHT_DIRECTIONAL = 3,
+	D3DLIGHT_FORCE_DWORD = 0x7fffffff, /* force 32-bit size enum */
+} LIGHTTYPE;
+
+
+typedef struct _D3DLIGHT {
+	LIGHTTYPE m_eType;
+	_vec4 m_vDiffuse;
+	_vec4 m_vSpecular;
+	_vec4 m_vAmbient;
+	_vec4 m_vPosition;
+	_vec4 m_vDirection;
+	float m_fRange;
+}D3DLIGHT;
+
+
 #endif // Engine_Struct_h__

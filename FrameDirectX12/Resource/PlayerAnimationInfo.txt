@@ -1,0 +1,5 @@
+0~47 Walk
+48~197 IDLE
+198~232 WalkLEft;
+
+233~262 Fire

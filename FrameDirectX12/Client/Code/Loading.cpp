@@ -3,6 +3,8 @@
 #include "ComponentMgr.h"
 #include "ObjectMgr.h"
 #include "Management.h"
+#include "Scene_Logo.h"
+#include "GraphicDevice.h"
 
 
 CLoading::CLoading(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
@@ -25,18 +27,46 @@ HRESULT CLoading::Ready_Loading(LOADINGID eLoadingID)
 
 	m_LoadingID = eLoadingID;
 
-
-
 	return S_OK;
 }
 
 _uint CLoading::Loading_ForStage(void)
 {
-
+	CFont* pFont = static_cast<CScene_Logo*>( CManagement::Get_Instance()->Get_CurScene())->Get_Font();
+	pFont->Set_Text(L"Mesh_Loading");
+	pFont->Set_Color(D2D1::ColorF::Red);
 	Mesh_ForStage();
+
+	pFont->Set_Text(L"Texture_Loading");
+	pFont->Set_Color(D2D1::ColorF::Red);
 	Texture_ForStage();
 
+	pFont->Set_Text(L"Shader_Loading");
+	pFont->Set_Color(D2D1::ColorF::Red);
+	Load_Shader();
+
+	pFont->Set_Text(L"Loading_Finish");
+	pFont->Set_Color(D2D1::ColorF::Red);
 	m_bFinish = true;
+	return S_OK;
+}
+
+HRESULT CLoading::Load_Shader()
+{
+	CComponent*	pComponent = nullptr;
+
+	pComponent = CShader_Mesh::Create(DEVICE, m_pCommandList);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_Mesh", ID_STATIC, pComponent), E_FAIL);
+
+
+	pComponent = CShader_Mesh::Create(DEVICE, m_pCommandList,CShader_Mesh::SKYDOME);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_SkyDome", ID_STATIC, pComponent), E_FAIL);
+
+	// Shader_ColorBuffer
+
+
 	return S_OK;
 }
 
@@ -44,16 +74,24 @@ HRESULT CLoading::Mesh_ForStage(void)
 {
 	Engine::CComponent* pComponent = nullptr;
 
-	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Missile/", L"B.X");
+	
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/DynamicMesh/Player/", L"Player.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Missile", ID_STATIC, pComponent), E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Player", ID_STATIC, pComponent), E_FAIL);
 
-
-	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/DynamicMesh/Weapon/", L"Weapon.X");
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/DynamicMesh/PlayerLeg/", L"PlayerLeg.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Pig", ID_STATIC, pComponent), E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_PlayerLeg", ID_STATIC, pComponent), E_FAIL);
 
 
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Missile/", L"Missile.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Missile", ID_STATIC, pComponent), E_FAIL);
+
+
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/SkyDome/", L"SkyDome.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_SkyDome", ID_STATIC, pComponent), E_FAIL);
 	return S_OK;
 }
 
@@ -61,9 +99,17 @@ HRESULT CLoading::Texture_ForStage(void)
 {
 	Engine::CComponent* pComponent = nullptr;
 
-	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/StonesArray%d.dds", 1);
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/Terrain/Terrain%d.dds", 1);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture", ID_STATIC, pComponent), E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_Terrain", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/TerrainN/TerrainN%d.dds", 1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_TerrainN", ID_STATIC, pComponent), E_FAIL);
+
+
+
+
 
 	return S_OK;
 }

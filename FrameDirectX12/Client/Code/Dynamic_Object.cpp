@@ -61,7 +61,7 @@ HRESULT CDynamicObject::LateInit_GameObject()
 	m_pDynamicCamera = static_cast<CDynamicCamera*>(m_pObjectMgr->Get_GameObject(L"Layer_Camera", L"DynamicCamera"));
 	NULL_CHECK_RETURN(m_pDynamicCamera, E_FAIL);
 
-	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture());
+	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(),m_pMeshCom->Get_NormalTexture(),m_pMeshCom->Get_SpecularTexture());
 
 	return S_OK;
 
@@ -107,10 +107,7 @@ void CDynamicObject::Render_GameObject(const _float & fTimeDelta)
 
 	m_pShaderCom->Begin_Shader();
 
-	m_pMeshCom->Render_Mesh(m_pShaderCom);
-
-
-	CGraphicDevice::Get_Instance()->Wait_ForGpuComplete();
+	m_pMeshCom->Render_Mesh(m_pShaderCom, m_vecMatrix);
 }
 
 HRESULT CDynamicObject::Add_Component()
@@ -150,13 +147,7 @@ void CDynamicObject::Set_ConstantTable()
 
 
 
-	vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(m_fTime*3000.f,2);
-	for (int i = 0; i < vecMatrix.size(); i++)
-	XMStoreFloat4x4(&tCB_BoneInfo.matbone[i], XMMatrixTranspose(vecMatrix[i]));
-
-	dynamic_cast<CShader_Mesh*>(m_pShaderCom)->Get_UploadBuffer_BoneInfo()->CopyData(0, tCB_BoneInfo);
-
-
+	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(m_fTime*3000.f);
 
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
 }

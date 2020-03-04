@@ -21,6 +21,46 @@ CTransform::~CTransform()
 {
 }
 
+bool CTransform::Chase_Target( _vec3  vTargetPos, const _float & fTimeDelta)
+{
+	_float fAngle=0.f;
+	
+	_vec3 vLook, vRight, vDirection;
+
+	_matrix matRot;
+
+	vDirection = vTargetPos - m_vPos;
+	vDirection.y = 0.f;
+
+	vDirection.Normalize();
+	memcpy(&vLook, &m_matWorld._31, sizeof(_vec3));
+	memcpy(&vRight, &m_matWorld._11, sizeof(_vec3));
+	vRight.Normalize();
+	vLook.Normalize();
+
+	if (90.f >= XMConvertToDegrees(acosf(vDirection.Dot(vRight))))
+	{
+		fAngle = XMConvertToDegrees(acosf(vDirection.Dot(vLook)));
+	}
+	else
+		fAngle -= XMConvertToDegrees(acosf(vDirection.Dot(vLook)));
+
+	if ((fAngle > 3.f || fAngle < -3.f) && m_bIsTrun==false )
+	{
+		m_vAngle.y += fAngle *180.f*fTimeDelta;
+	}
+	else if ((fAngle <= 3.f && fAngle >= -3.f))
+	{
+		m_bIsTrun = true;
+	}
+	else if ((fAngle > 15.f || fAngle < -15.f))
+	{
+		m_bIsTrun = false;
+	}
+
+	return m_bIsTrun;
+}
+
 
 HRESULT CTransform::Ready_Component()
 {

@@ -17,7 +17,7 @@ private:
 	HRESULT            Ready_Mesh(const _tchar* pFilePath, const _tchar* pFileName);
 	HRESULT            Ready_Texture();
 public:
-	void			   Render_Mesh(CShader* pMesh);
+	void			   Render_Mesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix);
 public:
 	ID3D12Resource* Create_DefaultBuffer(const void* InitData,
 		UINT64 uiByteSize,

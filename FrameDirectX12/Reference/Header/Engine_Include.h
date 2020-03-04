@@ -1,7 +1,7 @@
 #ifndef Engine_Include_h__
 #define Engine_Include_h__
 
-//#include "vld.h"
+#include "vld.h"
 // #include <Windows.h>
 #include <iostream>
 #include <array>
@@ -74,5 +74,16 @@ ______________________________________________________________________*/
 #pragma comment(lib, "dsound.lib")
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "winmm.lib")
+
+
+/*_______//ÆùÆ® ¿ë 
+___________________________________________________________________________________________________
+[ DirectX 11 ]
+____________________________________________________________________________________________________________*/
+#include <d3d11on12.h>
+#include <d2d1_3.h>
+#include <dwrite_2.h>
+
+
 
 #endif // Engine_Include_h__

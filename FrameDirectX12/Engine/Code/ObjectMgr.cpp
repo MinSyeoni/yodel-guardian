@@ -129,6 +129,24 @@ HRESULT CObjectMgr::Add_GameObject(wstring wstrLayerTag, wstring wstrPrototypeTa
 	return iter_find_layer->second->Add_GameObject(wstrObjTag, pGameObject);
 }
 
+CGameObject * CObjectMgr::Get_NewGameObject(wstring wstrPrototypeTag, wstring wstrObjTag, void * pArg)
+{
+
+	/*____________________________________________________________________
+	1. GambObject의 Prototype을 찾는다. 없다면 E_FAIL.
+	______________________________________________________________________*/
+	auto iter_Prototype = m_mapObjectPrototype.find(wstrPrototypeTag);
+	if (iter_Prototype == m_mapObjectPrototype.end())
+		return nullptr;
+
+	CGameObject* pGameObject = iter_Prototype->second->Clone_GameObject(pArg);
+	if (pGameObject == nullptr) return nullptr;
+	return pGameObject;
+
+}
+
+
+
 _int CObjectMgr::Update_ObjectMgr(const _float & fTimeDelta)
 {
 	_int	iEnd = 0;

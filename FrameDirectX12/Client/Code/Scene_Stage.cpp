@@ -6,7 +6,10 @@
 #include "Terrain.h"
 #include "StaticObject.h"
 #include "Dynamic_Object.h"
-
+#include "Player.h"
+#include "LightMgr.h"
+#include "SkyDome.h"
+#include "Frustom.h"
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -15,6 +18,34 @@ CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandLi
 
 CScene_Stage::~CScene_Stage()
 {
+}
+
+HRESULT CScene_Stage::Ready_LightInfo()
+{
+	D3DLIGHT tagLight;
+	tagLight.m_eType = LIGHTTYPE::D3DLIGHT_DIRECTIONAL;
+	tagLight.m_vDiffuse = _vec4{ 1.0f,1.0f,1.0f,1.0f };
+	tagLight.m_vAmbient = _vec4{ 0.35f,0.35f,0.35f,1.0f };
+	tagLight.m_vSpecular = _vec4{ 0.8f,0.8f,0.8f,1.0f };
+	tagLight.m_vDirection= _vec4{ -1.0f,-1.0f,1.f,1.0f };
+	if(FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &tagLight)))
+	   return E_FAIL;
+
+
+	tagLight.m_eType = LIGHTTYPE::D3DLIGHT_POINT;
+	tagLight.m_vDiffuse = _vec4{ 1.0f,1.0f,0.0f,1.0f };
+	tagLight.m_vAmbient = _vec4{ 0.35f,0.35f,0.35f,1.0f };
+	tagLight.m_vSpecular = _vec4{ 0.3f,0.3f,0.3f,1.0f };
+	tagLight.m_vDirection = _vec4{ 1.0f,1.0f,-1.f,1.0f };
+	tagLight.m_vPosition = _vec4{ 300.f,10.f,400.f,0.f };
+	tagLight.m_fRange = 100.f;
+
+
+	//if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &tagLight)))
+	//	return E_FAIL;
+
+
+	return S_OK;
 }
 
 HRESULT CScene_Stage::Ready_Scene()
@@ -28,12 +59,13 @@ HRESULT CScene_Stage::Ready_Scene()
 	FAILED_CHECK_RETURN(Ready_LayerEnvironment(L"Layer_Environment"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_LayerGameObject(L"Layer_GameObject"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_LayerUI(L"Layer_UI"), E_FAIL);
-
+	FAILED_CHECK_RETURN(Ready_LightInfo(), E_FAIL);
 	return S_OK;
 }
 
 _int CScene_Stage::Update_Scene(const _float & fTimeDelta)
 {
+	CFrustom::Get_Instance()->Update_Frustom_Manager();
 	return Engine::CScene::Update_Scene(fTimeDelta);
 }
 
@@ -76,6 +108,17 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = CDynamicObject::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_DynamicObject", pGameObject), E_FAIL);
+
+	pGameObject = CPlayer::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Player", pGameObject), E_FAIL);
+
+	pGameObject = CSkyDome::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_SkyDome", pGameObject), E_FAIL);
+
+
+
 	return S_OK;
 }
 
@@ -96,7 +139,7 @@ HRESULT CScene_Stage::Ready_LayerEnvironment(wstring wstrLayerTag)
 	m_pObjectMgr->Add_GameObject(wstrLayerTag, wstrObjTag);
 	______________________________________________________________________*/
 
-
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_SkyDome", L"SkyDome", nullptr), E_FAIL);
 	return S_OK;
 }
 
@@ -131,29 +174,21 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	m_pObjectMgr->Add_Layer(wstrLayerTag, pLayer);
 
 
-	// CubeObject
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_CubeObject", L"CubeObject", nullptr), E_FAIL);
-
-	// CubeObject
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_CubeObject", L"CubeObject2", nullptr), E_FAIL);
-
 	// Terrain
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Terrain", L"Terrain", nullptr), E_FAIL);
 
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player",nullptr), E_FAIL);
+
 	MeshInfo tMeshInfo;
-	tMeshInfo.MeshTag = L"Prototype_Missile";
-	tMeshInfo.Pos = _vec3(10.f,-3.f,20.f );
+	tMeshInfo.MeshTag = L"Mesh_Missile";
+	tMeshInfo.Pos = _vec3(350.f,-3.f,400.f );
 	tMeshInfo.Rotation = _vec3( 0.f,0.f,0.f );
-	tMeshInfo.Scale = _vec3(0.01f, 0.01f, 0.01f);
+	tMeshInfo.Scale = _vec3(0.1f, 0.1f, 0.1f);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_StaticObject", L"Missile", &tMeshInfo), E_FAIL);
 
-
-	tMeshInfo.MeshTag = L"Prototype_Pig";
-	tMeshInfo.Pos = _vec3(8.f, 1.f, 0.f);
-	tMeshInfo.Scale = _vec3(0.1f, 0.1f, 0.1f);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_DynamicObject", L"Pig", &tMeshInfo), E_FAIL);
 	return S_OK;
+		
 }
 
 HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
@@ -192,5 +227,7 @@ CScene_Stage * CScene_Stage::Create(ID3D12Device* pGraphicDevice, ID3D12Graphics
 
 void CScene_Stage::Free()
 {
+	CFrustom::Get_Instance()->Destroy_Instance();
 	Engine::CScene::Free();
+	
 }

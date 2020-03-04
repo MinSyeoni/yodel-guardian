@@ -90,6 +90,10 @@ void CGameObject::Render_GameObject(const _float & fTimeDelta)
 {
 }
 
+void CGameObject::Render_ShadowDepth(CShader_Shadow* pShader)
+{
+}
+
 HRESULT CGameObject::Add_Component()
 {
 	return S_OK;

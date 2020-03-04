@@ -38,6 +38,8 @@ HRESULT CGraphicDevice::Ready_GraphicDevice(HWND hWnd,
 	FAILED_CHECK_RETURN(Create_RtvAndDsvDescriptorHeaps(), E_FAIL);
 	FAILED_CHECK_RETURN(OnResize(iWidth, iHeight), E_FAIL);
 	FAILED_CHECK_RETURN(Create_RootSig(),E_FAIL);
+	FAILED_CHECK_RETURN(Create_11On12GraphicDevice(), E_FAIL);
+
 	return S_OK;
 }
 
@@ -113,7 +115,40 @@ HRESULT CGraphicDevice::Render_Begin(const _rgba& vRGBA)
 
 	return S_OK;
 }
+HRESULT CGraphicDevice::Render_TextBegin()
+{
+	/*__________________________________________________________________________________________________________
+	- 먼저 모든 D3D12 명령 목록을 실행하여 3D 장면을 렌더링한 다음, 그 위에 UI를 렌더링한다.
+	다른 샘플에서는 명령 목록을 닫기 전에 일반적으로 리소스 장벽을 적용하여 렌더링 대상 상태에서 현재 상태로 백 버퍼를 전환합니다.
+	그러나 이 샘플에서는 D2D를 사용하여 백 버퍼로 계속 렌더링해야 하므로 해당 리소스 장벽을 제거합니다.
 
+	- 백 버퍼의 래핑된 리소스를 만들 때 렌더링 대상 상태를 "IN" 상태로 지정하고, 현재 상태를 "OUT" 상태로 지정.
+	(m_pWrappedBackBuffers를 PRESENT 상태로 래핑하여 ResourceBarrier - PRESENT 대체.)
+	____________________________________________________________________________________________________________*/
+	m_p11On12Device->AcquireWrappedResources(&m_pWrappedBackBuffers[m_iCurrBackBuffer], 1);
+
+	m_pD2D_Context->SetTarget(m_pD2DRenderTargets[m_iCurrBackBuffer]);
+	m_pD2D_Context->BeginDraw();
+	m_pD2D_Context->SetTransform(D2D1::Matrix3x2F::Identity());
+
+	return S_OK;
+}
+
+HRESULT CGraphicDevice::Render_TextEnd()
+{
+	/*__________________________________________________________________________________________________________
+	- 마지막으로, 11On12 디바이스에서 수행된 모든 명령을 공유 ID3D12CommandQueue로 제출하기 위해
+	ID3D11DeviceContext에서 Flush를 호출해야 합니다.
+	____________________________________________________________________________________________________________*/
+	m_pD2D_Context->EndDraw();
+	m_pD2D_Context->SetTarget(nullptr);
+
+	m_p11On12Device->ReleaseWrappedResources(&m_pWrappedBackBuffers[m_iCurrBackBuffer], 1);
+
+	m_p11Context->Flush();
+
+	return S_OK;
+}
 HRESULT CGraphicDevice::Render_End()
 {
 	/*____________________________________________________________________
@@ -123,40 +158,55 @@ HRESULT CGraphicDevice::Render_End()
 	- GPU가 렌더 타겟(버퍼)을 더 이상 사용하지 않으면 렌더 타겟의 상태는 
 	  프리젠트 상태(D3D12_RESOURCE_STATE_PRESENT)로 바뀔 것이다.
 	______________________________________________________________________*/
-	m_pCommandList->ResourceBarrier(1, 
-									&CD3DX12_RESOURCE_BARRIER::Transition(m_ppSwapChainBuffer[m_iCurrBackBuffer],
-									D3D12_RESOURCE_STATE_RENDER_TARGET, 
-									D3D12_RESOURCE_STATE_PRESENT));
-
-
-
-
-	/*____________________________________________________________________
-	- 명령들의 기록을 마친다.
-	- ExecuteCommandLists로 명령 목록을 제출하기 전에 
-	  반드시 이 메서드를 이용해서 명령 목록을 닫아야 한다.
-	______________________________________________________________________*/
-	FAILED_CHECK_RETURN(m_pCommandList->Close(), E_FAIL);
-
-	/*____________________________________________________________________
-	- 명령 리스트를 명령 큐에 추가하여 실행한다.
-	______________________________________________________________________*/
-	ID3D12CommandList* ppCommandLists[] = { m_pCommandList };
-	m_pCommandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
-
-	/*____________________________________________________________________
+	/*__________________________________________________________________________________________________________
 	- 스왑체인을 프리젠트한다. (후면 버퍼와 전면 버퍼를 교환)
-	- 프리젠트를 하면 현재 렌더 타겟(후면버퍼)의 내용이 
+	- 프리젠트를 하면 현재 렌더 타겟(후면버퍼)의 내용이
 	  전면버퍼로 옮겨지고, 렌더 타겟 인덱스가 바뀔 것이다.
-	______________________________________________________________________*/
+	____________________________________________________________________________________________________________*/
 	FAILED_CHECK_RETURN(m_pSwapChain->Present(0, 0), E_FAIL);
 
 	m_iCurrBackBuffer = (m_iCurrBackBuffer + 1) % m_iSwapChainBufferCount;
 
-	/*____________________________________________________________________
+	/*__________________________________________________________________________________________________________
 	- GPU가 모든 명령 리스트를 실행할 때 까지 기다린다.
-	______________________________________________________________________*/
+	____________________________________________________________________________________________________________*/
 	FAILED_CHECK_RETURN(Wait_ForGpuComplete(), E_FAIL);
+	return S_OK;
+}
+
+CD3DX12_CPU_DESCRIPTOR_HANDLE CGraphicDevice::Get_DepthBuffer_handle()
+{
+	return CD3DX12_CPU_DESCRIPTOR_HANDLE(m_pDSV_Heap->GetCPUDescriptorHandleForHeapStart());
+}
+
+HRESULT CGraphicDevice::BackBufferSettingBegin()
+{
+
+	m_pCommandList->ResourceBarrier(1,
+		&CD3DX12_RESOURCE_BARRIER::Transition(m_ppSwapChainBuffer[m_iCurrBackBuffer],
+			D3D12_RESOURCE_STATE_RENDER_TARGET,
+			D3D12_RESOURCE_STATE_PRESENT));
+
+	return S_OK;
+}
+
+HRESULT CGraphicDevice::BackBufferSettingEnd()
+{
+
+	m_pCommandList->ResourceBarrier(1,
+		&CD3DX12_RESOURCE_BARRIER::Transition(m_ppSwapChainBuffer[m_iCurrBackBuffer],
+			D3D12_RESOURCE_STATE_PRESENT,
+			D3D12_RESOURCE_STATE_RENDER_TARGET));
+
+	m_pCommandList->OMSetRenderTargets(1,
+		&CD3DX12_CPU_DESCRIPTOR_HANDLE(m_pRTV_Heap->GetCPUDescriptorHandleForHeapStart(),
+			m_iCurrBackBuffer,
+			m_uiRTV_DescriptorSize),
+		true,
+		&m_pDSV_Heap->GetCPUDescriptorHandleForHeapStart());
+
+
+
 
 	return S_OK;
 }
@@ -175,10 +225,22 @@ HRESULT CGraphicDevice::Create_GraphicDevice(const _uint & iWidth, const _uint &
 	// FAILED_CHECK_RETURN(CreateDXGIFactory1(IID_PPV_ARGS(&m_pFactory)), E_FAIL);
 	ThrowIfFailed(CreateDXGIFactory1(IID_PPV_ARGS(&m_pFactory)));
 
-	/*____________________________________________________________________
+	/*______________	IDXGIAdapter1 *pd3dAdapter = NULL;
+
+	for (UINT i = 0; DXGI_ERROR_NOT_FOUND != m_pdxgiFactory->EnumAdapters1(i, &pd3dAdapter); i++)
+	{
+		DXGI_ADAPTER_DESC1 dxgiAdapterDesc;
+		pd3dAdapter->GetDesc1(&dxgiAdapterDesc);
+		if (dxgiAdapterDesc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE) continue;
+		if (SUCCEEDED(D3D12CreateDevice(pd3dAdapter, D3D_FEATURE_LEVEL_12_0, _uuidof(ID3D12Device), (void **)&m_pd3dDevice))) break;
+	}______________________________________________________
 	 Try to create hardware device.
 	______________________________________________________________________*/
-	HRESULT hResult = D3D12CreateDevice(nullptr,             // default adapter
+	IDXGIAdapter1 *pd3dAdapter = nullptr;
+
+
+	m_pFactory->EnumAdapters1(1, &pd3dAdapter);
+	HRESULT hResult = D3D12CreateDevice(pd3dAdapter,             // default adapter
 										D3D_FEATURE_LEVEL_12_0,
 										IID_PPV_ARGS(&m_pGraphicDevice));
 
@@ -369,6 +431,10 @@ HRESULT CGraphicDevice::Create_RootSig()
 
 	Create_TextureRoot();
 	Create_MeshRoot();
+	Create_LightRoot();
+	Create_BlendRoot();
+	Create_ShadowDepthRoot();
+	Create_TerrainRoot();
 	return S_OK;
 }
 
@@ -415,22 +481,32 @@ HRESULT CGraphicDevice::Create_TextureRoot()
 
 HRESULT CGraphicDevice::Create_MeshRoot()
 {
-	CD3DX12_DESCRIPTOR_RANGE texTable;
-	texTable.Init(
+	CD3DX12_DESCRIPTOR_RANGE texTable[3];
+	texTable[0].Init(
 		D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
 		1,  // number of descriptors
 		0); // register t0
+	texTable[1].Init(
+		D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+		1,  // number of descriptors
+		1); // register t0
+	texTable[2].Init(
+		D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+		1,  // number of descriptors
+		2); // register t0
 
 	// Root parameter can be a table, root descriptor or root constants.
-	CD3DX12_ROOT_PARAMETER slotRootParameter[3];
+	CD3DX12_ROOT_PARAMETER slotRootParameter[5];
 
-	slotRootParameter[0].InitAsDescriptorTable(1, &texTable, D3D12_SHADER_VISIBILITY_PIXEL);
-	slotRootParameter[1].InitAsConstantBufferView(0);
-	slotRootParameter[2].InitAsConstantBufferView(1);
+	slotRootParameter[0].InitAsDescriptorTable(1, &texTable[0], D3D12_SHADER_VISIBILITY_PIXEL);
+	slotRootParameter[1].InitAsDescriptorTable(1, &texTable[1], D3D12_SHADER_VISIBILITY_PIXEL);
+	slotRootParameter[2].InitAsDescriptorTable(1, &texTable[2], D3D12_SHADER_VISIBILITY_PIXEL);
+	slotRootParameter[3].InitAsConstantBufferView(0);
+	slotRootParameter[4].InitAsConstantBufferView(1);
 
 	auto staticSamplers = GetStaticSamplers();
 
-	CD3DX12_ROOT_SIGNATURE_DESC rootSigDesc(3, slotRootParameter,
+	CD3DX12_ROOT_SIGNATURE_DESC rootSigDesc(5, slotRootParameter,
 		(UINT)staticSamplers.size(), staticSamplers.data(),
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
 
@@ -451,6 +527,200 @@ HRESULT CGraphicDevice::Create_MeshRoot()
 		serializedRootSig->GetBufferPointer(),
 		serializedRootSig->GetBufferSize(),
 		IID_PPV_ARGS(&m_arrSig[(UINT)ROOT_SIG_TYPE::INPUT_MESH])));
+
+	return S_OK;
+}
+
+HRESULT CGraphicDevice::Create_LightRoot()
+{
+	CD3DX12_DESCRIPTOR_RANGE texTable[3];
+	texTable[0].Init(
+		D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+		1,  // number of descriptors
+		0); // register t0
+
+	texTable[1].Init(
+		D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+		1,  // number of descriptors
+		1); // register t0
+
+	texTable[2].Init(
+		D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+		1,  // number of descriptors
+		2); // register t0
+
+	// Root parameter can be a table, root descriptor or root constants.
+	CD3DX12_ROOT_PARAMETER slotRootParameter[5];
+
+	slotRootParameter[0].InitAsDescriptorTable(1, &texTable[0], D3D12_SHADER_VISIBILITY_PIXEL);
+	slotRootParameter[1].InitAsDescriptorTable(1, &texTable[1], D3D12_SHADER_VISIBILITY_PIXEL);
+	slotRootParameter[2].InitAsDescriptorTable(1, &texTable[2], D3D12_SHADER_VISIBILITY_PIXEL);
+	slotRootParameter[3].InitAsConstantBufferView(0);
+	slotRootParameter[4].InitAsConstantBufferView(1);
+	auto staticSamplers = GetStaticSamplers();
+
+	CD3DX12_ROOT_SIGNATURE_DESC rootSigDesc(5, slotRootParameter,
+		(UINT)staticSamplers.size(), staticSamplers.data(),
+		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
+
+	// create a root signature with a single slot which points to a descriptor range consisting of a single constant buffer
+	ComPtr<ID3DBlob> serializedRootSig = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
+	HRESULT hr = D3D12SerializeRootSignature(&rootSigDesc, D3D_ROOT_SIGNATURE_VERSION_1,
+		serializedRootSig.GetAddressOf(), errorBlob.GetAddressOf());
+
+	if (errorBlob != nullptr)
+	{
+		::OutputDebugStringA((char*)errorBlob->GetBufferPointer());
+	}
+	ThrowIfFailed(hr);
+
+	ThrowIfFailed(m_pGraphicDevice->CreateRootSignature(
+		0,
+		serializedRootSig->GetBufferPointer(),
+		serializedRootSig->GetBufferSize(),
+		IID_PPV_ARGS(&m_arrSig[(UINT)ROOT_SIG_TYPE::INPUT_LIGHT])));
+
+	return S_OK;
+}
+
+HRESULT CGraphicDevice::Create_BlendRoot()
+{
+	CD3DX12_DESCRIPTOR_RANGE texTable;
+	texTable.Init(
+		D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+		1,  // number of descriptors
+		0); // register t0
+
+
+	CD3DX12_DESCRIPTOR_RANGE texTable2;
+	texTable2.Init(
+		D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+		1,  // number of descriptors
+		1); //
+
+	CD3DX12_DESCRIPTOR_RANGE texTable3;
+	texTable3.Init(
+		D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+		1,  // number of descriptors
+		2); //
+
+
+	// Root parameter can be a table, root descriptor or root constants.
+	CD3DX12_ROOT_PARAMETER slotRootParameter[3];
+
+	slotRootParameter[0].InitAsDescriptorTable(1, &texTable, D3D12_SHADER_VISIBILITY_PIXEL);
+	slotRootParameter[1].InitAsDescriptorTable(1, &texTable2, D3D12_SHADER_VISIBILITY_PIXEL);
+	slotRootParameter[2].InitAsDescriptorTable(1, &texTable3, D3D12_SHADER_VISIBILITY_PIXEL);
+
+	auto staticSamplers = GetStaticSamplers();
+
+	CD3DX12_ROOT_SIGNATURE_DESC rootSigDesc(3, slotRootParameter,
+		(UINT)staticSamplers.size(), staticSamplers.data(),
+		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
+
+	// create a root signature with a single slot which points to a descriptor range consisting of a single constant buffer
+	ComPtr<ID3DBlob> serializedRootSig = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
+	HRESULT hr = D3D12SerializeRootSignature(&rootSigDesc, D3D_ROOT_SIGNATURE_VERSION_1,
+		serializedRootSig.GetAddressOf(), errorBlob.GetAddressOf());
+
+	if (errorBlob != nullptr)
+	{
+		::OutputDebugStringA((char*)errorBlob->GetBufferPointer());
+	}
+	ThrowIfFailed(hr);
+
+	ThrowIfFailed(m_pGraphicDevice->CreateRootSignature(
+		0,
+		serializedRootSig->GetBufferPointer(),
+		serializedRootSig->GetBufferSize(),
+		IID_PPV_ARGS(&m_arrSig[(UINT)ROOT_SIG_TYPE::INPUT_BLEND])));
+	return S_OK;
+}
+
+HRESULT CGraphicDevice::Create_TerrainRoot()
+{
+	CD3DX12_DESCRIPTOR_RANGE texTable[3];
+	texTable[0].Init(
+		D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+		1,  // number of descriptors
+		0); // register t0
+	texTable[1].Init(
+		D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+		1,  // number of descriptors
+		1); // register t1
+	texTable[2].Init(
+		D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+		1,  // number of descriptors
+	    2); // register t2
+	// Root parameter can be a table, root descriptor or root constants.
+	CD3DX12_ROOT_PARAMETER slotRootParameter[5];
+
+	slotRootParameter[0].InitAsDescriptorTable(1, &texTable[0], D3D12_SHADER_VISIBILITY_PIXEL);
+	slotRootParameter[1].InitAsDescriptorTable(1, &texTable[1], D3D12_SHADER_VISIBILITY_PIXEL);
+	slotRootParameter[2].InitAsDescriptorTable(1, &texTable[2], D3D12_SHADER_VISIBILITY_PIXEL);
+	slotRootParameter[3].InitAsConstantBufferView(0);
+	slotRootParameter[4].InitAsConstantBufferView(1);
+
+	auto staticSamplers = GetStaticSamplers();
+
+	CD3DX12_ROOT_SIGNATURE_DESC rootSigDesc(5, slotRootParameter,
+		(UINT)staticSamplers.size(), staticSamplers.data(),
+		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
+
+	// create a root signature with a single slot which points to a descriptor range consisting of a single constant buffer
+	ComPtr<ID3DBlob> serializedRootSig = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
+	HRESULT hr = D3D12SerializeRootSignature(&rootSigDesc, D3D_ROOT_SIGNATURE_VERSION_1,
+		serializedRootSig.GetAddressOf(), errorBlob.GetAddressOf());
+
+	if (errorBlob != nullptr)
+	{
+		::OutputDebugStringA((char*)errorBlob->GetBufferPointer());
+	}
+	ThrowIfFailed(hr);
+
+	ThrowIfFailed(m_pGraphicDevice->CreateRootSignature(
+		0,
+		serializedRootSig->GetBufferPointer(),
+		serializedRootSig->GetBufferSize(),
+		IID_PPV_ARGS(&m_arrSig[(UINT)ROOT_SIG_TYPE::INPUT_TERRAIN])));
+
+	return S_OK;
+}
+
+HRESULT CGraphicDevice::Create_ShadowDepthRoot()
+{
+	
+	// Root parameter can be a table, root descriptor or root constants.
+	CD3DX12_ROOT_PARAMETER slotRootParameter[2];
+
+	slotRootParameter[0].InitAsConstantBufferView(0);
+	slotRootParameter[1].InitAsConstantBufferView(1);
+
+
+	CD3DX12_ROOT_SIGNATURE_DESC rootSigDesc(2, slotRootParameter,
+		0, nullptr,
+		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
+
+	// create a root signature with a single slot which points to a descriptor range consisting of a single constant buffer
+	ComPtr<ID3DBlob> serializedRootSig = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
+	HRESULT hr = D3D12SerializeRootSignature(&rootSigDesc, D3D_ROOT_SIGNATURE_VERSION_1,
+		serializedRootSig.GetAddressOf(), errorBlob.GetAddressOf());
+
+	if (errorBlob != nullptr)
+	{
+		::OutputDebugStringA((char*)errorBlob->GetBufferPointer());
+	}
+	ThrowIfFailed(hr);
+
+	ThrowIfFailed(m_pGraphicDevice->CreateRootSignature(
+		0,
+		serializedRootSig->GetBufferPointer(),
+		serializedRootSig->GetBufferSize(),
+		IID_PPV_ARGS(&m_arrSig[(UINT)ROOT_SIG_TYPE::INPUT_SHADOWDEPTH])));
 
 	return S_OK;
 }
@@ -477,7 +747,7 @@ HRESULT CGraphicDevice::OnResize(const _uint& iWidth, const _uint& iHeight)
 											  DXGI_FORMAT_R8G8B8A8_UNORM,
 											  DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH));
 
-
+	
 	m_iCurrBackBuffer = 0;
 
 	CD3DX12_CPU_DESCRIPTOR_HANDLE RTV_HeapHandle(m_pRTV_Heap->GetCPUDescriptorHandleForHeapStart());
@@ -702,61 +972,114 @@ void CGraphicDevice::Log_OutputDisplayModes(IDXGIOutput* output, DXGI_FORMAT for
 	}
 }
 
-array<const CD3DX12_STATIC_SAMPLER_DESC, 6> CGraphicDevice::GetStaticSamplers()
+array<const CD3DX12_STATIC_SAMPLER_DESC, 1> CGraphicDevice::GetStaticSamplers()
 {
-	const CD3DX12_STATIC_SAMPLER_DESC pointWrap(
-		0, // shaderRegister
-		D3D12_FILTER_MIN_MAG_MIP_POINT, // filter
-		D3D12_TEXTURE_ADDRESS_MODE_WRAP,  // addressU
-		D3D12_TEXTURE_ADDRESS_MODE_WRAP,  // addressV
-		D3D12_TEXTURE_ADDRESS_MODE_WRAP); // addressW
-
-	const CD3DX12_STATIC_SAMPLER_DESC pointClamp(
-		1, // shaderRegister
-		D3D12_FILTER_MIN_MAG_MIP_POINT, // filter
-		D3D12_TEXTURE_ADDRESS_MODE_CLAMP,  // addressU
-		D3D12_TEXTURE_ADDRESS_MODE_CLAMP,  // addressV
-		D3D12_TEXTURE_ADDRESS_MODE_CLAMP); // addressW
 
 	const CD3DX12_STATIC_SAMPLER_DESC linearWrap(
-		2, // shaderRegister
+		0, // shaderRegister
 		D3D12_FILTER_MIN_MAG_MIP_LINEAR, // filter
 		D3D12_TEXTURE_ADDRESS_MODE_WRAP,  // addressU
 		D3D12_TEXTURE_ADDRESS_MODE_WRAP,  // addressV
 		D3D12_TEXTURE_ADDRESS_MODE_WRAP); // addressW
 
-	const CD3DX12_STATIC_SAMPLER_DESC linearClamp(
-		3, // shaderRegister
-		D3D12_FILTER_MIN_MAG_MIP_LINEAR, // filter
-		D3D12_TEXTURE_ADDRESS_MODE_CLAMP,  // addressU
-		D3D12_TEXTURE_ADDRESS_MODE_CLAMP,  // addressV
-		D3D12_TEXTURE_ADDRESS_MODE_CLAMP); // addressW
+	                           // maxAnisotropy
 
-	const CD3DX12_STATIC_SAMPLER_DESC anisotropicWrap(
-		4, // shaderRegister
-		D3D12_FILTER_ANISOTROPIC, // filter
-		D3D12_TEXTURE_ADDRESS_MODE_WRAP,  // addressU
-		D3D12_TEXTURE_ADDRESS_MODE_WRAP,  // addressV
-		D3D12_TEXTURE_ADDRESS_MODE_WRAP,  // addressW
-		0.0f,                             // mipLODBias
-		8);                               // maxAnisotropy
-
-	const CD3DX12_STATIC_SAMPLER_DESC anisotropicClamp(
-		5, // shaderRegister
-		D3D12_FILTER_ANISOTROPIC, // filter
-		D3D12_TEXTURE_ADDRESS_MODE_CLAMP,  // addressU
-		D3D12_TEXTURE_ADDRESS_MODE_CLAMP,  // addressV
-		D3D12_TEXTURE_ADDRESS_MODE_CLAMP,  // addressW
-		0.0f,                              // mipLODBias
-		8);                                // maxAnisotropy
-
-	return {
-		pointWrap, pointClamp,
-		linearWrap, linearClamp,
-		anisotropicWrap, anisotropicClamp };
+	return {linearWrap};
 }
 
+HRESULT CGraphicDevice::Create_11On12GraphicDevice()
+{
+	/*__________________________________________________________________________________________________________
+	[ Create 11On12 state to enable D2D rendering on D3D12. ]
 
+	- 첫 번째 단계는 ID3D12Device를 만든 후에 ID3D11On12Device를 만드는 것입니다.
+	- 이때 API D3D11On12CreateDevice를 통해 ID3D12Device에 래핑되는 ID3D11Device를 만듭니다.
+	- 이 API는 다른 매개 변수 중에서 ID3D12CommandQueue를 사용하므로 11On12 디바이스는 해당 명령을 제출할 수 있습니다.
+	- ID3D11Device가 만들어지면 여기에서 ID3D11On12Device 인터페이스를 쿼리할 수 있습니다.
+	- 이것은 D2D 설정에 사용할 기본 디바이스 개체입니다.
+	____________________________________________________________________________________________________________*/
+	IUnknown* pRenderCommandQueue = m_pCommandQueue;
+
+	ThrowIfFailed(D3D11On12CreateDevice(m_pGraphicDevice,					// D3D11 interop에 사용할 기존 D3D12 장치.
+		D3D11_CREATE_DEVICE_BGRA_SUPPORT,
+		nullptr,							// NULL을 하면 D3D12장치의 기능 수준.
+		0,									// 기능 레벨 배열의 크기(바이트).
+		&pRenderCommandQueue,				// D3D11on12에서 사용할 고유한 큐 배열.
+		1,									// 명령 큐 배열의 크기(바이트).
+		0,									// D3D12 장치의 노드. 1비트만 설정할 수 있음.								
+		&m_p11Device,						// 11Device
+		&m_p11Context,						// 11DeviceContext
+		nullptr));
+
+	ThrowIfFailed(m_p11Device->QueryInterface(&m_p11On12Device));
+
+	/*__________________________________________________________________________________________________________
+	[ Create D2D/DWrite components ]
+
+	- D2D 팩토리 만들기.
+	- 이제 11On12 디바이스가 있으므로, 이 디바이스를 사용하여 D3D11을 사용할 때처럼 D2D 팩터리 및 디바이스를 만듭니다.
+	____________________________________________________________________________________________________________*/
+	ThrowIfFailed(DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(m_pDWriteFactory), (IUnknown**)&m_pDWriteFactory));
+	ThrowIfFailed(D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, IID_PPV_ARGS(&m_pD2D_Factory)));
+
+
+	D2D1_DEVICE_CONTEXT_OPTIONS DeviceOptions = D2D1_DEVICE_CONTEXT_OPTIONS_NONE;
+	IDXGIDevice*				pDxgiDevice = nullptr;;
+
+	ThrowIfFailed(m_p11On12Device->QueryInterface(&pDxgiDevice));
+
+	ThrowIfFailed(m_pD2D_Factory->CreateDevice(pDxgiDevice, &m_pD2D_Device));
+	Safe_Release(pDxgiDevice);
+
+	ThrowIfFailed(m_pD2D_Device->CreateDeviceContext(DeviceOptions, &m_pD2D_Context));
+
+	/*__________________________________________________________________________________________________________
+	[ Cretae D2D RenderTarget ]
+
+	- D3D12는 스왑 체인을 소유하므로, 11On12 디바이스(D2D 콘텐츠)를 사용하여 백 버퍼로 렌더링하려면,
+	ID3D12Resource 형식의 백 버퍼에서 ID3D11Resource 형식의 래핑된 리소스를 만들어야 합니다.
+	- 이렇게 하면 11On12 디바이스에 사용할 수 있도록 ID3D12Resource가 D3D11 기반 인터페이스에 연결됩니다.
+	- 래핑된 리소스를 준비한 후에는 마찬가지로 LoadAssets 메서드에서 D2D가 렌더링될 렌더링 대상 화면을 만들 수 있습니다.
+	____________________________________________________________________________________________________________*/
+
+	/*__________________________________________________________________________________________________________
+	- Query the desktop's dpi settings, which will be used to create D2D's render targets.
+	____________________________________________________________________________________________________________*/
+	_float DPIx = 0.0f;
+	_float DPIy = 0.0f;
+	m_pD2D_Factory->GetDesktopDpi(&DPIx, &DPIy);
+
+	D2D1_BITMAP_PROPERTIES1 bitmapProperties = D2D1::BitmapProperties1(D2D1_BITMAP_OPTIONS_TARGET | D2D1_BITMAP_OPTIONS_CANNOT_DRAW,
+		D2D1::PixelFormat(DXGI_FORMAT_UNKNOWN, D2D1_ALPHA_MODE_PREMULTIPLIED),
+		DPIx, DPIy);
+	/*__________________________________________________________________________________________________________
+	- For each buffer in the swapchain, we need to create a wrapped resource,
+	and create a D2D render target object to enable D2D rendering for the UI.
+
+	- D3D12는 스왑 체인을 소유하므로, 11On12 디바이스(D2D 콘텐츠)를 사용하여 백 버퍼로 렌더링하려면
+	ID3D12Resource 형식의 백 버퍼에서 ID3D11Resource 형식의 래핑된 리소스를 만들어야 합니다.
+	- 이렇게 하면 11On12 디바이스에 사용할 수 있도록 ID3D12Resource가 D3D11 기반 인터페이스에 연결됩니다.
+	- 래핑된 리소스를 준비한 후에는 마찬가지로 LoadAssets 메서드에서 D2D가 렌더링될 렌더링 대상 화면을 만들 수 있습니다.
+	____________________________________________________________________________________________________________*/
+	for (_uint i = 0; i < m_iSwapChainBufferCount; ++i)
+	{
+		D3D11_RESOURCE_FLAGS d3d11Flags = { D3D11_BIND_RENDER_TARGET };
+
+		ThrowIfFailed(m_p11On12Device->CreateWrappedResource(m_ppSwapChainBuffer[i],
+			&d3d11Flags,
+			D3D12_RESOURCE_STATE_RENDER_TARGET,
+			D3D12_RESOURCE_STATE_PRESENT,
+			IID_PPV_ARGS(&m_pWrappedBackBuffers[i])));
+
+		IDXGISurface* pSurface;
+		ThrowIfFailed(m_pWrappedBackBuffers[i]->QueryInterface(&pSurface));
+
+		m_pD2D_Context->CreateBitmapFromDxgiSurface(pSurface, &bitmapProperties, &m_pD2DRenderTargets[i]);
+		Safe_Release(pSurface);
+	}
+
+	return S_OK;
+}
 void CGraphicDevice::Free()
 {
 #ifdef _DEBUG
@@ -764,8 +1087,12 @@ void CGraphicDevice::Free()
 #endif
 
 	for (int i = 0; i < m_iSwapChainBufferCount; i++)
+	{
 		Engine::Safe_Release(m_ppSwapChainBuffer[i]);
+		Engine::Safe_Release(m_pWrappedBackBuffers[i]);
+		Engine::Safe_Release(m_pD2DRenderTargets[i]);
 
+	}
 	Engine::Safe_Release(m_pDepthStencilBuffer);
 
 	Engine::Safe_Release(m_pRTV_Heap);
@@ -781,4 +1108,21 @@ void CGraphicDevice::Free()
 
 	Engine::Safe_Release(m_pGraphicDevice);
 	Engine::Safe_Release(m_pFactory);
+
+
+	Engine::Safe_Release(m_p11Device);
+	Engine::Safe_Release(m_p11On12Device);
+	Engine::Safe_Release(m_pD2D_Device);
+	Engine::Safe_Release(m_pD2D_Context);
+
+
+	Engine::Safe_Release(m_pD2D_Factory);
+	Engine::Safe_Release(m_pDWriteFactory);
+
+	if (m_p11Context)
+	{
+		m_p11Context->ClearState();
+		m_p11Context->Flush();
+		Engine::Safe_Release(m_p11Context);
+	}
 }

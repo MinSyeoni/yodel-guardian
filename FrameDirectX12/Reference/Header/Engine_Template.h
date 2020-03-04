@@ -77,7 +77,7 @@ public:
 	}
 
 	void Set_IsClone() { m_bIsClone = true; }
-
+	_uint Get_ElementSize() { return m_uiElementByteSize; };
 private:
 	ID3D12Device*	m_pGraphicDevice	= nullptr;
 	ID3D12Resource* m_pUploadBuffer		= nullptr;

@@ -32,18 +32,27 @@ HRESULT CScene_Logo::Ready_Scene()
 	FAILED_CHECK_RETURN(Ready_LayerUI(L"Layer_UI"), E_FAIL);
 
 
+	m_pFont = static_cast<CFont*>( CObjectMgr::Get_Instance()->Get_NewGameObject(L"Prototype_Font_NetmarbleLight",L"fuck",nullptr));
+	m_pFont->Ready_GameObjectClone(L"Mesh_Loading", _vec2{ 50.f,50.f }, D2D1::ColorF::Red);
 	m_pLoading = CLoading::Create(m_pGraphicDevice,m_pCommandList,CLoading::LOADING_STAGE);
 	NULL_CHECK_RETURN(m_pLoading, E_FAIL);
+
+
+
+
 	return S_OK;
 }
 
 _int CScene_Logo::Update_Scene(const _float & fTimeDelta)
 {
+	m_pFont->Update_GameObject(fTimeDelta);
 	return Engine::CScene::Update_Scene(fTimeDelta);
 }
 
 _int CScene_Logo::LateUpdate_Scene(const _float & fTimeDelta)
 {
+
+	m_pFont->LateUpdate_GameObject(fTimeDelta);
 	return Engine::CScene::LateUpdate_Scene(fTimeDelta);
 }
 
@@ -82,8 +91,8 @@ HRESULT CScene_Logo::Ready_GameObjectPrototype()
 			_vec3(0.f, 1.f, 0.f)),	// Up
 		PROJ_INFO(60.f,							// FovY
 			_float(WINCX) / _float(WINCY),	// Aspect
-			0.1f,							// Near
-			1000.f),							// Far
+			1.f,							// Near
+			500.f),							// Far
 		ORTHO_INFO(WINCX,	// Viewport Width
 			WINCY,	// Viewport Height
 			0.f,	// Near
@@ -150,7 +159,7 @@ HRESULT CScene_Logo::Ready_LayerCamera(wstring wstrLayerTag)
 	m_pObjectMgr->Add_Layer(wstrLayerTag, pLayer);
 
 	// DynamicCamera
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_DynamicCamera", L"DynamicCamera", nullptr), E_FAIL);
+	//FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_DynamicCamera", L"DynamicCamera", nullptr), E_FAIL);
 
 
 	return S_OK;
@@ -170,4 +179,5 @@ void CScene_Logo::Free()
 {
 	Safe_Release(m_pLoading);
 	Engine::CScene::Free();
+	Safe_Release(m_pFont);
 }

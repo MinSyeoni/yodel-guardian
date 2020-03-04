@@ -5,6 +5,7 @@
 BEGIN(Engine)
 
 class CObjectMgr;
+class CShader_Shadow;
 
 class ENGINE_DLL CGameObject : public CBase
 {
@@ -28,6 +29,8 @@ public:
 	virtual _int	Update_GameObject(const _float& fTimeDelta);
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void	Render_GameObject(const _float& fTimeDelta);
+
+	virtual void  Render_ShadowDepth(CShader_Shadow* pShader);
 protected:
 	virtual HRESULT Add_Component();
 	void			Compute_ViewZ(const _vec4* pPosInWorld);

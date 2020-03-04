@@ -1,6 +1,7 @@
 #include "MeshComponent.h"
 #include "GraphicDevice.h"
-
+#include "Shader_Mesh.h"
+#include "Shader_Shadow.h"
 USING(Engine)
 CMeshComponent::CMeshComponent(const aiScene * scene, ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList,_tchar path[MAX_PATH])
 	:m_pScene(scene),CComponent(pGraphicDevice, pCommandList)
@@ -26,6 +27,10 @@ CMeshComponent::CMeshComponent(const CMeshComponent & rhs)
 	, m_entries(rhs.m_entries)
 	, m_vecResource(rhs.m_vecResource)
 	, m_vecUpload(rhs.m_vecUpload)
+	,m_vecNormalResource(rhs.m_vecNormalResource)
+	,m_vecNormalUpload(rhs.m_vecNormalUpload)
+	,m_vecSpecularResource(rhs.m_vecSpecularResource)
+	,m_vecSpecularUpload(rhs.m_vecSpecularResource)
 {
 	for (int i = 0; i < m_entries.size(); i++)
 	{
@@ -63,7 +68,7 @@ CMeshComponent::~CMeshComponent()
 
 	for (_ulong i = 0; i < m_vecVB_Uploader.size(); ++i)
 		Safe_Release(m_vecVB_Uploader[i]);
-
+	
 }
 
 HRESULT CMeshComponent::Ready_Texture()
@@ -99,11 +104,64 @@ HRESULT CMeshComponent::Ready_Texture()
 				m_vecResource.push_back(pResource);
 				m_vecUpload.push_back(pUpload);
 			}
-		}
+			if (material->GetTexture(aiTextureType_DIFFUSE, 1, &textureName) == AI_SUCCESS)
+			{
+
+
+				wstring strTextureName;//택스처이름
+				wstring strPathName;//파일경로
+				string  Name = textureName.C_Str();
+				strTextureName.assign(Name.begin(), Name.end());
+
+				strPathName = m_szFilePath + strTextureName;
+
+
+				ComPtr<ID3D12Resource> pResource = nullptr;
+				ComPtr<ID3D12Resource> pUpload = nullptr;
+				ThrowIfFailed(CreateDDSTextureFromFile12(m_pGraphicDevice, CGraphicDevice::Get_Instance()->Get_CommandListThread(), strPathName.c_str(), pResource, pUpload));
+
+
+				m_vecNormalResource.push_back(pResource);
+				m_vecNormalUpload.push_back(pUpload);
+
+			}
+			else
+			{
+				m_vecNormalResource.push_back(nullptr);
+				m_vecNormalUpload.push_back(nullptr);
+			}
+			if (material->GetTexture(aiTextureType_SPECULAR, 0, &textureName) == AI_SUCCESS)
+			{
+
+				wstring strTextureName;//택스처이름
+				wstring strPathName;//파일경로
+				string  Name = textureName.C_Str();
+				strTextureName.assign(Name.begin(), Name.end());
+
+				strPathName = m_szFilePath + strTextureName;
+
+
+				ComPtr<ID3D12Resource> pResource = nullptr;
+				ComPtr<ID3D12Resource> pUpload = nullptr;
+					ThrowIfFailed(CreateDDSTextureFromFile12(m_pGraphicDevice, CGraphicDevice::Get_Instance()->Get_CommandListThread(), strPathName.c_str(), pResource, pUpload));
+
+
+				m_vecSpecularResource.push_back(pResource);
+				m_vecSpecularUpload.push_back(pUpload);
+
+				}
+				else
+				{
+					m_vecSpecularResource.push_back(nullptr);
+					m_vecSpecularUpload.push_back(nullptr);
+
+				}
+	
+			}
+
+		
 
 	}
-
-
 	return S_OK;
 }
 
@@ -170,7 +228,7 @@ ID3D12Resource * CMeshComponent::Create_DefaultBuffer(const void * InitData, UIN
 
 HRESULT CMeshComponent::InitMesh(int MeshIndex, const aiMesh * paiMesh, vector<VTXMESH>& vecVtx, vector<_uint>& vecIndex)
 {
-
+	int i = paiMesh->mPrimitiveTypes;
 		VTXMESH vertex;
 		ZeroMemory(&vertex, sizeof(VTXMESH));
 		for (unsigned int i = 0; i < paiMesh->mNumVertices; i++)
@@ -187,6 +245,7 @@ HRESULT CMeshComponent::InitMesh(int MeshIndex, const aiMesh * paiMesh, vector<V
 			}
 			if (paiMesh->HasTextureCoords(0))
 			{
+
 				vertex.TexCoord.x = paiMesh->mTextureCoords[0][i].x;
 				vertex.TexCoord.y = paiMesh->mTextureCoords[0][i].y;
 			}
@@ -194,7 +253,7 @@ HRESULT CMeshComponent::InitMesh(int MeshIndex, const aiMesh * paiMesh, vector<V
 		}
 
 	
-	for (int i = 0; i < paiMesh->mNumFaces; i++)
+	for (_uint i = 0; i < paiMesh->mNumFaces; i++)
 	{
 		aiFace face = paiMesh->mFaces[i];
 		assert(face.mNumIndices == 3);
@@ -204,13 +263,13 @@ HRESULT CMeshComponent::InitMesh(int MeshIndex, const aiMesh * paiMesh, vector<V
 	}
 
 	int inumBones = 0;
-	for (int i = 0; i < paiMesh->mNumBones; i++)
+	for (_uint i = 0; i < paiMesh->mNumBones; i++)
 	{
 
 		unsigned int boneIndex = inumBones;
 		inumBones += 1;
 
-		for (int j = 0; j < paiMesh->mBones[i]->mNumWeights; j++)
+		for (_uint j = 0; j < paiMesh->mBones[i]->mNumWeights; j++)
 		{
 			unsigned int vertexld = paiMesh->mBones[i]->mWeights[j].mVertexId;
 			float weight = paiMesh->mBones[i]->mWeights[j].mWeight;
@@ -224,8 +283,8 @@ HRESULT CMeshComponent::InitMesh(int MeshIndex, const aiMesh * paiMesh, vector<V
 				{
 					if (vecVtx[vertexld].BoneWeights[uivectorId].x == 0.0f)
 					{
-						vecVtx[vertexld].BoneIds[uivectorId].x = boneIndex;
-						vecVtx[vertexld].BoneWeights[uivectorId].x = weight;
+						vecVtx[vertexld].BoneIds[uivectorId].x = float(boneIndex);
+						vecVtx[vertexld].BoneWeights[uivectorId].x = float(weight);
 						break;
 					}
 				}
@@ -233,8 +292,8 @@ HRESULT CMeshComponent::InitMesh(int MeshIndex, const aiMesh * paiMesh, vector<V
 				{
 					if (vecVtx[vertexld].BoneWeights[uivectorId].y == 0.0f)
 					{
-						vecVtx[vertexld].BoneIds[uivectorId].y = boneIndex;
-						vecVtx[vertexld].BoneWeights[uivectorId].y = weight;
+						vecVtx[vertexld].BoneIds[uivectorId].y =float( boneIndex);
+						vecVtx[vertexld].BoneWeights[uivectorId].y = float(weight);
 						break;
 					}
 
@@ -243,8 +302,8 @@ HRESULT CMeshComponent::InitMesh(int MeshIndex, const aiMesh * paiMesh, vector<V
 				{
 					if (vecVtx[vertexld].BoneWeights[uivectorId].z == 0.0f)
 					{
-						vecVtx[vertexld].BoneIds[uivectorId].z = boneIndex;
-						vecVtx[vertexld].BoneWeights[uivectorId].z = weight;
+						vecVtx[vertexld].BoneIds[uivectorId].z = float(boneIndex);
+						vecVtx[vertexld].BoneWeights[uivectorId].z =float( weight);
 						break;
 					}
 
@@ -253,8 +312,8 @@ HRESULT CMeshComponent::InitMesh(int MeshIndex, const aiMesh * paiMesh, vector<V
 				{
 					if (vecVtx[vertexld].BoneWeights[uivectorId].w == 0.0f)
 					{
-						vecVtx[vertexld].BoneIds[uivectorId].w = boneIndex;
-						vecVtx[vertexld].BoneWeights[uivectorId].w = weight;
+						vecVtx[vertexld].BoneIds[uivectorId].w =float( boneIndex);
+						vecVtx[vertexld].BoneWeights[uivectorId].w = float(weight);
 						break;
 					}
 
@@ -283,7 +342,7 @@ HRESULT CMeshComponent::Ready_Mesh()
 
 			_int numVertices = 0;
 			_int numIndices = 0;
-
+		
 			m_entries[i].MaterialIndex = m_pScene->mMeshes[i]->mMaterialIndex;
 			m_entries[i].NumIndices = m_pScene->mMeshes[i]->mNumFaces * 3;
 			m_entries[i].BaseVertex = numVertices;
@@ -299,7 +358,7 @@ HRESULT CMeshComponent::Ready_Mesh()
 			vector<VTXMESH> Vertices;
 			Vertices.resize(vecVertex.size());
 			const aiMesh* paiMesh = m_pScene->mMeshes[i];
-			InitMesh(i, paiMesh, Vertices, vecIndex);
+			InitMesh(int(i), paiMesh, Vertices, vecIndex);
 
 
 			m_uiIB_ByteSize.resize(m_entries.size());
@@ -347,12 +406,26 @@ HRESULT CMeshComponent::Ready_Mesh()
 		Engine::CGraphicDevice::Get_Instance()->End_ResetCmdListThread();
 		return S_OK;
 	}
+	return S_OK;
 }
 
-void CMeshComponent::Render_Mesh(CShader * pShader)
+void CMeshComponent::Render_Mesh(CShader * pShader,vector<vector<_matrix>> vecBoneMatrix, _int CBOffset , _int MeshNum, _bool Draw )
 {
 	for (int i = 0; i < m_entries.size(); i++)
 	{
+		if (!Draw&& (i == MeshNum))
+			continue;
+
+		CB_BONE_INFO	tCB_BoneInfo;
+		if (vecBoneMatrix.size() != 0)
+		{
+			for (int j = 0; j < vecBoneMatrix[i].size(); j++)
+				XMStoreFloat4x4(&tCB_BoneInfo.matbone[j], XMMatrixTranspose(vecBoneMatrix[i][j]));
+		dynamic_cast<CShader_Mesh*>(pShader)->Get_UploadBuffer_BoneInfo()->CopyData(CBOffset+i, tCB_BoneInfo);
+		}
+
+
+
 		if (m_entries[i].m_blsTexture == false)
 			continue;
 
@@ -361,7 +434,43 @@ void CMeshComponent::Render_Mesh(CShader * pShader)
 
 		m_pCommandList->IASetPrimitiveTopology(m_PrimitiveTopology);
 
-		pShader->End_Shader(i);
+		if (vecBoneMatrix.size() != 0)
+		{
+			pShader->End_Shader(i, i);
+		}
+		else
+			pShader->End_Shader(i, 0);
+
+		m_pCommandList->DrawIndexedInstanced(m_vecSubMeshGeometry[i].uiIndexCount,
+			1,
+			0,
+			0,
+			0);
+
+	}
+}
+void CMeshComponent::Render_ShadowMesh(CShader * pShader, vector<vector<_matrix>> vecBoneMatrix,bool BlsBone)
+{
+	for (int i = 0; i < m_entries.size(); i++)
+	{
+		CB_BONE_INFO	tCB_BoneInfo;
+		if (vecBoneMatrix.size() != 0)
+		{
+			if(BlsBone==true)
+			{int BoneCount =static_cast<CShader_Shadow*>(pShader)->Get_CBBoneCount();
+
+			for (int j = 0; j < vecBoneMatrix[i].size(); j++)
+				XMStoreFloat4x4(&tCB_BoneInfo.matbone[j], XMMatrixTranspose(vecBoneMatrix[i][j]));
+			static_cast<CShader_Shadow*>(pShader)->Get_UploadBuffer_BoneInfo()->CopyData(BoneCount, tCB_BoneInfo);
+			}
+		}
+
+		m_pCommandList->IASetVertexBuffers(0, 1, &Get_VertexBufferView(i));
+		m_pCommandList->IASetIndexBuffer(&Get_IndexBufferView(i));
+
+		m_pCommandList->IASetPrimitiveTopology(m_PrimitiveTopology);
+
+		dynamic_cast<CShader_Shadow*>(pShader)->End_ShadowShader(BlsBone);
 
 
 		m_pCommandList->DrawIndexedInstanced(m_vecSubMeshGeometry[i].uiIndexCount,

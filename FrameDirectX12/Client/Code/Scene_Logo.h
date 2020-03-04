@@ -14,6 +14,7 @@ public:
 	virtual _int	Update_Scene(const _float& fTimeDelta);
 	virtual _int	LateUpdate_Scene(const _float& fTimeDelta);
 	virtual void	Render_Scene(const _float& fTimeDelta);
+	CFont*          Get_Font() { return m_pFont; };
 private:
 	HRESULT			Ready_GameObjectPrototype();
 	HRESULT			Ready_LayerEnvironment(wstring wstrLayerTag);
@@ -22,6 +23,7 @@ private:
 	HRESULT			Ready_LayerCamera(wstring wstrLayerTag);
 private:
 	CLoading*			m_pLoading = nullptr;
+		CFont* m_pFont = nullptr;
 public:
 	static CScene_Logo*	Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 private:

@@ -1,7 +1,13 @@
 #pragma once
 #include "Engine_Include.h"
 #include "Base.h"
-
+#include "Target.h"
+#include "LightTarget.h"
+#include "Shader_Blend.h"
+#include "RcTex.h"
+#include "Shader_Shadow.h"
+#include "ShadowDepthTarget.h"
+#include "Shader_Shadow.h"
 BEGIN(Engine)
 
 class CGameObject;
@@ -14,10 +20,12 @@ class ENGINE_DLL CRenderer : public CBase
 public:
 	enum RENDERGROUP 
 	{
+		RENDER_SHADOWDEPTH,
 		RENDER_PRIORITY,
 		RENDER_NONALPHA,
 		RENDER_ALPHA,
 		RENDER_UI,
+		RENDER_FONT,
 		RENDER_END
 	};
 
@@ -30,10 +38,14 @@ public:
 	HRESULT	Add_Renderer(const RENDERGROUP& eRenderID, CGameObject* pGameObject);
 	void	Render_Renderer(const _float& fTimeDelta);
 private:
-	void	Render_Priority(const _float& fTimeDelta);
-	void	Render_NonAlpha(const _float& fTimeDelta);
-	void	Render_Alpha(const _float& fTimeDelta);
-	void	Render_UI(const _float& fTimeDelta);
+	HRESULT Render_ShadowDepth();
+	HRESULT Render_LightAcc();
+	HRESULT	Render_Priority(const _float& fTimeDelta);
+	HRESULT	Render_NonAlpha(const _float& fTimeDelta);
+	HRESULT	Render_Alpha(const _float& fTimeDelta);
+	HRESULT	Render_UI(const _float& fTimeDelta);
+	HRESULT	Render_Font(const _float& fTimeDelta);
+	HRESULT Render_Blend();
 public:
 	void	Clear_RenderGroup();
 
@@ -46,6 +58,23 @@ private:
 	CComponentMgr*				m_pComponentMgr		= nullptr;
 
 	list<CGameObject*>			m_RenderList[RENDER_END];
+public:
+	CShadowDepthTarget* Get_ShadowDepthTarget() { return m_ShadowDepthTarget; };
+
+
+private: //랜더타겟관련
+	CTarget*     m_DifferdTarget=nullptr;
+	CLightTarget* m_LightTarget = nullptr;
+	CShadowDepthTarget* m_ShadowDepthTarget = nullptr;
+	_bool m_blsShowTarget = false;
+
+private://블랜딩관련
+	CRcTex* m_pBlendBuffer;
+	CShader_Blend* m_pBlendShader;
+	_bool m_blsBlendInit=false;
+private://그림자관련
+	CShader_Shadow* m_pShadowShader;
+
 
 private:
 	virtual void		Free();

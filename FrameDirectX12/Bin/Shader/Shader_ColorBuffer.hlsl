@@ -11,9 +11,6 @@ ______________________________________________________________________*/
 cbuffer cbMatrixInfo	: register(b0)
 {
 	float4x4 matWVP		: packoffset(c0);
-	//float4x4 matWorld	: packoffset(c0);
-	//float4x4 matView	: packoffset(c4);
-	//float4x4 matProj	: packoffset(c8);
 };
 
 

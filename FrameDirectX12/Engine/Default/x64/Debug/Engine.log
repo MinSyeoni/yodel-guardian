@@ -1,78 +1,81 @@
-﻿  compilation object save succeeded; see C:\Users\Huijun\Desktop\졸작\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ColorBuffer.cso
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\졸작\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Default.cso
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\졸작\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Mesh.cso
+﻿  compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Blend.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ColorBuffer.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Default.cso
+C:\Users\Huijun\Desktop\??�ɷ���??yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(82,12-69): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_LightAcc.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Mesh.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ShadowDepth.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Terrain.cso
   AnimationControl.cpp
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\animationcontrol.cpp(14): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\animationcontrol.cpp(43): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\animationcontrol.cpp(47): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\animationcontrol.cpp(61): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\animationcontrol.cpp(105): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\animationcontrol.cpp(124): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\animationcontrol.cpp(126): warning C4244: '초기화 중': 'double'에서 'Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\animationcontrol.cpp(153): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\animationcontrol.cpp(155): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\code\animationcontrol.cpp(132): warning C4244: '-=': 'double'에서 'Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Base.cpp
   Camera.cpp
+  Cell.cpp
   Component.cpp
   ComponentMgr.cpp
   CubeTex.cpp
   DDSTextureLoader.cpp
   DirectInput.cpp
   DirectSound.cpp
+  Font.cpp
   Frame.cpp
   FrameMgr.cpp
+  Frustom.cpp
+c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\code\frustom.cpp(87): warning C4101: 'matProjInv' :참조되지 않은 지역 변수입니다.
   GameObject.cpp
   GraphicDevice.cpp
   Info.cpp
   Layer.cpp
+  Light.cpp
+  LightMgr.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  LightTarget.cpp
+  Line.cpp
   Management.cpp
   MathMgr.cpp
   Mesh.cpp
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\mesh.cpp(32): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   MeshComponent.cpp
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\meshcomponent.cpp(197): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\meshcomponent.cpp(207): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\meshcomponent.cpp(213): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\meshcomponent.cpp(227): warning C4244: '=': 'unsigned int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\meshcomponent.cpp(236): warning C4244: '=': 'unsigned int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\meshcomponent.cpp(246): warning C4244: '=': 'unsigned int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\meshcomponent.cpp(256): warning C4244: '=': 'unsigned int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\meshcomponent.cpp(302): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  NaviMesh.cpp
   ObjectMgr.cpp
-  코드를 생성하고 있습니다...
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\meshcomponent.cpp(350): warning C4715: 'Engine::CMeshComponent::Ready_Mesh': 모든 제어 경로에서 값을 반환하지는 않습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\animationcontrol.cpp(198): warning C4715: 'Engine::CAnimationControl::FindKeyIndex': 모든 제어 경로에서 값을 반환하지는 않습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\animationcontrol.cpp(207): warning C4715: 'Engine::CAnimationControl::FindKeyIndex': 모든 제어 경로에서 값을 반환하지는 않습니다.
-  컴파일하고 있습니다...
   RcTex.cpp
   Renderer.cpp
   Scene.cpp
   Shader.cpp
+  Shader_Blend.cpp
   Shader_ColorBuffer.cpp
   Shader_Default.cpp
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\shader_default.cpp(60): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Shader_DefaultTex.cpp
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\shader_defaulttex.cpp(60): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Shader_LightAcc.cpp
   Shader_Mesh.cpp
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\shader_mesh.cpp(56): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  StaticMesh.cpp
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\staticmesh.cpp(58): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\staticmesh.cpp(98): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\code\shader_mesh.cpp(84): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Shader_Shadow.cpp
+  Shader_Terrain.cpp
+c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\code\shader_terrain.cpp(59): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\code\shader_terrain.cpp(71): warning C4267: '=': 'size_t'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  ShadowDepthTarget.cpp
+  Target.cpp
+  TargetMgr.cpp
   TerrainTex.cpp
+c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\code\terraintex.cpp(93): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   Texture.cpp
   TimeMgr.cpp
   Timer.cpp
   Transform.cpp
+c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\code\transform.cpp(30): warning C4101: 'matRot' :참조되지 않은 지역 변수입니다.
   VIBuffer.cpp
+  VlLine.cpp
   코드를 생성하고 있습니다...
-  LINK : ../Bin\Engine.dll을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
      ../Bin\Engine.lib 라이브러리 및 ../Bin\Engine.exp 개체를 생성하고 있습니다.
-  Engine.vcxproj -> C:\Users\Huijun\Desktop\졸작\yodel-guardian\FrameDirectX12\Engine\Default\../Bin\Engine.dll
+  Engine.vcxproj -> C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Default\../Bin\Engine.dll
   '//'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
   배치 파일이 아닙니다.
           1개 파일이 복사되었습니다.
           1개 파일이 복사되었습니다.
-          1개 파일이 복사되었습니다.
+  지정된 파일을 찾을 수 없습니다.
   .\Engine\Code\AnimationControl.h
   .\Engine\Code\Base.h
   .\Engine\Code\Camera.h
@@ -84,12 +87,17 @@ c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\staticm
   .\Engine\Code\DDSTextureLoader.h
   .\Engine\Code\DirectInput.h
   .\Engine\Code\DirectSound.h
+  .\Engine\Code\Font.h
   .\Engine\Code\Frame.h
   .\Engine\Code\FrameMgr.h
+  .\Engine\Code\Frustom.h
   .\Engine\Code\GameObject.h
   .\Engine\Code\GraphicDevice.h
   .\Engine\Code\Info.h
   .\Engine\Code\Layer.h
+  .\Engine\Code\Light.h
+  .\Engine\Code\LightMgr.h
+  .\Engine\Code\LightTarget.h
   .\Engine\Code\Line.h
   .\Engine\Code\Management.h
   .\Engine\Code\MathMgr.h
@@ -101,18 +109,26 @@ c:\users\huijun\desktop\졸작\yodel-guardian\framedirectx12\engine\code\staticm
   .\Engine\Code\Renderer.h
   .\Engine\Code\Scene.h
   .\Engine\Code\Shader.h
+  .\Engine\Code\Shader_Blend.h
   .\Engine\Code\Shader_ColorBuffer.h
   .\Engine\Code\Shader_Default.h
   .\Engine\Code\Shader_DefaultTex.h
+  .\Engine\Code\Shader_LightAcc.h
   .\Engine\Code\Shader_Mesh.h
+  .\Engine\Code\Shader_Shadow.h
+  .\Engine\Code\Shader_Terrain.h
+  .\Engine\Code\ShadowDepthTarget.h
   .\Engine\Code\StaticMesh.h
+  .\Engine\Code\Target.h
+  .\Engine\Code\TargetMgr.h
   .\Engine\Code\TerrainTex.h
   .\Engine\Code\Texture.h
   .\Engine\Code\TimeMgr.h
   .\Engine\Code\Timer.h
   .\Engine\Code\Transform.h
   .\Engine\Code\VIBuffer.h
-         39개 파일이 복사되었습니다.
+  .\Engine\Code\VlLine.h
+         52개 파일이 복사되었습니다.
   .\Engine\Header\Engine_Const.h
   .\Engine\Header\Engine_Enum.h
   .\Engine\Header\Engine_Function.h

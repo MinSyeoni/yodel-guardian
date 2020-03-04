@@ -13,15 +13,17 @@ CMesh::CMesh(const CMesh & rhs)
 	, m_pAnimationComponent(rhs.m_pAnimationComponent)
 {
 	m_pMeshComponent->AddRef();
+	if(m_pAnimationComponent!=nullptr)
 	m_pAnimationComponent->AddRef();
 }
 
 
 
-vector<_matrix> CMesh::ExtractBoneTransforms(float fanimationTime, const int animationIndex)
+vector<vector<_matrix>> CMesh::ExtractBoneTransforms(float fanimationTime, CAniCtrl::STATE eState, _float fAngle)
 {
-	return m_pAnimationComponent->ExtractBoneTransforms(fanimationTime, animationIndex);
+	return m_pAnimationComponent->Extract_BoneTransform(fanimationTime,eState,fAngle);
 }
+
 
 HRESULT CMesh::Ready_Mesh(const _tchar * pFilePath, const _tchar * pFileName)
 {
@@ -29,7 +31,7 @@ HRESULT CMesh::Ready_Mesh(const _tchar * pFilePath, const _tchar * pFileName)
 	lstrcat(m_szFileName, pFileName);
 	lstrcpy(m_szFilePath, pFilePath);
 
-	int len = wcslen((wchar_t*)m_szFileName);
+	int len = int(wcslen((wchar_t*)m_szFileName));
 	char* psz = new char[2 * len + 1];
 	wcstombs(psz, (wchar_t*)m_szFileName, 2 * len + 1);
 	string szFullPath = psz;
@@ -39,7 +41,7 @@ HRESULT CMesh::Ready_Mesh(const _tchar * pFilePath, const _tchar * pFileName)
 		| aiProcess_FlipUVs
 		| aiProcess_JoinIdenticalVertices
 		| aiPostProcessSteps::aiProcess_FlipWindingOrder);
-
+	
 	if (m_pScene->mNumMeshes)
 	{
 		m_pMeshComponent = new CMeshComponent(m_pScene, m_pGraphicDevice, m_pCommandList, m_szFilePath);
@@ -47,17 +49,35 @@ HRESULT CMesh::Ready_Mesh(const _tchar * pFilePath, const _tchar * pFileName)
 	}
 	if (m_pScene->mNumAnimations)
 	{
-		m_pAnimationComponent = new CAnimationControl(m_pScene);
+		m_pAnimationComponent = CAniCtrl::Create(m_pScene);
 	}
 
 	return S_OK;
 }
 
-void CMesh::Render_Mesh(CShader * pMesh)
+void CMesh::Render_Mesh(CShader * pMesh,vector<vector<_matrix>> vecBoneMatrix, _int iCBoffset, _int MeshId , bool Draw )
 {
-	m_pMeshComponent->Render_Mesh(pMesh);
+	m_pMeshComponent->Render_Mesh(pMesh,vecBoneMatrix, iCBoffset, MeshId,Draw);
 
 }
+
+void CMesh::Render_ShadowMesh(CShader * pMesh, vector<vector<_matrix>> vecBoneMatrix, bool blsBone)
+{
+	m_pMeshComponent->Render_ShadowMesh(pMesh, vecBoneMatrix, blsBone);
+}
+
+void CMesh::Set_Animation(_int Animation)
+{
+	if (m_pAnimationComponent != nullptr)
+		m_pAnimationComponent->Set_AnimationKey(Animation);
+}
+
+_matrix * CMesh::Find_BoneMatrix(string strBoneName)
+{
+
+	return m_pAnimationComponent->Find_BoneMatrix(strBoneName);
+}
+
 
 
 CMesh * CMesh::Create(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList, const _tchar * pFilePath, const _tchar * pFileName)

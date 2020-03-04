@@ -35,7 +35,7 @@ private:
 	______________________________________________________________________*/
 	Engine::CCubeTex*				m_pBufferCom = nullptr;
 	Engine::CShader_ColorBuffer*	m_pShaderCom = nullptr;
-
+	//Engine::CNaviMesh*              m_pNaviMesh = nullptr;
 	/*____________________________________________________________________
 	[ Value ]
 	______________________________________________________________________*/

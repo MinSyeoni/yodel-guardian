@@ -14,7 +14,7 @@ public:
 	ID3D12PipelineState*		Get_PipelineState()						{ return m_pPipelineState; }
 public:
 	virtual void Begin_Shader();
-	virtual void End_Shader(_uint Texnum = 0);
+	virtual void End_Shader(_uint Texnum = 0,_int Index=0);
 
 public:
 	ID3D12DescriptorHeap*			Get_CBVDescriptorHeap() { return m_pCBV_DescriptorHeap; }

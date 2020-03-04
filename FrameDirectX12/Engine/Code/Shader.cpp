@@ -28,7 +28,7 @@ void CShader::Begin_Shader()
 {
 }
 
-void CShader::End_Shader(_uint Texnum)
+void CShader::End_Shader(_uint Texnum, _int Index)
 {
 }
 

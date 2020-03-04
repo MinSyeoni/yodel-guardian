@@ -26,19 +26,23 @@ public:
 	virtual _int	Update_GameObject(const _float& fTimeDelta);
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void	Render_GameObject(const _float& fTimeDelta);
+	virtual void    Render_ShadowDepth(CShader_Shadow* pShader);
 private:
 	virtual HRESULT Add_Component();
 private:
+	void            Set_ShadowTable(CShader_Shadow* pShader);
 	void			Set_ConstantTable();
 private:
 	/*____________________________________________________________________
 	[ Component ]
 	______________________________________________________________________*/
 	Engine::CTerrainTex*				m_pBufferCom = nullptr;
-	Engine::CShader_Default*         	m_pShaderCom = nullptr;
-	Engine::CTexture*                   m_pTexture = nullptr;
+	Engine::CShader_Terrain*         	m_pShaderCom = nullptr;
 
-	CDynamicCamera*	m_pDynamicCamera = nullptr;
+	Engine::CTexture*                   m_pDiffuseTexture = nullptr;
+	Engine::CTexture*                   m_pNormalTexture = nullptr;
+
+
 public:
 	virtual CGameObject*	Clone_GameObject(void* prg);
 	static CTerrain*		Create(ID3D12Device* pGraphicDevice,

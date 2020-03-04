@@ -12,7 +12,8 @@ BEGIN(Engine)
 class ENGINE_DLL CDirectInput : public CBase
 {
 	DECLARE_SINGLETON(CDirectInput)
-
+public:
+	enum MOUSEMOVE { DIMM_X, DIMM_Y, DIMM_H, DIMM_END };
 private:
 	explicit CDirectInput(void);
 	virtual ~CDirectInput(void);
@@ -37,6 +38,12 @@ public:
 	bool Mouse_KeyPressing(const MOUSEBUTTON& eMouseKey);
 	bool Mouse_KeyUp(const MOUSEBUTTON& eMouseKey);
 	bool Mouse_KeyDown(const MOUSEBUTTON& eMouseKey);
+
+	_long Get_DIMouseMove(MOUSEMOVE eMouseMoveID)
+	{
+		return *((_long*)&m_MouseState + eMouseMoveID);
+	}
+
 
 private:
 	LPDIRECTINPUT8			m_pInputSDK = nullptr;

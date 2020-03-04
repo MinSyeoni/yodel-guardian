@@ -1,7 +1,7 @@
 #pragma once
 #include "Include.h"
 #include "Camera.h"
-
+#include "Player.h"
 class CDynamicCamera : public Engine::CCamera
 {
 private:
@@ -18,13 +18,15 @@ public:
 	virtual _int	Update_GameObject(const _float& fTimeDelta);
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void	Render_GameObject(const _float& fTimeDelta);
-
+	void MouseInput();
 private:
 	/*____________________________________________________________________
 	[ Value ]
 	______________________________________________________________________*/
+	CPlayer* m_pPlayer = nullptr;
+	_vec3 m_vDir = _vec3{ 0.0f,0.0f,-1.0f };
 
-
+	_float m_fViewZ = 25.f;
 public:
 	virtual CGameObject*	Clone_GameObject(void* pArg);
 	static CDynamicCamera*	Create(ID3D12Device* pGraphicDevice,

@@ -41,7 +41,7 @@ private:
 	MeshInfo         m_tMeshInfo;
 
 	float m_fTime = 0.f;
-	vector<_matrix> vecMatrix;
+	vector<vector<_matrix>> m_vecMatrix;
 public:
 	virtual CGameObject*	Clone_GameObject(void* prg);
 	static CDynamicObject*		Create(ID3D12Device* pGraphicDevice,

@@ -61,7 +61,7 @@ HRESULT CTerrainTex::Ready_Buffer(const _uint& iNumVerticesX, const _uint& iNumV
 			vSour = Vertices[Indices32[k + 1]].vPos - Vertices[Indices32[k]].vPos;
 			vDest = Vertices[Indices32[k + 2]].vPos - Vertices[Indices32[k+1]].vPos;
 
-			vNormal=vSour.Cross_InputDst(vDest);
+			vNormal= vDest.Cross_InputDst(vSour);
 			
 			vNormal.Normalize();
 
@@ -78,7 +78,7 @@ HRESULT CTerrainTex::Ready_Buffer(const _uint& iNumVerticesX, const _uint& iNumV
 			vSour = Vertices[Indices32[k + 1]].vPos - Vertices[Indices32[k]].vPos;
 			vDest = Vertices[Indices32[k + 2]].vPos - Vertices[Indices32[k + 1]].vPos;
 
-			vNormal = vSour.Cross_InputDst(vDest);
+			vNormal = vDest.Cross_InputDst(vSour);
 
 			vNormal.Normalize();
 
@@ -90,7 +90,10 @@ HRESULT CTerrainTex::Ready_Buffer(const _uint& iNumVerticesX, const _uint& iNumV
 		}
 	}
 
-
+	for (int i = 0; i < vertexCount; i++)
+	{
+		Vertices[i].vNormal.Normalize();
+	}
 
 	const UINT vbByteSize = (UINT)Vertices.size() * sizeof(VTXTEX);
 	m_uiVB_ByteSize = vbByteSize;

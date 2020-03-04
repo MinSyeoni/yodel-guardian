@@ -97,13 +97,14 @@ void CCubeObject::Render_GameObject(const _float & fTimeDelta)
 	Set_ConstantTable();
 
 	m_pShaderCom->Begin_Shader();
+	m_pShaderCom->End_Shader();
 	m_pBufferCom->Begin_Buffer();
 
-	m_pShaderCom->End_Shader();
 	m_pBufferCom->End_Buffer();
 
 	m_pBufferCom->Render_Buffer();
 
+	//m_pNaviMesh->Render_NaviMesh();
 }
 
 HRESULT CCubeObject::Add_Component()
@@ -124,6 +125,14 @@ HRESULT CCubeObject::Add_Component()
 	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
 #ifdef _DEBUG
 	COUT_STR("Success CubeObject - Clone ShaderCom");
+#endif
+
+	/*m_pNaviMesh = static_cast<Engine::CNaviMesh*>(m_pComponentMgr->Clone_Component(L"Prototype_NaviMesh", COMPONENTID::ID_STATIC));
+	NULL_CHECK_RETURN(m_pNaviMesh, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_NaviMesh", m_pNaviMesh);*/
+
+#ifdef _DEBUG
+	COUT_STR("Success CubeObject - Clone Navi");
 #endif
 
 	return S_OK;

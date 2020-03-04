@@ -10,8 +10,12 @@ namespace Engine
 	#define			DEADOBJ 0
 	#define			NOEVENT 1
 
-	#define			WINSIZEX 1600
-	#define			WINSIZEY 900
+	#define			WINSIZEX 800
+	#define			WINSIZEY 600
+
+#define       SHADOWDEPTHSIZEX 8000
+#define       SHADOWDEPTHSIZEY 8000
+
 
 	#define			MIN_STR	64
 	#define			MAX_STR	256
@@ -100,7 +104,7 @@ ______________________________________________________________________*/
 #define INIT_VEC3(input)		_vec3(input, input, input)
 #define INIT_VEC4(input)		_vec4(input, input, input, input)
 
-#define MatrixInverse(matrix)	XMMatrixInverse(&XMMatrixDeterminant(input), input)
+#define MatrixInverse(matrix)	XMMatrixInverse(&XMMatrixDeterminant(matrix), matrix)
 
 /*____________________________________________________________________
 [ Random RGB ]

@@ -54,8 +54,7 @@ HRESULT CBackGround::LateInit_GameObject()
 	/*____________________________________________________________________
 	Get GameObject - DynamicCamera
 	______________________________________________________________________*/
-	m_pDynamicCamera = static_cast<CDynamicCamera*>(m_pObjectMgr->Get_GameObject(L"Layer_Camera", L"DynamicCamera"));
-	NULL_CHECK_RETURN(m_pDynamicCamera, E_FAIL);
+
 
 #ifdef _DEBUG
 	COUT_STR("Success Get DynamicCamera");
@@ -90,7 +89,7 @@ _int CBackGround::LateUpdate_GameObject(const _float & fTimeDelta)
 	/*____________________________________________________________________
 	[ Renderer - Add Render Group ]
 	______________________________________________________________________*/
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
 	/*____________________________________________________________________
 	[ Set PipelineState ]
@@ -146,13 +145,15 @@ void CBackGround::Set_ConstantTable()
 	CB_MATRIX_INFO	tCB_MatrixInfo;
 	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
 
-	if (nullptr != m_pDynamicCamera)
-	{
-		//matProj = m_pDynamicCamera->Get_OrthInfo().matProj;
-	}
+	
 
 	_matrix matWVP = INIT_MATRIX * matView * matProj;
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(INIT_MATRIX));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
+
+
 
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
 }

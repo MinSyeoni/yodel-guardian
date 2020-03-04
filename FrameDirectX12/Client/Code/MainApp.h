@@ -9,6 +9,7 @@ namespace Engine
 	class CObjectMgr;
 	class CManagement;
 	class CRenderer;
+	class CFont;
 }
 
 class CMainApp : public CBase
@@ -28,7 +29,7 @@ private:
 	HRESULT	SetUp_ComponentPrototype();
 	HRESULT	SetUp_StartScene(Engine::SCENEID eScebeID);
 	HRESULT SetUp_Resource();
-
+	HRESULT	SetUp_Font();
 private:
 	/*____________________________________________________________________
 	[ GraphicDevice / Mgr ]
@@ -42,6 +43,10 @@ private:
 	Engine::CManagement*	m_pManagement		= nullptr;
 	Engine::CRenderer*		m_pRenderer			= nullptr;
 
+	Engine::CFont*   m_pFont_FPS = nullptr;
+	_float         m_fTime = 0.f;
+	_uint         m_uiFPS = 0;
+	_tchar         m_szFPS[MIN_STR] = L"";
 public:
 	static CMainApp*	Create();
 private:
