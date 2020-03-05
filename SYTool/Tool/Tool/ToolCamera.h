@@ -27,6 +27,8 @@ public:
 	_matrix&		Change_CameraMat(_matrix* pMatView);
 	void			SetGrapicDevice(LPDIRECT3DDEVICE9 pDev) { m_pGraphicDev = pDev; };
 
+	_matrix			Get_WorldMatrix() { return m_matWorld; };
+
 private:
 	LPDIRECT3DDEVICE9		m_pGraphicDev;
 

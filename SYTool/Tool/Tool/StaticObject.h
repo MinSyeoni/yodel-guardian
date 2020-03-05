@@ -24,17 +24,23 @@ private:
 	virtual ~CStaticObject(void);
 
 public:
-	virtual HRESULT		Ready_Object();
-	virtual _int		Update_Object(const _float& fTimeDelta);
-	virtual void		Render_Object(void);
-	HRESULT				Set_ConstantTable(LPD3DXEFFECT pEffect);
-	void				Set_StaticCurState(STATIC_STATE eState) { m_eState = eState; };
+	virtual HRESULT			Ready_Object();
+	virtual _int			Update_Object(const _float& fTimeDelta);
+	virtual void			Render_Object(void);
+	HRESULT					Set_ConstantTable(LPD3DXEFFECT pEffect);
+	void					Set_StaticCurState(STATIC_STATE eState) { m_eState = eState; };
+
+	Engine::CTransform*		Get_StaticMeshTranscom() { return m_pTransCom; };
+	const LPD3DXMESH		Get_Mesh(void) const { return m_pMeshCom->Get_StaticMesh(); }
+	Engine::CStaticMesh*    Get_StaticMesh() const { return m_pMeshCom; }
+
+	_tchar					m_szMeshTag[128] = L"";
 
 private:
-	HRESULT				Add_Component(void);
+	HRESULT					Add_Component(void);
 
 private:
-	virtual void		Free(void);
+	virtual void			Free(void);
 
 public:
 	static CStaticObject*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
@@ -48,7 +54,7 @@ private:
 	Engine::CShader*		m_pShaderCom = nullptr;
 
 	MESHDATA				m_tMeshData;
-	_tchar*					m_tMeshTag = nullptr;
+	_tchar*					m_szFileTag = L"";
 
 	_vec3					m_vMeshPos = { 0.f,0.f,0.f };
 	_vec3					m_vMeshRot = { 0.f,0.f,0.f };

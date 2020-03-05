@@ -31,6 +31,7 @@ BEGIN_MESSAGE_MAP(CToolView, CView)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
 	ON_WM_RBUTTONDOWN()
 	ON_WM_RBUTTONUP()
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // CToolView 생성/소멸
@@ -53,6 +54,7 @@ CToolView::~CToolView()
 	Engine::DestroyResources();
 	Engine::DestroySystem();
 
+	CPickingMgr::GetInstance()->DestroyInstance();
 	Engine::CKeyMgr::GetInstance()->DestroyInstance();
 	Engine::CGraphicDev::GetInstance()->DestroyInstance();
 }
@@ -155,7 +157,6 @@ _int CToolView::Update_MainApp(const _float& fTimeDelta)
 	CObjMgr::GetInstance()->Update_Object(fTimeDelta);
 	CToolCamera::GetInstance()->Update_Camera(fTimeDelta);
 
-
 	return iExitCode;
 }
 
@@ -163,6 +164,8 @@ HRESULT CToolView::Ready_MainApp()
 {
 	if (FAILED(Ready_Default_Setting(CGraphicDev::MODE_WIN, g_iWinCX, g_iWinCY)))
 		return E_FAIL;
+
+
 	return NOERROR;
 }
 
@@ -198,6 +201,10 @@ void CToolView::OnInitialUpdate()
 	m_pManagement->AddRef();
 
 	Initalize_Object();
+
+	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
+	CToolView* pToolView = dynamic_cast<CToolView*>(pMainFrm->m_MainSplitWnd.GetPane(0, 1));
+	m_pMapTab = dynamic_cast<CMyform*>(pMainFrm->m_MainSplitWnd.GetPane(0, 0))->m_pMapTab;
 }
 
 void CToolView::Initalize_Object()
@@ -233,7 +240,7 @@ void CToolView::Ready_Buffer_Setting()
 
 	if (FAILED(Engine::Ready_Buffer(m_pDevice,
 		RESOURCE_STATIC,
-		L"Buffer_Terrain",
+		L"Buffer_TerrainTex",
 		Engine::BUFFER_TERRAINTEX,
 		129,
 		129,
@@ -273,19 +280,140 @@ void CToolView::Ready_Buffer_Setting()
 	//	return;
 }
 
-
-void CToolView::OnRButtonDown(UINT nFlags, CPoint point)
+void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	m_pMapTab->UpdateData(TRUE);
 
+	if (0 == m_pMapTab->m_iObjToolMode)	// 생성 모드
+	{
+		bool retflag;
+		Picking_TerrainOnStaticObject(retflag);
+		Picking_MeshOnStaticObject(retflag);
+		if (retflag) return;
+	}
+	else // 수정, 삭제 시 메쉬 클릭
+	{
+		bool retflag;
+		Picking_MouseOnStaticObject(retflag);
+		if (retflag) return;
+	}
 
-	CView::OnRButtonDown(nFlags, point);
+	m_pMapTab->UpdateData(FALSE);
+
+	CView::OnLButtonDown(nFlags, point);
 }
 
-
-void CToolView::OnRButtonUp(UINT nFlags, CPoint point)
+void CToolView::Picking_MeshOnStaticObject(bool& retflag)
 {
-	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	retflag = true;
+	if (nullptr == CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_OBJECT))
+		retflag = false;
 
-	CView::OnRButtonUp(nFlags, point);
+	_float fDistTemp = 10000000.f;
+	_float fFixDist = 0.f;
+
+	list<Engine::CGameObject*> pObjLst = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_OBJECT);
+	for (auto& pObject : pObjLst)
+	{
+		Engine::CTransform* pTransCom = dynamic_cast<CStaticObject*>(pObject)->Get_StaticMeshTranscom();
+
+		if (CPickingMgr::GetInstance()->IsCheckStaticObjgectMesh(
+			dynamic_cast<CStaticObject*>(pObject),
+			*pTransCom->Get_WorldMatrix(),
+			&fDistTemp,
+			&m_vMeshPos))
+		{
+			if (fFixDist <= fDistTemp)
+			{
+				fDistTemp = fFixDist;
+
+				m_pMapTab->m_vMeshPos = m_vMeshPos;
+				m_pMapTab->m_fPosX = m_vMeshPos.x;
+				m_pMapTab->m_fPosY = m_vMeshPos.y;
+				m_pMapTab->m_fPosZ = m_vMeshPos.z;
+				break;
+			}
+		}
+	}
+	retflag = false;
+}
+
+void CToolView::Picking_MouseOnStaticObject(bool& retflag)
+{
+	retflag = true;
+	if (nullptr == CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_OBJECT))
+	{
+		MessageBox(L"수정할 Object 없다 만들어라");
+		return;
+	}
+
+	_float fDistTemp = 10000000.f;
+	_float fFixDist = 0.f;
+
+	list<Engine::CGameObject*> pObjLst = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_OBJECT);
+	for (auto& pObject : pObjLst)
+	{
+		Engine::CTransform* pTransCom = dynamic_cast<CStaticObject*>(pObject)->Get_StaticMeshTranscom();
+
+		if (CPickingMgr::GetInstance()->IsCheckStaticObjgectMesh(
+			dynamic_cast<CStaticObject*>(pObject),
+			*pTransCom->Get_WorldMatrix(),
+			&fDistTemp,
+			&m_vMeshPos))
+		{
+			if (fFixDist <= fDistTemp)
+			{
+				fDistTemp = fFixDist;
+
+				dynamic_cast<CStaticObject*>(pObject)->Get_StaticMeshTranscom()->Get_Info(Engine::INFO_POS, &m_vMeshPos);
+				m_vMeshScale = dynamic_cast<CStaticObject*>(pObject)->Get_StaticMeshTranscom()->m_vScale;
+				m_vMeshRot = dynamic_cast<CStaticObject*>(pObject)->Get_StaticMeshTranscom()->m_vAngle;
+
+				m_pMapTab->m_vMeshPos = m_vMeshPos;
+				m_pMapTab->m_fPosX = m_vMeshPos.x;
+				m_pMapTab->m_fPosY = m_vMeshPos.y;
+				m_pMapTab->m_fPosZ = m_vMeshPos.z;
+
+				m_pMapTab->m_vMeshScale = m_vMeshScale;
+				m_pMapTab->m_fScaleX = m_vMeshScale.x;
+				m_pMapTab->m_fScaleY = m_vMeshScale.y;
+				m_pMapTab->m_fScaleZ = m_vMeshScale.z;
+
+				m_pMapTab->m_vMeshRot = m_vMeshRot;
+				m_pMapTab->m_fRotX = m_vMeshRot.x;
+				m_pMapTab->m_fRotY = m_vMeshRot.y;
+				m_pMapTab->m_fRotZ = m_vMeshRot.z;
+
+				m_pMapTab->m_pPickStaticObj = dynamic_cast<CStaticObject*>(pObject);
+				m_pMapTab->m_bIsPickingStaticObj = true;
+				break;
+			}
+		}
+		else
+			m_pMapTab->m_bIsPickingStaticObj = false;
+	}
+	retflag = false;
+}
+
+void CToolView::Picking_TerrainOnStaticObject(bool& retflag)
+{
+	retflag = true;
+	if (nullptr == CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN))
+	{
+		MessageBox(L"피킹 할 Terrain 없다 만들어라");
+		return;
+	}
+	Engine::CGameObject* pObj = CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN);
+	Engine::CTerrainTex* pBufferCom = dynamic_cast<CTerrain*>(pObj)->Get_BufferCom();
+	Engine::CTransform* pTransCom = dynamic_cast<CTerrain*>(pObj)->Get_TransCom();
+
+	CPickingMgr::GetInstance()->SetTerrainSize(m_pMapTab->m_iCntX, m_pMapTab->m_iCntZ);
+	CPickingMgr::GetInstance()->PickingTerrain(&m_vMeshPos, pBufferCom->m_pVtxTexOrigin, pTransCom->Get_WorldMatrix());
+
+	m_pMapTab->m_vMeshPos = m_vMeshPos;
+	m_pMapTab->m_fPosX = m_vMeshPos.x;
+	m_pMapTab->m_fPosY = m_vMeshPos.y;
+	m_pMapTab->m_fPosZ = m_vMeshPos.z;
+	retflag = false;
 }

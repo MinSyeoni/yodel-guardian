@@ -17,6 +17,9 @@ public:
 	_ulong				Get_VtxCntX(void) const { return m_iH.biWidth; }
 	_ulong				Get_VtxCntZ(void) const { return m_iH.biHeight; }
 
+	VTXTEX*				m_pVtxTex = nullptr;
+	VTXTEX*				m_pVtxTexOrigin = nullptr;
+
 public:
 	void		Copy_Index(Engine::INDEX32* pIndex, const _ulong& dwTriCnt);
 
@@ -40,9 +43,7 @@ private:
 	_ulong				m_dwVtxCntZ;
 	_ulong				m_dwVtxCntX;
 
-private:
-	VTXTEX*				m_pVtxTex = nullptr;
-	VTXTEX*				m_pVtxTexOrigin = nullptr;
+
 
 public:
 	static CTerrainTex*		Create(LPDIRECT3DDEVICE9 pGraphicDev, 

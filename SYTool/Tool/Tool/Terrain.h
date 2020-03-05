@@ -9,6 +9,7 @@ class CTexture;
 class CCalculator;
 class CShader;
 class CRenderer;
+class CBuffer_Terrain;
 END
 
 class CTerrain :public Engine::CGameObject
@@ -21,18 +22,21 @@ private:
 	virtual ~CTerrain(void);
 
 public:
-	virtual HRESULT		Ready_Object(void);
-	virtual _int		Update_Object(const _float& fTimeDelta);
-	virtual void		Render_Object(void);
+	virtual HRESULT			Ready_Object(void);
+	virtual _int			Update_Object(const _float& fTimeDelta);
+	virtual void			Render_Object(void);
 	
-	void				Set_TerrainCurState(TERRAIN_STATE eState) { m_eState = eState; };
+	void					Set_TerrainCurState(TERRAIN_STATE eState) { m_eState = eState; };
 
-	void				Set_TerrainDrawID(_int iDrawID) { m_iDrawID = iDrawID; };
+	void					Set_TerrainDrawID(_int iDrawID) { m_iDrawID = iDrawID; };
+	
+	Engine::CTransform*		Get_TransCom() { return m_pTransCom; };
+	Engine::CTerrainTex*	Get_BufferCom() { return m_pBufferCom; };
 
 private:
-	HRESULT				Add_Component(void);
-	HRESULT				Set_Material(void);
-	HRESULT				Set_ConstantTable(LPD3DXEFFECT pEffect);
+	HRESULT					Add_Component(void);
+	HRESULT					Set_Material(void);
+	HRESULT					Set_ConstantTable(LPD3DXEFFECT pEffect);
 
 public:
 	static CTerrain* Create(LPDIRECT3DDEVICE9 pGraphicDev);
@@ -43,6 +47,7 @@ private:
 
 private:	
 	LPDIRECT3DTEXTURE9		m_pTerrainTex = nullptr;
+
 	Engine::CTerrainTex*	m_pBufferCom = nullptr;
 	Engine::CTexture*		m_pTextureCom = nullptr;
 	Engine::CTransform*		m_pTransCom = nullptr;

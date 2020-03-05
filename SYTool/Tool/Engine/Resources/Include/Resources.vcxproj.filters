@@ -55,6 +55,9 @@
     <Filter Include="00. Resources\02. Mesh\02.NaviMesh\01.Line">
       <UniqueIdentifier>{b34e4efd-2be0-4a50-83b2-c916d0447dd3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\03.Test">
+      <UniqueIdentifier>{89ccce2d-cd7a-4401-b9a7-b1bc992bb2ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Export_Resources.h">
@@ -110,6 +113,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\Line.h">
       <Filter>00. Resources\02. Mesh\02.NaviMesh\01.Line</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Buffer_Terrain.h">
+      <Filter>00. Resources\00. VIBuffer\03.Test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +174,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Line.cpp">
       <Filter>00. Resources\02. Mesh\02.NaviMesh\01.Line</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Buffer_Terrain.cpp">
+      <Filter>00. Resources\00. VIBuffer\03.Test</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

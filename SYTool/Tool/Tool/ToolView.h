@@ -8,6 +8,8 @@
 #include "Export_Function.h"
 #include "Terrain.h"
 #include "ToolCamera.h"
+#include "MapTab.h"
+#include "Myform.h"
 
 BEGIN(Engine)
 class CManagement;
@@ -50,26 +52,39 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 public:
-	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
-	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
 
 public:
-	HRESULT			Render_MainApp();
-	_int			Update_MainApp(const _float& fTimeDelta);
-	HRESULT			Ready_MainApp();
-	HRESULT			Ready_Default_Setting(CGraphicDev::WINMODE eMode, const _uint& iWinCX, const _uint& iWinCY);
+	HRESULT				Render_MainApp();
+	_int				Update_MainApp(const _float& fTimeDelta);
+	HRESULT				Ready_MainApp();
+	HRESULT				Ready_Default_Setting(CGraphicDev::WINMODE eMode, const _uint& iWinCX, const _uint& iWinCY);
 	
-	virtual void	OnInitialUpdate();
-	void			Initalize_Object();
-	void			Ready_Buffer_Setting();
+	virtual void		OnInitialUpdate();
+	void				Initalize_Object();
+	void				Ready_Buffer_Setting();
 
-	LPDIRECT3DDEVICE9& Get_ToolViewDevice() { return m_pDevice; };
+	LPDIRECT3DDEVICE9&  Get_ToolViewDevice() { return m_pDevice; };
+
+	_vec3				Get_PickMeshPos() { return m_vMeshPos; };
+	_vec3				Get_PickMeshScale() { return m_vMeshScale; };
+	_vec3				Get_PickMeshRot() { return m_vMeshRot; };
 
 private:
 	Engine::CGraphicDev*	m_pGraphicDev = nullptr;
 	LPDIRECT3DDEVICE9       m_pDevice = nullptr;
 	CManagement*			m_pManagement = nullptr;
 
+	_vec3					m_vMeshPos = { 0.f,0.f,0.f };
+	_vec3					m_vMeshScale = { 0.f,0.f,0.f };
+	_vec3					m_vMeshRot = { 0.f,0.f,0.f };
+
+	CMapTab*				m_pMapTab = nullptr;
+
+public:
+	afx_msg void		OnLButtonDown(UINT nFlags, CPoint point);
+	void				Picking_MeshOnStaticObject(bool& retflag);
+	void				Picking_MouseOnStaticObject(bool& retflag);
+	void				Picking_TerrainOnStaticObject(bool& retflag);
 };
 
 #ifndef _DEBUG  // ToolView.cpp의 디버그 버전

@@ -16,11 +16,15 @@ HRESULT CStaticObject::Ready_Object(void)
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
 	m_bisDead = 0;
+	
 	m_pTransCom->Set_Pos(&m_vMeshPos);
 	m_pTransCom->Set_Scale(m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z);
 	m_pTransCom->Rotation(Engine::ROT_X, m_vMeshRot.x);
 	m_pTransCom->Rotation(Engine::ROT_Y, m_vMeshRot.y);
 	m_pTransCom->Rotation(Engine::ROT_Z, m_vMeshRot.z);
+
+
+	lstrcpy(m_szMeshTag, m_szFileTag);
 
 	return S_OK;
 }
@@ -97,7 +101,7 @@ HRESULT CStaticObject::Add_Component(void)
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Calculator", pComponent);
 
 	// staticMesh
-	pComponent = m_pMeshCom = dynamic_cast<Engine::CStaticMesh*>(Engine::Clone_Resources(RESOURCE_STAGE, m_tMeshTag));
+	pComponent = m_pMeshCom = dynamic_cast<Engine::CStaticMesh*>(Engine::Clone_Resources(RESOURCE_STAGE, m_szFileTag));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Mesh", pComponent);
 
@@ -137,7 +141,7 @@ CStaticObject* CStaticObject::Create(LPDIRECT3DDEVICE9 pGraphicDev, _vec3 pPos, 
 {
 	CStaticObject* pInstance = new CStaticObject(pGraphicDev);
 
-	pInstance->m_tMeshTag = pTag;
+	pInstance->m_szFileTag = pTag;
 	pInstance->m_vMeshPos = pPos;
 	pInstance->m_vMeshRot = pRot;
 	pInstance->m_vMeshScale = pScale;

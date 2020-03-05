@@ -5,6 +5,7 @@
 #include "TriCol.h"
 #include "RcTex.h"
 #include "TerrainTex.h"
+#include "Buffer_Terrain.h"
 #include "CubeTex.h"
 
 #include "Texture.h"

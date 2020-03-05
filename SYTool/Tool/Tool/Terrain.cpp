@@ -59,10 +59,9 @@ HRESULT CTerrain::Add_Component(void)
 
 	// BufferCom
 	pComponent = m_pBufferCom = dynamic_cast<Engine::CTerrainTex*>
-		(Engine::Clone_Resources(RESOURCE_STATIC, L"Buffer_Terrain"));
+		(Engine::Clone_Resources(RESOURCE_STATIC, L"Buffer_TerrainTex"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);
-
 
 	// TransCom;
 	pComponent = m_pTransCom = Engine::CTransform::Create();
@@ -139,12 +138,5 @@ CTerrain* CTerrain::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 
 void CTerrain::Free(void)
 {
-	Engine::Safe_Release(m_pTerrainTex);
-	Engine::Safe_Release(m_pShaderCom);
-	Engine::Safe_Release(m_pTextureCom);
-	Engine::Safe_Release(m_pBufferCom);
-	Engine::Safe_Release(m_pTransCom);
-	Engine::Safe_Release(m_pCalculCom);
-
 	Engine::CGameObject::Free();
 }

@@ -50,5 +50,7 @@ using namespace std;
 #include "Enum.h"
 #include "ObjMgr.h"
 #include "KeyMgr.h"
+#include "PickingMgr.h"
+#include "CursorMgr.h"
 
 #endif //PCH_H

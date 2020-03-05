@@ -176,6 +176,7 @@ call CopyResources.bat</Command>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Export_Resources.h" />
     <ClInclude Include="..\Code\AniCtrl.h" />
+    <ClInclude Include="..\Code\Buffer_Terrain.h" />
     <ClInclude Include="..\Code\Cell.h" />
     <ClInclude Include="..\Code\CubeTex.h" />
     <ClInclude Include="..\Code\DynamicMesh.h" />
@@ -198,6 +199,7 @@ call CopyResources.bat</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\AniCtrl.cpp" />
+    <ClCompile Include="..\Code\Buffer_Terrain.cpp" />
     <ClCompile Include="..\Code\Cell.cpp" />
     <ClCompile Include="..\Code\CubeTex.cpp" />
     <ClCompile Include="..\Code\DynamicMesh.cpp" />

@@ -46,6 +46,12 @@
     <Filter Include="05.GameObject\01.StaticObject">
       <UniqueIdentifier>{8ddb5f9f-3367-4ea0-8ec1-1b086585e63c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06.Manager\01.PickingMgr">
+      <UniqueIdentifier>{eba54a10-d39c-4e9d-a683-6463de56b30a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Manager\02.CursorMgr">
+      <UniqueIdentifier>{335611b7-58ad-46e3-92ae-ffbf1b3e65a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainFrm.h">
@@ -105,6 +111,12 @@
     <ClInclude Include="StaticObject.h">
       <Filter>05.GameObject\01.StaticObject</Filter>
     </ClInclude>
+    <ClInclude Include="PickingMgr.h">
+      <Filter>06.Manager\01.PickingMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CursorMgr.h">
+      <Filter>06.Manager\02.CursorMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainFrm.cpp">
@@ -139,6 +151,12 @@
     </ClCompile>
     <ClCompile Include="StaticObject.cpp">
       <Filter>05.GameObject\01.StaticObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PickingMgr.cpp">
+      <Filter>06.Manager\01.PickingMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CursorMgr.cpp">
+      <Filter>06.Manager\02.CursorMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

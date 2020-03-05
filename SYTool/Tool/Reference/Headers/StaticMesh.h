@@ -13,11 +13,11 @@ private:
 	virtual ~CStaticMesh(void);
 
 public:
-	_ulong	Get_NumVtx(void) const { return m_dwNumVtx; }
-	_ulong Get_Stride(void) const { return m_dwStride; }
+	_ulong			Get_NumVtx(void) const { return m_dwNumVtx; }
+	_ulong			Get_Stride(void) const { return m_dwStride; }
 	const _vec3*	Get_VtxPos(void) const { return m_pVtxPos; }
-	_bool		Find_Alpha(const char* pFileName);
-
+	_bool			Find_Alpha(const char* pFileName);
+	LPD3DXMESH		Get_StaticMesh() { return m_pOriMesh; }
 public:
 	HRESULT	Ready_Mesh(const _tchar* pFilePath, const _tchar* pFileName);
 	void	Render_Mesh();

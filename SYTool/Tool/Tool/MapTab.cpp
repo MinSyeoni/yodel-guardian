@@ -84,6 +84,8 @@ BEGIN_MESSAGE_MAP(CMapTab, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON5, &CMapTab::OnBnClickedStaticDelete)
 	ON_BN_CLICKED(IDC_BUTTON4, &CMapTab::OnBnClickedStaticSet)
 	ON_WM_MOUSEWHEEL()
+	ON_BN_CLICKED(IDC_BUTTON8, &CMapTab::OnBnClickedSaveStaticObj)
+	ON_BN_CLICKED(IDC_BUTTON9, &CMapTab::OnBnClickedLoadStaticObj)
 END_MESSAGE_MAP()
 
 
@@ -133,6 +135,9 @@ void CMapTab::OnBnClickedCreateTerrain()
 	}
 	else
 	{
+		Engine::CGameObject* pObj = CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN);
+		Engine::CComponent* pComponent = pObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC);
+		dynamic_cast<Engine::CTerrainTex*>(pComponent)->Ready_Buffer(m_iCntX, m_iCntZ, m_iInterval);
 		return;
 	}
 }
@@ -342,7 +347,6 @@ void CMapTab::OnBnClickedStaticCreate()
 										m_vMeshPos, m_vMeshRot, m_vMeshScale,
 										strTag.GetBuffer());
 	CObjMgr::GetInstance()->AddObject(pStaticObj, CObjMgr::OBJ_OBJECT);
-
 }
 
 
@@ -354,6 +358,28 @@ void CMapTab::OnBnClickedStaticDelete()
 		MessageBox(L"Delete_Mode 클릭");
 		return;
 	}
+
+	if (nullptr == CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_OBJECT))
+	{
+		MessageBox(L"삭제 할 Object 없다 만들어라");
+		return;
+	}
+
+	if (m_pPickStaticObj != nullptr && true == m_bIsPickingStaticObj)
+	{
+		list<Engine::CGameObject*> pLst = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_OBJECT);
+		for (auto& pObject : pLst)
+		{
+			if (dynamic_cast<CStaticObject*>(pObject) == m_pPickStaticObj)
+			{
+				dynamic_cast<CStaticObject*>(pObject)->m_bisDead = true;
+				m_bIsPickingStaticObj = false;
+				m_pPickStaticObj = nullptr;
+				break;
+			}
+		}
+	}
+
 }
 
 
@@ -379,9 +405,6 @@ BOOL CMapTab::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 	m_EditPosY.GetWindowRect(&rc[7]);
 	m_EditPosZ.GetWindowRect(&rc[8]);
 
-	if (1 != m_iObjToolMode)
-		return 0;
-
 	ModifyStaticObj(rc, pt, zDelta);
 
 	UpdateData(FALSE);
@@ -398,6 +421,10 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 		else
 			m_fScaleX -= 0.1f;
 		m_vMeshScale.x = m_fScaleX;
+		
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+			m_pPickStaticObj->Get_StaticMeshTranscom()->
+			Set_Scale(m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z);
 	}
 	if (PtInRect(&rc[1], pt))	// ScaleY
 	{
@@ -406,6 +433,10 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 		else
 			m_fScaleY -= 0.1f;
 		m_vMeshScale.y = m_fScaleY;
+		
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+			m_pPickStaticObj->Get_StaticMeshTranscom()->
+			Set_Scale(m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z);
 	}
 	if (PtInRect(&rc[2], pt))	// ScaleZ
 	{
@@ -414,31 +445,62 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 		else
 			m_fScaleZ -= 0.1f;
 		m_vMeshScale.z = m_fScaleZ;
+
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+			m_pPickStaticObj->Get_StaticMeshTranscom()->
+			Set_Scale(m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z);
 	}
 
 	if (PtInRect(&rc[3], pt))	// RotX
 	{
 		if (zDelta > 0)
+		{
 			m_fRotX += 0.1f;
+			m_vMeshRot.x = 0.1f;
+		}
 		else
+		{
 			m_fRotX -= 0.1f;
-		m_vMeshRot.x = m_fRotX;
+			m_vMeshRot.x = -0.1f;
+		}
+
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+			m_pPickStaticObj->Get_StaticMeshTranscom()->
+			Rotation(Engine::ROT_X, m_vMeshRot.x);
 	}
 	if (PtInRect(&rc[4], pt))	// RotY
 	{
 		if (zDelta > 0)
+		{
 			m_fRotY += 0.1f;
+			m_vMeshRot.y = 0.1f;
+		}
 		else
+		{
 			m_fRotY -= 0.1f;
-		m_vMeshRot.y = m_fRotY;
+			m_vMeshRot.y = -0.1f;
+		}
+
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+			m_pPickStaticObj->Get_StaticMeshTranscom()->
+			Rotation(Engine::ROT_Y, m_vMeshRot.y);
 	}
 	if (PtInRect(&rc[5], pt))	// RotZ
 	{
 		if (zDelta > 0)
+		{
 			m_fRotZ += 0.1f;
+			m_vMeshRot.z = 0.1f;
+		}
 		else
+		{
 			m_fRotZ -= 0.1f;
-		m_vMeshRot.z = m_fRotZ;
+			m_vMeshRot.z = -0.1f;
+		}
+
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+			m_pPickStaticObj->Get_StaticMeshTranscom()->
+			Rotation(Engine::ROT_Z, m_vMeshRot.z);
 	}
 
 	if (PtInRect(&rc[6], pt))	// PosX
@@ -448,6 +510,10 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 		else
 			m_fPosX -= 0.1f;
 		m_vMeshPos.x = m_fPosX;
+
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+			m_pPickStaticObj->Get_StaticMeshTranscom()->
+			Set_Pos(&m_vMeshPos);
 	}
 	if (PtInRect(&rc[7], pt))	// PosY
 	{
@@ -456,6 +522,10 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 		else
 			m_fPosY -= 0.1f;
 		m_vMeshPos.y = m_fPosY;
+
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+			m_pPickStaticObj->Get_StaticMeshTranscom()->
+			Set_Pos(&m_vMeshPos);
 	}
 	if (PtInRect(&rc[8], pt))	// PosZ
 	{
@@ -464,7 +534,161 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 		else
 			m_fPosZ -= 0.1f;
 		m_vMeshPos.z = m_fPosZ;
+
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+			m_pPickStaticObj->Get_StaticMeshTranscom()->
+			Set_Pos(&m_vMeshPos);
 	}
 }
 
 
+void CMapTab::OnBnClickedSaveStaticObj()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+		// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CFileDialog Dlg(FALSE, L"dat", L"제목없음.dat", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
+		L"Data Files(*.dat)|*.dat||", this);
+
+	TCHAR szCurPath[256] = L"";
+
+	// GetCurrentDirectory: 현재 작업 경로를 얻어오는 함수.
+	GetCurrentDirectory(256, szCurPath);
+
+	// PathRemoveFileSpec: 현재 경로 상에서 파일명을 제거하는 함수.
+	// 제거해야할 파일명이 없을 경우에는 가장 말단 폴더명을 제거한다.
+	PathRemoveFileSpec(szCurPath);
+	lstrcat(szCurPath, L"\\Data\\StaticObj");
+
+	// 대화상자를 열 때 초기 경로를 설정한다.
+	Dlg.m_ofn.lpstrInitialDir = szCurPath;
+
+	if (IDOK == Dlg.DoModal())
+	{
+		CString strFileName = Dlg.GetPathName();
+
+		HANDLE hFile = CreateFile(strFileName.GetString(), GENERIC_WRITE, 0, 0,
+			CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+
+		if (INVALID_HANDLE_VALUE == hFile)
+			return;
+
+		DWORD dwByte = 0;
+		MESHDATA tMeshData;
+
+		list<Engine::CGameObject*> pLst = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_OBJECT);
+
+		// 일단 태그만 저장
+		//int	  iPathLength = 0;
+		//int	  iNameLength = 0;
+		int		  iTagLength = 0;
+		for (auto& pMesh : pLst)
+		{
+			if (nullptr == pMesh)
+				return;
+
+			auto pMeshTemp = dynamic_cast<CStaticObject*>(pMesh);
+
+			//iNameLength = lstrlen(pMeshTemp->m_szFilePath) + 1;
+			//lstrcpy(tMeshData.szFilePath, pMeshTemp->m_szFilePath);
+			//iNameLength = lstrlen(pMeshTemp->m_szFileName) + 1;
+			//lstrcpy(tMeshData.szFileName, pMeshTemp->m_szFileName);
+			iTagLength = lstrlen(pMeshTemp->m_szMeshTag) + 1;
+			lstrcpy(tMeshData.m_MeshTag, pMeshTemp->m_szMeshTag);
+
+			tMeshData.vScale = pMeshTemp->Get_StaticMeshTranscom()->m_vScale;
+			pMeshTemp->Get_StaticMeshTranscom()->Get_Info(Engine::INFO_POS, &tMeshData.vPos);
+			tMeshData.vRotate = pMeshTemp->Get_StaticMeshTranscom()->m_vAngle;
+
+			//tMeshData.byMeshID = pMeshTemp->Get_StaticObjID();
+			//tMeshData.byDrawID = pMeshTemp->Get_StaticObjDrawID();
+
+			//WriteFile(hFile, &iPathLength, sizeof(int), &dwByte, nullptr);
+			//WriteFile(hFile, &iNameLength, sizeof(int), &dwByte, nullptr);
+			WriteFile(hFile, &iTagLength, sizeof(int), &dwByte, nullptr);
+			WriteFile(hFile, &tMeshData, sizeof(MESHDATA), &dwByte, nullptr);
+		}
+		CloseHandle(hFile);
+	}
+}
+
+
+void CMapTab::OnBnClickedLoadStaticObj()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	// CFileDialog: 파일 저장 및 열기를 수행하는 대화상자에 해당하는 MFC 클래스.
+	CFileDialog Dlg(TRUE, L"dat", L"제목없음.dat", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
+		L"Data Files(*.dat)|*.dat||", this);
+
+	TCHAR szCurPath[256] = L"";
+
+	// GetCurrentDirectory: 현재 작업 경로를 얻어오는 함수.
+	GetCurrentDirectory(256, szCurPath);
+
+	// PathRemoveFileSpec: 현재 경로 상에서 파일명을 제거하는 함수.
+	// 제거해야할 파일명이 없을 경우에는 가장 말단 폴더명을 제거한다.
+	PathRemoveFileSpec(szCurPath);
+	lstrcat(szCurPath, L"\\Data\\StaticObj");
+
+	// 대화상자를 열 때 초기 경로를 설정한다.
+	Dlg.m_ofn.lpstrInitialDir = szCurPath;
+
+	if (IDOK == Dlg.DoModal())
+	{
+		CString strFileName = Dlg.GetPathName();
+
+		HANDLE hFile = CreateFile(strFileName.GetString(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+
+		if (INVALID_HANDLE_VALUE == hFile)
+			return;
+
+		DWORD dwByte = 0;
+		CStaticObject* pStaticObj = nullptr;
+
+		MESHDATA tObjData = {};
+
+		if (!CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_OBJECT).empty())
+		{
+			list<Engine::CGameObject*> pLst = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_OBJECT);
+			for (auto& pGameObj : pLst)
+			{
+				dynamic_cast<CStaticObject*>(pGameObj)->m_bisDead = true;
+			}
+			pLst.clear();
+		}
+
+		//int		 iPathLength = 0;
+		//int		 iNameLength = 0;
+		int			 iTagLength = 0;
+		CString		 strTag;
+
+		while (1)
+		{
+			ReadFile(hFile, &iTagLength, sizeof(int), &dwByte, nullptr);
+			//ReadFile(hFile, &iPathLength, sizeof(int), &dwByte, nullptr);
+			//ReadFile(hFile, &iNameLength, sizeof(int), &dwByte, nullptr);
+			ReadFile(hFile, &tObjData, sizeof(MESHDATA), &dwByte, nullptr);
+
+			if (dwByte == 0)
+				break;
+
+			//m_strMeshFullName = tObjData.szFileName;
+			//m_strMeshPathName = tObjData.szFilePath;
+			strTag = tObjData.m_MeshTag;
+
+			m_vMeshPos = tObjData.vPos;
+			m_vMeshScale = tObjData.vScale;
+			m_vMeshRot = tObjData.vRotate;
+			//m_byMeshID = tObjData.byMeshID;
+			//m_byDrawID = tObjData.byDrawID;
+
+			Engine::CGameObject* pStaticObj = CStaticObject::Create(m_pToolView->Get_ToolViewDevice(),
+				m_vMeshPos, m_vMeshRot, m_vMeshScale,
+				strTag.GetBuffer());
+			CObjMgr::GetInstance()->AddObject(pStaticObj, CObjMgr::OBJ_OBJECT);
+		}
+		m_pToolView->Invalidate(TRUE);
+
+		CloseHandle(hFile);
+	}
+}

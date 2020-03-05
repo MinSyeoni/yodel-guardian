@@ -32,12 +32,14 @@ protected:
 public:
 	virtual void OnInitialUpdate();
 	
+	//CMapTab		 Get_MapTab() { return m_pMapTab; };
+
+	CMapTab*	m_pMapTab = nullptr;
 private:
 	void		Free();
 
 private:
 	CTabCtrl	m_MainTab;
-	CMapTab*	m_pMapTab = nullptr;
 
 };
 
