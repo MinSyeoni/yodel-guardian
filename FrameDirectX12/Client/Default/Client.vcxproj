@@ -170,6 +170,7 @@
     <ClInclude Include="..\Code\Dynamic_Object.h" />
     <ClInclude Include="..\Code\Loading.h" />
     <ClInclude Include="..\Code\MainApp.h" />
+    <ClInclude Include="..\Code\Pistol.h" />
     <ClInclude Include="..\Code\Player.h" />
     <ClInclude Include="..\Code\PlayerArm.h" />
     <ClInclude Include="..\Code\PlayerLeg.h" />
@@ -182,6 +183,7 @@
     <ClInclude Include="..\Code\SkyDome.h" />
     <ClInclude Include="..\Code\StaticObject.h" />
     <ClInclude Include="..\Code\Terrain.h" />
+    <ClInclude Include="..\Code\Weapon.h" />
     <ClInclude Include="..\Header\Const.h" />
     <ClInclude Include="..\Header\Define.h" />
     <ClInclude Include="..\Header\Extern.h" />
@@ -202,6 +204,7 @@
     <ClCompile Include="..\Code\Dynamic_Object.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
+    <ClCompile Include="..\Code\Pistol.cpp" />
     <ClCompile Include="..\Code\Player.cpp" />
     <ClCompile Include="..\Code\PlayerArm.cpp" />
     <ClCompile Include="..\Code\PlayerLeg.cpp" />
@@ -214,6 +217,7 @@
     <ClCompile Include="..\Code\SkyDome.cpp" />
     <ClCompile Include="..\Code\StaticObject.cpp" />
     <ClCompile Include="..\Code\Terrain.cpp" />
+    <ClCompile Include="..\Code\Weapon.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

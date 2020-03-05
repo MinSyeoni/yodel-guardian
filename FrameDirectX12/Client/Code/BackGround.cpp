@@ -23,9 +23,6 @@ CBackGround::~CBackGround()
 
 HRESULT CBackGround::Ready_GameObjectPrototype()
 {
-#ifdef _DEBUG
-	COUT_STR("Ready Prototype BackGround");
-#endif
 
 
 	return S_OK;
@@ -37,7 +34,7 @@ HRESULT CBackGround::Ready_GameObject()
 #ifdef _DEBUG
 	COUT_STR("Ready Clone BackGround");
 #endif
-	CGameObject::Ready_GameObject();
+	//CGameObject::Ready_GameObject();
 	Add_Component();
 
 
@@ -71,7 +68,7 @@ _int CBackGround::Update_GameObject(const _float & fTimeDelta)
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
-	m_pTransCom->m_vAngle.y += 90.f * fTimeDelta;
+	//m_pTransCom->m_vAngle.y += 90.f * fTimeDelta;
 
 	/*____________________________________________________________________
 	TransCom - Update WorldMatrix.
@@ -132,7 +129,7 @@ HRESULT CBackGround::Add_Component()
 	// Texture
 	m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_Logo", COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
-	m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pShaderCom);
+	m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
 
 	return S_OK;
 }
@@ -182,8 +179,4 @@ CBackGround * CBackGround::Create(ID3D12Device * pGraphicDevice,
 void CBackGround::Free()
 {
 	CGameObject::Free();
-
-	Engine::Safe_Release(m_pBufferCom);
-	Engine::Safe_Release(m_pShaderCom);
-	Engine::Safe_Release(m_pTexture);
 }

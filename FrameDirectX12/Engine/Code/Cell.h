@@ -54,7 +54,7 @@ public:
 		const _vec3* pPointB,
 		const _vec3* pPointC,
 		_int Option);
-
-	virtual void		Free(void);
+private:
+	virtual void	Free(void);
 };
 END

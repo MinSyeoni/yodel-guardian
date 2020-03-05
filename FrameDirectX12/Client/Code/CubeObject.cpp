@@ -183,6 +183,4 @@ void CCubeObject::Free()
 {
 	CGameObject::Free();
 
-	Engine::Safe_Release(m_pBufferCom);
-	Engine::Safe_Release(m_pShaderCom);
 }

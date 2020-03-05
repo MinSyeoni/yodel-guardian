@@ -2,6 +2,7 @@
   compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ColorBuffer.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Default.cso
 C:\Users\Huijun\Desktop\??�ɷ���??yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(82,12-69): warning X3206: implicit truncation of vector type
+C:\Users\Huijun\Desktop\??�ɷ���??yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(119,12-69): warning X3206: implicit truncation of vector type
   
   compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_LightAcc.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Mesh.cso
@@ -75,7 +76,7 @@ c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\cod
   배치 파일이 아닙니다.
           1개 파일이 복사되었습니다.
           1개 파일이 복사되었습니다.
-  지정된 파일을 찾을 수 없습니다.
+          1개 파일이 복사되었습니다.
   .\Engine\Code\AnimationControl.h
   .\Engine\Code\Base.h
   .\Engine\Code\Camera.h

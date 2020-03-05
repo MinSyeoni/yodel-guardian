@@ -327,12 +327,13 @@ _ulong Release_Singleton()
 		MSG_BOX(L"CObjectMgr Release Failed");
 		return dwRefCnt;
 	}
-
 	if (dwRefCnt = CComponentMgr::Get_Instance()->Destroy_Instance())
 	{
 		MSG_BOX(L"CComponentMgr Release Failed");
 		return dwRefCnt;
 	}
+
+
 
 	if (dwRefCnt = CGraphicDevice::Get_Instance()->Destroy_Instance())
 	{
