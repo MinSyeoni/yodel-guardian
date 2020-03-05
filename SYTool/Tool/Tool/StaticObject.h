@@ -49,7 +49,7 @@ public:
 private:
 	Engine::CTransform*		m_pTransCom = nullptr;
 	Engine::CCalculator*	m_pCalculatorCom = nullptr;
-	Engine::CCollider*		m_pColliderCom = nullptr;
+	//Engine::CCollider*		m_pColliderCom = nullptr;
 	Engine::CStaticMesh*	m_pMeshCom = nullptr;
 	Engine::CShader*		m_pShaderCom = nullptr;
 

@@ -379,7 +379,6 @@ void CMapTab::OnBnClickedStaticDelete()
 			}
 		}
 	}
-
 }
 
 

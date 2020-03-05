@@ -61,7 +61,7 @@ void CStaticObject::Render_Object(void)
 	pEffect->BeginPass(0);
 
 	m_pMeshCom->Render_Mesh();
-	m_pColliderCom->Render_Collider(Engine::COL_FALSE, m_pTransCom->Get_WorldMatrix());
+	//m_pColliderCom->Render_Collider(Engine::COL_FALSE, m_pTransCom->Get_WorldMatrix());
 
 	pEffect->EndPass();
 	pEffect->End();
@@ -106,12 +106,12 @@ HRESULT CStaticObject::Add_Component(void)
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Mesh", pComponent);
 
 	// Collider 
-	pComponent = m_pColliderCom = Engine::CCollider::Create(m_pGraphicDev, 
-															m_pMeshCom->Get_VtxPos(), 
-															m_pMeshCom->Get_NumVtx(), 
-															m_pMeshCom->Get_Stride());
-	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Collider", pComponent);
+	//pComponent = m_pColliderCom = Engine::CCollider::Create(m_pGraphicDev, 
+	//														m_pMeshCom->Get_VtxPos(), 
+	//														m_pMeshCom->Get_NumVtx(), 
+	//														m_pMeshCom->Get_Stride());
+	//NULL_CHECK_RETURN(pComponent, E_FAIL);
+	//m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Collider", pComponent);
 
 	// ShaderCom
 	pComponent = m_pShaderCom = dynamic_cast<Engine::CShader*>
