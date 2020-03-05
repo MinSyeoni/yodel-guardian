@@ -151,8 +151,7 @@ void CPlayerHed::Free()
 {
 	CGameObject::Free();
 
-	Engine::Safe_Release(m_pMeshCom);
-	Engine::Safe_Release(m_pShaderCom);
+
 
 
 }

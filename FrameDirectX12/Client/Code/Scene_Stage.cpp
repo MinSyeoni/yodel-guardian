@@ -10,6 +10,7 @@
 #include "LightMgr.h"
 #include "SkyDome.h"
 #include "Frustom.h"
+#include "Pistol.h"
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -117,7 +118,9 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_SkyDome", pGameObject), E_FAIL);
 
-
+	pGameObject = CPistol::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Pistol", pGameObject), E_FAIL);
 
 	return S_OK;
 }
@@ -187,6 +190,8 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_StaticObject", L"Missile", &tMeshInfo), E_FAIL);
 
+
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Pistol", L"Weapon", &tMeshInfo), E_FAIL);
 	return S_OK;
 		
 }

@@ -49,7 +49,7 @@ protected:
 
 	CTransform*					m_pTransCom			= nullptr;
 	CInfo*						m_pInfoCom			= nullptr;
-	unordered_map<wstring, CComponent*>	m_mapComponent[COMPONENTID::ID_END];
+	unordered_map< wstring, CComponent*>	m_mapComponent[COMPONENTID::ID_END];
 
 	/*____________________________________________________________________
 	[ Value ]

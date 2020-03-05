@@ -163,7 +163,7 @@ call CopyEngine.bat</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>d3dcompiler.lib;D3D12.lib;dxgi.lib;dxguid.lib;dinput8.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3dcompiler.lib;D3D12.lib;dxgi.lib;dxguid.lib;dinput8.lib;assimp-vc140-mt.lib;d3d12.lib;d3d11.lib;d2d1.lib;dwrite.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <LargeAddressAware>true</LargeAddressAware>
       <AdditionalLibraryDirectories>../../libarary/Assimp/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>

@@ -220,8 +220,5 @@ void CTerrain::Free()
 {
 	CGameObject::Free();
 
-	Engine::Safe_Release(m_pBufferCom);
-	Engine::Safe_Release(m_pShaderCom);
-	Engine::Safe_Release(m_pDiffuseTexture);
-	Engine::Safe_Release(m_pNormalTexture);
+
 }

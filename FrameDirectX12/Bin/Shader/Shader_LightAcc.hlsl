@@ -96,6 +96,7 @@ ps_output PS_POINTMAIN(VS_OUTPUT input) : SV_TARGET
     
     float4 vNormalInfo = gNormaltexture.Sample(gsamLinearWrap, input.uv);
     float4 vDepthInfo = gDepthtexture.Sample(gsamLinearWrap, input.uv);
+    float4 vMaterial = gSpecTexture.Sample(gsamLinearWrap, input.uv);
     
     float fViewZ = vDepthInfo.y * 500.f;
     
@@ -115,11 +116,14 @@ ps_output PS_POINTMAIN(VS_OUTPUT input) : SV_TARGET
     
     float4 vShade = saturate(dot(normalize(vLightDir), vWorldNormal));
     float fAtt = saturate((g_fRange - fDistance) / g_fRange);
-   
-  
+    float3 reflection = normalize(reflect(g_vLightDir, vWorldNormal));
+    float3 vLook = normalize(vPosition.xyz - g_vCampos.xyz);
+    
     output.shade = g_vLightDiffuse * (vShade + g_vLightAmibient) * fAtt;
     output.shade.a = 1.f;
 
-    output.spec = float4(0.f, 0.f, 0.f, 0.f);
+    output.spec = pow(saturate(dot(reflection, -vLook)), 5.f) * g_vLightSpecular * vMaterial.r * fAtt;
+    output.spec += output.shade * 0.05f;
+    output.spec.a = 0;
     return output;
 }

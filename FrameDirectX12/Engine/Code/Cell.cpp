@@ -1,5 +1,7 @@
 #include "Cell.h"
 
+USING(Engine)
+
 CCell::CCell(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	:CComponent(pGraphicDevice,pCommandList)
 {
