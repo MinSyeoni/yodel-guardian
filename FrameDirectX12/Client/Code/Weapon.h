@@ -5,6 +5,10 @@
 
 class CWeapon : public CGameObject
 {
+
+public:
+	enum WEAPONSTATE {DROP,EQUIP,BAG};
+
 protected:
 	explicit CWeapon(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 	explicit CWeapon(const CWeapon& rhs);
@@ -29,6 +33,10 @@ protected:
 
 protected:
 	vector<vector<_matrix>> m_vecBoneMatirx;   
+
+
+
+
 
 protected:
 	virtual void			Free();

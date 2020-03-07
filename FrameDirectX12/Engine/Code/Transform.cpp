@@ -27,8 +27,6 @@ bool CTransform::Chase_Target( _vec3  vTargetPos, const _float & fTimeDelta)
 	
 	_vec3 vLook, vRight, vDirection;
 
-	_matrix matRot;
-
 	vDirection = vTargetPos - m_vPos;
 	vDirection.y = 0.f;
 

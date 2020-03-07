@@ -31,7 +31,8 @@ public:
 	_matrix Get_RootFrame();
 
 	vector<vector<_matrix>> GetArmMatrix() { return m_vecMatrix; };
-	void SetLegMatrix(vector<vector<_matrix>> Matrix) { m_vecLegMatrix = Matrix; };
+	void SetLegMatrix(vector<vector<_matrix>> Matrix) { m_vecLegMatrix = Matrix;	AnimationBlending();
+	};
 public:
 	void            Set_Animation(CPlayer::STATE  Animation) { m_eCurAnimationKey = Animation;};
 private:

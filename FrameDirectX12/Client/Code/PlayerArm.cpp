@@ -41,7 +41,7 @@ HRESULT CPlayerArm::Ready_GameObject(ARMTYPE eType)
 
 HRESULT CPlayerArm::LateInit_GameObject()
 {
-	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(),m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture());
+	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(),m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(),m_pMeshCom->Get_EmissiveTexture());
 	m_pTransCom->m_vPos = _vec3(80.f, -2.f, 80.f);
 
 	return S_OK;
@@ -65,8 +65,6 @@ _int CPlayerArm::Update_GameObject(const _float & fTimeDelta)
 		m_ePreAnimationKey = m_eCurAnimationKey;
 	}
 
-
-
 	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)m_eCurAnimationKey);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f*fTimeDelta, CAniCtrl::PLAYER, m_fSpineAngle);
 	return NO_EVENT;
@@ -76,7 +74,7 @@ _int CPlayerArm::LateUpdate_GameObject(const _float & fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
-	AnimationBlending();
+
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 
@@ -102,10 +100,9 @@ void CPlayerArm::AnimationBlending()
 	{
 		float fAccBody = 0.7f;
 		float fAccLeg = 0.3f;
-
-
 		for (int j = 0; j < m_vecMatrix[i].size(); j++)
 		{
+
 			m_vecMatrix[i][j] = (m_vecMatrix[i][j] * fAccBody) + (m_vecLegMatrix[i][j] * fAccLeg);
 		}
 	}

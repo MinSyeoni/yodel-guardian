@@ -82,7 +82,7 @@ void CShader_DefaultTex::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVec
 		hDescriptor.Offset(1, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 	}
 
-	m_pCB_MatrixInfo = new CUploadBuffer<CB_MATRIX_INFO>(DEVICE, 5, true);
+	m_pCB_MatrixInfo = new CUploadBuffer<CB_MATRIX_INFO>(DEVICE,6, true);
 	_uint uiCB_ByteSize = INIT_CB_256(CB_MATRIX_INFO);
 
 	CGraphicDevice::Get_Instance()->End_ResetCmdList();

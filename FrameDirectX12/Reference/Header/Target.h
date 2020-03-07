@@ -18,18 +18,11 @@ public:
 		return m_vecTargetTexture;
 	};
 
-	_uint Get_Widht() { return m_uiWidth; };
-	_uint Get_Height() { return m_uiHeight; };
-
 	HRESULT SetUp_OnGraphicDev(const _uint& iIndex);
 	HRESULT Release_OnGraphicDev(const _uint& iIndex);
 
 	
 	HRESULT BuildResource();
-
-
-	void Render_Albedo();
-	void Render_Normal();
 
 	void Render_RenderTarget();
 	void SetUp_ConstateTable(const int offset);
@@ -47,13 +40,14 @@ private:
 
 	_uint m_uiWidth = 0;
 	_uint m_uiHeight = 0;
+
 	_float m_ArrbedoClear[4];
 	_float m_NormalClear[4];
 	_float m_DepthClear[4];
 	_float m_SpecClear[4];
+	_float m_EmissiveClear[4];
 
 	DXGI_FORMAT mFormat = DXGI_FORMAT_R24G8_TYPELESS;
-
 
 	ID3D12DescriptorHeap*	m_pRTV_Heap = nullptr;
 	ID3D12DescriptorHeap*	m_pDSV_Heap = nullptr;
@@ -64,14 +58,8 @@ private:
 
 	vector<ComPtr<ID3D12Resource>> m_vecTargetTexture;
 
-	_int m_iTargetNum=0;
-
 	CRcTex* m_pBuffer;
-
-
-
 	CShader_DefaultTex* m_pShader;
-
 
 public:
 	static CTarget* Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);

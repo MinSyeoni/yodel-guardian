@@ -41,14 +41,14 @@ struct VS_OUTPUT
 VS_OUTPUT VS_MAIN(VS_INPUT Input)
 {
     VS_OUTPUT output;
-    output.position = mul(float4(Input.position, 1.0f), matWVP);
-    output.uv = Input.uv;
     
     float4x4 matLightWV, matLightWVP;
     
     matLightWV = mul(matWorld, matLightView);
     matLightWVP = mul(matLightWV, matLightProj);
     
+    output.position = mul(float4(Input.position, 1.0f), matWVP);
+    output.uv = Input.uv;
     output.vLightPos = mul(float4(Input.position, 1.0f), matLightWVP);
     
  
@@ -91,7 +91,7 @@ ps_output PS_MAIN(VS_OUTPUT input) : SV_TARGET
     float4 vShadow = gShadowTexture.Sample(gsamLinearWrap, uv);
     if (vShadow.r + 0.000125f < input.vLightPos.z / input.vLightPos.w)
         output.albedo.rgb *= 0.5f;
-    
+
     float3 tangentNormal = gNormalTexture.Sample(gsamLinearWrap, input.uv).xyz;
     tangentNormal = normalize(tangentNormal * 2.f - 1.f);
     float3x3 TBN = float3x3(normalize(input.vT), normalize(input.vB), normalize(input.vN));

@@ -8,6 +8,7 @@ typedef struct tagMeshTexture
 	_uint  m_iAlbedo = 999;
 	_uint m_iNormal = 999;
 	_uint m_iSpecular = 999;
+	_uint m_iEmissive = 999;
 
 }MESHTEXTURE;
 
@@ -30,7 +31,7 @@ public:
 	virtual void	End_Shader(_uint Texnum = 0,_int boneIndex = 0);
 
 public:
-	void Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture, vector< ComPtr<ID3D12Resource>> pVecNormalTexture, vector< ComPtr<ID3D12Resource>> pVecSpecularTexture);
+	void Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture, vector< ComPtr<ID3D12Resource>> pVecNormalTexture, vector< ComPtr<ID3D12Resource>> pVecSpecularTexture, vector< ComPtr<ID3D12Resource>> pEmissiveTexture);;
 
 	CUploadBuffer<CB_BONE_INFO>*	Get_UploadBuffer_BoneInfo();
 private:
@@ -45,10 +46,12 @@ private:
 	virtual D3D12_INPUT_LAYOUT_DESC		Create_InputLayout() override;
 private:
 	CUploadBuffer<CB_BONE_INFO>*	m_pCB_BoneInfo = nullptr;
+	CUploadBuffer<CB_TEXTURE_INFO>* m_pCB_TextureInfo = nullptr;
+
 	vector<MESHTEXTURE> m_vecTextureType;
-	_uint m_iTotalAlbedo = 0;
-	_uint m_iTotalNormal = 0;
-	_uint m_iTotalSpecular = 0;
+
+
+
 public:
 	virtual CComponent *		Clone() override;
 	static CShader_Mesh* Create(ID3D12Device* pGraphicDevice,

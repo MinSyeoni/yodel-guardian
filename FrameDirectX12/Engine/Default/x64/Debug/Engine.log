@@ -1,16 +1,18 @@
-﻿  compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Blend.cso
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ColorBuffer.cso
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Default.cso
-C:\Users\Huijun\Desktop\??�ɷ���??yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(82,12-69): warning X3206: implicit truncation of vector type
-C:\Users\Huijun\Desktop\??�ɷ���??yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(119,12-69): warning X3206: implicit truncation of vector type
+﻿  compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Blend.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ColorBuffer.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Default.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_DownSample.cso
+C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(82,12-69): warning X3206: implicit truncation of vector type
+C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(121,12-69): warning X3206: implicit truncation of vector type
   
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_LightAcc.cso
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Mesh.cso
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ShadowDepth.cso
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Terrain.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_LightAcc.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Mesh.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ShadowDepth.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Terrain.cso
   AnimationControl.cpp
-c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\code\animationcontrol.cpp(132): warning C4244: '-=': 'double'에서 'Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\animationcontrol.cpp(132): warning C4244: '-=': 'double'에서 'Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Base.cpp
+  BloomTarget.cpp
   Camera.cpp
   Cell.cpp
   Component.cpp
@@ -19,19 +21,20 @@ c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\cod
   DDSTextureLoader.cpp
   DirectInput.cpp
   DirectSound.cpp
+  DownSampleTarget.cpp
   Font.cpp
   Frame.cpp
   FrameMgr.cpp
   Frustom.cpp
-c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\code\frustom.cpp(87): warning C4101: 'matProjInv' :참조되지 않은 지역 변수입니다.
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\frustom.cpp(87): warning C4101: 'matProjInv' :참조되지 않은 지역 변수입니다.
   GameObject.cpp
   GraphicDevice.cpp
   Info.cpp
   Layer.cpp
-  Light.cpp
-  LightMgr.cpp
   코드를 생성하고 있습니다...
   컴파일하고 있습니다...
+  Light.cpp
+  LightMgr.cpp
   LightTarget.cpp
   Line.cpp
   Management.cpp
@@ -45,33 +48,31 @@ c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\cod
   Scene.cpp
   Shader.cpp
   Shader_Blend.cpp
+  Shader_Bloom.cpp
   Shader_ColorBuffer.cpp
   Shader_Default.cpp
   Shader_DefaultTex.cpp
-  Shader_LightAcc.cpp
-  Shader_Mesh.cpp
-c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\code\shader_mesh.cpp(84): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Shader_Shadow.cpp
-  Shader_Terrain.cpp
-c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\code\shader_terrain.cpp(59): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\code\shader_terrain.cpp(71): warning C4267: '=': 'size_t'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Shader_DownSample.cpp
   코드를 생성하고 있습니다...
   컴파일하고 있습니다...
+  Shader_LightAcc.cpp
+  Shader_Mesh.cpp
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\shader_mesh.cpp(98): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Shader_Shadow.cpp
+  Shader_Terrain.cpp
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\shader_terrain.cpp(59): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ShadowDepthTarget.cpp
   Target.cpp
-  TargetMgr.cpp
   TerrainTex.cpp
-c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\code\terraintex.cpp(93): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   Texture.cpp
   TimeMgr.cpp
   Timer.cpp
   Transform.cpp
-c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\code\transform.cpp(30): warning C4101: 'matRot' :참조되지 않은 지역 변수입니다.
   VIBuffer.cpp
   VlLine.cpp
   코드를 생성하고 있습니다...
      ../Bin\Engine.lib 라이브러리 및 ../Bin\Engine.exp 개체를 생성하고 있습니다.
-  Engine.vcxproj -> C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Engine\Default\../Bin\Engine.dll
+  Engine.vcxproj -> C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Default\../Bin\Engine.dll
   '//'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
   배치 파일이 아닙니다.
           1개 파일이 복사되었습니다.
@@ -79,6 +80,7 @@ c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\cod
           1개 파일이 복사되었습니다.
   .\Engine\Code\AnimationControl.h
   .\Engine\Code\Base.h
+  .\Engine\Code\BloomTarget.h
   .\Engine\Code\Camera.h
   .\Engine\Code\Cell.h
   .\Engine\Code\Collider.h
@@ -88,6 +90,7 @@ c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\cod
   .\Engine\Code\DDSTextureLoader.h
   .\Engine\Code\DirectInput.h
   .\Engine\Code\DirectSound.h
+  .\Engine\Code\DownSampleTarget.h
   .\Engine\Code\Font.h
   .\Engine\Code\Frame.h
   .\Engine\Code\FrameMgr.h
@@ -111,9 +114,11 @@ c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\cod
   .\Engine\Code\Scene.h
   .\Engine\Code\Shader.h
   .\Engine\Code\Shader_Blend.h
+  .\Engine\Code\Shader_Bloom.h
   .\Engine\Code\Shader_ColorBuffer.h
   .\Engine\Code\Shader_Default.h
   .\Engine\Code\Shader_DefaultTex.h
+  .\Engine\Code\Shader_DownSample.h
   .\Engine\Code\Shader_LightAcc.h
   .\Engine\Code\Shader_Mesh.h
   .\Engine\Code\Shader_Shadow.h
@@ -129,7 +134,7 @@ c:\users\huijun\desktop\이걸로작업\yodel-guardian\framedirectx12\engine\cod
   .\Engine\Code\Transform.h
   .\Engine\Code\VIBuffer.h
   .\Engine\Code\VlLine.h
-         52개 파일이 복사되었습니다.
+         56개 파일이 복사되었습니다.
   .\Engine\Header\Engine_Const.h
   .\Engine\Header\Engine_Enum.h
   .\Engine\Header\Engine_Function.h

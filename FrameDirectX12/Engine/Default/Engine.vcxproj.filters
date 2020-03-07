@@ -118,9 +118,6 @@
     <Filter Include="01.Utility\03.RenderTarget">
       <UniqueIdentifier>{a6f88146-10db-4d89-82cd-1fa2655da762}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Utility\03.RenderTarget\Manager">
-      <UniqueIdentifier>{90651b96-5b2b-4f25-98df-fb94daec87b4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01.Utility\03.RenderTarget\Target">
       <UniqueIdentifier>{cfb58df5-5a2c-4272-9db0-547428096b75}</UniqueIdentifier>
     </Filter>
@@ -171,6 +168,18 @@
     </Filter>
     <Filter Include="01.Utility\05.Shader\06.Shader_ShadowDepth">
       <UniqueIdentifier>{ffd77416-be1c-4b35-91f2-f1ed1cba344b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\05.Shader\07.Shader_DownSample">
+      <UniqueIdentifier>{627efeb7-36e7-4ebf-a541-aed658efd6de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.RenderTarget\BloomTarget">
+      <UniqueIdentifier>{700aa8c8-9325-4fbd-8006-d843a91cd2b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.RenderTarget\DownSampleTarget">
+      <UniqueIdentifier>{f8f000d3-d355-4875-9c8d-c8460ea8d964}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\05.Shader\08.Shader_Blur">
+      <UniqueIdentifier>{0338d26d-3ce5-4841-b6f3-d5f3cbfa9fcc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -321,9 +330,6 @@
     <ClInclude Include="..\Code\Target.h">
       <Filter>01.Utility\03.RenderTarget\Target</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\TargetMgr.h">
-      <Filter>01.Utility\03.RenderTarget\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\Light.h">
       <Filter>01.Utility\04.Light\Light</Filter>
     </ClInclude>
@@ -353,6 +359,18 @@
     </ClInclude>
     <ClInclude Include="..\Code\Shader_Shadow.h">
       <Filter>01.Utility\05.Shader\06.Shader_ShadowDepth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\DownSampleTarget.h">
+      <Filter>01.Utility\03.RenderTarget\DownSampleTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\BloomTarget.h">
+      <Filter>01.Utility\03.RenderTarget\BloomTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Shader_DownSample.h">
+      <Filter>01.Utility\05.Shader\07.Shader_DownSample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Shader_Bloom.h">
+      <Filter>01.Utility\05.Shader\08.Shader_Blur</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -473,9 +491,6 @@
     <ClCompile Include="..\Code\Target.cpp">
       <Filter>01.Utility\03.RenderTarget\Target</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\TargetMgr.cpp">
-      <Filter>01.Utility\03.RenderTarget\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Light.cpp">
       <Filter>01.Utility\04.Light\Light</Filter>
     </ClCompile>
@@ -506,6 +521,18 @@
     <ClCompile Include="..\Code\Shader_Shadow.cpp">
       <Filter>01.Utility\05.Shader\06.Shader_ShadowDepth</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\DownSampleTarget.cpp">
+      <Filter>01.Utility\03.RenderTarget\DownSampleTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BloomTarget.cpp">
+      <Filter>01.Utility\03.RenderTarget\BloomTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shader_DownSample.cpp">
+      <Filter>01.Utility\05.Shader\07.Shader_DownSample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shader_Bloom.cpp">
+      <Filter>01.Utility\05.Shader\08.Shader_Blur</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\Bin\Shader\Shader_ColorBuffer.hlsl">
@@ -528,6 +555,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Bin\Shader\Shader_ShadowDepth.hlsl">
       <Filter>01.Utility\05.Shader\06.Shader_ShadowDepth</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Bin\Shader\Shader_DownSample.hlsl">
+      <Filter>01.Utility\05.Shader\07.Shader_DownSample</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

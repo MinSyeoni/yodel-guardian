@@ -37,7 +37,9 @@ HRESULT CRenderer::Ready_Renderer(ID3D12Device* pGraphicDevice, ID3D12GraphicsCo
 
 	m_pShadowShader = CShader_Shadow::Create(m_pGraphicDevice, m_pCommandList);
 
-
+	m_pDownSampleBuffer = CRcTex::Create(m_pGraphicDevice, m_pCommandList);
+	m_pDownSampleShader = CShader_DownSample::Create(m_pGraphicDevice, m_pCommandList);
+	m_DownSampleTarget = CDownSampleTarget::Create(m_pGraphicDevice, m_pCommandList);
 	return S_OK;
 }
 
@@ -62,6 +64,8 @@ void CRenderer::Render_Renderer(const _float& fTimeDelta)
 
 	Render_LightAcc();
 
+	Render_PostPoressing();
+
 	Render_Blend();
 
 	Render_Alpha(fTimeDelta);
@@ -75,12 +79,14 @@ void CRenderer::Render_Renderer(const _float& fTimeDelta)
 		m_ShadowDepthTarget->Render_RenderTarget();
 		m_DifferdTarget->Render_RenderTarget();
 		m_LightTarget->Render_RenderTarget();
+		m_DownSampleTarget->Render_RenderTarget();
 	}
 	CGraphicDevice::Get_Instance()->End_ResetCmdList();
+
+
 	CGraphicDevice::Get_Instance()->Render_TextBegin();
 	Render_Font(fTimeDelta);
 	CGraphicDevice::Get_Instance()->Render_TextEnd();
-
 
 
 	CGraphicDevice::Get_Instance()->Render_End();
@@ -204,6 +210,39 @@ HRESULT CRenderer::Render_Blend()
 	return S_OK;
 }
 
+HRESULT CRenderer::Render_PostPoressing()
+{
+
+	Render_DownSampleing();//블러 다운샘플링.
+
+	return S_OK;
+}
+
+HRESULT CRenderer::Render_DownSampleing()
+{
+	if (!m_bIsDownSampleInit)
+	{
+		vector<ComPtr<ID3D12Resource>> pDiffedTarget = m_DifferdTarget->GetTargetTexture();
+		vector<ComPtr<ID3D12Resource>> pShadeTarget = m_LightTarget->GetTargetTexture();
+		vector<ComPtr<ID3D12Resource>> pDownSampleTarget;
+		pDownSampleTarget.push_back(pDiffedTarget[4]);
+		m_pDownSampleShader->Set_Shader_Texture(pDownSampleTarget);
+		m_bIsDownSampleInit = true;
+	}
+	m_DownSampleTarget->SetUp_OnGraphicDev();
+
+	m_pDownSampleShader->Begin_Shader();
+	m_pDownSampleBuffer->Begin_Buffer();
+
+	m_pDownSampleShader->End_Shader();
+	m_pDownSampleBuffer->Render_Buffer();
+
+
+	m_DownSampleTarget->Release_OnGraphicDev();
+
+	return S_OK;
+}
+
 void CRenderer::Clear_RenderGroup()
 {
 	for (size_t i = 0; i < RENDER_END; ++i)
@@ -258,9 +297,16 @@ void CRenderer::Free()
 	Safe_Release(m_LightTarget);
 	Safe_Release(m_DifferdTarget);
 	Safe_Release(m_ShadowDepthTarget);
+	Safe_Release(m_DownSampleTarget);
+	//블랜드
 	Safe_Release(m_pBlendBuffer);
 	Safe_Release(m_pBlendShader);
 	Safe_Release(m_pShadowShader);
+
+	//다운샘플
+	Safe_Release(m_pDownSampleBuffer);
+	Safe_Release(m_pDownSampleShader);
+
 	CLight_Manager::Get_Instance()->Destroy_Instance();
 	Clear_RenderGroup();
 }

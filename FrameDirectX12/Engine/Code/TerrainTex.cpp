@@ -90,7 +90,7 @@ HRESULT CTerrainTex::Ready_Buffer(const _uint& iNumVerticesX, const _uint& iNumV
 		}
 	}
 
-	for (int i = 0; i < vertexCount; i++)
+	for (_uint i = 0; i < vertexCount; i++)
 	{
 		Vertices[i].vNormal.Normalize();
 	}

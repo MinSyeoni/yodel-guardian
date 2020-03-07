@@ -35,7 +35,7 @@ HRESULT CDirectInput::Ready_InputDevice(HINSTANCE hInst, HWND hWnd)
 
 	FAILED_CHECK_RETURN(m_pInputSDK->CreateDevice(GUID_SysMouse, &m_pMouse, nullptr), E_FAIL);
 	m_pMouse->SetDataFormat(&c_dfDIMouse);
-	m_pMouse->SetCooperativeLevel(hWnd, DISCL_FOREGROUND | DISCL_EXCLUSIVE);
+	m_pMouse->SetCooperativeLevel(hWnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
 	m_pMouse->Acquire();
 
 	return S_OK;
@@ -43,10 +43,18 @@ HRESULT CDirectInput::Ready_InputDevice(HINSTANCE hInst, HWND hWnd)
 
 void CDirectInput::SetUp_InputState()
 {
-	m_pKeyBoard->GetDeviceState(256, m_byKeyState);
 
-	m_pMouse->GetDeviceState(sizeof(m_MouseState), &m_MouseState);
+	HRESULT hr = m_pKeyBoard->GetDeviceState(256, m_byKeyState);
+	if (DIERR_INPUTLOST == hr || DIERR_NOTACQUIRED == hr)
+	{
+		m_pKeyBoard->Acquire();
+	}
 
+	hr = m_pMouse->GetDeviceState(sizeof(m_MouseState), &m_MouseState);
+	if (DIERR_INPUTLOST == hr || DIERR_NOTACQUIRED == hr)
+	{
+		m_pMouse->Acquire();
+	}
 	memcpy(m_byKeyPressed, m_byKeyPressedTemp, 256);
 	memcpy(m_byKeyDown, m_byKeyDownTemp, 256);
 

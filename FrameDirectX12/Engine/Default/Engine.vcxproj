@@ -23,32 +23,32 @@
     <ProjectGuid>{65AE2EA8-2D08-4BBB-94C7-5E4DEAF32EBB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Engine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -181,6 +181,7 @@ call CopyEngine.bat</Command>
   <ItemGroup>
     <ClInclude Include="..\Code\AnimationControl.h" />
     <ClInclude Include="..\Code\Base.h" />
+    <ClInclude Include="..\Code\BloomTarget.h" />
     <ClInclude Include="..\Code\Camera.h" />
     <ClInclude Include="..\Code\Cell.h" />
     <ClInclude Include="..\Code\Component.h" />
@@ -189,6 +190,7 @@ call CopyEngine.bat</Command>
     <ClInclude Include="..\Code\DDSTextureLoader.h" />
     <ClInclude Include="..\Code\DirectInput.h" />
     <ClInclude Include="..\Code\DirectSound.h" />
+    <ClInclude Include="..\Code\DownSampleTarget.h" />
     <ClInclude Include="..\Code\Font.h" />
     <ClInclude Include="..\Code\Frame.h" />
     <ClInclude Include="..\Code\FrameMgr.h" />
@@ -212,16 +214,17 @@ call CopyEngine.bat</Command>
     <ClInclude Include="..\Code\Scene.h" />
     <ClInclude Include="..\Code\Shader.h" />
     <ClInclude Include="..\Code\Shader_Blend.h" />
+    <ClInclude Include="..\Code\Shader_Bloom.h" />
     <ClInclude Include="..\Code\Shader_ColorBuffer.h" />
     <ClInclude Include="..\Code\Shader_Default.h" />
     <ClInclude Include="..\Code\Shader_DefaultTex.h" />
+    <ClInclude Include="..\Code\Shader_DownSample.h" />
     <ClInclude Include="..\Code\Shader_LightAcc.h" />
     <ClInclude Include="..\Code\Shader_Mesh.h" />
     <ClInclude Include="..\Code\Shader_Shadow.h" />
     <ClInclude Include="..\Code\Shader_Terrain.h" />
     <ClInclude Include="..\Code\ShadowDepthTarget.h" />
     <ClInclude Include="..\Code\Target.h" />
-    <ClInclude Include="..\Code\TargetMgr.h" />
     <ClInclude Include="..\Code\TerrainTex.h" />
     <ClInclude Include="..\Code\Texture.h" />
     <ClInclude Include="..\Code\TimeMgr.h" />
@@ -243,6 +246,7 @@ call CopyEngine.bat</Command>
   <ItemGroup>
     <ClCompile Include="..\Code\AnimationControl.cpp" />
     <ClCompile Include="..\Code\Base.cpp" />
+    <ClCompile Include="..\Code\BloomTarget.cpp" />
     <ClCompile Include="..\Code\Camera.cpp" />
     <ClCompile Include="..\Code\Cell.cpp" />
     <ClCompile Include="..\Code\Component.cpp" />
@@ -251,6 +255,7 @@ call CopyEngine.bat</Command>
     <ClCompile Include="..\Code\DDSTextureLoader.cpp" />
     <ClCompile Include="..\Code\DirectInput.cpp" />
     <ClCompile Include="..\Code\DirectSound.cpp" />
+    <ClCompile Include="..\Code\DownSampleTarget.cpp" />
     <ClCompile Include="..\Code\Font.cpp" />
     <ClCompile Include="..\Code\Frame.cpp" />
     <ClCompile Include="..\Code\FrameMgr.cpp" />
@@ -274,16 +279,17 @@ call CopyEngine.bat</Command>
     <ClCompile Include="..\Code\Scene.cpp" />
     <ClCompile Include="..\Code\Shader.cpp" />
     <ClCompile Include="..\Code\Shader_Blend.cpp" />
+    <ClCompile Include="..\Code\Shader_Bloom.cpp" />
     <ClCompile Include="..\Code\Shader_ColorBuffer.cpp" />
     <ClCompile Include="..\Code\Shader_Default.cpp" />
     <ClCompile Include="..\Code\Shader_DefaultTex.cpp" />
+    <ClCompile Include="..\Code\Shader_DownSample.cpp" />
     <ClCompile Include="..\Code\Shader_LightAcc.cpp" />
     <ClCompile Include="..\Code\Shader_Mesh.cpp" />
     <ClCompile Include="..\Code\Shader_Shadow.cpp" />
     <ClCompile Include="..\Code\Shader_Terrain.cpp" />
     <ClCompile Include="..\Code\ShadowDepthTarget.cpp" />
     <ClCompile Include="..\Code\Target.cpp" />
-    <ClCompile Include="..\Code\TargetMgr.cpp" />
     <ClCompile Include="..\Code\TerrainTex.cpp" />
     <ClCompile Include="..\Code\Texture.cpp" />
     <ClCompile Include="..\Code\TimeMgr.cpp" />
@@ -296,6 +302,7 @@ call CopyEngine.bat</Command>
     <FxCompile Include="..\..\Bin\Shader\Shader_Blend.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_ColorBuffer.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_Default.hlsl" />
+    <FxCompile Include="..\..\Bin\Shader\Shader_DownSample.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_LightAcc.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_Mesh.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_ShadowDepth.hlsl" />

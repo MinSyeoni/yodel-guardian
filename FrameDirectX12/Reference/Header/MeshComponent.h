@@ -32,6 +32,7 @@ public:
 	vector< ComPtr<ID3D12Resource>> Get_Texture() { return m_vecResource; };
 	vector< ComPtr<ID3D12Resource>> Get_NormalTexture() { return m_vecNormalResource; };
 	vector<ComPtr< ID3D12Resource>> Get_SpecularTexture() { return m_vecSpecularResource; };
+	vector<ComPtr< ID3D12Resource>> Get_EmissiveTexture() { return m_vecEmissiveResource; };
 public:
 	void			   Render_Mesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix,_int CBOffset=0 ,_int MeshNum = 0,_bool Draw = true);
 	void               Render_ShadowMesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix,bool blsBone=false);
@@ -66,6 +67,10 @@ private:
 
 	vector< ComPtr<ID3D12Resource>> m_vecSpecularResource;
 	vector< ComPtr<ID3D12Resource>> m_vecSpecularUpload;
+
+
+	vector< ComPtr<ID3D12Resource>> m_vecEmissiveResource;
+	vector< ComPtr<ID3D12Resource>> m_vecEmissiveUpload;
 
 private:
 	const aiScene* m_pScene;

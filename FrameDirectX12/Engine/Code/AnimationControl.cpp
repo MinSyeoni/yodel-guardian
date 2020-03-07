@@ -195,7 +195,6 @@ void CAniCtrl::Update_NodeHierarchy(_float fAnimationTime,
 		_matrix   matRotate = Convert_AiToMat3(vRotate.GetMatrix());
 		_matrix   matTrans = XMMatrixTranslation(vTrans.x, vTrans.y, vTrans.z);
 
-
 		if (m_eState == PLAYER && strNodeName == "Chest")
 		{
 			_matrix            matRotationX = XMMatrixRotationX( XMConvertToRadians(m_fAngle));
@@ -226,6 +225,11 @@ void CAniCtrl::Update_NodeHierarchy(_float fAnimationTime,
 	if (strNodeName == "root")
 	{
 		m_matRootFinal = matGlobalTransform* Convert_AiToMat4(m_pScene->mRootNode->mTransformation);
+	}
+
+	if (strNodeName == "Prop01")
+	{
+		m_matWeapon = matGlobalTransform * Convert_AiToMat4(m_pScene->mRootNode->mTransformation);
 	}
 	/*__________________________________________________________________________________________________________
 	- Bone이 있는 노드에 대해서만 Bone Transform을 저장.
@@ -406,21 +410,16 @@ _matrix * CAniCtrl::Find_BoneMatrix(string strBoneName)
 	{
 		auto iter_find = m_vecBoneNameMap[i].find(strBoneName);
 
-		/*__________________________________________________________________________________________________________
+		if (iter_find == m_vecBoneNameMap[i].end())
+			continue;
+
+		/*_____________________________________________________
+		_____________________________________________________
 		[ 탐색 성공 ]
 		- Bone의 m_vecBoneInfo에서 FinalTransform 반환.
 		____________________________________________________________________________________________________________*/
-		if (iter_find->first == strBoneName)
-		{
-			return &(m_vecBoneInfo[i][iter_find->second].matfinalTransform);
-		}
+	   return &(m_vecBoneInfo[i][iter_find->second].matfinalTransform);
 
-		/*__________________________________________________________________________________________________________
-		[ 탐색 실패 ]
-		- nullptr 반환.
-		____________________________________________________________________________________________________________*/
-		if (iter_find == m_vecBoneNameMap[m_vecBoneNameMap.size() - 1].end())
-			return nullptr;
 
 	}
 

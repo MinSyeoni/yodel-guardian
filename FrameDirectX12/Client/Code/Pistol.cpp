@@ -1,5 +1,9 @@
 #include "stdafx.h"
 #include "Pistol.h"
+#include "Player.h"
+#include "PlayerArm.h"
+#include "PlayerLeg.h"
+#include "ObjectMgr.h"
 
 CPistol::CPistol(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	:CWeapon(pGraphicDevice,pCommandList)
@@ -22,15 +26,28 @@ HRESULT CPistol::Ready_GameObject()
 {
 	CWeapon::AddComponent();
 	AddComponent();
-
+	
 	return S_OK;
 }
 
 HRESULT CPistol::LateInit_GameObject()
 {
-	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture());
-	m_pTransCom->m_vPos = _vec3(300.f, 2.f, 350.f);
-	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
+	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
+	m_pTransCom->m_vScale = _vec3(1.0f, 1.0f, 1.0f);
+	m_pTransCom->m_vPos = _vec3(0.f, 0.f, 0.f);
+	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+
+	if (pPlayer != nullptr)
+	{
+		m_pPlayerArm = static_cast<CPlayer*>(pPlayer)->Get_PlayerArm();
+		m_pPlayerLeg = static_cast<CPlayer*>(pPlayer)->Get_PlayerLeg();
+	}
+
+
+	m_pPlayerArmMatrix = static_cast<CMesh*>(m_pPlayerArm->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_WeaponMatrix();
+	m_pPlayerLegMatrix =  static_cast<CMesh*>(m_pPlayerLeg->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_WeaponMatrix();
+	m_pPlayerMatrix = &(m_pPlayerArm->Get_Transform()->m_matWorld);
+	m_pHandleMatrix = m_pMeshCom->Find_BoneMatrix("handle");
 	return S_OK;
 }
 
@@ -44,9 +61,11 @@ _int CPistol::Update_GameObject(const _float & fTimeDelta)
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
+	
 
 	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)BASE);
 	m_vecBoneMatirx = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f*fTimeDelta);
+
 
 
 	return NO_EVENT;
@@ -59,6 +78,7 @@ _int CPistol::LateUpdate_GameObject(const _float & fTimeDelta)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 
+	FallowPlayer();
 	return S_OK;
 }
 
@@ -71,6 +91,22 @@ HRESULT CPistol::AddComponent()
 
 
 	return S_OK;
+}
+
+void CPistol::FallowPlayer()
+{
+
+	_matrix Rotation = XMMatrixRotationY(XMConvertToRadians(-90.f));
+
+	_matrix matBlend;
+	if (m_pPlayerArmMatrix != nullptr && m_pPlayerLegMatrix != nullptr)
+	{
+
+		matBlend = (*m_pPlayerArmMatrix* 0.7f) + (*m_pPlayerLegMatrix*0.3f);
+
+		m_pTransCom->m_matWorld = *m_pHandleMatrix* matBlend* (Rotation* *m_pPlayerMatrix);
+
+	};
 }
 
 CGameObject * CPistol::Clone_GameObject(void * prg)

@@ -8,6 +8,8 @@
 #include "Shader_Shadow.h"
 #include "ShadowDepthTarget.h"
 #include "Shader_Shadow.h"
+#include "DownSampleTarget.h"
+#include "Shader_DownSample.h"
 BEGIN(Engine)
 
 class CGameObject;
@@ -46,6 +48,8 @@ private:
 	HRESULT	Render_UI(const _float& fTimeDelta);
 	HRESULT	Render_Font(const _float& fTimeDelta);
 	HRESULT Render_Blend();
+	HRESULT Render_PostPoressing();
+	HRESULT Render_DownSampleing();
 public:
 	void	Clear_RenderGroup();
 
@@ -66,6 +70,8 @@ private: //랜더타겟관련
 	CTarget*     m_DifferdTarget=nullptr;
 	CLightTarget* m_LightTarget = nullptr;
 	CShadowDepthTarget* m_ShadowDepthTarget = nullptr;
+	CDownSampleTarget* m_DownSampleTarget = nullptr;
+
 	_bool m_blsShowTarget = false;
 
 private://블랜딩관련
@@ -74,7 +80,10 @@ private://블랜딩관련
 	_bool m_blsBlendInit=false;
 private://그림자관련
 	CShader_Shadow* m_pShadowShader;
-
+private://다운샘플링관련
+	CRcTex* m_pDownSampleBuffer;
+	CShader_DownSample* m_pDownSampleShader;
+	_bool m_bIsDownSampleInit = false;
 
 private:
 	virtual void		Free();

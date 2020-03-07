@@ -12,7 +12,7 @@ class CPlayerStatus;
 class CPlayer : public Engine::CGameObject
 {
 public:
-	enum STATE {WALK, IDLE,EX,EE};
+	enum STATE {IDLE, WALK,FIRE,EE};
 
 private:
 	explicit CPlayer(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
@@ -24,10 +24,14 @@ public:
 	virtual HRESULT	Ready_GameObject();
 	virtual HRESULT	LateInit_GameObject();
 	virtual _int	Update_GameObject(const _float& fTimeDelta);
-
 	void UpdateParts(const _float& fTimeDelta);
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void	Render_GameObject(const _float& fTimeDelta);
+
+
+public:
+	CPlayerArm*  Get_PlayerArm() { return m_pArm; };
+	CPlayerLeg*  Get_PlayerLeg() { return m_pLeg; };
 private:
 	virtual HRESULT Add_Component();
 private:

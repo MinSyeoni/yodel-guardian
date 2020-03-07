@@ -51,6 +51,7 @@ public:
 
 	vector<VECTOR_MATRIX>   Extract_BoneTransform(_float fAnimationTime, STATE eState =NONE, _float fAngle=0.f);
 	_matrix*           Get_RootFrame() { return &m_matRootFinal; };
+	_matrix*           Get_WeaponMatrix() { return &m_matWeapon; };
 private:
 	void               Update_NodeHierarchy(_float fAnimationTime,
 		const aiNode* pNode,
@@ -95,7 +96,7 @@ private:
 	unordered_map<string, HIERARCHY_INFO*>   m_mapNodeHierarchy;   // Node Hierarchy Á¤º¸.
 
 	_matrix            m_matRootFinal;
-
+	_matrix            m_matWeapon;
 	_float  m_fAngle = 0.f;
 
 private:

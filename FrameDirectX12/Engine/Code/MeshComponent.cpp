@@ -27,10 +27,12 @@ CMeshComponent::CMeshComponent(const CMeshComponent & rhs)
 	, m_entries(rhs.m_entries)
 	, m_vecResource(rhs.m_vecResource)
 	, m_vecUpload(rhs.m_vecUpload)
-	,m_vecNormalResource(rhs.m_vecNormalResource)
-	,m_vecNormalUpload(rhs.m_vecNormalUpload)
-	,m_vecSpecularResource(rhs.m_vecSpecularResource)
-	,m_vecSpecularUpload(rhs.m_vecSpecularResource)
+	, m_vecNormalResource(rhs.m_vecNormalResource)
+	, m_vecNormalUpload(rhs.m_vecNormalUpload)
+	, m_vecSpecularResource(rhs.m_vecSpecularResource)
+	, m_vecSpecularUpload(rhs.m_vecSpecularResource)
+	, m_vecEmissiveResource(rhs.m_vecEmissiveResource)
+    ,m_vecEmissiveUpload(rhs.m_vecEmissiveUpload)
 {
 	for (int i = 0; i < m_entries.size(); i++)
 	{
@@ -107,7 +109,7 @@ HRESULT CMeshComponent::Ready_Texture()
 			if (material->GetTexture(aiTextureType_DIFFUSE, 1, &textureName) == AI_SUCCESS)
 			{
 
-
+			
 				wstring strTextureName;//택스처이름
 				wstring strPathName;//파일경로
 				string  Name = textureName.C_Str();
@@ -156,10 +158,34 @@ HRESULT CMeshComponent::Ready_Texture()
 					m_vecSpecularUpload.push_back(nullptr);
 
 				}
-	
+			if (material->GetTexture(aiTextureType_EMISSIVE, 0, &textureName) == AI_SUCCESS)
+			{
+				wstring strTextureName;//택스처이름
+				wstring strPathName;//파일경로
+				string  Name = textureName.C_Str();
+				strTextureName.assign(Name.begin(), Name.end());
+
+				strPathName = m_szFilePath + strTextureName;
+
+
+				ComPtr<ID3D12Resource> pResource = nullptr;
+				ComPtr<ID3D12Resource> pUpload = nullptr;
+				ThrowIfFailed(CreateDDSTextureFromFile12(m_pGraphicDevice, CGraphicDevice::Get_Instance()->Get_CommandListThread(), strPathName.c_str(), pResource, pUpload));
+
+
+				m_vecEmissiveResource.push_back(pResource);
+				m_vecEmissiveUpload.push_back(pUpload);
+			}
+			else
+			{
+				m_vecEmissiveResource.push_back(nullptr);
+				m_vecEmissiveUpload.push_back(nullptr);
+
 			}
 
-		
+
+			}
+	
 
 	}
 	return S_OK;
@@ -424,22 +450,18 @@ void CMeshComponent::Render_Mesh(CShader * pShader,vector<vector<_matrix>> vecBo
 		dynamic_cast<CShader_Mesh*>(pShader)->Get_UploadBuffer_BoneInfo()->CopyData(CBOffset+i, tCB_BoneInfo);
 		}
 
-
-
-		if (m_entries[i].m_blsTexture == false)
-			continue;
-
-		m_pCommandList->IASetVertexBuffers(0, 1, &Get_VertexBufferView(i));
-		m_pCommandList->IASetIndexBuffer(&Get_IndexBufferView(i));
-
-		m_pCommandList->IASetPrimitiveTopology(m_PrimitiveTopology);
-
 		if (vecBoneMatrix.size() != 0)
 		{
 			pShader->End_Shader(i, i);
 		}
 		else
 			pShader->End_Shader(i, 0);
+
+
+		m_pCommandList->IASetVertexBuffers(0, 1, &Get_VertexBufferView(i));
+		m_pCommandList->IASetIndexBuffer(&Get_IndexBufferView(i));
+
+		m_pCommandList->IASetPrimitiveTopology(m_PrimitiveTopology);
 
 		m_pCommandList->DrawIndexedInstanced(m_vecSubMeshGeometry[i].uiIndexCount,
 			1,

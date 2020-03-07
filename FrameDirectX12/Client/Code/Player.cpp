@@ -70,7 +70,7 @@ HRESULT CPlayer::LateInit_GameObject()
 #ifdef _DEBUG
 	COUT_STR("LateInit Player");
 #endif
-	m_pTransCom->m_vPos = _vec3(300.f, -2.f, 300.f);
+	m_pTransCom->m_vPos = _vec3(300.f, 0.f, 300.f);
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
 	m_pTransCom->m_vDir = _vec3(0.f, 0.0f, 1.f);
 	return S_OK;
@@ -90,8 +90,8 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 	CGameObject::Update_GameObject(fTimeDelta);
 
 	UpdateParts(fTimeDelta);
-	m_pArm->Set_Animation(EE);
-	m_pLeg->Set_Animation(EX);
+	m_pArm->Set_Animation(m_eCurState);
+	m_pLeg->Set_Animation(m_eCurState);
 
 
 	return NO_EVENT;

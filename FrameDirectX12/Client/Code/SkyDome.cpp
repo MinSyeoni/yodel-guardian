@@ -52,7 +52,7 @@ HRESULT CSkyDome::LateInit_GameObject()
 {
 	m_pTransCom->m_vPos = _vec3{ 300.f,0.f,300.f };
 	m_pTransCom->m_vScale = _vec3{ 1.0f,1.0f,1.0f };
-	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture());
+	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
 
 	return S_OK;
 }

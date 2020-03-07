@@ -564,8 +564,21 @@ typedef struct tagCBMatrixInfo
 typedef struct tagCBBoneInfo
 {
 	XMFLOAT4X4 matbone[64];
-
 }CB_BONE_INFO;//´ÙÀÌ³ª¹Í¸Å½¬
+
+typedef struct tagCBDownSample
+{
+	XMFLOAT4 DownSampleOffset[16];
+
+}CB_SAMPLE_INFO;//´Ù¿î»ùÇÃ
+
+
+typedef struct tagCBTextureInfo
+{
+	XMFLOAT4 vecTexInfo; //r ½ºÆå g ÀÌ¸Þ 
+
+}CB_TEXTURE_INFO;
+
 typedef struct tagCBShadowInfo
 {
 	XMFLOAT4X4 matWorld;
@@ -702,6 +715,8 @@ enum class ROOT_SIG_TYPE
 	INPUT_LIGHT,
 	INPUT_BLEND,
 	INPUT_SHADOWDEPTH,
+	INPUT_DOWNSAMPLE,
+	INPUT_BLUR,
 	ENDSIG,
 };
 

@@ -60,9 +60,9 @@ void CWeapon::Set_ConstantTable()
 	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
 
 
-	_matrix matWVP = matRotY * m_pTransCom->m_matWorld* matView * matProj;
+	_matrix matWVP =  m_pTransCom->m_matWorld* matView * matProj;
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
-	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(matRotY*m_pTransCom->m_matWorld));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_pTransCom->m_matWorld));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
 
@@ -83,7 +83,7 @@ void CWeapon::Set_ShadowTable(CShader_Shadow * pShader)
 	matView = CFrustom::Get_Instance()->Get_LightView();
 	matProj = CFrustom::Get_Instance()->Get_LightProj();
 
-	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(matRotY*m_pTransCom->m_matWorld));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_pTransCom->m_matWorld));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
 	tCB_MatrixInfo.blsMesh = true;

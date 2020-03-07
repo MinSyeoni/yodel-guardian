@@ -9,13 +9,10 @@ HRESULT CTarget::Ready_Target()
 {
 	//albedo
 	ComPtr<ID3D12Resource> pTex = nullptr;
-	m_vecTargetTexture.push_back(pTex);
-	//normal
-	m_vecTargetTexture.push_back(pTex);
-	//Depth
-	m_vecTargetTexture.push_back(pTex);
-	//Spec
-	m_vecTargetTexture.push_back(pTex);
+	for (int i = 0; i < 5; ++i)
+	{
+		m_vecTargetTexture.push_back(pTex);
+	}
 
 	m_ArrbedoClear[0] = 0.f;
 	m_ArrbedoClear[1] = 0.f;
@@ -36,6 +33,11 @@ HRESULT CTarget::Ready_Target()
 	m_SpecClear[1] = 0.f;
 	m_SpecClear[2] = 0.f;
 	m_SpecClear[3] = 1.f;
+
+	m_EmissiveClear[0] = 0.f;
+	m_EmissiveClear[1] = 0.f;
+	m_EmissiveClear[2] = 0.f;
+	m_EmissiveClear[3] = 0.f;
 
 	m_uiWidth = WINSIZEX;
 	m_uiHeight = WINSIZEY;
@@ -67,34 +69,23 @@ HRESULT CTarget::SetUp_OnGraphicDev(const _uint & iIndex)
 {
 	CGraphicDevice::Get_Instance()->BackBufferSettingBegin();
 
-	m_pCommandLst->ResourceBarrier(1,
-		&CD3DX12_RESOURCE_BARRIER::Transition(m_vecTargetTexture[0].Get(),
-			D3D12_RESOURCE_STATE_GENERIC_READ,
-			D3D12_RESOURCE_STATE_RENDER_TARGET));
+	for (int i = 0; i < 5; ++i)
+	{
 
-	m_pCommandLst->ResourceBarrier(1,
-		&CD3DX12_RESOURCE_BARRIER::Transition(m_vecTargetTexture[1].Get(),
-			D3D12_RESOURCE_STATE_GENERIC_READ,
-			D3D12_RESOURCE_STATE_RENDER_TARGET));
-	m_pCommandLst->ResourceBarrier(1,
-		&CD3DX12_RESOURCE_BARRIER::Transition(m_vecTargetTexture[2
-		].Get(),
-			D3D12_RESOURCE_STATE_GENERIC_READ,
-			D3D12_RESOURCE_STATE_RENDER_TARGET));
+		m_pCommandLst->ResourceBarrier(1,
+			&CD3DX12_RESOURCE_BARRIER::Transition(m_vecTargetTexture[i].Get(),
+				D3D12_RESOURCE_STATE_GENERIC_READ,
+				D3D12_RESOURCE_STATE_RENDER_TARGET));
 
-	m_pCommandLst->ResourceBarrier(1,
-		&CD3DX12_RESOURCE_BARRIER::Transition(m_vecTargetTexture[3
-		].Get(),
-			D3D12_RESOURCE_STATE_GENERIC_READ,
-			D3D12_RESOURCE_STATE_RENDER_TARGET));
+	}
 
-
-	m_pCommandLst->ClearRenderTargetView(CD3DX12_CPU_DESCRIPTOR_HANDLE(m_pRTV_Heap->GetCPUDescriptorHandleForHeapStart(),0, m_uiRTV_DescriptorSize), m_ArrbedoClear, 0, nullptr);
-	m_pCommandLst->ClearRenderTargetView(CD3DX12_CPU_DESCRIPTOR_HANDLE(m_pRTV_Heap->GetCPUDescriptorHandleForHeapStart(),1, m_uiRTV_DescriptorSize), m_NormalClear, 0, nullptr);
+	m_pCommandLst->ClearRenderTargetView(CD3DX12_CPU_DESCRIPTOR_HANDLE(m_pRTV_Heap->GetCPUDescriptorHandleForHeapStart(), 0, m_uiRTV_DescriptorSize), m_ArrbedoClear, 0, nullptr);
+	m_pCommandLst->ClearRenderTargetView(CD3DX12_CPU_DESCRIPTOR_HANDLE(m_pRTV_Heap->GetCPUDescriptorHandleForHeapStart(), 1, m_uiRTV_DescriptorSize), m_NormalClear, 0, nullptr);
 	m_pCommandLst->ClearRenderTargetView(CD3DX12_CPU_DESCRIPTOR_HANDLE(m_pRTV_Heap->GetCPUDescriptorHandleForHeapStart(), 2, m_uiRTV_DescriptorSize), m_DepthClear, 0, nullptr);
 	m_pCommandLst->ClearRenderTargetView(CD3DX12_CPU_DESCRIPTOR_HANDLE(m_pRTV_Heap->GetCPUDescriptorHandleForHeapStart(), 3, m_uiRTV_DescriptorSize), m_SpecClear, 0, nullptr);
-
-	m_pCommandLst->OMSetRenderTargets(4, &CD3DX12_CPU_DESCRIPTOR_HANDLE(m_pRTV_Heap->GetCPUDescriptorHandleForHeapStart()), true, &CGraphicDevice::Get_Instance()->Get_DepthBuffer_handle());
+	m_pCommandLst->ClearRenderTargetView(CD3DX12_CPU_DESCRIPTOR_HANDLE(m_pRTV_Heap->GetCPUDescriptorHandleForHeapStart(), 4, m_uiRTV_DescriptorSize), m_EmissiveClear, 0, nullptr);
+	
+	m_pCommandLst->OMSetRenderTargets(5, &CD3DX12_CPU_DESCRIPTOR_HANDLE(m_pRTV_Heap->GetCPUDescriptorHandleForHeapStart()), true, &CGraphicDevice::Get_Instance()->Get_DepthBuffer_handle());
 
 
 	return S_OK;
@@ -104,28 +95,15 @@ HRESULT CTarget::Release_OnGraphicDev(const _uint & iIndex)
 {
 	CGraphicDevice::Get_Instance()->BackBufferSettingEnd();
 
+	for (int i = 0; i < 5; ++i)
+	{
 
+		m_pCommandLst->ResourceBarrier(1,
+			&CD3DX12_RESOURCE_BARRIER::Transition(m_vecTargetTexture[i].Get(),
+				D3D12_RESOURCE_STATE_RENDER_TARGET,
+				D3D12_RESOURCE_STATE_GENERIC_READ));
+	}
 
-
-	m_pCommandLst->ResourceBarrier(1,
-		&CD3DX12_RESOURCE_BARRIER::Transition(m_vecTargetTexture[0].Get(),
-			D3D12_RESOURCE_STATE_RENDER_TARGET,
-			D3D12_RESOURCE_STATE_GENERIC_READ));
-
-	m_pCommandLst->ResourceBarrier(1,
-		&CD3DX12_RESOURCE_BARRIER::Transition(m_vecTargetTexture[1].Get(),
-			D3D12_RESOURCE_STATE_RENDER_TARGET,
-			D3D12_RESOURCE_STATE_GENERIC_READ));
-
-	m_pCommandLst->ResourceBarrier(1,
-		&CD3DX12_RESOURCE_BARRIER::Transition(m_vecTargetTexture[2].Get(),
-			D3D12_RESOURCE_STATE_RENDER_TARGET,
-			D3D12_RESOURCE_STATE_GENERIC_READ));
-
-	m_pCommandLst->ResourceBarrier(1,
-		&CD3DX12_RESOURCE_BARRIER::Transition(m_vecTargetTexture[3].Get(),
-			D3D12_RESOURCE_STATE_RENDER_TARGET,
-			D3D12_RESOURCE_STATE_GENERIC_READ));
 
 
 	return S_OK;
@@ -157,7 +135,7 @@ HRESULT CTarget::BuildResource()
 
 
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		if (i == 1)
 		{
@@ -184,7 +162,15 @@ HRESULT CTarget::BuildResource()
 			optClear.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 			texDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 		}
-
+		if (i == 4)
+		{
+			optClear.Color[0] = m_EmissiveClear[0];
+			optClear.Color[1] = m_EmissiveClear[1];
+			optClear.Color[2] = m_EmissiveClear[2];
+			optClear.Color[3] = m_EmissiveClear[3];
+			optClear.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+			texDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+		}
 
 		ThrowIfFailed(m_pGraphicDev->CreateCommittedResource(
 			&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT),
@@ -205,7 +191,7 @@ HRESULT CTarget::BuildResource()
 
 	desc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
 
-	for (_uint i = 0; i < 4; i++)
+	for (_uint i = 0; i < 5; i++)
 	{
 		if(i==2)
 			desc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
@@ -220,20 +206,12 @@ HRESULT CTarget::BuildResource()
 	return S_OK;
 }
 
-void CTarget::Render_Albedo()
-{
 
-
-}
-
-void CTarget::Render_Normal()
-{
-}
 
 void CTarget::Render_RenderTarget()
 {
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 
 	{
 		SetUp_ConstateTable(i);
@@ -279,7 +257,7 @@ void CTarget::SetUp_ConstateTable(const int offset)
 HRESULT CTarget::BuildDescriptors()
 {
 	D3D12_DESCRIPTOR_HEAP_DESC RTV_HeapDesc;
-	RTV_HeapDesc.NumDescriptors = 4;
+	RTV_HeapDesc.NumDescriptors = 5;
 	RTV_HeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
 	RTV_HeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 	RTV_HeapDesc.NodeMask = 0;

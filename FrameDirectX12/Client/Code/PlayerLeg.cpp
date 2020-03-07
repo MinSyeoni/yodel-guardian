@@ -40,7 +40,7 @@ HRESULT CPlayerLeg::Ready_GameObject()
 
 HRESULT CPlayerLeg::LateInit_GameObject()
 {
-	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(),m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture());
+	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(),m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(),m_pMeshCom->Get_EmissiveTexture());
 
 	return S_OK;
 }

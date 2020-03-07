@@ -1,6 +1,7 @@
 Texture2D gTexture : register(t0);
 Texture2D gNormalTexture : register(t1);
 Texture2D gSpecTexture : register(t2);
+Texture2D gEmisTexture : register(t3);
 
 SamplerState gsamLinearWrap       : register(s0);
 
@@ -14,8 +15,15 @@ cbuffer cbMatrixInfo	: register(b0)
 cbuffer cbBoneInfo	: register(b1)
 {
 	float4x4 gmatBones[64]		: packoffset(c0);
-
 };
+
+cbuffer cbTexutreInfo : register(b2)
+{
+    float4 gTexInfo : packoffset(c0);
+};
+
+
+
 struct VS_INPUT
 {
 	float3 position : POSITION;
@@ -60,6 +68,7 @@ struct ps_output
 	float4 normal : SV_TARGET1;
     float4 Depth  : SV_TARGET2;
     float4 Specular : SV_TARGET3;
+    float4 Emissive : SV_Target4;
 };
 
 
@@ -81,10 +90,15 @@ ps_output PS_MAIN(VS_OUTPUT input) : SV_TARGET
     
     float3 WorldNormal = mul(TBN, tangentNormal);
     output.normal = float4(WorldNormal * 0.5 + 0.5, 1.f);
-   
-    
+  
     float4 fSpec = float4((SpecMap.r + SpecMap.g) / 2, step(SpecMap.r + 0.05, SpecMap.g - SpecMap.b), 0.f, 0.f);
     output.Specular = fSpec;
+  
+    
     output.Depth = float4(input.vProjPos.z / input.vProjPos.w, input.vProjPos.w / 500.f, 0.f, 0.f);
+    
+    output.Emissive = float4(0.f, 0.f, 0.f, 0.f);
+    if (gTexInfo.g > 0)    output.Emissive = gEmisTexture.Sample(gsamLinearWrap, input.uv);
+    
     return(output);
 };

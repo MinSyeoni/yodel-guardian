@@ -46,10 +46,18 @@ void CShader_Mesh::Begin_Shader()
 
 }
 
-void CShader_Mesh::End_Shader(_uint Texnum, _int boneIndex
-)
+void CShader_Mesh::End_Shader(_uint Texnum, _int boneIndex)
 {
 	
+	CB_TEXTURE_INFO pTexInfo;
+	ZeroMemory(&pTexInfo,sizeof(CB_TEXTURE_INFO));
+	if (m_vecTextureType[Texnum].m_iSpecular != 999)
+		pTexInfo.vecTexInfo.x = 1.f;
+	if (m_vecTextureType[Texnum].m_iEmissive != 999)
+		pTexInfo.vecTexInfo.y = 1.f;
+
+	m_pCB_TextureInfo->CopyData(Texnum, pTexInfo);
+
 
 	CD3DX12_GPU_DESCRIPTOR_HANDLE tex(m_pCBV_DescriptorHeap->GetGPUDescriptorHandleForHeapStart());
 	tex.Offset(Texnum, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
@@ -67,13 +75,19 @@ void CShader_Mesh::End_Shader(_uint Texnum, _int boneIndex
 		Spec.Offset(m_vecTextureType[Texnum].m_iSpecular, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 		m_pCommandList->SetGraphicsRootDescriptorTable(2, Spec);
 	}
+	if (m_vecTextureType[Texnum].m_iEmissive != 999)
+	{
+		CD3DX12_GPU_DESCRIPTOR_HANDLE Emis(m_pCBV_DescriptorHeap->GetGPUDescriptorHandleForHeapStart());
+		Emis.Offset(m_vecTextureType[Texnum].m_iEmissive, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
+		m_pCommandList->SetGraphicsRootDescriptorTable(3, Emis);
+	}
 
-
-	m_pCommandList->SetGraphicsRootConstantBufferView(3, m_pCB_MatrixInfo->Resource()->GetGPUVirtualAddress());
-	m_pCommandList->SetGraphicsRootConstantBufferView(4, m_pCB_BoneInfo->Resource()->GetGPUVirtualAddress()+(m_pCB_BoneInfo->Get_ElementSize()*boneIndex));
+	m_pCommandList->SetGraphicsRootConstantBufferView(4, m_pCB_MatrixInfo->Resource()->GetGPUVirtualAddress());
+	m_pCommandList->SetGraphicsRootConstantBufferView(5, m_pCB_BoneInfo->Resource()->GetGPUVirtualAddress()+(m_pCB_BoneInfo->Get_ElementSize()*boneIndex));
+	m_pCommandList->SetGraphicsRootConstantBufferView(6, m_pCB_TextureInfo->Resource()->GetGPUVirtualAddress() + (m_pCB_TextureInfo->Get_ElementSize()*Texnum));
 }
 
-void CShader_Mesh::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture, vector< ComPtr<ID3D12Resource>> pNormalTexture, vector< ComPtr<ID3D12Resource>> pSpecularTexture)
+void CShader_Mesh::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture, vector< ComPtr<ID3D12Resource>> pNormalTexture, vector< ComPtr<ID3D12Resource>> pSpecularTexture, vector< ComPtr<ID3D12Resource>> pEmissiveTexture)
 {
 
 
@@ -81,7 +95,7 @@ void CShader_Mesh::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTextur
 
 	CGraphicDevice::Get_Instance()->Begin_ResetCmdList();;
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
-	srvHeapDesc.NumDescriptors = pVecTexture.size()*3;
+	srvHeapDesc.NumDescriptors = pVecTexture.size()*4;
 	srvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	srvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
 	DEVICE->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(&m_pCBV_DescriptorHeap));
@@ -136,16 +150,32 @@ void CShader_Mesh::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTextur
 		hDescriptor.Offset(1, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 		OffSet++;
 	}
+	for (int i = 0; i < pEmissiveTexture.size(); ++i)
+	{
+		if (pEmissiveTexture[i] == nullptr)
+			continue;
 
+		m_vecTextureType[i].m_iEmissive = OffSet;
+		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+		srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+		srvDesc.Format = pEmissiveTexture[i]->GetDesc().Format;
+		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+		srvDesc.Texture2D.MostDetailedMip = 0;
+		srvDesc.Texture2D.MipLevels = pEmissiveTexture[i]->GetDesc().MipLevels;
+		srvDesc.Texture2D.ResourceMinLODClamp = 0.0f;
+		DEVICE->CreateShaderResourceView(pEmissiveTexture[i].Get(), &srvDesc, hDescriptor);
+		hDescriptor.Offset(1, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
+		OffSet++;
+	}
 
 
 
 	m_pCB_MatrixInfo = new CUploadBuffer<CB_MATRIX_INFO>(DEVICE, 2, true);
-	 INIT_CB_256(CB_MATRIX_INFO);
 
-	 CGraphicDevice::Get_Instance()->Wait_ForGpuComplete();
 	 m_pCB_BoneInfo = new CUploadBuffer<CB_BONE_INFO>(DEVICE, 10, true);
-	 INIT_CB_256(CB_BONE_INFO);
+
+	 m_pCB_TextureInfo = new CUploadBuffer<CB_TEXTURE_INFO>(DEVICE, 15, true);
+
 
 	 CGraphicDevice::Get_Instance()->Wait_ForGpuComplete();
 
@@ -176,8 +206,7 @@ HRESULT CShader_Mesh::Create_DescriptorHeaps()
 
 HRESULT CShader_Mesh::Create_ConstantBufferView()
 {
-	// 물체 n개의 상수 자료를 담을 상수 버퍼.
-	m_pCB_MatrixInfo = new CUploadBuffer<CB_MATRIX_INFO>(m_pGraphicDevice, 2, true);
+
 
 
 	return S_OK;
@@ -215,11 +244,12 @@ HRESULT CShader_Mesh::Create_PipelineState()
 	PipelineStateDesc.DepthStencilState = Create_DepthStencilState();
 	PipelineStateDesc.SampleMask = UINT_MAX;
 	PipelineStateDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
-	PipelineStateDesc.NumRenderTargets = 4;
+	PipelineStateDesc.NumRenderTargets = 5;
 	PipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
 	PipelineStateDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM;
 	PipelineStateDesc.RTVFormats[2] = DXGI_FORMAT_R32G32B32A32_FLOAT;
 	PipelineStateDesc.RTVFormats[3] = DXGI_FORMAT_R8G8B8A8_UNORM;
+	PipelineStateDesc.RTVFormats[4] = DXGI_FORMAT_R8G8B8A8_UNORM;
 	PipelineStateDesc.SampleDesc.Count = CGraphicDevice::Get_Instance()->Get_MSAA4X_Enable() ? 4 : 1;
 	PipelineStateDesc.SampleDesc.Quality = CGraphicDevice::Get_Instance()->Get_MSAA4X_Enable() ? (CGraphicDevice::Get_Instance()->Get_MSAA4X_QualityLevels() - 1) : 0;
 	PipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
@@ -332,4 +362,5 @@ void CShader_Mesh::Free()
 	Engine::Safe_Release(m_pCBV_DescriptorHeap);
 	Engine::Safe_Delete(m_pCB_MatrixInfo);
 	Engine::Safe_Delete(m_pCB_BoneInfo);
+	Engine::Safe_Delete(m_pCB_TextureInfo);
 }

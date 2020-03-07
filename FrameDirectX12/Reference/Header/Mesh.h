@@ -35,6 +35,7 @@ public:
 	vector< ComPtr<ID3D12Resource>> Get_Texture() { return m_pMeshComponent->Get_Texture(); };
 	vector< ComPtr<ID3D12Resource>> Get_NormalTexture() { return m_pMeshComponent->Get_NormalTexture(); };
 	vector< ComPtr<ID3D12Resource>> Get_SpecularTexture() { return m_pMeshComponent->Get_SpecularTexture(); };
+	vector< ComPtr<ID3D12Resource>> Get_EmissiveTexture() { return m_pMeshComponent->Get_EmissiveTexture(); };
 
 	CAniCtrl* Get_AnimationComponent() { return m_pAnimationComponent; };
 private:

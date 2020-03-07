@@ -59,7 +59,7 @@ _int CTerrain::Update_GameObject(const _float & fTimeDelta)
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
-	m_pTransCom->m_vPos.y = -2.f;
+
 	/*____________________________________________________________________
 	TransCom - Update WorldMatrix.
 	______________________________________________________________________*/
