@@ -12,6 +12,8 @@
 
 #include "ToolDoc.h"
 #include "ToolView.h"
+#include "SphereCollider.h"
+#include "BoxCollider.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -43,7 +45,7 @@ CToolView::CToolView() noexcept
 }
 
 CToolView::~CToolView()
-{	
+{
 	CObjMgr::GetInstance()->DestroyInstance();
 	CToolCamera::GetInstance()->DestroyInstance();
 
@@ -129,15 +131,25 @@ HRESULT CToolView::Render_MainApp()
 
 	if (nullptr == m_pGraphicDev ||
 		nullptr == m_pDevice ||
-		nullptr == m_pManagement )
+		nullptr == m_pManagement)
 		return E_FAIL;
 
 	m_pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
-	
+
 	m_pGraphicDev->Render_Begin(D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.f));
 
 	m_pManagement->Render_Scene(m_pDevice);
 	CObjMgr::GetInstance()->Render_Object();
+
+	// 나중에 고쳐야함
+	if (!m_pMapTab->m_pColliderLst.empty() && true == m_pMapTab->m_bIsColliderShow)
+	{
+		for (auto& pCol : m_pMapTab->m_pColliderLst)
+		{
+			pCol->Update_Collider(&pCol->Get_PareOriWorld());
+			pCol->Render_Collider();
+		}
+	}
 
 	m_pGraphicDev->Render_End();
 
@@ -169,9 +181,9 @@ HRESULT CToolView::Ready_MainApp()
 	return NOERROR;
 }
 
-HRESULT  CToolView::Ready_Default_Setting(CGraphicDev::WINMODE eMode, 
-										const _uint& iWinCX,
-										const _uint& iWinCY)
+HRESULT  CToolView::Ready_Default_Setting(CGraphicDev::WINMODE eMode,
+	const _uint& iWinCX,
+	const _uint& iWinCY)
 {
 	if (FAILED(Engine::Ready_GraphicDev(g_hWnd, eMode, iWinCX, iWinCY, &m_pGraphicDev)))
 		return E_FAIL;
@@ -294,9 +306,16 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 	}
 	else // 수정, 삭제 시 메쉬 클릭
 	{
-		bool retflag;
-		Picking_MouseOnStaticObject(retflag);
-		if (retflag) return;
+		if (true == m_pMapTab->m_bIsColliderMode)
+		{
+
+		}
+		else
+		{
+			bool retflag;
+			Picking_MouseOnStaticObject(retflag);
+			if (retflag) return;
+		}
 	}
 
 	m_pMapTab->UpdateData(FALSE);
@@ -316,7 +335,7 @@ void CToolView::Picking_MeshOnStaticObject(bool& retflag)
 	list<Engine::CGameObject*> pObjLst = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_OBJECT);
 	for (auto& pObject : pObjLst)
 	{
-		Engine::CTransform* pTransCom = dynamic_cast<CStaticObject*>(pObject)->Get_StaticMeshTranscom();
+		Engine::CTransform* pTransCom = dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom();
 
 		if (CPickingMgr::GetInstance()->IsCheckStaticObjgectMesh(
 			dynamic_cast<CStaticObject*>(pObject),
@@ -327,6 +346,12 @@ void CToolView::Picking_MeshOnStaticObject(bool& retflag)
 			if (fFixDist <= fDistTemp)
 			{
 				fDistTemp = fFixDist;
+
+				if (true == m_pMapTab->m_bIsColliderMode)
+				{
+					dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom()->Get_Info(Engine::INFO_POS, &m_vMeshPos);
+					m_pMapTab->m_pPickStaticObj = dynamic_cast<CStaticObject*>(pObject);
+				}
 
 				m_pMapTab->m_vMeshPos = m_vMeshPos;
 				m_pMapTab->m_fPosX = m_vMeshPos.x;
@@ -354,7 +379,7 @@ void CToolView::Picking_MouseOnStaticObject(bool& retflag)
 	list<Engine::CGameObject*> pObjLst = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_OBJECT);
 	for (auto& pObject : pObjLst)
 	{
-		Engine::CTransform* pTransCom = dynamic_cast<CStaticObject*>(pObject)->Get_StaticMeshTranscom();
+		Engine::CTransform* pTransCom = dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom();
 
 		if (CPickingMgr::GetInstance()->IsCheckStaticObjgectMesh(
 			dynamic_cast<CStaticObject*>(pObject),
@@ -366,9 +391,9 @@ void CToolView::Picking_MouseOnStaticObject(bool& retflag)
 			{
 				fDistTemp = fFixDist;
 
-				dynamic_cast<CStaticObject*>(pObject)->Get_StaticMeshTranscom()->Get_Info(Engine::INFO_POS, &m_vMeshPos);
-				m_vMeshScale = dynamic_cast<CStaticObject*>(pObject)->Get_StaticMeshTranscom()->m_vScale;
-				m_vMeshRot = dynamic_cast<CStaticObject*>(pObject)->Get_StaticMeshTranscom()->m_vAngle;
+				dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom()->Get_Info(Engine::INFO_POS, &m_vMeshPos);
+				m_vMeshScale = dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom()->m_vScale;
+				m_vMeshRot = dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom()->m_vAngle;
 
 				m_pMapTab->m_vMeshPos = m_vMeshPos;
 				m_pMapTab->m_fPosX = m_vMeshPos.x;
@@ -415,5 +440,6 @@ void CToolView::Picking_TerrainOnStaticObject(bool& retflag)
 	m_pMapTab->m_fPosX = m_vMeshPos.x;
 	m_pMapTab->m_fPosY = m_vMeshPos.y;
 	m_pMapTab->m_fPosZ = m_vMeshPos.z;
+
 	retflag = false;
 }

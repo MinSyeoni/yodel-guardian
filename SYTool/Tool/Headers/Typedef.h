@@ -51,15 +51,15 @@ typedef struct tagMeshData
 
 typedef struct tagSphere
 {
-	D3DXVECTOR3		vCenter = { 0.f, 0.f, 0.f};
-	unsigned long	dwStride = 0;
-	unsigned long	dwNumVtx = 0;
-	float			fRadius = 0.f;
+	D3DXVECTOR3		vCenter;
+	unsigned long	dwStride;
+	unsigned long	dwNumVtx;
+	float			fRadius;
 }SPHERE, * LPSPHERE;
 
 typedef struct tagCollider
 {
-	D3DXVECTOR3		vCenter = { 0.f,0.f,0.f };
+	D3DXVECTOR3		vCenter = {0.f,0.f,0.f};
 	D3DXVECTOR3		vScale = { 0.f,0.f,0.f };
 	D3DXVECTOR3		vRotate = { 0.f,0.f,0.f };
 	D3DXVECTOR3		dwVtxPos = { 0.f,0.f,0.f };
@@ -70,6 +70,6 @@ typedef struct tagCollider
 	float			fRadius = 0.f;
 	unsigned int	iColID = 0;
 	unsigned int	iGroupID = 0;
+	_matrix			matWorld;
 }COLLIDER;
-
 #endif // Typedef_h__

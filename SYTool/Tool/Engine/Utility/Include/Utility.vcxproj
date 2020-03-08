@@ -174,6 +174,7 @@ call CopyUtility.bat</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\BoxCollider.cpp" />
     <ClCompile Include="..\Code\Calculator.cpp" />
     <ClCompile Include="..\Code\Camera.cpp" />
     <ClCompile Include="..\Code\Collider.cpp" />
@@ -193,11 +194,14 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\RenderTargetMgr.cpp" />
     <ClCompile Include="..\Code\Scene.cpp" />
     <ClCompile Include="..\Code\Shader.cpp" />
+    <ClCompile Include="..\Code\SphereCollider.cpp" />
+    <ClCompile Include="..\Code\ToolCollider.cpp" />
     <ClCompile Include="..\Code\TrailColor.cpp" />
     <ClCompile Include="..\Code\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Headers\Export_Utility.h" />
+    <ClInclude Include="..\Code\BoxCollider.h" />
     <ClInclude Include="..\Code\Calculator.h" />
     <ClInclude Include="..\Code\Camera.h" />
     <ClInclude Include="..\Code\Collider.h" />
@@ -220,6 +224,8 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\Shader_Mesh.hpp" />
     <ClInclude Include="..\Code\Shader_Texture.hpp" />
     <ClInclude Include="..\Code\Shader_ToolTerrain.hpp" />
+    <ClInclude Include="..\Code\SphereCollider.h" />
+    <ClInclude Include="..\Code\ToolCollider.h" />
     <ClInclude Include="..\Code\TrailColor.h" />
     <ClInclude Include="..\Code\Transform.h" />
   </ItemGroup>

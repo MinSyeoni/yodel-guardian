@@ -61,6 +61,9 @@
     <Filter Include="08.Shader\hpp">
       <UniqueIdentifier>{007fc488-9198-4cfb-a704-aac6c845b748}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Component\ToolCollider">
+      <UniqueIdentifier>{ef93494a-2a3f-4c18-9427-8c272293033a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Management.cpp">
@@ -125,6 +128,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\Shader.cpp">
       <Filter>08.Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BoxCollider.cpp">
+      <Filter>04. Component\ToolCollider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SphereCollider.cpp">
+      <Filter>04. Component\ToolCollider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ToolCollider.cpp">
+      <Filter>04. Component\ToolCollider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +214,15 @@
     </ClInclude>
     <ClInclude Include="..\Code\Shader_ToolTerrain.hpp">
       <Filter>08.Shader\hpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\BoxCollider.h">
+      <Filter>04. Component\ToolCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\SphereCollider.h">
+      <Filter>04. Component\ToolCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\ToolCollider.h">
+      <Filter>04. Component\ToolCollider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

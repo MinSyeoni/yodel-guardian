@@ -9,6 +9,11 @@
 
 BEGIN(Engine)
 class CComponent;
+class CCollider;
+class CSColiider;
+class CToolCollider;
+class CSphereCollider;
+class CBoxCollider;
 END
 
 class CToolView;
@@ -46,10 +51,16 @@ public:
 	afx_msg void			OnBnClickedStaticDeleteMode();
 	afx_msg void			OnBnClickedStaticCreate();
 	afx_msg void			OnBnClickedStaticDelete();
-	afx_msg void			OnBnClickedStaticSet();
+
+	afx_msg void			OnBnClickedSaveStaticObj();
+	afx_msg void			OnBnClickedLoadStaticObj();
+	afx_msg void			OnBnClickedCheck_ColliderMode();
+	afx_msg void			OnBnClickedColliderSphereMode();
+	afx_msg void			OnBnClickedColliderBoxMode();
+	afx_msg	void			OnBnClickedColliderShow();
+	afx_msg	void			OnBnClickedSetOn_Mesh();
 
 	afx_msg BOOL			OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
-
 	virtual BOOL			OnInitDialog();
 
 public:
@@ -65,7 +76,7 @@ public:
 
 	_vec3					m_vMeshPos = { 0.f,0.f,0.f };
 	_vec3					m_vMeshRot = { 0.f,0.f,0.f };
-	_vec3					m_vMeshScale = { 0.f,0.f,0.f };
+	_vec3					m_vMeshScale = { 1.f, 1.f, 1.f };
 
 	int						m_iCntX;
 	int						m_iCntZ;
@@ -73,11 +84,23 @@ public:
 
 	_uint					m_iTexToolMode = 0;	// 0-TEX, 1-HEIGHT, 2-SPLATTING
 	_uint					m_iObjToolMode = 0;	// 0-CREATE, 1-MODY, 2-DEL
-
+	_uint					m_iColliderState = 0; // 0-SPHERE, 1-BOX
+	
 	_bool					m_bIsPickingStaticObj = false;
+	_bool					m_bIsColliderMode = false;
+	_bool					m_bIsColliderShow = false;
+	_bool					m_bIsSetOnMesh = false;
+
 	CStaticObject*			m_pPickStaticObj = nullptr;
 
+	// 테스트
+	CSphereCollider*			m_pSphereCol = nullptr;
+	CBoxCollider*				m_pBoxCol = nullptr;
+	list<CToolCollider*>		m_pColliderLst;
+	_matrix						m_matColliderWorld;
+
 private:
+
 	void					Load_ResourceList(CString strPath, CListBox* pListBox, CString pDir);
 	void					Change_TerrainTexture();
 	void					Change_HeightMapTexture();
@@ -112,8 +135,10 @@ private:
 	CString					m_strPath = L"";
 	VTXTEX*					m_pTerrainVtx = nullptr;
 
+	// Collider
+	CButton					m_BnColliderMode;
+	COLLIDER*				m_pColliderData = nullptr;
+	CButton					m_BnShowCollider;
 public:
-
-	afx_msg void OnBnClickedSaveStaticObj();
-	afx_msg void OnBnClickedLoadStaticObj();
+	CButton m_BnSetOn;
 };

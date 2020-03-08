@@ -13,6 +13,9 @@
 
 BEGIN(Engine)
 class CManagement;
+class CBoxCollider;
+class CSphereCollider;
+class CToolCollider;
 END
 
 class CToolView : public CView

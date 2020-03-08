@@ -305,7 +305,7 @@ bool CPickingMgr::IsCheckStaticObjgectMesh(CStaticObject* pMesh, D3DXMATRIX pMes
 	//월드->로컬
 	_matrix      matWorld;
 
-	matWorld = *pMesh->Get_StaticMeshTranscom()->Get_WorldMatrix();
+	matWorld = *pMesh->Get_StaticTranscom()->Get_WorldMatrix();
 	D3DXMatrixInverse(&matWorld, NULL, &matWorld);
 	D3DXVec3TransformNormal(&vRayDir, &vRayDir, &matWorld);
 	D3DXVec3TransformCoord(&vRayPos, &vRayPos, &matWorld);
@@ -321,7 +321,7 @@ bool CPickingMgr::IsCheckStaticObjgectMesh(CStaticObject* pMesh, D3DXMATRIX pMes
 		return false;
 
 	_vec3   Pos = vRayPos + (vRayDir * fDist);
-	D3DXVec3TransformCoord(&Pos, &Pos, pMesh->Get_StaticMeshTranscom()->Get_WorldMatrix());
+	D3DXVec3TransformCoord(&Pos, &Pos, pMesh->Get_StaticTranscom()->Get_WorldMatrix());
 
 	*pPos = Pos;
 	*pDist = fDist;
@@ -383,7 +383,7 @@ _vec3 CPickingMgr::IsCheckCollMesh(CStaticObject* pMesh, D3DXMATRIX pMeshWorld)
 	//월드->로컬
 	_matrix      matWorld;
 
-	matWorld = *pMesh->Get_StaticMeshTranscom()->Get_WorldMatrix();
+	matWorld = *pMesh->Get_StaticTranscom()->Get_WorldMatrix();
 	D3DXMatrixInverse(&matWorld, NULL, &matWorld);
 	D3DXVec3TransformNormal(&vRayDir, &vRayDir, &matWorld);
 	D3DXVec3TransformCoord(&vRayPos, &vRayPos, &matWorld);
@@ -398,7 +398,7 @@ _vec3 CPickingMgr::IsCheckCollMesh(CStaticObject* pMesh, D3DXMATRIX pMeshWorld)
 	if (bCheck)
 	{
 		_vec3   Pos = vRayPos + (vRayDir * fDist);
-		D3DXVec3TransformCoord(&Pos, &Pos, pMesh->Get_StaticMeshTranscom()->Get_WorldMatrix());
+		D3DXVec3TransformCoord(&Pos, &Pos, pMesh->Get_StaticTranscom()->Get_WorldMatrix());
 
 		return Pos;
 	}

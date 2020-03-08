@@ -30,7 +30,7 @@ public:
 	HRESULT					Set_ConstantTable(LPD3DXEFFECT pEffect);
 	void					Set_StaticCurState(STATIC_STATE eState) { m_eState = eState; };
 
-	Engine::CTransform*		Get_StaticMeshTranscom() { return m_pTransCom; };
+	Engine::CTransform*		Get_StaticTranscom() { return m_pTransCom; };
 	const LPD3DXMESH		Get_Mesh(void) const { return m_pMeshCom->Get_StaticMesh(); }
 	Engine::CStaticMesh*    Get_StaticMesh() const { return m_pMeshCom; }
 

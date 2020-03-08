@@ -19,9 +19,9 @@ public:
 	_bool			Find_Alpha(const char* pFileName);
 	LPD3DXMESH		Get_StaticMesh() { return m_pOriMesh; }
 public:
-	HRESULT	Ready_Mesh(const _tchar* pFilePath, const _tchar* pFileName);
-	void	Render_Mesh();
-	void	Render_Mesh(LPD3DXEFFECT pEffect);
+	HRESULT			Ready_Mesh(const _tchar* pFilePath, const _tchar* pFileName);
+	void			Render_Mesh();
+	void			Render_Mesh(LPD3DXEFFECT pEffect);
 
 private:
 	LPD3DXMESH			m_pMesh;
