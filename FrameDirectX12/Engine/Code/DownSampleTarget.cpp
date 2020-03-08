@@ -20,7 +20,7 @@ HRESULT CDownSampleTarget::Ready_Target()
 	m_uiWidth = WINSIZEX/4;
 	m_uiHeight = WINSIZEY/4;
 
-	m_Viewport = { 0.0f,0.0f,(_float)m_uiWidth,(_float)m_uiHeight,0.0f,1.0f };
+	m_Viewport = { 0.0f,0.0f,(_float)WINSIZEX,(_float)WINSIZEY,0.0f,1.0f };
 	m_ScissorRect = { 0,0, (_long)m_uiWidth,(_long)m_uiHeight };
 
 	m_uiRTV_DescriptorSize = m_pGraphicDev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
@@ -73,14 +73,14 @@ HRESULT CDownSampleTarget::Release_OnGraphicDev()
 
 
 	CGraphicDevice::Get_Instance()->BackBufferSettingEnd();
-
-	m_pCommandLst->RSSetViewports(1, &CGraphicDevice::Get_Instance()->Get_Viewport());
-	m_pCommandLst->RSSetScissorRects(1, &CGraphicDevice::Get_Instance()->Get_ScissorRect());
-
 	m_pCommandLst->ResourceBarrier(1,
 		&CD3DX12_RESOURCE_BARRIER::Transition(m_vecSampleTarget[0].Get(),
 			D3D12_RESOURCE_STATE_RENDER_TARGET,
 			D3D12_RESOURCE_STATE_GENERIC_READ));
+
+	m_pCommandLst->RSSetViewports(1, &CGraphicDevice::Get_Instance()->Get_Viewport());
+	m_pCommandLst->RSSetScissorRects(1, &CGraphicDevice::Get_Instance()->Get_ScissorRect());
+
 
 	return S_OK;
 }
@@ -164,8 +164,8 @@ void CDownSampleTarget::SetUp_ConstateTable()
 	matWorld._11 = 80.f;
 	matWorld._22 = 60.f;
 	matWorld._33 = 1.f;
-	matWorld._41 = (80+160) - WINSIZEX * 0.5f;
-	matWorld._42 = (-315) + WINSIZEY * 0.5f;
+	matWorld._41 = (80 +640) - WINSIZEX * 0.5f;
+	matWorld._42 = (-(60+120)) + WINSIZEY * 0.5f;
 
 
 

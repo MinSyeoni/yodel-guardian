@@ -5,17 +5,17 @@
 #include "Shader_DefaultTex.h"
 #include "Shader_Terrain.h"
 
-class ENGINE_DLL CShadowDepthTarget : public CBase
+class ENGINE_DLL CBloomTarget : public CBase
 {
 private:
-	explicit CShadowDepthTarget(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
-	virtual ~CShadowDepthTarget() = default;
+	explicit CBloomTarget(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
+	virtual ~CBloomTarget() = default;
 
 public:
 	HRESULT Ready_Target();
 
 	vector<ComPtr<ID3D12Resource>> GetTargetTexture() {
-		return m_vecDepthTarget;
+		return m_vecBloomTarget;
 	};
 
 
@@ -50,18 +50,17 @@ private:
 
 
 	ID3D12DescriptorHeap*	m_pRTV_Heap = nullptr;
-	ID3D12DescriptorHeap*	m_pDSV_Heap = nullptr;
+
 
 
 	_uint					m_uiRTV_DescriptorSize = 0;
 
-	vector<ComPtr<ID3D12Resource>> m_vecDepthTarget;
-	ID3D12Resource* m_pDepthStencilBuffer;
+	vector<ComPtr<ID3D12Resource>> m_vecBloomTarget;
 
 	CRcTex* m_pBuffer;
 	CShader_DefaultTex* m_pShader;
 
 public:
-	static CShadowDepthTarget* Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
+	static CBloomTarget* Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 	virtual void Free();
 };

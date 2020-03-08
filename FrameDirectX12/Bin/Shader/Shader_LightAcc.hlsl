@@ -85,7 +85,7 @@ ps_output PS_MAIN(VS_OUTPUT input) : SV_TARGET
 
     
     output.spec = pow(saturate(dot(reflection, -vLook)), 3.f) * g_vLightSpecular * vMaterial.r * step(0, vWorldNormal.r + vWorldNormal.g + vWorldNormal.b);
-  
+    output.spec.rgb *= 1.5f;
     output.spec.a = 0;
 
     return output;

@@ -92,13 +92,13 @@ ps_output PS_MAIN(VS_OUTPUT input) : SV_TARGET
     output.normal = float4(WorldNormal * 0.5 + 0.5, 1.f);
   
     float4 fSpec = float4((SpecMap.r + SpecMap.g) / 2, step(SpecMap.r + 0.05, SpecMap.g - SpecMap.b), 0.f, 0.f);
-    output.Specular = fSpec;
+    output.Specular = fSpec*gTexInfo.r;
   
     
     output.Depth = float4(input.vProjPos.z / input.vProjPos.w, input.vProjPos.w / 500.f, 0.f, 0.f);
     
     output.Emissive = float4(0.f, 0.f, 0.f, 0.f);
     if (gTexInfo.g > 0)    output.Emissive = gEmisTexture.Sample(gsamLinearWrap, input.uv);
-    
+ 
     return(output);
 };
