@@ -24,7 +24,7 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\deb
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_defaulttex.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_default.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_colorbuffer.obj
-c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_bloom.obj
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_blur.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_blend.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\scene.obj
@@ -56,6 +56,7 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\deb
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\engine.lib
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\engine.exp
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\shader_blend.cso
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\shader_blur.cso
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\shader_colorbuffer.cso
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\shader_default.cso
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\shader_downsample.cso

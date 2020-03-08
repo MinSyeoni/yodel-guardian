@@ -10,6 +10,9 @@
 #include "Shader_Shadow.h"
 #include "DownSampleTarget.h"
 #include "Shader_DownSample.h"
+#include "Shader_Blur.h"
+#include "BloomTarget.h"
+
 BEGIN(Engine)
 
 class CGameObject;
@@ -50,6 +53,7 @@ private:
 	HRESULT Render_Blend();
 	HRESULT Render_PostPoressing();
 	HRESULT Render_DownSampleing();
+	HRESULT Render_Bloom();
 public:
 	void	Clear_RenderGroup();
 
@@ -71,6 +75,7 @@ private: //랜더타겟관련
 	CLightTarget* m_LightTarget = nullptr;
 	CShadowDepthTarget* m_ShadowDepthTarget = nullptr;
 	CDownSampleTarget* m_DownSampleTarget = nullptr;
+	CBloomTarget* m_pBloomTarget = nullptr;
 
 	_bool m_blsShowTarget = false;
 
@@ -84,6 +89,10 @@ private://다운샘플링관련
 	CRcTex* m_pDownSampleBuffer;
 	CShader_DownSample* m_pDownSampleShader;
 	_bool m_bIsDownSampleInit = false;
+private://블러관련
+	CRcTex* m_pBlurBuffer;
+	CShader_Blur* m_pBlurShader;
+	_bool m_bIsBlurInit = false;
 
 private:
 	virtual void		Free();

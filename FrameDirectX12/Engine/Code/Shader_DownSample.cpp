@@ -64,8 +64,10 @@ void CShader_DownSample::End_Shader()
 	int i = CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize();
 	tex.Offset(0, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 	m_pCommandList->SetGraphicsRootDescriptorTable(0, tex);
+	tex.Offset(1, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
+	m_pCommandList->SetGraphicsRootDescriptorTable(1, tex);
 
-	m_pCommandList->SetGraphicsRootConstantBufferView(1, m_pCB_SampleInfo->Resource()->GetGPUVirtualAddress());
+	m_pCommandList->SetGraphicsRootConstantBufferView(2, m_pCB_SampleInfo->Resource()->GetGPUVirtualAddress());
 
 }
 

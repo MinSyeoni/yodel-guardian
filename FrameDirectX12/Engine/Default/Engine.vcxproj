@@ -214,7 +214,7 @@ call CopyEngine.bat</Command>
     <ClInclude Include="..\Code\Scene.h" />
     <ClInclude Include="..\Code\Shader.h" />
     <ClInclude Include="..\Code\Shader_Blend.h" />
-    <ClInclude Include="..\Code\Shader_Bloom.h" />
+    <ClInclude Include="..\Code\Shader_Blur.h" />
     <ClInclude Include="..\Code\Shader_ColorBuffer.h" />
     <ClInclude Include="..\Code\Shader_Default.h" />
     <ClInclude Include="..\Code\Shader_DefaultTex.h" />
@@ -279,7 +279,7 @@ call CopyEngine.bat</Command>
     <ClCompile Include="..\Code\Scene.cpp" />
     <ClCompile Include="..\Code\Shader.cpp" />
     <ClCompile Include="..\Code\Shader_Blend.cpp" />
-    <ClCompile Include="..\Code\Shader_Bloom.cpp" />
+    <ClCompile Include="..\Code\Shader_Blur.cpp" />
     <ClCompile Include="..\Code\Shader_ColorBuffer.cpp" />
     <ClCompile Include="..\Code\Shader_Default.cpp" />
     <ClCompile Include="..\Code\Shader_DefaultTex.cpp" />
@@ -300,6 +300,7 @@ call CopyEngine.bat</Command>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\Bin\Shader\Shader_Blend.hlsl" />
+    <FxCompile Include="..\..\Bin\Shader\Shader_Blur.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_ColorBuffer.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_Default.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_DownSample.hlsl" />

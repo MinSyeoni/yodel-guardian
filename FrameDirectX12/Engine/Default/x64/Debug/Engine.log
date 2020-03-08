@@ -1,4 +1,5 @@
 ﻿  compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Blend.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Blur.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ColorBuffer.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Default.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_DownSample.cso
@@ -48,7 +49,8 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\frustom.cp
   Scene.cpp
   Shader.cpp
   Shader_Blend.cpp
-  Shader_Bloom.cpp
+  Shader_Blur.cpp
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\shader_blur.cpp(68): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
   Shader_ColorBuffer.cpp
   Shader_Default.cpp
   Shader_DefaultTex.cpp
@@ -114,7 +116,7 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\shader_ter
   .\Engine\Code\Scene.h
   .\Engine\Code\Shader.h
   .\Engine\Code\Shader_Blend.h
-  .\Engine\Code\Shader_Bloom.h
+  .\Engine\Code\Shader_Blur.h
   .\Engine\Code\Shader_ColorBuffer.h
   .\Engine\Code\Shader_Default.h
   .\Engine\Code\Shader_DefaultTex.h

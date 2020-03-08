@@ -40,6 +40,11 @@ HRESULT CRenderer::Ready_Renderer(ID3D12Device* pGraphicDevice, ID3D12GraphicsCo
 	m_pDownSampleBuffer = CRcTex::Create(m_pGraphicDevice, m_pCommandList);
 	m_pDownSampleShader = CShader_DownSample::Create(m_pGraphicDevice, m_pCommandList);
 	m_DownSampleTarget = CDownSampleTarget::Create(m_pGraphicDevice, m_pCommandList);
+	//ºí·ë
+	m_pBlurBuffer = CRcTex::Create(m_pGraphicDevice, m_pCommandList);
+	m_pBlurShader = CShader_Blur::Create(m_pGraphicDevice, m_pCommandList);
+	m_pBloomTarget = CBloomTarget::Create(m_pGraphicDevice, m_pCommandList);
+
 	return S_OK;
 }
 
@@ -80,6 +85,7 @@ void CRenderer::Render_Renderer(const _float& fTimeDelta)
 		m_DifferdTarget->Render_RenderTarget();
 		m_LightTarget->Render_RenderTarget();
 		m_DownSampleTarget->Render_RenderTarget();
+		m_pBloomTarget->Render_RenderTarget();
 	}
 	CGraphicDevice::Get_Instance()->End_ResetCmdList();
 
@@ -188,12 +194,14 @@ HRESULT CRenderer::Render_Blend()
 	{
 		vector<ComPtr<ID3D12Resource>> pDiffedTarget = m_DifferdTarget->GetTargetTexture();
 		vector<ComPtr<ID3D12Resource>> pShadeTarget = m_LightTarget->GetTargetTexture();
+		vector<ComPtr<ID3D12Resource>> pBlurTarget = m_pBloomTarget->GetTargetTexture();
 
 		vector<ComPtr<ID3D12Resource>> pBlendTarget;
-		pBlendTarget.push_back(pDiffedTarget[0]);
-		pBlendTarget.push_back(pShadeTarget[0]);
-		pBlendTarget.push_back(pShadeTarget[1]);
-
+		pBlendTarget.push_back(pDiffedTarget[0]);//albedo
+		pBlendTarget.push_back(pShadeTarget[0]);//Shade
+		pBlendTarget.push_back(pShadeTarget[1]);//Spec
+		pBlendTarget.push_back(pBlurTarget[0]);//Blur
+		pBlendTarget.push_back(pDiffedTarget[4]);//Emi
 		m_pBlendShader->Set_Shader_Texture(pBlendTarget);
 
 		m_blsBlendInit = true;
@@ -214,7 +222,7 @@ HRESULT CRenderer::Render_PostPoressing()
 {
 
 	Render_DownSampleing();//ºí·¯ ´Ù¿î»ùÇÃ¸µ.
-
+	Render_Bloom();//ºí·ëÈ¿°ú
 	return S_OK;
 }
 
@@ -223,9 +231,10 @@ HRESULT CRenderer::Render_DownSampleing()
 	if (!m_bIsDownSampleInit)
 	{
 		vector<ComPtr<ID3D12Resource>> pDiffedTarget = m_DifferdTarget->GetTargetTexture();
-		vector<ComPtr<ID3D12Resource>> pShadeTarget = m_LightTarget->GetTargetTexture();
+		vector<ComPtr<ID3D12Resource>> pLightTarget = m_LightTarget->GetTargetTexture();
 		vector<ComPtr<ID3D12Resource>> pDownSampleTarget;
 		pDownSampleTarget.push_back(pDiffedTarget[4]);
+		pDownSampleTarget.push_back(pLightTarget[1]);
 		m_pDownSampleShader->Set_Shader_Texture(pDownSampleTarget);
 		m_bIsDownSampleInit = true;
 	}
@@ -239,6 +248,33 @@ HRESULT CRenderer::Render_DownSampleing()
 
 
 	m_DownSampleTarget->Release_OnGraphicDev();
+
+	return S_OK;
+}
+
+HRESULT CRenderer::Render_Bloom()
+{
+
+	if (!m_bIsBlurInit)
+	{
+		vector<ComPtr<ID3D12Resource>> pDownSampleTarget = m_DownSampleTarget->GetTargetTexture();
+		vector<ComPtr<ID3D12Resource>> pBlurTarget;
+		pBlurTarget.push_back(pDownSampleTarget[0]);
+		m_pBlurShader->Set_Shader_Texture(pBlurTarget);
+		m_bIsBlurInit = true;
+
+	}
+	m_pBloomTarget->SetUp_OnGraphicDev();
+
+	m_pBlurShader->Begin_Shader();
+	m_pBlurBuffer->Begin_Buffer();
+
+	m_pBlurShader->End_Shader();
+	m_pBlurBuffer->Render_Buffer();
+
+
+	m_pBloomTarget->Release_OnGraphicDev();
+
 
 	return S_OK;
 }
@@ -298,14 +334,21 @@ void CRenderer::Free()
 	Safe_Release(m_DifferdTarget);
 	Safe_Release(m_ShadowDepthTarget);
 	Safe_Release(m_DownSampleTarget);
+	Safe_Release(m_pBloomTarget);
+
 	//ºí·£µå
 	Safe_Release(m_pBlendBuffer);
 	Safe_Release(m_pBlendShader);
+	//±×¸²ÀÚ
 	Safe_Release(m_pShadowShader);
 
 	//´Ù¿î»ùÇÃ
 	Safe_Release(m_pDownSampleBuffer);
 	Safe_Release(m_pDownSampleShader);
+
+	//ºí·ë
+	Safe_Release(m_pBlurBuffer);
+	Safe_Release(m_pBlurShader);
 
 	CLight_Manager::Get_Instance()->Destroy_Instance();
 	Clear_RenderGroup();

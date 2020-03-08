@@ -369,7 +369,7 @@
     <ClInclude Include="..\Code\Shader_DownSample.h">
       <Filter>01.Utility\05.Shader\07.Shader_DownSample</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Shader_Bloom.h">
+    <ClInclude Include="..\Code\Shader_Blur.h">
       <Filter>01.Utility\05.Shader\08.Shader_Blur</Filter>
     </ClInclude>
   </ItemGroup>
@@ -530,7 +530,7 @@
     <ClCompile Include="..\Code\Shader_DownSample.cpp">
       <Filter>01.Utility\05.Shader\07.Shader_DownSample</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Shader_Bloom.cpp">
+    <ClCompile Include="..\Code\Shader_Blur.cpp">
       <Filter>01.Utility\05.Shader\08.Shader_Blur</Filter>
     </ClCompile>
   </ItemGroup>
@@ -558,6 +558,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Bin\Shader\Shader_DownSample.hlsl">
       <Filter>01.Utility\05.Shader\07.Shader_DownSample</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Bin\Shader\Shader_Blur.hlsl">
+      <Filter>01.Utility\05.Shader\08.Shader_Blur</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

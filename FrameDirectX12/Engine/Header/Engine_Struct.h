@@ -571,6 +571,19 @@ typedef struct tagCBDownSample
 	XMFLOAT4 DownSampleOffset[16];
 
 }CB_SAMPLE_INFO;//促款基敲
+typedef struct tagCBPIXELSample
+{
+	XMFLOAT2 PixelKerneIH[13];
+	XMFLOAT2 PixelKernelV[13];
+
+}CB_PIXEL_INFO;//促款基敲
+
+typedef struct tagCBBlurSample
+{
+	float BlurWeight[13]; 
+
+}CB_BLUR_INFO;//促款基敲
+
 
 
 typedef struct tagCBTextureInfo
