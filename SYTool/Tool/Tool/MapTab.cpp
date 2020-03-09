@@ -552,7 +552,7 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 			m_fScaleY -= 0.1f;
 		m_vMeshScale.y = m_fScaleY;
 
-		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj && false == m_bIsColliderMode)
 			m_pPickStaticObj->Get_StaticTranscom()->
 			Set_Scale(m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z);
 		else if (true == m_bIsPickingCollider && nullptr != m_pPickCollider && true == m_bIsColliderMode)
@@ -571,7 +571,7 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 			m_fScaleZ -= 0.1f;
 		m_vMeshScale.z = m_fScaleZ;
 
-		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj && false == m_bIsColliderMode)
 			m_pPickStaticObj->Get_StaticTranscom()->
 			Set_Scale(m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z);
 		else if (true == m_bIsPickingCollider && nullptr != m_pPickCollider && true == m_bIsColliderMode)
@@ -596,7 +596,7 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 			m_vMeshRot.x = -0.1f;
 		}
 
-		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj && false == m_bIsColliderMode)
 			m_pPickStaticObj->Get_StaticTranscom()->
 			Rotation(Engine::ROT_X, m_vMeshRot.x);
 		else if (true == m_bIsPickingCollider && nullptr != m_pPickCollider && true == m_bIsColliderMode)
@@ -618,7 +618,7 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 			m_vMeshRot.y = -0.1f;
 		}
 
-		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj && false == m_bIsColliderMode)
 			m_pPickStaticObj->Get_StaticTranscom()->
 			Rotation(Engine::ROT_Y, m_vMeshRot.y);
 		else if (true == m_bIsPickingCollider && nullptr != m_pPickCollider && true == m_bIsColliderMode)
@@ -640,7 +640,7 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 			m_vMeshRot.z = -0.1f;
 		}
 
-		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj && false == m_bIsColliderMode)
 			m_pPickStaticObj->Get_StaticTranscom()->
 			Rotation(Engine::ROT_Z, m_vMeshRot.z);
 		else if (true == m_bIsPickingCollider && nullptr != m_pPickCollider && true == m_bIsColliderMode)
@@ -658,7 +658,7 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 			m_fPosX -= 0.1f;
 		m_vMeshPos.x = m_fPosX;
 
-		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj && false == m_bIsColliderMode)
 			m_pPickStaticObj->Get_StaticTranscom()->
 			Set_Pos(&m_vMeshPos);
 		else if (true == m_bIsPickingCollider && nullptr != m_pPickCollider && true == m_bIsColliderMode)
@@ -676,7 +676,7 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 			m_fPosY -= 0.1f;
 		m_vMeshPos.y = m_fPosY;
 
-		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj && false == m_bIsColliderMode)
 			m_pPickStaticObj->Get_StaticTranscom()->
 			Set_Pos(&m_vMeshPos);
 		else if (true == m_bIsPickingCollider && nullptr != m_pPickCollider && true == m_bIsColliderMode)
@@ -694,7 +694,7 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 			m_fPosZ -= 0.1f;
 		m_vMeshPos.z = m_fPosZ;
 
-		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj && false == m_bIsColliderMode)
 			m_pPickStaticObj->Get_StaticTranscom()->
 			Set_Pos(&m_vMeshPos);
 		else if (true == m_bIsPickingCollider && nullptr != m_pPickCollider && true == m_bIsColliderMode)
