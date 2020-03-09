@@ -20,10 +20,6 @@ HRESULT Engine::CBoxCollider::Ready_Collider(const _vec3* pPos, const _ulong & d
 // 	ZeroMemory(&m_vMin, sizeof(_vec3));
 // 	ZeroMemory(&m_vMax, sizeof(_vec3));
 
-	m_pVtxPos = *pPos;
-	m_dwNumVtx = dwNumVtx;
-	m_dwStride = dwStride;
-
  	if (FAILED(D3DXComputeBoundingBox(pPos, dwNumVtx,sizeof(_vec3), &m_vMin, &m_vMax)))
  		return E_FAIL;
 	
@@ -34,6 +30,10 @@ HRESULT Engine::CBoxCollider::Ready_Collider(const _vec3* pPos, const _ulong & d
 
 	m_vFSize = m_vMax - m_vMin;
 	m_eShape = COL_BOX;
+
+	m_dwNumVtx = dwNumVtx;
+	m_pVtxPos = *pPos;
+	m_dwStride = dwStride;
 
 	for (_uint i = 0; i < COL_END; ++i)
 	{
@@ -288,7 +288,6 @@ HRESULT Engine::CBoxCollider::Ready_OffsetCollider(const _vec3 * pVtxPos, const 
 
 void Engine::CBoxCollider::Update_Collider(const _matrix * pPareMatrix)
 {
-
 	_matrix matRot[ROT_END];
 
 	D3DXMatrixRotationX(&matRot[ROT_X], D3DXToRadian(m_vAngle.x));

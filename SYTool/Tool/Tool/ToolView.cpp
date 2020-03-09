@@ -308,7 +308,9 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 	{
 		if (true == m_pMapTab->m_bIsColliderMode)
 		{
-
+			bool retflag;
+			Picking_MouseOnCollider(retflag);
+			if (retflag) return;
 		}
 		else
 		{
@@ -321,6 +323,58 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 	m_pMapTab->UpdateData(FALSE);
 
 	CView::OnLButtonDown(nFlags, point);
+}
+
+void CToolView::Picking_MouseOnCollider(bool& retflag)
+{
+	retflag = true;
+	if (m_pMapTab->m_pColliderLst.empty())
+		return;
+
+	for (auto& iter = m_pMapTab->m_pColliderLst.begin(); iter != m_pMapTab->m_pColliderLst.end();)
+	{
+		if (true == CPickingMgr::GetInstance()->IsCheckColiderMesh((*iter)->Get_ColliderMesh(), (*iter)->Get_WorldMat())
+			|| true == CPickingMgr::GetInstance()->IsCheckSphereCollider((*iter)))
+		{
+			(*iter)->Set_ColType(CToolCollider::COL_TRUE);
+			m_pMapTab->m_CbColliderID.SetCurSel((*iter)->Get_ColID());
+
+			m_pMapTab->m_fPosX = (*iter)->Get_WorldMat()._41;
+			m_pMapTab->m_fPosY = (*iter)->Get_WorldMat()._42;
+			m_pMapTab->m_fPosZ = (*iter)->Get_WorldMat()._43;
+			m_pMapTab->m_vMeshPos = { m_pMapTab->m_fPosX, m_pMapTab->m_fPosY, m_pMapTab->m_fPosZ };
+
+			m_pMapTab->m_fRotX = (*iter)->Get_Angle().x;
+			m_pMapTab->m_fRotY = (*iter)->Get_Angle().y;
+			m_pMapTab->m_fRotZ = (*iter)->Get_Angle().z;
+			m_pMapTab->m_vMeshRot = { m_pMapTab->m_fRotX, m_pMapTab->m_fRotY, m_pMapTab->m_fRotZ };
+
+			if (CPickingMgr::GetInstance()->IsCheckSphereCollider((*iter)))
+			{
+				m_pMapTab->m_fScaleX = (*iter)->Get_WorldMat()._11;
+				m_pMapTab->m_fScaleY = (*iter)->Get_WorldMat()._22;
+				m_pMapTab->m_fScaleZ = (*iter)->Get_WorldMat()._33;
+			}
+			else
+			{
+				m_pMapTab->m_fScaleX = (*iter)->Get_Scale().x;
+				m_pMapTab->m_fScaleY = (*iter)->Get_Scale().y;
+				m_pMapTab->m_fScaleZ = (*iter)->Get_Scale().z;
+			}
+			m_pMapTab->m_vMeshScale = { m_pMapTab->m_fScaleX, m_pMapTab->m_fScaleY, m_pMapTab->m_fScaleZ };
+
+			m_pMapTab->m_pPickCollider = (*iter);
+			m_pMapTab->m_bIsPickingCollider = true;
+			break;
+		}
+		else
+		{
+			(*iter)->Set_ColType(CToolCollider::COL_FALSE);
+			m_pMapTab->m_bIsPickingCollider = false;
+			iter++;
+		}
+	}
+	retflag = false;
 }
 
 void CToolView::Picking_MeshOnStaticObject(bool& retflag)

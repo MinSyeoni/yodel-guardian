@@ -1,0 +1,48 @@
+﻿  BoxCollider.cpp
+  SphereCollider.cpp
+  ToolCollider.cpp
+  코드를 생성하고 있습니다...
+  Utility.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Include\../Bin\Utility.dll
+  .\Engine\Utility\Code\BoxCollider.h
+  .\Engine\Utility\Code\Calculator.h
+  .\Engine\Utility\Code\Camera.h
+  .\Engine\Utility\Code\Collider.h
+  .\Engine\Utility\Code\Component.h
+  .\Engine\Utility\Code\CSCollider.h
+  .\Engine\Utility\Code\Frustum.h
+  .\Engine\Utility\Code\GameObject.h
+  .\Engine\Utility\Code\Layer.h
+  .\Engine\Utility\Code\Light.h
+  .\Engine\Utility\Code\LightMgr.h
+  .\Engine\Utility\Code\Management.h
+  .\Engine\Utility\Code\Optimization.h
+  .\Engine\Utility\Code\ProtoMgr.h
+  .\Engine\Utility\Code\QuadTree.h
+  .\Engine\Utility\Code\Renderer.h
+  .\Engine\Utility\Code\RenderTarget.h
+  .\Engine\Utility\Code\RenderTargetMgr.h
+  .\Engine\Utility\Code\Scene.h
+  .\Engine\Utility\Code\Shader.h
+  .\Engine\Utility\Code\SphereCollider.h
+  .\Engine\Utility\Code\ToolCollider.h
+  .\Engine\Utility\Code\TrailColor.h
+  .\Engine\Utility\Code\Transform.h
+         24개 파일이 복사되었습니다.
+  지정된 경로를 찾을 수 없습니다.
+          0개 파일이 복사되었습니다.
+          1개 파일이 복사되었습니다.
+  .\Engine\Headers\Engine_Defines.h
+  .\Engine\Headers\Engine_Enum.h
+  .\Engine\Headers\Engine_Function.h
+  .\Engine\Headers\Engine_Macro.h
+  .\Engine\Headers\Engine_Struct.h
+  .\Engine\Headers\Engine_Typedef.h
+  .\Engine\Headers\Export_Function.h
+  .\Engine\Headers\Export_Resources.h
+  .\Engine\Headers\Export_System.h
+  .\Engine\Headers\Export_Utility.h
+         10개 파일이 복사되었습니다.
+  .\Engine\Headers\Export_Resources.inl
+  .\Engine\Headers\Export_System.inl
+  .\Engine\Headers\Export_Utility.inl
+          3개 파일이 복사되었습니다.

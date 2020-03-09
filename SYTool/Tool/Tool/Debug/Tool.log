@@ -1,2 +1,8 @@
-﻿  MapTab.cpp
+﻿  ToolView.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(240,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(240,98): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(245,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(262,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(264,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(245,66): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
   Tool.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Debug\Tool.exe
