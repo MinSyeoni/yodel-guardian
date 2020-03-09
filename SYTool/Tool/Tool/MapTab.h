@@ -51,9 +51,9 @@ public:
 	afx_msg void			OnBnClickedStaticDeleteMode();
 	afx_msg void			OnBnClickedStaticCreate();
 	afx_msg void			OnBnClickedStaticDelete();
-
 	afx_msg void			OnBnClickedSaveStaticObj();
 	afx_msg void			OnBnClickedLoadStaticObj();
+
 	afx_msg void			OnBnClickedCheck_ColliderMode();
 	afx_msg void			OnBnClickedColliderSphereMode();
 	afx_msg void			OnBnClickedColliderBoxMode();
@@ -62,6 +62,8 @@ public:
 
 	afx_msg BOOL			OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
 	virtual BOOL			OnInitDialog();
+
+	void Initialize_String();
 
 public:
 	float					m_fPosX;
@@ -87,11 +89,13 @@ public:
 	_uint					m_iColliderState = 0; // 0-SPHERE, 1-BOX
 	
 	_bool					m_bIsPickingStaticObj = false;
+	_bool					m_bIsPickingCollider = false;
 	_bool					m_bIsColliderMode = false;
 	_bool					m_bIsColliderShow = false;
 	_bool					m_bIsSetOnMesh = false;
 
 	CStaticObject*			m_pPickStaticObj = nullptr;
+	CToolCollider*			m_pPickCollider = nullptr;
 
 	// 테스트
 	CSphereCollider*			m_pSphereCol = nullptr;
@@ -139,6 +143,8 @@ private:
 	CButton					m_BnColliderMode;
 	COLLIDER*				m_pColliderData = nullptr;
 	CButton					m_BnShowCollider;
+	CButton					m_BnSetOn;
+
 public:
-	CButton m_BnSetOn;
+	CComboBox				m_CbColliderID;
 };

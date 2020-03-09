@@ -71,6 +71,7 @@ void CMapTab::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CHECK1, m_BnColliderMode);
 	DDX_Control(pDX, IDC_CHECK2, m_BnShowCollider);
 	DDX_Control(pDX, IDC_CHECK3, m_BnSetOn);
+	DDX_Control(pDX, IDC_COMBO1, m_CbColliderID);
 }
 
 
@@ -221,12 +222,7 @@ BOOL CMapTab::OnInitDialog()
 	Load_ResourceList(L"../Resources/Texture/HeightMap/", &m_HeightTexLst, L".bmp");
 	Load_ResourceList(L"../Resources/StaticMesh/", &m_StaticObjLst, L".X");
 
-	m_HeightTexLst.InsertString(0, L"NONE");
-	m_TexListBox.SetCurSel(0);
-	m_HeightTexLst.SetCurSel(0);
-
-	m_StaticObjLst.InsertString(0, L"NONE");
-	m_StaticObjLst.SetCurSel(0);
+	Initialize_String();
 
 	m_vMeshScale = { 1.f, 1.f, 1.f };
 
@@ -244,6 +240,22 @@ BOOL CMapTab::OnInitDialog()
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
+}
+
+void CMapTab::Initialize_String()
+{
+	m_HeightTexLst.InsertString(0, L"NONE");
+	m_TexListBox.SetCurSel(0);
+	m_HeightTexLst.SetCurSel(0);
+
+	m_StaticObjLst.InsertString(0, L"NONE");
+	m_StaticObjLst.SetCurSel(0);
+
+	m_CbColliderID.AddString(L"For_Collider");
+	m_CbColliderID.AddString(L"For_Terrain");
+	m_CbColliderID.AddString(L"For_Combat");
+	m_CbColliderID.AddString(L"For_Trigger");
+	m_CbColliderID.SetCurSel(0);
 }
 
 void CMapTab::OnBnClickedSetTexture()
@@ -350,37 +362,30 @@ void CMapTab::OnBnClickedStaticCreate()
 	{
 		// 나중에 옵션 넣어서 바꿔야 함, 함수로 정리할 것
 		_matrix matScale, matTrans;
+		_vec3 vPosTemp = { 0.f,0.f,0.f };
+		int iColliderID = m_CbColliderID.GetCurSel();
+
 		if (0 == m_iColliderState) // sphere
 		{
 			if (true == m_bIsSetOnMesh)
 			{
 				if (nullptr == m_pPickStaticObj) return;
-
-				m_pSphereCol = Engine::CSphereCollider::Create(
-					m_pToolView->Get_ToolViewDevice(),
-					m_pPickStaticObj->Get_StaticMesh()->Get_VtxPos(),
-					m_pPickStaticObj->Get_StaticMesh()->Get_NumVtx(),
-					m_pPickStaticObj->Get_StaticMesh()->Get_Stride(),
-					CToolCollider::COLID_COLLIDER);
-
-				m_pSphereCol->Set_PareOriWorld(*m_pPickStaticObj->Get_StaticTranscom()->Get_WorldMatrix());
-				m_pSphereCol->Set_WorldMat(*m_pPickStaticObj->Get_StaticTranscom()->Get_WorldMatrix());
+				m_pPickStaticObj->Get_StaticTranscom()->Get_Info(Engine::INFO_POS, &m_vMeshPos);
+				m_vMeshScale = m_pPickStaticObj->Get_StaticTranscom()->m_vScale;
 			}
-			else
-			{
-				m_pSphereCol = Engine::CSphereCollider::Create(
-					m_pToolView->Get_ToolViewDevice(),
-					m_vMeshScale.x,
-					CToolCollider::COLID_TERRAIN);
 
-				D3DXMatrixScaling(&matScale, m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z);
-				D3DXMatrixTranslation(&matTrans, m_fPosX, m_fPosY, m_fPosZ);
+			m_pSphereCol = Engine::CSphereCollider::Create(
+				m_pToolView->Get_ToolViewDevice(),
+				m_vMeshScale.x,
+				(CToolCollider::COLLID)iColliderID);
 
-				m_matColliderWorld = matScale * matTrans;
+			D3DXMatrixScaling(&matScale, m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z);
+			D3DXMatrixTranslation(&matTrans, m_fPosX, m_fPosY, m_fPosZ);
 
-				m_pSphereCol->Set_PareOriWorld(m_matColliderWorld);
-				m_pSphereCol->Set_WorldMat(m_matColliderWorld);
-			}
+			m_matColliderWorld = matScale * matTrans;
+
+			m_pSphereCol->Set_PareOriWorld(m_matColliderWorld);
+			m_pSphereCol->Set_WorldMat(m_matColliderWorld);
 			m_pColliderLst.push_back(m_pSphereCol);
 			return;
 		}
@@ -388,35 +393,34 @@ void CMapTab::OnBnClickedStaticCreate()
 		{
 			if (true == m_bIsSetOnMesh)
 			{
-				if (nullptr == m_pPickStaticObj) return;
-
-				m_pBoxCol = Engine::CBoxCollider::Create(
+				/*
+					m_pBoxCol = Engine::CBoxCollider::Create(
 					m_pToolView->Get_ToolViewDevice(),
 					m_pPickStaticObj->Get_StaticMesh()->Get_VtxPos(),
 					m_pPickStaticObj->Get_StaticMesh()->Get_NumVtx(),
 					m_pPickStaticObj->Get_StaticMesh()->Get_Stride(),
 					CToolCollider::COLID_COLLIDER);
-
-				// 여기서 충돌체 사이즈가 2.5, 2.5, 1로 되는듯
+	
 				m_pBoxCol->Set_PareOriWorld(*m_pPickStaticObj->Get_StaticTranscom()->Get_WorldMatrix());
 				m_pBoxCol->Set_WorldMat(*m_pPickStaticObj->Get_StaticTranscom()->Get_WorldMatrix());
+				*/
+				if (nullptr == m_pPickStaticObj) return;
+				m_pPickStaticObj->Get_StaticTranscom()->Get_Info(Engine::INFO_POS, &m_vMeshPos);
+				m_vMeshScale = m_pPickStaticObj->Get_StaticTranscom()->m_vScale;
 			}
-			else
-			{
-				_vec3 vPosTemp = { 0.f,0.f,0.f };
-				m_pBoxCol = Engine::CBoxCollider::Create(
-					m_pToolView->Get_ToolViewDevice(),
-					vPosTemp, m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z,
-					CToolCollider::COLID_TERRAIN);
 
-				D3DXMatrixScaling(&matScale, m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z);
-				D3DXMatrixTranslation(&matTrans, m_fPosX, m_fPosY, m_fPosZ);
+			m_pBoxCol = Engine::CBoxCollider::Create(
+				m_pToolView->Get_ToolViewDevice(),
+				vPosTemp, m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z,
+				(CToolCollider::COLLID)iColliderID);
 
-				m_matColliderWorld = matScale * matTrans;
+			D3DXMatrixScaling(&matScale, m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z);
+			D3DXMatrixTranslation(&matTrans, m_fPosX, m_fPosY, m_fPosZ);
 
-				m_pBoxCol->Set_PareOriWorld(m_matColliderWorld);
-				m_pBoxCol->Set_WorldMat(m_matColliderWorld);
-			}
+			m_matColliderWorld = matScale * matTrans;
+
+			m_pBoxCol->Set_PareOriWorld(m_matColliderWorld);
+			m_pBoxCol->Set_WorldMat(m_matColliderWorld);
 			m_pColliderLst.push_back(m_pBoxCol);
 			return;
 		}
@@ -451,7 +455,25 @@ void CMapTab::OnBnClickedStaticDelete()
 
 	if (true == m_bIsColliderMode)
 	{
-		return;
+		if (m_pColliderLst.empty())
+		{
+			MessageBox(L"삭제 할 Collider 없다 만들어라");
+			return;
+		}
+		if (m_pPickCollider != nullptr && true == m_bIsPickingCollider)
+		{
+			for (auto& iter = m_pColliderLst.begin(); iter != m_pColliderLst.end();)
+			{
+				if (m_pPickCollider == (*iter))
+				{
+					Engine::Safe_Release(*iter);
+					iter = m_pColliderLst.erase(iter);
+					break;
+				}
+				else
+					++iter;
+			}
+		}
 	}
 	else
 	{
@@ -511,9 +533,16 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 			m_fScaleX -= 0.1f;
 		m_vMeshScale.x = m_fScaleX;
 
-		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj && false == m_bIsColliderMode)
 			m_pPickStaticObj->Get_StaticTranscom()->
 			Set_Scale(m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z);
+		else if (true == m_bIsPickingCollider && nullptr != m_pPickCollider && true == m_bIsColliderMode)
+		{
+			_matrix matCol = m_pPickCollider->Get_PareOriWorld();
+			matCol._11 = m_vMeshScale.x;
+			m_pPickCollider->Set_Scale(m_vMeshScale);
+			m_pPickCollider->Set_PareOriWorld(matCol);
+		}
 	}
 	if (PtInRect(&rc[1], pt))	// ScaleY
 	{
@@ -523,9 +552,16 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 			m_fScaleY -= 0.1f;
 		m_vMeshScale.y = m_fScaleY;
 
-		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj && false == m_bIsColliderMode)
 			m_pPickStaticObj->Get_StaticTranscom()->
 			Set_Scale(m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z);
+		else if (true == m_bIsPickingCollider && nullptr != m_pPickCollider && true == m_bIsColliderMode)
+		{
+			_matrix matCol = m_pPickCollider->Get_PareOriWorld();
+			matCol._22 = m_vMeshScale.y;
+			m_pPickCollider->Set_Scale(m_vMeshScale);
+			m_pPickCollider->Set_PareOriWorld(matCol);
+		}
 	}
 	if (PtInRect(&rc[2], pt))	// ScaleZ
 	{
@@ -535,9 +571,16 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 			m_fScaleZ -= 0.1f;
 		m_vMeshScale.z = m_fScaleZ;
 
-		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj && false == m_bIsColliderMode)
 			m_pPickStaticObj->Get_StaticTranscom()->
 			Set_Scale(m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z);
+		else if (true == m_bIsPickingCollider && nullptr != m_pPickCollider && true == m_bIsColliderMode)
+		{
+			_matrix matCol = m_pPickCollider->Get_PareOriWorld();
+			matCol._33 = m_vMeshScale.z;
+			m_pPickCollider->Set_Scale(m_vMeshScale);
+			m_pPickCollider->Set_PareOriWorld(matCol);
+		}
 	}
 
 	if (PtInRect(&rc[3], pt))	// RotX
@@ -553,9 +596,14 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 			m_vMeshRot.x = -0.1f;
 		}
 
-		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj && false == m_bIsColliderMode)
 			m_pPickStaticObj->Get_StaticTranscom()->
 			Rotation(Engine::ROT_X, m_vMeshRot.x);
+		else if (true == m_bIsPickingCollider && nullptr != m_pPickCollider && true == m_bIsColliderMode)
+		{
+			m_vMeshRot.x = m_fRotX;
+			m_pPickCollider->Set_Angle(&m_vMeshRot);
+		}
 	}
 	if (PtInRect(&rc[4], pt))	// RotY
 	{
@@ -570,9 +618,14 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 			m_vMeshRot.y = -0.1f;
 		}
 
-		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj && false == m_bIsColliderMode)
 			m_pPickStaticObj->Get_StaticTranscom()->
 			Rotation(Engine::ROT_Y, m_vMeshRot.y);
+		else if (true == m_bIsPickingCollider && nullptr != m_pPickCollider && true == m_bIsColliderMode)
+		{
+			m_vMeshRot.y = m_fRotY;
+			m_pPickCollider->Set_Angle(&m_vMeshRot);
+		}
 	}
 	if (PtInRect(&rc[5], pt))	// RotZ
 	{
@@ -587,9 +640,14 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 			m_vMeshRot.z = -0.1f;
 		}
 
-		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj && false == m_bIsColliderMode)
 			m_pPickStaticObj->Get_StaticTranscom()->
 			Rotation(Engine::ROT_Z, m_vMeshRot.z);
+		else if (true == m_bIsPickingCollider && nullptr != m_pPickCollider && true == m_bIsColliderMode)
+		{
+			m_vMeshRot.z = m_fRotZ;
+			m_pPickCollider->Set_Angle(&m_vMeshRot);
+		}
 	}
 
 	if (PtInRect(&rc[6], pt))	// PosX
@@ -600,9 +658,15 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 			m_fPosX -= 0.1f;
 		m_vMeshPos.x = m_fPosX;
 
-		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj && false == m_bIsColliderMode)
 			m_pPickStaticObj->Get_StaticTranscom()->
 			Set_Pos(&m_vMeshPos);
+		else if (true == m_bIsPickingCollider && nullptr != m_pPickCollider && true == m_bIsColliderMode)
+		{
+			_matrix matCol = m_pPickCollider->Get_PareOriWorld();
+			matCol._41 = m_fPosX;
+			m_pPickCollider->Set_PareOriWorld(matCol);
+		}
 	}
 	if (PtInRect(&rc[7], pt))	// PosY
 	{
@@ -612,9 +676,15 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 			m_fPosY -= 0.1f;
 		m_vMeshPos.y = m_fPosY;
 
-		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj && false == m_bIsColliderMode)
 			m_pPickStaticObj->Get_StaticTranscom()->
 			Set_Pos(&m_vMeshPos);
+		else if (true == m_bIsPickingCollider && nullptr != m_pPickCollider && true == m_bIsColliderMode)
+		{
+			_matrix matCol = m_pPickCollider->Get_PareOriWorld();
+			matCol._42 = m_fPosY;
+			m_pPickCollider->Set_PareOriWorld(matCol);
+		}
 	}
 	if (PtInRect(&rc[8], pt))	// PosZ
 	{
@@ -624,9 +694,15 @@ void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
 			m_fPosZ -= 0.1f;
 		m_vMeshPos.z = m_fPosZ;
 
-		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj)
+		if (true == m_bIsPickingStaticObj && nullptr != m_pPickStaticObj && false == m_bIsColliderMode)
 			m_pPickStaticObj->Get_StaticTranscom()->
 			Set_Pos(&m_vMeshPos);
+		else if (true == m_bIsPickingCollider && nullptr != m_pPickCollider && true == m_bIsColliderMode)
+		{
+			_matrix matCol = m_pPickCollider->Get_PareOriWorld();
+			matCol._43 = m_fPosZ;
+			m_pPickCollider->Set_PareOriWorld(matCol);
+		}
 	}
 }
 
@@ -686,14 +762,19 @@ void CMapTab::OnBnClickedSaveStaticObj()
 				tColliderData.vRotate = pCollider->Get_Angle();
 				tColliderData.iGroupID = pCollider->Get_ColliderGroupID();
 
-				tColliderData.vScale.x = pCollider->Get_PareOriWorld()._11;
-				tColliderData.vScale.y = pCollider->Get_PareOriWorld()._22;
-				tColliderData.vScale.z = pCollider->Get_PareOriWorld()._33;
+				//if (1 == tColliderData.iType)
+				//{
+					tColliderData.vScale.x = pCollider->Get_PareOriWorld()._11;
+					tColliderData.vScale.y = pCollider->Get_PareOriWorld()._22;
+					tColliderData.vScale.z = pCollider->Get_PareOriWorld()._33;
+				//}
+				//else
+				//	tColliderData.vScale = pCollider->Get_Scale();
 
-				tColliderData.matWorld = pCollider->Get_PareOriWorld();
 				tColliderData.dwNumVtx = pCollider->Get_dwNumVtx();
 				tColliderData.dwVtxPos = pCollider->Get_VtxPos();
 				tColliderData.dwStride = pCollider->Get_dwStride();
+				tColliderData.matWorld = pCollider->Get_PareOriWorld();
 
 				WriteFile(hFile, &tColliderData, sizeof(COLLIDER), &dwByte, nullptr);
 			}
@@ -785,7 +866,7 @@ void CMapTab::OnBnClickedLoadStaticObj()
 					break;
 
 				_vec3 vPosTemp = { 0.f,0.f,0.f };
-
+				_vec3 vScaleTemp = { 0.f,0.f,0.f };
 				// 메쉬의 크기 2.5, 2.5, 1 그대로 가져와서 크기가 이상해지는 것
 				m_vMeshPos = tColliderData.vCenter;
 				m_vMeshScale = tColliderData.vScale;
@@ -795,48 +876,26 @@ void CMapTab::OnBnClickedLoadStaticObj()
 
 				if (0 == tColliderData.iType)	// 박스
 				{
-					if (0 == iColliderOptionID)
-					{
-						pCollider = Engine::CBoxCollider::Create(
-							m_pToolView->Get_ToolViewDevice(),
-							vPosTemp, 2.5f, 2.5, 1.f,
-							(CToolCollider::COLLID)iColliderOptionID);
-					}
-					else if (1 == iColliderOptionID)
-					{
-						pCollider = Engine::CBoxCollider::Create(
-							m_pToolView->Get_ToolViewDevice(),
-							vPosTemp, m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z,
-							(CToolCollider::COLLID)iColliderOptionID);
-					//	D3DXMatrixScaling(&matScale, m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z);
-					//	D3DXMatrixTranslation(&matTrans, m_vMeshPos.x, m_vMeshPos.y, m_vMeshPos.z);
-					//	matWorld = matScale * matTrans;
-					//	pCollider->Set_Scale(m_vMeshScale);
-					//	pCollider->Set_Angle(&m_vMeshRot);
-					}
-					pCollider->Set_PareOriWorld(matWorld);
-					pCollider->Set_WorldMat(matWorld);
-					m_pColliderLst.push_back(pCollider);
+					// 충돌체 scale 구조가 이상함. 구조 내부에서 *10 해줌
+					// 클라 충돌체 정보랑 다를 것이기 때문에 정보 불러올 때 문제가 생기면 바꿔줄 것.
+					pCollider = Engine::CBoxCollider::Create(
+						m_pToolView->Get_ToolViewDevice(),
+						vPosTemp, m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z,
+						(CToolCollider::COLLID)iColliderOptionID);
 				}
 				else if (1 == tColliderData.iType)	// 구
 				{
-					if (0 == iColliderOptionID)
-					{
-					}
-					else if (1 == iColliderOptionID)
-					{
-						pCollider = Engine::CSphereCollider::Create(
-							m_pToolView->Get_ToolViewDevice(),
-							m_vMeshScale.x,
-							(CToolCollider::COLLID)iColliderOptionID);
-					//	D3DXMatrixScaling(&matScale, m_vMeshScale.x, m_vMeshScale.y, m_vMeshScale.z);
-					//	D3DXMatrixTranslation(&matTrans, m_vMeshPos.x, m_vMeshPos.y, m_vMeshPos.z);
-					//	matWorld = matScale * matTrans;
-					}
-					pCollider->Set_PareOriWorld(matWorld);
-					pCollider->Set_WorldMat(matWorld);
-					m_pColliderLst.push_back(pCollider);
-				}
+					pCollider = Engine::CSphereCollider::Create(
+						m_pToolView->Get_ToolViewDevice(),
+						m_vMeshScale.x,
+						(CToolCollider::COLLID)iColliderOptionID);
+				}		
+
+				pCollider->Set_PareOriWorld(matWorld);
+				pCollider->Set_WorldMat(matWorld);
+				pCollider->Set_Angle(&m_vMeshRot);
+
+				m_pColliderLst.push_back(pCollider);
 			}
 		}
 		else
@@ -901,12 +960,13 @@ void CMapTab::OnBnClickedCheck_ColliderMode()
 		m_bIsColliderMode = false;
 		MessageBox(L"StaticObject 모드로 변환합니다.");
 	}
+
 	m_vMeshPos = { 0.f,0.f,0.f };
 	m_vMeshRot = { 0.f,0.f,0.f };
-	m_vMeshScale = { 1.f, 1.f, 1.f };
+	m_vMeshScale = { 2.f, 2.f, 2.f };
 	m_fPosX = 0.f, m_fPosY = 0.f, m_fPosZ = 0.f;
 	m_fRotX = 0.f, m_fRotY = 0.f, m_fRotZ = 0.f;
-	m_fScaleX = 1.f, m_fScaleY = 1.f, m_fScaleZ = 1.f;
+	m_fScaleX = 2.f, m_fScaleY = 2.f, m_fScaleZ = 2.f;
 	UpdateData(FALSE);
 }
 
