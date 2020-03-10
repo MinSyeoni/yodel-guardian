@@ -85,6 +85,7 @@ private:
 
 public:
 	afx_msg void		OnLButtonDown(UINT nFlags, CPoint point);
+	void Picking_MouseOnCollider(bool& retflag);
 	void				Picking_MeshOnStaticObject(bool& retflag);
 	void				Picking_MouseOnStaticObject(bool& retflag);
 	void				Picking_TerrainOnStaticObject(bool& retflag);

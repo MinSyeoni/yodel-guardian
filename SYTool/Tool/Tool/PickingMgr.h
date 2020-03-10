@@ -7,7 +7,7 @@
 #include "ToolCamera.h"
 
 BEGIN(Engine)
-class CCollider;
+class CToolCollider;
 END
 
 class CPickingMgr : public CBase
@@ -25,7 +25,7 @@ public:
     void	        PickingTerrain(D3DXVECTOR3* pOut, const VTXTEX* pVertex, const D3DXMATRIX* pmatWorld);
 	void	        PickTerrainTextPos(D3DXVECTOR3 * pOut, const VTXTEX * pTerrainVtx, float fDeap);
 
-	//bool	        IsCheckSphereCollider(CCollider* pCollider);
+	bool	        IsCheckSphereCollider(Engine::CToolCollider* pCollider);
 	bool	        IsCheckColiderMesh(const LPD3DXMESH* pMesh, D3DXMATRIX pMeshWorld);
 	bool	        IsCheckStaticObjgectMesh(CStaticObject* pMesh, D3DXMATRIX pMeshWorld, _float* pDist, _vec3* pPos);
 	_vec3	        IsCheckCollMesh(CStaticObject* pMesh, D3DXMATRIX pMeshWorld);

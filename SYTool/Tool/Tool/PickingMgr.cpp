@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "PickingMgr.h"
-
+#include "ToolCollider.h"
 
 IMPLEMENT_SINGLETON(CPickingMgr)
 
@@ -204,28 +204,28 @@ void CPickingMgr::PickTerrainTextPos(D3DXVECTOR3 * pOut, const VTXTEX * pTerrain
 	}
 }
 
-//bool CPickingMgr::IsCheckSphereCollider(CCollider* pCollider)
-//{
-//	Translation_ViewSpace();
-//
-//	D3DXMATRIX	matIdentity;
-//	D3DXMatrixIdentity(&matIdentity);
-//	Translation_Local(&matIdentity);
-//
-//	matIdentity._41 = -(pCollider->Get_ColliderWorldMatrix2()._41);
-//	matIdentity._42 = -(pCollider->Get_ColliderWorldMatrix2()._42);
-//	matIdentity._43 = -(pCollider->Get_ColliderWorldMatrix2()._43);
-//
-//	D3DXVec3TransformCoord(&m_tRay.vOri, &m_tRay.vOri, &matIdentity);
-//	D3DXVec3TransformNormal(&m_tRay.vDir, &m_tRay.vDir, &matIdentity);
-//
-//	float fV = D3DXVec3Dot(&m_tRay.vDir, &m_tRay.vDir);
-//	float fqV = D3DXVec3Dot(&m_tRay.vOri, &m_tRay.vDir);
-//	float fqQ = D3DXVec3Dot(&m_tRay.vOri, &m_tRay.vOri);
-//	float fR = (pCollider->Get_Radius() * pCollider->Get_Radius()) * 0.01f;
-//	
-//	return fqV * fqV - fV * (fqQ - fR) >= 0;
-//}
+bool CPickingMgr::IsCheckSphereCollider(Engine::CToolCollider* pCollider)
+{
+	Translation_ViewSpace();
+
+	D3DXMATRIX	matIdentity;
+	D3DXMatrixIdentity(&matIdentity);
+	Translation_Local(&matIdentity);
+
+	matIdentity._41 = -(pCollider->Get_WorldMat()._41);
+	matIdentity._42 = -(pCollider->Get_WorldMat()._42);
+	matIdentity._43 = -(pCollider->Get_WorldMat()._43);
+
+	D3DXVec3TransformCoord(&m_tRay.vOri, &m_tRay.vOri, &matIdentity);
+	D3DXVec3TransformNormal(&m_tRay.vDir, &m_tRay.vDir, &matIdentity);
+
+	float fV = D3DXVec3Dot(&m_tRay.vDir, &m_tRay.vDir);
+	float fqV = D3DXVec3Dot(&m_tRay.vOri, &m_tRay.vDir);
+	float fqQ = D3DXVec3Dot(&m_tRay.vOri, &m_tRay.vOri);
+	float fR = (pCollider->Get_Radius() * pCollider->Get_Radius()) * 0.01f;
+
+	return fqV * fqV - fV * (fqQ - fR) >= 0;
+}
 
 bool CPickingMgr::IsCheckColiderMesh(const LPD3DXMESH* pMesh, D3DXMATRIX pMeshWorld)
 {

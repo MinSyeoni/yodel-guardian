@@ -51,9 +51,10 @@ public:
 	void Set_AddPosX(float fX)				{ m_vAddPos.x += fX; }
 	void Set_AddPosY(float fY)				{ m_vAddPos.y += fY; }
 	void Set_AddPosZ(float fZ)				{ m_vAddPos.z += fZ; }
-	void Set_AngleX(float fX)				{ m_vAngle.x += fX; }
-	void Set_AngleY(float fY)				{ m_vAngle.y += fY; }
-	void Set_AngleZ(float fZ)				{ m_vAngle.z += fZ; }
+
+	void Set_AngleX(float fX)				{ m_vAngle.x = fX; }
+	void Set_AngleY(float fY)				{ m_vAngle.y = fY; }
+	void Set_AngleZ(float fZ)				{ m_vAngle.z = fZ; }
 	void Set_Angle(const _vec3* pAngle)		{ m_vAngle = *pAngle; }
 	void Set_WorldMat(_matrix pWorldMat) { m_matWorld = pWorldMat; }
 	void Set_PareOriWorld(const _matrix& matPareWorld) { m_matPariOriWorld = matPareWorld; }

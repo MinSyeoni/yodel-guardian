@@ -14,10 +14,6 @@ Engine::CSphereCollider::~CSphereCollider(void)
 
 HRESULT Engine::CSphereCollider::Ready_Collider(const _vec3* pPos, const _ulong & dwNumVtx, const _ulong & dwStride,COLLID eColID)
 {
-	m_pVtxPos = *pPos;
-	m_dwNumVtx = dwNumVtx;
-	m_dwStride = dwStride;
-
 	if (FAILED(D3DXComputeBoundingSphere(pPos, dwNumVtx, sizeof(_vec3), &m_vCenterPos, &m_fRadius)))
 		return E_FAIL;
 
