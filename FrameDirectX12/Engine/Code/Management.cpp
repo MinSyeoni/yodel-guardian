@@ -1,6 +1,6 @@
 #include "Management.h"
 #include "Scene.h"
-
+#include "ColliderMgr.h"
 USING(Engine)
 IMPLEMENT_SINGLETON(CManagement)
 
@@ -42,6 +42,8 @@ _int CManagement::LateUpdate_Management(const _float & fTimeDelta)
 
 void CManagement::Render_Management(const _float & fTimeDelta)
 {
+	CColliderMgr::Get_Instance()->Clear_Collider();
+
 	if (nullptr != m_pCurrentScene)
 		m_pCurrentScene->Render_Scene(fTimeDelta);
 }

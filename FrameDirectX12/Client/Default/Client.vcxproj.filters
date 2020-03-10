@@ -67,12 +67,6 @@
     <Filter Include="02.GameObject\99.Player\01.Player ARM">
       <UniqueIdentifier>{16791c50-7330-46d4-9eec-1991bb11bdfe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\99.Player\02.Player HED">
-      <UniqueIdentifier>{2960d22e-2d91-4140-9940-6491b89b707c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\99.Player\03.Player BTR">
-      <UniqueIdentifier>{d19451d9-3b44-450e-a248-6f9e5a584091}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject\99.Player\04.PlayerStatus">
       <UniqueIdentifier>{4da12c0d-b904-4737-9ce2-1fba2c11a315}</UniqueIdentifier>
     </Filter>
@@ -84,6 +78,9 @@
     </Filter>
     <Filter Include="02.GameObject\98.Weapon\00.Pistol">
       <UniqueIdentifier>{67acf475-2210-478f-825f-a67f110c78a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\99.Player\03.Player Leg">
+      <UniqueIdentifier>{d19451d9-3b44-450e-a248-6f9e5a584091}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -165,14 +162,11 @@
     <ClInclude Include="..\Code\PlayerArm.h">
       <Filter>02.GameObject\99.Player\01.Player ARM</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\PlayerHed.h">
-      <Filter>02.GameObject\99.Player\02.Player HED</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\PlayerStatus.h">
       <Filter>02.GameObject\99.Player\04.PlayerStatus</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\PlayerLeg.h">
-      <Filter>02.GameObject\99.Player\03.Player BTR</Filter>
+      <Filter>02.GameObject\99.Player\03.Player Leg</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\SkyDome.h">
       <Filter>02.GameObject\01.Environment\01.SkyDome</Filter>
@@ -233,14 +227,11 @@
     <ClCompile Include="..\Code\PlayerArm.cpp">
       <Filter>02.GameObject\99.Player\01.Player ARM</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\PlayerHed.cpp">
-      <Filter>02.GameObject\99.Player\02.Player HED</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\PlayerStatus.cpp">
       <Filter>02.GameObject\99.Player\04.PlayerStatus</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\PlayerLeg.cpp">
-      <Filter>02.GameObject\99.Player\03.Player BTR</Filter>
+      <Filter>02.GameObject\99.Player\03.Player Leg</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\SkyDome.cpp">
       <Filter>02.GameObject\01.Environment\01.SkyDome</Filter>

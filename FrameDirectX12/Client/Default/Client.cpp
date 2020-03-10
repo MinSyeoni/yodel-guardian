@@ -332,14 +332,18 @@ _ulong Release_Singleton()
 		MSG_BOX(L"CComponentMgr Release Failed");
 		return dwRefCnt;
 	}
-
-
-
+	if (dwRefCnt = CMathMgr::Get_Instance()->Destroy_Instance())
+	{
+		return dwRefCnt;
+	}
 	if (dwRefCnt = CGraphicDevice::Get_Instance()->Destroy_Instance())
 	{
 		MSG_BOX(L"CDirectInput Release Failed");
 		return dwRefCnt;
 	}
-
+	if (dwRefCnt = CColliderMgr::Get_Instance()->Destroy_Instance())
+	{
+		return dwRefCnt;
+	}
 	return dwRefCnt;
 }

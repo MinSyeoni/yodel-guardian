@@ -181,6 +181,18 @@
     <Filter Include="01.Utility\05.Shader\08.Shader_Blur">
       <UniqueIdentifier>{0338d26d-3ce5-4841-b6f3-d5f3cbfa9fcc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\03.Collider">
+      <UniqueIdentifier>{4295b6c0-f8a8-45b7-9b7f-04d125743512}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\03.Collider\00.BoxCollider">
+      <UniqueIdentifier>{a9ae6438-5f0d-4908-b141-ae0d71f4337e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\03.Collider\01.SphereCollider">
+      <UniqueIdentifier>{7f4a2416-fbe9-4023-a64a-94ecca9aaae5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\03.Collider\Manager">
+      <UniqueIdentifier>{3d9afb9d-95dd-432d-abdf-81bd136a2585}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\Engine_Functor.h">
@@ -372,6 +384,15 @@
     <ClInclude Include="..\Code\Shader_Blur.h">
       <Filter>01.Utility\05.Shader\08.Shader_Blur</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Collider.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\03.Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\BoxCollider.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\03.Collider\00.BoxCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\ColliderMgr.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\03.Collider\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\DirectInput.cpp">
@@ -532,6 +553,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\Shader_Blur.cpp">
       <Filter>01.Utility\05.Shader\08.Shader_Blur</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Collider.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\03.Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BoxCollider.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\03.Collider\00.BoxCollider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ColliderMgr.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\03.Collider\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -33,6 +33,9 @@ HRESULT CCubeObject::Ready_GameObject()
 #ifdef _DEBUG
 	COUT_STR("Ready Clone CubeObject");
 #endif
+	
+
+
 	CGameObject::Ready_GameObject();
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 	return S_OK;

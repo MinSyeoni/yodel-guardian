@@ -129,7 +129,7 @@ vector<VECTOR_MATRIX> CAniCtrl::Extract_BoneTransform(_float fAnimationTime, STA
 	{
 		m_fAnimationTime = m_fBlendAnimationTime;
 		m_fAnimationTime = (_float)(fmod(m_fAnimationTime, (m_pScene->mAnimations[m_uiCurAniIndex]->mDuration)));
-		m_fBlendingTime -= 0.002*fAnimationTime;
+		m_fBlendingTime -= 0.002f*fAnimationTime;
 	}
 	if (m_fBlendingTime <= 0)
 	{

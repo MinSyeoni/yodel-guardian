@@ -45,6 +45,10 @@ HRESULT CRenderer::Ready_Renderer(ID3D12Device* pGraphicDevice, ID3D12GraphicsCo
 	m_pBlurShader = CShader_Blur::Create(m_pGraphicDevice, m_pCommandList);
 	m_pBloomTarget = CBloomTarget::Create(m_pGraphicDevice, m_pCommandList);
 
+	m_pDebugTexture = CTexture::Create(m_pGraphicDevice, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/Debug/Debug%d.dds", 2);
+	m_pDebugShader = CShader_DefaultTex::Create(m_pGraphicDevice, m_pCommandList,CShader_DefaultTex::WIREFRAME);
+	m_pDebugShader->Set_Shader_Texture(m_pDebugTexture->Get_Texture(),100);
+
 	return S_OK;
 }
 
@@ -53,6 +57,17 @@ HRESULT CRenderer::Add_Renderer(const RENDERGROUP & eRenderID, CGameObject * pGa
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 
 	m_RenderList[eRenderID].push_back(pGameObject);
+
+	return S_OK;
+}
+
+HRESULT CRenderer::Add_ColliderGroup(CCollider * pCol)
+{
+	if (pCol == nullptr)
+		return E_FAIL;;
+
+	m_ColliderList.push_back(pCol);
+
 
 	return S_OK;
 }
@@ -74,6 +89,9 @@ void CRenderer::Render_Renderer(const _float& fTimeDelta)
 	Render_Blend();
 
 	Render_Alpha(fTimeDelta);
+
+	Render_DebugBuffer();
+
 	Render_UI(fTimeDelta);
 
 
@@ -279,6 +297,21 @@ HRESULT CRenderer::Render_Bloom()
 	return S_OK;
 }
 
+HRESULT CRenderer::Render_DebugBuffer()
+{
+	
+	m_pDebugShader->Begin_Shader();
+	_uint uiOffset = 0;
+	for (auto&pCol : m_ColliderList)
+	{
+		pCol->Render_Collider(m_pDebugShader,uiOffset);
+		uiOffset++;
+	}
+
+	m_ColliderList.clear();
+	return S_OK;
+}
+
 void CRenderer::Clear_RenderGroup()
 {
 	for (size_t i = 0; i < RENDER_END; ++i)
@@ -349,6 +382,10 @@ void CRenderer::Free()
 	//ºí·ë
 	Safe_Release(m_pBlurBuffer);
 	Safe_Release(m_pBlurShader);
+
+	//Debug
+	Safe_Release(m_pDebugShader);
+	Safe_Release(m_pDebugTexture);
 
 	CLight_Manager::Get_Instance()->Destroy_Instance();
 	Clear_RenderGroup();

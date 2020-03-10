@@ -32,7 +32,9 @@ CMeshComponent::CMeshComponent(const CMeshComponent & rhs)
 	, m_vecSpecularResource(rhs.m_vecSpecularResource)
 	, m_vecSpecularUpload(rhs.m_vecSpecularResource)
 	, m_vecEmissiveResource(rhs.m_vecEmissiveResource)
-    ,m_vecEmissiveUpload(rhs.m_vecEmissiveUpload)
+	, m_vecEmissiveUpload(rhs.m_vecEmissiveUpload)
+	, m_vMaxPos(rhs.m_vMaxPos)
+	,m_vMinPos(rhs.m_vMinPos)
 {
 	for (int i = 0; i < m_entries.size(); i++)
 	{
@@ -263,6 +265,8 @@ HRESULT CMeshComponent::InitMesh(int MeshIndex, const aiMesh * paiMesh, vector<V
 			vertex.Pos.y = paiMesh->mVertices[i].y;
 			vertex.Pos.z = paiMesh->mVertices[i].z;
 
+			FoundColliderPosition(vertex.Pos);
+		
 			if (paiMesh->HasNormals())
 			{
 				vertex.Normal.x = paiMesh->mNormals[i].x;
@@ -354,6 +358,29 @@ HRESULT CMeshComponent::InitMesh(int MeshIndex, const aiMesh * paiMesh, vector<V
 		return S_OK;
 }
 
+
+void CMeshComponent::FoundColliderPosition(_vec3 vtxPos)
+{
+	if (m_vMaxPos.x < vtxPos.x)
+		m_vMaxPos.x = vtxPos.x;
+
+	if (m_vMaxPos.y < vtxPos.y)
+		m_vMaxPos.y = vtxPos.y;
+
+	if (m_vMaxPos.z < vtxPos.z)
+		m_vMaxPos.z = vtxPos.z;
+
+	if (m_vMinPos.x > vtxPos.x)
+		m_vMinPos.x = vtxPos.x;
+
+	if (m_vMinPos.y > vtxPos.y)
+		m_vMinPos.y = vtxPos.y;
+
+	if (m_vMinPos.z > vtxPos.z)
+		m_vMinPos.z = vtxPos.z;
+
+
+}
 
 HRESULT CMeshComponent::Ready_Mesh()
 

@@ -54,14 +54,13 @@ HRESULT CPlayer::Ready_GameObject()
 #endif
 
 	 m_pLeg = static_cast<CPlayerLeg*>(m_pObjectMgr->Get_NewGameObject(L"Prototype_PlayerLeg", L"TPlayerLeg",nullptr));
+	 m_pLeg->SetPlayerTransform(m_pTransCom);
 
 	 m_pArm= static_cast<CPlayerArm*>(m_pObjectMgr->Get_NewGameObject( L"Prototype_PlayerArm", L"TPlayerArm", nullptr));
-
+	 m_pArm->SetPlayerTransform(m_pTransCom);
 	 
-
-
 	 m_pStatus = new CPlayerStatus();
-
+	 m_pStatus->SetMesh(static_cast<CMesh*>(m_pArm->Get_Component(L"Com_Mesh",ID_STATIC)));
 	return S_OK;
 }
 
@@ -83,13 +82,10 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 
 
 
-	m_pStatus->UpdateState(fTimeDelta, m_pTransCom);
-
-
+	UpdateParts(fTimeDelta);
 
 	CGameObject::Update_GameObject(fTimeDelta);
 
-	UpdateParts(fTimeDelta);
 	m_pArm->Set_Animation(m_eCurState);
 	m_pLeg->Set_Animation(m_eCurState);
 
@@ -101,18 +97,16 @@ void CPlayer::UpdateParts(const _float & fTimeDelta)
 {
 
 	m_pArm->Update_GameObject(fTimeDelta);
-	m_pArm->Get_Transform()->m_matWorld = m_pTransCom->m_matWorld;
-
 	m_pLeg->Update_GameObject(fTimeDelta);
-	m_pLeg->Get_Transform()->m_matWorld = m_pTransCom->m_matWorld;
+
+	m_pStatus->UpdateState(fTimeDelta, m_pTransCom);
+	m_eCurState = m_pStatus->m_eCurState;
 }
 
 _int CPlayer::LateUpdate_GameObject(const _float & fTimeDelta)
 {
-	//m_pHed->LateUpdate_GameObject(fTimeDelta);
 
-	m_eCurState = m_pStatus->m_eCurState;
-
+	m_pStatus->LateUpdate(fTimeDelta);
 	m_pArm->SetLegMatrix(m_pLeg->GetLegMatrix());
 	m_pArm->LateUpdate_GameObject(fTimeDelta);
 

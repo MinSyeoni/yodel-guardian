@@ -13,11 +13,13 @@
 #include "Texture.h"
 #include "Shader_DefaultTex.h"
 #include "Shader_Mesh.h"
-#include "StaticMesh.h"
 #include "Mesh.h"
-#include"AnimationControl.h"
+#include "AnimationControl.h"
 #include "MeshComponent.h"
 #include "NaviMesh.h"
+#include "Collider.h"
+#include "BoxCollider.h"
+
 BEGIN(Engine)
 
 class ENGINE_DLL CComponentMgr : public CBase
@@ -32,6 +34,9 @@ public:
 	CComponent*	Get_Component(wstring wstrPrototypeTag, COMPONENTID eID);
 	HRESULT		Add_ComponentPrototype(wstring wstrPrototypeTag, const COMPONENTID& eID, CComponent* pComponent);
 	CComponent* Clone_Component(wstring wstrPrototypeTag, const COMPONENTID& eID);
+	CComponent* Clone_Collider(wstring wstrPrototypeTag, const COMPONENTID& eID, const CCollider::COLLSHAPE& eColShape, const _bool& bIsAttatch,  CMesh* pMesh, const _vec3& vAddPos,
+		const _vec3& vAngle, const _float& fRadius,
+		const _vec3& vScale, CGameObject* pOwner = nullptr);
 private:
 	CComponent*	Find_Component(wstring wstrPrototypeTag, const COMPONENTID& eID);
 

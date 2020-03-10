@@ -25,8 +25,11 @@ CShader_DefaultTex::~CShader_DefaultTex()
 {
 }
 
-HRESULT CShader_DefaultTex::Ready_Shader()
+HRESULT CShader_DefaultTex::Ready_Shader(TYPE eType)
 {
+	if (eType == WIREFRAME)
+		m_bIsWire = D3D12_FILL_MODE_WIREFRAME;
+
 
 	FAILED_CHECK_RETURN(Create_PipelineState(), E_FAIL);
 
@@ -42,7 +45,7 @@ void CShader_DefaultTex::Begin_Shader()
 
 }
 
-void CShader_DefaultTex::End_Shader(_uint uiOffset, _uint Texnum)
+void CShader_DefaultTex::End_Shader(_uint Texnum, _uint uiOffset)
 {
 
 	UINT objCBByteSize = (sizeof(CB_MATRIX_INFO) + 255) & ~255;
@@ -56,7 +59,7 @@ void CShader_DefaultTex::End_Shader(_uint uiOffset, _uint Texnum)
 
 }
 
-void CShader_DefaultTex::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture)
+void CShader_DefaultTex::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture, _uint offset)
 {
 	CGraphicDevice::Get_Instance()->Begin_ResetCmdList();
 	int iTexSize = (int)pVecTexture.size();
@@ -82,8 +85,7 @@ void CShader_DefaultTex::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVec
 		hDescriptor.Offset(1, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 	}
 
-	m_pCB_MatrixInfo = new CUploadBuffer<CB_MATRIX_INFO>(DEVICE,6, true);
-	_uint uiCB_ByteSize = INIT_CB_256(CB_MATRIX_INFO);
+	m_pCB_MatrixInfo = new CUploadBuffer<CB_MATRIX_INFO>(DEVICE,offset, true);
 
 	CGraphicDevice::Get_Instance()->End_ResetCmdList();
 }
@@ -159,7 +161,7 @@ D3D12_RASTERIZER_DESC CShader_DefaultTex::Create_RasterizerState()
 
 	// 레스터라이저 설정.
 	ZeroMemory(&RasterizerDesc, sizeof(D3D12_RASTERIZER_DESC));
-	RasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;
+	RasterizerDesc.FillMode = m_bIsWire;
 	RasterizerDesc.CullMode = D3D12_CULL_MODE_BACK;
 	RasterizerDesc.FrontCounterClockwise = FALSE;
 	RasterizerDesc.DepthBias = 0;
@@ -235,11 +237,11 @@ CComponent * CShader_DefaultTex::Clone()
 }
 
 CShader_DefaultTex * CShader_DefaultTex::Create(ID3D12Device * pGraphicDevice,
-	ID3D12GraphicsCommandList * pCommandList)
+	ID3D12GraphicsCommandList * pCommandList, TYPE eType)
 {
 	CShader_DefaultTex* pInstance = new CShader_DefaultTex(pGraphicDevice, pCommandList);
 
-	if (FAILED(pInstance->Ready_Shader()))
+	if (FAILED(pInstance->Ready_Shader( eType)))
 		Engine::Safe_Release(pInstance);
 
 	return pInstance;

@@ -35,7 +35,7 @@ HRESULT CBloomTarget::Ready_Target()
 
 	m_pShader = CShader_DefaultTex::Create(m_pGraphicDev, m_pCommandLst);
 
-	m_pShader->Set_Shader_Texture(m_vecBloomTarget);
+	m_pShader->Set_Shader_Texture(m_vecBloomTarget,(_uint)m_vecBloomTarget.size());
 
 
 	return S_OK;

@@ -34,7 +34,7 @@ HRESULT CShadowDepthTarget::Ready_Target()
 
 	m_pShader = CShader_DefaultTex::Create(m_pGraphicDev, m_pCommandLst);
 
-	m_pShader->Set_Shader_Texture(m_vecDepthTarget);
+	m_pShader->Set_Shader_Texture(m_vecDepthTarget,(_uint)m_vecDepthTarget.size());
 
 
 	return S_OK;

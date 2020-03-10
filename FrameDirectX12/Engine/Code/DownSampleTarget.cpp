@@ -35,7 +35,7 @@ HRESULT CDownSampleTarget::Ready_Target()
 
 	m_pShader = CShader_DefaultTex::Create(m_pGraphicDev, m_pCommandLst);
 
-	m_pShader->Set_Shader_Texture(m_vecSampleTarget);
+	m_pShader->Set_Shader_Texture(m_vecSampleTarget,(_uint)m_vecSampleTarget.size());
 
 
 	return S_OK;

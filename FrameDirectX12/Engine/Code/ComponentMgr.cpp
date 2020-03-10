@@ -48,6 +48,21 @@ CComponent * CComponentMgr::Clone_Component(wstring wstrPrototypeTag, const COMP
 	return pComponent->Clone();
 }
 
+CComponent * CComponentMgr::Clone_Collider(wstring wstrPrototypeTag, const COMPONENTID & eID, const CCollider::COLLSHAPE & eColShape, const _bool & bIsAttatch,  CMesh * pMesh, const _vec3 & vAddPos, const _vec3 & vAngle, const _float & fRadius, const _vec3 & vScale, CGameObject * pOwner)
+{
+	if (eID > COMPONENTID::ID_END)
+		return nullptr;
+
+	CComponent* pComponent = Find_Component(wstrPrototypeTag, eID);
+	NULL_CHECK_RETURN(pComponent, nullptr);
+
+	CComponent* pClone = static_cast<CCollider*>(pComponent)->Clone_Collider(bIsAttatch, pMesh, vAddPos, vAngle, fRadius, vScale, pOwner);
+	if (nullptr == pClone)
+		return nullptr;
+
+	return pClone;
+}
+
 CComponent * CComponentMgr::Find_Component(wstring wstrPrototypeTag, const COMPONENTID & eID)
 {
 	auto iter_find = m_mapComponent[eID].find(wstrPrototypeTag);

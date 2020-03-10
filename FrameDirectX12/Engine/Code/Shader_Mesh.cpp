@@ -95,7 +95,7 @@ void CShader_Mesh::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTextur
 
 	CGraphicDevice::Get_Instance()->Begin_ResetCmdList();;
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
-	srvHeapDesc.NumDescriptors = pVecTexture.size()*4;
+	srvHeapDesc.NumDescriptors =(_uint)(pVecTexture.size()*4);
 	srvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	srvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
 	DEVICE->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(&m_pCBV_DescriptorHeap));

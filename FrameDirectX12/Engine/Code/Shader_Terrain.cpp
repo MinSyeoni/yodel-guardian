@@ -56,7 +56,7 @@ void CShader_Terrain::End_Shader(_uint Texnum)
 	Normal.Offset(Texnum + m_iDiffussMapCount, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 	m_pCommandList->SetGraphicsRootDescriptorTable(1, Normal);
 
-	_uint ShadowIndex = m_eTextureType.size();
+	_uint ShadowIndex = (_uint)m_eTextureType.size();
 	CD3DX12_GPU_DESCRIPTOR_HANDLE Shadow(m_pCBV_DescriptorHeap->GetGPUDescriptorHandleForHeapStart());
 	Shadow.Offset(ShadowIndex-1, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 	m_pCommandList->SetGraphicsRootDescriptorTable(2, Shadow);

@@ -28,7 +28,7 @@ public:
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 
-
+	
 public:
 	CPlayerArm*  Get_PlayerArm() { return m_pArm; };
 	CPlayerLeg*  Get_PlayerLeg() { return m_pLeg; };

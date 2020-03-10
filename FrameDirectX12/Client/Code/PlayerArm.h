@@ -28,8 +28,9 @@ public:
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 	void AnimationBlending();
 	virtual void    Render_ShadowDepth(CShader_Shadow* pShader);
-	_matrix Get_RootFrame();
 
+
+	void SetPlayerTransform(CTransform* pTransform) { m_pTransCom = pTransform; m_pTransCom->AddRef(); };
 	vector<vector<_matrix>> GetArmMatrix() { return m_vecMatrix; };
 	void SetLegMatrix(vector<vector<_matrix>> Matrix) { m_vecLegMatrix = Matrix;	AnimationBlending();
 	};

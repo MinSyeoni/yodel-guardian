@@ -26,17 +26,17 @@ HRESULT CCubeTex::Ready_Buffer()
 	/*____________________________________________________________________
 	[ Vertex Buffer ]
 	______________________________________________________________________*/
-	array<VTXCOL, 8> vertices =
+	array<VTXRC, 8> vertices =
 	{
-		VTXCOL(_vec3(-0.5f, 0.5f, -0.5f), _rgba(RANDOM_COLOR)),
-		VTXCOL(_vec3(0.5f, 0.5f, -0.5f), _rgba(RANDOM_COLOR)),
-		VTXCOL(_vec3(0.5f, -0.5f, -0.5f), _rgba(RANDOM_COLOR)),
-		VTXCOL(_vec3(-0.5f, -0.5f, -0.5f), _rgba(RANDOM_COLOR)),
+		VTXRC(_vec3(-0.5f, 0.5f, -0.5f), _vec2(0.0f,1.0f)),
+		VTXRC(_vec3(0.5f, 0.5f, -0.5f), _vec2(1.0f,1.0f)),
+		VTXRC(_vec3(0.5f, -0.5f, -0.5f), _vec2(1.0f,0.0f)),
+		VTXRC(_vec3(-0.5f, -0.5f, -0.5f), _vec2(0.0f,0.0f)),
 
-		VTXCOL(_vec3(-0.5f, 0.5f, 0.5f), _rgba(RANDOM_COLOR)),
-		VTXCOL(_vec3(0.5f, 0.5f, 0.5f), _rgba(RANDOM_COLOR)),
-		VTXCOL(_vec3(0.5f, -0.5f, 0.5f), _rgba(RANDOM_COLOR)),
-		VTXCOL(_vec3(-0.5f, -0.5f, 0.5f), _rgba(RANDOM_COLOR))
+		VTXRC(_vec3(-0.5f, 0.5f, 0.5f),_vec2(1.0f,0.0f)),
+		VTXRC(_vec3(0.5f, 0.5f, 0.5f), _vec2(0.0f,0.0f)),
+		VTXRC(_vec3(0.5f, -0.5f, 0.5f), _vec2(0.0f,1.0f)),
+		VTXRC(_vec3(-0.5f, -0.5f, 0.5f),  _vec2(1.0f,0.0f))
 	};
 
 	/*____________________________________________________________________
@@ -69,7 +69,7 @@ HRESULT CCubeTex::Ready_Buffer()
 		0, 2, 3
 	};
 
-	const _int uiVB_ByteSize = (_uint)vertices.size() * sizeof(VTXCOL);
+	const _int uiVB_ByteSize = (_uint)vertices.size() * sizeof(VTXRC);
 	const _int uiIB_ByteSize = (_uint)indices.size() * sizeof(_uint);
 
 	ThrowIfFailed(D3DCreateBlob(uiVB_ByteSize, &m_pVB_CPU));
@@ -87,7 +87,7 @@ HRESULT CCubeTex::Ready_Buffer()
 	NULL_CHECK_RETURN(m_pIB_GPU, E_FAIL);
 
 
-	m_uiVertexByteStride	= sizeof(VTXCOL);
+	m_uiVertexByteStride	= sizeof(VTXRC);
 	m_uiVB_ByteSize			= uiVB_ByteSize;
 	m_uiIB_ByteSize			= uiIB_ByteSize;
 	m_IndexFormat			= DXGI_FORMAT_R32_UINT;

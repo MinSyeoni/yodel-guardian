@@ -42,8 +42,8 @@ HRESULT CScene_Stage::Ready_LightInfo()
 	tagLight.m_fRange = 100.f;
 
 
-	//if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &tagLight)))
-	//	return E_FAIL;
+	if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &tagLight)))
+		return E_FAIL;
 
 
 	return S_OK;
@@ -90,13 +90,6 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	CGameObject* pGameObject = nullptr;
 
 
-	// Prototype - CubeObject
-	pGameObject = CCubeObject::Create(m_pGraphicDevice, m_pCommandList);
-
-	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_CubeObject", pGameObject), E_FAIL);
-
-
 
 	pGameObject = CTerrain::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -106,9 +99,6 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_StaticObject", pGameObject), E_FAIL);
 
-	pGameObject = CDynamicObject::Create(m_pGraphicDevice, m_pCommandList);
-	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_DynamicObject", pGameObject), E_FAIL);
 
 	pGameObject = CPlayer::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);

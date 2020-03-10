@@ -387,48 +387,10 @@ HRESULT CGraphicDevice::Create_RtvAndDsvDescriptorHeaps()
 
 HRESULT CGraphicDevice::Create_RootSig()
 {
-	/*____________________________________________________________________
-		 일반적으로 셰이더 프로그램은 특정 자원들(상수 버퍼, 텍스처, 샘플러) 등이 입력된다고 기대한다.
-		루트 서명은 셰이더 프로그램이 기대하는 자원들을 정의한다.
-		셰이더 프로그램은 본질적으로 하나의 함수이고, 셰이더에 입력되는 자원들은 함수의 매개변수들에 해당하므로
-		루트 서명은 곧 함수 서명을 정의하는 수단이라 할 수 있다.
-		______________________________________________________________________*/
 
-		// 루트 매개변수는 테이블이거나, 루트 서술자 또는 루트 상수이다.
-	CD3DX12_ROOT_PARAMETER RootParameter[1];
 
-	// CBV 하나를 담는 서술자 테이블을 생성한다.
-	CD3DX12_DESCRIPTOR_RANGE CBV_Table;
-	CBV_Table.Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 0);
-	RootParameter[0].InitAsDescriptorTable(1, &CBV_Table);
 
-	// 루트 서명은 루트 매개변수들의 배열이다.
-	CD3DX12_ROOT_SIGNATURE_DESC RootSignatureDesc(1,
-		RootParameter,
-		0,		// Texture가 없으므로 0.
-		nullptr,	// Texture가 없으므로 nullptr.
-		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
-
-	// 상수 버퍼 하나로 구성된 서술자 구간을 가리키는, 슬롯 하나로 이루어진 루트 서명을 생성한다.
-	ID3DBlob* pSignatureBlob = nullptr;
-	ID3DBlob* pErrorBlob = nullptr;
-	FAILED_CHECK_RETURN(D3D12SerializeRootSignature(&RootSignatureDesc,
-		D3D_ROOT_SIGNATURE_VERSION_1,
-		&pSignatureBlob,
-		&pErrorBlob), E_FAIL);
-	if (nullptr != pErrorBlob)
-	{
-		OutputDebugStringA((char*)pErrorBlob->GetBufferPointer());
-		return E_FAIL;
-	}
-
-	ThrowIfFailed(m_pGraphicDevice->CreateRootSignature(0,
-		pSignatureBlob->GetBufferPointer(),
-		pSignatureBlob->GetBufferSize(),
-		IID_PPV_ARGS(&m_arrSig[(UINT)ROOT_SIG_TYPE::INPUT_OBJECT])));
-	Engine::Safe_Release(pSignatureBlob);
-	Engine::Safe_Release(pErrorBlob);
-
+	Create_ColorObjectRoot();
 	Create_TextureRoot();
 	Create_MeshRoot();
 	Create_LightRoot();
@@ -438,6 +400,41 @@ HRESULT CGraphicDevice::Create_RootSig()
 	Create_DownSampleRoot();
 	Create_BlurRoot();
 	return S_OK;
+}
+
+HRESULT CGraphicDevice::Create_ColorObjectRoot()
+{
+
+	CD3DX12_ROOT_PARAMETER slotRootParameter[1];
+
+	slotRootParameter[0].InitAsConstantBufferView(0);
+
+	auto staticSamplers = GetStaticSamplers();
+
+	CD3DX12_ROOT_SIGNATURE_DESC rootSigDesc(1, slotRootParameter,
+		(UINT)staticSamplers.size(), staticSamplers.data(),
+		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
+
+	// create a root signature with a single slot which points to a descriptor range consisting of a single constant buffer
+	ComPtr<ID3DBlob> serializedRootSig = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
+	HRESULT hr = D3D12SerializeRootSignature(&rootSigDesc, D3D_ROOT_SIGNATURE_VERSION_1,
+		serializedRootSig.GetAddressOf(), errorBlob.GetAddressOf());
+
+	if (errorBlob != nullptr)
+	{
+		::OutputDebugStringA((char*)errorBlob->GetBufferPointer());
+	}
+	ThrowIfFailed(hr);
+
+	ThrowIfFailed(m_pGraphicDevice->CreateRootSignature(
+		0,
+		serializedRootSig->GetBufferPointer(),
+		serializedRootSig->GetBufferSize(),
+		IID_PPV_ARGS(&m_arrSig[(UINT)ROOT_SIG_TYPE::INPUT_OBJECT])));
+
+	return S_OK;
+
 }
 
 HRESULT CGraphicDevice::Create_TextureRoot()

@@ -11,11 +11,13 @@ C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_Ligh
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ShadowDepth.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Terrain.cso
   AnimationControl.cpp
-c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\animationcontrol.cpp(132): warning C4244: '-=': 'double'에서 'Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Base.cpp
   BloomTarget.cpp
+  BoxCollider.cpp
   Camera.cpp
   Cell.cpp
+  Collider.cpp
+  ColliderMgr.cpp
   Component.cpp
   ComponentMgr.cpp
   CubeTex.cpp
@@ -27,13 +29,12 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\animationc
   Frame.cpp
   FrameMgr.cpp
   Frustom.cpp
-c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\frustom.cpp(87): warning C4101: 'matProjInv' :참조되지 않은 지역 변수입니다.
   GameObject.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
   GraphicDevice.cpp
   Info.cpp
   Layer.cpp
-  코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
   Light.cpp
   LightMgr.cpp
   LightTarget.cpp
@@ -50,19 +51,16 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\frustom.cp
   Shader.cpp
   Shader_Blend.cpp
   Shader_Blur.cpp
-c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\shader_blur.cpp(68): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
   Shader_ColorBuffer.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
   Shader_Default.cpp
   Shader_DefaultTex.cpp
   Shader_DownSample.cpp
-  코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
   Shader_LightAcc.cpp
   Shader_Mesh.cpp
-c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\shader_mesh.cpp(98): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Shader_Shadow.cpp
   Shader_Terrain.cpp
-c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\shader_terrain.cpp(59): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ShadowDepthTarget.cpp
   Target.cpp
   TerrainTex.cpp
@@ -83,9 +81,11 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\shader_ter
   .\Engine\Code\AnimationControl.h
   .\Engine\Code\Base.h
   .\Engine\Code\BloomTarget.h
+  .\Engine\Code\BoxCollider.h
   .\Engine\Code\Camera.h
   .\Engine\Code\Cell.h
   .\Engine\Code\Collider.h
+  .\Engine\Code\ColliderMgr.h
   .\Engine\Code\Component.h
   .\Engine\Code\ComponentMgr.h
   .\Engine\Code\CubeTex.h
@@ -136,7 +136,7 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\shader_ter
   .\Engine\Code\Transform.h
   .\Engine\Code\VIBuffer.h
   .\Engine\Code\VlLine.h
-         56개 파일이 복사되었습니다.
+         58개 파일이 복사되었습니다.
   .\Engine\Header\Engine_Const.h
   .\Engine\Header\Engine_Enum.h
   .\Engine\Header\Engine_Function.h

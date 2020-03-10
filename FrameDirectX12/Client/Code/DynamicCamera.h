@@ -26,7 +26,7 @@ private:
 	CPlayer* m_pPlayer = nullptr;
 	_vec3 m_vDir = _vec3{ 0.0f,0.0f,-1.0f };
 
-	_float m_fViewZ = 30.f;
+	_float m_fViewZ = 10.f;
 public:
 	virtual CGameObject*	Clone_GameObject(void* pArg);
 	static CDynamicCamera*	Create(ID3D12Device* pGraphicDevice,

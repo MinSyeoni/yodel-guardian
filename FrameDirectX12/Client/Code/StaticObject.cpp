@@ -3,6 +3,7 @@
 #include "ObjectMgr.h"
 #include "DynamicCamera.h"
 #include "GraphicDevice.h"
+#include "ColliderMgr.h"
 #include "Frustom.h"
 CStaticObject::CStaticObject(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -48,6 +49,11 @@ HRESULT CStaticObject::Ready_GameObject()
 	m_pTransCom->m_vAngle = m_tMeshInfo.Rotation;
 
 
+	m_pBoxCom = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC,CCollider::COL_BOX,true,m_pMeshCom,_vec3(0.f,0.f,0.f),_vec3(0.f,0.f,0.f),0.f,_vec3(300.f,300.f,300.f),this));
+	NULL_CHECK_RETURN(m_pBoxCom, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCom);
+
+
 	return S_OK;
 }
 
@@ -83,8 +89,9 @@ _int CStaticObject::Update_GameObject(const _float & fTimeDelta)
 	TransCom - Update WorldMatrix.
 	______________________________________________________________________*/
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
+	m_pBoxCom->Update_Collider(&m_pTransCom->m_matWorld);
 
-
+	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT,m_pBoxCom);
 	return NO_EVENT;
 }
 
@@ -100,7 +107,7 @@ _int CStaticObject::LateUpdate_GameObject(const _float & fTimeDelta)
 	/*____________________________________________________________________
 	[ Set PipelineState ]
 	______________________________________________________________________*/
-
+	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCom), -1);
 
 	return NO_EVENT;
 }

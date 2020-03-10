@@ -25,7 +25,7 @@ public:
 	virtual _int	Update_GameObject(const _float& fTimeDelta);
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void	Render_GameObject(const _float& fTimeDelta);
-
+	void SetPlayerTransform(CTransform* pTransform) { m_pTransCom = pTransform; m_pTransCom->AddRef();};
 	virtual void    Render_ShadowDepth(CShader_Shadow* pShader);
 public:
 	void            Set_Animation(CPlayer::STATE  Animation) { m_eCurAnimationKey = Animation; };

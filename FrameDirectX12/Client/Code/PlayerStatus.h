@@ -2,14 +2,15 @@
 #include "Player.h"
 
 
-class CPlayerStatus
+class CPlayerStatus 
 {
 public:
 	CPlayerStatus();
 	~CPlayerStatus();
 
 	_int UpdateState(const _float& fTimeDelta,CTransform* pTranscom);
-
+	_int LateUpdate(const _float&fTimeDelta);
+	void SetMesh(CMesh* m_pMesh);
 	void KeyInput();
 	void StatusUpdate(const _float& fTimeDelta);
 	void Rotation(const _float& fTimeDelta);
@@ -17,7 +18,11 @@ public:
 public:
 	CPlayer::STATE m_eCurState= CPlayer::IDLE;
 	CPlayer::STATE m_ePreState = CPlayer::IDLE;
+
 	CTransform* m_pTransCom;
+	CMesh*  m_pMesh;
+	CBoxCollider* m_pBoxCollider;
+
 
 	//움직일 방향 
 	_vec3 m_vecMoveDirection = _vec3{ 0.f,0.f,1.0f };

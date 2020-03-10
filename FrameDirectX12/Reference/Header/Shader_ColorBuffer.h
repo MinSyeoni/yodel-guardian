@@ -5,6 +5,7 @@ BEGIN(Engine)
 
 class ENGINE_DLL CShader_ColorBuffer : public CShader
 {
+	enum TYPE{NONE,WIREFRAME};
 private:
 	explicit CShader_ColorBuffer(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 	explicit CShader_ColorBuffer(const CShader_ColorBuffer& rhs);
@@ -12,7 +13,7 @@ private:
 
 
 public:
-	HRESULT			Ready_Shader();
+	HRESULT			Ready_Shader(TYPE etype);
 	virtual void	Begin_Shader();
 	virtual void	End_Shader(_uint Texnum = 0);
 private:
@@ -26,12 +27,12 @@ private:
 	virtual D3D12_DEPTH_STENCIL_DESC	Create_DepthStencilState() override;
 	virtual D3D12_INPUT_LAYOUT_DESC		Create_InputLayout() override;
 
-
-
+	TYPE  m_eType = NONE;
+	D3D12_FILL_MODE m_bIsWire = D3D12_FILL_MODE_SOLID;
 public:
 	virtual CComponent *		Clone() override;
 	static CShader_ColorBuffer* Create(ID3D12Device* pGraphicDevice, 
-									   ID3D12GraphicsCommandList* pCommandList);
+									   ID3D12GraphicsCommandList* pCommandList,TYPE eType=NONE);
 private:
 	virtual void				Free();
 };

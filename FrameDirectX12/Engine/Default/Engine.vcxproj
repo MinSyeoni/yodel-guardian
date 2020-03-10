@@ -182,8 +182,11 @@ call CopyEngine.bat</Command>
     <ClInclude Include="..\Code\AnimationControl.h" />
     <ClInclude Include="..\Code\Base.h" />
     <ClInclude Include="..\Code\BloomTarget.h" />
+    <ClInclude Include="..\Code\BoxCollider.h" />
     <ClInclude Include="..\Code\Camera.h" />
     <ClInclude Include="..\Code\Cell.h" />
+    <ClInclude Include="..\Code\Collider.h" />
+    <ClInclude Include="..\Code\ColliderMgr.h" />
     <ClInclude Include="..\Code\Component.h" />
     <ClInclude Include="..\Code\ComponentMgr.h" />
     <ClInclude Include="..\Code\CubeTex.h" />
@@ -247,8 +250,11 @@ call CopyEngine.bat</Command>
     <ClCompile Include="..\Code\AnimationControl.cpp" />
     <ClCompile Include="..\Code\Base.cpp" />
     <ClCompile Include="..\Code\BloomTarget.cpp" />
+    <ClCompile Include="..\Code\BoxCollider.cpp" />
     <ClCompile Include="..\Code\Camera.cpp" />
     <ClCompile Include="..\Code\Cell.cpp" />
+    <ClCompile Include="..\Code\Collider.cpp" />
+    <ClCompile Include="..\Code\ColliderMgr.cpp" />
     <ClCompile Include="..\Code\Component.cpp" />
     <ClCompile Include="..\Code\ComponentMgr.cpp" />
     <ClCompile Include="..\Code\CubeTex.cpp" />

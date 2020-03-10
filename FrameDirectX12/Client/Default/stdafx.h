@@ -54,6 +54,7 @@ using namespace DirectX::PackedVector;
 Manager Class
 ______________________________________________________________________*/
 #include "MathMgr.h"
+#include "ColliderMgr.h"
 
 /*____________________________________________________________________
 Window Console창.

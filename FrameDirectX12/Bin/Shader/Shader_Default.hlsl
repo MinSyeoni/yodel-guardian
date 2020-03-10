@@ -12,7 +12,6 @@ cbuffer cbMatrixInfo	: register(b0)
 struct VS_TEXTURED_INPUT
 {
 	float3 position : POSITION;
-	float3 Normal : NORMAL;
 	float2 uv : TEXCOORD;
 };
 
@@ -21,6 +20,9 @@ struct VS_TEXTURED_OUTPUT
 	float4 position : SV_POSITION;
 	float2 uv       : TEXCOORD;
 };
+
+
+
 /*노말없는거*/
 struct VS_NTEXTURED_INPUT//노말없는거
 {
@@ -33,6 +35,8 @@ struct VS_NTEXTURED_OUTPUT
 	float4 position : SV_POSITION;
 	float2 uv       : TEXCOORD;
 };
+
+
 VS_TEXTURED_OUTPUT VS_MAIN(VS_TEXTURED_INPUT Input)
 {
 	VS_TEXTURED_OUTPUT output;

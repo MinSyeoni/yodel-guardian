@@ -26,7 +26,6 @@ HRESULT CPlayerLeg::Ready_GameObject()
 {
 
 	NULL_CHECK_RETURN(m_pComponentMgr, E_FAIL);
-	CGameObject::Ready_GameObject();
 
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 	// Buffer
@@ -34,7 +33,6 @@ HRESULT CPlayerLeg::Ready_GameObject()
 	COUT_STR("Success Static - Clone Mesh");
 #endif
 	m_fTime = 0.f;
-	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
 	return S_OK;
 }
 
@@ -73,12 +71,6 @@ _int CPlayerLeg::Update_GameObject(const _float & fTimeDelta)
 _int CPlayerLeg::LateUpdate_GameObject(const _float & fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
-
-
-
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
-
 
 
 
@@ -215,7 +207,7 @@ void CPlayerLeg::Free()
 {
 	CGameObject::Free();
 
-
+	Safe_Release(m_pTransCom);
 
 
 }

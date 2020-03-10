@@ -1,8 +1,5 @@
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\vc141.pdb
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\vc141.idb
-c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\layer.obj
-c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\info.obj
-c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\graphicdevice.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\gameobject.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\frustom.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\framemgr.obj
@@ -15,14 +12,14 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\deb
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\cubetex.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\componentmgr.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\component.obj
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\collidermgr.obj
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\collider.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\cell.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\camera.obj
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\boxcollider.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\bloomtarget.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\base.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\animationcontrol.obj
-c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_downsample.obj
-c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_defaulttex.obj
-c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_default.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_colorbuffer.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_blur.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_blend.obj
@@ -40,6 +37,9 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\deb
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\lighttarget.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\lightmgr.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\light.obj
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\layer.obj
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\info.obj
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\graphicdevice.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\vlline.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\vibuffer.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\transform.obj
@@ -53,6 +53,9 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\deb
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_shadow.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_mesh.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_lightacc.obj
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_downsample.obj
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_defaulttex.obj
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_default.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\engine.lib
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\engine.exp
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\shader_blend.cso

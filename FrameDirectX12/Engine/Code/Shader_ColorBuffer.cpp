@@ -10,6 +10,8 @@ CShader_ColorBuffer::CShader_ColorBuffer(ID3D12Device * pGraphicDevice, ID3D12Gr
 
 CShader_ColorBuffer::CShader_ColorBuffer(const CShader_ColorBuffer & rhs)
 	: CShader(rhs)
+	,m_eType(rhs.m_eType)
+	,m_bIsWire(rhs.m_bIsWire)
 {
 	/*____________________________________________________________________
 	[ 주의 ]
@@ -26,8 +28,13 @@ CShader_ColorBuffer::~CShader_ColorBuffer()
 {
 }
 
-HRESULT CShader_ColorBuffer::Ready_Shader()
+HRESULT CShader_ColorBuffer::Ready_Shader(TYPE eType)
 {
+
+	m_eType = eType;
+	if (m_eType == WIREFRAME)
+		m_bIsWire = D3D12_FILL_MODE_WIREFRAME;
+
 	FAILED_CHECK_RETURN(Create_DescriptorHeaps(), E_FAIL);
 	FAILED_CHECK_RETURN(Create_ConstantBufferView(), E_FAIL);
 	FAILED_CHECK_RETURN(Create_PipelineState(), E_FAIL);
@@ -47,7 +54,7 @@ void CShader_ColorBuffer::Begin_Shader()
 
 void CShader_ColorBuffer::End_Shader(_uint Texnum )
 {
-	m_pCommandList->SetGraphicsRootDescriptorTable(0, m_pCBV_DescriptorHeap->GetGPUDescriptorHandleForHeapStart());
+	m_pCommandList->SetGraphicsRootConstantBufferView(0, m_pCB_MatrixInfo->Resource()->GetGPUVirtualAddress());
 }
 
 HRESULT CShader_ColorBuffer::Create_DescriptorHeaps()
@@ -60,7 +67,6 @@ HRESULT CShader_ColorBuffer::Create_DescriptorHeaps()
 
 	ThrowIfFailed(m_pGraphicDevice->CreateDescriptorHeap(&CBV_HeapDesc,
 														 IID_PPV_ARGS(&m_pCBV_DescriptorHeap)));
-
 	return S_OK;
 }
 
@@ -68,22 +74,6 @@ HRESULT CShader_ColorBuffer::Create_ConstantBufferView()
 {
 	// 물체 n개의 상수 자료를 담을 상수 버퍼.
 	m_pCB_MatrixInfo = new CUploadBuffer<CB_MATRIX_INFO>(m_pGraphicDevice, 1, true);
-
-	_uint uiCB_ByteSize = INIT_CB_256(CB_MATRIX_INFO);
-
-	// 버퍼 자체의 시작 주소(0번째 상수 버퍼의 주소)
-	D3D12_GPU_VIRTUAL_ADDRESS CB_Address = m_pCB_MatrixInfo->Resource()->GetGPUVirtualAddress();
-	
-	// 버퍼에 담긴 i번째 상수 버퍼의 오프셋.
-	int CBIndex = 0;
-	CB_Address += CBIndex * uiCB_ByteSize;
-
-	D3D12_CONSTANT_BUFFER_VIEW_DESC cbvDesc;
-	cbvDesc.BufferLocation	= CB_Address;
-	cbvDesc.SizeInBytes		= INIT_CB_256(CB_MATRIX_INFO);
-
-	m_pGraphicDevice->CreateConstantBufferView(&cbvDesc,
-											   m_pCBV_DescriptorHeap->GetCPUDescriptorHandleForHeapStart());
 
 	return S_OK;
 }
@@ -150,7 +140,7 @@ D3D12_RASTERIZER_DESC CShader_ColorBuffer::Create_RasterizerState()
 
 	// 레스터라이저 설정.
 	ZeroMemory(&RasterizerDesc, sizeof(D3D12_RASTERIZER_DESC));
-	RasterizerDesc.FillMode					= D3D12_FILL_MODE_SOLID;
+	RasterizerDesc.FillMode					= m_bIsWire;
 	RasterizerDesc.CullMode					= D3D12_CULL_MODE_BACK;
 	RasterizerDesc.FrontCounterClockwise	= FALSE;
 	RasterizerDesc.DepthBias				= 0;
@@ -260,11 +250,11 @@ CComponent * CShader_ColorBuffer::Clone()
 }
 
 CShader_ColorBuffer * CShader_ColorBuffer::Create(ID3D12Device * pGraphicDevice, 
-												  ID3D12GraphicsCommandList * pCommandList)
+												  ID3D12GraphicsCommandList * pCommandList,TYPE eType)
 {
 	CShader_ColorBuffer* pInstance = new CShader_ColorBuffer(pGraphicDevice, pCommandList);
 
-	if (FAILED(pInstance->Ready_Shader()))
+	if (FAILED(pInstance->Ready_Shader(eType)))
 		Engine::Safe_Release(pInstance);
 
 	return pInstance;

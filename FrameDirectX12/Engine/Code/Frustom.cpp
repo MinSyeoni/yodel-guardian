@@ -84,7 +84,7 @@ HRESULT CFrustom::Update_Frustom_Manager()
 HRESULT CFrustom::Ready_Light_Frustom_Manager()
 {
 
-	_matrix matViewProjInv, matViewInv, matProjInv;
+	_matrix matViewProjInv, matViewInv;
 
 	_matrix matProj,matView;
 

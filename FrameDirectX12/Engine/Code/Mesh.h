@@ -25,8 +25,6 @@ public:
 
 	void Set_Animation(_int Animation);
 
-	CAniCtrl* GetAnimaionControl() { return m_pAnimationComponent; };
-
 	_matrix*           Get_RootFrame() { return m_pAnimationComponent->Get_RootFrame(); };
 public:
 	_matrix*            Find_BoneMatrix(string strBoneName);
@@ -37,6 +35,7 @@ public:
 	vector< ComPtr<ID3D12Resource>> Get_SpecularTexture() { return m_pMeshComponent->Get_SpecularTexture(); };
 	vector< ComPtr<ID3D12Resource>> Get_EmissiveTexture() { return m_pMeshComponent->Get_EmissiveTexture(); };
 
+	CMeshComponent* Get_MeshComponent() { return m_pMeshComponent; };
 	CAniCtrl* Get_AnimationComponent() { return m_pAnimationComponent; };
 private:
 	const aiScene* m_pScene = nullptr;

@@ -59,7 +59,7 @@ HRESULT CTarget::Ready_Target()
 
 	m_pShader = CShader_DefaultTex::Create(m_pGraphicDev, m_pCommandLst);
 
-	m_pShader->Set_Shader_Texture(m_vecTargetTexture);
+	m_pShader->Set_Shader_Texture(m_vecTargetTexture,(_uint)m_vecTargetTexture.size());
 	
 	return S_OK;
 }

@@ -12,12 +12,14 @@
 #include "Shader_DownSample.h"
 #include "Shader_Blur.h"
 #include "BloomTarget.h"
+#include "Shader_DefaultTex.h"
+#include "Texture.h"
 
 BEGIN(Engine)
 
 class CGameObject;
 class CComponentMgr;
-
+class CCollider;
 class ENGINE_DLL CRenderer : public CBase
 {
 	DECLARE_SINGLETON(CRenderer)
@@ -41,6 +43,7 @@ private:
 public:
 	HRESULT	Ready_Renderer(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 	HRESULT	Add_Renderer(const RENDERGROUP& eRenderID, CGameObject* pGameObject);
+	HRESULT Add_ColliderGroup(CCollider* pCol);
 	void	Render_Renderer(const _float& fTimeDelta);
 private:
 	HRESULT Render_ShadowDepth();
@@ -54,6 +57,7 @@ private:
 	HRESULT Render_PostPoressing();
 	HRESULT Render_DownSampleing();
 	HRESULT Render_Bloom();
+	HRESULT Render_DebugBuffer();
 public:
 	void	Clear_RenderGroup();
 
@@ -65,6 +69,7 @@ private:
 	ID3D12GraphicsCommandList*	m_pCommandList		= nullptr;
 	CComponentMgr*				m_pComponentMgr		= nullptr;
 
+	list<CCollider*>             m_ColliderList;
 	list<CGameObject*>			m_RenderList[RENDER_END];
 public:
 	CShadowDepthTarget* Get_ShadowDepthTarget() { return m_ShadowDepthTarget; };
@@ -93,6 +98,12 @@ private://블러관련
 	CRcTex* m_pBlurBuffer;
 	CShader_Blur* m_pBlurShader;
 	_bool m_bIsBlurInit = false;
+
+private:
+	CShader_DefaultTex* m_pDebugShader;
+	CTexture* m_pDebugTexture;
+	_bool m_bIsDebugInit;
+
 
 private:
 	virtual void		Free();

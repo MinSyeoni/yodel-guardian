@@ -27,7 +27,6 @@ HRESULT CPlayerArm::Ready_GameObject(ARMTYPE eType)
 {
 	m_eArmType = eType;
 	NULL_CHECK_RETURN(m_pComponentMgr, E_FAIL);
-	CGameObject::Ready_GameObject();
 
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 	// Buffer
@@ -35,14 +34,13 @@ HRESULT CPlayerArm::Ready_GameObject(ARMTYPE eType)
 	COUT_STR("Success Static - Clone Mesh");
 #endif
 	m_fTime = 0.f;
-	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
+
 	return S_OK;
 }
 
 HRESULT CPlayerArm::LateInit_GameObject()
 {
 	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(),m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(),m_pMeshCom->Get_EmissiveTexture());
-	m_pTransCom->m_vPos = _vec3(80.f, -2.f, 80.f);
 
 	return S_OK;
 
@@ -116,10 +114,7 @@ void CPlayerArm::Render_ShadowDepth(CShader_Shadow * pShader)
 	pShader->Set_ShadowFinish();
 }
 
-_matrix CPlayerArm::Get_RootFrame()
-{
-	return *(m_pMeshCom->Get_RootFrame());
-}
+
 
 void CPlayerArm::Set_ShadowTable(CShader_Shadow * pShader)
 {
@@ -218,7 +213,7 @@ void CPlayerArm::Free()
 {
 	CGameObject::Free();
 
-
+	Safe_Release(m_pTransCom);
 
 
 }

@@ -43,7 +43,7 @@ void CShader_Default::Begin_Shader()
 
 }
 
-void CShader_Default::End_Shader(_uint Texnum)
+void CShader_Default::End_Shader(_uint Texnum,_uint Offset)
 {
 
 	CD3DX12_GPU_DESCRIPTOR_HANDLE tex(m_pCBV_DescriptorHeap->GetGPUDescriptorHandleForHeapStart());
@@ -53,7 +53,7 @@ void CShader_Default::End_Shader(_uint Texnum)
 
 }
 
-void CShader_Default::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture)
+void CShader_Default::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture, _uint uiMaxOffset)
 {
 	
 	int iTexSize = (int)pVecTexture.size();
@@ -79,7 +79,7 @@ void CShader_Default::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTex
 		hDescriptor.Offset(1, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 	}
 
-	m_pCB_MatrixInfo = new CUploadBuffer<CB_MATRIX_INFO>(m_pGraphicDevice, 1, true);
+	m_pCB_MatrixInfo = new CUploadBuffer<CB_MATRIX_INFO>(m_pGraphicDevice, uiMaxOffset, true);
 	_uint uiCB_ByteSize = INIT_CB_256(CB_MATRIX_INFO);
 
 }

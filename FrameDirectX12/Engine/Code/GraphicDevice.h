@@ -48,8 +48,8 @@ private:
 	HRESULT	Create_SwapChain(HWND hWnd, WINMODE eMode, const _uint& iWidth, const _uint& iHeight);
 	HRESULT Create_RtvAndDsvDescriptorHeaps();
 
-
 	HRESULT Create_RootSig();
+	HRESULT Create_ColorObjectRoot();
 	HRESULT Create_TextureRoot();
 	HRESULT Create_MeshRoot();
 	HRESULT Create_LightRoot();

@@ -41,7 +41,7 @@ HRESULT CLightTarget::Ready_Target()
 
 	m_pShader = CShader_DefaultTex::Create(m_pGraphicDev, m_pCommandLst);
 
-	m_pShader->Set_Shader_Texture(m_veCLightTargetTexture);
+	m_pShader->Set_Shader_Texture(m_veCLightTargetTexture,(_uint)m_veCLightTargetTexture.size());
 
 	return S_OK;
 }

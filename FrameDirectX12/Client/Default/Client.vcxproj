@@ -174,7 +174,6 @@
     <ClInclude Include="..\Code\Player.h" />
     <ClInclude Include="..\Code\PlayerArm.h" />
     <ClInclude Include="..\Code\PlayerLeg.h" />
-    <ClInclude Include="..\Code\PlayerHed.h" />
     <ClInclude Include="..\Code\PlayerStatus.h" />
     <ClInclude Include="..\Code\RectObject.h" />
     <ClInclude Include="..\Code\Scene_Logo.h" />
@@ -208,7 +207,6 @@
     <ClCompile Include="..\Code\Player.cpp" />
     <ClCompile Include="..\Code\PlayerArm.cpp" />
     <ClCompile Include="..\Code\PlayerLeg.cpp" />
-    <ClCompile Include="..\Code\PlayerHed.cpp" />
     <ClCompile Include="..\Code\PlayerStatus.cpp" />
     <ClCompile Include="..\Code\RectObject.cpp" />
     <ClCompile Include="..\Code\Scene_Logo.cpp" />

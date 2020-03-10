@@ -15,10 +15,10 @@ private:
 public:
 	HRESULT			Ready_Shader();
 	virtual void	Begin_Shader();
-	virtual void	End_Shader(_uint Texnum = 0);
+	virtual void	End_Shader(_uint Texnum = 0, _uint Offset = 0);
 
 public:
-	void Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture);
+	void Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture,_uint uiMaxOffset=1);
 private:
 	// CShader을(를) 통해 상속됨
 	virtual HRESULT						Create_DescriptorHeaps() override;
@@ -30,7 +30,7 @@ private:
 	virtual D3D12_DEPTH_STENCIL_DESC	Create_DepthStencilState() override;
 	virtual D3D12_INPUT_LAYOUT_DESC		Create_InputLayout() override;
 
-
+	
 public:
 	virtual CComponent *		Clone() override;
 	static CShader_Default* Create(ID3D12Device* pGraphicDevice,

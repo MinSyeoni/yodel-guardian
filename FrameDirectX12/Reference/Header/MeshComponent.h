@@ -25,7 +25,10 @@ private:
 public:
 	D3D12_VERTEX_BUFFER_VIEW Get_VertexBufferView(_uint iIndex) const;
 	D3D12_INDEX_BUFFER_VIEW  Get_IndexBufferView(_uint iIndex)	const;
+	_vec3 Get_MinPos() { return m_vMinPos; };
+	_vec3 Get_MaxPos() { return m_vMaxPos; };
 
+	void FoundColliderPosition( _vec3 vtxPos);
 	HRESULT Ready_Mesh();
 
 public:
@@ -36,7 +39,7 @@ public:
 public:
 	void			   Render_Mesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix,_int CBOffset=0 ,_int MeshNum = 0,_bool Draw = true);
 	void               Render_ShadowMesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix,bool blsBone=false);
-
+	
 private:
 	vector<ID3DBlob*>		m_vecVB_CPU;
 	vector<ID3DBlob*>		m_vecIB_CPU;
@@ -76,5 +79,7 @@ private:
 	const aiScene* m_pScene;
 	vector<MeshEntry> m_entries;
 
+	_vec3 m_vMaxPos = _vec3{ 0.f,0.f,0.f };
+	_vec3 m_vMinPos = _vec3{ 0.f,0.f,0.f };
 };
 END
