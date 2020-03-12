@@ -1,35 +1,37 @@
 #pragma once
 #include "Component.h"
-#include "VlLine.h"
-#include "Shader_ColorBuffer.h"
+
 BEGIN(Engine)
 
-class ENGINE_DLL CLine : public CComponent
+class CCell;
+
+class ENGINE_DLL CLine : public CBase
 {
 public:
 	enum POINT { POINT_START, POINT_FINISH, POINT_END };
 	enum COMPARE { COMPARE_LEFT, COMPARE_RIGHT };
 
 private:
-	explicit CLine(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
+	explicit CLine(void);
 	virtual ~CLine(void)=default;
 
 public:
-	void RenderLine(CShader_ColorBuffer* pShader);
-	void SetConstantTable(CShader_ColorBuffer* pShader);
-public:
-	HRESULT	Ready_Line(const _vec3* pPointA, const _vec3* pPointB);
-	COMPARE	Compare(const _vec3* pEndPos);
-	_vec2 Point_Meet(_vec3 * OutPut, _vec3 * pDir);
-	_vec3 Get_LineDir() { return m_vPoint[POINT_FINISH] - m_vPoint[POINT_START]; }
-private:
-	_vec3			m_vPoint[POINT_END];
-	_vec3			m_vDirection;
-	_vec3			m_vNormal;
+	HRESULT	Ready_Line(const _vec2* pPointA, const _vec2* pPointB);
+	COMPARE	Compare(const _vec2* pEndPos);
 
-	CVlLine*      m_pLine = nullptr;
+
+	_vec2 Point_Meet(_vec2 * OutPut, _vec2 * pDir);
+	_vec2 Get_LineDir() { return m_vPoint[POINT_FINISH] - m_vPoint[POINT_START]; }
+	const _vec2& Get_Normal() { return m_vNormal; }
+	const _vec2& Get_Point(POINT ePoint) { return m_vPoint[ePoint]; }
+
+private:
+	_vec2			m_vPoint[POINT_END];
+	_vec2			m_vDirection;
+	_vec2			m_vNormal;
+
 public:
-	static CLine*		Create(const _vec3* pPointA, const _vec3* pPointB, ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
+	static CLine*		Create(const _vec2* pPointA, const _vec2* pPointB);
 	virtual void		Free(void);
 };
 

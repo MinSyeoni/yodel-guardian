@@ -49,6 +49,8 @@ HRESULT CRenderer::Ready_Renderer(ID3D12Device* pGraphicDevice, ID3D12GraphicsCo
 	m_pDebugShader = CShader_DefaultTex::Create(m_pGraphicDevice, m_pCommandList,CShader_DefaultTex::WIREFRAME);
 	m_pDebugShader->Set_Shader_Texture(m_pDebugTexture->Get_Texture(),100);
 
+	m_pColorShader = CShader_ColorBuffer::Create(m_pGraphicDevice, m_pCommandList, CShader_ColorBuffer::WIREFRAME);
+
 	return S_OK;
 }
 
@@ -69,6 +71,16 @@ HRESULT CRenderer::Add_ColliderGroup(CCollider * pCol)
 	m_ColliderList.push_back(pCol);
 
 
+	return S_OK;
+}
+
+HRESULT CRenderer::Add_NaviGroup(CNaviMesh * pNavi)
+{
+	if (pNavi == nullptr)
+		return E_FAIL;
+
+
+	m_NaviList.push_back(pNavi);
 	return S_OK;
 }
 
@@ -309,6 +321,17 @@ HRESULT CRenderer::Render_DebugBuffer()
 	}
 
 	m_ColliderList.clear();
+
+
+	m_pColorShader->Begin_Shader();
+
+	for (auto&pSrc : m_NaviList)
+	{
+		pSrc->Render_NaviMesh(m_pColorShader);
+
+	}
+	m_NaviList.clear();
+	
 	return S_OK;
 }
 
@@ -386,6 +409,7 @@ void CRenderer::Free()
 	//Debug
 	Safe_Release(m_pDebugShader);
 	Safe_Release(m_pDebugTexture);
+	Safe_Release(m_pColorShader);
 
 	CLight_Manager::Get_Instance()->Destroy_Instance();
 	Clear_RenderGroup();

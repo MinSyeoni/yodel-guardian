@@ -25,7 +25,7 @@ HRESULT CScene_Stage::Ready_LightInfo()
 {
 	D3DLIGHT tagLight;
 	tagLight.m_eType = LIGHTTYPE::D3DLIGHT_DIRECTIONAL;
-	tagLight.m_vDiffuse = _vec4{ 0.3f,0.3f,0.3f,1.0f };
+	tagLight.m_vDiffuse = _vec4{ 0.1f,0.1f,0.1f,1.0f };
 	tagLight.m_vAmbient = _vec4{ 0.1f,0.1f,0.1f,1.0f };
 	tagLight.m_vSpecular = _vec4{ 0.7f,0.7f,0.7f,1.0f };
 	tagLight.m_vDirection= _vec4{ -1.0f,-1.0f,1.f,1.0f };
@@ -42,8 +42,8 @@ HRESULT CScene_Stage::Ready_LightInfo()
 	tagLight.m_fRange = 100.f;
 
 
-	if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &tagLight)))
-		return E_FAIL;
+	//if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &tagLight)))
+	//	return E_FAIL;
 
 
 	return S_OK;

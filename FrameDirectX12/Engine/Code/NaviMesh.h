@@ -4,7 +4,7 @@
 #include "Shader_ColorBuffer.h"
 BEGIN(Engine)
 
-
+class CNaviBuffer;
 class ENGINE_DLL CNaviMesh : public CComponent
 {
 private:
@@ -16,18 +16,20 @@ private:
 	HRESULT     Ready_NaviMesh();
 	HRESULT		Link_Cell(void);
 public:
-	void		Render_NaviMesh(void);
-	_vec3		Move_NaviMesh(const _vec3* pTargetPos, const _vec3* pTargetDir);
+	void		Render_NaviMesh(CShader_ColorBuffer* pShader);
+	void        SetConstantTable(CShader_ColorBuffer* pShader);
+
 
 	_ulong  GetIndex(void) { return m_dwIndex; };
 	CCell* GetCurCell(void) { return m_vecCell[m_dwIndex]; };
 
+	_vec3 MoveOn_NaviMesh(const _vec3* pTargetPos, const _vec3* pTargetDir, const _float&fSpeed = 0.f, _bool bIsJump = false);
 
 private:
 
 	vector<CCell*>				 m_vecCell;
-	Engine::CShader_ColorBuffer* m_pShaderCom = nullptr;
 	_ulong						 m_dwIndex;
+	CNaviBuffer*                 m_pNaviBuffer;
 public:
 	static CNaviMesh* Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 public:

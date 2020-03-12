@@ -2,7 +2,6 @@
 
 #include "Component.h"
 #include "Line.h"
-#include "Shader_ColorBuffer.h"
 BEGIN(Engine)
 
 class ENGINE_DLL CCell : public CComponent
@@ -11,13 +10,14 @@ public:
 	enum POINT { POINT_A, POINT_B, POINT_C, POINT_END };
 	enum NEIGHBOR { NEIGHBOR_AB, NEIGHBOR_BC, NEIGHBOR_CA, NEIGHBOR_END };
 	enum LINE { LINE_AB, LINE_BC, LINE_CA, LINE_END };
-	enum COMPARE { COMPARE_MOVE, COMPARE_STOP };
+	enum COMPARE { COMPARE_MOVE, COMPARE_SLIDING,COMPARE_STOP };
 
 private:
 	explicit CCell(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 	virtual ~CCell();
+
 public:
-public:
+	_uint               Get_Option() { return m_iOption; };
 	const _vec3*		Get_Point(POINT eType) const { return &m_vPoint[eType]; }
 	CCell*				Get_Neighbor(NEIGHBOR eType) const { return m_pNeighbor[eType]; }
 	const _ulong*		Get_Index(void) { return &m_dwIndex; }
@@ -33,19 +33,18 @@ public:
 	_bool				Compare_Point(const _vec3* pPointA,
 		const _vec3* pPointB,
 		CCell* pCell);
-
+	COMPARE             Compare(const _vec3* pEndPos, _ulong* pIndex, const _float& fTargetSpeed, _vec3* pTargetPos = nullptr,
+		_vec3* pTargetDir = nullptr, _vec3* pSlidingDir = nullptr);
 
 	_bool               FindCell(_vec3* pPos, _ulong* iIndex);
-	void				Render_Cell(CShader_ColorBuffer* pShader);
-
 public:
+  
 	_vec3		m_vPoint[POINT_END];
 	CCell*		m_pNeighbor[NEIGHBOR_END];
 	CLine*		m_pLine[LINE_END];
 	_vec3       m_vPos;
 	_ulong		m_dwIndex;
 	_ulong      m_dwParentIndex = 0;
-	_uint       m_iSlidIndex;
 	_uint       m_iOption = 0;
 public:
 	static CCell*		Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList,
@@ -53,7 +52,7 @@ public:
 		const _vec3* pPointA,
 		const _vec3* pPointB,
 		const _vec3* pPointC,
-		_int Option);
+		_uint Option);
 private:
 	virtual void	Free(void);
 };

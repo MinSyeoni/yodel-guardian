@@ -12,8 +12,7 @@ CCell::CCell(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommand
 
 CCell::~CCell()
 {
-	for (auto&pSrc : m_pLine)
-		Safe_Release(pSrc);
+
 }
 
 HRESULT CCell::Ready_Cell(const _ulong & dwIndex, const _vec3 * pPointA, const _vec3 * pPointB, const _vec3 * pPointC)
@@ -24,16 +23,16 @@ HRESULT CCell::Ready_Cell(const _ulong & dwIndex, const _vec3 * pPointA, const _
 	m_vPoint[POINT_B] = *pPointB;
 	m_vPoint[POINT_C] = *pPointC;
 
-	m_pLine[LINE_AB] = CLine::Create(&m_vPoint[POINT_A],
-		&m_vPoint[POINT_B],m_pGraphicDevice,m_pCommandList);
+	m_pLine[LINE_AB] = CLine::Create(&_vec2(m_vPoint[POINT_A].x, m_vPoint[POINT_A].z),
+		&_vec2(m_vPoint[POINT_B].x, m_vPoint[POINT_B].z));
 
-	m_pLine[LINE_BC] = CLine::Create(&m_vPoint[POINT_B],
-		&m_vPoint[POINT_C],m_pGraphicDevice, m_pCommandList);
+	m_pLine[LINE_BC] = CLine::Create(&_vec2(m_vPoint[POINT_B].x, m_vPoint[POINT_B].z),
+		&_vec2(m_vPoint[POINT_C].x, m_vPoint[POINT_C].z));
 
-	m_pLine[LINE_CA] = CLine::Create(&m_vPoint[POINT_C],
-		&m_vPoint[POINT_A], m_pGraphicDevice, m_pCommandList);
+	m_pLine[LINE_CA] = CLine::Create(&_vec2(m_vPoint[POINT_C].x, m_vPoint[POINT_C].z),
+		&_vec2(m_vPoint[POINT_A].x, m_vPoint[POINT_A].z));
 
-
+	
 	m_vPos = (m_vPoint[POINT_A] + m_vPoint[POINT_B] + m_vPoint[POINT_C]);
 	m_vPos.x = m_vPos.x / 3.f;
 	m_vPos.y = m_vPos.y / 3.f;
@@ -46,9 +45,9 @@ CCell::COMPARE CCell::Compare(const _vec3 * pEndPos, LINE & eLine, _ulong * pCel
 {
 	for (_ulong i = 0; i < LINE_END; ++i)
 	{
-		if (CLine::COMPARE_LEFT == m_pLine[i]->Compare(pEndPos))
+		if (CLine::COMPARE_LEFT == m_pLine[i]->Compare(&_vec2(pEndPos->x, pEndPos->z)))
 		{
-			if (nullptr == m_pNeighbor[i] || m_pNeighbor[i]->m_iOption == 1 || m_pNeighbor[i]->m_iOption == 2)
+			if (nullptr == m_pNeighbor[i])
 			{
 				eLine = CCell::LINE(i);
 				return CCell::COMPARE_STOP;
@@ -112,6 +111,63 @@ _bool CCell::Compare_Point(const _vec3 * pPointA, const _vec3 * pPointB, CCell *
 	return false;
 }
 
+CCell::COMPARE CCell::Compare(const _vec3* pEndPos, _ulong * pIndex, const _float & fTargetSpeed, _vec3 * pTargetPos, _vec3 * pTargetDir, _vec3 * pSlidingDir)
+{
+	for (_ulong i = 0; i < LINE_END; ++i)
+	{
+		if (CLine::COMPARE_LEFT == m_pLine[i]->Compare(&_vec2(pEndPos->x, pEndPos->z)))
+		{
+			if (nullptr == m_pNeighbor[i])
+			{
+				_vec3 vNormal = _vec3(m_pLine[i]->Get_Normal().x, 0.f, m_pLine[i]->Get_Normal().y);
+
+				*pSlidingDir = *pTargetDir - vNormal * vNormal.Dot(*pTargetDir);
+				_vec3 vNormal14 = vNormal * 1.4f;
+				_vec3 vNormal20 = vNormal * 2.f;
+				_vec3 doubleNormal = *pTargetDir - (vNormal14)*vNormal14.Dot(*pTargetDir);
+				_vec3 TripleNormal = *pTargetDir - (vNormal20)*vNormal20.Dot(*pTargetDir);
+
+				_vec3 vEndPos = *pTargetPos + *pSlidingDir * fTargetSpeed * 5.f;
+				_vec3 vDoublePos = *pTargetPos + doubleNormal * fTargetSpeed * 5.f;
+				_vec3 vTriplePos = *pTargetPos + TripleNormal * fTargetSpeed * 5.f;
+
+				_float fMaxX = max((m_pLine[i]->Get_Point(CLine::POINT_START).x), (m_pLine[i]->Get_Point(CLine::POINT_FINISH).x));
+				_float fMinX = min(m_pLine[i]->Get_Point(CLine::POINT_START).x, m_pLine[i]->Get_Point(CLine::POINT_FINISH).x);
+
+				_float fMaxZ = max(m_pLine[i]->Get_Point(CLine::POINT_START).y, m_pLine[i]->Get_Point(CLine::POINT_FINISH).y);
+				_float fMinZ = min(m_pLine[i]->Get_Point(CLine::POINT_START).y, m_pLine[i]->Get_Point(CLine::POINT_FINISH).y);
+
+				if ((vEndPos.x > fMinX) && (vEndPos.x < fMaxX) &&
+					(vEndPos.z > fMinZ) && (vEndPos.z < fMaxZ))
+				{
+					return COMPARE_SLIDING;
+				}
+				else
+				{
+					*pTargetDir = doubleNormal;
+					*pSlidingDir = TripleNormal;
+					return COMPARE_STOP;
+				}
+
+			}
+
+			else
+			{
+				*pIndex = *m_pNeighbor[i]->Get_Index();
+
+				return COMPARE_MOVE;
+			}
+		}
+
+
+	}
+
+
+
+
+	return COMPARE_MOVE;
+}
+
 
 
 _bool CCell::FindCell(_vec3 * pPos, _ulong * iIndex)
@@ -141,16 +197,8 @@ _bool CCell::FindCell(_vec3 * pPos, _ulong * iIndex)
 	return true;
 }
 
-void CCell::Render_Cell(CShader_ColorBuffer* pShader)
-{
-	for (int i = 0; i < LINE_END; i++)
-	{
-		m_pLine[i]->RenderLine(pShader);
-	}
-	
-}
 
-CCell * CCell::Create(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList, const _ulong & dwIndex, const _vec3 * pPointA, const _vec3 * pPointB, const _vec3 * pPointC, _int Option)
+CCell * CCell::Create(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList, const _ulong & dwIndex, const _vec3 * pPointA, const _vec3 * pPointB, const _vec3 * pPointC, _uint Option)
 {
 	CCell*	pInstance = new CCell(pGraphicDevice,pCommandList);
 
@@ -164,4 +212,6 @@ CCell * CCell::Create(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList *
 
 void CCell::Free(void)
 {
+	for (auto&pSrc : m_pLine)
+		Safe_Release(pSrc);
 }

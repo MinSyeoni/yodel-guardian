@@ -193,6 +193,9 @@
     <Filter Include="01.Utility\02.SuperClass\04.Component\03.Collider\Manager">
       <UniqueIdentifier>{3d9afb9d-95dd-432d-abdf-81bd136a2585}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\05.NaviBuffer">
+      <UniqueIdentifier>{1064cd2e-fab3-427b-bc4f-10d6cd8beb3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\Engine_Functor.h">
@@ -393,6 +396,9 @@
     <ClInclude Include="..\Code\ColliderMgr.h">
       <Filter>01.Utility\02.SuperClass\04.Component\03.Collider\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\NaviBuffer.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\05.NaviBuffer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\DirectInput.cpp">
@@ -562,6 +568,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\ColliderMgr.cpp">
       <Filter>01.Utility\02.SuperClass\04.Component\03.Collider\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\NaviBuffer.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\05.NaviBuffer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

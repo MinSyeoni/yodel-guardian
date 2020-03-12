@@ -210,6 +210,7 @@ call CopyEngine.bat</Command>
     <ClInclude Include="..\Code\MathMgr.h" />
     <ClInclude Include="..\Code\Mesh.h" />
     <ClInclude Include="..\Code\MeshComponent.h" />
+    <ClInclude Include="..\Code\NaviBuffer.h" />
     <ClInclude Include="..\Code\NaviMesh.h" />
     <ClInclude Include="..\Code\ObjectMgr.h" />
     <ClInclude Include="..\Code\RcTex.h" />
@@ -278,6 +279,7 @@ call CopyEngine.bat</Command>
     <ClCompile Include="..\Code\MathMgr.cpp" />
     <ClCompile Include="..\Code\Mesh.cpp" />
     <ClCompile Include="..\Code\MeshComponent.cpp" />
+    <ClCompile Include="..\Code\NaviBuffer.cpp" />
     <ClCompile Include="..\Code\NaviMesh.cpp" />
     <ClCompile Include="..\Code\ObjectMgr.cpp" />
     <ClCompile Include="..\Code\RcTex.cpp" />

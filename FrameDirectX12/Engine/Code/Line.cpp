@@ -1,59 +1,33 @@
 #include "Line.h"
 #include "GraphicDevice.h"
 USING(Engine)
-CLine::CLine(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
-	:CComponent(pGraphicDevice,pCommandList)
+CLine::CLine()
 {
 	ZeroMemory(m_vPoint, sizeof(_vec2)*POINT_END);
 }
 
-void CLine::RenderLine(CShader_ColorBuffer* pShader)
-{
-	SetConstantTable(pShader);
-	m_pLine->Render_Buffer();
-}
-
-void CLine::SetConstantTable(CShader_ColorBuffer* pShader)
-{
-	_matrix matView = CGraphicDevice::Get_Instance()->GetViewMatrix();
-	_matrix matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
-	_matrix matWorld = INIT_MATRIX;
 
 
-	CB_MATRIX_INFO	tCB_MatrixInfo;
-	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
 
 
-	_matrix matWVP = matWorld * matView * matProj;
-	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
-
-	pShader->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
-
-}
-
-HRESULT CLine::Ready_Line(const _vec3 * pPointA, const _vec3 * pPointB)
+HRESULT CLine::Ready_Line(const _vec2 * pPointA, const _vec2 * pPointB)
 {
 	m_vPoint[POINT_START] = *pPointA;
 	m_vPoint[POINT_FINISH] = *pPointB;
 
 	m_vDirection = m_vPoint[POINT_FINISH] - m_vPoint[POINT_START];
-	m_vNormal.x = m_vDirection.z*-1.f;
-	m_vNormal.y = 0.f;
-	m_vNormal.z = m_vDirection.x;
+	m_vNormal = _vec2(m_vDirection.y * -1.f, m_vDirection.x);
 	m_vNormal.Normalize();
-
-	m_pLine = CVlLine::Create(m_pGraphicDevice, m_pCommandList, m_vPoint[POINT_START], m_vPoint[POINT_FINISH], _vec4(1.0f, 0.0f, 0.0f, 1.0f));
 
 	return S_OK;
 }
 
-CLine::COMPARE CLine::Compare(const _vec3 * pEndPos)
+CLine::COMPARE CLine::Compare(const _vec2* pEndPos)
 {
-	_vec3 vEndPos = *pEndPos;
-	_vec3 vDest = vEndPos - m_vPoint[POINT_START];
-
+	_vec2 vEndPos = *pEndPos;
+	_vec2 vDest = vEndPos - m_vPoint[POINT_START];
 	vDest.Normalize();
-	_float fResult = vDest.Dot(m_vNormal);
+	_float fResult = m_vNormal.Dot(vDest);
 
 	if (0.f <= fResult)
 		return COMPARE_LEFT;
@@ -61,7 +35,7 @@ CLine::COMPARE CLine::Compare(const _vec3 * pEndPos)
 		return COMPARE_RIGHT;
 }
 
-_vec2 CLine::Point_Meet(_vec3 * OutPut, _vec3 * pDir)
+_vec2 CLine::Point_Meet(_vec2 * OutPut, _vec2 * pDir)
 {
 	_float x1 = OutPut->x;
 	_float y1 = OutPut->y;
@@ -87,16 +61,12 @@ _vec2 CLine::Point_Meet(_vec3 * OutPut, _vec3 * pDir)
 
 	_float b2 = -(m2 * x2) + y2;
 
-	_vec2 vResult;
-	vResult.x = (b2 - b1) / (m1 - m2);
-	vResult.y = m1 * ((b2 - b1) / (m1 - m2)) + b1;
-
-	return vResult;
+	return _vec2{ (b2 - b1) / (m1 - m2)  ,m1 * ((b2 - b1) / (m1 - m2)) + b1 };
 }
 
-CLine * CLine::Create(const _vec3 * pPointA, const _vec3 * pPointB, ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
+CLine * CLine::Create(const _vec2 * pPointA, const _vec2 * pPointB)
 {
-	CLine*	pInstance = new CLine(pGraphicDevice,pCommandList);
+	CLine*	pInstance = new CLine();
 
 	if (FAILED(pInstance->Ready_Line(pPointA, pPointB)))
 		Safe_Release(pInstance);
@@ -106,4 +76,5 @@ CLine * CLine::Create(const _vec3 * pPointA, const _vec3 * pPointB, ID3D12Device
 
 void CLine::Free(void)
 {
+
 }

@@ -33,8 +33,11 @@ HRESULT CShader_ColorBuffer::Ready_Shader(TYPE eType)
 
 	m_eType = eType;
 	if (m_eType == WIREFRAME)
+	{
 		m_bIsWire = D3D12_FILL_MODE_WIREFRAME;
-
+		m_bIsDepth = false;
+		m_CurMode = D3D12_CULL_MODE_NONE;
+	}
 	FAILED_CHECK_RETURN(Create_DescriptorHeaps(), E_FAIL);
 	FAILED_CHECK_RETURN(Create_ConstantBufferView(), E_FAIL);
 	FAILED_CHECK_RETURN(Create_PipelineState(), E_FAIL);
@@ -116,11 +119,11 @@ HRESULT CShader_ColorBuffer::Create_PipelineState()
 	PipelineStateDesc.pRootSignature		= CGraphicDevice::Get_Instance()->GetLootSig((_uint)ROOT_SIG_TYPE::INPUT_OBJECT);
 	PipelineStateDesc.VS					= { reinterpret_cast<BYTE*>(m_pVS_ByteCode->GetBufferPointer()), m_pVS_ByteCode->GetBufferSize() };
 	PipelineStateDesc.PS					= { reinterpret_cast<BYTE*>(m_pPS_ByteCode->GetBufferPointer()), m_pPS_ByteCode->GetBufferSize() };
-	PipelineStateDesc.RasterizerState		= CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
+	PipelineStateDesc.RasterizerState = Create_RasterizerState();
 	PipelineStateDesc.BlendState			= CD3DX12_BLEND_DESC(D3D12_DEFAULT);
 	PipelineStateDesc.DepthStencilState		= CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
 	PipelineStateDesc.SampleMask			= UINT_MAX;
-	PipelineStateDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_LINE;
+	PipelineStateDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 	PipelineStateDesc.NumRenderTargets		= 1;
 	PipelineStateDesc.RTVFormats[0]			= DXGI_FORMAT_R8G8B8A8_UNORM;
 	PipelineStateDesc.SampleDesc.Count		= CGraphicDevice::Get_Instance()->Get_MSAA4X_Enable() ? 4 : 1;
@@ -141,7 +144,7 @@ D3D12_RASTERIZER_DESC CShader_ColorBuffer::Create_RasterizerState()
 	// 레스터라이저 설정.
 	ZeroMemory(&RasterizerDesc, sizeof(D3D12_RASTERIZER_DESC));
 	RasterizerDesc.FillMode					= m_bIsWire;
-	RasterizerDesc.CullMode					= D3D12_CULL_MODE_BACK;
+	RasterizerDesc.CullMode					= m_CurMode;
 	RasterizerDesc.FrontCounterClockwise	= FALSE;
 	RasterizerDesc.DepthBias				= 0;
 	RasterizerDesc.DepthBiasClamp			= 0.0f;
@@ -183,7 +186,7 @@ D3D12_DEPTH_STENCIL_DESC CShader_ColorBuffer::Create_DepthStencilState()
 
 	// Depth & Stencil 설정.
 	ZeroMemory(&DepthStencilDesc, sizeof(D3D12_DEPTH_STENCIL_DESC));
-	DepthStencilDesc.DepthEnable					= TRUE;
+	DepthStencilDesc.DepthEnable					= m_bIsDepth;
 	DepthStencilDesc.DepthWriteMask					= D3D12_DEPTH_WRITE_MASK_ALL;
 	DepthStencilDesc.DepthFunc						= D3D12_COMPARISON_FUNC_LESS;
 

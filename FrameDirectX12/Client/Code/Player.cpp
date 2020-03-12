@@ -71,7 +71,7 @@ HRESULT CPlayer::LateInit_GameObject()
 #endif
 	m_pTransCom->m_vPos = _vec3(300.f, 0.f, 300.f);
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
-	m_pTransCom->m_vDir = _vec3(0.f, 0.0f, 1.f);
+	m_pTransCom->m_vDir = _vec3(1.f, 0.0f, 0.f);
 	return S_OK;
 
 }
@@ -82,24 +82,24 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 
 
 
+	m_pStatus->UpdateState(fTimeDelta, m_pTransCom);
+
+
 	UpdateParts(fTimeDelta);
-
-	CGameObject::Update_GameObject(fTimeDelta);
-
 	m_pArm->Set_Animation(m_eCurState);
 	m_pLeg->Set_Animation(m_eCurState);
 
 
+	CGameObject::Update_GameObject(fTimeDelta);
 	return NO_EVENT;
 }
 
 void CPlayer::UpdateParts(const _float & fTimeDelta)
 {
 
+
 	m_pArm->Update_GameObject(fTimeDelta);
 	m_pLeg->Update_GameObject(fTimeDelta);
-
-	m_pStatus->UpdateState(fTimeDelta, m_pTransCom);
 	m_eCurState = m_pStatus->m_eCurState;
 }
 

@@ -22,7 +22,7 @@ public:
 	CTransform* m_pTransCom;
 	CMesh*  m_pMesh;
 	CBoxCollider* m_pBoxCollider;
-
+	CNaviMesh* m_pNaviMesh;
 
 	//움직일 방향 
 	_vec3 m_vecMoveDirection = _vec3{ 0.f,0.f,1.0f };

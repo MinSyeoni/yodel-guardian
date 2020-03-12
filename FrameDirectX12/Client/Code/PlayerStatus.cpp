@@ -12,6 +12,7 @@ CPlayerStatus::~CPlayerStatus()
 {
 	Safe_Release(m_pBoxCollider);
 	Safe_Release(m_pMesh);
+	Safe_Release(m_pNaviMesh);
 }
 
 _int CPlayerStatus::UpdateState(const _float & fTimeDelta, CTransform * pTranscom)
@@ -41,6 +42,7 @@ _int CPlayerStatus::UpdateState(const _float & fTimeDelta, CTransform * pTransco
 _int CPlayerStatus::LateUpdate(const _float & fTimeDelta)
 {
 	CRenderer::Get_Instance()->Add_ColliderGroup(m_pBoxCollider);
+	CRenderer::Get_Instance()->Add_NaviGroup(m_pNaviMesh);
 	_vec3 vShaveDir;
 
 	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::OBJECT))
@@ -62,6 +64,9 @@ void CPlayerStatus::SetMesh(CMesh * pMesh)
 
 	m_pBoxCollider = static_cast<Engine::CBoxCollider*>(CComponentMgr::Get_Instance()->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, false, nullptr, _vec3(0.f, 6.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(100.f, 150.f, 100.f), nullptr));
 	
+	m_pNaviMesh = static_cast<Engine::CNaviMesh*>(CComponentMgr::Get_Instance()->Clone_Component(L"Mesh_Navi", ID_STATIC));
+
+
 }
 
 void CPlayerStatus::KeyInput()
@@ -71,7 +76,7 @@ void CPlayerStatus::KeyInput()
 	if (KEY_PRESSING(DIKEYBOARD_W))
 	{
 		m_eCurState = CPlayer::WALK;
-		m_fSpeed = 5.f;
+		m_fSpeed = 30.f;
 	}
 
 		
@@ -88,9 +93,13 @@ void CPlayerStatus::StatusUpdate(const _float & fTimeDelta)
 	switch (m_eCurState)
 	{
 	case CPlayer::WALK:
-		m_pTransCom->m_vPos += m_pTransCom->m_vDir*m_fSpeed*fTimeDelta;
+	{
+	 m_pTransCom->m_vPos=  m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed*fTimeDelta);
 
+	 cout << m_pTransCom->m_vPos.x  << endl;
 
+	 cout << m_pTransCom->m_vPos.z << endl;
+	}
 
 	default:
 		break;

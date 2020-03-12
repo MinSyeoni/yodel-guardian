@@ -31,7 +31,6 @@ HRESULT CFont::Ready_GameObjectPrototype(wstring wstrFontName,
 {
 	m_pD2D_Context = CGraphicDevice::Get_Instance()->Get_D2DContext();
 	NULL_CHECK_RETURN(m_pD2D_Context, E_FAIL);
-
 	m_pDWriteFactory = CGraphicDevice::Get_Instance()->Get_DWriteFactory();
 	NULL_CHECK_RETURN(m_pDWriteFactory, E_FAIL);
 

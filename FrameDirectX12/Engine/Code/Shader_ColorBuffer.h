@@ -5,6 +5,7 @@ BEGIN(Engine)
 
 class ENGINE_DLL CShader_ColorBuffer : public CShader
 {
+public:
 	enum TYPE{NONE,WIREFRAME};
 private:
 	explicit CShader_ColorBuffer(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
@@ -28,6 +29,8 @@ private:
 	virtual D3D12_INPUT_LAYOUT_DESC		Create_InputLayout() override;
 
 	TYPE  m_eType = NONE;
+	_bool m_bIsDepth = true;
+	D3D12_CULL_MODE m_CurMode = D3D12_CULL_MODE_BACK;
 	D3D12_FILL_MODE m_bIsWire = D3D12_FILL_MODE_SOLID;
 public:
 	virtual CComponent *		Clone() override;
