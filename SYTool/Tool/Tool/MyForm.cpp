@@ -31,6 +31,7 @@ void CMyform::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CMyform, CFormView)
+	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CMyform::OnTcnSelchangeTab)
 END_MESSAGE_MAP()
 
 
@@ -60,6 +61,7 @@ void CMyform::OnInitialUpdate()
 
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 	m_MainTab.InsertItem(0, L"MapTool", 0);
+	m_MainTab.InsertItem(1, L"NaviTool", 1);
 
 	m_MainTab.SetCurSel(0);
 
@@ -71,10 +73,39 @@ void CMyform::OnInitialUpdate()
 	m_pMapTab->MoveWindow(0, 25, rc.Width(), rc.Height());
 	m_pMapTab->ShowWindow(SW_SHOW);
 
-
+	m_pNaviTab = new CNaviTab;
+	m_pNaviTab->Create(IDD_DIALOG2, &m_MainTab);
+	m_pNaviTab->MoveWindow(0, 25, rc.Width(), rc.Height());
+	m_pNaviTab->ShowWindow(SW_HIDE);
 }
 
 void CMyform::Free()
 {
 	Engine::Safe_Delete(m_pMapTab);
+	Engine::Safe_Delete(m_pNaviTab);
+}
+
+
+void CMyform::OnTcnSelchangeTab(NMHDR* pNMHDR, LRESULT* pResult)
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	int iCurTab = m_MainTab.GetCurSel();
+
+	switch (iCurTab)
+	{
+	case 0:
+		m_iCurTab = 0;
+		m_pMapTab->ShowWindow(SW_SHOW);
+		m_pNaviTab->ShowWindow(SW_HIDE);
+		break;
+	case 1:
+		m_iCurTab = 1;
+		m_pMapTab->ShowWindow(SW_HIDE);
+		m_pNaviTab->ShowWindow(SW_SHOW);
+		break;
+	default:
+		break;
+	}
+
+	*pResult = 0;
 }

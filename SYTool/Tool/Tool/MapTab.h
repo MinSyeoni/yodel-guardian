@@ -9,8 +9,6 @@
 
 BEGIN(Engine)
 class CComponent;
-class CCollider;
-class CSColiider;
 class CToolCollider;
 class CSphereCollider;
 class CBoxCollider;
@@ -63,7 +61,7 @@ public:
 	afx_msg BOOL			OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
 	virtual BOOL			OnInitDialog();
 
-	void Initialize_String();
+	void					Initialize_String();
 
 public:
 	float					m_fPosX;
