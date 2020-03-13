@@ -79,6 +79,7 @@ typedef struct tagCell
 	D3DXVECTOR3  PointB;
 	D3DXVECTOR3  PointC;
 	int			 Option = 0;
+	int			 DrawID = 0;
 }NAVICELL;
 
 #endif // Typedef_h__

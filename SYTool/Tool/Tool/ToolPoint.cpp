@@ -43,7 +43,8 @@ _int CToolPoint::Update_Object(const _float& fTimeDelta)
 
 void CToolPoint::Render_Object(void)
 {
-	m_pSphereCol->Render_Collider();
+	if(true == m_bIsShow)
+		m_pSphereCol->Render_Collider();
 }
 
 HRESULT CToolPoint::Add_Component(_vec3 Pos)

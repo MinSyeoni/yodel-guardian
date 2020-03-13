@@ -39,7 +39,8 @@ void CToolCell::Render_Object(void)
 	m_pPointB-> Render_Object();
 	m_pPointC->Render_Object();
 
-	Render_FontOnCell();
+	if(true == m_bIsShow)
+		Render_FontOnCell();
 }
 
 void CToolCell::Render_FontOnCell()
@@ -68,7 +69,11 @@ void CToolCell::Render_FontOnCell()
 	m_pD3DXLine->Begin();
 
 	_matrix matTemp;
-	m_pD3DXLine->DrawTransform(m_vPtPos, 4, D3DXMatrixIdentity(&matTemp), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+
+	if(false == m_bIsCheckCell)
+		m_pD3DXLine->DrawTransform(m_vPtPos, 4, D3DXMatrixIdentity(&matTemp), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+	else if(true == m_bIsCheckCell)
+		m_pD3DXLine->DrawTransform(m_vPtPos, 4, D3DXMatrixIdentity(&matTemp), D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
 	m_pD3DXLine->End();
 
 	m_pGraphicDev->GetTransform(D3DTS_WORLD, &m_matWorld);
@@ -88,10 +93,14 @@ void CToolCell::Render_FontOnCell()
 	m_vViewPortPos.x = (m_vFontPos.x + 1.f) * (m_ViewPort.Width * 0.5);
 	m_vViewPortPos.y = -(m_vFontPos.y - 1.f) * (m_ViewPort.Height * 0.5);
 
+
 	CString strBuffer = L"";
 	strBuffer.Format(L"%d", m_iCellindex);
 
-	Engine::Render_Font(L"Font_Default", strBuffer, &_vec2(m_vViewPortPos.x, m_vViewPortPos.y), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+	if (false == m_bIsCheckCell)
+		Engine::Render_Font(L"Font_Default", strBuffer, &_vec2(m_vViewPortPos.x, m_vViewPortPos.y), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));	
+	else if (true == m_bIsCheckCell)
+		Engine::Render_Font(L"Font_Default", strBuffer, &_vec2(m_vViewPortPos.x, m_vViewPortPos.y), D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
 }
 
 HRESULT CToolCell::Add_Component(_vec3 Pos)
@@ -101,9 +110,9 @@ HRESULT CToolCell::Add_Component(_vec3 Pos)
 
 void CToolCell::Free(void)
 {
-	Engine::Safe_Release(m_pPointA);
-	Engine::Safe_Release(m_pPointB);
-	Engine::Safe_Release(m_pPointC);
+	//Engine::Safe_Release(m_pPointA);
+	//Engine::Safe_Release(m_pPointB);
+	//Engine::Safe_Release(m_pPointC);
 	Engine::Safe_Release(m_pD3DXLine);
 	Engine::Safe_Release(m_pCalculCom);
 	Engine::CGameObject::Free();

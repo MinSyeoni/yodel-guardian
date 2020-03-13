@@ -40,36 +40,44 @@ public:
 	afx_msg void	OnBnClickedNaviNoneMode();
 	afx_msg void	OnLbnSelchangeNaviList();
 	afx_msg void	OnBnClickedNaviDelete();
-
-	void			Get_NaviPointPos(_int iIdx);
+	afx_msg void	OnBnClickedShowNavi();
+	afx_msg void	OnBnClickedShowNaviPoint();
+	afx_msg void	OnBnClickedSaveNavi();
+	afx_msg void	OnBnClickedLoadNavi();
 
 	virtual BOOL	OnInitDialog();
+
+	void			Get_NaviPointPos();
 	
 private:
 	void			Modify_PointPosition(RECT  rc[9], CPoint& pt, short zDelta);
 	void			Modify_NaviPointPos();
 
-
 public:
 	_int			m_iCurNaviMode = 3;		// 0-CREATE, 1-MODIFY, 2-DELETE, 3-NONE
-	_int			m_iPointCnt = 0;
+	_int			m_iCellCnt = 0;
 	_int			m_iCurCell = 0;
 	CListBox		m_NaviList;
 
-	CEdit			m_EditPosX[3];
-	CEdit			m_EditPosY[3];
-	CEdit			m_EditPosZ[3];
+	CEdit			m_EditPosX;
+	CEdit			m_EditPosY;
+	CEdit			m_EditPosZ;
 
-	_vec3			m_vNaviPos[3] = { };
-	float			m_fPosX[3] = { 0.f, };
-	float			m_fPosY[3] = { 0.f, };
-	float			m_fPosZ[3] = { 0.f, };
+	_vec3			m_vNaviPos = { 0.f, 0.f,0.f };
+	float			m_fPosX = 0.f;
+	float			m_fPosY = 0.f;
+	float			m_fPosZ = 0.f;
 
 	CToolPoint*		m_pToolPoint[3];
 	CToolPoint*		m_pPointTmp = nullptr;
 	CToolCell*		m_pToolCell = nullptr;
 
-	list<CToolPoint*>		m_pPointLstTmp;
-	list<CToolCell*>		m_pCellLstTmp;
+	list<CToolPoint*>		m_pPointLst;
+	list<CToolCell*>		m_pCellLst;
 
+private:
+	CMainFrame*		m_pMainFrm = nullptr;
+	CToolView*		m_pToolView = nullptr;
+	CButton			m_BnShowNavi;
+	CButton			m_BnShowPoint;
 };

@@ -170,6 +170,7 @@ _int CToolView::Update_MainApp(const _float& fTimeDelta)
 	CObjMgr::GetInstance()->Update_Object(fTimeDelta);
 	CToolCamera::GetInstance()->Update_Camera(fTimeDelta);
 
+
 	return iExitCode;
 }
 
@@ -328,6 +329,7 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 		m_pNaviTab->UpdateData(TRUE);	// NaviTab
 		if (0 == m_pNaviTab->m_iCurNaviMode)	// 생성 모드
 		{
+			bool retflag;
 			Get_TerrainInfo();
 			if (nullptr != CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_OBJECT))
 			{
@@ -350,7 +352,8 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 					}
 				}
 			}			
-			Create_NaviPointCell();
+			Create_NaviPointCell(retflag);
+			if (retflag) return;
 		}
 		else if (1 == m_pNaviTab->m_iCurNaviMode)	// 수정 모드
 		{
@@ -358,7 +361,6 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 			Modify_NaviPointCell(retflag);
 			if (retflag) return;
 		}
-
 		m_pNaviTab->UpdateData(FALSE);
 	}
 
@@ -368,89 +370,77 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 void CToolView::Modify_NaviPointCell(bool& retflag)
 {
 	retflag = true;
-	if (m_pNaviTab->m_pPointLstTmp.empty() || m_pNaviTab->m_pCellLstTmp.empty())
-		return;
+	if (m_pNaviTab->m_pPointLst.empty() || m_pNaviTab->m_pCellLst.empty())
+		retflag = false;
 
 	int iTmp = 0;
-	for (auto& pPoint : m_pNaviTab->m_pPointLstTmp)
+	for (auto& pPoint : m_pNaviTab->m_pPointLst)
 	{
 		if (true == CPickingMgr::GetInstance()->IsCheckSphereCollider(pPoint->m_pSphereCol))
 		{
-			pPoint->Set_CheckPoint(true);
+			pPoint->Set_CheckPoint(true); 
 			m_pNaviTab->m_pPointTmp = pPoint;
-			m_pNaviTab->m_NaviList.SetCurSel(iTmp);
 		}
 		if (false == CPickingMgr::GetInstance()->IsCheckSphereCollider(pPoint->m_pSphereCol))
 			pPoint->Set_CheckPoint(false);
 		iTmp++;
 	}
 
-	for (auto& pCell : m_pNaviTab->m_pCellLstTmp)
+	for (auto& pPoint : m_pNaviTab->m_pPointLst)
 	{
 		if (nullptr == m_pNaviTab->m_pPointTmp)
 			return;
 
-		if (pCell->m_pPointA == m_pNaviTab->m_pPointTmp)
-		{
-			m_pNaviTab->Get_NaviPointPos(0);
-			break;
-		}
-		else if (pCell->m_pPointB == m_pNaviTab->m_pPointTmp)
-		{
-			m_pNaviTab->Get_NaviPointPos(1);
-			break;
-		}
-		else if (pCell->m_pPointC == m_pNaviTab->m_pPointTmp)
-		{
-			m_pNaviTab->Get_NaviPointPos(2);
-			break;
-		}
+		if(pPoint == m_pNaviTab->m_pPointTmp)
+			m_pNaviTab->Get_NaviPointPos();
 	}
+
 	retflag = false;
 }
 
-void CToolView::Create_NaviPointCell()
+void CToolView::Create_NaviPointCell(bool& retflag)
 {
+	retflag = true;
 	CString	strIndex = L"";
 
-	if (!m_pNaviTab->m_pPointLstTmp.empty())	// 겹치게 찍었을 때
+	if (!m_pNaviTab->m_pPointLst.empty())	// 겹치게 찍었을 때
 	{
-		for (auto& pPoint : m_pNaviTab->m_pPointLstTmp)
+		for (auto& pPoint : m_pNaviTab->m_pPointLst)
 		{
 			if (true == CPickingMgr::GetInstance()->IsCheckSphereCollider(pPoint->m_pSphereCol))
 			{
-				m_vMeshPos.x = pPoint->m_pSphereCol->Get_WorldMat()._41;
-				m_vMeshPos.y = pPoint->m_pSphereCol->Get_WorldMat()._42;
-				m_vMeshPos.z = pPoint->m_pSphereCol->Get_WorldMat()._43;
+				m_vMeshPos = pPoint->m_pSphereCol->Get_Pos();
 				break;
 			}
 		}
 	}
 
-	m_pNaviTab->m_vNaviPos[m_iIdxCnt] = m_vMeshPos;
-	m_pNaviTab->m_fPosX[m_iIdxCnt] = m_vMeshPos.x;
-	m_pNaviTab->m_fPosY[m_iIdxCnt] = m_vMeshPos.y;
-	m_pNaviTab->m_fPosZ[m_iIdxCnt] = m_vMeshPos.z;
+	m_pNaviTab->m_vNaviPos = m_vMeshPos;
+	m_pNaviTab->m_fPosX = m_vMeshPos.x;
+	m_pNaviTab->m_fPosY = m_vMeshPos.y;
+	m_pNaviTab->m_fPosZ = m_vMeshPos.z;
 
 	m_pNaviTab->m_pToolPoint[m_iIdxCnt] = CToolPoint::Create(m_pGraphicDev->GetDevice(), m_vMeshPos);
 	CObjMgr::GetInstance()->AddObject(m_pNaviTab->m_pToolPoint[m_iIdxCnt], CObjMgr::OBJ_POINT);
-	m_pNaviTab->m_pPointLstTmp.push_back(m_pNaviTab->m_pToolPoint[m_iIdxCnt]);
-
-	strIndex.Format(L"%d.Point_%d", m_pNaviTab->m_iPointCnt, m_iIdxCnt);
-	m_pNaviTab->m_NaviList.InsertString(m_pNaviTab->m_iPointCnt, strIndex);
+	m_pNaviTab->m_pPointLst.push_back(m_pNaviTab->m_pToolPoint[m_iIdxCnt]);
 
 	m_iIdxCnt++;
-	m_pNaviTab->m_iPointCnt++;
 
 	if (3 == m_iIdxCnt)
 	{
 		m_pNaviTab->m_pToolCell = CToolCell::Create(m_pGraphicDev->GetDevice(),
 			m_pNaviTab->m_pToolPoint[0], m_pNaviTab->m_pToolPoint[1], m_pNaviTab->m_pToolPoint[2]);
 		CObjMgr::GetInstance()->AddObject(m_pNaviTab->m_pToolCell, CObjMgr::OBJ_CELL);
-		m_pNaviTab->m_pCellLstTmp.push_back(m_pNaviTab->m_pToolCell);
+		m_pNaviTab->m_pCellLst.push_back(m_pNaviTab->m_pToolCell);
+
+		strIndex.Format(L"%d번 Cell", m_pNaviTab->m_iCellCnt);
+		m_pNaviTab->m_NaviList.InsertString(m_pNaviTab->m_iCellCnt, strIndex);
+		m_pNaviTab->m_iCellCnt++;
+
 		m_iIdxCnt = 0;
 	}
-	return;
+
+	retflag = false;
 }
 
 void CToolView::Get_TerrainInfo()

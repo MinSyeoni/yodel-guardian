@@ -24,11 +24,17 @@ public:
 	_int				Get_CellOption() { return m_iCellOption; }
 	void				Set_CellIndex(_int iIdx) { m_iCellindex = iIdx; }
 	void				Set_CellOption(_int iOption) { m_iCellOption = iOption; }
+	
+	void				Set_IsCheckCell(_bool bIsCheck) { m_bIsCheckCell = bIsCheck; }
+	_bool&				Get_IsCheckCell() { return m_bIsCheckCell; }
 
+	void				Set_IsShowCell(_bool bIsShow) { m_bIsShow = bIsShow; }
+	
 public:
 	virtual HRESULT     Ready_Object();
 	virtual _int		Update_Object(const _float& fTimeDelta);
 	virtual void		Render_Object(void);
+
 
 	void				Render_FontOnCell();
 
@@ -61,6 +67,9 @@ private:
 	_matrix						m_matView;
 	_matrix						m_matWorld;
 	_matrix						m_matViewPort;
+
+	_bool						m_bIsCheckCell = false;
+	_bool						m_bIsShow = true;
 };
 
 #endif // ToolCell_h__

@@ -29,6 +29,7 @@ public:
 
 	void							Set_CheckPoint(_bool bIsCheck) { m_bIsCheck = bIsCheck; }
 	void							Set_NaviPos(_vec3 vPos) { m_vPos = vPos; }
+	void							Set_IsShowPoint(_bool bIsShow) { m_bIsShow = bIsShow; }
 
 private:
 	HRESULT							Add_Component(_vec3 Pos);
@@ -53,6 +54,7 @@ private:
 	_vec3							m_vScale = {};
 
 	bool							m_bIsCheck = false;
+	_bool							m_bIsShow = true;
 };
 
 #endif // ToolPoint_h__
