@@ -28,10 +28,10 @@ public:
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 
-	
+	float Get_SpineAngle() { return m_fSpineAngle; }//Ã´ÃßÈ¸ÀüÁ¤µµ
 public:
-	CPlayerArm*  Get_PlayerArm() { return m_pArm; };
-	CPlayerLeg*  Get_PlayerLeg() { return m_pLeg; };
+	CPlayerArm*  Get_PlayerArm() { return m_pArm; };//ÆÈ
+	CPlayerLeg*  Get_PlayerLeg() { return m_pLeg; };//´Ù¸®
 private:
 	virtual HRESULT Add_Component();
 private:
@@ -48,6 +48,7 @@ private:
 	STATE m_eCurState=IDLE;
 
 	float m_fTime = 0.f;
+	float m_fSpineAngle = 0.f;
 public:
 	virtual CGameObject*	Clone_GameObject(void* prg);
 	static CPlayer*		Create(ID3D12Device* pGraphicDevice,ID3D12GraphicsCommandList* pCommandList);

@@ -60,7 +60,7 @@ private:
 	STATETYPE m_eType = NONALPHA;
 	D3D12_CULL_MODE m_eFileMode = D3D12_CULL_MODE_BACK;
 	bool   m_bIsZwrite = true;
-	bool   m_bIsAlphaBlend = false;
+	_bool   m_bIsAlphaBlend = false;
 
 
 private:

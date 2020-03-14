@@ -82,6 +82,9 @@
     <Filter Include="02.GameObject\99.Player\03.Player Leg">
       <UniqueIdentifier>{d19451d9-3b44-450e-a248-6f9e5a584091}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\01.Environment\02.GrassObject">
+      <UniqueIdentifier>{02143260-ceb1-4cdc-8ee5-13c46089d446}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -177,6 +180,9 @@
     <ClInclude Include="..\Code\Pistol.h">
       <Filter>02.GameObject\98.Weapon\00.Pistol</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\GlassObject.h">
+      <Filter>02.GameObject\01.Environment\02.GrassObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -241,6 +247,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Pistol.cpp">
       <Filter>02.GameObject\98.Weapon\00.Pistol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GlassObject.cpp">
+      <Filter>02.GameObject\01.Environment\02.GrassObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

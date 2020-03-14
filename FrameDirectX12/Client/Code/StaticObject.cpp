@@ -155,11 +155,10 @@ void CStaticObject::Set_ConstantTable()
 	CB_MATRIX_INFO	tCB_MatrixInfo;
 	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
 
-	if (nullptr != m_pDynamicCamera)
-	{
-		matView = m_pDynamicCamera->Get_CameraInfo().matView;
-		matProj = m_pDynamicCamera->Get_ProjInfo().matProj;
-	}
+	
+	matView = CGraphicDevice::Get_Instance()->GetViewMatrix();
+		matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
+	
 
 	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));

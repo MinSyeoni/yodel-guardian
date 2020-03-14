@@ -1,2 +1,5 @@
-﻿  Player.cpp
+﻿  PlayerStatus.cpp
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\client\code\playerstatus.cpp(76): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\client\code\playerstatus.cpp(76): warning C4309: '인수': 상수 값이 잘립니다.
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\client\code\playerstatus.cpp(123): warning C4101: 'matRot' :참조되지 않은 지역 변수입니다.
   Client.vcxproj -> C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Client\Default\../Bin\Client.exe

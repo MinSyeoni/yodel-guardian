@@ -67,6 +67,11 @@ void CMesh::Render_ShadowMesh(CShader * pMesh, vector<vector<_matrix>> vecBoneMa
 	m_pMeshComponent->Render_ShadowMesh(pMesh, vecBoneMatrix, blsBone);
 }
 
+void CMesh::Render_Destortion(CShader * pShader)
+{
+	m_pMeshComponent->Render_Destortion(pShader);
+}
+
 void CMesh::Set_Animation(_int Animation)
 {
 	if (m_pAnimationComponent != nullptr)

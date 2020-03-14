@@ -58,6 +58,9 @@ private:
 	HRESULT Create_ShadowDepthRoot();
 	HRESULT Create_DownSampleRoot();
 	HRESULT Create_BlurRoot();
+	HRESULT Create_DistortRoot();
+
+
 	HRESULT OnResize(const _uint& iWidth, const _uint& iHeight);
 public:
 	ID3D12RootSignature* GetLootSig(_uint eType) { return m_arrSig[eType]; }

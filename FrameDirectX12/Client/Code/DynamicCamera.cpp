@@ -3,6 +3,8 @@
 #include "DirectInput.h"
 #include "GraphicDevice.h"
 #include "ObjectMgr.h"
+#include "PlayerArm.h"
+#include "PlayerLeg.h"
 CDynamicCamera::CDynamicCamera(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CCamera(pGraphicDevice, pCommandList)
 {
@@ -48,10 +50,15 @@ HRESULT CDynamicCamera::LateInit_GameObject()
 	COUT_STR("LateInit DynamicCamera");
 #endif
 	if (nullptr != CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player"))
+	{
 		m_pPlayer = static_cast<CPlayer*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player"));
+		m_pPlayerMatrix = &m_pPlayer->Get_Transform()->m_matWorld;
+		m_pPlayerArm = static_cast<CPlayerArm*>(m_pPlayer->Get_PlayerArm());
+		m_pPlayerLeg = static_cast<CPlayerLeg*>(m_pPlayer->Get_PlayerLeg());
 
-
-
+		m_pmatArmCamera= static_cast<CMesh*>(m_pPlayerArm->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_CameraMatrix();
+		m_pmatLegCamera= static_cast<CMesh*>(m_pPlayerLeg->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_CameraMatrix();
+	}
 	return S_OK;
 }
 
@@ -88,34 +95,47 @@ void CDynamicCamera::MouseInput()
 	
 	_long dwMouseMove;
 
-	if (dwMouseMove = CDirectInput::Get_Instance()->Get_DIMouseMove(CDirectInput::DIMM_X))
+
+
+
+	if (m_pmatArmCamera != nullptr &&m_pmatLegCamera!=nullptr)
 	{
 
-		_vec3 vUp = _vec3{ 0.f,1.f,0.f };
-		_matrix matRot;
+		_matrix RotY = XMMatrixRotationY(XMConvertToRadians(-90));
 
-		matRot = XMMatrixRotationAxis(vUp.Get_XMVECTOR(), XMConvertToRadians(dwMouseMove / 10.f));
-		m_vDir.TransformNormal(m_vDir, matRot);
-		m_vDir.Normalize();
+
+		_matrix BoneMatrix = (*m_pmatArmCamera*0.8f)+(*m_pmatLegCamera*0.2f);
+		_matrix CameraMatrix = BoneMatrix * *m_pPlayerMatrix  ;
+
+	   
+		_vec3 CameraRight;
+		_vec3 CameraUp;
+		_vec3 CameraLook;
+		_vec3 CameraPos;
+
+		memcpy(&CameraRight, &CameraMatrix._11, sizeof(_vec3));//±íÀÌ
+		memcpy(&CameraUp, &CameraMatrix._21, sizeof(_vec3));
+		memcpy(&CameraLook, &CameraMatrix._31, sizeof(_vec3));//³ôÀÌ
+		memcpy(&CameraPos, &CameraMatrix._41, sizeof(_vec3));
+
+		
+		_float fSpine = m_pPlayer->Get_SpineAngle();
+
+
+		m_tCameraInfo.vEye = CameraPos-(CameraLook*(50.f+fSpine))-CameraRight*150.f - CameraUp*50.f;
+		m_tCameraInfo.vAt = CameraPos - (CameraLook*(50.f-fSpine)) - CameraUp * 50.f;
+
+
+
+		if (m_tCameraInfo.vEye.x == 0 && m_tCameraInfo.vEye.z == 0)
+			m_tCameraInfo.vEye.x = 3;
+
+
+		m_tCameraInfo.vUp = _vec3(0.f,1.0f,0.f);
 	}
-
-
-
-	if (m_pPlayer != nullptr)
-	{
-		CTransform* pTransfrom = nullptr;
-		pTransfrom = static_cast<CTransform*> (m_pPlayer->Get_Component(L"Com_Transform", ID_DYNAMIC));
-		if (pTransfrom != nullptr)
-		{
-			m_tCameraInfo.vAt = pTransfrom->m_vPos;
-
-			m_tCameraInfo.vEye =m_vDir *m_fViewZ + m_tCameraInfo.vAt;
-			m_tCameraInfo.vAt.y += 16.f;
-			m_tCameraInfo.vEye.y += 17.0f;
-		}
-	}
-
 }
+
+
 
 CGameObject * CDynamicCamera::Clone_GameObject(void* pArg)
 {

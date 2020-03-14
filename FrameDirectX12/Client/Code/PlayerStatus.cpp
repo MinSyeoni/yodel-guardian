@@ -28,7 +28,7 @@ _int CPlayerStatus::UpdateState(const _float & fTimeDelta, CTransform * pTransco
 	KeyInput();
 	Rotation(fTimeDelta);
 	StatusUpdate(fTimeDelta);
-	PlayerDirection();
+	PlayerDirection(fTimeDelta);
 
 	m_ePreState = m_eCurState;
 
@@ -95,10 +95,6 @@ void CPlayerStatus::StatusUpdate(const _float & fTimeDelta)
 	case CPlayer::WALK:
 	{
 	 m_pTransCom->m_vPos=  m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed*fTimeDelta);
-
-	 cout << m_pTransCom->m_vPos.x  << endl;
-
-	 cout << m_pTransCom->m_vPos.z << endl;
 	}
 
 	default:
@@ -115,22 +111,35 @@ void CPlayerStatus::Rotation(const _float& fTimeDelta)
 	m_pTransCom->Chase_Target(m_vecTargetPos, fTimeDelta*0.05f);
 }
 
-void CPlayerStatus::PlayerDirection()
+void CPlayerStatus::PlayerDirection(const _float&fTimeDelta)
 {
-	if (m_eCurState == CPlayer::WALK)
+
+	_long dwMouseMove;
+
+	if (dwMouseMove = CDirectInput::Get_Instance()->Get_DIMouseMove(CDirectInput::DIMM_X))
 	{
-		_matrix matViewInv = CGraphicDevice::Get_Instance()->GetViewMatrix();
 
-		matViewInv = XMMatrixInverse(nullptr, matViewInv);
+		_vec3 vUp = _vec3{ 0.f,1.f,0.f };
+		_matrix matRot;
 
-		_vec3 vCamDir;
-		memcpy(&vCamDir, &matViewInv._31, sizeof(_vec3));
-
-		vCamDir.y = 0.f;
-		m_pTransCom->m_vDir = vCamDir;
+		m_pTransCom->m_vAngle.y += (_float)dwMouseMove*fTimeDelta*2.5f;
+		m_pTransCom->m_vDir = _vec3{ m_pTransCom->m_matWorld._31,m_pTransCom->m_matWorld._32,m_pTransCom->m_matWorld._33 };
+		m_pTransCom->m_vDir.y = 0.f;
 		m_pTransCom->m_vDir.Normalize();
-	
+		m_vecTargetPos = m_pTransCom->m_vPos + (m_pTransCom->m_vDir)*30.f;
+
+	}
+	if (dwMouseMove = CDirectInput::Get_Instance()->Get_DIMouseMove(CDirectInput::DIMM_Y))
+	{
+		m_fSpine += dwMouseMove * fTimeDelta;
+
+		if (m_fSpine > 45.f)
+			m_fSpine = 45.f;
+		if (m_fSpine < -45.f)
+			m_fSpine = -45.f;
 	}
 
-	m_vecTargetPos = m_pTransCom->m_vPos + (m_pTransCom->m_vDir)*30.f;
+
+
+
 }

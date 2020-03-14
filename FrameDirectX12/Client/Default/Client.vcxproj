@@ -168,6 +168,7 @@
     <ClInclude Include="..\Code\CubeObject.h" />
     <ClInclude Include="..\Code\DynamicCamera.h" />
     <ClInclude Include="..\Code\Dynamic_Object.h" />
+    <ClInclude Include="..\Code\GlassObject.h" />
     <ClInclude Include="..\Code\Loading.h" />
     <ClInclude Include="..\Code\MainApp.h" />
     <ClInclude Include="..\Code\Pistol.h" />
@@ -201,6 +202,7 @@
     <ClCompile Include="..\Code\CubeObject.cpp" />
     <ClCompile Include="..\Code\DynamicCamera.cpp" />
     <ClCompile Include="..\Code\Dynamic_Object.cpp" />
+    <ClCompile Include="..\Code\GlassObject.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\Pistol.cpp" />

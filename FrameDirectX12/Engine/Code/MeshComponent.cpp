@@ -466,8 +466,6 @@ void CMeshComponent::Render_Mesh(CShader * pShader,vector<vector<_matrix>> vecBo
 {
 	for (int i = 0; i < m_entries.size(); i++)
 	{
-		if (!Draw&& (i == MeshNum))
-			continue;
 
 		CB_BONE_INFO	tCB_BoneInfo;
 		if (vecBoneMatrix.size() != 0)
@@ -529,6 +527,27 @@ void CMeshComponent::Render_ShadowMesh(CShader * pShader, vector<vector<_matrix>
 			0);
 
 	}
+}
+void CMeshComponent::Render_Destortion(CShader * pShader)
+{
+	for (int i = 0; i < m_entries.size(); i++)
+	{
+		pShader->End_Shader(i, 0);
+
+
+		m_pCommandList->IASetVertexBuffers(0, 1, &Get_VertexBufferView(i));
+		m_pCommandList->IASetIndexBuffer(&Get_IndexBufferView(i));
+
+		m_pCommandList->IASetPrimitiveTopology(m_PrimitiveTopology);
+
+		m_pCommandList->DrawIndexedInstanced(m_vecSubMeshGeometry[i].uiIndexCount,
+			1,
+			0,
+			0,
+			0);
+
+	}
+
 }
 D3D12_VERTEX_BUFFER_VIEW CMeshComponent::Get_VertexBufferView(_uint iIndex) const
 {

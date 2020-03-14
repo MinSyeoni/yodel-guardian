@@ -582,9 +582,14 @@ typedef struct tagCBBlurSample
 {
 	float BlurWeight[13]; 
 
-}CB_BLUR_INFO;//다운샘플
+}CB_BLUR_INFO;//블러
 
 
+typedef struct tagDistionInfo
+{
+	XMFLOAT4 DistorScale;
+
+}CB_DISTORT_INFO;
 
 typedef struct tagCBTextureInfo
 {
@@ -730,6 +735,7 @@ enum class ROOT_SIG_TYPE
 	INPUT_SHADOWDEPTH,
 	INPUT_DOWNSAMPLE,
 	INPUT_BLUR,
+	INPUT_DISTORT,
 	ENDSIG,
 };
 

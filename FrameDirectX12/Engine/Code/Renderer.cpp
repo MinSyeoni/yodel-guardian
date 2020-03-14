@@ -51,6 +51,8 @@ HRESULT CRenderer::Ready_Renderer(ID3D12Device* pGraphicDevice, ID3D12GraphicsCo
 
 	m_pColorShader = CShader_ColorBuffer::Create(m_pGraphicDevice, m_pCommandList, CShader_ColorBuffer::WIREFRAME);
 
+	m_pDestortionTarget = CDistortionTarget::Create(m_pGraphicDevice, m_pCommandList);
+
 	return S_OK;
 }
 
@@ -96,7 +98,7 @@ void CRenderer::Render_Renderer(const _float& fTimeDelta)
 
 	Render_LightAcc();
 
-	Render_PostPoressing();
+	Render_PostPoressing(fTimeDelta);
 
 	Render_Blend();
 
@@ -116,6 +118,7 @@ void CRenderer::Render_Renderer(const _float& fTimeDelta)
 		m_LightTarget->Render_RenderTarget();
 		m_DownSampleTarget->Render_RenderTarget();
 		m_pBloomTarget->Render_RenderTarget();
+		m_pDestortionTarget->Render_RenderTarget();
 	}
 	CGraphicDevice::Get_Instance()->End_ResetCmdList();
 
@@ -127,6 +130,22 @@ void CRenderer::Render_Renderer(const _float& fTimeDelta)
 
 	CGraphicDevice::Get_Instance()->Render_End();
 	Clear_RenderGroup();
+}
+
+HRESULT CRenderer::Render_Destortion(const _float& fTimeDelta)
+{
+	m_pDestortionTarget->SetUp_OnGraphicDev();
+
+	for (auto& pGameObject : m_RenderList[RENDER_DESTORTION])
+	{
+		pGameObject->Render_Distortion(fTimeDelta);
+	}
+
+
+
+	m_pDestortionTarget->Release_OnGraphicDev();
+
+	return S_OK;
 }
 
 HRESULT CRenderer::Render_ShadowDepth()
@@ -225,13 +244,14 @@ HRESULT CRenderer::Render_Blend()
 		vector<ComPtr<ID3D12Resource>> pDiffedTarget = m_DifferdTarget->GetTargetTexture();
 		vector<ComPtr<ID3D12Resource>> pShadeTarget = m_LightTarget->GetTargetTexture();
 		vector<ComPtr<ID3D12Resource>> pBlurTarget = m_pBloomTarget->GetTargetTexture();
-
+		vector<ComPtr<ID3D12Resource>> pDestortionTarget = m_pDestortionTarget->GetTargetTexture();
 		vector<ComPtr<ID3D12Resource>> pBlendTarget;
 		pBlendTarget.push_back(pDiffedTarget[0]);//albedo
 		pBlendTarget.push_back(pShadeTarget[0]);//Shade
 		pBlendTarget.push_back(pShadeTarget[1]);//Spec
 		pBlendTarget.push_back(pBlurTarget[0]);//Blur
 		pBlendTarget.push_back(pDiffedTarget[4]);//Emi
+		pBlendTarget.push_back(pDestortionTarget[0]);//Destor;
 		m_pBlendShader->Set_Shader_Texture(pBlendTarget);
 
 		m_blsBlendInit = true;
@@ -248,11 +268,13 @@ HRESULT CRenderer::Render_Blend()
 	return S_OK;
 }
 
-HRESULT CRenderer::Render_PostPoressing()
+HRESULT CRenderer::Render_PostPoressing(const _float& fTimeDelta)
 {
 
 	Render_DownSampleing();//ºí·¯ ´Ù¿î»ùÇÃ¸µ.
 	Render_Bloom();//ºí·ëÈ¿°ú
+	Render_Destortion(fTimeDelta);//¿Ö°î
+
 	return S_OK;
 }
 
@@ -372,6 +394,9 @@ HRESULT CRenderer::Ready_ShaderPrototype()
 	NULL_CHECK_RETURN(pShader, E_FAIL);
 	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_LightPoint", ID_STATIC, pShader), E_FAIL);
 
+	pShader = CShader_Destortion::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pShader, E_FAIL);
+	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_Destortion", ID_STATIC, pShader), E_FAIL);
 
 	pShader = CShader_Terrain::Create(DEVICE, m_pCommandList);
 	NULL_CHECK_RETURN(pShader, E_FAIL);
@@ -391,6 +416,7 @@ void CRenderer::Free()
 	Safe_Release(m_ShadowDepthTarget);
 	Safe_Release(m_DownSampleTarget);
 	Safe_Release(m_pBloomTarget);
+	Safe_Release(m_pDestortionTarget);
 
 	//ºí·£µå
 	Safe_Release(m_pBlendBuffer);
@@ -410,6 +436,7 @@ void CRenderer::Free()
 	Safe_Release(m_pDebugShader);
 	Safe_Release(m_pDebugTexture);
 	Safe_Release(m_pColorShader);
+
 
 	CLight_Manager::Get_Instance()->Destroy_Instance();
 	Clear_RenderGroup();

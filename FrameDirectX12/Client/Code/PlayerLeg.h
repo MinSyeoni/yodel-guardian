@@ -29,7 +29,7 @@ public:
 	virtual void    Render_ShadowDepth(CShader_Shadow* pShader);
 public:
 	void            Set_Animation(CPlayer::STATE  Animation) { m_eCurAnimationKey = Animation; };
-
+	void            Set_Spine(_float Spine) { m_fSpineAngle = Spine; };
 	vector<vector<_matrix>> GetLegMatrix() { return m_vecMatrix; };
 	void SetArmMatrix(vector<vector<_matrix>> Matrix) { m_vecArmMatrix = Matrix; };
 

@@ -24,9 +24,19 @@ private:
 	[ Value ]
 	______________________________________________________________________*/
 	CPlayer* m_pPlayer = nullptr;
+	_matrix* m_pPlayerMatrix = nullptr;
+	CPlayerArm* m_pPlayerArm = nullptr;
+	CPlayerLeg* m_pPlayerLeg = nullptr;
+
 	_vec3 m_vDir = _vec3{ 0.0f,0.0f,-1.0f };
 
-	_float m_fViewZ = 10.f;
+	_float m_fViewZ = 20.f;
+	_float fRigth = 0.f;
+	_float fUp = 0.f;
+	_float fLook = 0.f;
+	
+	_matrix* m_pmatArmCamera = nullptr;
+	_matrix* m_pmatLegCamera = nullptr;
 public:
 	virtual CGameObject*	Clone_GameObject(void* pArg);
 	static CDynamicCamera*	Create(ID3D12Device* pGraphicDevice,

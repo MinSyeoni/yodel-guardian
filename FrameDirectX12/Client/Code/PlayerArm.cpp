@@ -63,6 +63,7 @@ _int CPlayerArm::Update_GameObject(const _float & fTimeDelta)
 		m_ePreAnimationKey = m_eCurAnimationKey;
 	}
 
+
 	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)m_eCurAnimationKey);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f*fTimeDelta, CAniCtrl::PLAYER, m_fSpineAngle);
 	return NO_EVENT;

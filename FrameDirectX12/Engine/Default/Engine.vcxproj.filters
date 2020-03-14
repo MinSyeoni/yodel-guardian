@@ -196,6 +196,12 @@
     <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\05.NaviBuffer">
       <UniqueIdentifier>{1064cd2e-fab3-427b-bc4f-10d6cd8beb3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\05.Shader\09.Shader_Destortion">
+      <UniqueIdentifier>{3a3ed828-edda-4c3b-946d-fd55d3fd77c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.RenderTarget\DistortionTarget">
+      <UniqueIdentifier>{41069fc3-9478-4eb4-9dd6-e6727ef361bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\Engine_Functor.h">
@@ -399,6 +405,12 @@
     <ClInclude Include="..\Code\NaviBuffer.h">
       <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\05.NaviBuffer</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\DistortionTarget.h">
+      <Filter>01.Utility\03.RenderTarget\DistortionTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Shader_Destortion.h">
+      <Filter>01.Utility\05.Shader\09.Shader_Destortion</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\DirectInput.cpp">
@@ -572,6 +584,12 @@
     <ClCompile Include="..\Code\NaviBuffer.cpp">
       <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\05.NaviBuffer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\DistortionTarget.cpp">
+      <Filter>01.Utility\03.RenderTarget\DistortionTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shader_Destortion.cpp">
+      <Filter>01.Utility\05.Shader\09.Shader_Destortion</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\Bin\Shader\Shader_ColorBuffer.hlsl">
@@ -600,6 +618,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Bin\Shader\Shader_Blur.hlsl">
       <Filter>01.Utility\05.Shader\08.Shader_Blur</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Bin\Shader\Shader_Destortion.hlsl">
+      <Filter>01.Utility\05.Shader\09.Shader_Destortion</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

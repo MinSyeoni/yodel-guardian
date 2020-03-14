@@ -39,7 +39,7 @@ public:
 public:
 	void			   Render_Mesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix,_int CBOffset=0 ,_int MeshNum = 0,_bool Draw = true);
 	void               Render_ShadowMesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix,bool blsBone=false);
-	
+	void               Render_Destortion(CShader* pShader);
 private:
 	vector<ID3DBlob*>		m_vecVB_CPU;
 	vector<ID3DBlob*>		m_vecIB_CPU;

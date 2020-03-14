@@ -203,7 +203,7 @@ void CShadowDepthTarget::SetUp_ConstateTable()
 	matWorld._22 = 60.f;
 	matWorld._33 = 1.f;
 	matWorld._41 = (80) - WINSIZEX * 0.5f;
-	matWorld._42 = (-315) + WINSIZEY * 0.5f;
+	matWorld._42 = (-300) + WINSIZEY * 0.5f;
 
 
 

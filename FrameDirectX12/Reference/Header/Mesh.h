@@ -22,6 +22,8 @@ public:
 	vector<vector<_matrix>> ExtractBoneTransforms(float fanimationTime,CAniCtrl::STATE eState = CAniCtrl::NONE,_float fAngle=0.f);
 	void			   Render_Mesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix= vector<vector<_matrix>>(),_int iCBoffset=0,_int MeshId=0,bool Draw =true);
 	void               Render_ShadowMesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix = vector<vector<_matrix>>(), bool blsBone = false);
+	void               Render_Destortion(CShader* pMesh);
+
 
 	void Set_Animation(_int Animation);
 

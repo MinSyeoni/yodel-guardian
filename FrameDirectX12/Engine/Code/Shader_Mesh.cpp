@@ -32,6 +32,10 @@ HRESULT CShader_Mesh::Ready_Shader(STATETYPE eType)
 	{
 		m_bIsZwrite = false;
 	}
+	if (m_eType == ALPHA)
+	{
+		m_bIsAlphaBlend = true;
+	}
 	FAILED_CHECK_RETURN(Create_PipelineState(), E_FAIL);
 
 	return S_OK;
@@ -176,9 +180,6 @@ void CShader_Mesh::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTextur
 
 	 m_pCB_TextureInfo = new CUploadBuffer<CB_TEXTURE_INFO>(DEVICE, 15, true);
 
-
-	 CGraphicDevice::Get_Instance()->Wait_ForGpuComplete();
-
 	CGraphicDevice::Get_Instance()->End_ResetCmdList();
 }
 
@@ -292,10 +293,10 @@ D3D12_BLEND_DESC CShader_Mesh::Create_BlendState()
 	ZeroMemory(&BlendDesc, sizeof(D3D12_BLEND_DESC));
 	BlendDesc.AlphaToCoverageEnable = FALSE;
 	BlendDesc.IndependentBlendEnable = FALSE;
-	BlendDesc.RenderTarget[0].BlendEnable = TRUE;
+	BlendDesc.RenderTarget[0].BlendEnable = m_bIsAlphaBlend;
 	BlendDesc.RenderTarget[0].LogicOpEnable = FALSE;
-	BlendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_ONE;
-	BlendDesc.RenderTarget[0].DestBlend = D3D12_BLEND_ZERO;
+	BlendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
+	BlendDesc.RenderTarget[0].DestBlend = D3D12_BLEND_DEST_ALPHA;
 	BlendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
 	BlendDesc.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
 	BlendDesc.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;

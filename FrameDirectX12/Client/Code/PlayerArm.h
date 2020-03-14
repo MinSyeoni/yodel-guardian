@@ -32,8 +32,11 @@ public:
 
 	void SetPlayerTransform(CTransform* pTransform) { m_pTransCom = pTransform; m_pTransCom->AddRef(); };
 	vector<vector<_matrix>> GetArmMatrix() { return m_vecMatrix; };
-	void SetLegMatrix(vector<vector<_matrix>> Matrix) { m_vecLegMatrix = Matrix;	AnimationBlending();
-	};
+	void SetLegMatrix(vector<vector<_matrix>> Matrix) { m_vecLegMatrix = Matrix;	AnimationBlending();};
+
+	void            Set_Spine(_float Spine) { m_fSpineAngle = Spine; };
+
+
 public:
 	void            Set_Animation(CPlayer::STATE  Animation) { m_eCurAnimationKey = Animation;};
 private:

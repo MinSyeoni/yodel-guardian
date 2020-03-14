@@ -29,7 +29,7 @@ public:
 	virtual _int	Update_GameObject(const _float& fTimeDelta);
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void	Render_GameObject(const _float& fTimeDelta);
-
+	virtual void    Render_Distortion(const _float& fTimeDelta);
 	virtual void  Render_ShadowDepth(CShader_Shadow* pShader);
 protected:
 	virtual HRESULT Add_Component();

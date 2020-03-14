@@ -5,6 +5,7 @@
 #include "CubeObject.h"
 #include "Terrain.h"
 #include "StaticObject.h"
+#include "GlassObject.h"
 #include "Dynamic_Object.h"
 #include "Player.h"
 #include "LightMgr.h"
@@ -25,8 +26,8 @@ HRESULT CScene_Stage::Ready_LightInfo()
 {
 	D3DLIGHT tagLight;
 	tagLight.m_eType = LIGHTTYPE::D3DLIGHT_DIRECTIONAL;
-	tagLight.m_vDiffuse = _vec4{ 0.1f,0.1f,0.1f,1.0f };
-	tagLight.m_vAmbient = _vec4{ 0.1f,0.1f,0.1f,1.0f };
+	tagLight.m_vDiffuse = _vec4{ 1.0f,1.0f,1.0f,1.0f };
+	tagLight.m_vAmbient = _vec4{ 0.2f,0.2f,0.2f,1.0f };
 	tagLight.m_vSpecular = _vec4{ 0.7f,0.7f,0.7f,1.0f };
 	tagLight.m_vDirection= _vec4{ -1.0f,-1.0f,1.f,1.0f };
 	if(FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &tagLight)))
@@ -42,8 +43,8 @@ HRESULT CScene_Stage::Ready_LightInfo()
 	tagLight.m_fRange = 100.f;
 
 
-	//if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &tagLight)))
-	//	return E_FAIL;
+	if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &tagLight)))
+		return E_FAIL;
 
 
 	return S_OK;
@@ -111,6 +112,11 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = CPistol::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Pistol", pGameObject), E_FAIL);
+
+	pGameObject = CGlassObject::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_GlassObject", pGameObject), E_FAIL);
+
 
 	return S_OK;
 }
@@ -189,8 +195,17 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_StaticObject", L"Static", &tMeshInfo), E_FAIL);
 
-
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Pistol", L"Weapon", &tMeshInfo), E_FAIL);
+
+
+
+	tMeshInfo.MeshTag = L"Mesh_Temp";
+	tMeshInfo.Pos = _vec3(300.f, 10.f, 320.f);
+	tMeshInfo.Rotation = _vec3(0.f, 0.f, 0.f);
+	tMeshInfo.Scale = _vec3(0.1f, 0.1f, 0.1f);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_GlassObject", L"Static", &tMeshInfo), E_FAIL);
+
+
 	return S_OK;
 		
 }

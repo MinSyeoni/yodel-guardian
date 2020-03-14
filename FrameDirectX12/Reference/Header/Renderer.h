@@ -15,6 +15,7 @@
 #include "Shader_DefaultTex.h"
 #include "NaviMesh.h"
 #include "Shader_ColorBuffer.h"
+#include "DistortionTarget.h"
 
 BEGIN(Engine)
 
@@ -26,12 +27,13 @@ class ENGINE_DLL CRenderer : public CBase
 	DECLARE_SINGLETON(CRenderer)
 
 public:
-	enum RENDERGROUP 
+	enum RENDERGROUP
 	{
 		RENDER_SHADOWDEPTH,
 		RENDER_PRIORITY,
 		RENDER_NONALPHA,
 		RENDER_ALPHA,
+		RENDER_DESTORTION,
 		RENDER_UI,
 		RENDER_FONT,
 		RENDER_END
@@ -48,6 +50,7 @@ public:
 	HRESULT Add_NaviGroup(CNaviMesh* pNavi);
 	void	Render_Renderer(const _float& fTimeDelta);
 private:
+	HRESULT Render_Destortion(const _float& fTimeDelta);
 	HRESULT Render_ShadowDepth();
 	HRESULT Render_LightAcc();
 	HRESULT	Render_Priority(const _float& fTimeDelta);
@@ -56,13 +59,13 @@ private:
 	HRESULT	Render_UI(const _float& fTimeDelta);
 	HRESULT	Render_Font(const _float& fTimeDelta);
 	HRESULT Render_Blend();
-	HRESULT Render_PostPoressing();
+	HRESULT Render_PostPoressing(const _float& fTimeDelta);
 	HRESULT Render_DownSampleing();
 	HRESULT Render_Bloom();
 	HRESULT Render_DebugBuffer();
 public:
 	void	Clear_RenderGroup();
-
+	CTarget* Get_Target() { return m_DifferdTarget; };
 private:
 	HRESULT	Ready_ShaderPrototype();
 
@@ -108,7 +111,8 @@ private:
 
 	CTexture* m_pDebugTexture;
 	_bool m_bIsDebugInit;
-
+private:
+	CDistortionTarget* m_pDestortionTarget;
 
 private:
 	virtual void		Free();

@@ -61,6 +61,15 @@ HRESULT CPlayer::Ready_GameObject()
 	 
 	 m_pStatus = new CPlayerStatus();
 	 m_pStatus->SetMesh(static_cast<CMesh*>(m_pArm->Get_Component(L"Com_Mesh",ID_STATIC)));
+
+
+	 m_pTransCom->m_vPos = _vec3(300.f, 0.f, 300.f);
+	 m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
+	 m_pTransCom->m_vDir = _vec3(1.f, 0.0f, 0.f);
+
+	 m_pTransCom->m_matWorld._41 = 300.f;
+	 m_pTransCom->m_matWorld._42 = 0.f;
+	 m_pTransCom->m_matWorld._43 = 300.f;
 	return S_OK;
 }
 
@@ -69,9 +78,7 @@ HRESULT CPlayer::LateInit_GameObject()
 #ifdef _DEBUG
 	COUT_STR("LateInit Player");
 #endif
-	m_pTransCom->m_vPos = _vec3(300.f, 0.f, 300.f);
-	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
-	m_pTransCom->m_vDir = _vec3(1.f, 0.0f, 0.f);
+
 	return S_OK;
 
 }
@@ -84,7 +91,7 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 
 	m_pStatus->UpdateState(fTimeDelta, m_pTransCom);
 
-
+	m_fSpineAngle = m_pStatus->Get_Spine();
 	UpdateParts(fTimeDelta);
 	m_pArm->Set_Animation(m_eCurState);
 	m_pLeg->Set_Animation(m_eCurState);
@@ -96,7 +103,8 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 
 void CPlayer::UpdateParts(const _float & fTimeDelta)
 {
-
+	m_pArm->Set_Spine(m_fSpineAngle);
+	m_pLeg->Set_Spine(m_fSpineAngle);
 
 	m_pArm->Update_GameObject(fTimeDelta);
 	m_pLeg->Update_GameObject(fTimeDelta);

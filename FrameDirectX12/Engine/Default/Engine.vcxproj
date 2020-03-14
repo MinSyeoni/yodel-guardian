@@ -193,6 +193,7 @@ call CopyEngine.bat</Command>
     <ClInclude Include="..\Code\DDSTextureLoader.h" />
     <ClInclude Include="..\Code\DirectInput.h" />
     <ClInclude Include="..\Code\DirectSound.h" />
+    <ClInclude Include="..\Code\DistortionTarget.h" />
     <ClInclude Include="..\Code\DownSampleTarget.h" />
     <ClInclude Include="..\Code\Font.h" />
     <ClInclude Include="..\Code\Frame.h" />
@@ -222,6 +223,7 @@ call CopyEngine.bat</Command>
     <ClInclude Include="..\Code\Shader_ColorBuffer.h" />
     <ClInclude Include="..\Code\Shader_Default.h" />
     <ClInclude Include="..\Code\Shader_DefaultTex.h" />
+    <ClInclude Include="..\Code\Shader_Destortion.h" />
     <ClInclude Include="..\Code\Shader_DownSample.h" />
     <ClInclude Include="..\Code\Shader_LightAcc.h" />
     <ClInclude Include="..\Code\Shader_Mesh.h" />
@@ -262,6 +264,7 @@ call CopyEngine.bat</Command>
     <ClCompile Include="..\Code\DDSTextureLoader.cpp" />
     <ClCompile Include="..\Code\DirectInput.cpp" />
     <ClCompile Include="..\Code\DirectSound.cpp" />
+    <ClCompile Include="..\Code\DistortionTarget.cpp" />
     <ClCompile Include="..\Code\DownSampleTarget.cpp" />
     <ClCompile Include="..\Code\Font.cpp" />
     <ClCompile Include="..\Code\Frame.cpp" />
@@ -291,6 +294,7 @@ call CopyEngine.bat</Command>
     <ClCompile Include="..\Code\Shader_ColorBuffer.cpp" />
     <ClCompile Include="..\Code\Shader_Default.cpp" />
     <ClCompile Include="..\Code\Shader_DefaultTex.cpp" />
+    <ClCompile Include="..\Code\Shader_Destortion.cpp" />
     <ClCompile Include="..\Code\Shader_DownSample.cpp" />
     <ClCompile Include="..\Code\Shader_LightAcc.cpp" />
     <ClCompile Include="..\Code\Shader_Mesh.cpp" />
@@ -311,6 +315,7 @@ call CopyEngine.bat</Command>
     <FxCompile Include="..\..\Bin\Shader\Shader_Blur.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_ColorBuffer.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_Default.hlsl" />
+    <FxCompile Include="..\..\Bin\Shader\Shader_Destortion.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_DownSample.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_LightAcc.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_Mesh.hlsl" />
