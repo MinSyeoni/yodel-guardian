@@ -96,6 +96,7 @@ public:
 	void Modify_NaviPointCell(bool& retflag);
 
 	void				Create_NaviPointCell(bool& retflag);
+	void				Check_ClockDirection(bool& retflag);
 	void				Get_TerrainInfo();
 	void				Picking_MouseOnCollider(bool& retflag);
 	void				Picking_MeshOnStaticObject(bool& retflag);
