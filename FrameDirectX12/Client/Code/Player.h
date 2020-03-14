@@ -12,7 +12,9 @@ class CPlayerStatus;
 class CPlayer : public Engine::CGameObject
 {
 public:
-	enum STATE {IDLE, WALK,FIRE,EE};
+	enum STATE {IDLE, WALK};
+	enum LEGSTATE {LEGIDLE,LEGNORTH,LEGSOUTH,LEGWEST,LEGEAST};
+
 
 private:
 	explicit CPlayer(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);

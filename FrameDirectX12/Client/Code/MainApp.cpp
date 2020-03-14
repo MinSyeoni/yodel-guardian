@@ -30,7 +30,7 @@ HRESULT CMainApp::Ready_MainApp()
 {
 	srand(unsigned int(time(nullptr)));
 
-	FAILED_CHECK_RETURN(SetUp_DefaultSetting(CGraphicDevice::MODE_FULL, WINCX, WINCY), E_FAIL);
+	FAILED_CHECK_RETURN(SetUp_DefaultSetting(CGraphicDevice::MODE_WIN, WINCX, WINCY), E_FAIL);
 	FAILED_CHECK_RETURN(SetUp_ComponentPrototype(), E_FAIL);
 	FAILED_CHECK_RETURN(SetUp_Resource(),E_FAIL);
 	FAILED_CHECK_RETURN(SetUp_Font(),E_FAIL);
@@ -82,8 +82,7 @@ _int CMainApp::Update_MainApp(const _float & fTimeDelta)
 
 	if (m_fTime >= 1.0f)
 	{
-		wsprintf(m_szFPS, L"FPS : %d", m_uiFPS);
-		m_pFont_FPS->Set_Text(wstring(m_szFPS));
+
 
 		m_fTime = 0.0f;
 		m_uiFPS = 0;

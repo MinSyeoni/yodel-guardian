@@ -1,2 +1,34 @@
-﻿  Client.cpp
-  Client.vcxproj -> C:\Users\Huijun\Desktop\이걸로작업\yodel-guardian\FrameDirectX12\Client\Default\../Release\Client.exe
+﻿  stdafx.cpp
+  BackGround.cpp
+  CubeObject.cpp
+  DynamicCamera.cpp
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\client\code\dynamiccamera.cpp(96): warning C4101: 'dwMouseMove' :참조되지 않은 지역 변수입니다.
+  Dynamic_Object.cpp
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\client\code\dynamic_object.cpp(135): warning C4101: 'tCB_BoneInfo' :참조되지 않은 지역 변수입니다.
+  GlassObject.cpp
+  Loading.cpp
+  MainApp.cpp
+  Pistol.cpp
+  Player.cpp
+  PlayerArm.cpp
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\client\code\playerarm.cpp(175): warning C4101: 'tCB_BoneInfo' :참조되지 않은 지역 변수입니다.
+  PlayerLeg.cpp
+  PlayerStatus.cpp
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\client\code\playerstatus.cpp(76): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\client\code\playerstatus.cpp(76): warning C4309: '인수': 상수 값이 잘립니다.
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\client\code\playerstatus.cpp(123): warning C4101: 'matRot' :참조되지 않은 지역 변수입니다.
+  RectObject.cpp
+  Scene_Logo.cpp
+  Scene_Menu.cpp
+  Scene_Stage.cpp
+  SkyDome.cpp
+  StaticObject.cpp
+  Terrain.cpp
+  Weapon.cpp
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\client\code\weapon.cpp(55): warning C4101: 'tCB_BoneInfo' :참조되지 않은 지역 변수입니다.
+  코드를 생성하고 있습니다...
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\client\code\weapon.cpp(30): warning C4715: 'CWeapon::AddComponent': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  컴파일하고 있습니다...
+  Client.cpp
+  코드를 생성하고 있습니다...
+  Client.vcxproj -> C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Client\Default\../Release\Client.exe
