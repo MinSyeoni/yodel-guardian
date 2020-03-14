@@ -8,7 +8,10 @@
 #include "Export_Function.h"
 #include "Terrain.h"
 #include "ToolCamera.h"
+#include "ToolPoint.h"
+#include "ToolCell.h"
 #include "MapTab.h"
+#include "NaviTab.h"
 #include "Myform.h"
 
 BEGIN(Engine)
@@ -82,10 +85,19 @@ private:
 	_vec3					m_vMeshRot = { 0.f,0.f,0.f };
 
 	CMapTab*				m_pMapTab = nullptr;
+	CNaviTab*				m_pNaviTab = nullptr;
+	CMyform*				m_pMyForm = nullptr;
+
+	_int					m_iIdxCnt = 0;
 
 public:
 	afx_msg void		OnLButtonDown(UINT nFlags, CPoint point);
-	void Picking_MouseOnCollider(bool& retflag);
+
+	void Modify_NaviPointCell(bool& retflag);
+
+	void				Create_NaviPointCell(bool& retflag);
+	void				Get_TerrainInfo();
+	void				Picking_MouseOnCollider(bool& retflag);
 	void				Picking_MeshOnStaticObject(bool& retflag);
 	void				Picking_MouseOnStaticObject(bool& retflag);
 	void				Picking_TerrainOnStaticObject(bool& retflag);

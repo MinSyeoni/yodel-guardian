@@ -25,6 +25,11 @@ public:
 	const _vec3&		Get_AddPos(void)		{ return m_vAddPos; }
 	const _vec3&		Get_AddAngle(void)		{ return m_vAngle; }
 	const _vec3&		Get_Scale(void)			{ return m_vScale; }
+	const _vec3&		Get_Pos(void)			{
+		return _vec3{ m_matPariOriWorld._41, m_matPariOriWorld._42, m_matPariOriWorld._43 };
+	}
+
+
 	const _vec3*		Get_Min(void);
 	const _vec3*		Get_Max(void);
 

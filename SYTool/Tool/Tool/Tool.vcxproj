@@ -216,6 +216,7 @@
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MapTab.h" />
     <ClInclude Include="Myform.h" />
+    <ClInclude Include="NaviTab.h" />
     <ClInclude Include="ObjMgr.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PickingMgr.h" />
@@ -225,7 +226,9 @@
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Tool.h" />
     <ClInclude Include="ToolCamera.h" />
+    <ClInclude Include="ToolCell.h" />
     <ClInclude Include="ToolDoc.h" />
+    <ClInclude Include="ToolPoint.h" />
     <ClInclude Include="ToolView.h" />
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +236,7 @@
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MapTab.cpp" />
     <ClCompile Include="Myform.cpp" />
+    <ClCompile Include="NaviTab.cpp" />
     <ClCompile Include="ObjMgr.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -245,7 +249,9 @@
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Tool.cpp" />
     <ClCompile Include="ToolCamera.cpp" />
+    <ClCompile Include="ToolCell.cpp" />
     <ClCompile Include="ToolDoc.cpp" />
+    <ClCompile Include="ToolPoint.cpp" />
     <ClCompile Include="ToolView.cpp" />
   </ItemGroup>
   <ItemGroup>

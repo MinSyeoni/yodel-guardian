@@ -124,6 +124,10 @@ HRESULT CStaticObject::Add_Component(void)
 
 void CStaticObject::Free(void)
 {
+	Engine::Safe_Release(m_pTransCom);
+	Engine::Safe_Release(m_pCalculatorCom);
+	Engine::Safe_Release(m_pMeshCom);
+	Engine::Safe_Release(m_pShaderCom);
 	Engine::CGameObject::Free();
 }
 

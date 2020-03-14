@@ -58,6 +58,7 @@ CToolView::~CToolView()
 
 	CPickingMgr::GetInstance()->DestroyInstance();
 	Engine::CKeyMgr::GetInstance()->DestroyInstance();
+
 	Engine::CGraphicDev::GetInstance()->DestroyInstance();
 }
 
@@ -169,6 +170,7 @@ _int CToolView::Update_MainApp(const _float& fTimeDelta)
 	CObjMgr::GetInstance()->Update_Object(fTimeDelta);
 	CToolCamera::GetInstance()->Update_Camera(fTimeDelta);
 
+
 	return iExitCode;
 }
 
@@ -176,8 +178,6 @@ HRESULT CToolView::Ready_MainApp()
 {
 	if (FAILED(Ready_Default_Setting(CGraphicDev::MODE_WIN, g_iWinCX, g_iWinCY)))
 		return E_FAIL;
-
-
 	return NOERROR;
 }
 
@@ -216,7 +216,9 @@ void CToolView::OnInitialUpdate()
 
 	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
 	CToolView* pToolView = dynamic_cast<CToolView*>(pMainFrm->m_MainSplitWnd.GetPane(0, 1));
-	m_pMapTab = dynamic_cast<CMyform*>(pMainFrm->m_MainSplitWnd.GetPane(0, 0))->m_pMapTab;
+	m_pMyForm = dynamic_cast<CMyform*>(pMainFrm->m_MainSplitWnd.GetPane(0, 0));
+	m_pMapTab = m_pMyForm->m_pMapTab;
+	m_pNaviTab = m_pMyForm->m_pNaviTab;
 }
 
 void CToolView::Initalize_Object()
@@ -295,36 +297,166 @@ void CToolView::Ready_Buffer_Setting()
 void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	m_pMapTab->UpdateData(TRUE);
-
-	if (0 == m_pMapTab->m_iObjToolMode)	// 생성 모드
+	if (0 == m_pMyForm->m_iCurTab)
 	{
-		bool retflag;
-		Picking_TerrainOnStaticObject(retflag);
-		Picking_MeshOnStaticObject(retflag);
-		if (retflag) return;
-	}
-	else // 수정, 삭제 시 메쉬 클릭
-	{
-		if (true == m_pMapTab->m_bIsColliderMode)
+		m_pMapTab->UpdateData(TRUE);	// MapTab
+		if (0 == m_pMapTab->m_iObjToolMode)	// 생성 모드
 		{
 			bool retflag;
-			Picking_MouseOnCollider(retflag);
+			Picking_TerrainOnStaticObject(retflag);
+			Picking_MeshOnStaticObject(retflag);
 			if (retflag) return;
 		}
-		else
+		else // 수정, 삭제 시 메쉬 클릭
+		{
+			if (true == m_pMapTab->m_bIsColliderMode)
+			{
+				bool retflag;
+				Picking_MouseOnCollider(retflag);
+				if (retflag) return;
+			}
+			else
+			{
+				bool retflag;
+				Picking_MouseOnStaticObject(retflag);
+				if (retflag) return;
+			}
+		}
+		m_pMapTab->UpdateData(FALSE);
+	}
+	else if (1 == m_pMyForm->m_iCurTab)
+	{
+		m_pNaviTab->UpdateData(TRUE);	// NaviTab
+		if (0 == m_pNaviTab->m_iCurNaviMode)	// 생성 모드
 		{
 			bool retflag;
-			Picking_MouseOnStaticObject(retflag);
+			Get_TerrainInfo();
+			if (nullptr != CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_OBJECT))
+			{
+				_float fDistTemp = 10000000.f;
+				_float fFixDist = 0.f;
+				list<Engine::CGameObject*> pObjLst = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_OBJECT);
+				for (auto& pObject : pObjLst)
+				{
+					Engine::CTransform* pTransCom = dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom();
+
+					if (CPickingMgr::GetInstance()->IsCheckStaticObjgectMesh(
+						dynamic_cast<CStaticObject*>(pObject),
+						*pTransCom->Get_WorldMatrix(),
+						&fDistTemp,
+						&m_vMeshPos))
+					{
+						if (fFixDist <= fDistTemp)
+							fDistTemp = fFixDist;
+						break;
+					}
+				}
+			}			
+			Create_NaviPointCell(retflag);
 			if (retflag) return;
 		}
+		else if (1 == m_pNaviTab->m_iCurNaviMode)	// 수정 모드
+		{
+			bool retflag;
+			Modify_NaviPointCell(retflag);
+			if (retflag) return;
+		}
+		m_pNaviTab->UpdateData(FALSE);
 	}
-
-	m_pMapTab->UpdateData(FALSE);
 
 	CView::OnLButtonDown(nFlags, point);
 }
 
+void CToolView::Modify_NaviPointCell(bool& retflag)
+{
+	retflag = true;
+	if (m_pNaviTab->m_pPointLst.empty() || m_pNaviTab->m_pCellLst.empty())
+		retflag = false;
+
+	int iTmp = 0;
+	for (auto& pPoint : m_pNaviTab->m_pPointLst)
+	{
+		if (true == CPickingMgr::GetInstance()->IsCheckSphereCollider(pPoint->m_pSphereCol))
+		{
+			pPoint->Set_CheckPoint(true); 
+			m_pNaviTab->m_pPointTmp = pPoint;
+		}
+		if (false == CPickingMgr::GetInstance()->IsCheckSphereCollider(pPoint->m_pSphereCol))
+			pPoint->Set_CheckPoint(false);
+		iTmp++;
+	}
+
+	for (auto& pPoint : m_pNaviTab->m_pPointLst)
+	{
+		if (nullptr == m_pNaviTab->m_pPointTmp)
+			return;
+
+		if(pPoint == m_pNaviTab->m_pPointTmp)
+			m_pNaviTab->Get_NaviPointPos();
+	}
+
+	retflag = false;
+}
+
+void CToolView::Create_NaviPointCell(bool& retflag)
+{
+	retflag = true;
+	CString	strIndex = L"";
+
+	if (!m_pNaviTab->m_pPointLst.empty())	// 겹치게 찍었을 때
+	{
+		for (auto& pPoint : m_pNaviTab->m_pPointLst)
+		{
+			if (true == CPickingMgr::GetInstance()->IsCheckSphereCollider(pPoint->m_pSphereCol))
+			{
+				m_vMeshPos = pPoint->m_pSphereCol->Get_Pos();
+				break;
+			}
+		}
+	}
+
+	m_pNaviTab->m_vNaviPos = m_vMeshPos;
+	m_pNaviTab->m_fPosX = m_vMeshPos.x;
+	m_pNaviTab->m_fPosY = m_vMeshPos.y;
+	m_pNaviTab->m_fPosZ = m_vMeshPos.z;
+
+	m_pNaviTab->m_pToolPoint[m_iIdxCnt] = CToolPoint::Create(m_pGraphicDev->GetDevice(), m_vMeshPos);
+	CObjMgr::GetInstance()->AddObject(m_pNaviTab->m_pToolPoint[m_iIdxCnt], CObjMgr::OBJ_POINT);
+	m_pNaviTab->m_pPointLst.push_back(m_pNaviTab->m_pToolPoint[m_iIdxCnt]);
+
+	m_iIdxCnt++;
+
+	if (3 == m_iIdxCnt)
+	{
+		m_pNaviTab->m_pToolCell = CToolCell::Create(m_pGraphicDev->GetDevice(),
+			m_pNaviTab->m_pToolPoint[0], m_pNaviTab->m_pToolPoint[1], m_pNaviTab->m_pToolPoint[2]);
+		CObjMgr::GetInstance()->AddObject(m_pNaviTab->m_pToolCell, CObjMgr::OBJ_CELL);
+		m_pNaviTab->m_pCellLst.push_back(m_pNaviTab->m_pToolCell);
+
+		strIndex.Format(L"%d번 Cell", m_pNaviTab->m_iCellCnt);
+		m_pNaviTab->m_NaviList.InsertString(m_pNaviTab->m_iCellCnt, strIndex);
+		m_pNaviTab->m_iCellCnt++;
+
+		m_iIdxCnt = 0;
+	}
+
+	retflag = false;
+}
+
+void CToolView::Get_TerrainInfo()
+{
+	if (nullptr == CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN))
+	{
+		MessageBox(L"피킹 할 Terrain 없다 만들어라");
+		return;
+	}
+	Engine::CGameObject* pObj = CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN);
+	Engine::CTerrainTex* pBufferCom = dynamic_cast<CTerrain*>(pObj)->Get_BufferCom();
+	Engine::CTransform* pTransCom = dynamic_cast<CTerrain*>(pObj)->Get_TransCom();
+
+	CPickingMgr::GetInstance()->SetTerrainSize(m_pMapTab->m_iCntX, m_pMapTab->m_iCntZ);
+	CPickingMgr::GetInstance()->PickingTerrain(&m_vMeshPos, pBufferCom->m_pVtxTexOrigin, pTransCom->Get_WorldMatrix());
+}
 void CToolView::Picking_MouseOnCollider(bool& retflag)
 {
 	retflag = true;
@@ -365,18 +497,17 @@ void CToolView::Picking_MouseOnCollider(bool& retflag)
 
 			m_pMapTab->m_pPickCollider = (*iter);
 			m_pMapTab->m_bIsPickingCollider = true;
-			break;
+		//	break;
 		}
 		else
 		{
 			(*iter)->Set_ColType(CToolCollider::COL_FALSE);
 			m_pMapTab->m_bIsPickingCollider = false;
-			iter++;
 		}
+		iter++;
 	}
 	retflag = false;
 }
-
 void CToolView::Picking_MeshOnStaticObject(bool& retflag)
 {
 	retflag = true;
@@ -417,7 +548,6 @@ void CToolView::Picking_MeshOnStaticObject(bool& retflag)
 	}
 	retflag = false;
 }
-
 void CToolView::Picking_MouseOnStaticObject(bool& retflag)
 {
 	retflag = true;
@@ -474,21 +604,10 @@ void CToolView::Picking_MouseOnStaticObject(bool& retflag)
 	}
 	retflag = false;
 }
-
 void CToolView::Picking_TerrainOnStaticObject(bool& retflag)
 {
 	retflag = true;
-	if (nullptr == CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN))
-	{
-		MessageBox(L"피킹 할 Terrain 없다 만들어라");
-		return;
-	}
-	Engine::CGameObject* pObj = CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN);
-	Engine::CTerrainTex* pBufferCom = dynamic_cast<CTerrain*>(pObj)->Get_BufferCom();
-	Engine::CTransform* pTransCom = dynamic_cast<CTerrain*>(pObj)->Get_TransCom();
-
-	CPickingMgr::GetInstance()->SetTerrainSize(m_pMapTab->m_iCntX, m_pMapTab->m_iCntZ);
-	CPickingMgr::GetInstance()->PickingTerrain(&m_vMeshPos, pBufferCom->m_pVtxTexOrigin, pTransCom->Get_WorldMatrix());
+	Get_TerrainInfo();
 
 	m_pMapTab->m_vMeshPos = m_vMeshPos;
 	m_pMapTab->m_fPosX = m_vMeshPos.x;

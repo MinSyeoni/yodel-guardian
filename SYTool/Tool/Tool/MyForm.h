@@ -4,8 +4,10 @@
 
 // CMyform 폼 보기
 #include "MapTab.h"
+#include "NaviTab.h"
 
 class CMapTab;
+class CNaviTab;
 class CMyform : public CFormView
 {
 	DECLARE_DYNCREATE(CMyform)
@@ -35,12 +37,16 @@ public:
 	//CMapTab		 Get_MapTab() { return m_pMapTab; };
 
 	CMapTab*	m_pMapTab = nullptr;
+	CNaviTab*	m_pNaviTab = nullptr;
+
+	_int		m_iCurTab = 0;	// 0-MAP, 1-NAVI
 private:
 	void		Free();
 
 private:
 	CTabCtrl	m_MainTab;
-
+public:
+	afx_msg void OnTcnSelchangeTab(NMHDR* pNMHDR, LRESULT* pResult);
 };
 
 

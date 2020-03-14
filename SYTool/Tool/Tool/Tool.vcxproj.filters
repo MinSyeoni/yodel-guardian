@@ -52,6 +52,15 @@
     <Filter Include="06.Manager\02.CursorMgr">
       <UniqueIdentifier>{335611b7-58ad-46e3-92ae-ffbf1b3e65a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Tab\01.NaviTool">
+      <UniqueIdentifier>{ba62ef1f-2740-4e7a-b1b3-4a2478973a4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.GameObject\03.ToolCell">
+      <UniqueIdentifier>{a1de2da1-f017-4a27-818d-c428d2091578}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.GameObject\02.ToolPoint">
+      <UniqueIdentifier>{e331643d-c528-47af-afb2-6977f664cca4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainFrm.h">
@@ -117,6 +126,15 @@
     <ClInclude Include="CursorMgr.h">
       <Filter>06.Manager\02.CursorMgr</Filter>
     </ClInclude>
+    <ClInclude Include="NaviTab.h">
+      <Filter>04.Tab\01.NaviTool</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolCell.h">
+      <Filter>05.GameObject\03.ToolCell</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolPoint.h">
+      <Filter>05.GameObject\02.ToolPoint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainFrm.cpp">
@@ -157,6 +175,15 @@
     </ClCompile>
     <ClCompile Include="CursorMgr.cpp">
       <Filter>06.Manager\02.CursorMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="NaviTab.cpp">
+      <Filter>04.Tab\01.NaviTool</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolCell.cpp">
+      <Filter>05.GameObject\03.ToolCell</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolPoint.cpp">
+      <Filter>05.GameObject\02.ToolPoint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

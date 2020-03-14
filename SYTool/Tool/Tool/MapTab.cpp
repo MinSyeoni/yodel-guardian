@@ -261,6 +261,8 @@ void CMapTab::Initialize_String()
 void CMapTab::OnBnClickedSetTexture()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	if (nullptr == CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN))
+		return;
 
 	if (0 == m_iTexToolMode)
 		Change_TerrainTexture();

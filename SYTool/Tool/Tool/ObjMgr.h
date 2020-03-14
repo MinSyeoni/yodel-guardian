@@ -12,8 +12,7 @@ class CObjMgr
 {
 	DECLARE_SINGLETON(CObjMgr)
 public:
-	enum OBJ_ID { OBJ_TERRAIN, OBJ_OBJECT, OBJ_DYNAMIC, OBJ_TOOLBRUSH, OBJ_MOUSE,
-		OBJ_ENV, OBJ_SPALTING, OBJ_SPOT, OBJ_CELL, OBJ_COLLIDER, OBJ_END};
+	enum OBJ_ID { OBJ_TERRAIN, OBJ_OBJECT, OBJ_POINT, OBJ_CELL, OBJ_COLLIDER, OBJ_END};
 
 private:
 	CObjMgr(void);
@@ -31,7 +30,8 @@ public:
 	list<Engine::CGameObject*>	GetGameObjectLst(OBJ_ID eId) { return m_ObjLst[eId]; };
 
 private:
-	void Release();
+	void						Release();
+
 public:
 	list<Engine::CGameObject*>  m_ObjLst[OBJ_END];
 };
