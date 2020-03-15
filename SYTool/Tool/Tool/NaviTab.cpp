@@ -201,21 +201,19 @@ void CNaviTab::Get_NaviPointPos()
 void CNaviTab::OnBnClickedNaviDelete()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-
 	if (2 != m_iCurNaviMode)
 	{
 		MessageBox(L"DeleteMode 선택할 것");
 		return;
 	}
 
-	if (m_pPointLst.empty() || m_pCellLst.empty())
+	if (m_pPointLst.empty() || m_pCellLst.empty() 
+		|| CObjMgr::GetInstance()->m_ObjLst[CObjMgr::OBJ_CELL].empty())
 	{
 		MessageBox(L"삭제할 NaviMesh가 없습니다.");
 		return;
 	}
 	
-	for (int i = 0; i < 3; ++i)
-		CObjMgr::GetInstance()->m_ObjLst[CObjMgr::OBJ_POINT].pop_back();
 	CObjMgr::GetInstance()->m_ObjLst[CObjMgr::OBJ_CELL].pop_back();
 
 	int iCurCnt = m_NaviList.GetCount();

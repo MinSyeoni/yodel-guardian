@@ -110,9 +110,9 @@ HRESULT CToolCell::Add_Component(_vec3 Pos)
 
 void CToolCell::Free(void)
 {
-	//Engine::Safe_Release(m_pPointA);
-	//Engine::Safe_Release(m_pPointB);
-	//Engine::Safe_Release(m_pPointC);
+	Engine::Safe_Release(m_pPointA);
+	Engine::Safe_Release(m_pPointB);
+	Engine::Safe_Release(m_pPointC);
 	Engine::Safe_Release(m_pD3DXLine);
 	Engine::Safe_Release(m_pCalculCom);
 	Engine::CGameObject::Free();

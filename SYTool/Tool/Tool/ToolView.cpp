@@ -420,11 +420,7 @@ void CToolView::Create_NaviPointCell(bool& retflag)
 	m_pNaviTab->m_fPosY = m_vMeshPos.y;
 	m_pNaviTab->m_fPosZ = m_vMeshPos.z;
 
-	m_pNaviTab->m_pToolPoint[m_iIdxCnt] = CToolPoint::Create(m_pGraphicDev->GetDevice(), m_vMeshPos);
-	CObjMgr::GetInstance()->AddObject(m_pNaviTab->m_pToolPoint[m_iIdxCnt], CObjMgr::OBJ_POINT);
-	m_pNaviTab->m_pPointLst.push_back(m_pNaviTab->m_pToolPoint[m_iIdxCnt]);
-
-	m_iIdxCnt++;
+	Check_ClockDirection(retflag);
 
 	if (3 == m_iIdxCnt)
 	{
@@ -432,6 +428,7 @@ void CToolView::Create_NaviPointCell(bool& retflag)
 			m_pNaviTab->m_pToolPoint[0], m_pNaviTab->m_pToolPoint[1], m_pNaviTab->m_pToolPoint[2]);
 		CObjMgr::GetInstance()->AddObject(m_pNaviTab->m_pToolCell, CObjMgr::OBJ_CELL);
 		m_pNaviTab->m_pCellLst.push_back(m_pNaviTab->m_pToolCell);
+		CObjMgr::GetInstance()->m_ObjLst[CObjMgr::OBJ_POINT].clear();
 
 		strIndex.Format(L"%d번 Cell", m_pNaviTab->m_iCellCnt);
 		m_pNaviTab->m_NaviList.InsertString(m_pNaviTab->m_iCellCnt, strIndex);
@@ -441,6 +438,89 @@ void CToolView::Create_NaviPointCell(bool& retflag)
 	}
 
 	retflag = false;
+}
+
+void CToolView::Check_ClockDirection(bool& retflag)
+{
+	if (CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_CELL) != nullptr)
+	{
+		int i = 0;
+		for (auto& pSRC : CObjMgr::GetInstance()->m_ObjLst[CObjMgr::OBJ_CELL])
+		{
+			CToolPoint* pToolPoint1 = nullptr;
+			CToolPoint* pToolPoint2 = nullptr;
+
+			int i = 0;
+			if (CObjMgr::GetInstance()->m_ObjLst[CObjMgr::OBJ_POINT].size() == 2)
+			{
+				for (auto& pPoint : CObjMgr::GetInstance()->m_ObjLst[CObjMgr::OBJ_POINT])
+				{
+					if (i == 0)
+						pToolPoint1 = dynamic_cast<CToolPoint*>(pPoint);
+					else
+						pToolPoint2 = dynamic_cast<CToolPoint*>(pPoint);
+					i++;
+				}
+				_vec3 PointAtoB = 
+					pToolPoint2->m_pTransCom->m_vInfo[Engine::INFO_POS]
+					- pToolPoint1->m_pTransCom->m_vInfo[Engine::INFO_POS];
+				_vec3 PointAtoC = m_vMeshPos - pToolPoint1->m_pTransCom->m_vInfo[Engine::INFO_POS];
+				_vec3 Cross;
+				D3DXVec3Cross(&Cross, &PointAtoB, &PointAtoC);
+
+				if (Cross.y < 0)
+				{
+					AfxMessageBox(L"반시계 방향! 시계 방향으로 찍을 것");
+					return;
+				}
+			}
+			m_pNaviTab->m_pToolPoint[m_iIdxCnt] = CToolPoint::Create(m_pGraphicDev->GetDevice(), m_vMeshPos);
+			CObjMgr::GetInstance()->AddObject(m_pNaviTab->m_pToolPoint[m_iIdxCnt], CObjMgr::OBJ_POINT);
+			m_pNaviTab->m_pPointLst.push_back(m_pNaviTab->m_pToolPoint[m_iIdxCnt]);
+			m_iIdxCnt++;
+			return;
+		}
+		m_pNaviTab->m_pToolPoint[m_iIdxCnt] = CToolPoint::Create(m_pGraphicDev->GetDevice(), m_vMeshPos);
+		CObjMgr::GetInstance()->AddObject(m_pNaviTab->m_pToolPoint[m_iIdxCnt], CObjMgr::OBJ_POINT);
+		m_pNaviTab->m_pPointLst.push_back(m_pNaviTab->m_pToolPoint[m_iIdxCnt]);
+		m_iIdxCnt++;
+		return;
+	}
+	else
+	{
+		if (CObjMgr::GetInstance()->m_ObjLst[CObjMgr::OBJ_POINT].size() == 2)
+		{
+			CToolPoint* pToolPoint1 = nullptr;
+			CToolPoint* pToolPoint2 = nullptr;
+			int i = 0;
+
+			for (auto& pPoint : CObjMgr::GetInstance()->m_ObjLst[CObjMgr::OBJ_POINT])
+			{
+				if (i == 0)
+					pToolPoint1 = dynamic_cast<CToolPoint*>(pPoint);
+				else
+					pToolPoint2 = dynamic_cast<CToolPoint*>(pPoint);
+				i++;
+			}
+
+			_vec3 PointAtoB = pToolPoint2->m_pTransCom->m_vInfo[Engine::INFO_POS]
+				- pToolPoint1->m_pTransCom->m_vInfo[Engine::INFO_POS];
+			_vec3 PointAtoC = m_vMeshPos - pToolPoint1->m_pTransCom->m_vInfo[Engine::INFO_POS];
+			_vec3 Cross;
+			D3DXVec3Cross(&Cross, &PointAtoB, &PointAtoC);
+
+			if (Cross.y < 0)
+			{
+				AfxMessageBox(L"반시계 방향! 시계 방향으로 찍을 것");
+				return;
+			}
+		}
+		m_pNaviTab->m_pToolPoint[m_iIdxCnt] = CToolPoint::Create(m_pGraphicDev->GetDevice(), m_vMeshPos);
+		CObjMgr::GetInstance()->AddObject(m_pNaviTab->m_pToolPoint[m_iIdxCnt], CObjMgr::OBJ_POINT);
+		m_pNaviTab->m_pPointLst.push_back(m_pNaviTab->m_pToolPoint[m_iIdxCnt]);
+		m_iIdxCnt++;
+		return;
+	}
 }
 
 void CToolView::Get_TerrainInfo()
