@@ -12,7 +12,7 @@ class CPlayerStatus;
 class CPlayer : public Engine::CGameObject
 {
 public:
-	enum STATE {IDLE, WALK};
+	enum STATE {IDLE, WALKNORTH, WALKSOUTH,WALKWEST,WALKEAST};
 	enum LEGSTATE {LEGIDLE,LEGNORTH,LEGSOUTH,LEGWEST,LEGEAST};
 
 
@@ -51,6 +51,11 @@ private:
 
 	float m_fTime = 0.f;
 	float m_fSpineAngle = 0.f;
+
+//블랜딩수치
+	_float m_fLegBlend = 0.8f;
+	_float m_fArmBlend = 0.2f;
+
 public:
 	virtual CGameObject*	Clone_GameObject(void* prg);
 	static CPlayer*		Create(ID3D12Device* pGraphicDevice,ID3D12GraphicsCommandList* pCommandList);

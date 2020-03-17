@@ -33,8 +33,7 @@ private:
 	CPlayerArm*  m_pPlayerArm;
 	CPlayerLeg*  m_pPlayerLeg;
 
-	_matrix*  m_pPlayerArmMatrix;//상하체해서 둘다 가져와야함.
-	_matrix*  m_pPlayerLegMatrix; //상하체해서 둘다 가져와야함.
+	_matrix*  m_pPlayerArmMatrix;
 	_matrix*  m_pHandleMatrix;
 	_matrix*  m_pPlayerMatrix;
 private:

@@ -19,9 +19,9 @@ CMesh::CMesh(const CMesh & rhs)
 
 
 
-vector<vector<_matrix>> CMesh::ExtractBoneTransforms(float fanimationTime, CAniCtrl::STATE eState, _float fAngle)
+vector<vector<_matrix>> CMesh::ExtractBoneTransforms(float fanimationTime)
 {
-	return m_pAnimationComponent->Extract_BoneTransform(fanimationTime,eState,fAngle);
+	return m_pAnimationComponent->Extract_BoneTransform(fanimationTime);
 }
 
 
@@ -56,6 +56,11 @@ HRESULT CMesh::Ready_Mesh(const _tchar * pFilePath, const _tchar * pFileName)
 	return S_OK;
 }
 
+vector<vector<_matrix>> CMesh::ExtractBoneTransformsBlend(float fanimationTime, float fanimationTimeSub, _float fAngle)
+{
+	return m_pAnimationComponent->Extract_BoneBlendingTransform(fanimationTime,fanimationTimeSub,fAngle);
+}
+
 void CMesh::Render_Mesh(CShader * pMesh,vector<vector<_matrix>> vecBoneMatrix, _int iCBoffset, _int MeshId , bool Draw )
 {
 	m_pMeshComponent->Render_Mesh(pMesh,vecBoneMatrix, iCBoffset, MeshId,Draw);
@@ -78,10 +83,32 @@ void CMesh::Set_Animation(_int Animation)
 		m_pAnimationComponent->Set_AnimationKey(Animation);
 }
 
+void CMesh::Set_AnimationBlend(_int FirstAni, _int SecondAni)
+{
+	if (m_pAnimationComponent != nullptr)
+		m_pAnimationComponent->Set_BlendAnimationKey(FirstAni,SecondAni);
+}
+
+_bool CMesh::Set_IsAniFinsh()
+{
+	return m_pAnimationComponent->Set_IsFinish();
+}
+
+void CMesh::Set_AnimationStart()
+{
+	m_pAnimationComponent->Set_Start();
+	return;
+}
+
 _matrix * CMesh::Find_BoneMatrix(string strBoneName)
 {
 
 	return m_pAnimationComponent->Find_BoneMatrix(strBoneName);
+}
+
+_matrix * CMesh::Find_BoneOffset(string strBoneName)
+{
+	return m_pAnimationComponent->Find_BoneOffset(strBoneName);
 }
 
 

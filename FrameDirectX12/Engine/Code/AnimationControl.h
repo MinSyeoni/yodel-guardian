@@ -48,8 +48,13 @@ public:
 	void               Ready_NodeHierarchy(const aiNode* pNode);
 
 	void               Set_AnimationKey(_int AniKey);
+	void               Set_BlendAnimationKey(_int FirstAniKey, _int SecondAniKey);
+public:
+	_bool  Set_IsFinish();
+	void   Set_Start();
+	vector<VECTOR_MATRIX>   Extract_BoneBlendingTransform(_float fAniTimeFirst,_float fAniTimeSecond,_float fAngle);
+	vector<VECTOR_MATRIX>   Extract_BoneTransform(_float fAnimationTime);
 
-	vector<VECTOR_MATRIX>   Extract_BoneTransform(_float fAnimationTime, STATE eState =NONE, _float fAngle=0.f);
 	_matrix*           Get_RootFrame() { return &m_matRootFinal; };
 	_matrix*           Get_WeaponMatrix() { return &m_matWeapon; };
 	_matrix*           Get_CameraMatrix() { return &m_matCamera; };
@@ -57,6 +62,9 @@ private:
 	void               Update_NodeHierarchy(_float fAnimationTime,
 		const aiNode* pNode,
 		const _matrix& matParentTransform);
+
+	void      Update_NodeHirearchyBlend(_float fAnimationTime, _float fAnimationTimeSub, const aiNode*pNode, const _matrix& matParentTransform);
+
 private:
 	aiNodeAnim*            Find_NodeAnimation(const aiAnimation* pAnimation, const string strNodeName);
 	aiVector3D            Calc_InterPolatedValue_From_Key(const _float& fAnimationTime,
@@ -73,6 +81,7 @@ private:
 		const aiQuatKey* pPreVectorKey);
 public:
 	_matrix*            Find_BoneMatrix(string strBoneName);
+	_matrix*            Find_BoneOffset(string strBoneName);
 private:
 	_uint               Find_KeyIndex(const _float& fAnimationTime, const _uint& uiNumKey, const aiVectorKey* pVectorKey);
 	_uint               Find_KeyIndex(const _float& fAnimationTime, const _uint& uiNumKey, const aiQuatKey* pQuatKey);
@@ -90,10 +99,21 @@ private:
 	_uint               m_uiCurAniIndex = 0;            // 현재 애니메이션의 Index
 	_uint               m_uiNewAniIndex = 0;            // 새로운 애니메이션이 Index
 
+	_uint               m_uiCurSubAniIndex = 0; //블랜딩할 애니 인덱스
+	_uint               m_uiNewSubAniIndex = 0;//블랜딩할 애니 인덱스
 
-	_float              m_fBlendingTime = 1.f;
-	_float              m_fBlendAnimationTime = 0.f;
-	_float              m_fAnimationTime = 0.f;
+	_float              m_fBlendingTime = 1.f; //선형보관 시간
+	_float              m_fBlendigTimeSub = 1.f;
+
+	_float              m_fBlendAnimationTime = 0.f;//선형보관 시간
+	_float              m_fBlendAnimationTimeSub = 0.f;
+
+	_float              m_fAnimationTime = 0.f;//애니메이션 시간
+	_float              m_fAnimationTimeSub = 0.f;//블랜딩 애니메이션 시간.
+
+
+	_bool  m_bIsFisrtAni = true;
+
 	unordered_map<string, HIERARCHY_INFO*>   m_mapNodeHierarchy;   // Node Hierarchy 정보.
 
 	_matrix            m_matRootFinal;

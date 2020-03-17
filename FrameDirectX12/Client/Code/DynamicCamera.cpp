@@ -96,15 +96,13 @@ void CDynamicCamera::MouseInput()
 	_long dwMouseMove;
 
 
-
-
 	if (m_pmatArmCamera != nullptr &&m_pmatLegCamera!=nullptr)
 	{
 
 		_matrix RotY = XMMatrixRotationY(XMConvertToRadians(-90));
 
 
-		_matrix BoneMatrix = (*m_pmatArmCamera*0.8f)+(*m_pmatLegCamera*0.2f);
+		_matrix BoneMatrix = (*m_pmatArmCamera);
 		_matrix CameraMatrix = BoneMatrix * *m_pPlayerMatrix  ;
 
 	   
@@ -122,8 +120,8 @@ void CDynamicCamera::MouseInput()
 		_float fSpine = m_pPlayer->Get_SpineAngle();
 
 
-		m_tCameraInfo.vEye = CameraPos-(CameraLook*(50.f+fSpine))-CameraRight*150.f - CameraUp*50.f;
-		m_tCameraInfo.vAt = CameraPos - (CameraLook*(50.f-fSpine)) - CameraUp * 50.f;
+		m_tCameraInfo.vEye = CameraPos-(CameraLook*(70.f+fSpine))-CameraRight*150.f - CameraUp*50.f;
+		m_tCameraInfo.vAt = CameraPos - (CameraLook*(70.f-fSpine)) - CameraUp * 50.f;
 
 
 
