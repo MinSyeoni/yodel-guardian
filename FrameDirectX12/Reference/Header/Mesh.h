@@ -19,17 +19,24 @@
 
 	HRESULT         Ready_Mesh(const _tchar* pFilePath, const _tchar* pFileName);
 public:
-	vector<vector<_matrix>> ExtractBoneTransforms(float fanimationTime,CAniCtrl::STATE eState = CAniCtrl::NONE,_float fAngle=0.f);
+	vector<vector<_matrix>> ExtractBoneTransforms(float fanimationTime);
+	vector<vector<_matrix>> ExtractBoneTransformsBlend(float fanimationTime,float fanimationTimeSub, _float fAngle = 0.f);
+
 	void			   Render_Mesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix= vector<vector<_matrix>>(),_int iCBoffset=0,_int MeshId=0,bool Draw =true);
 	void               Render_ShadowMesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix = vector<vector<_matrix>>(), bool blsBone = false);
 	void               Render_Destortion(CShader* pMesh);
 
 
 	void Set_Animation(_int Animation);
+	void Set_AnimationBlend(_int FirstAni, _int SecondAni);
+
+	_bool Set_IsAniFinsh();
+	void  Set_AnimationStart();
 
 	_matrix*           Get_RootFrame() { return m_pAnimationComponent->Get_RootFrame(); };
 public:
 	_matrix*            Find_BoneMatrix(string strBoneName);
+	_matrix*            Find_BoneOffset(string strBoneName);
 
 public:
 	vector< ComPtr<ID3D12Resource>> Get_Texture() { return m_pMeshComponent->Get_Texture(); };

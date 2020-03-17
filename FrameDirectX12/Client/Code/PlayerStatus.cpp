@@ -75,12 +75,26 @@ void CPlayerStatus::KeyInput()
 
 	if (KEY_PRESSING(DIKEYBOARD_W))
 	{
-		m_eCurState = CPlayer::WALK;
-		m_fSpeed = 30.f;
+		m_eCurState = CPlayer::WALKNORTH;
+		m_fSpeed = 5.f;
 	}
 
-		
+	if (KEY_PRESSING(DIKEYBOARD_S))
+	{
+		m_eCurState = CPlayer::WALKSOUTH;
+		m_fSpeed = 5.f;
+	}
 
+	if (KEY_PRESSING(DIKEYBOARD_A))
+	{
+		m_eCurState = CPlayer::WALKEAST;
+		m_fSpeed = 5.f;
+	}
+	if (KEY_PRESSING(DIKEYBOARD_D))
+	{
+		m_eCurState = CPlayer::WALKWEST;
+		m_fSpeed = 5.f;
+	}
 
 }
 
@@ -90,12 +104,34 @@ void CPlayerStatus::StatusUpdate(const _float & fTimeDelta)
 	if (m_pTransCom == nullptr)
 		return;
 
+	_vec3 vRight;
+	memcpy(&vRight, &m_pTransCom->m_matWorld._11, sizeof(_vec3));
+	vRight.Normalize();
 	switch (m_eCurState)
 	{
-	case CPlayer::WALK:
+	case CPlayer::WALKNORTH:
 	{
 	 m_pTransCom->m_vPos=  m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed*fTimeDelta);
+	 break;
 	}
+	case CPlayer::WALKSOUTH:
+	{
+	m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(m_pTransCom->m_vDir*-1), m_fSpeed*fTimeDelta);
+	break;
+	}
+	case CPlayer::WALKEAST:
+	{
+		m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(vRight*-1.f), m_fSpeed*fTimeDelta);
+		break;
+	}
+	case CPlayer::WALKWEST:
+	{
+		m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(vRight), m_fSpeed*fTimeDelta);
+		break;
+	}
+
+
+
 
 	default:
 		break;
@@ -122,7 +158,7 @@ void CPlayerStatus::PlayerDirection(const _float&fTimeDelta)
 		_vec3 vUp = _vec3{ 0.f,1.f,0.f };
 		_matrix matRot;
 
-		m_pTransCom->m_vAngle.y += (_float)dwMouseMove*fTimeDelta*2.5f;
+		m_pTransCom->m_vAngle.y += (_float)dwMouseMove*fTimeDelta*1.5f;
 		m_pTransCom->m_vDir = _vec3{ m_pTransCom->m_matWorld._31,m_pTransCom->m_matWorld._32,m_pTransCom->m_matWorld._33 };
 		m_pTransCom->m_vDir.y = 0.f;
 		m_pTransCom->m_vDir.Normalize();
@@ -133,10 +169,10 @@ void CPlayerStatus::PlayerDirection(const _float&fTimeDelta)
 	{
 		m_fSpine += dwMouseMove * fTimeDelta;
 
-		if (m_fSpine > 45.f)
-			m_fSpine = 45.f;
-		if (m_fSpine < -45.f)
-			m_fSpine = -45.f;
+		if (m_fSpine > 30.f)
+			m_fSpine = 30.f;
+		if (m_fSpine < -30.f)
+			m_fSpine = -30.f;
 	}
 
 

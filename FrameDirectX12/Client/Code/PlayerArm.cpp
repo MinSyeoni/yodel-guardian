@@ -64,8 +64,8 @@ _int CPlayerArm::Update_GameObject(const _float & fTimeDelta)
 	}
 
 
-	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)m_eCurAnimationKey);
-	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f*fTimeDelta, CAniCtrl::PLAYER, m_fSpineAngle);
+	dynamic_cast<CMesh*>(m_pMeshCom)->Set_AnimationBlend((_int)m_eCurAnimationKey,(_int)m_eCurAnimationKey);
+	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransformsBlend(5000.f*fTimeDelta, 5000.f*fTimeDelta,m_fSpineAngle);
 	return NO_EVENT;
 }
 
@@ -95,16 +95,16 @@ void CPlayerArm::AnimationBlending()
 {
 
 
-	for (int i = 0; i < m_vecMatrix.size(); i++)
-	{
-		float fAccBody = 0.7f;
-		float fAccLeg = 0.3f;
-		for (int j = 0; j < m_vecMatrix[i].size(); j++)
-		{
+	//for (int i = 0; i < m_vecMatrix.size(); i++)
+	//{
+	//	float fAccBody = 0.7f;
+	//	float fAccLeg = 0.3f;
+	//	for (int j = 0; j < m_vecMatrix[i].size(); j++)
+	//	{
 
-			m_vecMatrix[i][j] = (m_vecMatrix[i][j] * fAccBody) + (m_vecLegMatrix[i][j] * fAccLeg);
-		}
-	}
+	//		m_vecMatrix[i][j] = (m_vecMatrix[i][j] * fAccBody) + (m_vecLegMatrix[i][j] * fAccLeg);
+	//	}
+	//}
 
 }
 

@@ -45,7 +45,6 @@ HRESULT CPistol::LateInit_GameObject()
 
 
 	m_pPlayerArmMatrix = static_cast<CMesh*>(m_pPlayerArm->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_WeaponMatrix();
-	m_pPlayerLegMatrix =  static_cast<CMesh*>(m_pPlayerLeg->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_WeaponMatrix();
 	m_pPlayerMatrix = &(m_pPlayerArm->Get_Transform()->m_matWorld);
 	m_pHandleMatrix = m_pMeshCom->Find_BoneMatrix("handle");
 	return S_OK;
@@ -63,8 +62,8 @@ _int CPistol::Update_GameObject(const _float & fTimeDelta)
 
 	
 
-	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)BASE);
-	m_vecBoneMatirx = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f*fTimeDelta);
+	//dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)BASE);
+	//m_vecBoneMatirx = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f*fTimeDelta);
 
 
 
@@ -75,8 +74,8 @@ _int CPistol::LateUpdate_GameObject(const _float & fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
+	//FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
+	//FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 
 	FallowPlayer();
 	return S_OK;
@@ -99,10 +98,10 @@ void CPistol::FallowPlayer()
 	_matrix Rotation = XMMatrixRotationY(XMConvertToRadians(-90.f));
 
 	_matrix matBlend;
-	if (m_pPlayerArmMatrix != nullptr && m_pPlayerLegMatrix != nullptr)
+	if (m_pPlayerArmMatrix != nullptr)
 	{
 
-		matBlend = (*m_pPlayerArmMatrix* 0.7f) + (*m_pPlayerLegMatrix*0.3f);
+		matBlend = (*m_pPlayerArmMatrix* 1.0f);
 
 		m_pTransCom->m_matWorld = *m_pHandleMatrix* matBlend* (Rotation* *m_pPlayerMatrix);
 

@@ -20,6 +20,7 @@ public:
 	CPlayer::STATE m_eCurState= CPlayer::IDLE;
 	CPlayer::STATE m_ePreState = CPlayer::IDLE;
 
+
 	CTransform* m_pTransCom;
 	CMesh*  m_pMesh;
 	CBoxCollider* m_pBoxCollider;

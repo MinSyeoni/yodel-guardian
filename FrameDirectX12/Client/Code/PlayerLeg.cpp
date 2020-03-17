@@ -62,8 +62,8 @@ _int CPlayerLeg::Update_GameObject(const _float & fTimeDelta)
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
 
-	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)m_eCurAnimationKey);
-	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f*fTimeDelta, CAniCtrl::PLAYER, m_fSpineAngle);
+	//dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)5);
+//	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f*fTimeDelta);
 
 	return NO_EVENT;
 }
