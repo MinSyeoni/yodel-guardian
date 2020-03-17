@@ -88,6 +88,12 @@
     <Filter Include="02.GameObject\98.Weapon\01.Rifle">
       <UniqueIdentifier>{794dd58e-19b1-4477-a9b2-60252cb98b98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\97.UI">
+      <UniqueIdentifier>{166b5389-d91b-4774-a11b-968c4776d647}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\97.UI\00.Menu">
+      <UniqueIdentifier>{aa6e7ac4-87a6-44aa-8071-82a638b5c4b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">

@@ -139,7 +139,7 @@ HRESULT CLoading::Texture_ForStage(void)
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_TerrainN", ID_STATIC, pComponent), E_FAIL);
 
 
-
+	// UI 이미지 넣을 것. 
 
 
 	return S_OK;

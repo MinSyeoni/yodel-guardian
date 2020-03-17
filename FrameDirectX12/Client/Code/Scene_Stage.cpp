@@ -231,7 +231,7 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 	m_pObjectMgr->Add_GameObject(wstrLayerTag, wstrObjTag);
 	______________________________________________________________________*/
 
-
+	// °´Ã¼ »ý¼º
 
 	m_pObjectMgr->Add_Layer(wstrLayerTag, pLayer);
 
