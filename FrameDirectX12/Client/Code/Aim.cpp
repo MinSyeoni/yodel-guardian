@@ -42,6 +42,8 @@ _int CAim::Update_GameObject(const _float& fTimeDelta)
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
+	ShowCursor(TRUE);
+
 	GetCursorPos(&m_pt);
 	ClientToScreen(g_hWnd, &m_pt);
 
@@ -108,8 +110,6 @@ void CAim::Set_ConstantTable()
 
 	CB_MATRIX_INFO	tCB_MatrixInfo;
 	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
-
-	ShowCursor(TRUE);
 
 	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
