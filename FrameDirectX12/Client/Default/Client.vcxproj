@@ -164,6 +164,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Code\Aim.h" />
     <ClInclude Include="..\Code\BackGround.h" />
     <ClInclude Include="..\Code\CubeObject.h" />
     <ClInclude Include="..\Code\DynamicCamera.h" />
@@ -174,8 +175,10 @@
     <ClInclude Include="..\Code\Pistol.h" />
     <ClInclude Include="..\Code\Player.h" />
     <ClInclude Include="..\Code\PlayerArm.h" />
+    <ClInclude Include="..\Code\PlayerHP.h" />
     <ClInclude Include="..\Code\PlayerLeg.h" />
     <ClInclude Include="..\Code\PlayerStatus.h" />
+    <ClInclude Include="..\Code\PlayerUI.h" />
     <ClInclude Include="..\Code\RectObject.h" />
     <ClInclude Include="..\Code\Rifle.h" />
     <ClInclude Include="..\Code\Scene_Logo.h" />
@@ -197,8 +200,10 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\Aim.cpp" />
     <ClCompile Include="..\Code\BackGround.cpp" />
     <ClCompile Include="..\Code\CubeObject.cpp" />
     <ClCompile Include="..\Code\DynamicCamera.cpp" />
@@ -209,8 +214,10 @@
     <ClCompile Include="..\Code\Pistol.cpp" />
     <ClCompile Include="..\Code\Player.cpp" />
     <ClCompile Include="..\Code\PlayerArm.cpp" />
+    <ClCompile Include="..\Code\PlayerHP.cpp" />
     <ClCompile Include="..\Code\PlayerLeg.cpp" />
     <ClCompile Include="..\Code\PlayerStatus.cpp" />
+    <ClCompile Include="..\Code\PlayerUI.cpp" />
     <ClCompile Include="..\Code\RectObject.cpp" />
     <ClCompile Include="..\Code\Rifle.cpp" />
     <ClCompile Include="..\Code\Scene_Logo.cpp" />
@@ -227,6 +234,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

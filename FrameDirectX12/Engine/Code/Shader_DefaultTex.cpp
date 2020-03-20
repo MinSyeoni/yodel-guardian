@@ -183,12 +183,12 @@ D3D12_BLEND_DESC CShader_DefaultTex::Create_BlendState()
 
     // ºí·»µå ¼³Á¤.
     ZeroMemory(&BlendDesc, sizeof(D3D12_BLEND_DESC));
-    BlendDesc.AlphaToCoverageEnable = FALSE;
+    BlendDesc.AlphaToCoverageEnable = m_bIsAlpha;
     BlendDesc.IndependentBlendEnable = FALSE;
     BlendDesc.RenderTarget[0].BlendEnable = m_bIsAlpha;
     BlendDesc.RenderTarget[0].LogicOpEnable = FALSE;
     BlendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;;
-    BlendDesc.RenderTarget[0].DestBlend = D3D12_BLEND_DEST_ALPHA;
+    BlendDesc.RenderTarget[0].DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
     BlendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
     BlendDesc.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
     BlendDesc.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;

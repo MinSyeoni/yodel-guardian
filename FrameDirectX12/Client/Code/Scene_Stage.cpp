@@ -13,6 +13,12 @@
 #include "Frustom.h"
 #include "Pistol.h"
 #include "Rifle.h"
+
+#include "UI.h"
+#include "Aim.h"
+#include "PlayerHP.h"
+#include "PlayerUI.h"
+
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -92,7 +98,6 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	CGameObject* pGameObject = nullptr;
 
 
-
 	pGameObject = CTerrain::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Terrain", pGameObject), E_FAIL);
@@ -100,7 +105,6 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = CStaticObject::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_StaticObject", pGameObject), E_FAIL);
-
 
 	pGameObject = CPlayer::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -122,6 +126,22 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Rifle", pGameObject), E_FAIL);
 
+	////////////////////////////////// UI /////////////////////////////////////////////
+	pGameObject = CUI::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_UI", pGameObject), E_FAIL);
+
+	pGameObject = CAim::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Aim", pGameObject), E_FAIL);
+
+	pGameObject = CPlayerUI::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_PlayerUI", pGameObject), E_FAIL);
+
+	pGameObject = CPlayerHP::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_PlayerHP", pGameObject), E_FAIL);
 
 	return S_OK;
 }
@@ -177,7 +197,6 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	m_pObjectMgr->Add_Layer(wstrLayerTag, pLayer);
 
-
 	// Terrain
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Terrain", L"Terrain", nullptr), E_FAIL);
 
@@ -226,16 +245,15 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 	Engine::CLayer* pLayer = Engine::CLayer::Create();
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
 
-	/*____________________________________________________________________
-	GameObject 持失.
-	m_pObjectMgr->Add_GameObject(wstrLayerTag, wstrObjTag);
-	______________________________________________________________________*/
-
-	// 梓端 持失
-
 	m_pObjectMgr->Add_Layer(wstrLayerTag, pLayer);
 
-	//FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_BackGround", L"BackGround", nullptr), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_UI", L"Quest", nullptr), E_FAIL);
+
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Aim", L"Aim", nullptr), E_FAIL);
+
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_PlayerUI", L"PlayerUI", nullptr), E_FAIL);
+
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_PlayerHP", L"PlayerHP", nullptr), E_FAIL);
 
 	return S_OK;
 }
@@ -254,5 +272,4 @@ void CScene_Stage::Free()
 {
 	CFrustom::Get_Instance()->Destroy_Instance();
 	Engine::CScene::Free();
-	
 }

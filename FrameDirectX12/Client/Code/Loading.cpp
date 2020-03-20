@@ -140,7 +140,21 @@ HRESULT CLoading::Texture_ForStage(void)
 
 
 	// UI 이미지 넣을 것. 
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/mission%d.dds", 1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_UI", ID_STATIC, pComponent), E_FAIL);
 
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/aim.dds", 1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_Aim", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/Player.dds", 1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_PlayerUI", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/PlayerHp.dds", 1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_PlayerHP", ID_STATIC, pComponent), E_FAIL);
 
 	return S_OK;
 }

@@ -91,8 +91,23 @@
     <Filter Include="02.GameObject\97.UI">
       <UniqueIdentifier>{166b5389-d91b-4774-a11b-968c4776d647}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\97.UI\00.Menu">
+    <Filter Include="02.GameObject\97.UI\01.Quest">
       <UniqueIdentifier>{aa6e7ac4-87a6-44aa-8071-82a638b5c4b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\97.UI\00.System">
+      <UniqueIdentifier>{9c07c71f-c401-4727-ae94-d526252c719b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\97.UI\02.Aim">
+      <UniqueIdentifier>{f581aab3-544b-46d6-a3fc-57635aa397aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\97.UI\03.PlayerUI">
+      <UniqueIdentifier>{931a8d86-0187-4521-85e9-0b9ff1e4a89e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\97.UI\03.PlayerUI\00.PlayerIcon">
+      <UniqueIdentifier>{872441a6-32bc-45d2-81fd-a76c5806f89c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\97.UI\03.PlayerUI\01.PlayerHP">
+      <UniqueIdentifier>{c0d04a7a-517e-481a-b077-9292461837d5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +210,18 @@
     <ClInclude Include="..\Code\Rifle.h">
       <Filter>02.GameObject\98.Weapon\01.Rifle</Filter>
     </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>02.GameObject\97.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Aim.h">
+      <Filter>02.GameObject\97.UI\02.Aim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\PlayerUI.h">
+      <Filter>02.GameObject\97.UI\03.PlayerUI\00.PlayerIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\PlayerHP.h">
+      <Filter>02.GameObject\97.UI\03.PlayerUI\01.PlayerHP</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -265,6 +292,18 @@
     </ClCompile>
     <ClCompile Include="..\Code\Rifle.cpp">
       <Filter>02.GameObject\98.Weapon\01.Rifle</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>02.GameObject\97.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Aim.cpp">
+      <Filter>02.GameObject\97.UI\02.Aim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PlayerUI.cpp">
+      <Filter>02.GameObject\97.UI\03.PlayerUI\00.PlayerIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PlayerHP.cpp">
+      <Filter>02.GameObject\97.UI\03.PlayerUI\01.PlayerHP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
