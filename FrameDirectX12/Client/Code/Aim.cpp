@@ -45,9 +45,10 @@ _int CAim::Update_GameObject(const _float& fTimeDelta)
 	ShowCursor(TRUE);
 
 	GetCursorPos(&m_pt);
-	ClientToScreen(g_hWnd, &m_pt);
+	ScreenToClient(g_hWnd, &m_pt);
 
-	m_pTransCom->m_vPos = _vec3();
+	m_pTransCom->m_vPos.x = _float(2.f / WINCX * m_pt.x) - 1.f;
+	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * m_pt.y) + 1.f;
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
@@ -74,6 +75,7 @@ void CAim::Render_GameObject(const _float& fTimeDelta)
 	m_pBufferCom->End_Buffer();
 
 	m_pBufferCom->Render_Buffer();
+
 }
 
 HRESULT CAim::Add_Component()
@@ -97,7 +99,7 @@ HRESULT CAim::Add_Component()
 
 	// TransCom 
 	m_pTransCom = static_cast<CTransform*>(m_pComponentMgr->Clone_Component(L"Prototype_Transform", COMPONENTID::ID_DYNAMIC));
-	if (nullptr != m_pTransCom)
+	if (nullptr != m_pTransCom) 
 		m_mapComponent[ID_DYNAMIC].emplace(L"Com_Transform", m_pTransCom);
 
 	return S_OK;

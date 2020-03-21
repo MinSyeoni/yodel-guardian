@@ -42,6 +42,7 @@ private:
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
 
 	POINT						m_pt = {};
+
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);
 	static CAim*				Create(ID3D12Device* pGraphicDevice,

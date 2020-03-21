@@ -42,7 +42,7 @@ _int CPlayerHP::Update_GameObject(const _float& fTimeDelta)
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
-	m_pTransCom->m_vScale = _vec3(0.2f, 0.2f, 0.f);
+	m_pTransCom->m_vScale = _vec3(0.15f, 0.2f, 0.f);
 	m_pTransCom->m_vPos = _vec3(-0.8f, -0.8f, 0.f);
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
