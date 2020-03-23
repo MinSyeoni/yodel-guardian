@@ -42,8 +42,6 @@ _int CAim::Update_GameObject(const _float& fTimeDelta)
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
-	ShowCursor(TRUE);
-
 	GetCursorPos(&m_pt);
 	ScreenToClient(g_hWnd, &m_pt);
 
