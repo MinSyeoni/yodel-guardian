@@ -94,7 +94,7 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 	m_fSpineAngle = m_pStatus->Get_Spine();
 	UpdateParts(fTimeDelta);
 	m_pArm->Set_Animation(m_eCurState);
-	m_pLeg->Set_Animation(m_eCurState);
+	m_pArm->Set_LegAnimation(m_eCurLegState);
 
 
 	CGameObject::Update_GameObject(fTimeDelta);
@@ -104,11 +104,10 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 void CPlayer::UpdateParts(const _float & fTimeDelta)
 {
 	m_pArm->Set_Spine(m_fSpineAngle);
-	m_pLeg->Set_Spine(m_fSpineAngle);
 
 	m_pArm->Update_GameObject(fTimeDelta);
-	m_pLeg->Update_GameObject(fTimeDelta);
 	m_eCurState = m_pStatus->m_eCurState;
+	m_eCurLegState = m_pStatus->m_eLegState;
 }
 
 _int CPlayer::LateUpdate_GameObject(const _float & fTimeDelta)

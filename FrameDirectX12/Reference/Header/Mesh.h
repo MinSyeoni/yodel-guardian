@@ -31,6 +31,7 @@ public:
 	void Set_AnimationBlend(_int FirstAni, _int SecondAni);
 
 	_bool Set_IsAniFinsh();
+	_bool Set_FindAnimation(_float fTime, _int AniKey);
 	void  Set_AnimationStart();
 
 	_matrix*           Get_RootFrame() { return m_pAnimationComponent->Get_RootFrame(); };

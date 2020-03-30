@@ -1,5 +1,10 @@
-0~47 Walk
-48~197 IDLE
-198~232 WalkLEft;
-
-233~262 Fire
+0~119 RilfeIdle
+120~151 RifleWalkNorth
+152~184 RifleWalkSouth
+185~217 RifleWarkEase
+218~250 RifleWalkWest
+251~399 NoneIdle
+400~447 NoneWalk
+448~482 RifleHolster
+483~522 RilfeDraw
+523~537 RifleAttack

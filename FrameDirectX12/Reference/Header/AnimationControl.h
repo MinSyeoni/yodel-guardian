@@ -51,6 +51,7 @@ public:
 	void               Set_BlendAnimationKey(_int FirstAniKey, _int SecondAniKey);
 public:
 	_bool  Set_IsFinish();
+	_bool  Set_FindAnimation(_float fTime, _int AniKey);
 	void   Set_Start();
 	vector<VECTOR_MATRIX>   Extract_BoneBlendingTransform(_float fAniTimeFirst,_float fAniTimeSecond,_float fAngle);
 	vector<VECTOR_MATRIX>   Extract_BoneTransform(_float fAnimationTime);

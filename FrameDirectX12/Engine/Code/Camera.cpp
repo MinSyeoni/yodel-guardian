@@ -23,6 +23,12 @@ CCamera::~CCamera()
 {
 }
 
+void CCamera::Set_ProjForV(_float fForV)
+{
+
+	m_tProjInfo.fFovY = fForV;
+}
+
 HRESULT CCamera::Ready_GameObject(const CAMERA_INFO& tCameraInfo,
 								  const PROJ_INFO& tProjInfo,
 								  const ORTHO_INFO& tOrthoInfo)
@@ -61,6 +67,10 @@ _int CCamera::Update_GameObject(const _float & fTimeDelta)
 											 m_tCameraInfo.vAt.Get_XMVECTOR(), 
 											 m_tCameraInfo.vUp.Get_XMVECTOR());
 
+	m_tProjInfo.matProj = XMMatrixPerspectiveFovLH(XMConvertToRadians(m_tProjInfo.fFovY),
+		m_tProjInfo.fAspect,
+		1.f,
+		m_tProjInfo.fFarZ);
 	return NOEVENT;
 }
 

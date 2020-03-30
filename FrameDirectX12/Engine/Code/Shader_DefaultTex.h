@@ -6,7 +6,7 @@ BEGIN(Engine)
 class ENGINE_DLL CShader_DefaultTex : public CShader
 {
 public:
-	enum TYPE { NONE, WIREFRAME };
+	enum TYPE { NONE, WIREFRAME,ALPHA };
 
 private:
 	explicit CShader_DefaultTex(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
@@ -35,6 +35,8 @@ private:
 
 private:
 	TYPE  m_eType = NONE;
+	bool m_bIsAlpha = false;
+
 	D3D12_FILL_MODE m_bIsWire = D3D12_FILL_MODE_SOLID;
 
 public:

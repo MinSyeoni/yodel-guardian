@@ -103,29 +103,51 @@ void CAniCtrl::Set_AnimationKey(_int AniKey)
 
 void CAniCtrl::Set_BlendAnimationKey(_int FirstAniKey, _int SecondAniKey)
 {
-	if (m_uiNewAniIndex != FirstAniKey)
+	
+
+
+	if (m_uiNewAniIndex != FirstAniKey && m_uiNewAniIndex==m_uiCurAniIndex)
 	{
 		m_uiNewAniIndex = FirstAniKey;
 		m_fBlendAnimationTime = m_fAnimationTime;
 		m_fBlendingTime = 1.0f;
+		m_fAnimationTime = 0.f;
 
 	}
 
-	if (m_uiNewSubAniIndex != SecondAniKey)
+	if (m_uiNewSubAniIndex != SecondAniKey && m_uiNewSubAniIndex == m_uiCurSubAniIndex)
 	{
 
 		m_uiNewSubAniIndex = SecondAniKey;
 		m_fBlendAnimationTimeSub = m_fAnimationTimeSub;
 		m_fBlendigTimeSub = 1.0f;
+		m_fAnimationTimeSub = 0.f;
 	}
 
 }
 
 _bool CAniCtrl::Set_IsFinish()
 {
-	if (m_fAnimationTime > (m_pScene->mAnimations[m_uiCurAniIndex]->mDuration) - 100.f)
+	_float fDestTime = (_float)(fmod(m_fAnimationTime, (m_pScene->mAnimations[m_uiCurAniIndex]->mDuration)));
+
+	if (fDestTime > (m_pScene->mAnimations[m_uiCurAniIndex]->mDuration) - 200.f)
 		return true;
 
+
+	return false;
+}
+
+_bool CAniCtrl::Set_FindAnimation(_float fTime, _int AniKey)
+{
+	if (m_uiCurAniIndex != m_uiNewAniIndex)
+		return false;
+	if (m_uiCurAniIndex != AniKey)
+		return false;
+
+	_float fDestTime =(_float)(fmod(m_fAnimationTime, (m_pScene->mAnimations[m_uiCurAniIndex]->mDuration)));
+	_float fSrcTiem = (_float)(fmod(fTime, (m_pScene->mAnimations[m_uiCurAniIndex]->mDuration)));
+ 	if (fDestTime > fTime)
+		return true;
 
 	return false;
 }
@@ -153,8 +175,8 @@ vector<VECTOR_MATRIX> CAniCtrl::Extract_BoneBlendingTransform(_float fAniTimeFir
 
 	if (m_uiNewAniIndex != m_uiCurAniIndex)//상체
 	{
-		m_fAnimationTime = m_fBlendAnimationTime;
-		m_fAnimationTime = (_float)(fmod(m_fAnimationTime, (m_pScene->mAnimations[m_uiCurAniIndex]->mDuration)));
+		m_fAnimationTime = 0.f;
+		m_fBlendAnimationTime = (_float)(fmod(m_fBlendAnimationTime, (m_pScene->mAnimations[m_uiCurAniIndex]->mDuration)));
 		m_fBlendingTime -= 0.002f*fAniTimeFirst;
 	}
 	if (m_fBlendingTime <= 0)//상체
@@ -163,8 +185,8 @@ vector<VECTOR_MATRIX> CAniCtrl::Extract_BoneBlendingTransform(_float fAniTimeFir
 	}
 	if (m_uiNewSubAniIndex != m_uiCurSubAniIndex)//하체
 	{
-		m_fAnimationTimeSub = m_fBlendAnimationTimeSub;
-		m_fAnimationTimeSub = (_float)(fmod(m_fAnimationTimeSub, (m_pScene->mAnimations[m_uiCurSubAniIndex]->mDuration)));
+		m_fAnimationTimeSub = 0.f;
+		m_fBlendAnimationTimeSub = (_float)(fmod(m_fBlendAnimationTimeSub, (m_pScene->mAnimations[m_uiCurSubAniIndex]->mDuration)));
 		m_fBlendigTimeSub -= 0.002f*fAniTimeSecond;
 
 	}
@@ -177,8 +199,10 @@ vector<VECTOR_MATRIX> CAniCtrl::Extract_BoneBlendingTransform(_float fAniTimeFir
 	- Read_NodeHierarchy() 함수 호출이 끝나고 나면, 멤버 변수인 m_vecBoneTransform배열에 데이터를 채우고 리턴.
 	____________________________________________________________________________________________________________*/
 	_matrix matIdentity = INIT_MATRIX;
+	if(m_uiCurAniIndex==m_uiNewAniIndex)
 	Update_NodeHirearchyBlend(m_fAnimationTime,m_fAnimationTimeSub, m_pScene->mRootNode, matIdentity);
-
+	else
+		Update_NodeHirearchyBlend(m_fBlendAnimationTime, m_fBlendAnimationTimeSub, m_pScene->mRootNode, matIdentity);
 	if (m_fBlendingTime <= 0)
 	{
 		m_uiCurAniIndex = m_uiNewAniIndex;

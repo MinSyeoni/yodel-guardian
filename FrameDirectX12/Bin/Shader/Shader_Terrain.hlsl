@@ -81,7 +81,7 @@ ps_output PS_MAIN(VS_OUTPUT input) : SV_TARGET
     
     ps_output output;
     
-    output.albedo = gTexture.Sample(gsamLinearWrap, input.uv*2.f);
+    output.albedo = gTexture.Sample(gsamLinearWrap, input.uv*100.f);
     
     float2 uv = input.vLightPos.xy / input.vLightPos.w;
     uv.y = -uv.y;

@@ -45,6 +45,13 @@ HRESULT CRenderer::Ready_Renderer(ID3D12Device* pGraphicDevice, ID3D12GraphicsCo
 	m_pBlurShader = CShader_Blur::Create(m_pGraphicDevice, m_pCommandList);
 	m_pBloomTarget = CBloomTarget::Create(m_pGraphicDevice, m_pCommandList);
 
+	//SSAO
+	m_pSSAOBuffer = CRcTex::Create(m_pGraphicDevice, m_pCommandList);
+	m_pSSAOShader = CShader_SSAO::Create(m_pGraphicDevice, m_pCommandList);
+	m_pSSAOTarget = CSSAOTarget::Create(m_pGraphicDevice, m_pCommandList);
+
+
+	//충돌택스처
 	m_pDebugTexture = CTexture::Create(m_pGraphicDevice, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/Debug/Debug%d.dds", 2);
 	m_pDebugShader = CShader_DefaultTex::Create(m_pGraphicDevice, m_pCommandList,CShader_DefaultTex::WIREFRAME);
 	m_pDebugShader->Set_Shader_Texture(m_pDebugTexture->Get_Texture(),100);
@@ -119,6 +126,7 @@ void CRenderer::Render_Renderer(const _float& fTimeDelta)
 		m_DownSampleTarget->Render_RenderTarget();
 		m_pBloomTarget->Render_RenderTarget();
 		m_pDestortionTarget->Render_RenderTarget();
+		m_pSSAOTarget->Render_RenderTarget();
 	}
 	CGraphicDevice::Get_Instance()->End_ResetCmdList();
 
@@ -245,6 +253,7 @@ HRESULT CRenderer::Render_Blend()
 		vector<ComPtr<ID3D12Resource>> pShadeTarget = m_LightTarget->GetTargetTexture();
 		vector<ComPtr<ID3D12Resource>> pBlurTarget = m_pBloomTarget->GetTargetTexture();
 		vector<ComPtr<ID3D12Resource>> pDestortionTarget = m_pDestortionTarget->GetTargetTexture();
+		vector<ComPtr<ID3D12Resource>> pSSAOTarget = m_pSSAOTarget->GetTargetTexture();
 		vector<ComPtr<ID3D12Resource>> pBlendTarget;
 		pBlendTarget.push_back(pDiffedTarget[0]);//albedo
 		pBlendTarget.push_back(pShadeTarget[0]);//Shade
@@ -252,6 +261,7 @@ HRESULT CRenderer::Render_Blend()
 		pBlendTarget.push_back(pBlurTarget[0]);//Blur
 		pBlendTarget.push_back(pDiffedTarget[4]);//Emi
 		pBlendTarget.push_back(pDestortionTarget[0]);//Destor;
+		pBlendTarget.push_back(pSSAOTarget[0]);//SSAO;
 		m_pBlendShader->Set_Shader_Texture(pBlendTarget);
 
 		m_blsBlendInit = true;
@@ -274,7 +284,7 @@ HRESULT CRenderer::Render_PostPoressing(const _float& fTimeDelta)
 	Render_DownSampleing();//블러 다운샘플링.
 	Render_Bloom();//블룸효과
 	Render_Destortion(fTimeDelta);//왜곡
-
+	Render_SSAO();
 	return S_OK;
 }
 
@@ -326,6 +336,35 @@ HRESULT CRenderer::Render_Bloom()
 
 
 	m_pBloomTarget->Release_OnGraphicDev();
+
+
+	return S_OK;
+}
+
+HRESULT CRenderer::Render_SSAO()
+{
+	if (m_bIsSSAOInit == false)
+	{
+		vector<ComPtr<ID3D12Resource>> pTarget = m_DifferdTarget->GetTargetTexture();
+		vector<ComPtr<ID3D12Resource>> pSSAOTarget;
+		pSSAOTarget.push_back(pTarget[1]);
+		pSSAOTarget.push_back(pTarget[2]);
+
+		m_pSSAOShader->Set_Shader_Texture(pSSAOTarget);
+		m_bIsSSAOInit = true;
+	}
+
+	m_pSSAOTarget->SetUp_OnGraphicDev();
+
+	m_pSSAOShader->Begin_Shader();
+	m_pSSAOBuffer->Begin_Buffer();
+
+	m_pSSAOShader->End_Shader();
+	m_pSSAOBuffer->Render_Buffer();
+
+
+	m_pSSAOTarget->Release_OnGraphicDev();
+
 
 
 	return S_OK;
@@ -383,6 +422,9 @@ HRESULT CRenderer::Ready_ShaderPrototype()
 	NULL_CHECK_RETURN(pShader, E_FAIL);
 	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_DefaultTex", ID_STATIC, pShader), E_FAIL);
 
+	pShader = CShader_DefaultTex::Create(m_pGraphicDevice, m_pCommandList,CShader_DefaultTex::ALPHA);
+	NULL_CHECK_RETURN(pShader, E_FAIL);
+	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_DefaultTexAlpha", ID_STATIC, pShader), E_FAIL);
 
 	
 	pShader = CShader_LightAcc::Create(m_pGraphicDevice, m_pCommandList, LIGHTTYPE::D3DLIGHT_DIRECTIONAL);
@@ -417,6 +459,7 @@ void CRenderer::Free()
 	Safe_Release(m_DownSampleTarget);
 	Safe_Release(m_pBloomTarget);
 	Safe_Release(m_pDestortionTarget);
+	Safe_Release(m_pSSAOTarget);
 
 	//블랜드
 	Safe_Release(m_pBlendBuffer);
@@ -427,6 +470,11 @@ void CRenderer::Free()
 	//다운샘플
 	Safe_Release(m_pDownSampleBuffer);
 	Safe_Release(m_pDownSampleShader);
+
+	//SSAO
+	Safe_Release(m_pSSAOBuffer);
+	Safe_Release(m_pSSAOShader);
+
 
 	//블룸
 	Safe_Release(m_pBlurBuffer);

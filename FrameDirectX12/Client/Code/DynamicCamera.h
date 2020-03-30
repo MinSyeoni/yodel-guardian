@@ -19,6 +19,8 @@ public:
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 	void MouseInput();
+	_bool Get_ZoomOut() { return m_bIsZoom; };
+	void Set_ZoomInOut(_bool ZoomIn);
 private:
 	/*____________________________________________________________________
 	[ Value ]
@@ -35,6 +37,12 @@ private:
 	_float fUp = 0.f;
 	_float fLook = 0.f;
 	
+	_bool m_bIsZoom = false;
+
+	_float m_fMaxZoom = 50.f;
+	_float m_fMinZoom = 150.f;
+	_float m_fZoom = 150.f;
+
 	_matrix* m_pmatArmCamera = nullptr;
 	_matrix* m_pmatLegCamera = nullptr;
 public:

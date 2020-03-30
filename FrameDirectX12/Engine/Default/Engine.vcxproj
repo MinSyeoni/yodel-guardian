@@ -228,8 +228,10 @@ call CopyEngine.bat</Command>
     <ClInclude Include="..\Code\Shader_LightAcc.h" />
     <ClInclude Include="..\Code\Shader_Mesh.h" />
     <ClInclude Include="..\Code\Shader_Shadow.h" />
+    <ClInclude Include="..\Code\Shader_SSAO.h" />
     <ClInclude Include="..\Code\Shader_Terrain.h" />
     <ClInclude Include="..\Code\ShadowDepthTarget.h" />
+    <ClInclude Include="..\Code\SSAOTarget.h" />
     <ClInclude Include="..\Code\Target.h" />
     <ClInclude Include="..\Code\TerrainTex.h" />
     <ClInclude Include="..\Code\Texture.h" />
@@ -299,8 +301,10 @@ call CopyEngine.bat</Command>
     <ClCompile Include="..\Code\Shader_LightAcc.cpp" />
     <ClCompile Include="..\Code\Shader_Mesh.cpp" />
     <ClCompile Include="..\Code\Shader_Shadow.cpp" />
+    <ClCompile Include="..\Code\Shader_SSAO.cpp" />
     <ClCompile Include="..\Code\Shader_Terrain.cpp" />
     <ClCompile Include="..\Code\ShadowDepthTarget.cpp" />
+    <ClCompile Include="..\Code\SSAOTarget.cpp" />
     <ClCompile Include="..\Code\Target.cpp" />
     <ClCompile Include="..\Code\TerrainTex.cpp" />
     <ClCompile Include="..\Code\Texture.cpp" />
@@ -320,6 +324,7 @@ call CopyEngine.bat</Command>
     <FxCompile Include="..\..\Bin\Shader\Shader_LightAcc.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_Mesh.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_ShadowDepth.hlsl" />
+    <FxCompile Include="..\..\Bin\Shader\Shader_SSAO.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_Terrain.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

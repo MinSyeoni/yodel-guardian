@@ -51,11 +51,6 @@ HRESULT CBackGround::LateInit_GameObject()
 	/*____________________________________________________________________
 	Get GameObject - DynamicCamera
 	______________________________________________________________________*/
-
-
-#ifdef _DEBUG
-	COUT_STR("Success Get DynamicCamera");
-#endif
 	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());
 
 	return S_OK;

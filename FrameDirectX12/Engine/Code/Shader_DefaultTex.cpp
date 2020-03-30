@@ -29,7 +29,8 @@ HRESULT CShader_DefaultTex::Ready_Shader(TYPE eType)
 {
 	if (eType == WIREFRAME)
 		m_bIsWire = D3D12_FILL_MODE_WIREFRAME;
-
+	if (eType == ALPHA)
+		m_bIsAlpha = true;
 
 	FAILED_CHECK_RETURN(Create_PipelineState(), E_FAIL);
 
@@ -138,7 +139,7 @@ HRESULT CShader_DefaultTex::Create_PipelineState()
 	PipelineStateDesc.VS = { reinterpret_cast<BYTE*>(m_pVS_ByteCode->GetBufferPointer()), m_pVS_ByteCode->GetBufferSize() };
 	PipelineStateDesc.PS = { reinterpret_cast<BYTE*>(m_pPS_ByteCode->GetBufferPointer()), m_pPS_ByteCode->GetBufferSize() };
 	PipelineStateDesc.RasterizerState = Create_RasterizerState();
-	PipelineStateDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
+	PipelineStateDesc.BlendState = Create_BlendState();
 	PipelineStateDesc.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
 	PipelineStateDesc.SampleMask = UINT_MAX;
 	PipelineStateDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
@@ -182,12 +183,12 @@ D3D12_BLEND_DESC CShader_DefaultTex::Create_BlendState()
 
 	// ºí·»µå ¼³Á¤.
 	ZeroMemory(&BlendDesc, sizeof(D3D12_BLEND_DESC));
-	BlendDesc.AlphaToCoverageEnable = FALSE;
+	BlendDesc.AlphaToCoverageEnable = m_bIsAlpha;
 	BlendDesc.IndependentBlendEnable = FALSE;
-	BlendDesc.RenderTarget[0].BlendEnable = FALSE;
+	BlendDesc.RenderTarget[0].BlendEnable = m_bIsAlpha;
 	BlendDesc.RenderTarget[0].LogicOpEnable = FALSE;
-	BlendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_ONE;
-	BlendDesc.RenderTarget[0].DestBlend = D3D12_BLEND_ZERO;
+	BlendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;;
+	BlendDesc.RenderTarget[0].DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
 	BlendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
 	BlendDesc.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
 	BlendDesc.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;
