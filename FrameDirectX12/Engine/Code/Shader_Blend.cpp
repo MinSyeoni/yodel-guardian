@@ -62,6 +62,9 @@ void CShader_Blend::End_Shader()
 
 	tex.Offset(1, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 	m_pCommandList->SetGraphicsRootDescriptorTable(5, tex);
+
+	tex.Offset(1, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
+	m_pCommandList->SetGraphicsRootDescriptorTable(6, tex);
 }
 
 void CShader_Blend::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture)

@@ -1,4 +1,5 @@
 #include "GraphicDevice.h"
+#pragma warning(disable:4996)
 
 USING(Engine)
 IMPLEMENT_SINGLETON(CGraphicDevice)
@@ -397,7 +398,7 @@ HRESULT CGraphicDevice::Create_RootSig()
 	Create_DownSampleRoot();
 	Create_BlurRoot();
 	Create_DistortRoot();
-
+	Create_SSAORoot();
 
 	return S_OK;
 }
@@ -590,7 +591,7 @@ HRESULT CGraphicDevice::Create_LightRoot()
 
 HRESULT CGraphicDevice::Create_BlendRoot()
 {
-	CD3DX12_DESCRIPTOR_RANGE texTable[6];
+	CD3DX12_DESCRIPTOR_RANGE texTable[7];
 
 	texTable[0].Init(
 		D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
@@ -620,7 +621,12 @@ HRESULT CGraphicDevice::Create_BlendRoot()
 		1,  // number of descriptors
 		5); // register t0
 	// Root parameter can be a table, root descriptor or root constants.
-	CD3DX12_ROOT_PARAMETER slotRootParameter[6];
+	texTable[6].Init(
+		D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+		1,  // number of descriptors
+		6); // register t0
+	// Root parameter can be a table, root descriptor or root constants.
+	CD3DX12_ROOT_PARAMETER slotRootParameter[7];
 
 	slotRootParameter[0].InitAsDescriptorTable(1, &texTable[0], D3D12_SHADER_VISIBILITY_PIXEL);
 	slotRootParameter[1].InitAsDescriptorTable(1, &texTable[1], D3D12_SHADER_VISIBILITY_PIXEL);
@@ -628,11 +634,11 @@ HRESULT CGraphicDevice::Create_BlendRoot()
 	slotRootParameter[3].InitAsDescriptorTable(1, &texTable[3], D3D12_SHADER_VISIBILITY_PIXEL);
 	slotRootParameter[4].InitAsDescriptorTable(1, &texTable[4], D3D12_SHADER_VISIBILITY_PIXEL);
 	slotRootParameter[5].InitAsDescriptorTable(1, &texTable[5], D3D12_SHADER_VISIBILITY_PIXEL);
-
+	slotRootParameter[6].InitAsDescriptorTable(1, &texTable[6], D3D12_SHADER_VISIBILITY_PIXEL);
 
 	auto staticSamplers = GetStaticSamplers();
 
-	CD3DX12_ROOT_SIGNATURE_DESC rootSigDesc(6, slotRootParameter,
+	CD3DX12_ROOT_SIGNATURE_DESC rootSigDesc(7, slotRootParameter,
 		(UINT)staticSamplers.size(), staticSamplers.data(),
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
 
@@ -877,6 +883,51 @@ HRESULT CGraphicDevice::Create_DistortRoot()
 	return S_OK;
 }
 
+HRESULT CGraphicDevice::Create_SSAORoot()
+{
+	CD3DX12_DESCRIPTOR_RANGE texTable[2];
+	texTable[0].Init(
+		D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+		1,  // number of descriptors
+		0); // register t0
+	texTable[1].Init(
+		D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+		1,  // number of descriptors
+		1); // register t0
+
+	// Root parameter can be a table, root descriptor or root constants.
+	CD3DX12_ROOT_PARAMETER slotRootParameter[2];
+
+	slotRootParameter[0].InitAsDescriptorTable(1, &texTable[0], D3D12_SHADER_VISIBILITY_PIXEL);
+	slotRootParameter[1].InitAsDescriptorTable(1, &texTable[1], D3D12_SHADER_VISIBILITY_PIXEL);
+
+	auto staticSamplers = GetStaticSamplers();
+
+	CD3DX12_ROOT_SIGNATURE_DESC rootSigDesc(2, slotRootParameter,
+		(UINT)staticSamplers.size(), staticSamplers.data(),
+		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
+
+	// create a root signature with a single slot which points to a descriptor range consisting of a single constant buffer
+	ComPtr<ID3DBlob> serializedRootSig = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
+	HRESULT hr = D3D12SerializeRootSignature(&rootSigDesc, D3D_ROOT_SIGNATURE_VERSION_1,
+		serializedRootSig.GetAddressOf(), errorBlob.GetAddressOf());
+
+	if (errorBlob != nullptr)
+	{
+		::OutputDebugStringA((char*)errorBlob->GetBufferPointer());
+	}
+	ThrowIfFailed(hr);
+
+	ThrowIfFailed(m_pGraphicDevice->CreateRootSignature(
+		0,
+		serializedRootSig->GetBufferPointer(),
+		serializedRootSig->GetBufferSize(),
+		IID_PPV_ARGS(&m_arrSig[(UINT)ROOT_SIG_TYPE::INPUT_SSAO])));
+
+	return S_OK;
+}
+
 HRESULT CGraphicDevice::OnResize(const _uint& iWidth, const _uint& iHeight)
 {
 	assert(m_pGraphicDevice);
@@ -997,7 +1048,7 @@ HRESULT CGraphicDevice::Wait_ForGpuComplete()
 	______________________________________________________________________*/
 	if (m_pFence->GetCompletedValue() < m_uiCurrentFence)
 	{
-		HANDLE eventHandle = CreateEventEx(nullptr, false, false, EVENT_ALL_ACCESS);
+		HANDLE eventHandle = CreateEventEx(nullptr, nullptr, false, EVENT_ALL_ACCESS);
 
 		// GPU가 현재 Fence 지점에 도달했으면 이벤트를 발동한다.
 		ThrowIfFailed(m_pFence->SetEventOnCompletion(m_uiCurrentFence, eventHandle));

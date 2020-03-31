@@ -59,8 +59,6 @@ HRESULT CMainApp::SetUp_Font()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Font_NetmarbleLight", pGameObject);
 
-
-
 	m_pFont_FPS = static_cast<CFont*>(CObjectMgr::Get_Instance()->Get_NewGameObject(L"Prototype_Font_NetmarbleLight", L"fuck", nullptr));
 	FAILED_CHECK_RETURN(m_pFont_FPS->Ready_GameObjectClone(L"", _vec2(1400.f, 850.f), D2D1::ColorF::SpringGreen), E_FAIL);
 	return S_OK;

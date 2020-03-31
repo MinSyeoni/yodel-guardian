@@ -57,7 +57,7 @@ HRESULT CDynamicCamera::LateInit_GameObject()
 		m_pPlayerLeg = static_cast<CPlayerLeg*>(m_pPlayer->Get_PlayerLeg());
 
 		m_pmatArmCamera= static_cast<CMesh*>(m_pPlayerArm->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_CameraMatrix();
-		m_pmatLegCamera= static_cast<CMesh*>(m_pPlayerLeg->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_CameraMatrix();
+	//	m_pmatLegCamera= static_cast<CMesh*>(m_pPlayerLeg->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_CameraMatrix();
 	}
 	return S_OK;
 }
@@ -69,6 +69,22 @@ _int CDynamicCamera::Update_GameObject(const _float & fTimeDelta)
 	/*____________________________________________________________________
 	View За·Д Update.
 	______________________________________________________________________*/
+
+	if (m_bIsZoom == true)
+	{
+		m_fZoom -= fTimeDelta * 500.f;
+		if (m_fMaxZoom > m_fZoom)
+			m_fZoom = m_fMaxZoom;
+		Set_ProjForV(45.f);
+	}
+	else
+	{
+		m_fZoom += fTimeDelta * 500.f;
+		if (m_fMinZoom < m_fZoom)
+			m_fZoom = m_fMinZoom;
+		Set_ProjForV(60.f);
+	}
+
 
 	MouseInput();
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
@@ -96,7 +112,7 @@ void CDynamicCamera::MouseInput()
 	_long dwMouseMove;
 
 
-	if (m_pmatArmCamera != nullptr &&m_pmatLegCamera!=nullptr)
+	if (m_pmatArmCamera != nullptr)
 	{
 
 		_matrix RotY = XMMatrixRotationY(XMConvertToRadians(-90));
@@ -120,8 +136,8 @@ void CDynamicCamera::MouseInput()
 		_float fSpine = m_pPlayer->Get_SpineAngle();
 
 
-		m_tCameraInfo.vEye = CameraPos-(CameraLook*(70.f+fSpine))-CameraRight*150.f - CameraUp*50.f;
-		m_tCameraInfo.vAt = CameraPos - (CameraLook*(70.f-fSpine)) - CameraUp * 50.f;
+		m_tCameraInfo.vEye = CameraPos-(CameraLook*(70.f+fSpine))-CameraRight* m_fZoom + CameraUp*50.f;
+		m_tCameraInfo.vAt = CameraPos - (CameraLook*(70.f-fSpine)) + CameraUp * 50.f;
 
 
 
@@ -131,6 +147,17 @@ void CDynamicCamera::MouseInput()
 
 		m_tCameraInfo.vUp = _vec3(0.f,1.0f,0.f);
 	}
+}
+
+void CDynamicCamera::Set_ZoomInOut(_bool ZoomIn)
+{
+	if (m_fZoom >= 150.f && ZoomIn == true&&m_bIsZoom ==false)
+		m_bIsZoom = true;
+
+	if (m_fZoom <= 50.f && ZoomIn == false&&m_bIsZoom==true)
+		m_bIsZoom = false;
+
+
 }
 
 

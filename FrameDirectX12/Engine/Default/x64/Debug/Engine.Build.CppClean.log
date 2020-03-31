@@ -40,7 +40,6 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\deb
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\info.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\graphicdevice.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\gameobject.obj
-c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\vlline.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\vibuffer.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\transform.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\timer.obj
@@ -48,8 +47,10 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\deb
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\texture.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\terraintex.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\target.obj
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\ssaotarget.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shadowdepthtarget.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_terrain.obj
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_ssao.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_shadow.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_mesh.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_lightacc.obj
@@ -59,6 +60,7 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\deb
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_default.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_colorbuffer.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_blur.obj
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\default\x64\debug\vlline.obj
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\engine.lib
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\engine.exp
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\shader_blend.cso
@@ -70,6 +72,7 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\shader_down
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\shader_lightacc.cso
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\shader_mesh.cso
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\shader_shadowdepth.cso
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\shader_ssao.cso
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\shader_terrain.cso
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\engine.ilk
 c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\bin\engine.dll

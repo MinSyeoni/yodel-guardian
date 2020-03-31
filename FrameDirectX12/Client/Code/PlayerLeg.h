@@ -45,8 +45,8 @@ private:
 	Engine::CMesh*				m_pMeshCom = nullptr;
 	Engine::CShader_Mesh*         	m_pShaderCom = nullptr;
 
-	CPlayer::STATE   m_eCurAnimationKey = CPlayer::IDLE;
-	CPlayer::STATE    m_ePreAnimationKey = CPlayer::IDLE;
+	CPlayer::STATE   m_eCurAnimationKey = CPlayer::RIFLEIDLE;
+	CPlayer::STATE    m_ePreAnimationKey = CPlayer::RIFLEIDLE;
 
 	float m_fTime = 0.f;
 	_float m_fSpineAngle = 0.f;

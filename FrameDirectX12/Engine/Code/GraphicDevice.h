@@ -59,7 +59,7 @@ private:
 	HRESULT Create_DownSampleRoot();
 	HRESULT Create_BlurRoot();
 	HRESULT Create_DistortRoot();
-
+	HRESULT Create_SSAORoot();
 
 	HRESULT OnResize(const _uint& iWidth, const _uint& iHeight);
 public:

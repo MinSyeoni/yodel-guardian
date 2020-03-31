@@ -16,7 +16,8 @@
 #include "NaviMesh.h"
 #include "Shader_ColorBuffer.h"
 #include "DistortionTarget.h"
-
+#include "Shader_SSAO.h"
+#include "SSAOTarget.h"
 BEGIN(Engine)
 
 class CGameObject;
@@ -62,6 +63,7 @@ private:
 	HRESULT Render_PostPoressing(const _float& fTimeDelta);
 	HRESULT Render_DownSampleing();
 	HRESULT Render_Bloom();
+	HRESULT Render_SSAO();
 	HRESULT Render_DebugBuffer();
 public:
 	void	Clear_RenderGroup();
@@ -87,6 +89,7 @@ private: //랜더타겟관련
 	CShadowDepthTarget* m_ShadowDepthTarget = nullptr;
 	CDownSampleTarget* m_DownSampleTarget = nullptr;
 	CBloomTarget* m_pBloomTarget = nullptr;
+	CSSAOTarget* m_pSSAOTarget = nullptr;
 
 	_bool m_blsShowTarget = false;
 
@@ -104,6 +107,11 @@ private://블러관련
 	CRcTex* m_pBlurBuffer;
 	CShader_Blur* m_pBlurShader;
 	_bool m_bIsBlurInit = false;
+private://SSAO관련
+	CRcTex* m_pSSAOBuffer;
+	CShader_SSAO* m_pSSAOShader;
+	_bool m_bIsSSAOInit = false;
+
 
 private:
 	CShader_DefaultTex* m_pDebugShader;

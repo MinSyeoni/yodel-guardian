@@ -47,6 +47,8 @@ HRESULT CPistol::LateInit_GameObject()
 	m_pPlayerArmMatrix = static_cast<CMesh*>(m_pPlayerArm->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_WeaponMatrix();
 	m_pPlayerMatrix = &(m_pPlayerArm->Get_Transform()->m_matWorld);
 	m_pHandleMatrix = m_pMeshCom->Find_BoneMatrix("handle");
+
+	m_eWeaponType = PISTOL;
 	return S_OK;
 }
 

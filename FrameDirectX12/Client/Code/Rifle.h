@@ -25,6 +25,7 @@ public:
 	virtual HRESULT AddComponent();
 	void  FallowPlayer();
 	void  FallowBag();
+	void AniCheck();
 
 public:
 	virtual CGameObject*	Clone_GameObject(void* prg);
