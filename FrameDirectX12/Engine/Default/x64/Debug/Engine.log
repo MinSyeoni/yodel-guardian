@@ -10,6 +10,7 @@ C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_Ligh
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_LightAcc.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Mesh.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ShadowDepth.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_SSAO.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Terrain.cso
   AnimationControl.cpp
   Base.cpp
@@ -32,7 +33,7 @@ C:\Users\Huijun\Desktop\Git\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_Ligh
   FrameMgr.cpp
   Frustom.cpp
   코드를 생성하고 있습니다...
-c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\animationcontrol.cpp(673): warning C4715: 'Engine::CAniCtrl::Find_BoneOffset': 모든 제어 경로에서 값을 반환하지는 않습니다.
+c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\animationcontrol.cpp(697): warning C4715: 'Engine::CAniCtrl::Find_BoneOffset': 모든 제어 경로에서 값을 반환하지는 않습니다.
   컴파일하고 있습니다...
   GameObject.cpp
   GraphicDevice.cpp
@@ -68,8 +69,10 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\shader_des
   Shader_LightAcc.cpp
   Shader_Mesh.cpp
   Shader_Shadow.cpp
+  Shader_SSAO.cpp
   Shader_Terrain.cpp
   ShadowDepthTarget.cpp
+  SSAOTarget.cpp
   Target.cpp
   TerrainTex.cpp
   Texture.cpp
@@ -77,6 +80,8 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\shader_des
   Timer.cpp
   Transform.cpp
   VIBuffer.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
   VlLine.cpp
   코드를 생성하고 있습니다...
      ../Bin\Engine.lib 라이브러리 및 ../Bin\Engine.exp 개체를 생성하고 있습니다.
@@ -135,8 +140,10 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\shader_des
   .\Engine\Code\Shader_LightAcc.h
   .\Engine\Code\Shader_Mesh.h
   .\Engine\Code\Shader_Shadow.h
+  .\Engine\Code\Shader_SSAO.h
   .\Engine\Code\Shader_Terrain.h
   .\Engine\Code\ShadowDepthTarget.h
+  .\Engine\Code\SSAOTarget.h
   .\Engine\Code\StaticMesh.h
   .\Engine\Code\Target.h
   .\Engine\Code\TargetMgr.h
@@ -147,7 +154,7 @@ c:\users\huijun\desktop\git\yodel-guardian\framedirectx12\engine\code\shader_des
   .\Engine\Code\Transform.h
   .\Engine\Code\VIBuffer.h
   .\Engine\Code\VlLine.h
-         61개 파일이 복사되었습니다.
+         63개 파일이 복사되었습니다.
   .\Engine\Header\Engine_Const.h
   .\Engine\Header\Engine_Enum.h
   .\Engine\Header\Engine_Function.h

@@ -3,12 +3,12 @@
 
 USING(Engine)
 
-CShader_DefaultTex::CShader_DefaultTex(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
+CShader_DefaultTex::CShader_DefaultTex(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: CShader(pGraphicDevice, pCommandList)
 {
 }
 
-CShader_DefaultTex::CShader_DefaultTex(const CShader_DefaultTex & rhs)
+CShader_DefaultTex::CShader_DefaultTex(const CShader_DefaultTex& rhs)
 	: CShader(rhs)
 {
 	/*____________________________________________________________________
@@ -29,7 +29,8 @@ HRESULT CShader_DefaultTex::Ready_Shader(TYPE eType)
 {
 	if (eType == WIREFRAME)
 		m_bIsWire = D3D12_FILL_MODE_WIREFRAME;
-
+	if (eType == ALPHA)
+		m_bIsAlpha = true;
 
 	FAILED_CHECK_RETURN(Create_PipelineState(), E_FAIL);
 
@@ -50,12 +51,12 @@ void CShader_DefaultTex::End_Shader(_uint Texnum, _uint uiOffset)
 
 	UINT objCBByteSize = (sizeof(CB_MATRIX_INFO) + 255) & ~255;
 
-	D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = m_pCB_MatrixInfo->Resource()->GetGPUVirtualAddress() + uiOffset *objCBByteSize;
+	D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = m_pCB_MatrixInfo->Resource()->GetGPUVirtualAddress() + uiOffset * objCBByteSize;
 
 	CD3DX12_GPU_DESCRIPTOR_HANDLE tex(m_pCBV_DescriptorHeap->GetGPUDescriptorHandleForHeapStart());
 	tex.Offset(Texnum, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 	m_pCommandList->SetGraphicsRootDescriptorTable(0, tex);
-	m_pCommandList->SetGraphicsRootConstantBufferView(1,objCBAddress);
+	m_pCommandList->SetGraphicsRootConstantBufferView(1, objCBAddress);
 
 }
 
@@ -85,7 +86,7 @@ void CShader_DefaultTex::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVec
 		hDescriptor.Offset(1, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 	}
 
-	m_pCB_MatrixInfo = new CUploadBuffer<CB_MATRIX_INFO>(DEVICE,offset, true);
+	m_pCB_MatrixInfo = new CUploadBuffer<CB_MATRIX_INFO>(DEVICE, offset, true);
 
 	CGraphicDevice::Get_Instance()->End_ResetCmdList();
 }
@@ -125,8 +126,8 @@ HRESULT CShader_DefaultTex::Create_PipelineState()
 	vecInputLayout =
 	{
 
-		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
-		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+	   { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+	   { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
 
 	};
 
@@ -138,7 +139,7 @@ HRESULT CShader_DefaultTex::Create_PipelineState()
 	PipelineStateDesc.VS = { reinterpret_cast<BYTE*>(m_pVS_ByteCode->GetBufferPointer()), m_pVS_ByteCode->GetBufferSize() };
 	PipelineStateDesc.PS = { reinterpret_cast<BYTE*>(m_pPS_ByteCode->GetBufferPointer()), m_pPS_ByteCode->GetBufferSize() };
 	PipelineStateDesc.RasterizerState = Create_RasterizerState();
-	PipelineStateDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
+	PipelineStateDesc.BlendState = Create_BlendState();
 	PipelineStateDesc.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
 	PipelineStateDesc.SampleMask = UINT_MAX;
 	PipelineStateDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
@@ -182,12 +183,12 @@ D3D12_BLEND_DESC CShader_DefaultTex::Create_BlendState()
 
 	// ºí·»µå ¼³Á¤.
 	ZeroMemory(&BlendDesc, sizeof(D3D12_BLEND_DESC));
-	BlendDesc.AlphaToCoverageEnable = FALSE;
+	BlendDesc.AlphaToCoverageEnable = m_bIsAlpha;
 	BlendDesc.IndependentBlendEnable = FALSE;
-	BlendDesc.RenderTarget[0].BlendEnable = FALSE;
+	BlendDesc.RenderTarget[0].BlendEnable = m_bIsAlpha;
 	BlendDesc.RenderTarget[0].LogicOpEnable = FALSE;
-	BlendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_ONE;
-	BlendDesc.RenderTarget[0].DestBlend = D3D12_BLEND_ZERO;
+	BlendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;;
+	BlendDesc.RenderTarget[0].DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
 	BlendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
 	BlendDesc.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
 	BlendDesc.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;
@@ -231,17 +232,17 @@ D3D12_INPUT_LAYOUT_DESC CShader_DefaultTex::Create_InputLayout()
 }
 
 
-CComponent * CShader_DefaultTex::Clone()
+CComponent* CShader_DefaultTex::Clone()
 {
 	return new CShader_DefaultTex(*this);
 }
 
-CShader_DefaultTex * CShader_DefaultTex::Create(ID3D12Device * pGraphicDevice,
-	ID3D12GraphicsCommandList * pCommandList, TYPE eType)
+CShader_DefaultTex* CShader_DefaultTex::Create(ID3D12Device* pGraphicDevice,
+	ID3D12GraphicsCommandList* pCommandList, TYPE eType)
 {
 	CShader_DefaultTex* pInstance = new CShader_DefaultTex(pGraphicDevice, pCommandList);
 
-	if (FAILED(pInstance->Ready_Shader( eType)))
+	if (FAILED(pInstance->Ready_Shader(eType)))
 		Engine::Safe_Release(pInstance);
 
 	return pInstance;

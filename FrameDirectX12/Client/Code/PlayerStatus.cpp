@@ -4,6 +4,9 @@
 #include "GraphicDevice.h"
 #include "ComponentMgr.h"
 #include "ColliderMgr.h"
+#include "ObjectMgr.h"
+#include "Weapon.h"
+#include "DynamicCamera.h"
 CPlayerStatus::CPlayerStatus()
 {
 }
@@ -15,8 +18,18 @@ CPlayerStatus::~CPlayerStatus()
 	Safe_Release(m_pNaviMesh);
 }
 
+void CPlayerStatus::LateInit()
+{
+	m_pCamera = static_cast<CDynamicCamera*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_Camera", L"DynamicCamera"));
+
+	m_bIsInit = true;
+}
+
 _int CPlayerStatus::UpdateState(const _float & fTimeDelta, CTransform * pTranscom)
 {
+	LateInit();
+
+
 	_matrix matRot;
 
 	matRot=XMMatrixRotationY(XMConvertToRadians(-90.f));
@@ -24,23 +37,34 @@ _int CPlayerStatus::UpdateState(const _float & fTimeDelta, CTransform * pTransco
 	if(pTranscom!=nullptr)
 	m_pTransCom = pTranscom;
 
-
+	if(m_eCurState!=CPlayer::RIFLEDRAW)
 	KeyInput();
 	Rotation(fTimeDelta);
 	StatusUpdate(fTimeDelta);
 	PlayerDirection(fTimeDelta);
+	WeaponChange();
+	if (m_bIsShoot)
+	{
+		m_eCurState = CPlayer::RIFLEATTACK;
+	}
+
+
+
 
 	m_ePreState = m_eCurState;
 
-	matRot =  m_pTransCom->m_matWorld;
+//	AttackCheck();
 
-	m_pBoxCollider->Update_Collider(&matRot);
+	m_pBoxCollider->Update_Collider(&m_pTransCom->m_matWorld);
 
 	return NO_EVENT;
 }
 
 _int CPlayerStatus::LateUpdate(const _float & fTimeDelta)
 {
+
+
+
 	CRenderer::Get_Instance()->Add_ColliderGroup(m_pBoxCollider);
 	CRenderer::Get_Instance()->Add_NaviGroup(m_pNaviMesh);
 	_vec3 vShaveDir;
@@ -71,32 +95,199 @@ void CPlayerStatus::SetMesh(CMesh * pMesh)
 
 void CPlayerStatus::KeyInput()
 {
-	m_eCurState = CPlayer::IDLE;
+	if (m_eCurState == CPlayer::RIFLEDRAW || m_eCurState == CPlayer::RIFLEHOLSTER)
+		return;
+
+
+
+	if (m_eEquip == RIFLE)
+	{
+		if (!m_bIsShoot)
+		{
+			m_eCurState = CPlayer::RIFLEIDLE;
+
+			m_eLegState = CPlayer::RIFLEIDLE;
+		}
+		else
+		{
+			m_eCurState = CPlayer::RIFLEATTACK;
+			m_eLegState = CPlayer::RIFLEATTACK;
+		}
+	}
+	else
+	{
+		m_pCamera->Set_ZoomInOut(false);
+		m_eCurState = CPlayer::NONEIDLE;
+		m_eLegState = CPlayer::NONEIDLE;
+
+	}
+
+	if (MOUSE_PRESSING(MOUSEBUTTON::DIM_LB))
+	{
+		if (m_eEquip == RIFLE)
+		{
+			m_eCurState = CPlayer::RIFLEATTACK;
+			m_bIsShoot = true;
+		}
+	}
+	else
+		m_bIsShoot = false;
+
 
 	if (KEY_PRESSING(DIKEYBOARD_W))
 	{
-		m_eCurState = CPlayer::WALKNORTH;
+
+		if (m_eEquip == RIFLE)
+		{
+			m_pCamera->Set_ZoomInOut(false);
+		
+			if(!m_bIsShoot)
+			m_eCurState = CPlayer::RIFLEWALKNORTH;
+
+			m_eLegState = CPlayer::RIFLEWALKNORTH;
+		}
+		else if (m_eEquip == NONE)
+		{
+			m_pCamera->Set_ZoomInOut(false);
+			if(!m_bIsShoot)
+			m_eCurState = CPlayer::NONEWALK;
+
+			m_eLegState = CPlayer::NONEWALK;
+		}
 		m_fSpeed = 5.f;
 	}
 
+
+	if (KEY_PRESSING(DIKEYBOARD_2)&&m_eEquip==NONE)
+	{
+		if (!m_bIsShoot)
+		{
+			m_eCurState = CPlayer::RIFLEDRAW;
+			m_eLegState = CPlayer::RIFLEDRAW;
+		}
+	}
+
+
+	if (KEY_PRESSING(DIKEYBOARD_F))
+	{
+		if (m_eEquip == RIFLE)
+		{
+			m_pCamera->Set_ZoomInOut(false);
+			if (!m_bIsShoot)
+			{
+				m_eCurState = CPlayer::RIFLEHOLSTER;
+				m_eLegState = CPlayer::RIFLEHOLSTER;
+			}
+
+		}
+	}
+
+
+	if (m_eEquip == NONE)
+		return;
+
+
 	if (KEY_PRESSING(DIKEYBOARD_S))
 	{
-		m_eCurState = CPlayer::WALKSOUTH;
+		m_pCamera->Set_ZoomInOut(false);
+		if (!m_bIsShoot)
+		m_eCurState = CPlayer::RIFLEWALKSOUTH;
+
+		m_eLegState = CPlayer::RIFLEWALKSOUTH;
 		m_fSpeed = 5.f;
 	}
 
 	if (KEY_PRESSING(DIKEYBOARD_A))
 	{
-		m_eCurState = CPlayer::WALKEAST;
-		m_fSpeed = 5.f;
-	}
-	if (KEY_PRESSING(DIKEYBOARD_D))
-	{
-		m_eCurState = CPlayer::WALKWEST;
+		m_pCamera->Set_ZoomInOut(false);
+		if (!m_bIsShoot)
+		m_eCurState = CPlayer::RIFLEWALKWEST;
+
+		m_eLegState = CPlayer::RIFLEWALKWEST;
 		m_fSpeed = 5.f;
 	}
 
+
+
+	if (KEY_PRESSING(DIKEYBOARD_D))
+	{
+		m_pCamera->Set_ZoomInOut(false);
+		if (!m_bIsShoot)
+		m_eCurState = CPlayer::RIFLEWALKEAST;
+
+		m_eLegState = CPlayer::RIFLEWALKEAST;
+		m_fSpeed = 5.f;
+	}
+	if (MOUSE_KEYDOWN(MOUSEBUTTON::DIM_RB))
+	{
+		if (m_eEquip != NONE)
+		{ 
+			_bool IsZoom = m_pCamera->Get_ZoomOut();
+			if(IsZoom==false)
+			m_pCamera->Set_ZoomInOut(true);
+			else
+			m_pCamera->Set_ZoomInOut(false);
+
+		}
+	}
+
 }
+
+void CPlayerStatus::WeaponChange()
+{
+	if (m_eCurState == CPlayer::RIFLEDRAW)
+	{
+	
+		list<CGameObject*> *pList =	 CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Weapon");
+
+		for (auto&pSrc : *pList)
+		{
+			if (static_cast<CWeapon*>(pSrc)->Get_WeaponType() == CWeapon::RIFLE &&static_cast<CWeapon*>(pSrc)->Get_WeaponState() == CWeapon::BAG)
+			{
+				if (m_pMesh->Set_FindAnimation(1800.f,(int)CPlayer::RIFLEDRAW))
+				{
+					static_cast<CWeapon*>(pSrc)->SetWeaponState(CWeapon::EQUIP);
+				}
+			}
+		}
+
+		if (m_pMesh->Set_FindAnimation(5500.f,(int)CPlayer::RIFLEDRAW))
+		{
+			m_eCurState = CPlayer::RIFLEIDLE;
+			m_eLegState = CPlayer::RIFLEIDLE;
+			m_eEquip = RIFLE;
+		}
+
+	}
+
+	if (m_eCurState == CPlayer::RIFLEHOLSTER)
+	{
+		list<CGameObject*> *pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Weapon");
+
+		for (auto&pSrc : *pList)
+		{
+			if (static_cast<CWeapon*>(pSrc)->Get_WeaponType() == CWeapon::RIFLE &&static_cast<CWeapon*>(pSrc)->Get_WeaponState() == CWeapon::EQUIP)
+			{
+				if (m_pMesh->Set_FindAnimation(5000.f,(int)CPlayer::RIFLEHOLSTER))
+				{
+					static_cast<CWeapon*>(pSrc)->SetWeaponState(CWeapon::BAG);
+				}
+			}
+		}
+
+		if (m_pMesh->Set_FindAnimation(5000.f,(_int)CPlayer::RIFLEHOLSTER))
+		{
+			m_eCurState = CPlayer::NONEIDLE;
+			m_eLegState = CPlayer::NONEIDLE;
+			m_eEquip = NONE;
+		}
+
+	}
+
+}
+
+
+
 
 void CPlayerStatus::StatusUpdate(const _float & fTimeDelta)
 {
@@ -107,32 +298,34 @@ void CPlayerStatus::StatusUpdate(const _float & fTimeDelta)
 	_vec3 vRight;
 	memcpy(&vRight, &m_pTransCom->m_matWorld._11, sizeof(_vec3));
 	vRight.Normalize();
-	switch (m_eCurState)
+	switch (m_eLegState)
 	{
-	case CPlayer::WALKNORTH:
+	case CPlayer::RIFLEWALKNORTH:
 	{
 	 m_pTransCom->m_vPos=  m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed*fTimeDelta);
 	 break;
 	}
-	case CPlayer::WALKSOUTH:
+	case CPlayer::RIFLEWALKSOUTH:
 	{
 	m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(m_pTransCom->m_vDir*-1), m_fSpeed*fTimeDelta);
 	break;
 	}
-	case CPlayer::WALKEAST:
-	{
-		m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(vRight*-1.f), m_fSpeed*fTimeDelta);
-		break;
-	}
-	case CPlayer::WALKWEST:
+	case CPlayer::RIFLEWALKEAST:
 	{
 		m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(vRight), m_fSpeed*fTimeDelta);
 		break;
 	}
+	case CPlayer::RIFLEWALKWEST:
+	{
+		m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(vRight*-1.f), m_fSpeed*fTimeDelta);
+		break;
+	}
+	case CPlayer::NONEWALK:
+	{
+		 m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed*fTimeDelta);
+	 break;
 
-
-
-
+	}
 	default:
 		break;
 	}
@@ -144,7 +337,7 @@ void CPlayerStatus::StatusUpdate(const _float & fTimeDelta)
 void CPlayerStatus::Rotation(const _float& fTimeDelta)
 {
 	
-	m_pTransCom->Chase_Target(m_vecTargetPos, fTimeDelta*0.05f);
+	//m_pTransCom->Chase_Target(m_vecTargetPos, fTimeDelta*0.05f);
 }
 
 void CPlayerStatus::PlayerDirection(const _float&fTimeDelta)
@@ -177,5 +370,20 @@ void CPlayerStatus::PlayerDirection(const _float&fTimeDelta)
 
 
 
+
+}
+
+void CPlayerStatus::AttackCheck()
+{
+	if (m_eCurState == CPlayer::RIFLEATTACK)
+	{
+
+		if(m_pMesh->Set_FindAnimation(2000.f,(int) CPlayer::RIFLEATTACK))
+		{
+			//m_eCurState = CPlayer::RIFLEIDLE;
+			//m_ePreState = CPlayer::RIFLEIDLE;
+
+		}
+	}
 
 }

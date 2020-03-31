@@ -12,8 +12,8 @@ class CPlayerStatus;
 class CPlayer : public Engine::CGameObject
 {
 public:
-	enum STATE {IDLE, WALKNORTH, WALKSOUTH,WALKWEST,WALKEAST};
-	enum LEGSTATE {LEGIDLE,LEGNORTH,LEGSOUTH,LEGWEST,LEGEAST};
+	enum STATE {RIFLEIDLE, RIFLEWALKNORTH, RIFLEWALKSOUTH, RIFLEWALKEAST,RIFLEWALKWEST,NONEIDLE,NONEWALK,RIFLEHOLSTER,RIFLEDRAW,RIFLEATTACK};
+	enum LEGSTATE {LEGIDLE,LEGNORTH,LEGSOUTH, LEGRIFLEWALKSOUTH,LEGRIFLEWALKEAST};
 
 
 private:
@@ -42,13 +42,12 @@ private:
 	______________________________________________________________________*/
 	CPlayerArm* m_pArm;//갑옵
 	CPlayerLeg* m_pLeg;//마스크
-	CPlayerHed* m_pHed;//머리
 //상태관련
 	CPlayerStatus* m_pStatus;
 
 
-	STATE m_eCurState=IDLE;
-
+	STATE m_eCurState= RIFLEIDLE;
+	STATE m_eCurLegState = RIFLEIDLE;
 	float m_fTime = 0.f;
 	float m_fSpineAngle = 0.f;
 

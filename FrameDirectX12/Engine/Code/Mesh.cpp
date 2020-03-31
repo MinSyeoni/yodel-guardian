@@ -94,6 +94,11 @@ _bool CMesh::Set_IsAniFinsh()
 	return m_pAnimationComponent->Set_IsFinish();
 }
 
+_bool CMesh::Set_FindAnimation(_float fTime,_int AniKey)
+{
+	return m_pAnimationComponent->Set_FindAnimation(fTime,  AniKey);
+}
+
 void CMesh::Set_AnimationStart()
 {
 	m_pAnimationComponent->Set_Start();

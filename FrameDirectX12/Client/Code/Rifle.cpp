@@ -52,6 +52,9 @@ HRESULT CRifle::LateInit_GameObject()
 
 
 	m_pPlayerMatrix = &(m_pPlayerArm->Get_Transform()->m_matWorld);
+
+	m_eWeaponType = RIFLE;
+	
 	return S_OK;
 }
 
@@ -65,12 +68,12 @@ _int CRifle::Update_GameObject(const _float & fTimeDelta)
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
+	AniCheck();
 
 
 	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation(m_eCurAniState);
 
 	m_vecBoneMatirx = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f*fTimeDelta);
-
 
 
 	return NO_EVENT;
@@ -140,7 +143,7 @@ void CRifle::FallowBag()
 		memcpy(&vUp, &matBlend._31, sizeof(_vec3));
 		memcpy(&vPos, &matBlend._41, sizeof(_vec3));
 
-		vPos += vLook * -20.f + vRight * 12.f+ vUp*10.f;;
+		vPos += vLook * -15.f + vRight * -8.f+ vUp*10.f;;
 
 		matBlend._41 = vPos.x;
 		matBlend._42 = vPos.y;
@@ -153,6 +156,32 @@ void CRifle::FallowBag()
 
 
 
+}
+
+void CRifle::AniCheck()
+{
+	if (m_eCurAniState == COLLAPSEBASE && m_eWeaponState == EQUIP)
+	{
+		m_eCurAniState = EXPAND;
+		return;
+	}
+	if (m_eCurAniState == EXPAND&&m_pMeshCom->Set_FindAnimation(1000.f,(int)EXPAND))
+	{
+		m_eCurAniState = BASE;
+		return;
+	}
+	if (m_eCurAniState == BASE && m_eWeaponState==BAG)
+	{
+		m_eCurAniState = COLLAPSE;
+		return;
+	}
+	if (m_eCurAniState == COLLAPSE && m_pMeshCom->Set_FindAnimation(1000.f, (int)COLLAPSE))
+	{
+		m_eCurAniState = COLLAPSEBASE;
+		return;
+	}
+
+	
 }
 
 CGameObject * CRifle::Clone_GameObject(void * prg)

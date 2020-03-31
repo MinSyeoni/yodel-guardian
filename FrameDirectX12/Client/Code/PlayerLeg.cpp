@@ -105,9 +105,6 @@ HRESULT CPlayerLeg::Add_Component()
 
 
 
-	m_pMeshCom = static_cast<Engine::CMesh*>(m_pComponentMgr->Clone_Component(MeshName.c_str(), COMPONENTID::ID_STATIC));
-	NULL_CHECK_RETURN(m_pMeshCom, E_FAIL);
-	m_mapComponent[ID_STATIC].emplace(L"Com_Mesh", m_pMeshCom);
 
 
 

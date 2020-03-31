@@ -4,7 +4,7 @@ Texture2D gSpecTexture : register(t2);
 Texture2D gBlurTexture : register(t3);
 Texture2D gEmissiveTexture : register(t4);
 Texture2D gDestortionTexture : register(t5);
-
+Texture2D gSSAOTexture : register(t6);
 SamplerState gsamLinearWrap : register(s0);
 
 struct VS_INPUT
@@ -47,9 +47,9 @@ float4 PS_MAIN(VS_OUTPUT input) : SV_TARGET
     float4 vShadeInfo = gShadeTexture.Sample(gsamLinearWrap, DistUV);
     float4 vBlurInfo = gBlurTexture.Sample(gsamLinearWrap, DistUV);
     float4 vEmissiveInfo = gEmissiveTexture.Sample(gsamLinearWrap, DistUV);
+    float4 vSSaoInfo = gSSAOTexture.Sample(gsamLinearWrap, DistUV)*1.5f;
     
-    
-    OutColor = (vAlbedoInfo * vShadeInfo) + vSpecInfo + vBlurInfo + vEmissiveInfo;
+    OutColor = (vAlbedoInfo * vShadeInfo*vSSaoInfo) + vSpecInfo + vBlurInfo + vEmissiveInfo;
 
 
     return OutColor;

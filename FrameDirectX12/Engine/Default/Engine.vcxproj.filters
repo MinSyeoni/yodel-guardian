@@ -202,6 +202,12 @@
     <Filter Include="01.Utility\03.RenderTarget\DistortionTarget">
       <UniqueIdentifier>{41069fc3-9478-4eb4-9dd6-e6727ef361bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\05.Shader\10.Shader_SSAO">
+      <UniqueIdentifier>{84060bd0-c08b-4e52-8467-d39d5e4894bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.RenderTarget\SSAOTarget">
+      <UniqueIdentifier>{3602e1ed-3a79-4213-8748-6ae295443987}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\Engine_Functor.h">
@@ -411,6 +417,12 @@
     <ClInclude Include="..\Code\Shader_Destortion.h">
       <Filter>01.Utility\05.Shader\09.Shader_Destortion</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Shader_SSAO.h">
+      <Filter>01.Utility\05.Shader\10.Shader_SSAO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\SSAOTarget.h">
+      <Filter>01.Utility\03.RenderTarget\SSAOTarget</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\DirectInput.cpp">
@@ -590,6 +602,12 @@
     <ClCompile Include="..\Code\Shader_Destortion.cpp">
       <Filter>01.Utility\05.Shader\09.Shader_Destortion</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Shader_SSAO.cpp">
+      <Filter>01.Utility\05.Shader\10.Shader_SSAO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SSAOTarget.cpp">
+      <Filter>01.Utility\03.RenderTarget\SSAOTarget</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\Bin\Shader\Shader_ColorBuffer.hlsl">
@@ -621,6 +639,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Bin\Shader\Shader_Destortion.hlsl">
       <Filter>01.Utility\05.Shader\09.Shader_Destortion</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Bin\Shader\Shader_SSAO.hlsl">
+      <Filter>01.Utility\05.Shader\10.Shader_SSAO</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

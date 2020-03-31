@@ -21,6 +21,7 @@ public:
 	void Set_Up(const _vec3& vUp)						{ m_tCameraInfo.vEye = vUp; }
 	void Set_ProjInfo(const PROJ_INFO& tProjInfo)		{ m_tProjInfo = tProjInfo; }
 	void Set_OrthoInfo(const ORTHO_INFO& tOrthoInfo)	{ m_tOrthoInfo = tOrthoInfo; }
+	void Set_ProjForV(_float fForV);
 public:
 	HRESULT			Ready_GameObject(const CAMERA_INFO& tCameraInfo,
 									 const PROJ_INFO& tProjInfo,

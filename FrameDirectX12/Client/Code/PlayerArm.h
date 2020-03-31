@@ -39,6 +39,7 @@ public:
 
 public:
 	void            Set_Animation(CPlayer::STATE  Animation) { m_eCurAnimationKey = Animation;};
+	void            Set_LegAnimation(CPlayer::STATE Animation) { m_eLegAnimation = Animation; };
 private:
 	void            Set_ShadowTable(CShader_Shadow* pShader);
 private:
@@ -52,8 +53,11 @@ private:
 	Engine::CMesh*				m_pMeshCom = nullptr;
 	Engine::CShader_Mesh*         	m_pShaderCom = nullptr;
 	float m_fTime = 0.f;
-	CPlayer::STATE   m_eCurAnimationKey = CPlayer::IDLE;
-	CPlayer::STATE    m_ePreAnimationKey = CPlayer::IDLE;
+	CPlayer::STATE   m_eCurAnimationKey = CPlayer::RIFLEIDLE;
+	CPlayer::STATE    m_ePreAnimationKey = CPlayer::RIFLEIDLE;
+
+	CPlayer::STATE m_eLegAnimation = CPlayer::RIFLEIDLE;
+
 
 	_float m_fSpineAngle = 0.f;
 
