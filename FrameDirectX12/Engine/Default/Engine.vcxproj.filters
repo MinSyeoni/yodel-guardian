@@ -208,6 +208,9 @@
     <Filter Include="01.Utility\03.RenderTarget\SSAOTarget">
       <UniqueIdentifier>{3602e1ed-3a79-4213-8748-6ae295443987}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\05.Shader\11.Shader_UI">
+      <UniqueIdentifier>{63e62930-d721-4aa4-96e5-7ead971eef12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\Engine_Functor.h">
@@ -423,6 +426,9 @@
     <ClInclude Include="..\Code\SSAOTarget.h">
       <Filter>01.Utility\03.RenderTarget\SSAOTarget</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Shader_UI.h">
+      <Filter>01.Utility\05.Shader\11.Shader_UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\DirectInput.cpp">
@@ -608,6 +614,9 @@
     <ClCompile Include="..\Code\SSAOTarget.cpp">
       <Filter>01.Utility\03.RenderTarget\SSAOTarget</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Shader_UI.cpp">
+      <Filter>01.Utility\05.Shader\11.Shader_UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\Bin\Shader\Shader_ColorBuffer.hlsl">
@@ -642,6 +651,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Bin\Shader\Shader_SSAO.hlsl">
       <Filter>01.Utility\05.Shader\10.Shader_SSAO</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Bin\Shader\Shader_UI.hlsl">
+      <Filter>01.Utility\05.Shader\11.Shader_UI</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

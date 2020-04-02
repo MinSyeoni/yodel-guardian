@@ -18,6 +18,8 @@
 #include "DistortionTarget.h"
 #include "Shader_SSAO.h"
 #include "SSAOTarget.h"
+#include "Shader_UI.h"
+
 BEGIN(Engine)
 
 class CGameObject;
@@ -112,6 +114,9 @@ private://SSAO°ü·Ã
 	CShader_SSAO* m_pSSAOShader;
 	_bool m_bIsSSAOInit = false;
 
+	// UI
+private:
+	CShader_UI*			m_pShderUI;
 
 private:
 	CShader_DefaultTex* m_pDebugShader;
