@@ -23,7 +23,7 @@
     <ProjectGuid>{65AE2EA8-2D08-4BBB-94C7-5E4DEAF32EBB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Engine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -230,6 +230,7 @@ call CopyEngine.bat</Command>
     <ClInclude Include="..\Code\Shader_Shadow.h" />
     <ClInclude Include="..\Code\Shader_SSAO.h" />
     <ClInclude Include="..\Code\Shader_Terrain.h" />
+    <ClInclude Include="..\Code\Shader_UI.h" />
     <ClInclude Include="..\Code\ShadowDepthTarget.h" />
     <ClInclude Include="..\Code\SSAOTarget.h" />
     <ClInclude Include="..\Code\Target.h" />
@@ -303,6 +304,7 @@ call CopyEngine.bat</Command>
     <ClCompile Include="..\Code\Shader_Shadow.cpp" />
     <ClCompile Include="..\Code\Shader_SSAO.cpp" />
     <ClCompile Include="..\Code\Shader_Terrain.cpp" />
+    <ClCompile Include="..\Code\Shader_UI.cpp" />
     <ClCompile Include="..\Code\ShadowDepthTarget.cpp" />
     <ClCompile Include="..\Code\SSAOTarget.cpp" />
     <ClCompile Include="..\Code\Target.cpp" />
@@ -326,6 +328,7 @@ call CopyEngine.bat</Command>
     <FxCompile Include="..\..\Bin\Shader\Shader_ShadowDepth.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_SSAO.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_Terrain.hlsl" />
+    <FxCompile Include="..\..\Bin\Shader\Shader_UI.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

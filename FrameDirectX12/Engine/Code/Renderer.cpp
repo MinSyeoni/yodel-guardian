@@ -57,7 +57,6 @@ HRESULT CRenderer::Ready_Renderer(ID3D12Device* pGraphicDevice, ID3D12GraphicsCo
 	m_pSSAOShader = CShader_SSAO::Create(m_pGraphicDevice, m_pCommandList);
 	m_pSSAOTarget = CSSAOTarget::Create(m_pGraphicDevice, m_pCommandList);
 
-
     return S_OK;
 }
 
@@ -420,6 +419,9 @@ HRESULT CRenderer::Ready_ShaderPrototype()
 	NULL_CHECK_RETURN(pShader, E_FAIL);
 	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_DefaultTexAlpha", ID_STATIC, pShader), E_FAIL);
 
+    pShader = CShader_UI::Create(m_pGraphicDevice, m_pCommandList, CShader_UI::ALPHA);
+    NULL_CHECK_RETURN(pShader, E_FAIL);
+    FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_UI", ID_STATIC, pShader), E_FAIL);
 
     pShader = CShader_LightAcc::Create(m_pGraphicDevice, m_pCommandList, LIGHTTYPE::D3DLIGHT_DIRECTIONAL);
     NULL_CHECK_RETURN(pShader, E_FAIL);
@@ -477,6 +479,7 @@ void CRenderer::Free()
 	Safe_Release(m_pSSAOTarget);
 	Safe_Release(m_pSSAOShader);
 
+    Safe_Release(m_pShderUI);
 
     CLight_Manager::Get_Instance()->Destroy_Instance();
     Clear_RenderGroup();

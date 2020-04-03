@@ -36,7 +36,7 @@ private:
 
 private:
 	Engine::CRcTex*				m_pBufferCom = nullptr;
-	Engine::CShader_DefaultTex* m_pShaderCom = nullptr;
+	Engine::CShader_UI*			m_pShaderCom = nullptr;
 	Engine::CTexture*			m_pTexture = nullptr;
 
 	CDynamicCamera*				m_pDynamicCamera = nullptr;

@@ -178,6 +178,12 @@
     <Filter Include="02.Scene_All\05.RectObject">
       <UniqueIdentifier>{ac3817b5-9267-43b3-854b-f82508c1fd87}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Scene_All\03.StaticObject\00.Map">
+      <UniqueIdentifier>{e4248776-55b2-4aec-ab3c-16fe3f0cfb80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_All\03.StaticObject\01.MapObject">
+      <UniqueIdentifier>{022f3627-9f5b-4127-89b8-fa62a5174368}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -294,6 +300,9 @@
     <ClInclude Include="..\Code\RectObject.h">
       <Filter>02.Scene_All\05.RectObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\MapObject.h">
+      <Filter>02.Scene_All\03.StaticObject\01.MapObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -379,6 +388,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\RectObject.cpp">
       <Filter>02.Scene_All\05.RectObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MapObject.cpp">
+      <Filter>02.Scene_All\03.StaticObject\01.MapObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
