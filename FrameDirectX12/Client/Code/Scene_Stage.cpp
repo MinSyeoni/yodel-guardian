@@ -14,11 +14,13 @@
 #include "Pistol.h"
 #include "Rifle.h"
 
-#include "UI.h"
+#include "UI.h"	// 나중에 ui로 묶을것
 #include "Aim.h"
 #include "PlayerHP.h"
 #include "PlayerUI.h"
 #include "GunUI.h"
+
+#include "MapObject.h"
 
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
@@ -127,6 +129,11 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Rifle", pGameObject), E_FAIL);
 
+	////////////////////////////////// MAP /////////////////////////////////////////////
+	pGameObject = CMapObject::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_MapObject", pGameObject), E_FAIL);
+
 	////////////////////////////////// UI /////////////////////////////////////////////
 	pGameObject = CUI::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -207,8 +214,11 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player",nullptr), E_FAIL);
 
+	//Prototype_MapObject
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MapObject", L"MapObject", nullptr), E_FAIL);
+
 	MeshInfo tMeshInfo;
-	tMeshInfo.MeshTag = L"Mesh_Missile";
+	tMeshInfo.MeshTag = L"TombStone.X";
 	tMeshInfo.Pos = _vec3(350.f,-3.f,400.f );
 	tMeshInfo.Rotation = _vec3( 0.f,0.f,0.f );
 	tMeshInfo.Scale = _vec3(0.1f, 0.1f, 0.1f);
@@ -221,9 +231,8 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	tMeshInfo.Scale = _vec3(0.1f, 0.1f, 0.1f);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_StaticObject", L"Static", &tMeshInfo), E_FAIL);
-
-
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Rifle", L"Weapon", nullptr), E_FAIL);
+
 
 	return S_OK;
 		
