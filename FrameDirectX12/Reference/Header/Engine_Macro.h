@@ -10,8 +10,8 @@ namespace Engine
 	#define			DEADOBJ 0
 	#define			NOEVENT 1
 
-	#define			WINSIZEX 1000
-	#define			WINSIZEY 800
+	#define			WINSIZEX 1600
+	#define			WINSIZEY 900
 
 #define       SHADOWDEPTHSIZEX 8000
 #define       SHADOWDEPTHSIZEY 8000
