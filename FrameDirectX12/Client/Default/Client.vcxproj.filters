@@ -4,92 +4,14 @@
     <Filter Include="99.Etc">
       <UniqueIdentifier>{e427639d-e918-4a32-949d-9561326119a4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="98.Header">
-      <UniqueIdentifier>{6f905f50-11c2-45a4-91f5-7c78a86264b1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.MainApp">
       <UniqueIdentifier>{d44c419a-06e7-4459-aa0b-865fac6ecdc9}</UniqueIdentifier>
     </Filter>
     <Filter Include="97.Mgr">
       <UniqueIdentifier>{27876c48-0016-46b3-87e1-89e8fb599f1a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene">
-      <UniqueIdentifier>{256c4ed2-d49e-45f9-a77a-d6dfb12066fc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject">
-      <UniqueIdentifier>{ca6f4b3b-0852-42ed-89f9-fb933331dd10}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\00.Logo">
-      <UniqueIdentifier>{e1830c16-2d13-49f7-8572-3acdd2330b3c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\01.Environment">
-      <UniqueIdentifier>{c032b6d9-f4d5-4740-9507-36a2e633f142}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\02.Menu">
-      <UniqueIdentifier>{51fd0ff7-39a3-4557-b9b9-cc8eb69fb283}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\01.Logo">
-      <UniqueIdentifier>{fd93da88-aeef-4df4-a63a-e362f97fa376}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\00.Loading">
-      <UniqueIdentifier>{414ce8cb-454b-482a-95af-49b027ded482}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\03.Stage">
-      <UniqueIdentifier>{af574c80-212e-42e6-9a44-0bbdcdee06c7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="96.Camera">
       <UniqueIdentifier>{fd951fef-76fb-4e49-bf03-6a0843ab4a01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\03.CubeObject">
-      <UniqueIdentifier>{7af8cf58-650d-4246-acac-5d8f4c1df892}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\02.RectObject">
-      <UniqueIdentifier>{851722c3-688d-47c2-9258-f83785e0772a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\04.Terrain">
-      <UniqueIdentifier>{d57d42e9-c1d5-4ae7-ab26-0bfd6e3d02a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\01.Environment\00.StaticObject">
-      <UniqueIdentifier>{b19a86a4-68df-4d09-bad3-6b3ffcf7d9c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\00.Logo\00.BackGround">
-      <UniqueIdentifier>{95c01a6b-2044-48ee-bb1a-8dfc8e67e3c0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\05.Stage1">
-      <UniqueIdentifier>{e9df7a78-eb23-40d0-b55e-67f6c4606d8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\05.Stage1\00.DynamicObject">
-      <UniqueIdentifier>{69455796-45a0-4f52-bc51-98c8745c8d9d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\99.Player">
-      <UniqueIdentifier>{ef8f117b-7595-4056-ba98-dd6080ebb4a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\99.Player\01.Player ARM">
-      <UniqueIdentifier>{16791c50-7330-46d4-9eec-1991bb11bdfe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\99.Player\04.PlayerStatus">
-      <UniqueIdentifier>{4da12c0d-b904-4737-9ce2-1fba2c11a315}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\01.Environment\01.SkyDome">
-      <UniqueIdentifier>{ce32b8f7-e132-47c2-97b8-e1f8b1dafdde}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\98.Weapon">
-      <UniqueIdentifier>{844640f3-e36f-463f-94c8-5bcf1959892a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\98.Weapon\00.Pistol">
-      <UniqueIdentifier>{67acf475-2210-478f-825f-a67f110c78a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\99.Player\03.Player Leg">
-      <UniqueIdentifier>{d19451d9-3b44-450e-a248-6f9e5a584091}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\01.Environment\02.GrassObject">
-      <UniqueIdentifier>{02143260-ceb1-4cdc-8ee5-13c46089d446}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\98.Weapon\01.Rifle">
-      <UniqueIdentifier>{794dd58e-19b1-4477-a9b2-60252cb98b98}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\05.Stage1\01.NPC">
-      <UniqueIdentifier>{d31de4af-8814-4181-b336-e30b74b5cc4c}</UniqueIdentifier>
     </Filter>
     <Filter Include="99.Default">
       <UniqueIdentifier>{88342214-980b-4823-99f8-e72419361a27}</UniqueIdentifier>
@@ -177,6 +99,18 @@
     </Filter>
     <Filter Include="02.Scene_All\05.RectObject">
       <UniqueIdentifier>{ac3817b5-9267-43b3-854b-f82508c1fd87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_Boss">
+      <UniqueIdentifier>{78c8617c-45c2-458d-b813-edd30d356f9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_Boss\00.PlatForm">
+      <UniqueIdentifier>{47b998ec-f6f2-4f07-8c2b-0e9749b9537e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_Boss\01.Reaper">
+      <UniqueIdentifier>{6f2d0601-88c0-4977-ae71-685d6039bc1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_Boss\02.BossRing">
+      <UniqueIdentifier>{9c970969-756d-4a12-a451-c64fe3216e1f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -294,6 +228,15 @@
     <ClInclude Include="..\Code\RectObject.h">
       <Filter>02.Scene_All\05.RectObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Scene_Boss.h">
+      <Filter>02.Scene_Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Reaper.h">
+      <Filter>02.Scene_Boss\01.Reaper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\PlatForm.h">
+      <Filter>02.Scene_Boss\00.PlatForm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -379,6 +322,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\RectObject.cpp">
       <Filter>02.Scene_All\05.RectObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_Boss.cpp">
+      <Filter>02.Scene_Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Reaper.cpp">
+      <Filter>02.Scene_Boss\01.Reaper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PlatForm.cpp">
+      <Filter>02.Scene_Boss\00.PlatForm</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
