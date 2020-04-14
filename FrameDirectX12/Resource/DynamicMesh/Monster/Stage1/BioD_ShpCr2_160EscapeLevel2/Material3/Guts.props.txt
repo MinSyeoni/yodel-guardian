@@ -1,0 +1,19 @@
+TwoSided = false
+bDisableDepthTest = false
+bIsMasked = false
+ReferencedTextures[4] =
+{
+    ReferencedTextures[0] = Texture2D'BioVFX_Z_TEXTURES.Normals.fx_Ice1_n'
+    ReferencedTextures[1] = Texture2D'BioVFX_Z_TEXTURES.Textures.fx_Fractal_03b'
+    ReferencedTextures[2] = Texture2D'BioVFX_Z_TEXTURES.Fractals.fx_elec_1_Dup'
+    ReferencedTextures[3] = TextureCube3'BioVFX_Z_TEXTURES.Cube_Maps.Glitter_Cube_Map'
+}
+BlendMode = BLEND_Masked (1)
+OpacityMaskClipValue = 0.333
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

@@ -1,0 +1,6 @@
+Diffuse=Asari_Door01_Diff
+Normal=Asari_Door01_Norm
+Specular=Asari_Door01_Diff
+SpecPower=LAG_MM_Placeholder_SpecMsk
+Opacity=CircleDoor_Emis
+Cube=CircleDoor_Emis

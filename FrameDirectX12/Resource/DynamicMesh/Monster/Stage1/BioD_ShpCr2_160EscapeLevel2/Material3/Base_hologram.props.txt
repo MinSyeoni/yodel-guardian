@@ -1,0 +1,18 @@
+TwoSided = true
+bDisableDepthTest = false
+bIsMasked = false
+ReferencedTextures[3] =
+{
+    ReferencedTextures[0] = Texture2D'BioVFX_Env_Hologram.Textures.sfx_holo-test_videolines'
+    ReferencedTextures[1] = Texture2D'BioVFX_Env_Hologram.Textures.holo-test_distortion_alpha'
+    ReferencedTextures[2] = Texture2D'BioVFX_Env_Hologram.Textures.Holomod_05_Tex'
+}
+BlendMode = BLEND_Additive (3)
+OpacityMaskClipValue = 0.333
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

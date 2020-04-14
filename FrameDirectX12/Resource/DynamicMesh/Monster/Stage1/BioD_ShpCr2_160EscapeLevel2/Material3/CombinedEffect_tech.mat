@@ -1,0 +1,4 @@
+Diffuse=ZMB_ARM_NKDa_Diff_Stack
+Normal=ZMB_ARM_NKDa_Norm_Stack
+SpecPower=ZMB_ARM_NKDa_Spec_Stack
+Opacity=AlphaGrad_BottomTight_Clamp

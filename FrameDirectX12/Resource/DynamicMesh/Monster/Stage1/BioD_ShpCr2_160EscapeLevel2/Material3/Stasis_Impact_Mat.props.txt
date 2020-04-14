@@ -1,0 +1,21 @@
+TwoSided = true
+bDisableDepthTest = false
+bIsMasked = false
+ReferencedTextures[6] =
+{
+    ReferencedTextures[0] = Texture2D'BioVFX_Z_TEXTURES.Gradients.GradientTopandBottom'
+    ReferencedTextures[1] = Texture2D'BioVFX_Z_TEXTURES.Gradients.Gradient'
+    ReferencedTextures[2] = Texture2D'BioVFX_Z_TEXTURES.Distortion.fx_Distort'
+    ReferencedTextures[3] = Texture2D'BioVFX_Z_TEXTURES.Fractals.fx_Electric_fractal'
+    ReferencedTextures[4] = Texture2D'BioVFX_Z_TEXTURES.Fractals.Wave'
+    ReferencedTextures[5] = Texture2D'BioVFX_Z_TEXTURES.Fractals.fx_Fractal_05'
+}
+BlendMode = BLEND_Additive (3)
+OpacityMaskClipValue = 0.333
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None
