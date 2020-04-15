@@ -1,0 +1,21 @@
+TwoSided = false
+bDisableDepthTest = false
+bIsMasked = false
+ReferencedTextures[6] =
+{
+    ReferencedTextures[0] = Texture2D'BIOG_RBT_ROB_NKD_R.NKDa.Alliance.RBT_ROB_NKDa_Exe_Norm_Stack'
+    ReferencedTextures[1] = Texture2D'BioVFX_Z_TEXTURES.Generic.Fissure_Stack'
+    ReferencedTextures[2] = Texture2D'BioVFX_Z_TEXTURES.Generic.Fissure_Norm'
+    ReferencedTextures[3] = Texture2D'BIOG_RBT_ROB_NKD_R.NKDa.Alliance.RBT_ROB_NKDa_Exe_Spwr_Stack'
+    ReferencedTextures[4] = Texture2D'BIOG_RBT_ROB_NKD_R.NKDa.Alliance.RBT_ROB_NKDa_Exe_Emis_01'
+    ReferencedTextures[5] = Texture2D'BIOG_RBT_ROB_NKD_R.NKDa.Alliance.RBT_ROB_NKDa_Exe_Diff_Stack'
+}
+BlendMode = BLEND_Masked (1)
+OpacityMaskClipValue = 0.333
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

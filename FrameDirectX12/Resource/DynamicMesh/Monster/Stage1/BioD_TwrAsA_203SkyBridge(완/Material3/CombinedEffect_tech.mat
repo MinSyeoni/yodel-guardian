@@ -1,0 +1,5 @@
+Diffuse=RBT_ROB_NKDa_Exe_Diff_Stack
+Normal=RBT_ROB_NKDa_Exe_Norm_Stack
+SpecPower=RBT_ROB_NKDa_Exe_Spwr_Stack
+Opacity=AlphaGrad_BottomTight_Clamp
+Emissive=RBT_ROB_NKDa_Exe_Emis_01

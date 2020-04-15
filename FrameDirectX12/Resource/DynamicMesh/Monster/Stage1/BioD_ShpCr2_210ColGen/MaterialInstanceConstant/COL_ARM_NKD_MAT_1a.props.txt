@@ -1,0 +1,96 @@
+ScalarParameterValues[4] =
+{
+    ScalarParameterValues[0] =
+    {
+        ParameterName = Phong_Spwr
+        ParameterValue = 2
+        ParameterInfo = 
+    }
+    ScalarParameterValues[1] =
+    {
+        ParameterName = Spec_Add
+        ParameterValue = 4
+        ParameterInfo = 
+    }
+    ScalarParameterValues[2] =
+    {
+        ParameterName = Emissive_Scalar
+        ParameterValue = 1.7
+        ParameterInfo = 
+    }
+    ScalarParameterValues[3] =
+    {
+        ParameterName = Dead
+        ParameterValue = 1
+        ParameterInfo = 
+    }
+}
+TextureParameterValues[3] =
+{
+    TextureParameterValues[0] =
+    {
+        ParameterName = Spec
+        ParameterValue = Texture2D'BIOG_COL_ARM_NKD_R.NKDa.COL_ARM_NKDa_Spec'
+        ParameterInfo = 
+    }
+    TextureParameterValues[1] =
+    {
+        ParameterName = Normal
+        ParameterValue = Texture2D'BIOG_COL_ARM_NKD_R.NKDa.COL_ARM_NKDa_Norm'
+        ParameterInfo = 
+    }
+    TextureParameterValues[2] =
+    {
+        ParameterName = Diffuse
+        ParameterValue = Texture2D'BIOG_COL_ARM_NKD_R.NKDa.COL_ARM_NKDa_Diff'
+        ParameterInfo = 
+    }
+}
+VectorParameterValues[3] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = Phong_Spec_Color
+        ParameterValue =
+        {
+            R = 0.38891
+            G = 0.263175
+            B = 0.075926
+            A = 1
+        }
+        ParameterInfo = 
+    }
+    VectorParameterValues[1] =
+    {
+        ParameterName = Spec_Color
+        ParameterValue =
+        {
+            R = 0.464741
+            G = 0.605484
+            B = 0.91575
+            A = 1
+        }
+        ParameterInfo = 
+    }
+    VectorParameterValues[2] =
+    {
+        ParameterName = Emissive_color
+        ParameterValue =
+        {
+            R = 0.965815
+            G = 0.464741
+            B = 0.173439
+            A = 1
+        }
+        ParameterInfo = 
+    }
+}
+Parent = None
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

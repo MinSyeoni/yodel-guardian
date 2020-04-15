@@ -1,0 +1,6 @@
+Diffuse=Asa_Trim2_Diff
+Normal=Asa_Trim2_Norm
+Specular=Asa_Trim2_Spec
+SpecPower=LAG_MM_Placeholder_SpecMsk
+Opacity=Asa_Trim2_Emis
+Cube=Asa_Trim2_Emis

@@ -1,0 +1,60 @@
+ScalarParameterValues[2] =
+{
+    ScalarParameterValues[0] =
+    {
+        ParameterName = Emissive_Blowout
+        ParameterValue = 1
+        ParameterInfo = 
+    }
+    ScalarParameterValues[1] =
+    {
+        ParameterName = CubeMap_Intensity
+        ParameterValue = 0.25
+        ParameterInfo = 
+    }
+}
+TextureParameterValues[4] =
+{
+    TextureParameterValues[0] =
+    {
+        ParameterName = WPN_ALL_Norm_Stack
+        ParameterValue = Texture2D'BIOG_WPN_HVY_R.HVYd.Base.WPN_HVYd_Norm'
+        ParameterInfo = 
+    }
+    TextureParameterValues[1] =
+    {
+        ParameterName = WPN_ALL_Spec_Stack
+        ParameterValue = Texture2D'BIOG_WPN_HVY_R.HVYd.Base.WPN_HVYd_Spec'
+        ParameterInfo = 
+    }
+    TextureParameterValues[2] =
+    {
+        ParameterName = WPN_ALL_Diff_Stack
+        ParameterValue = Texture2D'BIOG_WPN_HVY_R.HVYd.Base.WPN_HVYd_MDL'
+        ParameterInfo = 
+    }
+    TextureParameterValues[3] =
+    {
+        ParameterName = CubeMap
+        ParameterValue = TextureCube3'BIOG_WPN_ALL_MASTER_L.CM_Chrome'
+        ParameterInfo = 
+    }
+}
+VectorParameterValues[1] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = WPN_MASTER_Emis_ColourTint
+        ParameterValue = { R=1, G=0, B=0, A=1 }
+        ParameterInfo = 
+    }
+}
+Parent = None
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None
