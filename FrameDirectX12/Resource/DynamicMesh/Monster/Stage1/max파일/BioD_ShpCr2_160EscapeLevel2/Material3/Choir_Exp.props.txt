@@ -1,0 +1,17 @@
+TwoSided = true
+bDisableDepthTest = false
+bIsMasked = false
+ReferencedTextures[2] =
+{
+    ReferencedTextures[0] = Texture2D'BioVFX_Z_TEXTURES.Fractals.wispyflat'
+    ReferencedTextures[1] = Texture2D'BioVFX_Z_TEXTURES.Textures.BioticEnergy'
+}
+BlendMode = BLEND_Additive (3)
+OpacityMaskClipValue = 0.333
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

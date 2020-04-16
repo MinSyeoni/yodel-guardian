@@ -1,0 +1,54 @@
+ScalarParameterValues[1] =
+{
+    ScalarParameterValues[0] =
+    {
+        ParameterName = WhiteRange
+        ParameterValue = 60
+        ParameterInfo = 
+    }
+}
+TextureParameterValues[3] =
+{
+    TextureParameterValues[0] =
+    {
+        ParameterName = NormalMap
+        ParameterValue = Texture2D'BioApl_Cra_MedCrate01.Materials.MedCrate01_Norm'
+        ParameterInfo = 
+    }
+    TextureParameterValues[1] =
+    {
+        ParameterName = MSK3 Red- Spec Green - Emis/Relfc Blue -Sppwr
+        ParameterValue = Texture2D'BioApl_Cra_MedCrate01.Materials.MedCrate01_Msk3'
+        ParameterInfo = 
+    }
+    TextureParameterValues[2] =
+    {
+        ParameterName = Simple Diffuse
+        ParameterValue = Texture2D'BioApl_Cra_MedCrate01.Materials.MedCrate01_Diff'
+        ParameterInfo = 
+    }
+}
+VectorParameterValues[1] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = Simple_Specular_color
+        ParameterValue =
+        {
+            R = 1
+            G = 0.598942
+            B = 0.598942
+            A = 5
+        }
+        ParameterInfo = 
+    }
+}
+Parent = Material3'BIOG_APL_MASTER_MATERIAL.Placeable_MM'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

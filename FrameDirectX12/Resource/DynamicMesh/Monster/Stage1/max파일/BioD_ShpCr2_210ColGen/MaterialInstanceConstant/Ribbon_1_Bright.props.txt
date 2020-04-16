@@ -1,0 +1,26 @@
+ScalarParameterValues[0] = {}
+TextureParameterValues[0] = {}
+VectorParameterValues[1] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = Color
+        ParameterValue =
+        {
+            R = 2
+            G = 0.8
+            B = 0.1
+            A = 1
+        }
+        ParameterInfo = 
+    }
+}
+Parent = Material3'BioVFX_Crt_Collector.Materials.Ribbon_1_Dup'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

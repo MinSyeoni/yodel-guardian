@@ -1,0 +1,40 @@
+ScalarParameterValues[1] =
+{
+    ScalarParameterValues[0] =
+    {
+        ParameterName = Intensity
+        ParameterValue = 1
+        ParameterInfo = 
+    }
+}
+TextureParameterValues[0] = {}
+VectorParameterValues[2] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = Color
+        ParameterValue = { R=20, G=10, B=5, A=1 }
+        ParameterInfo = 
+    }
+    VectorParameterValues[1] =
+    {
+        ParameterName = ImpactRadius
+        ParameterValue =
+        {
+            R = 1200
+            G = 1200
+            B = 1200
+            A = 1
+        }
+        ParameterInfo = 
+    }
+}
+Parent = Material3'BioVFX_Crt_Praetorian.Materials.Choir_Exp'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

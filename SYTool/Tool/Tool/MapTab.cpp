@@ -25,9 +25,9 @@ CMapTab::CMapTab(CWnd* pParent /*=nullptr*/)
 	, m_fPosX(0.f)
 	, m_fPosY(0.f)
 	, m_fPosZ(0.f)
-	, m_fScaleX(1.f)
-	, m_fScaleY(1.f)
-	, m_fScaleZ(1.f)
+	, m_fScaleX(0.1f)
+	, m_fScaleY(0.1f)
+	, m_fScaleZ(0.1f)
 	, m_fRotX(0.f)
 	, m_fRotY(0.f)
 	, m_fRotZ(0.f)
@@ -224,7 +224,7 @@ BOOL CMapTab::OnInitDialog()
 
 	Initialize_String();
 
-	m_vMeshScale = { 1.f, 1.f, 1.f };
+	m_vMeshScale = { 0.1f, 0.1f, 0.1f };
 
 	CButton* pButton = (CButton*)GetDlgItem(IDC_RADIO3);
 	pButton->SetCheck(TRUE);

@@ -261,10 +261,46 @@ void CToolView::Ready_Buffer_Setting()
 		1)))
 		return;
 
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"TombStone.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"TombStone.x"), E_FAIL))
+
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Board.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Board.x"), E_FAIL))
 		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Tree01.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Tree01.x"), E_FAIL))
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Book1.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Book1.x"), E_FAIL))
 		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Book2.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Book2.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Book3.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Book3.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Book4.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Book4.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Book5.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Book5.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Book6.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Book6.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Book7.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Book7.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Box.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Box.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Computer1.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Computer1.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Computer2.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Computer2.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Container_Blue.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Container_Blue.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Container_Green.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Container_Green.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Container_Grey.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Container_Grey.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Container_Red.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Container_Red.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Desk3.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Desk3.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Lathe.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Lathe.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Siren.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Siren.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Solar.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Solar.x"), E_FAIL))
+		return;
+
 
 	//if (FAILED(Engine::Ready_Mesh(m_pDevice,
 	//	RESOURCE_STAGE,

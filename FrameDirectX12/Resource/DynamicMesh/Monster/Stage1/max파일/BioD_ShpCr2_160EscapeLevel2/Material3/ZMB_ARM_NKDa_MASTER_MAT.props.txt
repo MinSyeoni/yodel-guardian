@@ -1,0 +1,18 @@
+TwoSided = false
+bDisableDepthTest = false
+bIsMasked = true
+ReferencedTextures[3] =
+{
+    ReferencedTextures[0] = Texture2D'BIOG_ZMB_ARM_NKD_R.NKDa.ZMB_ARM_NKDa_Norm_Stack'
+    ReferencedTextures[1] = Texture2D'BIOG_ZMB_ARM_NKD_R.NKDa.ZMB_ARM_NKDa_Diff_Stack'
+    ReferencedTextures[2] = Texture2D'BIOG_ZMB_ARM_NKD_R.NKDa.ZMB_ARM_NKDa_Spec_Stack'
+}
+BlendMode = BLEND_Masked (1)
+OpacityMaskClipValue = 1
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None
