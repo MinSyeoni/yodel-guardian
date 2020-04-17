@@ -1,52 +1,9 @@
-﻿  stdafx.cpp
-  Aim.cpp
-  BackGround.cpp
-  CubeObject.cpp
-  DynamicCamera.cpp
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\DynamicCamera.cpp(112,8): warning C4101: 'dwMouseMove' :참조되지 않은 지역 변수입니다.
-  Dynamic_Object.cpp
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Dynamic_Object.cpp(135,15): warning C4101: 'tCB_BoneInfo' :참조되지 않은 지역 변수입니다.
-  GlassObject.cpp
-  GunUI.cpp
-  Loading.cpp
-  MainApp.cpp
+﻿  MainApp.cpp
   MapObject.cpp
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\MapObject.cpp(58,2): warning C4002: 함수 같은 매크로 호출 'NULL_CHECK'에 대해 인수가 너무 많습니다.
-  Pistol.cpp
-  Player.cpp
-  PlayerArm.cpp
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerArm.cpp(175,15): warning C4101: 'tCB_BoneInfo' :참조되지 않은 지역 변수입니다.
-  PlayerHP.cpp
-  PlayerLeg.cpp
-  PlayerStatus.cpp
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(137,5): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(137,6): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(161,5): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(161,6): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(171,5): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(171,6): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(190,5): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(190,6): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(200,5): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(200,6): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(212,5): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(212,6): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(352,11): warning C4101: 'matRot' :참조되지 않은 지역 변수입니다.
-  PlayerUI.cpp
-  RectObject.cpp
-  Rifle.cpp
   Scene_Logo.cpp
-  코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
   Scene_Menu.cpp
   Scene_Stage.cpp
-  SkyDome.cpp
-  StaticObject.cpp
-  Terrain.cpp
-  Weapon.cpp
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Weapon.cpp(55,15): warning C4101: 'tCB_BoneInfo' :참조되지 않은 지역 변수입니다.
-  Client.cpp
-  UI.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Scene_Stage.cpp(277,2): warning C4002: 함수 같은 매크로 호출 'NULL_CHECK'에 대해 인수가 너무 많습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Scene_Stage.cpp(304,2): warning C4002: 함수 같은 매크로 호출 'NULL_CHECK'에 대해 인수가 너무 많습니다.
   코드를 생성하고 있습니다...
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Weapon.cpp(30): warning C4715: 'CWeapon::AddComponent': 모든 제어 경로에서 값을 반환하지는 않습니다.
   Client.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Default\../Bin\Client.exe

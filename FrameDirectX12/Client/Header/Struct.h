@@ -22,3 +22,19 @@ typedef struct tagMeshData
 	BYTE			byDrawID = 0;
 	BYTE			byMeshID = 0;
 }MESHDATA;
+
+typedef struct tagCollider
+{
+	_vec3		vCenter = _vec3(0.f, 0.f, 0.f);
+	_vec3		vScale = _vec3(0.f, 0.f, 0.f);
+	_vec3		vRotate = _vec3(0.f, 0.f, 0.f);
+	_vec3		dwVtxPos = _vec3(0.f, 0.f, 0.f);
+	unsigned long	dwStride = 0;
+	unsigned long	dwNumVtx = 0;
+	int				iType = 0;
+	int				iOptionID = 0;
+	float			fRadius = 0.f;
+	unsigned int	iColID = 0;
+	unsigned int	iGroupID = 0;
+	_matrix			matWorld;
+}COLLIDER;

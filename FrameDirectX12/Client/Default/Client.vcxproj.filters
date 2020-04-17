@@ -184,6 +184,9 @@
     <Filter Include="02.Scene_All\03.StaticObject\01.MapObject">
       <UniqueIdentifier>{022f3627-9f5b-4127-89b8-fa62a5174368}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Scene_Stage\06.Monster">
+      <UniqueIdentifier>{eb15a1db-72e5-459c-bad8-04305adacdfc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -303,6 +306,9 @@
     <ClInclude Include="..\Code\MapObject.h">
       <Filter>02.Scene_All\03.StaticObject\01.MapObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Monster.h">
+      <Filter>01.Scene_Stage\06.Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -391,6 +397,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\MapObject.cpp">
       <Filter>02.Scene_All\03.StaticObject\01.MapObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Monster.cpp">
+      <Filter>01.Scene_Stage\06.Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

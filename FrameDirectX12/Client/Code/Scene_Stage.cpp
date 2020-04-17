@@ -21,6 +21,7 @@
 #include "GunUI.h"
 
 #include "MapObject.h"
+#include "Monster.h"
 
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
@@ -133,7 +134,10 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = CMapObject::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_MapObject", pGameObject), E_FAIL);
-
+	
+	pGameObject = CMonster::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Monster", pGameObject), E_FAIL);
 	////////////////////////////////// UI /////////////////////////////////////////////
 	pGameObject = CUI::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -214,8 +218,6 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player",nullptr), E_FAIL);
 
-	//Prototype_MapObject
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MapObject", L"MapObject", nullptr), E_FAIL);
 
 	MeshInfo tMeshInfo;
 	tMeshInfo.MeshTag = L"TombStone.X";
@@ -233,9 +235,13 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_StaticObject", L"Static", &tMeshInfo), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Rifle", L"Weapon", nullptr), E_FAIL);
 
+	//Prototype_MapObject
+	Load_StageObject(L"../../../SYTool/Tool/Data/StaticObj/DataPassTest.dat");
+
+	// Monster
+	Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/MonsterTest.dat");
 
 	return S_OK;
-		
 }
 
 HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
@@ -262,6 +268,75 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 
 
 	return S_OK;
+}
+
+void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
+{
+	HANDLE hFile = CreateFile(wstrFilePath.c_str(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	NULL_CHECK(hFile, E_FAIL);
+
+	if (INVALID_HANDLE_VALUE == hFile)
+		return;
+
+	DWORD dwByte = 0;
+	COLLIDER tColData = {};
+
+	if (wstrFilePath == L"../../../SYTool/Tool/Data/Collider/MonsterTest.dat")
+		m_tMeshInfo.MeshTag = L"Flamethrower";
+
+	while (true)
+	{
+		ReadFile(hFile, &tColData, sizeof(COLLIDER), &dwByte, nullptr);
+
+		if (dwByte == 0)
+			break;
+
+		m_tMeshInfo.Pos = tColData.vCenter;
+		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Monster", m_tMeshInfo.MeshTag, &m_tMeshInfo);
+	}
+	CloseHandle(hFile);
+}
+
+void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
+{
+	HANDLE hFile = CreateFile(wstrFilePath.c_str(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	NULL_CHECK(hFile, E_FAIL);
+
+	if (INVALID_HANDLE_VALUE == hFile)
+		return;
+
+	DWORD dwByte = 0;
+	MESHDATA tObjData = {};
+
+	// 나중에 옵젝 로드할 떄 모든 옵젝 삭제하기 위해서 
+	//if (nullptr != Engine::Get_Layer(SCENE_STATIC, LAYER_STATICOBJECT))
+	//{
+	//	m_GameObjLstTemp = Engine::Get_Layer(SCENE_STATIC, LAYER_STATICOBJECT)->Get_list();
+	//	for (auto& pGameObj : m_GameObjLstTemp)
+	//	{
+	//		dynamic_cast<CStaticObj*>(pGameObj)->IsStaticObjDead(true);
+	//	}
+	//	m_GameObjLstTemp.clear();
+	//}
+
+	int			 iTagLength = 0;
+
+	while (true)
+	{
+		ReadFile(hFile, &iTagLength, sizeof(int), &dwByte, nullptr);
+		ReadFile(hFile, &tObjData, sizeof(MESHDATA), &dwByte, nullptr);
+
+		if (dwByte == 0)
+			break;
+
+		m_tMeshInfo.MeshTag = tObjData.m_MeshTag;
+		m_tMeshInfo.Pos = tObjData.vPos;
+		m_tMeshInfo.Rotation = tObjData.vRotate;
+		m_tMeshInfo.Scale = tObjData.vScale;
+
+		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
+	}
+	CloseHandle(hFile);
 }
 
 CScene_Stage * CScene_Stage::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)

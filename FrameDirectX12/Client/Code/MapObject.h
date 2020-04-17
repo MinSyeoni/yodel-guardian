@@ -27,7 +27,6 @@ public:
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 
 	virtual void    SetMeshInfo(MeshInfo tInfo) { m_tMeshInfo = tInfo; }
-   // virtual void    Render_ShadowDepth(CShader_Shadow* pShader);
 
 private:
 	virtual HRESULT Add_Component();
@@ -37,10 +36,6 @@ private:
     void            Set_ShadowTable(CShader_Shadow* pShader);
 
 private:
-	void			Load_StageObject(const wstring& wstrFilePath);
-
-private:
-
 	Engine::CMesh*				m_pMeshCom = nullptr;
 	Engine::CShader_Mesh*       m_pShaderCom = nullptr;
 

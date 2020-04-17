@@ -35,8 +35,6 @@ HRESULT CMapObject::Ready_GameObject()
 
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
-	Load_StageObject(L"../../../SYTool/Tool/Data/StaticObj/DataPassTest.dat");
-
 	// Buffer
 	m_pMeshCom = static_cast<Engine::CMesh*>(m_pComponentMgr->Clone_Component(m_tMeshInfo.MeshTag.c_str(), COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pMeshCom, E_FAIL);
@@ -46,52 +44,9 @@ HRESULT CMapObject::Ready_GameObject()
 	m_pTransCom->m_vScale = m_tMeshInfo.Scale;
 	m_pTransCom->m_vAngle = m_tMeshInfo.Rotation;
 
-	m_pTransCom->m_vPos = _vec3(300.f, 0.f, 300.f);
-	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
-
 	return S_OK;
 }
 
-void CMapObject::Load_StageObject(const wstring& wstrFilePath)
-{
-	HANDLE hFile = CreateFile(wstrFilePath.c_str(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
-	NULL_CHECK(hFile, E_FAIL);
-
-	if (INVALID_HANDLE_VALUE == hFile)
-		return;
-
-	DWORD dwByte = 0;
-	MESHDATA tObjData = {};
-
-	// 나중에 옵젝 로드할 떄 모든 옵젝 삭제하기 위해서 
-	//if (nullptr != Engine::Get_Layer(SCENE_STATIC, LAYER_STATICOBJECT))
-	//{
-	//	m_GameObjLstTemp = Engine::Get_Layer(SCENE_STATIC, LAYER_STATICOBJECT)->Get_list();
-	//	for (auto& pGameObj : m_GameObjLstTemp)
-	//	{
-	//		dynamic_cast<CStaticObj*>(pGameObj)->IsStaticObjDead(true);
-	//	}
-	//	m_GameObjLstTemp.clear();
-	//}
-
-	int			 iTagLength = 0;
-
-	while (true)
-	{
-		ReadFile(hFile, &iTagLength, sizeof(int), &dwByte, nullptr);
-		ReadFile(hFile, &tObjData, sizeof(MESHDATA), &dwByte, nullptr);
-
-		if (dwByte == 0)
-			break;
-
-		m_tMeshInfo.MeshTag	 = tObjData.m_MeshTag;
-		m_tMeshInfo.Pos      = tObjData.vPos;
-		m_tMeshInfo.Rotation = tObjData.vRotate;
-		m_tMeshInfo.Scale    = tObjData.vScale;
-
-	}
-	CloseHandle(hFile);
-}
 
 HRESULT CMapObject::LateInit_GameObject()
 {
@@ -197,6 +152,9 @@ void CMapObject::Set_ShadowTable(CShader_Shadow * pShader)
 CGameObject * CMapObject::Clone_GameObject(void * prg)
 {
 	CGameObject* pInstance = new CMapObject(*this);
+
+	MeshInfo tMeshInfo = *reinterpret_cast<MeshInfo*>(prg);
+	static_cast<CMapObject*>(pInstance)->m_tMeshInfo = tMeshInfo;
 
 	if (FAILED(pInstance->Ready_GameObject()))
 		return nullptr;

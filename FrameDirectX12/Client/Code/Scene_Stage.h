@@ -22,6 +22,12 @@ private:
 	HRESULT			Ready_LayerGameObject(wstring wstrLayerTag);
 	HRESULT			Ready_LayerUI(wstring wstrLayerTag);
 
+private:
+	void			Load_MonsterPos(const wstring& wstrFilePath);
+	void			Load_StageObject(const wstring& wstrFilePath);
+
+	MeshInfo		m_tMeshInfo;
+
 public:
 	static CScene_Stage*	Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 private:
