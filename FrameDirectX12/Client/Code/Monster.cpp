@@ -8,6 +8,7 @@
 #include "ColliderMgr.h"
 #include "Frustom.h"
 
+
 CMonster::CMonster(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	:CGameObject(pGraphicDevice,pCommandList)
 {
@@ -43,6 +44,9 @@ HRESULT CMonster::Ready_GameObject()
 	COUT_STR("Success Monster - Clone Mesh");
 #endif
 
+	if(m_tMeshInfo.MeshTag == L"Flamethrower")
+		m_eMonName = FLAMETHROWER;
+
 	// Buffer
 	m_pMeshCom = static_cast<Engine::CMesh*>(m_pComponentMgr->Clone_Component(m_tMeshInfo.MeshTag.c_str(), COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pMeshCom, E_FAIL);
@@ -51,6 +55,18 @@ HRESULT CMonster::Ready_GameObject()
 	m_pTransCom->m_vPos = m_tMeshInfo.Pos;
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
 	m_pTransCom->m_vDir = _vec3(0.f, 0.0f, 1.f);
+
+	switch (m_eMonName)
+	{
+	case CMonster::NONAME:
+		break;
+	case CMonster::FLAMETHROWER:
+		m_pFlameThrower = new CFlameThrower;
+		m_pFlameThrower->Set_Transform(m_pTransCom);
+		break;
+	default:
+		break;
+	}
 
 	return S_OK;
 }
@@ -65,6 +81,17 @@ HRESULT CMonster::LateInit_GameObject()
 
 	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
 
+	switch (m_eMonName)
+	{
+	case CMonster::NONAME:
+		break;
+	case CMonster::FLAMETHROWER:
+		m_pFlameThrower->Late_Initialized();
+		break;
+	default:
+		break;
+	}
+
 	return S_OK;
 }
 
@@ -72,22 +99,27 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 {
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
-	m_fTime += fTimeDelta;
-
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
-	Engine::CGameObject::Update_GameObject(fTimeDelta);
-
-	if (m_ePreState != m_eCurState)
+	switch (m_eMonName)
 	{
-		m_fTime = 0.f;
-		m_ePreState = m_eCurState;
+	case CMonster::NONAME:
+		break;
+	case CMonster::FLAMETHROWER:
+		if (m_pFlameThrower == nullptr)
+			return E_FAIL;
+		m_pFlameThrower->Update_FlameThrower(fTimeDelta, m_pTransCom);
+		m_iCurMonState = m_pFlameThrower->Get_CurState();
+		m_iPreMonState = m_pFlameThrower->Get_PreState();
+		break;
+	default:
+		break;
 	}
 
-	dynamic_cast<CMesh*>(m_pMeshCom)->Set_AnimationBlend((_int)m_eCurState, (_int)m_ePreState);
+	dynamic_cast<CMesh*>(m_pMeshCom)->Set_AnimationBlend((_int)m_iCurMonState, (_int)m_iPreMonState);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransformsBlend(5000.f * fTimeDelta, 5000.f * fTimeDelta, m_fSpineAngle);
-
+	Engine::CGameObject::Update_GameObject(fTimeDelta);
 	return NO_EVENT;
 }
 
@@ -96,6 +128,21 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
+
+	switch (m_eMonName)
+	{
+	case CMonster::NONAME:
+		break;
+	case CMonster::FLAMETHROWER:
+		if (m_pFlameThrower == nullptr)
+			return E_FAIL;
+		m_pFlameThrower->LateUpdate_FlameThrower(fTimeDelta, m_pTransCom);
+		break;
+	default:
+		break;
+	}
+
 	return NO_EVENT;
 }
 
@@ -138,6 +185,13 @@ void CMonster::Set_ConstantTable()
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
 
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
+}
+
+void CMonster::Render_ShadowDepth(CShader_Shadow * pShader)
+{
+	Set_ShadowTable(pShader);
+	m_pMeshCom->Render_ShadowMesh(pShader);
+	pShader->Set_ShadowFinish();
 }
 
 void CMonster::Set_ShadowTable(CShader_Shadow* pShader)
@@ -188,4 +242,5 @@ CMonster* CMonster::Create(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandL
 void CMonster::Free()
 {
 	CGameObject::Free();
+	Safe_Delete(m_pFlameThrower);
 }

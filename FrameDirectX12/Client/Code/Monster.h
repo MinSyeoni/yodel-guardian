@@ -1,6 +1,7 @@
 #pragma once
 #include "Include.h"
 #include "GameObject.h"
+#include "FlameThrower.h"
 
 namespace Engine
 {
@@ -13,7 +14,7 @@ class CDynamicCamera;
 class CMonster : public Engine::CGameObject
 {
 public:
-	enum MONSTATE { MON_IDLE, MON_ATTACK, MON_HIT, MON_DEAD, MON_END };
+	enum MONKIND { NONAME, FLAMETHROWER };
 
 private:
 	explicit CMonster(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
@@ -30,8 +31,8 @@ public:
 
 private:
 	void					Set_ConstantTable();
+	void					Render_ShadowDepth(CShader_Shadow* pShader);
 	void					Set_ShadowTable(CShader_Shadow* pShader);
-
 
 private:
 	virtual HRESULT			Add_Component();
@@ -41,10 +42,13 @@ private:
 	Engine::CShader_Mesh*	m_pShaderCom = nullptr;
 	CDynamicCamera*			m_pDynamicCamera = nullptr;
 
+	CFlameThrower*			m_pFlameThrower = nullptr;
+
 private:
-	MONSTATE				m_eCurState = MON_IDLE;
-	MONSTATE				m_ePreState = MON_IDLE;
-	float					m_fTime = 0.f;
+	MONKIND					m_eMonName = NONAME;
+	_int					m_iCurMonState = 0;
+	_int					m_iPreMonState = 0;
+
 	float					m_fSpineAngle = 0.f;
 
 	MeshInfo				m_tMeshInfo;

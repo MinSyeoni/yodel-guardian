@@ -1,9 +1,4 @@
-﻿  MainApp.cpp
-  MapObject.cpp
-  Scene_Logo.cpp
-  Scene_Menu.cpp
-  Scene_Stage.cpp
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Scene_Stage.cpp(277,2): warning C4002: 함수 같은 매크로 호출 'NULL_CHECK'에 대해 인수가 너무 많습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Scene_Stage.cpp(304,2): warning C4002: 함수 같은 매크로 호출 'NULL_CHECK'에 대해 인수가 너무 많습니다.
-  코드를 생성하고 있습니다...
+﻿  FlameThrower.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Default\FlameThrower.cpp(41,14): warning C4353: 비표준 확장을 사용했습니다. 함수 식으로 상수 0을 사용했습니다.  '__noop' 내장 함수를 대신 사용하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Default\FlameThrower.cpp(47,14): warning C4353: 비표준 확장을 사용했습니다. 함수 식으로 상수 0을 사용했습니다.  '__noop' 내장 함수를 대신 사용하십시오.
   Client.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Default\../Bin\Client.exe

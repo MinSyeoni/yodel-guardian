@@ -187,6 +187,9 @@
     <Filter Include="01.Scene_Stage\06.Monster">
       <UniqueIdentifier>{eb15a1db-72e5-459c-bad8-04305adacdfc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Scene_Stage\06.Monster\00.FlameThrower">
+      <UniqueIdentifier>{95102f00-49ab-42d5-aef4-48bbba25a08f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -309,6 +312,9 @@
     <ClInclude Include="..\Code\Monster.h">
       <Filter>01.Scene_Stage\06.Monster</Filter>
     </ClInclude>
+    <ClInclude Include="FlameThrower.h">
+      <Filter>01.Scene_Stage\06.Monster\00.FlameThrower</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -400,6 +406,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Monster.cpp">
       <Filter>01.Scene_Stage\06.Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="FlameThrower.cpp">
+      <Filter>01.Scene_Stage\06.Monster\00.FlameThrower</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
