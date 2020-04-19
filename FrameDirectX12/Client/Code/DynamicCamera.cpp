@@ -109,7 +109,7 @@ void CDynamicCamera::MouseInput()
 {
 	
 	
-	_long dwMouseMove;
+	_long dwMouseMove=0;
 
 
 	if (m_pmatArmCamera != nullptr)

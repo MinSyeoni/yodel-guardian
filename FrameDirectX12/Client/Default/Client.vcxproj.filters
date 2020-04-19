@@ -112,6 +112,12 @@
     <Filter Include="02.Scene_Boss\02.BossRing">
       <UniqueIdentifier>{9c970969-756d-4a12-a451-c64fe3216e1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Scene_Stage\04.Npc">
+      <UniqueIdentifier>{5bb052d5-a6d6-4954-99db-b87ec9ed107a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\04.Npc\00.Salone">
+      <UniqueIdentifier>{4b44d6c9-3028-4388-abda-b0e39fc9da57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -237,6 +243,9 @@
     <ClInclude Include="..\Code\PlatForm.h">
       <Filter>02.Scene_Boss\00.PlatForm</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Salone.h">
+      <Filter>01.Scene_Stage\04.Npc\00.Salone</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -331,6 +340,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\PlatForm.cpp">
       <Filter>02.Scene_Boss\00.PlatForm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Salone.cpp">
+      <Filter>01.Scene_Stage\04.Npc\00.Salone</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

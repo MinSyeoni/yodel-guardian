@@ -184,6 +184,7 @@
     <ClInclude Include="..\Code\Reaper.h" />
     <ClInclude Include="..\Code\RectObject.h" />
     <ClInclude Include="..\Code\Rifle.h" />
+    <ClInclude Include="..\Code\Salone.h" />
     <ClInclude Include="..\Code\Scene_Boss.h" />
     <ClInclude Include="..\Code\Scene_Logo.h" />
     <ClInclude Include="..\Code\Scene_Menu.h" />
@@ -227,6 +228,7 @@
     <ClCompile Include="..\Code\Reaper.cpp" />
     <ClCompile Include="..\Code\RectObject.cpp" />
     <ClCompile Include="..\Code\Rifle.cpp" />
+    <ClCompile Include="..\Code\Salone.cpp" />
     <ClCompile Include="..\Code\Scene_Boss.cpp" />
     <ClCompile Include="..\Code\Scene_Logo.cpp" />
     <ClCompile Include="..\Code\Scene_Menu.cpp" />
