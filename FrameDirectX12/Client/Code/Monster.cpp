@@ -54,7 +54,7 @@ HRESULT CMonster::Ready_GameObject()
 
 	m_pTransCom->m_vPos = m_tMeshInfo.Pos;
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
-	m_pTransCom->m_vDir = _vec3(0.f, 0.0f, 1.f);
+	m_pTransCom->m_vDir = _vec3(0.f, 0.f, 1.f);
 
 	switch (m_eMonName)
 	{
@@ -129,6 +129,8 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
+
+
 
 	switch (m_eMonName)
 	{

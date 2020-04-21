@@ -11,7 +11,9 @@ namespace Engine
 class CFlameThrower
 {
 public:
-	enum FLAMESTATE { FLAME_IDLE, FLAME_ATTACK, FLAME_HIT, FLAME_DEAD, FLAME_END };
+	enum FLAMESTATE { FLAME_IDLE, BC_Start/*연속쏘기*/, CB_Enter/*한발쏘기*/, CB_Exit/*쏘고 난후 착지?*/, CB_FireLoop/*화염방사*/,
+					CB_FireRecoil/*뭔지모르겠음*/, CB_FireStart/*뭔지모르겠음*/, CB_Idle/*가만히*/, CB_Twitch/*두리번두리번*/, CB_WalkDown/*?멈춰있음*/,
+					CB_WalkEast/*멈*/, CB_WalkNorth/*춰*/, CB_WalkSouth/*있*/, CB_WalkUp/*다*/, CB_WalkWest/*??*/ };
 
 public:
 	CFlameThrower();
@@ -40,5 +42,8 @@ private:
 
 	float					m_fTime = 0.f;
 	float					m_fSpineAngle = 0.f;
+	float					m_fAniTime = 0.f;
+
+	_int					m_iRandState = 0;
 };
 

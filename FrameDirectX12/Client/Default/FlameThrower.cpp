@@ -16,7 +16,7 @@ CFlameThrower::~CFlameThrower()
 
 void CFlameThrower::Initialized()
 {
-	m_eCurState = FLAME_IDLE;
+	m_eCurState = CB_Idle;
 	m_ePreState = m_eCurState;
 }
 
@@ -36,13 +36,24 @@ _int CFlameThrower::Update_FlameThrower(const _float& fTimeDelta, CTransform* pT
 	}
 
 	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-	m_pTransCom->Chase_Target(pPlayer->Get_Transform()->Get_PositionVector(), fTimeDelta);
+	//m_pTransCom->Chase_Target(pPlayer->Get_Transform()->Get_PositionVector(), fTimeDelta);
+
 
 	return S_OK();
 }
 
 _int CFlameThrower::LateUpdate_FlameThrower(const _float& fTimeDelta, CTransform* pTransform)
 {
+	srand((unsigned int)time(0));
+
+	
+	m_fAniTime += fTimeDelta;
+	if (m_fAniTime >= 3.f)
+	{
+		m_eCurState = CB_Twitch;
+		m_fAniTime = 0.f;
+	}
+	
 
 	return S_OK();
 }
