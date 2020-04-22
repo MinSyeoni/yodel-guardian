@@ -68,6 +68,10 @@ HRESULT CMonster::Ready_GameObject()
 		break;
 	}
 
+	m_pBoxCom = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(300.f, 300.f, 300.f), this));
+	NULL_CHECK_RETURN(m_pBoxCom, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCom);
+
 	return S_OK;
 }
 
@@ -102,6 +106,10 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
+	Engine::CGameObject::Update_GameObject(fTimeDelta);
+	m_pBoxCom->Update_Collider(&m_pTransCom->m_matWorld);
+	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCom);
+
 	switch (m_eMonName)
 	{
 	case CMonster::NONAME:
@@ -109,7 +117,7 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 	case CMonster::FLAMETHROWER:
 		if (m_pFlameThrower == nullptr)
 			return E_FAIL;
-		m_pFlameThrower->Update_FlameThrower(fTimeDelta, m_pTransCom);
+		m_pFlameThrower->Update_FlameThrower(fTimeDelta, m_pTransCom, m_pMeshCom);
 		m_iCurMonState = m_pFlameThrower->Get_CurState();
 		m_iPreMonState = m_pFlameThrower->Get_PreState();
 		break;
@@ -119,7 +127,8 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 
 	dynamic_cast<CMesh*>(m_pMeshCom)->Set_AnimationBlend((_int)m_iCurMonState, (_int)m_iPreMonState);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransformsBlend(5000.f * fTimeDelta, 5000.f * fTimeDelta, m_fSpineAngle);
-	Engine::CGameObject::Update_GameObject(fTimeDelta);
+
+
 	return NO_EVENT;
 }
 
@@ -129,8 +138,7 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
-
-
+	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCom), -1);
 
 	switch (m_eMonName)
 	{
@@ -139,7 +147,7 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 	case CMonster::FLAMETHROWER:
 		if (m_pFlameThrower == nullptr)
 			return E_FAIL;
-		m_pFlameThrower->LateUpdate_FlameThrower(fTimeDelta, m_pTransCom);
+		m_pFlameThrower->LateUpdate_FlameThrower(fTimeDelta, m_pTransCom, m_pMeshCom);
 		break;
 	default:
 		break;

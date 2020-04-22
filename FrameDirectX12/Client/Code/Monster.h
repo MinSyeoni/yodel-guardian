@@ -7,6 +7,7 @@ namespace Engine
 {
 	class CMesh;
 	class CShader_Mesh;
+	class CBoxCollider;
 }
 
 class CDynamicCamera;
@@ -40,6 +41,7 @@ private:
 private:
 	Engine::CMesh*			m_pMeshCom = nullptr;
 	Engine::CShader_Mesh*	m_pShaderCom = nullptr;
+	Engine::CBoxCollider*	m_pBoxCom = nullptr;
 	CDynamicCamera*			m_pDynamicCamera = nullptr;
 
 	CFlameThrower*			m_pFlameThrower = nullptr;

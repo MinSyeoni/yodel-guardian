@@ -1,4 +1,4 @@
 ﻿  FlameThrower.cpp
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Default\FlameThrower.cpp(42,14): warning C4353: 비표준 확장을 사용했습니다. 함수 식으로 상수 0을 사용했습니다.  '__noop' 내장 함수를 대신 사용하십시오.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Default\FlameThrower.cpp(58,14): warning C4353: 비표준 확장을 사용했습니다. 함수 식으로 상수 0을 사용했습니다.  '__noop' 내장 함수를 대신 사용하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Default\FlameThrower.cpp(114,14): warning C4353: 비표준 확장을 사용했습니다. 함수 식으로 상수 0을 사용했습니다.  '__noop' 내장 함수를 대신 사용하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Default\FlameThrower.cpp(123,14): warning C4353: 비표준 확장을 사용했습니다. 함수 식으로 상수 0을 사용했습니다.  '__noop' 내장 함수를 대신 사용하십시오.
   Client.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Default\../Bin\Client.exe
