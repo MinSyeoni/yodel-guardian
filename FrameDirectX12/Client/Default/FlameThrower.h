@@ -53,5 +53,6 @@ private:
 	_vec3					m_pPlayerPos = _vec3(0.f,0.f,0.f);
 	_vec3					m_pFlamePos = _vec3(0.f, 0.f, 0.f);
 	_float					m_fAniDelay = 0.f;
+	_bool					m_bIsInArea = false;
 };
 
