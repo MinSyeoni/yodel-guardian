@@ -154,7 +154,8 @@ void CPlayerStatus::KeyInput()
 
 			m_eLegState = CPlayer::NONEWALK;
 		}
-		m_fSpeed = 5.f;
+		//m_fSpeed = 5.f;
+		m_fSpeed = 10.f;
 	}
 
 
