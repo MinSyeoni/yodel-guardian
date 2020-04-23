@@ -15,8 +15,8 @@ CMonster::CMonster(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pC
 }
 
 CMonster::CMonster(const CMonster& rhs)
-	:CGameObject(rhs)
-
+	:CGameObject(rhs),
+	m_tMeshInfo(rhs.m_tMeshInfo)
 {
 }
 
@@ -72,6 +72,10 @@ HRESULT CMonster::Ready_GameObject()
 	NULL_CHECK_RETURN(m_pBoxCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCom);
 
+	//m_pBoundary = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(800.f, 800.f, 800.f), this));
+	//NULL_CHECK_RETURN(m_pBoundary, E_FAIL);
+	//m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoundary);
+
 	return S_OK;
 }
 
@@ -110,16 +114,25 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 	m_pBoxCom->Update_Collider(&m_pTransCom->m_matWorld);
 	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCom);
 
+	//Update_BoundaryBox();
+
+	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+	m_pPlayerPos = pPlayer->Get_Transform()->Get_PositionVector();
+	m_pMonsterPos = m_pTransCom->Get_PositionVector();
+
 	switch (m_eMonName)
 	{
 	case CMonster::NONAME:
 		break;
 	case CMonster::FLAMETHROWER:
+	{
 		if (m_pFlameThrower == nullptr)
 			return E_FAIL;
+
 		m_pFlameThrower->Update_FlameThrower(fTimeDelta, m_pTransCom, m_pMeshCom);
 		m_iCurMonState = m_pFlameThrower->Get_CurState();
 		m_iPreMonState = m_pFlameThrower->Get_PreState();
+	}
 		break;
 	default:
 		break;
@@ -139,6 +152,7 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCom), -1);
+	//FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoundary), -1);
 
 	switch (m_eMonName)
 	{
@@ -226,6 +240,20 @@ void CMonster::Set_ShadowTable(CShader_Shadow* pShader)
 	pShader->Get_UploadBuffer_ShadowInfo()->CopyData(offset, tCB_MatrixInfo);
 }
 
+void CMonster::Update_BoundaryBox()
+{
+	_matrix matBoundary = INIT_MATRIX;
+	_matrix matScale = INIT_MATRIX;
+
+	matBoundary = m_pTransCom->m_matWorld;
+
+	matBoundary._11 = 0.2f;
+	matBoundary._33 = 0.2f;
+
+	m_pBoundary->Update_Collider(&matBoundary);
+	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoundary);
+}
+
 CGameObject * CMonster::Clone_GameObject(void * prg)
 {
 	CGameObject* pInstance = new CMonster(*this);
@@ -253,4 +281,5 @@ void CMonster::Free()
 {
 	CGameObject::Free();
 	Safe_Delete(m_pFlameThrower);
+	Safe_Release(m_pBoundary);
 }

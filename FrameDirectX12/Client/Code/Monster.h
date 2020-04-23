@@ -35,6 +35,8 @@ private:
 	void					Render_ShadowDepth(CShader_Shadow* pShader);
 	void					Set_ShadowTable(CShader_Shadow* pShader);
 
+	void					Update_BoundaryBox();
+
 private:
 	virtual HRESULT			Add_Component();
 
@@ -42,9 +44,11 @@ private:
 	Engine::CMesh*			m_pMeshCom = nullptr;
 	Engine::CShader_Mesh*	m_pShaderCom = nullptr;
 	Engine::CBoxCollider*	m_pBoxCom = nullptr;
+	Engine::CBoxCollider*	m_pBoundary = nullptr;
 	CDynamicCamera*			m_pDynamicCamera = nullptr;
 
 	CFlameThrower*			m_pFlameThrower = nullptr;
+
 
 private:
 	MONKIND					m_eMonName = NONAME;
@@ -56,6 +60,9 @@ private:
 	MeshInfo				m_tMeshInfo;
 
 	vector<vector<_matrix>> m_vecMatrix;
+
+	_vec3					m_pPlayerPos = _vec3(0.f, 0.f, 0.f);
+	_vec3					m_pMonsterPos = _vec3(0.f, 0.f, 0.f);
 
 public:
 	virtual CGameObject*	Clone_GameObject(void* prg);

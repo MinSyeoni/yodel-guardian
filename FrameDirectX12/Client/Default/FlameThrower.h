@@ -35,6 +35,10 @@ public:
 	void					Set_PreState(FLAMESTATE eState) { m_ePreState = eState; }
 	
 	void					Set_Transform(CTransform* pTransform) { m_pTransCom = pTransform; m_pTransCom->AddRef(); };
+	void					Set_IsInArea(_bool bIsInArea) { m_bIsInArea = bIsInArea; }
+	
+private:
+	void					Chase_Player(const _float& fTimeDelta);
 
 private:
 	FLAMESTATE				m_eCurState;
@@ -43,10 +47,10 @@ private:
 	CTransform*				m_pTransCom = nullptr;
 	CMesh*					m_pMeshCom = nullptr;
 
-	float					m_fTime = 0.f;
-	float					m_fSpineAngle = 0.f;
-	float					m_fAniTime = 0.f;
-
+	_float					m_fTime = 0.f;
+	_float					m_fSpineAngle = 0.f;
+	_float					m_fAniTime = 0.f;
+	
 	_int					m_iRandState = 0;
 
 private:
@@ -54,5 +58,6 @@ private:
 	_vec3					m_pFlamePos = _vec3(0.f, 0.f, 0.f);
 	_float					m_fAniDelay = 0.f;
 	_bool					m_bIsInArea = false;
+	_bool					m_bIsTurn = false;
 };
 

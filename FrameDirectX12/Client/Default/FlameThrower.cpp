@@ -38,38 +38,52 @@ _int CFlameThrower::Update_FlameThrower(const _float& fTimeDelta, CTransform* pT
 		m_ePreState = m_eCurState;
 	}
 
-	//////////////// 테스트 ////////////////////////////////
+	////////////////////// 테스트 ////////////////////////////////
 	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 	m_pPlayerPos = pPlayer->Get_Transform()->Get_PositionVector();
 	m_pFlamePos = m_pTransCom->Get_PositionVector();
 
-	_float fDistance = sqrt(pow(m_pPlayerPos.x - m_pFlamePos.x, 2) + pow(m_pPlayerPos.y - m_pFlamePos.y, 2));
-	
-	//_vec3 vLook, vRight, vDir;
-	//vDir = m_pPlayerPos - m_pFlamePos;
-	//memcpy(&vLook, &m_pTransCom->Get_LookVector(), sizeof(_vec3));
-	//memcpy(&vRight, &m_pTransCom->Get_RightVector(), sizeof(_vec3));
-	//vDir.Normalize();
-	//vRight.Normalize();
-	//vLook.Normalize();
-
-	//_float fAngle = vLook.Dot(vDir);
-	//if (fAngle < -1.f)
-	//	fAngle = -1.f;
-	//_float fAngleTmp = XMConvertToDegrees(acosf(fAngle));
-	//_vec3 vTemp = vLook.Cross_InputDst(vDir);
-	////if (vTemp.y > 0.f)
-	////	fAngleTmp *= -1.f;
-
-
-	if (fDistance <= 0.1f)
-		m_bIsInArea = true;
-	else
-		m_bIsInArea = false;
-
+	Chase_Player(fTimeDelta);
 	/////////////////////////////////////////////
 
 	return S_OK();
+}
+
+void CFlameThrower::Chase_Player(const _float& fTimeDelta)
+{
+	_vec3 vLook, vRight, vDir;
+	vDir = m_pPlayerPos - m_pFlamePos;
+	memcpy(&vLook, &m_pTransCom->Get_LookVector(), sizeof(_vec3));
+	memcpy(&vRight, &m_pTransCom->Get_RightVector(), sizeof(_vec3));
+	vDir.Normalize();
+	vRight.Normalize();
+	vLook.Normalize();
+
+	_float fAngle = vLook.Dot(vDir);
+	if (fAngle < -1.f)
+		fAngle = -1.f;
+	_float fAngleTmp = XMConvertToDegrees(acosf(fAngle));
+	//_vec3 vTemp = vLook.Cross_InputDst(vDir);
+	//if (vTemp.y > 0.f)
+	//	fAngleTmp *= -1.f;
+
+	_float fDistance = sqrt(pow(m_pPlayerPos.x - m_pFlamePos.x, 2)
+		+ pow(m_pPlayerPos.y - m_pFlamePos.y, 2));
+
+	if (fDistance <= 1.f)
+	{
+		if (m_bIsTurn == false)
+		{
+			m_bIsTurn = true;
+			m_pTransCom->Chase_Target(m_pPlayerPos, 0.2f * fTimeDelta);
+		}
+		m_bIsInArea = true;
+		//	m_pTransCom->m_vAngle.y += (fAngleTmp * 5.f * fTimeDelta);
+	}
+	else
+		m_bIsInArea = false;
+
+	if (m_bIsInArea == true) m_eCurState = CB_FireLoop;
 }
 
 _int CFlameThrower::LateUpdate_FlameThrower(const _float& fTimeDelta, CTransform* pTransform, CMesh* m_pMeshCom)
@@ -81,8 +95,6 @@ _int CFlameThrower::LateUpdate_FlameThrower(const _float& fTimeDelta, CTransform
 
 void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 {
-	m_fAniTime += fTimeDelta;
-
 	switch (m_eCurState)
 	{
 	case CFlameThrower::FLAME_IDLE:
@@ -94,12 +106,14 @@ void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	case CFlameThrower::CB_Exit:
 		break;
 	case CFlameThrower::CB_FireLoop:		
-		m_fAniDelay = 50.f;
-		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, CB_FireLoop)
-			&& m_bIsInArea == false)
+		m_fAniTime += fTimeDelta;
+		m_fAniDelay = 500.f;
+		if (/*dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, CB_FireLoop)
+			&& */
+			m_fAniTime >= 3.f && m_bIsInArea == false)
 		{
-			m_eCurState = CB_Idle;
 			m_fAniTime = 0.f;
+			m_eCurState = CB_Idle;
 		}
 		break;
 	case CFlameThrower::CB_FireRecoil:
@@ -107,25 +121,30 @@ void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	case CFlameThrower::CB_FireStart:
 		break;
 	case CFlameThrower::CB_Idle: // 가만히 
-		if (m_bIsInArea == true)
-			m_eCurState = CB_FireLoop;
-		else
+		if (m_bIsInArea == false)
 		{
-			_float fTime = rand() % 6 + 3.f;
-			_float fAngle = rand() % 180 - 90.f;
-			m_pTransCom->m_vAngle.y += (fAngle * 1.f * fTimeDelta);
+			m_bIsTurn = false;
+			m_fAniTime += fTimeDelta;
 
-			if (m_fAniTime >= fTime)
+			_float fAngle = rand() % 180 - 90.f;
+
+			if (m_fAniTime >= 2.5f)
 			{
-				m_eCurState = CB_Twitch;
 				m_fAniTime = 0.f;
+				m_eCurState = CB_Twitch;
 			}
+			else
+				m_pTransCom->m_vAngle.y += (fAngle * 0.8f * fTimeDelta);
 		}
 		break;
 	case CFlameThrower::CB_Twitch: // 정찰
-		m_fAniDelay = 18000.f;
+		if (m_bIsInArea == true)
+			break;
+
+		m_fAniDelay = 14000.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, CB_Twitch))
 			m_eCurState = CB_Idle;
+		
 		break;
 	case CFlameThrower::CB_WalkDown:
 		break;
