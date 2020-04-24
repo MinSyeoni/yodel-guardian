@@ -3,6 +3,7 @@
 #include "DirectInput.h"
 #include "GraphicDevice.h"
 #include "ObjectMgr.h"
+#include "ColliderMgr.h"
 
 CFlameThrower::CFlameThrower()
 {
@@ -70,20 +71,42 @@ void CFlameThrower::Chase_Player(const _float& fTimeDelta)
 	_float fDistance = sqrt(pow(m_pPlayerPos.x - m_pFlamePos.x, 2)
 		+ pow(m_pPlayerPos.y - m_pFlamePos.y, 2));
 
-	if (fDistance <= 1.f)
-	{
-		if (m_bIsTurn == false)
-		{
-			m_bIsTurn = true;
-			m_pTransCom->Chase_Target(m_pPlayerPos, 0.2f * fTimeDelta);
-		}
+	if (fDistance <= 6.f)
 		m_bIsInArea = true;
 		//	m_pTransCom->m_vAngle.y += (fAngleTmp * 5.f * fTimeDelta);
-	}
 	else
 		m_bIsInArea = false;
 
-	if (m_bIsInArea == true) m_eCurState = CB_FireLoop;
+	if (m_bIsInArea == true)
+	{
+		m_fTurnTime += fTimeDelta;
+
+		if (false == m_bIsTurn)
+			m_pTransCom->m_vAngle.y += (fAngleTmp * 5.f * fTimeDelta);
+
+		if (false == m_bIsTurn && m_fTurnTime >= 2.f
+			/*true == m_pTransCom->Chase_Target(m_pPlayerPos, 0.3f * fTimeDelta)*/)
+		{
+			m_fTurnTime = 0.f;
+			m_bIsTurn = true;
+		}
+	}
+	else
+		m_bIsHit = false;
+
+	if (m_bIsTurn == true) 
+		m_eCurState = CB_FireLoop;
+}
+
+void CFlameThrower::Fire_Attak()
+{
+	if (true == m_bIsInArea)
+	{
+		//CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+		//pPlayerHP = pPlayer->Get_Transform()->Get_~~HP();
+
+		m_bIsHit = true;
+	}
 }
 
 _int CFlameThrower::LateUpdate_FlameThrower(const _float& fTimeDelta, CTransform* pTransform, CMesh* m_pMeshCom)
@@ -106,15 +129,13 @@ void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	case CFlameThrower::CB_Exit:
 		break;
 	case CFlameThrower::CB_FireLoop:		
-		m_fAniTime += fTimeDelta;
-		m_fAniDelay = 500.f;
-		if (/*dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, CB_FireLoop)
-			&& */
-			m_fAniTime >= 3.f && m_bIsInArea == false)
+		m_fAniDelay = 2500.f;
+		Fire_Attak();
+		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, CB_FireLoop))
 		{
-			m_fAniTime = 0.f;
+			m_bIsTurn = false;
 			m_eCurState = CB_Idle;
-		}
+		}		
 		break;
 	case CFlameThrower::CB_FireRecoil:
 		break;
@@ -123,10 +144,9 @@ void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	case CFlameThrower::CB_Idle: // °¡¸¸È÷ 
 		if (m_bIsInArea == false)
 		{
-			m_bIsTurn = false;
 			m_fAniTime += fTimeDelta;
 
-			_float fAngle = rand() % 180 - 90.f;
+			_float fAngle = rand() % 140 - 70.f;
 
 			if (m_fAniTime >= 2.5f)
 			{
@@ -134,17 +154,17 @@ void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 				m_eCurState = CB_Twitch;
 			}
 			else
-				m_pTransCom->m_vAngle.y += (fAngle * 0.8f * fTimeDelta);
+				m_pTransCom->m_vAngle.y += (fAngle * 1.f * fTimeDelta);
 		}
 		break;
 	case CFlameThrower::CB_Twitch: // Á¤Âû
+	{
 		if (m_bIsInArea == true)
 			break;
-
-		m_fAniDelay = 14000.f;
+		m_fAniDelay = 18000.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, CB_Twitch))
-			m_eCurState = CB_Idle;
-		
+			m_eCurState = CB_Idle;	
+	}
 		break;
 	case CFlameThrower::CB_WalkDown:
 		break;

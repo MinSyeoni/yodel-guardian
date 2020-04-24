@@ -239,7 +239,7 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	Load_StageObject(L"../../../SYTool/Tool/Data/StaticObj/DataPassTest.dat");
 
 	// Monster
-	Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/MonsterTest.dat");
+	Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/Flame_Once.dat");
 
 	return S_OK;
 }
@@ -281,7 +281,7 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 	DWORD dwByte = 0;
 	COLLIDER tColData = {};
 
-	if (wstrFilePath == L"../../../SYTool/Tool/Data/Collider/MonsterTest.dat")
+	if (wstrFilePath == L"../../../SYTool/Tool/Data/Collider/Flame_Once.dat")
 		m_tMeshInfo.MeshTag = L"Flamethrower";
 
 	while (true)

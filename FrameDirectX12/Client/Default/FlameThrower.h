@@ -7,6 +7,7 @@ namespace Engine
 {
 	class CTransform;
 	class CMesh;
+	class CBoxCollider;
 }
 
 class CFlameThrower
@@ -37,8 +38,12 @@ public:
 	void					Set_Transform(CTransform* pTransform) { m_pTransCom = pTransform; m_pTransCom->AddRef(); };
 	void					Set_IsInArea(_bool bIsInArea) { m_bIsInArea = bIsInArea; }
 	
+	_bool					IsPlayer_HitFireDemage() { return m_bIsHit; }
+	_float					Get_FireDemage() { return m_fFireDemage; }
+
 private:
 	void					Chase_Player(const _float& fTimeDelta);
+	void					Fire_Attak();
 
 private:
 	FLAMESTATE				m_eCurState;
@@ -47,17 +52,21 @@ private:
 	CTransform*				m_pTransCom = nullptr;
 	CMesh*					m_pMeshCom = nullptr;
 
+private:
 	_float					m_fTime = 0.f;
 	_float					m_fSpineAngle = 0.f;
 	_float					m_fAniTime = 0.f;
-	
-	_int					m_iRandState = 0;
+	_float					m_fTurnTime = 0.f;
 
-private:
+	_int					m_iRandState = 0;
 	_vec3					m_pPlayerPos = _vec3(0.f,0.f,0.f);
 	_vec3					m_pFlamePos = _vec3(0.f, 0.f, 0.f);
 	_float					m_fAniDelay = 0.f;
 	_bool					m_bIsInArea = false;
 	_bool					m_bIsTurn = false;
+
+	_float					m_fFireDemage = 10.f;
+	_bool					m_bIsHit = false;
+
 };
 
