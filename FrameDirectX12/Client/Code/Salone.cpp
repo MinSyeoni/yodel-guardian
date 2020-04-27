@@ -44,7 +44,7 @@ HRESULT CSalone::Ready_GameObject()
 #endif
 	m_pTransCom->m_vPos = _vec3(300.f, 0.f, 300.f);
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
-	m_pTransCom->m_vAngle = _vec3(0.f, 0.f, 0.f);
+	m_pTransCom->m_vAngle =  _vec3(0.f, 0.f, 0.f);
 
 	return S_OK;
 }
@@ -89,7 +89,7 @@ _int CSalone::LateUpdate_GameObject(const _float & fTimeDelta)
 	/*____________________________________________________________________
 	[ Set PipelineState ]
 	______________________________________________________________________*/
-	m_pMeshCom->Set_Animation(0);
+	m_pMeshCom->Set_Animation(m_eCurState);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(fTimeDelta*3000.f);
 
 	return NO_EVENT;

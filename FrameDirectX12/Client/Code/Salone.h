@@ -13,6 +13,8 @@ class CDynamicCamera;
 
 class CSalone : public Engine::CGameObject
 {
+	enum STATE{IDLE,EYEBLINK,RUN,WALK};
+
 private:
 	explicit CSalone(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 	explicit CSalone(const CSalone& rhs);
@@ -47,7 +49,8 @@ public:
 	virtual CGameObject*	Clone_GameObject(void* prg);
 	static CSalone*		Create(ID3D12Device* pGraphicDevice,
 		ID3D12GraphicsCommandList* pCommandList);
-
+private:
+	STATE m_eCurState = EYEBLINK;
 private:
 	virtual void			Free();
 };

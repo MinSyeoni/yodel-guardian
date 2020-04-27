@@ -61,6 +61,15 @@
     <Filter Include="05.GameObject\02.ToolPoint">
       <UniqueIdentifier>{e331643d-c528-47af-afb2-6977f664cca4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Tab\02.CameraTool">
+      <UniqueIdentifier>{37a92b40-3b13-4526-9e74-945356bdfa54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.GameObject\99.ToolCamera\00..ActionCamera">
+      <UniqueIdentifier>{12f2b8d0-83a6-48ab-b858-6783ec3d6a0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.GameObject\99.ToolCamera\00..ActionCamera\00.CameraSort">
+      <UniqueIdentifier>{eab71c6e-6c2f-4cad-a704-1172ce6b902c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainFrm.h">
@@ -135,6 +144,15 @@
     <ClInclude Include="ToolPoint.h">
       <Filter>05.GameObject\02.ToolPoint</Filter>
     </ClInclude>
+    <ClInclude Include="CameraTool.h">
+      <Filter>04.Tab\02.CameraTool</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionCamera.h">
+      <Filter>05.GameObject\99.ToolCamera\00..ActionCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraSort.h">
+      <Filter>05.GameObject\99.ToolCamera\00..ActionCamera\00.CameraSort</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainFrm.cpp">
@@ -184,6 +202,15 @@
     </ClCompile>
     <ClCompile Include="ToolPoint.cpp">
       <Filter>05.GameObject\02.ToolPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraTool.cpp">
+      <Filter>04.Tab\02.CameraTool</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionCamera.cpp">
+      <Filter>05.GameObject\99.ToolCamera\00..ActionCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraSort.cpp">
+      <Filter>05.GameObject\99.ToolCamera\00..ActionCamera\00.CameraSort</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
