@@ -39,74 +39,63 @@ _int CFlameThrower::Update_FlameThrower(const _float& fTimeDelta, CTransform* pT
 		m_ePreState = m_eCurState;
 	}
 
-	////////////////////// 테스트 ////////////////////////////////
-	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-	m_pPlayerPos = pPlayer->Get_Transform()->Get_PositionVector();
-	m_pFlamePos = m_pTransCom->Get_PositionVector();
-
-	Chase_Player(fTimeDelta);
-	/////////////////////////////////////////////
-
 	return S_OK();
 }
 
 void CFlameThrower::Chase_Player(const _float& fTimeDelta)
 {
-	_vec3 vLook, vRight, vDir;
-	vDir = m_pPlayerPos - m_pFlamePos;
-	memcpy(&vLook, &m_pTransCom->Get_LookVector(), sizeof(_vec3));
-	memcpy(&vRight, &m_pTransCom->Get_RightVector(), sizeof(_vec3));
-	vDir.Normalize();
-	vRight.Normalize();
-	vLook.Normalize();
+	//_vec3 vLook, vRight, vDir;
+	//vDir = m_pPlayerPos - m_pFlamePos;
+	//memcpy(&vLook, &m_pTransCom->Get_LookVector(), sizeof(_vec3));
+	//memcpy(&vRight, &m_pTransCom->Get_RightVector(), sizeof(_vec3));
+	//vDir.Normalize();
+	//vRight.Normalize();
+	//vLook.Normalize();
 
-	_float fAngle = vLook.Dot(vDir);
-	if (fAngle < -1.f)
-		fAngle = -1.f;
-	_float fAngleTmp = XMConvertToDegrees(acosf(fAngle));
-	//_vec3 vTemp = vLook.Cross_InputDst(vDir);
-	//if (vTemp.y > 0.f)
-	//	fAngleTmp *= -1.f;
+	//_float fAngle = vLook.Dot(vDir);
+	//if (fAngle < -1.f)
+	//	fAngle = -1.f;
+	//_float fAngleTmp = XMConvertToDegrees(acosf(fAngle));
+	////_vec3 vTemp = vLook.Cross_InputDst(vDir);
+	////if (vTemp.y > 0.f)
+	////	fAngleTmp *= -1.f;
 
-	_float fDistance = sqrt(pow(m_pPlayerPos.x - m_pFlamePos.x, 2)
-		+ pow(m_pPlayerPos.y - m_pFlamePos.y, 2));
+	//_float fDistance = sqrt(pow(m_pPlayerPos.x - m_pFlamePos.x, 2)
+	//	+ pow(m_pPlayerPos.y - m_pFlamePos.y, 2));
 
-	if (fDistance <= 6.f)
-		m_bIsInArea = true;
-		//	m_pTransCom->m_vAngle.y += (fAngleTmp * 5.f * fTimeDelta);
-	else
-		m_bIsInArea = false;
+	//if (fDistance <= 6.f)
+	//	m_bIsInArea = true;
+	//	//	m_pTransCom->m_vAngle.y += (fAngleTmp * 5.f * fTimeDelta);
+	//else
+	//	m_bIsInArea = false;
 
-	if (m_bIsInArea == true)
-	{
-		m_fTurnTime += fTimeDelta;
+	//if (m_bIsInArea == true)
+	//{
+	//	m_fTurnTime += fTimeDelta;
 
-		if (false == m_bIsTurn)
-			m_pTransCom->m_vAngle.y += (fAngleTmp * 5.f * fTimeDelta);
+	//	if (false == m_bIsTurn)
+	//		m_pTransCom->m_vAngle.y += (fAngleTmp * 5.f * fTimeDelta);
 
-		if (false == m_bIsTurn && m_fTurnTime >= 2.f
-			/*true == m_pTransCom->Chase_Target(m_pPlayerPos, 0.3f * fTimeDelta)*/)
-		{
-			m_fTurnTime = 0.f;
-			m_bIsTurn = true;
-		}
-	}
-	else
-		m_bIsHit = false;
+	//	if (false == m_bIsTurn && m_fTurnTime >= 2.f
+	//		/*true == m_pTransCom->Chase_Target(m_pPlayerPos, 0.3f * fTimeDelta)*/)
+	//	{
+	//		m_fTurnTime = 0.f;
+	//		m_bIsTurn = true;
+	//	}
+	//}
+	//else
+	//	m_bIsHit = false;
 
-	if (m_bIsTurn == true) 
-		m_eCurState = CB_FireLoop;
+	//if (m_bIsTurn == true) 
+	//	m_eCurState = CB_FireLoop;
 }
 
 void CFlameThrower::Fire_Attak()
 {
-	if (true == m_bIsInArea)
-	{
-		//CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-		//pPlayerHP = pPlayer->Get_Transform()->Get_~~HP();
+	//CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+	//pPlayerHP = pPlayer->Get_Transform()->Get_~~HP();
 
-		m_bIsHit = true;
-	}
+	m_bIsHit = true;
 }
 
 _int CFlameThrower::LateUpdate_FlameThrower(const _float& fTimeDelta, CTransform* pTransform, CMesh* m_pMeshCom)
@@ -133,7 +122,6 @@ void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		Fire_Attak();
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, CB_FireLoop))
 		{
-			m_bIsTurn = false;
 			m_eCurState = CB_Idle;
 		}		
 		break;
@@ -142,29 +130,33 @@ void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	case CFlameThrower::CB_FireStart:
 		break;
 	case CFlameThrower::CB_Idle: // 가만히 
-		if (m_bIsInArea == false)
+	{
+		m_fAniTime += fTimeDelta;
+
+		int iRandAni = rand() % 2;
+
+		if (iRandAni == 0)
 		{
-			m_fAniTime += fTimeDelta;
-
-			_float fAngle = rand() % 140 - 70.f;
-
 			if (m_fAniTime >= 2.5f)
 			{
 				m_fAniTime = 0.f;
 				m_eCurState = CB_Twitch;
 			}
-			else
-				m_pTransCom->m_vAngle.y += (fAngle * 1.f * fTimeDelta);
 		}
+		else if (iRandAni == 1)
+		{
+			if (m_fAniTime >= 2.5f)
+			{
+				m_fAniTime = 0.f;
+				m_eCurState = CB_FireLoop;
+			}
+		}
+	}
 		break;
 	case CFlameThrower::CB_Twitch: // 정찰
-	{
-		if (m_bIsInArea == true)
-			break;
 		m_fAniDelay = 18000.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, CB_Twitch))
 			m_eCurState = CB_Idle;	
-	}
 		break;
 	case CFlameThrower::CB_WalkDown:
 		break;
