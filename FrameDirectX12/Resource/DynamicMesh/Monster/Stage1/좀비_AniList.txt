@@ -1,0 +1,25 @@
+<좀비> 애니메이션 리스트
+[Husk]
+BasePose[101]			0~100
+CB_Active[211]			101~311
+CB_CombatActive[85]		312~396
+CB_CombatActive_Ceiling[66]		397~462
+CB_Idle[211]			463~673
+CB_IdlePose[2]			674~675
+DG_GetUpBack[205]		676~880
+DG_GetUpFront[205]		881~1085
+EX_IdleOffset[159]			1086~1244
+EX_IdlePose[2]			1245~1246
+EX_Run[45]			1247~1291
+EX_WalkSlow[45]			1292~1336
+
+[Husk_Pulse]
+BC_End[101](뒤짐)			1337~1437
+
+[Husk_Rake]
+Base_Pose[101]			1438~1538
+BC_End[63](할퀴기)			1539~1601
+
+[Husk_Rake2]
+Base_Pose[101]			1602~1702
+BC_End[53](할퀴기)			1703~1755

@@ -1,0 +1,25 @@
+TwoSided = false
+bDisableDepthTest = false
+bIsMasked = false
+ReferencedTextures[10] =
+{
+    ReferencedTextures[0] = Texture2D'BIOG_CBT_PRA_NKD_R.NKDa.Base.CBT_PRA_Norm'
+    ReferencedTextures[1] = Texture2D'BIOG_CBT_PRA_NKD_R.NKDa.Base.CBT_PRA_Mask'
+    ReferencedTextures[2] = Texture2D'BIOG_CBT_PRA_NKD_R.NKDa.CBT_PRA_Spec'
+    ReferencedTextures[3] = Texture2D'BioVFX_Z_TEXTURES.Gradients.Gradient_001'
+    ReferencedTextures[4] = Texture2D'BioVFX_Z_TEXTURES.Generic.Hex_tile'
+    ReferencedTextures[5] = Texture2D'BioVFX_Z_TEXTURES.Gradients.fx_AlphaGrad_03'
+    ReferencedTextures[6] = Texture2D'BioVFX_Z_TEXTURES.Distortion.Fx_distort_06'
+    ReferencedTextures[7] = Texture2D'BioVFX_Z_TEXTURES.Fractals.fx_WaterFractalCube'
+    ReferencedTextures[8] = Texture2D'BIOG_CBT_PRA_NKD_R.NKDa.Base.CBT_PRA_Diff'
+    ReferencedTextures[9] = TextureCube3'BioT_LevelMaster.TextureSamples.MM_CUBEMAP_SET_A'
+}
+BlendMode = BLEND_Masked (1)
+OpacityMaskClipValue = 0.333
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

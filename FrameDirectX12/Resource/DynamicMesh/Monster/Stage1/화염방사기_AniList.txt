@@ -1,0 +1,41 @@
+<화염방사기 Flamethrower>
+BasePose[2]		0~1
+BC_Start[31]		2~32
+CB_Enter[53]		33~85
+CB_Exit[61]		86~146
+CB_FireLoop[17]		147~163
+CB_FireRecoil[31]		164~194
+CB_FireStart[5]		195~199
+CB_Idle[2]		200~201
+CB_Twitch[121]		202~322
+CB_WalkDown[2]		323~324
+CB_WalkEast[2]		325~326
+CB_WalkNorth[2]		327~328
+CB_WalkSouth[2]		329~330
+CB_WalkUp[2]		331~332
+CB_WalkWest[2]		333~334
+DG_Death[31]		335~365
+DG_Front[31]		366~396
+DG_Idle[21]		397~417
+DG_Left[31]		418~448
+DG_Rear[31]		449~479
+DG_Right[31]		480~510
+EX_HoverIdle[81]		511~591
+EX_HoverIdleTwitch[161]	592~752
+EX_IdleHover[81]		753~833
+EX_IdleHoverTwitch[161]	834~994
+EX_IdleNoise[2]		995~996
+EX_IdleSway[2]		997~998
+EX_WalkEast[2]		999~1000
+EX_WalkNorth[2]		1001~1002
+EX_WalkSouth[2]		1003~1004
+EX_WalkWest[2]		1005~1006
+FightPose[2]		1007~1008
+GD_Idle[2]		1009~1010
+GD_Twitch[121]		1011~1131
+
+
+
+
+
+

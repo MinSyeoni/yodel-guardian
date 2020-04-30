@@ -1,0 +1,70 @@
+ScalarParameterValues[0] = {}
+TextureParameterValues[3] =
+{
+    TextureParameterValues[0] =
+    {
+        ParameterName = NormalMap
+        ParameterValue = Texture2D'BioApl_Uti_AmmoCase02.Materials.AmmoCase02_Norm'
+        ParameterInfo = 
+    }
+    TextureParameterValues[1] =
+    {
+        ParameterName = MSK3 Red- Spec Green - Emis/Relfc Blue -Sppwr
+        ParameterValue = Texture2D'BioApl_Uti_AmmoCase02.Materials.AmmoCase02_Msk3'
+        ParameterInfo = 
+    }
+    TextureParameterValues[2] =
+    {
+        ParameterName = Simple Diffuse
+        ParameterValue = Texture2D'BioApl_Uti_AmmoCase02.Materials.AmmoCase02_Diff'
+        ParameterInfo = 
+    }
+}
+VectorParameterValues[4] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = Simple_Specular_color
+        ParameterValue =
+        {
+            R = 0.991393
+            G = 1
+            B = 0.796917
+            A = 1.5
+        }
+        ParameterInfo = 
+    }
+    VectorParameterValues[1] =
+    {
+        ParameterName = Emissive_color
+        ParameterValue =
+        {
+            R = 0.005522
+            G = 0.180144
+            B = 0.804559
+            A = 3
+        }
+        ParameterInfo = 
+    }
+    VectorParameterValues[2] =
+    {
+        ParameterName = Reflection_Color
+        ParameterValue = { R=1, G=1, B=1, A=0.5 }
+        ParameterInfo = 
+    }
+    VectorParameterValues[3] =
+    {
+        ParameterName = Cubemap_Mixer
+        ParameterValue = { R=0, G=0, B=0.35, A=1 }
+        ParameterInfo = 
+    }
+}
+Parent = Material3'BIOG_APL_MASTER_MATERIAL.Placeable_MM'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

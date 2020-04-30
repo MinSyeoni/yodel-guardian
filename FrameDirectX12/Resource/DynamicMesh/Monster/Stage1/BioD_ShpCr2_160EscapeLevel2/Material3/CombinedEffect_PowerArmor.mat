@@ -1,0 +1,4 @@
+Diffuse=CBT_PRA_Diff
+Normal=CBT_PRA_Norm
+SpecPower=CBT_PRA_Spec
+Opacity=fx_AlphaGrad_03

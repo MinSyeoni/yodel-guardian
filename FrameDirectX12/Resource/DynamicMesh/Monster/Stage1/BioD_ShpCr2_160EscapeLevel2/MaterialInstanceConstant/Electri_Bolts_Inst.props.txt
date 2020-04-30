@@ -1,0 +1,42 @@
+ScalarParameterValues[1] =
+{
+    ScalarParameterValues[0] =
+    {
+        ParameterName = Intensity
+        ParameterValue = 1
+        ParameterInfo = 
+    }
+}
+TextureParameterValues[1] =
+{
+    TextureParameterValues[0] =
+    {
+        ParameterName = Texture
+        ParameterValue = Texture2D'BioVFX_Z_TEXTURES.electric.Electric_Bolts_01'
+        ParameterInfo = 
+    }
+}
+VectorParameterValues[1] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = ImpactRadius
+        ParameterValue =
+        {
+            R = 600
+            G = 600
+            B = 600
+            A = 1
+        }
+        ParameterInfo = 
+    }
+}
+Parent = Material3'BioVFX_Z_MATERIALS.Electric_BASE_MESH'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None
