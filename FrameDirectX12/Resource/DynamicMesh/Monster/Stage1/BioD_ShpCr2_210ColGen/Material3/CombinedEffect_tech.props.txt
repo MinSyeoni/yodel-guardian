@@ -1,0 +1,22 @@
+TwoSided = false
+bDisableDepthTest = false
+bIsMasked = false
+ReferencedTextures[7] =
+{
+    ReferencedTextures[0] = Texture2D'BIOG_Humanoid_MASTER_MTR_R.GBL_ARM_ALL_Norm'
+    ReferencedTextures[1] = Texture2D'BioVFX_Z_TEXTURES.Textures.fx_Tech01'
+    ReferencedTextures[2] = Texture2D'BioVFX_Z_TEXTURES.Distortion.fx_Distort_02'
+    ReferencedTextures[3] = Texture2D'BioVFX_Z_TEXTURES.Textures.fx_Tech04'
+    ReferencedTextures[4] = Texture2D'BioVFX_Z_TEXTURES.Gradients.GradientTopandBottom'
+    ReferencedTextures[5] = Texture2D'BioVFX_Z_TEXTURES.Gradients.AlphaGrad_BottomTight_Clamp'
+    ReferencedTextures[6] = Texture2D'BIOG_Humanoid_MASTER_MTR_R.GBL_ARM_ALL_White'
+}
+BlendMode = BLEND_Masked (1)
+OpacityMaskClipValue = 0.333
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

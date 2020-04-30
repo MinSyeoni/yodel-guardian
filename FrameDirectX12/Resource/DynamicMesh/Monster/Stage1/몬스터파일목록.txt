@@ -1,4 +1,0 @@
-바퀴벌레 - CBT_COL_NKDa_MDL
-화염방사기 - RBT_ROB_NKDa_MDL
-해파리 - CBT_COL_BUG_NKDa_MDL
-대왕해파리 - CBT_PRA_NKDa_MDL
