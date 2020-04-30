@@ -682,47 +682,101 @@ void CToolView::Picking_MouseOnStaticObject(bool& retflag)
 	_float fFixDist = 0.f;
 
 	list<Engine::CGameObject*> pObjLst = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_OBJECT);
-	for (auto& pObject : pObjLst)
+	auto& iter_front = pObjLst.begin();
+
+	auto iter = pObjLst.begin();
+	for (; iter != pObjLst.end(); ++iter)
 	{
-		Engine::CTransform* pTransCom = dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom();
+		Engine::CTransform* pTransCom = dynamic_cast<CStaticObject*>(*iter)->Get_StaticTranscom();
 
 		if (CPickingMgr::GetInstance()->IsCheckStaticObjgectMesh(
-			dynamic_cast<CStaticObject*>(pObject),
+			dynamic_cast<CStaticObject*>(*iter),
 			*pTransCom->Get_WorldMatrix(),
-			&fDistTemp,
+			&fFixDist,
 			&m_vMeshPos))
 		{
+			if (nullptr == dynamic_cast<CStaticObject*>(*iter))
+			{
+				AfxMessageBox(L"메쉬를 클릭하세요.");
+				continue;
+			}
+
 			if (fFixDist <= fDistTemp)
 			{
 				fDistTemp = fFixDist;
-
-				dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom()->Get_Info(Engine::INFO_POS, &m_vMeshPos);
-				m_vMeshScale = dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom()->m_vScale;
-				m_vMeshRot = dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom()->m_vAngle;
-
-				m_pMapTab->m_vMeshPos = m_vMeshPos;
-				m_pMapTab->m_fPosX = m_vMeshPos.x;
-				m_pMapTab->m_fPosY = m_vMeshPos.y;
-				m_pMapTab->m_fPosZ = m_vMeshPos.z;
-
-				m_pMapTab->m_vMeshScale = m_vMeshScale;
-				m_pMapTab->m_fScaleX = m_vMeshScale.x;
-				m_pMapTab->m_fScaleY = m_vMeshScale.y;
-				m_pMapTab->m_fScaleZ = m_vMeshScale.z;
-
-				m_pMapTab->m_vMeshRot = m_vMeshRot;
-				m_pMapTab->m_fRotX = m_vMeshRot.x;
-				m_pMapTab->m_fRotY = m_vMeshRot.y;
-				m_pMapTab->m_fRotZ = m_vMeshRot.z;
-
-				m_pMapTab->m_pPickStaticObj = dynamic_cast<CStaticObject*>(pObject);
-				m_pMapTab->m_bIsPickingStaticObj = true;
-				break;
+				iter_front = iter;
 			}
+			else
+				m_pMapTab->m_bIsPickingStaticObj = false;
 		}
-		else
-			m_pMapTab->m_bIsPickingStaticObj = false;
 	}
+
+	if (iter_front != pObjLst.end())
+	{
+		dynamic_cast<CStaticObject*>(*iter_front)->Get_StaticTranscom()->Get_Info(Engine::INFO_POS, &m_vMeshPos);
+		m_vMeshScale = dynamic_cast<CStaticObject*>(*iter_front)->Get_StaticTranscom()->m_vScale;
+		m_vMeshRot = dynamic_cast<CStaticObject*>(*iter_front)->Get_StaticTranscom()->m_vAngle;
+
+		m_pMapTab->m_vMeshPos = m_vMeshPos;
+		m_pMapTab->m_fPosX = m_vMeshPos.x;
+		m_pMapTab->m_fPosY = m_vMeshPos.y;
+		m_pMapTab->m_fPosZ = m_vMeshPos.z;
+
+		m_pMapTab->m_vMeshScale = m_vMeshScale;
+		m_pMapTab->m_fScaleX = m_vMeshScale.x;
+		m_pMapTab->m_fScaleY = m_vMeshScale.y;
+		m_pMapTab->m_fScaleZ = m_vMeshScale.z;
+
+		m_pMapTab->m_vMeshRot = m_vMeshRot;
+		m_pMapTab->m_fRotX = m_vMeshRot.x;
+		m_pMapTab->m_fRotY = m_vMeshRot.y;
+		m_pMapTab->m_fRotZ = m_vMeshRot.z;
+
+		m_pMapTab->m_pPickStaticObj = dynamic_cast<CStaticObject*>(*iter_front);
+		m_pMapTab->m_bIsPickingStaticObj = true;
+	}
+
+	//for (auto& pObject : pObjLst)
+	//{
+	//	Engine::CTransform* pTransCom = dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom();
+
+	//	if (CPickingMgr::GetInstance()->IsCheckStaticObjgectMesh(
+	//		dynamic_cast<CStaticObject*>(pObject),
+	//		*pTransCom->Get_WorldMatrix(),
+	//		&fDistTemp,
+	//		&m_vMeshPos))
+	//	{
+	//		if (fFixDist <= fDistTemp)
+	//		{
+	//			fDistTemp = fFixDist;
+
+	//			dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom()->Get_Info(Engine::INFO_POS, &m_vMeshPos);
+	//			m_vMeshScale = dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom()->m_vScale;
+	//			m_vMeshRot = dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom()->m_vAngle;
+
+	//			m_pMapTab->m_vMeshPos = m_vMeshPos;
+	//			m_pMapTab->m_fPosX = m_vMeshPos.x;
+	//			m_pMapTab->m_fPosY = m_vMeshPos.y;
+	//			m_pMapTab->m_fPosZ = m_vMeshPos.z;
+
+	//			m_pMapTab->m_vMeshScale = m_vMeshScale;
+	//			m_pMapTab->m_fScaleX = m_vMeshScale.x;
+	//			m_pMapTab->m_fScaleY = m_vMeshScale.y;
+	//			m_pMapTab->m_fScaleZ = m_vMeshScale.z;
+
+	//			m_pMapTab->m_vMeshRot = m_vMeshRot;
+	//			m_pMapTab->m_fRotX = m_vMeshRot.x;
+	//			m_pMapTab->m_fRotY = m_vMeshRot.y;
+	//			m_pMapTab->m_fRotZ = m_vMeshRot.z;
+
+	//			m_pMapTab->m_pPickStaticObj = dynamic_cast<CStaticObject*>(pObject);
+	//			m_pMapTab->m_bIsPickingStaticObj = true;
+	//			break;
+	//		}
+	//	}
+	//	else
+	//		m_pMapTab->m_bIsPickingStaticObj = false;
+	//}
 	retflag = false;
 }
 void CToolView::Picking_TerrainOnStaticObject(bool& retflag)

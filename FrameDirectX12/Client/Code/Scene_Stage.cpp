@@ -240,6 +240,7 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	// Monster
 	Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/Flame_Once.dat");
+	Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/해파리_Once.dat");
 
 	return S_OK;
 }
@@ -283,6 +284,8 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 
 	if (wstrFilePath == L"../../../SYTool/Tool/Data/Collider/Flame_Once.dat")
 		m_tMeshInfo.MeshTag = L"Flamethrower";
+	else if (wstrFilePath == L"../../../SYTool/Tool/Data/Collider/해파리_Once.dat")
+		m_tMeshInfo.MeshTag = L"Zombi";
 
 	while (true)
 	{
