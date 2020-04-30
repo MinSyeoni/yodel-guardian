@@ -46,6 +46,8 @@ HRESULT CMonster::Ready_GameObject()
 
 	if(m_tMeshInfo.MeshTag == L"Flamethrower")
 		m_eMonName = FLAMETHROWER;
+	else if (m_tMeshInfo.MeshTag == L"Zombi")
+		m_eMonName = ZOMBI;
 
 	// Buffer
 	m_pMeshCom = static_cast<Engine::CMesh*>(m_pComponentMgr->Clone_Component(m_tMeshInfo.MeshTag.c_str(), COMPONENTID::ID_STATIC));
@@ -71,10 +73,6 @@ HRESULT CMonster::Ready_GameObject()
 	m_pBoxCom = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(300.f, 300.f, 300.f), this));
 	NULL_CHECK_RETURN(m_pBoxCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCom);
-
-	//m_pBoundary = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(800.f, 800.f, 800.f), this));
-	//NULL_CHECK_RETURN(m_pBoundary, E_FAIL);
-	//m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoundary);
 
 	return S_OK;
 }
@@ -114,8 +112,6 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 	m_pBoxCom->Update_Collider(&m_pTransCom->m_matWorld);
 	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCom);
 
-	//Update_BoundaryBox();
-
 	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 	m_pPlayerPos = pPlayer->Get_Transform()->Get_PositionVector();
 	m_pMonsterPos = m_pTransCom->Get_PositionVector();
@@ -152,7 +148,6 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCom), -1);
-	//FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoundary), -1);
 
 	switch (m_eMonName)
 	{
