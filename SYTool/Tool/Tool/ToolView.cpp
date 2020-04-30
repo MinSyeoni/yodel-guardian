@@ -300,7 +300,12 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Solar.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Solar.x"), E_FAIL))
 		return;
-
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"map1_roof.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"map1_roof.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"map1.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"map1.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"minimap.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"minimap.x"), E_FAIL))
+		return;
 
 	//if (FAILED(Engine::Ready_Mesh(m_pDevice,
 	//	RESOURCE_STAGE,
