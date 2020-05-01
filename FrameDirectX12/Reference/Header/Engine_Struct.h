@@ -563,7 +563,7 @@ typedef struct tagCBMatrixInfo
 }CB_MATRIX_INFO;//오브젝트
 typedef struct tagCBBoneInfo
 {
-	XMFLOAT4X4 matbone[64];
+	XMFLOAT4X4 matbone[80];
 }CB_BONE_INFO;//다이나믹매쉬
 
 typedef struct tagCBDownSample

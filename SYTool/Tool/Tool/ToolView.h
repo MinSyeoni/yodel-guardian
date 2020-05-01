@@ -12,6 +12,7 @@
 #include "ToolCell.h"
 #include "MapTab.h"
 #include "NaviTab.h"
+#include "CameraTool.h"
 #include "Myform.h"
 
 BEGIN(Engine)
@@ -86,6 +87,8 @@ private:
 
 	CMapTab*				m_pMapTab = nullptr;
 	CNaviTab*				m_pNaviTab = nullptr;
+	CCameraTool*            m_pCameraTab = nullptr;
+
 	CMyform*				m_pMyForm = nullptr;
 
 	_int					m_iIdxCnt = 0;
@@ -102,6 +105,13 @@ public:
 	void				Picking_MeshOnStaticObject(bool& retflag);
 	void				Picking_MouseOnStaticObject(bool& retflag);
 	void				Picking_TerrainOnStaticObject(bool& retflag);
+
+
+
+	void CheckCameraTabButton();
+
+
+	afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
 };
 
 #ifndef _DEBUG  // ToolView.cpp의 디버그 버전

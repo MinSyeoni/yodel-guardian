@@ -1,5 +1,4 @@
 #include "GraphicDevice.h"
-#pragma warning(disable:4996)
 
 USING(Engine)
 IMPLEMENT_SINGLETON(CGraphicDevice)
@@ -1048,7 +1047,7 @@ HRESULT CGraphicDevice::Wait_ForGpuComplete()
 	______________________________________________________________________*/
 	if (m_pFence->GetCompletedValue() < m_uiCurrentFence)
 	{
-		HANDLE eventHandle = CreateEventEx(nullptr, nullptr, false, EVENT_ALL_ACCESS);
+		HANDLE eventHandle = CreateEventEx(nullptr, false, false, EVENT_ALL_ACCESS);
 
 		// GPU가 현재 Fence 지점에 도달했으면 이벤트를 발동한다.
 		ThrowIfFailed(m_pFence->SetEventOnCompletion(m_uiCurrentFence, eventHandle));

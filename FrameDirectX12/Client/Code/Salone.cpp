@@ -89,7 +89,7 @@ _int CSalone::LateUpdate_GameObject(const _float & fTimeDelta)
 	/*____________________________________________________________________
 	[ Set PipelineState ]
 	______________________________________________________________________*/
-	m_pMeshCom->Set_Animation(m_eCurState);
+	m_pMeshCom->Set_Animation((int)m_eCurState);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(fTimeDelta*3000.f);
 
 	return NO_EVENT;
@@ -129,7 +129,7 @@ HRESULT CSalone::Add_Component()
 
 void CSalone::Set_ConstantTable()
 {
-	_matrix matRotY = XMMatrixRotationY(XMConvertToRadians(-270));
+	_matrix matRotY = XMMatrixRotationY(XMConvertToRadians(-90));
 	_matrix matView = INIT_MATRIX;
 	_matrix matProj = INIT_MATRIX;
 

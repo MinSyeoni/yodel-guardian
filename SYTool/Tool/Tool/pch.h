@@ -52,7 +52,5 @@ using namespace std;
 #include "KeyMgr.h"
 #include "PickingMgr.h"
 #include "CursorMgr.h"
-#include <afxcontrolbars.h>
-#include <afxcontrolbars.h>
 
 #endif //PCH_H

@@ -14,7 +14,7 @@
 #include "ToolView.h"
 #include "SphereCollider.h"
 #include "BoxCollider.h"
-#include "ActionCamera.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -34,6 +34,7 @@ BEGIN_MESSAGE_MAP(CToolView, CView)
 	ON_WM_RBUTTONDOWN()
 	ON_WM_RBUTTONUP()
 	ON_WM_LBUTTONDOWN()
+	ON_WM_MOUSEWHEEL()
 END_MESSAGE_MAP()
 
 // CToolView 생성/소멸
@@ -48,14 +49,14 @@ CToolView::~CToolView()
 {
 	CObjMgr::GetInstance()->DestroyInstance();
 	CToolCamera::GetInstance()->DestroyInstance();
-	CActionCamera::GetInstance()->DestroyInstance();
+
 	Engine::Safe_Release(m_pManagement);
 	Engine::Safe_Release(m_pDevice);
 
 	Engine::DestroyUtility();
 	Engine::DestroyResources();
 	Engine::DestroySystem();
-	
+
 	CPickingMgr::GetInstance()->DestroyInstance();
 	Engine::CKeyMgr::GetInstance()->DestroyInstance();
 
@@ -141,7 +142,7 @@ HRESULT CToolView::Render_MainApp()
 
 	m_pManagement->Render_Scene(m_pDevice);
 	CObjMgr::GetInstance()->Render_Object();
-	CActionCamera::GetInstance()->RenderCamera();
+
 	// 나중에 고쳐야함
 	if (!m_pMapTab->m_pColliderLst.empty() && true == m_pMapTab->m_bIsColliderShow)
 	{
@@ -151,6 +152,12 @@ HRESULT CToolView::Render_MainApp()
 			pCol->Render_Collider();
 		}
 	}
+
+	if (m_pMyForm->m_iCurTab == 2)//Camera
+	{
+		m_pCameraTab->RenderCameraTool();
+	}
+
 
 	m_pGraphicDev->Render_End();
 
@@ -166,10 +173,14 @@ _int CToolView::Update_MainApp(const _float& fTimeDelta)
 
 	m_pManagement->Update_Scene(fTimeDelta);
 
+	if (m_pMyForm->m_iCurTab == 2)//Camera
+	{
+		m_pCameraTab->UPdateCameraTool(fTimeDelta);
+	}
 	Engine::CKeyMgr::GetInstance()->KeyCheck();
 	CObjMgr::GetInstance()->Update_Object(fTimeDelta);
 	CToolCamera::GetInstance()->Update_Camera(fTimeDelta);
-	CActionCamera::GetInstance()->UpdateActionCamera(fTimeDelta);
+
 
 	return iExitCode;
 }
@@ -219,6 +230,9 @@ void CToolView::OnInitialUpdate()
 	m_pMyForm = dynamic_cast<CMyform*>(pMainFrm->m_MainSplitWnd.GetPane(0, 0));
 	m_pMapTab = m_pMyForm->m_pMapTab;
 	m_pNaviTab = m_pMyForm->m_pNaviTab;
+	m_pCameraTab = m_pMyForm->m_pCameraTab;
+
+
 }
 
 void CToolView::Initalize_Object()
@@ -363,7 +377,19 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 		}
 		m_pNaviTab->UpdateData(FALSE);
 	}
+	else if (2 == m_pMyForm->m_iCurTab)
+	{
 
+
+		CheckCameraTabButton();
+
+
+
+
+
+
+
+	}
 	CView::OnLButtonDown(nFlags, point);
 }
 
@@ -695,4 +721,36 @@ void CToolView::Picking_TerrainOnStaticObject(bool& retflag)
 	m_pMapTab->m_fPosZ = m_vMeshPos.z;
 
 	retflag = false;
+}
+
+void CToolView::CheckCameraTabButton()
+{
+	if (m_pCameraTab->m_AddAtButton.GetCheck()||m_pCameraTab->m_AddEyeButton.GetCheck())
+	{
+		Get_TerrainInfo();
+		m_pCameraTab-> UpdateData(TRUE);
+		m_pCameraTab->m_PosX = m_vMeshPos.x;
+		m_pCameraTab->m_PosY = m_vMeshPos.y;
+		m_pCameraTab->m_PosZ = m_vMeshPos.z;
+		m_pCameraTab-> UpdateData(FALSE);
+
+	}
+
+}
+
+
+BOOL CToolView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+	if ((m_pCameraTab->m_AddAtButton.GetCheck() || m_pCameraTab->m_AddEyeButton.GetCheck())&& 2 == m_pMyForm->m_iCurTab)
+	{
+		m_pCameraTab->UpdateData(TRUE);
+		m_pCameraTab->m_PosY += zDelta * 0.001f;
+		m_pCameraTab->UpdateData(FALSE);
+	}
+
+
+	
+	return CView::OnMouseWheel(nFlags, zDelta, pt);
 }

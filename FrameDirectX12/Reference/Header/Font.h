@@ -18,7 +18,6 @@ private:
 public:
 	void         Set_Text(wstring wstrText) { m_wstrText = wstrText; }
 	void         Set_Pos(const _vec2& vPos) { m_vPos = vPos; }
-	void         Set_Size(_float fSize) { m_fFontSize = fSize; }
 	void         Set_Color(const D2D1::ColorF& Color) { m_pTextBrush->SetColor(Color); }
 public:
 	HRESULT         Ready_GameObjectPrototype(wstring wstrFontName,

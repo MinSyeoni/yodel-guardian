@@ -65,6 +65,7 @@ void CToolCamera::Update_Camera(const _float& fTimeDelta)
 	}
 
 	Change_CameraMat(&m_matView);
+	if(m_bIsCameraExecute)
 	m_pGraphicDev->SetTransform(D3DTS_VIEW, &m_matView);
 }
 

@@ -45,6 +45,7 @@ public:
 	afx_msg void	OnBnClickedSaveNavi();
 	afx_msg void	OnBnClickedLoadNavi();
 
+
 	virtual BOOL	OnInitDialog();
 
 	void			Get_NaviPointPos();

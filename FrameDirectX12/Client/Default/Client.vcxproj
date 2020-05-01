@@ -29,13 +29,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -49,7 +49,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -164,28 +164,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Code\Aim.h" />
     <ClInclude Include="..\Code\BackGround.h" />
     <ClInclude Include="..\Code\CubeObject.h" />
     <ClInclude Include="..\Code\DynamicCamera.h" />
     <ClInclude Include="..\Code\Dynamic_Object.h" />
     <ClInclude Include="..\Code\GlassObject.h" />
-    <ClInclude Include="..\Code\GunUI.h" />
     <ClInclude Include="..\Code\Loading.h" />
     <ClInclude Include="..\Code\MainApp.h" />
     <ClInclude Include="..\Code\Pistol.h" />
-    <ClInclude Include="..\Code\PlatForm.h" />
     <ClInclude Include="..\Code\Player.h" />
     <ClInclude Include="..\Code\PlayerArm.h" />
-    <ClInclude Include="..\Code\PlayerHP.h" />
     <ClInclude Include="..\Code\PlayerLeg.h" />
     <ClInclude Include="..\Code\PlayerStatus.h" />
-    <ClInclude Include="..\Code\PlayerUI.h" />
-    <ClInclude Include="..\Code\Reaper.h" />
     <ClInclude Include="..\Code\RectObject.h" />
     <ClInclude Include="..\Code\Rifle.h" />
-    <ClInclude Include="..\Code\Salone.h" />
-    <ClInclude Include="..\Code\Scene_Boss.h" />
     <ClInclude Include="..\Code\Scene_Logo.h" />
     <ClInclude Include="..\Code\Scene_Menu.h" />
     <ClInclude Include="..\Code\Scene_Stage.h" />
@@ -205,31 +197,22 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Code\Aim.cpp" />
     <ClCompile Include="..\Code\BackGround.cpp" />
     <ClCompile Include="..\Code\CubeObject.cpp" />
     <ClCompile Include="..\Code\DynamicCamera.cpp" />
     <ClCompile Include="..\Code\Dynamic_Object.cpp" />
     <ClCompile Include="..\Code\GlassObject.cpp" />
-    <ClCompile Include="..\Code\GunUI.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\Pistol.cpp" />
-    <ClCompile Include="..\Code\PlatForm.cpp" />
     <ClCompile Include="..\Code\Player.cpp" />
     <ClCompile Include="..\Code\PlayerArm.cpp" />
-    <ClCompile Include="..\Code\PlayerHP.cpp" />
     <ClCompile Include="..\Code\PlayerLeg.cpp" />
     <ClCompile Include="..\Code\PlayerStatus.cpp" />
-    <ClCompile Include="..\Code\PlayerUI.cpp" />
-    <ClCompile Include="..\Code\Reaper.cpp" />
     <ClCompile Include="..\Code\RectObject.cpp" />
     <ClCompile Include="..\Code\Rifle.cpp" />
-    <ClCompile Include="..\Code\Salone.cpp" />
-    <ClCompile Include="..\Code\Scene_Boss.cpp" />
     <ClCompile Include="..\Code\Scene_Logo.cpp" />
     <ClCompile Include="..\Code\Scene_Menu.cpp" />
     <ClCompile Include="..\Code\Scene_Stage.cpp" />
@@ -244,7 +227,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

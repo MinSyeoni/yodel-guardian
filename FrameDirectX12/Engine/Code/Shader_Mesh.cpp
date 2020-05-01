@@ -52,7 +52,11 @@ void CShader_Mesh::Begin_Shader()
 
 void CShader_Mesh::End_Shader(_uint Texnum, _int boneIndex)
 {
-	
+	int TexCount = Texnum;
+	if (Texnum > m_vecTextureType.size()-1)
+	Texnum = m_vecTextureType.size() - 1;
+
+
 	CB_TEXTURE_INFO pTexInfo;
 	ZeroMemory(&pTexInfo,sizeof(CB_TEXTURE_INFO));
 	if (m_vecTextureType[Texnum].m_iSpecular != 999)
@@ -88,7 +92,7 @@ void CShader_Mesh::End_Shader(_uint Texnum, _int boneIndex)
 
 	m_pCommandList->SetGraphicsRootConstantBufferView(4, m_pCB_MatrixInfo->Resource()->GetGPUVirtualAddress());
 	m_pCommandList->SetGraphicsRootConstantBufferView(5, m_pCB_BoneInfo->Resource()->GetGPUVirtualAddress()+(m_pCB_BoneInfo->Get_ElementSize()*boneIndex));
-	m_pCommandList->SetGraphicsRootConstantBufferView(6, m_pCB_TextureInfo->Resource()->GetGPUVirtualAddress() + (m_pCB_TextureInfo->Get_ElementSize()*Texnum));
+	m_pCommandList->SetGraphicsRootConstantBufferView(6, m_pCB_TextureInfo->Resource()->GetGPUVirtualAddress() + (m_pCB_TextureInfo->Get_ElementSize()*TexCount));
 }
 
 void CShader_Mesh::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture, vector< ComPtr<ID3D12Resource>> pNormalTexture, vector< ComPtr<ID3D12Resource>> pSpecularTexture, vector< ComPtr<ID3D12Resource>> pEmissiveTexture)

@@ -29,6 +29,8 @@ public:
 
 	_matrix			Get_WorldMatrix() { return m_matWorld; };
 
+	void      SetCameraOnOff(bool bIsOnOff) { m_bIsCameraExecute = bIsOnOff; }
+
 private:
 	LPDIRECT3DDEVICE9		m_pGraphicDev;
 
@@ -41,5 +43,8 @@ private:
 	_matrix					m_matWorld;
 	_matrix					m_matView;
 	_matrix					m_matProj;
+
+
+	bool m_bIsCameraExecute=true;
 };
 
