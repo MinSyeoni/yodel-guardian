@@ -66,6 +66,8 @@ HRESULT CMonster::Ready_GameObject()
 		m_pFlameThrower = new CFlameThrower;
 		m_pFlameThrower->Set_Transform(m_pTransCom);
 		break;
+	case CMonster::ZOMBI:
+		break;
 	default:
 		break;
 	}
@@ -94,6 +96,8 @@ HRESULT CMonster::LateInit_GameObject()
 	case CMonster::FLAMETHROWER:
 		m_pFlameThrower->Late_Initialized();
 		break;
+	case CMonster::ZOMBI:
+		break;
 	default:
 		break;
 	}
@@ -112,9 +116,9 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 	m_pBoxCom->Update_Collider(&m_pTransCom->m_matWorld);
 	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCom);
 
-	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-	m_pPlayerPos = pPlayer->Get_Transform()->Get_PositionVector();
-	m_pMonsterPos = m_pTransCom->Get_PositionVector();
+	//CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+	//m_pPlayerPos = pPlayer->Get_Transform()->Get_PositionVector();
+	//m_pMonsterPos = m_pTransCom->Get_PositionVector();
 
 	switch (m_eMonName)
 	{
@@ -130,13 +134,18 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 		m_iPreMonState = m_pFlameThrower->Get_PreState();
 	}
 		break;
+	case CMonster::ZOMBI:
+	{
+		m_iCurMonState = 1;
+		m_iPreMonState = m_iCurMonState;
+	}
+		break;
 	default:
 		break;
 	}
 
 	dynamic_cast<CMesh*>(m_pMeshCom)->Set_AnimationBlend((_int)m_iCurMonState, (_int)m_iPreMonState);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransformsBlend(5000.f * fTimeDelta, 5000.f * fTimeDelta, m_fSpineAngle);
-
 
 	return NO_EVENT;
 }
@@ -157,6 +166,8 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 		if (m_pFlameThrower == nullptr)
 			return E_FAIL;
 		m_pFlameThrower->LateUpdate_FlameThrower(fTimeDelta, m_pTransCom, m_pMeshCom);
+		break;
+	case CMonster::ZOMBI:
 		break;
 	default:
 		break;
@@ -276,5 +287,4 @@ void CMonster::Free()
 {
 	CGameObject::Free();
 	Safe_Delete(m_pFlameThrower);
-	Safe_Release(m_pBoundary);
 }
