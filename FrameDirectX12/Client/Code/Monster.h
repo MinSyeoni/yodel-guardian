@@ -15,7 +15,7 @@ class CDynamicCamera;
 class CMonster : public Engine::CGameObject
 {
 public:
-	enum MONKIND { NONAME, FLAMETHROWER };
+	enum MONKIND { NONAME, FLAMETHROWER, ZOMBI };
 
 private:
 	explicit CMonster(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
