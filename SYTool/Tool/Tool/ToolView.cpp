@@ -14,7 +14,7 @@
 #include "ToolView.h"
 #include "SphereCollider.h"
 #include "BoxCollider.h"
-
+#include "ActionCamera.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -49,14 +49,14 @@ CToolView::~CToolView()
 {
 	CObjMgr::GetInstance()->DestroyInstance();
 	CToolCamera::GetInstance()->DestroyInstance();
-
+	CActionCamera::GetInstance()->DestroyInstance();
 	Engine::Safe_Release(m_pManagement);
 	Engine::Safe_Release(m_pDevice);
 
 	Engine::DestroyUtility();
 	Engine::DestroyResources();
 	Engine::DestroySystem();
-
+	
 	CPickingMgr::GetInstance()->DestroyInstance();
 	Engine::CKeyMgr::GetInstance()->DestroyInstance();
 
@@ -142,7 +142,7 @@ HRESULT CToolView::Render_MainApp()
 
 	m_pManagement->Render_Scene(m_pDevice);
 	CObjMgr::GetInstance()->Render_Object();
-
+	CActionCamera::GetInstance()->RenderCamera();
 	// 나중에 고쳐야함
 	if (!m_pMapTab->m_pColliderLst.empty() && true == m_pMapTab->m_bIsColliderShow)
 	{
@@ -180,7 +180,7 @@ _int CToolView::Update_MainApp(const _float& fTimeDelta)
 	Engine::CKeyMgr::GetInstance()->KeyCheck();
 	CObjMgr::GetInstance()->Update_Object(fTimeDelta);
 	CToolCamera::GetInstance()->Update_Camera(fTimeDelta);
-
+	CActionCamera::GetInstance()->UpdateActionCamera(fTimeDelta);
 
 	return iExitCode;
 }

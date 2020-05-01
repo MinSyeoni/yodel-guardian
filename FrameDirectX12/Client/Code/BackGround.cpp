@@ -29,7 +29,7 @@ HRESULT CBackGround::Ready_GameObjectPrototype()
 }
 
 
-HRESULT CBackGround::Ready_GameObject()
+HRESULT CBackGround::Ready_GameObject()	// 복사본을 레디할 때 
 {
 #ifdef _DEBUG
 	COUT_STR("Ready Clone BackGround");
@@ -51,7 +51,14 @@ HRESULT CBackGround::LateInit_GameObject()
 	/*____________________________________________________________________
 	Get GameObject - DynamicCamera
 	______________________________________________________________________*/
-	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());
+
+
+
+#ifdef _DEBUG
+	COUT_STR("Success Get DynamicCamera");
+#endif
+	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());	// 셰이더에 텍스쳐 알려줘여 함.
+
 
 	return S_OK;
 }
@@ -81,7 +88,7 @@ _int CBackGround::LateUpdate_GameObject(const _float & fTimeDelta)
 	/*____________________________________________________________________
 	[ Renderer - Add Render Group ]
 	______________________________________________________________________*/
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);	
 
 	/*____________________________________________________________________
 	[ Set PipelineState ]
@@ -94,7 +101,7 @@ _int CBackGround::LateUpdate_GameObject(const _float & fTimeDelta)
 void CBackGround::Render_GameObject(const _float & fTimeDelta)
 {
 	Set_ConstantTable();
-
+	// 세이더 - 버퍼 - 세이더 - 버퍼 순서 중요 
 
 	m_pShaderCom->Begin_Shader();
 	m_pBufferCom->Begin_Buffer();
@@ -119,7 +126,6 @@ HRESULT CBackGround::Add_Component()
 	m_pShaderCom = static_cast<Engine::CShader_DefaultTex*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_DefaultTex", COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
-
 
 	// Texture
 	m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_Logo", COMPONENTID::ID_STATIC));
@@ -146,7 +152,7 @@ void CBackGround::Set_ConstantTable()
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
 
 
-
+	// CTarget::SetUp_ConstateTable 이건 직교 투영. 참고 
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
 }
 

@@ -5,9 +5,11 @@
 // CMyform 폼 보기
 #include "MapTab.h"
 #include "NaviTab.h"
+#include "CameraTool.h"
 
 class CMapTab;
 class CNaviTab;
+class CameraTool;
 class CMyform : public CFormView
 {
 	DECLARE_DYNCREATE(CMyform)
@@ -38,8 +40,10 @@ public:
 
 	CMapTab*	m_pMapTab = nullptr;
 	CNaviTab*	m_pNaviTab = nullptr;
+	CCameraTool* m_pCameraTab = nullptr;
 
-	_int		m_iCurTab = 0;	// 0-MAP, 1-NAVI
+
+	_int		m_iCurTab = 0;	// 0-MAP, 1-NAVI ,2-Camera
 private:
 	void		Free();
 

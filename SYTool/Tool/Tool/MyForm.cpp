@@ -62,6 +62,7 @@ void CMyform::OnInitialUpdate()
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 	m_MainTab.InsertItem(0, L"MapTool", 0);
 	m_MainTab.InsertItem(1, L"NaviTool", 1);
+	m_MainTab.InsertItem(2, L"CameraTool", 2);
 
 	m_MainTab.SetCurSel(0);
 
@@ -77,12 +78,22 @@ void CMyform::OnInitialUpdate()
 	m_pNaviTab->Create(IDD_DIALOG2, &m_MainTab);
 	m_pNaviTab->MoveWindow(0, 25, rc.Width(), rc.Height());
 	m_pNaviTab->ShowWindow(SW_HIDE);
+
+
+	m_pCameraTab = new CCameraTool;
+	m_pCameraTab->Create(IDD_DIALOG3, &m_MainTab);
+	m_pCameraTab->MoveWindow(0, 25, rc.Width(), rc.Height());
+	m_pCameraTab->ShowWindow(SW_HIDE);
+
+
+
 }
 
 void CMyform::Free()
 {
 	Engine::Safe_Delete(m_pMapTab);
 	Engine::Safe_Delete(m_pNaviTab);
+	Engine::Safe_Delete(m_pCameraTab);
 }
 
 
@@ -97,11 +108,19 @@ void CMyform::OnTcnSelchangeTab(NMHDR* pNMHDR, LRESULT* pResult)
 		m_iCurTab = 0;
 		m_pMapTab->ShowWindow(SW_SHOW);
 		m_pNaviTab->ShowWindow(SW_HIDE);
+		m_pCameraTab->ShowWindow(SW_HIDE);
 		break;
 	case 1:
 		m_iCurTab = 1;
 		m_pMapTab->ShowWindow(SW_HIDE);
 		m_pNaviTab->ShowWindow(SW_SHOW);
+		m_pCameraTab->ShowWindow(SW_HIDE);
+		break;
+	case 2:
+		m_iCurTab = 2;
+		m_pMapTab->ShowWindow(SW_HIDE);
+		m_pNaviTab->ShowWindow(SW_HIDE);
+		m_pCameraTab->ShowWindow(SW_SHOW);
 		break;
 	default:
 		break;

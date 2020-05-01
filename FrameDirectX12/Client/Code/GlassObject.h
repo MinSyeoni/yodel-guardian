@@ -45,7 +45,7 @@ private:
 	Engine::CShader_Mesh*            m_pShaderCom = nullptr;
 	MeshInfo         m_tMeshInfo;
 	_float m_fTime = 0.f;
-	_float m_fSize = 0.01f;
+	_float m_fSize = 0.5f;
 public:
 	virtual CGameObject*	Clone_GameObject(void* prg);
 	static CGlassObject*		Create(ID3D12Device* pGraphicDevice,

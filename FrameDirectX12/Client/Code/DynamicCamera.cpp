@@ -57,7 +57,7 @@ HRESULT CDynamicCamera::LateInit_GameObject()
 		m_pPlayerLeg = static_cast<CPlayerLeg*>(m_pPlayer->Get_PlayerLeg());
 
 		m_pmatArmCamera= static_cast<CMesh*>(m_pPlayerArm->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_CameraMatrix();
-		m_pmatLegCamera= static_cast<CMesh*>(m_pPlayerLeg->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_CameraMatrix();
+	//	m_pmatLegCamera= static_cast<CMesh*>(m_pPlayerLeg->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_CameraMatrix();
 	}
 	return S_OK;
 }
@@ -109,10 +109,10 @@ void CDynamicCamera::MouseInput()
 {
 	
 	
-	_long dwMouseMove;
+	_long dwMouseMove=0;
 
 
-	if (m_pmatArmCamera != nullptr &&m_pmatLegCamera!=nullptr)
+	if (m_pmatArmCamera != nullptr)
 	{
 
 		_matrix RotY = XMMatrixRotationY(XMConvertToRadians(-90));

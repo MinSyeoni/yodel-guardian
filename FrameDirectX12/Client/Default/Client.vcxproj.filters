@@ -4,277 +4,358 @@
     <Filter Include="99.Etc">
       <UniqueIdentifier>{e427639d-e918-4a32-949d-9561326119a4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="98.Header">
-      <UniqueIdentifier>{6f905f50-11c2-45a4-91f5-7c78a86264b1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00.MainApp">
       <UniqueIdentifier>{d44c419a-06e7-4459-aa0b-865fac6ecdc9}</UniqueIdentifier>
     </Filter>
     <Filter Include="97.Mgr">
       <UniqueIdentifier>{27876c48-0016-46b3-87e1-89e8fb599f1a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene">
-      <UniqueIdentifier>{256c4ed2-d49e-45f9-a77a-d6dfb12066fc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject">
-      <UniqueIdentifier>{ca6f4b3b-0852-42ed-89f9-fb933331dd10}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\00.Logo">
-      <UniqueIdentifier>{e1830c16-2d13-49f7-8572-3acdd2330b3c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\01.Environment">
-      <UniqueIdentifier>{c032b6d9-f4d5-4740-9507-36a2e633f142}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\02.Menu">
-      <UniqueIdentifier>{51fd0ff7-39a3-4557-b9b9-cc8eb69fb283}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\01.Logo">
-      <UniqueIdentifier>{fd93da88-aeef-4df4-a63a-e362f97fa376}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\00.Loading">
-      <UniqueIdentifier>{414ce8cb-454b-482a-95af-49b027ded482}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\03.Stage">
-      <UniqueIdentifier>{af574c80-212e-42e6-9a44-0bbdcdee06c7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="96.Camera">
       <UniqueIdentifier>{fd951fef-76fb-4e49-bf03-6a0843ab4a01}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\03.CubeObject">
-      <UniqueIdentifier>{7af8cf58-650d-4246-acac-5d8f4c1df892}</UniqueIdentifier>
+    <Filter Include="99.Default">
+      <UniqueIdentifier>{88342214-980b-4823-99f8-e72419361a27}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\02.RectObject">
-      <UniqueIdentifier>{851722c3-688d-47c2-9258-f83785e0772a}</UniqueIdentifier>
+    <Filter Include="98.Struct">
+      <UniqueIdentifier>{afe69e46-7f8e-4454-affd-67ab0fd2fd9b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\04.Terrain">
-      <UniqueIdentifier>{d57d42e9-c1d5-4ae7-ab26-0bfd6e3d02a3}</UniqueIdentifier>
+    <Filter Include="00.Scene_Logo">
+      <UniqueIdentifier>{255143e6-85e0-4475-9ded-aeab85f1a94b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\01.Environment\00.StaticObject">
-      <UniqueIdentifier>{b19a86a4-68df-4d09-bad3-6b3ffcf7d9c7}</UniqueIdentifier>
+    <Filter Include="01.Scene_Stage">
+      <UniqueIdentifier>{c7e44c3f-44a6-47d2-ba7c-251efa81d96f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\00.Logo\00.BackGround">
-      <UniqueIdentifier>{95c01a6b-2044-48ee-bb1a-8dfc8e67e3c0}</UniqueIdentifier>
+    <Filter Include="02.Scene_All">
+      <UniqueIdentifier>{6d8504b3-7a0c-42c2-bd3e-456404028fa1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\05.Stage1">
-      <UniqueIdentifier>{e9df7a78-eb23-40d0-b55e-67f6c4606d8b}</UniqueIdentifier>
+    <Filter Include="00.Scene_Logo\00.BackGround">
+      <UniqueIdentifier>{5e43f01f-8bda-485e-b070-bd0d631763b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\05.Stage1\00.DynamicObject">
-      <UniqueIdentifier>{69455796-45a0-4f52-bc51-98c8745c8d9d}</UniqueIdentifier>
+    <Filter Include="01.Scene_Stage\00.Player">
+      <UniqueIdentifier>{487385f9-9ea8-4e4e-9280-4b536592ae58}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\99.Player">
-      <UniqueIdentifier>{ef8f117b-7595-4056-ba98-dd6080ebb4a6}</UniqueIdentifier>
+    <Filter Include="01.Scene_Stage\01.Terrain">
+      <UniqueIdentifier>{646bbc1f-cd4d-412b-9e9e-3f005afd8ceb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\99.Player\01.Player ARM">
-      <UniqueIdentifier>{16791c50-7330-46d4-9eec-1991bb11bdfe}</UniqueIdentifier>
+    <Filter Include="03.UI">
+      <UniqueIdentifier>{20ffe26a-ee8f-4b32-a83e-7c0a9d1d4ae6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\99.Player\04.PlayerStatus">
-      <UniqueIdentifier>{4da12c0d-b904-4737-9ce2-1fba2c11a315}</UniqueIdentifier>
+    <Filter Include="03.UI\00.Aim">
+      <UniqueIdentifier>{73616220-cc37-4638-8b11-1d23824e8384}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\01.Environment\01.SkyDome">
-      <UniqueIdentifier>{ce32b8f7-e132-47c2-97b8-e1f8b1dafdde}</UniqueIdentifier>
+    <Filter Include="03.UI\01.GunUI">
+      <UniqueIdentifier>{a70dde8b-deab-4a83-aaee-8222e978fd92}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\98.Weapon">
-      <UniqueIdentifier>{844640f3-e36f-463f-94c8-5bcf1959892a}</UniqueIdentifier>
+    <Filter Include="01.Scene_Stage\02.Weapon">
+      <UniqueIdentifier>{f68a6284-4655-433d-af9f-7cee03ff9531}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\98.Weapon\00.Pistol">
-      <UniqueIdentifier>{67acf475-2210-478f-825f-a67f110c78a3}</UniqueIdentifier>
+    <Filter Include="01.Scene_Stage\02.Weapon\00.Rifle">
+      <UniqueIdentifier>{32c5e6cd-f5c5-44f0-b128-586810f4b0df}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\99.Player\03.Player Leg">
-      <UniqueIdentifier>{d19451d9-3b44-450e-a248-6f9e5a584091}</UniqueIdentifier>
+    <Filter Include="01.Scene_Stage\02.Weapon\01.Pistol">
+      <UniqueIdentifier>{f5c2f6e5-cfa1-48e8-8b75-d8e4ece6a5ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\01.Environment\02.GrassObject">
-      <UniqueIdentifier>{02143260-ceb1-4cdc-8ee5-13c46089d446}</UniqueIdentifier>
+    <Filter Include="04.Scene_Menu">
+      <UniqueIdentifier>{a402a9fb-e0d8-4e82-adbd-0930881d99cb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\98.Weapon\01.Rifle">
-      <UniqueIdentifier>{794dd58e-19b1-4477-a9b2-60252cb98b98}</UniqueIdentifier>
+    <Filter Include="02.Scene_All\00.CubeObject">
+      <UniqueIdentifier>{4e3838fc-46ac-433d-97e2-0d20ed191e23}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\05.Stage1\01.NPC">
-      <UniqueIdentifier>{d31de4af-8814-4181-b336-e30b74b5cc4c}</UniqueIdentifier>
+    <Filter Include="02.Scene_All\01.DynamicObject">
+      <UniqueIdentifier>{e74da73b-8304-4646-a1dd-b3d52ce6891a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_All\02.GlassObject">
+      <UniqueIdentifier>{62abff74-fe44-4ad5-879c-1569e957854b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\03.Camera">
+      <UniqueIdentifier>{6da4c9b2-a2d5-4849-949e-b2820d95ccd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\03.Camera\00.DynamicCamera">
+      <UniqueIdentifier>{f7e74713-ba1a-4e04-b867-608b9af61f4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\00.Player\00.PlayerArm">
+      <UniqueIdentifier>{1e8f1327-e8c7-4774-9f9e-4ec57723e46f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\00.Player\01.PlayerStatus">
+      <UniqueIdentifier>{a66796dc-9b78-40be-a3dd-b617722c6bc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\02.PlayerHP">
+      <UniqueIdentifier>{e99cac33-ee3e-4971-9466-288c7895bc60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\03.PlayerUI">
+      <UniqueIdentifier>{5bc3d12b-32ee-47ff-80e1-66ac7d11fb48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Loading">
+      <UniqueIdentifier>{b12196e0-3829-4a1c-8527-7392b0c7418d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\00.Player\02.PlayerLeg">
+      <UniqueIdentifier>{ccc1e160-0b98-487a-89b3-0975b9a30844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_All\03.StaticObject">
+      <UniqueIdentifier>{d0ceba82-3a2c-41f1-bcca-0f20f236eabf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_All\04.SkyDome">
+      <UniqueIdentifier>{dbcca541-6daa-40b4-9212-273151b88088}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_All\05.RectObject">
+      <UniqueIdentifier>{ac3817b5-9267-43b3-854b-f82508c1fd87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_Boss">
+      <UniqueIdentifier>{78c8617c-45c2-458d-b813-edd30d356f9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_Boss\00.PlatForm">
+      <UniqueIdentifier>{47b998ec-f6f2-4f07-8c2b-0e9749b9537e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_Boss\01.Reaper">
+      <UniqueIdentifier>{6f2d0601-88c0-4977-ae71-685d6039bc1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_Boss\02.BossRing">
+      <UniqueIdentifier>{9c970969-756d-4a12-a451-c64fe3216e1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\04.Npc">
+      <UniqueIdentifier>{5bb052d5-a6d6-4954-99db-b87ec9ed107a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\04.Npc\00.Salone">
+      <UniqueIdentifier>{4b44d6c9-3028-4388-abda-b0e39fc9da57}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
-      <Filter>99.Etc</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>99.Etc</Filter>
+      <Filter>99.Default</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
-      <Filter>99.Etc</Filter>
+      <Filter>99.Default</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>99.Etc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Include.h">
-      <Filter>98.Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Macro.h">
-      <Filter>98.Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Typedef.h">
-      <Filter>98.Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Function.h">
-      <Filter>98.Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Define.h">
-      <Filter>98.Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Header\Const.h">
-      <Filter>98.Header</Filter>
+    <ClInclude Include="Resource.h">
+      <Filter>99.Default</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\MainApp.h">
-      <Filter>00.MainApp</Filter>
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Macro.h">
+      <Filter>98.Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Define.h">
+      <Filter>98.Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Const.h">
+      <Filter>98.Struct</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Extern.h">
-      <Filter>98.Header</Filter>
+      <Filter>98.Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Include.h">
+      <Filter>98.Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\Typedef.h">
+      <Filter>98.Struct</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\Struct.h">
-      <Filter>98.Header</Filter>
+      <Filter>98.Struct</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Scene_Logo.h">
-      <Filter>01.Scene\01.Logo</Filter>
+    <ClInclude Include="targetver.h">
+      <Filter>99.Default</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Scene_Menu.h">
-      <Filter>01.Scene\02.Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\Scene_Stage.h">
-      <Filter>01.Scene\03.Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\DynamicCamera.h">
-      <Filter>96.Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\CubeObject.h">
-      <Filter>02.GameObject\03.CubeObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\RectObject.h">
-      <Filter>02.GameObject\02.RectObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\Terrain.h">
-      <Filter>02.GameObject\04.Terrain</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\StaticObject.h">
-      <Filter>02.GameObject\01.Environment\00.StaticObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\Loading.h">
-      <Filter>01.Scene\00.Loading</Filter>
+    <ClInclude Include="..\Header\Function.h">
+      <Filter>98.Struct</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\BackGround.h">
-      <Filter>02.GameObject\00.Logo\00.BackGround</Filter>
+      <Filter>00.Scene_Logo\00.BackGround</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Dynamic_Object.h">
-      <Filter>02.GameObject\05.Stage1\00.DynamicObject</Filter>
+    <ClInclude Include="..\Code\Terrain.h">
+      <Filter>01.Scene_Stage\01.Terrain</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Player.h">
-      <Filter>02.GameObject\99.Player</Filter>
+    <ClInclude Include="..\Code\Aim.h">
+      <Filter>03.UI\00.Aim</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\PlayerArm.h">
-      <Filter>02.GameObject\99.Player\01.Player ARM</Filter>
+    <ClInclude Include="..\Code\GunUI.h">
+      <Filter>03.UI\01.GunUI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\PlayerStatus.h">
-      <Filter>02.GameObject\99.Player\04.PlayerStatus</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\PlayerLeg.h">
-      <Filter>02.GameObject\99.Player\03.Player Leg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\SkyDome.h">
-      <Filter>02.GameObject\01.Environment\01.SkyDome</Filter>
+    <ClInclude Include="UI.h">
+      <Filter>03.UI</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Weapon.h">
-      <Filter>02.GameObject\98.Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\Pistol.h">
-      <Filter>02.GameObject\98.Weapon\00.Pistol</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\GlassObject.h">
-      <Filter>02.GameObject\01.Environment\02.GrassObject</Filter>
+      <Filter>01.Scene_Stage\02.Weapon</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Rifle.h">
-      <Filter>02.GameObject\98.Weapon\01.Rifle</Filter>
+      <Filter>01.Scene_Stage\02.Weapon\00.Rifle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Scene_Stage.h">
+      <Filter>01.Scene_Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Player.h">
+      <Filter>01.Scene_Stage\00.Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Scene_Menu.h">
+      <Filter>04.Scene_Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\CubeObject.h">
+      <Filter>02.Scene_All\00.CubeObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Dynamic_Object.h">
+      <Filter>02.Scene_All\01.DynamicObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\GlassObject.h">
+      <Filter>02.Scene_All\02.GlassObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\DynamicCamera.h">
+      <Filter>01.Scene_Stage\03.Camera\00.DynamicCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Pistol.h">
+      <Filter>01.Scene_Stage\02.Weapon\01.Pistol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\PlayerArm.h">
+      <Filter>01.Scene_Stage\00.Player\00.PlayerArm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\PlayerStatus.h">
+      <Filter>01.Scene_Stage\00.Player\01.PlayerStatus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\PlayerHP.h">
+      <Filter>03.UI\02.PlayerHP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\PlayerUI.h">
+      <Filter>03.UI\03.PlayerUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Loading.h">
+      <Filter>05.Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Scene_Logo.h">
+      <Filter>00.Scene_Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\PlayerLeg.h">
+      <Filter>01.Scene_Stage\00.Player\02.PlayerLeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\StaticObject.h">
+      <Filter>02.Scene_All\03.StaticObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\SkyDome.h">
+      <Filter>02.Scene_All\04.SkyDome</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\RectObject.h">
+      <Filter>02.Scene_All\05.RectObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Scene_Boss.h">
+      <Filter>02.Scene_Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Reaper.h">
+      <Filter>02.Scene_Boss\01.Reaper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\PlatForm.h">
+      <Filter>02.Scene_Boss\00.PlatForm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Salone.h">
+      <Filter>01.Scene_Stage\04.Npc\00.Salone</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Client.cpp">
-      <Filter>99.Etc</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
-      <Filter>99.Etc</Filter>
+      <Filter>99.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>99.Default</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MainApp.cpp">
-      <Filter>00.MainApp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Scene_Logo.cpp">
-      <Filter>01.Scene\01.Logo</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Scene_Menu.cpp">
-      <Filter>01.Scene\02.Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Scene_Stage.cpp">
-      <Filter>01.Scene\03.Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\DynamicCamera.cpp">
-      <Filter>96.Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\CubeObject.cpp">
-      <Filter>02.GameObject\03.CubeObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\RectObject.cpp">
-      <Filter>02.GameObject\02.RectObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Terrain.cpp">
-      <Filter>02.GameObject\04.Terrain</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\StaticObject.cpp">
-      <Filter>02.GameObject\01.Environment\00.StaticObject</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Loading.cpp">
-      <Filter>01.Scene\00.Loading</Filter>
+      <Filter>99.Default</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\BackGround.cpp">
-      <Filter>02.GameObject\00.Logo\00.BackGround</Filter>
+      <Filter>00.Scene_Logo\00.BackGround</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Dynamic_Object.cpp">
-      <Filter>02.GameObject\05.Stage1\00.DynamicObject</Filter>
+    <ClCompile Include="..\Code\Terrain.cpp">
+      <Filter>01.Scene_Stage\01.Terrain</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Player.cpp">
-      <Filter>02.GameObject\99.Player</Filter>
+    <ClCompile Include="..\Code\Aim.cpp">
+      <Filter>03.UI\00.Aim</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\PlayerArm.cpp">
-      <Filter>02.GameObject\99.Player\01.Player ARM</Filter>
+    <ClCompile Include="..\Code\GunUI.cpp">
+      <Filter>03.UI\01.GunUI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\PlayerStatus.cpp">
-      <Filter>02.GameObject\99.Player\04.PlayerStatus</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\PlayerLeg.cpp">
-      <Filter>02.GameObject\99.Player\03.Player Leg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SkyDome.cpp">
-      <Filter>02.GameObject\01.Environment\01.SkyDome</Filter>
+    <ClCompile Include="UI.cpp">
+      <Filter>03.UI</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Weapon.cpp">
-      <Filter>02.GameObject\98.Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Pistol.cpp">
-      <Filter>02.GameObject\98.Weapon\00.Pistol</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\GlassObject.cpp">
-      <Filter>02.GameObject\01.Environment\02.GrassObject</Filter>
+      <Filter>01.Scene_Stage\02.Weapon</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Rifle.cpp">
-      <Filter>02.GameObject\98.Weapon\01.Rifle</Filter>
+      <Filter>01.Scene_Stage\02.Weapon\00.Rifle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_Stage.cpp">
+      <Filter>01.Scene_Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Player.cpp">
+      <Filter>01.Scene_Stage\00.Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_Menu.cpp">
+      <Filter>04.Scene_Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CubeObject.cpp">
+      <Filter>02.Scene_All\00.CubeObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Dynamic_Object.cpp">
+      <Filter>02.Scene_All\01.DynamicObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GlassObject.cpp">
+      <Filter>02.Scene_All\02.GlassObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DynamicCamera.cpp">
+      <Filter>01.Scene_Stage\03.Camera\00.DynamicCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Pistol.cpp">
+      <Filter>01.Scene_Stage\02.Weapon\01.Pistol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PlayerArm.cpp">
+      <Filter>01.Scene_Stage\00.Player\00.PlayerArm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PlayerStatus.cpp">
+      <Filter>01.Scene_Stage\00.Player\01.PlayerStatus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PlayerHP.cpp">
+      <Filter>03.UI\02.PlayerHP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PlayerUI.cpp">
+      <Filter>03.UI\03.PlayerUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Loading.cpp">
+      <Filter>05.Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_Logo.cpp">
+      <Filter>00.Scene_Logo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PlayerLeg.cpp">
+      <Filter>01.Scene_Stage\00.Player\02.PlayerLeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StaticObject.cpp">
+      <Filter>02.Scene_All\03.StaticObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SkyDome.cpp">
+      <Filter>02.Scene_All\04.SkyDome</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RectObject.cpp">
+      <Filter>02.Scene_All\05.RectObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_Boss.cpp">
+      <Filter>02.Scene_Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Reaper.cpp">
+      <Filter>02.Scene_Boss\01.Reaper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PlatForm.cpp">
+      <Filter>02.Scene_Boss\00.PlatForm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Salone.cpp">
+      <Filter>01.Scene_Stage\04.Npc\00.Salone</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Client.ico">
-      <Filter>99.Etc</Filter>
-    </Image>
     <Image Include="small.ico">
-      <Filter>99.Etc</Filter>
+      <Filter>99.Default</Filter>
+    </Image>
+    <Image Include="Client.ico">
+      <Filter>99.Default</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
-      <Filter>99.Etc</Filter>
+      <Filter>99.Default</Filter>
     </ResourceCompile>
   </ItemGroup>
 </Project>

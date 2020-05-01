@@ -13,6 +13,14 @@
 #include "Frustom.h"
 #include "Pistol.h"
 #include "Rifle.h"
+#include "Salone.h"
+
+#include "UI.h"
+#include "Aim.h"
+#include "PlayerHP.h"
+#include "PlayerUI.h"
+#include "GunUI.h"
+
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -27,8 +35,8 @@ HRESULT CScene_Stage::Ready_LightInfo()
 {
 	D3DLIGHT tagLight;
 	tagLight.m_eType = LIGHTTYPE::D3DLIGHT_DIRECTIONAL;
-	tagLight.m_vDiffuse = _vec4{ 0.7f,0.7f,0.7f,1.0f };
-	tagLight.m_vAmbient = _vec4{ 0.1f,0.1f,0.1f,1.0f };
+	tagLight.m_vDiffuse = _vec4{ 0.9f,0.9f,0.9f,1.0f };
+	tagLight.m_vAmbient = _vec4{ 0.35f,0.35f,0.35f,1.0f };
 	tagLight.m_vSpecular = _vec4{ 1.0f,1.0f,1.0f,1.0f };
 	tagLight.m_vDirection= _vec4{ -1.0f,-1.0f,1.f,1.0f };
 	if(FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &tagLight)))
@@ -92,7 +100,6 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	CGameObject* pGameObject = nullptr;
 
 
-
 	pGameObject = CTerrain::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Terrain", pGameObject), E_FAIL);
@@ -100,7 +107,6 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = CStaticObject::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_StaticObject", pGameObject), E_FAIL);
-
 
 	pGameObject = CPlayer::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -122,6 +128,31 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Rifle", pGameObject), E_FAIL);
 
+	pGameObject = CSalone::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Salone", pGameObject), E_FAIL);
+
+
+	////////////////////////////////// UI /////////////////////////////////////////////
+	pGameObject = CUI::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_UI", pGameObject), E_FAIL);
+
+	pGameObject = CAim::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Aim", pGameObject), E_FAIL);
+
+	pGameObject = CPlayerUI::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_PlayerUI", pGameObject), E_FAIL);
+
+	pGameObject = CPlayerHP::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_PlayerHP", pGameObject), E_FAIL);
+
+	pGameObject = CGunUI::Create(m_pGraphicDevice, m_pCommandList, L"Prototype_Texture_Rifle");
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_RifleUI", pGameObject), E_FAIL);
 
 	return S_OK;
 }
@@ -177,7 +208,6 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	m_pObjectMgr->Add_Layer(wstrLayerTag, pLayer);
 
-
 	// Terrain
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Terrain", L"Terrain", nullptr), E_FAIL);
 
@@ -196,21 +226,13 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	tMeshInfo.Rotation = _vec3(0.f, 0.f, 0.f);
 	tMeshInfo.Scale = _vec3(0.1f, 0.1f, 0.1f);
 
-	
-
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_StaticObject", L"Static", &tMeshInfo), E_FAIL);
 
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Pistol", L"Weapon", &tMeshInfo), E_FAIL);
 
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Rifle", L"Weapon", nullptr), E_FAIL);//For.Rifle
 
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Salone", L"Salone", nullptr), E_FAIL);//For.Salone
 
-	tMeshInfo.MeshTag = L"Mesh_Temp";
-	tMeshInfo.Pos = _vec3(300.f, 10.f, 320.f);
-	tMeshInfo.Rotation = _vec3(0.f, 0.f, 0.f);
-	tMeshInfo.Scale = _vec3(0.1f, 0.1f, 0.1f);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_GlassObject", L"Static", &tMeshInfo), E_FAIL);
-
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Rifle", L"Weapon", nullptr), E_FAIL);
 
 	return S_OK;
 		
@@ -226,14 +248,17 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 	Engine::CLayer* pLayer = Engine::CLayer::Create();
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
 
-	/*____________________________________________________________________
-	GameObject »ý¼º.
-	m_pObjectMgr->Add_GameObject(wstrLayerTag, wstrObjTag);
-	______________________________________________________________________*/
-
-
-
 	m_pObjectMgr->Add_Layer(wstrLayerTag, pLayer);
+
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_UI", L"Quest", nullptr), E_FAIL);
+
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Aim", L"Aim", nullptr), E_FAIL);
+
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_PlayerUI", L"PlayerUI", nullptr), E_FAIL);
+
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_PlayerHP", L"PlayerHP", nullptr), E_FAIL);
+
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 
 
 	return S_OK;
@@ -253,5 +278,4 @@ void CScene_Stage::Free()
 {
 	CFrustom::Get_Instance()->Destroy_Instance();
 	Engine::CScene::Free();
-	
 }

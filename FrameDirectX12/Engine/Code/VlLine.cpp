@@ -67,7 +67,7 @@ void CVlLine::Render_Buffer()
 
 CComponent * CVlLine::Clone()
 {
-	return S_OK;
+	return new CVlLine(*this);
 }
 
 CVlLine * CVlLine::Create(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList, _vec3 vStartPos, _vec3 vEndPos,_vec4 vColor)

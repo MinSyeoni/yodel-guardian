@@ -3,12 +3,12 @@
 
 USING(Engine)
 
-CShader_DefaultTex::CShader_DefaultTex(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
+CShader_DefaultTex::CShader_DefaultTex(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: CShader(pGraphicDevice, pCommandList)
 {
 }
 
-CShader_DefaultTex::CShader_DefaultTex(const CShader_DefaultTex & rhs)
+CShader_DefaultTex::CShader_DefaultTex(const CShader_DefaultTex& rhs)
 	: CShader(rhs)
 {
 	/*____________________________________________________________________
@@ -51,12 +51,12 @@ void CShader_DefaultTex::End_Shader(_uint Texnum, _uint uiOffset)
 
 	UINT objCBByteSize = (sizeof(CB_MATRIX_INFO) + 255) & ~255;
 
-	D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = m_pCB_MatrixInfo->Resource()->GetGPUVirtualAddress() + uiOffset *objCBByteSize;
+	D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = m_pCB_MatrixInfo->Resource()->GetGPUVirtualAddress() + uiOffset * objCBByteSize;
 
 	CD3DX12_GPU_DESCRIPTOR_HANDLE tex(m_pCBV_DescriptorHeap->GetGPUDescriptorHandleForHeapStart());
 	tex.Offset(Texnum, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 	m_pCommandList->SetGraphicsRootDescriptorTable(0, tex);
-	m_pCommandList->SetGraphicsRootConstantBufferView(1,objCBAddress);
+	m_pCommandList->SetGraphicsRootConstantBufferView(1, objCBAddress);
 
 }
 
@@ -86,7 +86,7 @@ void CShader_DefaultTex::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVec
 		hDescriptor.Offset(1, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 	}
 
-	m_pCB_MatrixInfo = new CUploadBuffer<CB_MATRIX_INFO>(DEVICE,offset, true);
+	m_pCB_MatrixInfo = new CUploadBuffer<CB_MATRIX_INFO>(DEVICE, offset, true);
 
 	CGraphicDevice::Get_Instance()->End_ResetCmdList();
 }
@@ -126,8 +126,8 @@ HRESULT CShader_DefaultTex::Create_PipelineState()
 	vecInputLayout =
 	{
 
-		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
-		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+	   { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+	   { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
 
 	};
 
@@ -232,17 +232,17 @@ D3D12_INPUT_LAYOUT_DESC CShader_DefaultTex::Create_InputLayout()
 }
 
 
-CComponent * CShader_DefaultTex::Clone()
+CComponent* CShader_DefaultTex::Clone()
 {
 	return new CShader_DefaultTex(*this);
 }
 
-CShader_DefaultTex * CShader_DefaultTex::Create(ID3D12Device * pGraphicDevice,
-	ID3D12GraphicsCommandList * pCommandList, TYPE eType)
+CShader_DefaultTex* CShader_DefaultTex::Create(ID3D12Device* pGraphicDevice,
+	ID3D12GraphicsCommandList* pCommandList, TYPE eType)
 {
 	CShader_DefaultTex* pInstance = new CShader_DefaultTex(pGraphicDevice, pCommandList);
 
-	if (FAILED(pInstance->Ready_Shader( eType)))
+	if (FAILED(pInstance->Ready_Shader(eType)))
 		Engine::Safe_Release(pInstance);
 
 	return pInstance;

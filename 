@@ -1,0 +1,1603 @@
+[33mcommit 4d20d2f8c6ec336314da2d3e834096bfe3423852[m[33m ([m[1;36mHEAD -> [m[1;32mHUIJUN[m[33m)[m
+Author: KimHuiJun <xhdrkawk2637@gmail.com>
+Date:   Mon Apr 27 17:25:03 2020 +0900
+
+     1차카메라툴
+
+[33mcommit 8939886b94b0b82483d253976fe4670751c0f1b1[m
+Author: KimHuiJun <xhdrkawk2637@gmail.com>
+Date:   Sun Apr 19 20:24:24 2020 +0900
+
+     NPC(Salone) Update Commit
+
+[33mcommit 76ae2acac2b4f54e6ee7bdb380acdaa3ef7f3dd2[m
+Author: KimHuiJun <xhdrkawk2637@gmail.com>
+Date:   Thu Apr 9 17:30:42 2020 +0900
+
+     Huijun Player Error Fix
+
+[33mcommit 50f040890b612ccf95fc3c8bd9baeef5234b1aae[m
+Author: KimHuiJun <xhdrkawk2637@gmail.com>
+Date:   Mon Apr 6 16:42:20 2020 +0900
+
+     BossRoom
+
+[33mcommit 360a0fff3328ba4db20ea23c771283f6fdea6989[m
+Author: KimHuiJun <xhdrkawk2637@gmail.com>
+Date:   Tue Mar 31 18:55:13 2020 +0900
+
+    1차종합
+
+[33mcommit 1983cb938262b640355fc5634fd1f7f397d7d155[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Mar 30 13:18:16 2020 +0900
+
+    Create map.max
+
+[33mcommit c45654d2349200fd9c524d445232eee325a4cf03[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sat Mar 28 21:28:39 2020 +0900
+
+     d
+
+[33mcommit 4a0745ede773b7ae42895d09255c3d441d261696[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Thu Mar 26 21:44:03 2020 +0900
+
+    desk1
+
+[33mcommit 569aaf764e286d28e04a7d79844d09e52eb392a3[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Mar 25 23:22:01 2020 +0900
+
+    Update computer2.psd
+
+[33mcommit d91e855782bd475a5cf2f075735d687ce2ce6f7f[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Mar 24 19:38:00 2020 +0900
+
+    rifle
+
+[33mcommit a8ab773521c690415b466a492568d5302518528e[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Mar 24 00:44:42 2020 +0900
+
+    컴퓨터1차
+
+[33mcommit 98517faf9a4181bcb0ec0697d631dc5a7e53c145[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sat Mar 21 18:48:38 2020 +0900
+
+    업데이트
+
+[33mcommit 8654d4b461b94e93224c9ebf7609badb02298821[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Fri Mar 20 19:43:18 2020 +0900
+
+    오브젝트
+
+[33mcommit 79351817979bc1060f0a93c16f967719a4368ac7[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Fri Mar 20 17:36:39 2020 +0900
+
+    박스 작업
+
+[33mcommit 7aa48036cca4367a437292275057a3609cd011ac[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Thu Mar 19 22:01:10 2020 +0900
+
+    박스 uv 수정
+
+[33mcommit 6b6ec90a779f2bb808a0dc3e387b8b4c0f43d2f6[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Mar 18 23:25:08 2020 +0900
+
+    Delete mission.dds
+
+[33mcommit 1e897137e83666619458644bbe1200fe74b3d123[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Mar 18 23:22:28 2020 +0900
+
+    서랍 텍스쳐
+
+[33mcommit 8f91cdd3e8131afa904ba2eed4b89f714fdd4b31[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Mar 18 23:22:08 2020 +0900
+
+    ui
+
+[33mcommit a30d2d52b0d2d108aa8984d61ee9449aa72e54c5[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Mar 17 18:09:57 2020 +0900
+
+    폴더명변경
+
+[33mcommit 45a68d7b6d2efb28b4b2e6e3a0a14dfcfbc5fb31[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Mar 17 17:56:01 2020 +0900
+
+    폴더이동
+
+[33mcommit 9cf34b84c6438652e844e83a0d402a678809487a[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Mar 17 17:55:33 2020 +0900
+
+    작업일지폴더생성
+
+[33mcommit e3941b48b27cde525f26a82d4587bd98725a89a1[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Mar 17 17:55:26 2020 +0900
+
+    위치변경
+
+[33mcommit fa358bb355e8ee0284372efeca0e33b260e7759f[m
+Merge: b567b8f 1e7893d
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Mar 17 17:40:19 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit b567b8fb0a8546949894ac759780ac51ced490eb[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Mar 17 17:37:53 2020 +0900
+
+    수정 및 지도 추가
+
+[33mcommit 1e7893d411ba3b8e8be82ce4b33ce0e557126412[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Tue Mar 17 15:26:19 2020 +0900
+
+    PlayerMotion
+
+[33mcommit 08a1f0d66a13d25b5ef6bb1ab7611c6cd4cc9a7d[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Mar 17 14:29:46 2020 +0900
+
+    수정
+
+[33mcommit 801c80e0cccb2af666f5ede9c7ef79f0f50d1359[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Mar 17 14:11:34 2020 +0900
+
+    화이트보드 텍스쳐
+
+[33mcommit 27fe199634054b869926248f8bd503a9129e7e5e[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Mar 16 20:21:05 2020 +0900
+
+    book texture
+
+[33mcommit 74c4e7fc180c5bd1f519f8f0c6d6ae737fbff737[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Mar 16 17:43:18 2020 +0900
+
+    위클리 수정
+
+[33mcommit 784f421fcfb9b27250e4d4295c56030b9cea0747[m
+Merge: 069c670 9f4a1f7
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Mar 15 15:10:22 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 069c6703b62b5abfe9b1b58635a2c067a6ada37a[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Mar 15 15:10:19 2020 +0900
+
+    위클리
+
+[33mcommit 9f4a1f720b69ade22e12e51721964452f96d49a9[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Sat Mar 14 21:29:47 2020 +0900
+
+    NaviTool
+    
+    로드하고 바로 삭제하면 포인트안사라짐 셀하나 만들고 삭제해야함
+
+[33mcommit 72fea11a49ebbb6148855a1865b55527dbf2ad0c[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sat Mar 14 20:24:57 2020 +0900
+
+    수정
+
+[33mcommit 0d6e7634629d9e0c41150fd54db8b1d8b8ac1fb8[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Sat Mar 14 19:15:26 2020 +0900
+
+    Camera
+
+[33mcommit 9eb455e5be95791dc514d0260629b810a4dc6bb5[m
+Merge: 3c84ca7 9f84ba2
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Sat Mar 14 18:34:00 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 3c84ca70e80daaf4e7766c345fc3e8e82870a36e[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Sat Mar 14 18:29:46 2020 +0900
+
+    huijun
+
+[33mcommit 9f84ba239ac24b4ca31b70f904dcf84a067c394b[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Sat Mar 14 00:43:19 2020 +0900
+
+    NaviTool
+    
+    수정, 삭제, 저장, 로드 끝
+    시계방향 수정중
+
+[33mcommit 30794785bf414e943e7852ec3ea5dc14ed6bc056[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Fri Mar 13 17:12:45 2020 +0900
+
+    Update main_bottom.psd
+
+[33mcommit 53a789947b0056ed721035ba57b385a673c92fd6[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Fri Mar 13 17:12:31 2020 +0900
+
+    바닥 벽
+
+[33mcommit 322db668150d56063eb9d06f229155fcd373d6f7[m
+Merge: b8ee2e6 d279cff
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Fri Mar 13 17:12:17 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit b8ee2e6aeeb57cf8990ca41df57da33511ee51ab[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Fri Mar 13 17:12:14 2020 +0900
+
+    수정
+
+[33mcommit d279cff25c73f09802ad3effe46e69f821ec5430[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Fri Mar 13 13:53:50 2020 +0900
+
+    NaviTool 진행중
+    
+    생성, 수정, 삭제, 저장, 로드
+
+[33mcommit 2c15bbcc4212a42f916353340c23e484d75f6b38[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Thu Mar 12 16:49:03 2020 +0900
+
+    main roof uv
+
+[33mcommit 04116be480ca47c0e4351d2437f6ff3040a36dcf[m
+Merge: 375f846 0cd02f7
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Thu Mar 12 11:54:51 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 375f846b9ca191af41dc6281c234603fb74e3599[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Thu Mar 12 11:42:25 2020 +0900
+
+    Sliding Line & Navigation Mesh
+
+[33mcommit 0cd02f795c8905b573d777bbe5c59dda532712b0[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Mar 11 19:57:19 2020 +0900
+
+    입구
+
+[33mcommit e66188e781ea927372f43be09904bc5de7f8fd90[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Mar 11 16:10:58 2020 +0900
+
+    new
+
+[33mcommit 3825e95cf5d4a531dba0c30975fd2ad223d78c66[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Mar 10 21:14:18 2020 +0900
+
+    수정
+
+[33mcommit fdddc26fd6fa65dd82997138876004f5dd70ff3b[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Mar 10 17:11:05 2020 +0900
+
+    수정
+
+[33mcommit d19994e9aed6652dabd4b5131f522133d68ef893[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Mar 10 17:10:42 2020 +0900
+
+    main outside dif,nor dds
+
+[33mcommit 9cf2202fce1957dfe2f3fc94aa0ff7bffed5170e[m
+Merge: 8dac2e7 87bdd29
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Tue Mar 10 17:01:49 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 8dac2e7eacff0927e1a0dc1a3924d4f22bff0418[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Tue Mar 10 16:58:22 2020 +0900
+
+    collision
+
+[33mcommit 87bdd29f435c75e149c0a7568b7417b323286f5a[m
+Merge: 1dc5a1e 8008efe
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Mar 9 23:42:30 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 1dc5a1e302cde6b82fb68a1f11f2bbfff1ad7510[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Mar 9 23:42:06 2020 +0900
+
+    Update main_outside.psd
+
+[33mcommit 8008efef0dd9e4a1621e51e10c95f8a235c3bdbd[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Mar 9 18:49:46 2020 +0900
+
+    충돌체 Tool 진짜 수정 끝
+    
+    아마도..
+
+[33mcommit 248b83935b7dbdf2b3da8ffe4372525d19863acd[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Mar 9 18:42:57 2020 +0900
+
+    Tool 충돌체 수정 끝
+    
+    아마도...
+
+[33mcommit 6ba62ebd8ec02b5e23f70c8cebdbc12ea894d385[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Mar 9 16:29:31 2020 +0900
+
+    색상 가맵핑
+
+[33mcommit 24d841974c5c637b1cb31d860357edca64b83704[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Mar 8 22:39:24 2020 +0900
+
+    board and computer uv
+
+[33mcommit 363dac51abbe0b2cf220e4fbf7766fb057a6a7fe[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Mar 8 20:18:28 2020 +0900
+
+    lathe uv
+
+[33mcommit 1b05fcf00d8cb144560932cad0ef80717e0e3d7c[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Mar 8 20:03:24 2020 +0900
+
+    computer1 uv
+
+[33mcommit 72d50178f8a639f76398f04e4810b039797ebef2[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Mar 8 19:26:45 2020 +0900
+
+    Create main_accessory2.png
+
+[33mcommit e716694b189fe86c82f675aadac399805da86494[m
+Merge: ff8bc78 ac08c1a
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Sun Mar 8 14:31:16 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit ff8bc78c4f1b7ca2a70309289be8ee5bc8fe7c85[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Sun Mar 8 14:30:13 2020 +0900
+
+    Tool 충돌체 수정중
+    
+    생성 수정 저장 로드
+
+[33mcommit ac08c1a102da823ff9f43eee4735ff3f523ce0b2[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Sun Mar 8 14:29:29 2020 +0900
+
+    Bloom
+
+[33mcommit ea0ff2273fbcb4b670fd0897b630321d1d8d3bfb[m
+Merge: 43f3c21 c297d6c
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Sun Mar 8 06:23:17 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 43f3c21749886fd1903525df0628b8ef4dcbe188[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Sun Mar 8 06:22:37 2020 +0900
+
+    DownSample
+
+[33mcommit c297d6c79c5a723125e62d86454a256d0a887ac9[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sat Mar 7 15:15:10 2020 +0900
+
+    Create desk3.png
+
+[33mcommit b69e35ca096117e5c439d893c6e6db93f14f869d[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sat Mar 7 15:15:07 2020 +0900
+
+    Create passage_top.png
+
+[33mcommit 3a5eebefce1ce991917ef85efb603ed4dc20ee5f[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Fri Mar 6 21:52:10 2020 +0900
+
+    passage outside uv
+
+[33mcommit 7cf04021fc3ec54ef21bf9233e314783ae304519[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Fri Mar 6 19:15:21 2020 +0900
+
+    passage inside uv
+
+[33mcommit 36de89975d9ccf25aec1706afd36c796bf68c6d1[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Thu Mar 5 22:06:09 2020 +0900
+
+    desk랑 map uv
+
+[33mcommit 9d12b91405e6c99c25e1ba4af71d344e5d1cd098[m
+Merge: 8472ee5 eafb84a
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Thu Mar 5 19:01:09 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 8472ee5d1d100c101bf3630a4d447aff02de2882[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Thu Mar 5 18:58:15 2020 +0900
+
+    test
+
+[33mcommit 7e3a7fc6b3eb2e413313bb670848f7a387f01f72[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Thu Mar 5 18:23:44 2020 +0900
+
+    다시 버전 바꿔야됌ㄹ
+
+[33mcommit 06134662d109f28440beb9af203424ef36059216[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Thu Mar 5 18:20:06 2020 +0900
+
+    Collider Tool
+
+[33mcommit eafb84a865d1599e1316798d8f6f383cd1c17ea9[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Thu Mar 5 09:54:24 2020 +0900
+
+    Release and Pistol
+
+[33mcommit a32eea5b5a8b8c44a5f4116d0b542a0670710580[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Wed Mar 4 20:51:54 2020 +0900
+
+    huijun
+
+[33mcommit 6b51d4a353f2739e769962197a55c164965a2800[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Mar 4 17:34:43 2020 +0900
+
+    uv
+
+[33mcommit a43109650efcb69e173456e19655b04968344ae0[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Mar 3 21:41:24 2020 +0900
+
+    UV
+
+[33mcommit 249e1bb7e9da33cffad7abc5e3e7d78ac424d016[m
+Merge: 5d04f6b 7a7c83c
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Mar 2 23:47:28 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 5d04f6b2caa7bae4592cc5b20548b3be3278696b[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Mar 2 23:47:15 2020 +0900
+
+    uv
+
+[33mcommit 7a7c83c31aa7eba715b6628c24e2c06842d38ca8[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Mar 2 23:41:22 2020 +0900
+
+    MapTool 마우스 픽킹중
+
+[33mcommit ff66fadebcf0cf7abef0d89977fe26939dedbc79[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Mar 1 23:45:30 2020 +0900
+
+    daliy
+
+[33mcommit c39002a0751684faeac4369a801c927f11af2c18[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Sat Feb 29 17:44:56 2020 +0900
+
+    Tool Terrain,,,,,,,,gfkdkf
+
+[33mcommit d20b05f6f38e2f6b9354ff8c610cf8807ad8c101[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Fri Feb 28 17:35:38 2020 +0900
+
+    Create 20200228.png
+
+[33mcommit 977c59ff7c03e143b352685cf726dac60d027ac0[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Thu Feb 27 21:35:23 2020 +0900
+
+    add
+
+[33mcommit 302110807718a86088abcee654577e822986fab5[m
+Merge: 6e69308 be36d64
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Feb 26 19:53:31 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 6e6930825849adf3a6baf851f4c807ecebbbffb0[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Feb 26 19:53:08 2020 +0900
+
+    Create 20200226.PNG
+
+[33mcommit be36d64c0a8cf6907ae131713f3ab5563b1adee6[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Wed Feb 26 16:51:32 2020 +0900
+
+    tool add terrain
+
+[33mcommit 242a4a5535c0d56b0d9d107be99bfcb48abb14d3[m
+Merge: fcb6502 dc46e38
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Feb 25 19:19:05 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit fcb65027cb2f367e3f8524f7b8638044f9e2f227[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Feb 25 19:19:02 2020 +0900
+
+    Create weekly_15주차(2.24~3.1).txt
+
+[33mcommit a4d4d36f66bb0585abcaaf772699fa7f9eab44a2[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Feb 25 19:18:57 2020 +0900
+
+    외형 작업
+
+[33mcommit dc46e383c517f32f208e95fb17ce9d487427369b[m
+Merge: 099043a 0804c02
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Feb 24 20:46:06 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 099043a5c968398ca9b91178d93aab17235fde4c[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Feb 24 20:45:53 2020 +0900
+
+    SYTool 장치초기화
+
+[33mcommit 0804c027960887d0d7d107f634b08ef7b190f7f7[m
+Merge: 12af9f2 5e86b45
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Feb 24 17:48:24 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 12af9f27c9f4dcd543daf4d34dd3ab58bd60f201[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Feb 24 17:47:29 2020 +0900
+
+    Create 20200224.png
+
+[33mcommit 5e86b45cb899e7abf05958f4eb7729341484f96f[m
+Merge: f192a45 71e0ac9
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Feb 24 15:56:19 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit f192a455e1de216d39e35e7a33cc622150d85f75[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Feb 24 15:56:10 2020 +0900
+
+    tool D3D9 초기화
+
+[33mcommit 71e0ac954c90319d70d5af563cfd2ef3f3673e96[m
+Merge: 1249829 159ab33
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Feb 23 16:02:58 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 1249829392d89c18a447d7f8c3757aa74fd0a550[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Feb 23 16:02:38 2020 +0900
+
+    Create weekly_14주차(2.17~2.23).txt
+
+[33mcommit 159ab33011ab82f3d98ba50d041456b7819a91c8[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Sat Feb 15 16:33:34 2020 +0900
+
+    시영 weekly 수정
+
+[33mcommit 91f0dff6ec62a81b0dbfd90c3cd606b4e2a41eff[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Thu Feb 13 18:16:36 2020 +0900
+
+    Create weekly_13주차(2.10~2.16).txt
+
+[33mcommit 1cf926bbe4d625fc44a2174ab26f263408000d86[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sat Feb 8 21:45:18 2020 +0900
+
+    Update weekly_12주차(2.3~2.9).txt
+
+[33mcommit 0ebe16d7dfa54ce849ce80bee5b633fc2b5cc52f[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Feb 5 19:21:33 2020 +0900
+
+    Create weekly_12주차(2.3~2.9).txt
+
+[33mcommit 7b030dacb69a1b1e7f29e65cc151fe518c610e8c[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Mon Feb 3 07:56:45 2020 +0900
+
+    huijun
+
+[33mcommit a15c0a9cc641a898e155985f831753e47f6d774e[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Sun Feb 2 21:10:38 2020 +0900
+
+    Tool파란화면
+    
+    릭 지워야 함
+
+[33mcommit 983f9ee731780a07949179f003a14b1ff5d42a8f[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Sun Feb 2 00:55:51 2020 +0900
+
+    Tool세팅다시
+
+[33mcommit ecb3a3a4fd677178876cb391803321ad54ca24ce[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Sun Feb 2 00:03:43 2020 +0900
+
+    Revert "MapTool세팅"
+    
+    This reverts commit 8442c6a92d042401141b853d5f1ae9f65b012c5f.
+
+[33mcommit 8442c6a92d042401141b853d5f1ae9f65b012c5f[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Sat Feb 1 19:47:55 2020 +0900
+
+    MapTool세팅
+
+[33mcommit 4adf47f290e819e6db57ce464ecb033808e6de5f[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Sat Feb 1 16:42:12 2020 +0900
+
+    framework
+
+[33mcommit a7c79a2ae3af21d79235981b6edc1e60ed0d89d6[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Thu Jan 30 13:55:45 2020 +0900
+
+    Update weekly_11주차(1.27~2.2).txt
+
+[33mcommit d8d217bd54b8c47b8ca3af219ebd536bd2837239[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Thu Jan 30 13:55:41 2020 +0900
+
+    체력바
+
+[33mcommit 34eaa83a36949fb0f2a6d46e679015a7c55b693d[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Jan 28 21:25:03 2020 +0900
+
+    총기 1차
+
+[33mcommit a5e2def6cd1a7b502eccfa3aa3b598f0d9f57a95[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Jan 27 20:15:07 2020 +0900
+
+    Create weekly_10주차(1.20~1.26).txt
+
+[33mcommit 391129c01f1351a70d8b510f0d66c40236b9cbe6[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Jan 27 20:14:55 2020 +0900
+
+    이름변경
+
+[33mcommit 06026a7562a61c74202bfa0a84d007f471034388[m
+Merge: b6a66da 44f587a
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Jan 27 20:07:48 2020 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit b6a66da52821cd4af2ed7daf0690bb88fd2fa64f[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Jan 27 20:07:29 2020 +0900
+
+    에임
+
+[33mcommit 44f587a848a644c8368a2aca0c034dbb19c3fe22[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Thu Jan 23 17:13:00 2020 +0900
+
+    git test on mac
+
+[33mcommit 9fbf8da47d32d16563983cbeafdd4fc4dc4ae41f[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Thu Jan 23 17:11:59 2020 +0900
+
+    test on mac
+
+[33mcommit 9ba76d58879caa54987e13879a5c6c0d92fdf411[m
+Author: seerslab <seerslab@seerslabui-iMac.local>
+Date:   Thu Jan 23 16:50:28 2020 +0900
+
+    weekly 1.20~1.26
+
+[33mcommit 05db07b9f3c7dfa013f611fa66efb0ed1f55ca6b[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Jan 22 20:57:10 2020 +0900
+
+    참고자료저장
+
+[33mcommit 24034d76cc616f07dde2e72f363a495a3eee587e[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Jan 22 20:56:54 2020 +0900
+
+    수정
+
+[33mcommit f8581a3156b638d33f168967f2bdd3853a059cf1[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Jan 21 16:03:13 2020 +0900
+
+    Create main.psd
+
+[33mcommit 2147a432bad342b1907b510df34b73a9078fe0c1[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Jan 21 13:30:13 2020 +0900
+
+    Create weekly_(1.20~1.26).txt
+
+[33mcommit eb2517c841fe1c0866cafc4f722ad2d893ea7a63[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Jan 20 21:19:24 2020 +0900
+
+    참고자료
+
+[33mcommit b8c1545d38b491fec2247a8303a65f08bc8f7bf4[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Jan 20 19:34:25 2020 +0900
+
+    dds변환
+
+[33mcommit c37dab067063cc018ea9308c63e4bbec5233490e[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Jan 19 19:45:03 2020 +0900
+
+    Create logo.png
+
+[33mcommit 43dd565c7588134d76fa650630704e68bfd79d69[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Jan 12 19:57:16 2020 +0900
+
+    위클리
+
+[33mcommit fee51e3479b2ea2a84aa80c2b8144afd49a3cab0[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Jan 7 20:51:56 2020 +0900
+
+    Create weekly_(1.7~1.12).txt
+
+[33mcommit e0709df0413bc5093257878bd0ea5e18aa41b703[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Dec 29 11:28:38 2019 +0900
+
+    Update EXOMARS 1차발표.pptx
+
+[33mcommit e4d2090ab175b865c20766e20e2bc17ef1fcfdac[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Sat Dec 28 16:52:41 2019 +0900
+
+    Update EXOMARS 1차발표.pptx
+
+[33mcommit e2b6802222559c9b13a8beb1959d9980e0ee73fe[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Sat Dec 28 15:55:36 2019 +0900
+
+    Update EXOMARS 1차발표.pptx
+
+[33mcommit c957fa6fdf24036dc4e44921b7131d0d2aec098f[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Fri Dec 27 20:39:48 2019 +0900
+
+    Update EXOMARS 1차발표.pptx
+
+[33mcommit aefcb2739361ec36f717d323ac2c3617623156e1[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Wed Dec 11 15:46:20 2019 +0900
+
+    2016
+
+[33mcommit dac771097947385ec5a2b0362c5c5fd9cfbc500a[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Dec 3 23:41:17 2019 +0900
+
+    수정
+
+[33mcommit 10e56b6828e7c8109c2142d7cff03a95fe6ae19c[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Mon Dec 2 22:44:59 2019 +0900
+
+    Update EXOMARS 1차발표.pptx
+
+[33mcommit 924685fd6eb221eeabcc5aab55134620f9b6230e[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Dec 2 17:14:58 2019 +0900
+
+    Update EXOMARS 1차발표.pptx
+
+[33mcommit 40d6a39ad7702156c80131a9eaee6be9e10c76ce[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Dec 2 16:19:23 2019 +0900
+
+    Create 종합설계 계획서_요들과수호자(학생서식).hwp
+
+[33mcommit 7f0d9bf4b77d5488be782c1513aff926fc9a965a[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Nov 27 15:15:23 2019 +0900
+
+    수정
+
+[33mcommit 1afd99507e96b84140e5ea1f2fcb3437054b2411[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Nov 26 23:49:39 2019 +0900
+
+    수정
+
+[33mcommit 2ff2a8eb8a8eb16271529cbb7a065a38eeca88e2[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Tue Nov 26 19:33:15 2019 +0900
+
+    11-26
+
+[33mcommit a1821f0f51290765a83c576c7d4702093a32f2ff[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Nov 25 18:17:27 2019 +0900
+
+    Modify 발표자료
+
+[33mcommit 51bd6c09702b2473e282b6fa97285fba5d57d4a2[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Nov 25 14:20:11 2019 +0900
+
+    Update EXOMAS 1차발표.pptx
+
+[33mcommit 2b237fb54bc833162cd5c98e6541566bf0557639[m
+Merge: b8cc2c7 1472412
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Nov 25 14:11:19 2019 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit b8cc2c7bbf06c2685bd67d11323b6f32082923eb[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Nov 25 14:10:54 2019 +0900
+
+    Update EXOMAS 1차발표.pptx
+
+[33mcommit 147241207e52144853a69614b44db21799b29393[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Nov 20 14:35:01 2019 +0900
+
+    Update EXOMAS 1차발표.pptx
+
+[33mcommit ba6fa37cd9c9c0e93eba4c3bf976bb862b246250[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Tue Nov 19 22:33:19 2019 +0900
+
+    Update EXOMAS 1차발표.pptx
+
+[33mcommit c78dc6be439728912ed0713f5d331f4b96600c46[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Nov 19 22:13:00 2019 +0900
+
+    수정
+
+[33mcommit 7a390c76bd1a591bce71c740e3e9b210499326d6[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Nov 19 17:08:05 2019 +0900
+
+    Create EXOMAS 1차발표.pptx
+
+[33mcommit 0a9d67ce2b533d1124e474bfc61a732d0f52c0c9[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Nov 18 16:09:30 2019 +0900
+
+    Create Weekly_6주차(11.13~11.19).txt
+
+[33mcommit 9a3e1073a9ef10a024370964ad405b3ff34b417e[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Nov 18 16:02:30 2019 +0900
+
+    ppt, 일정 추가
+
+[33mcommit ce1e3ec94d7a571f3163f081c6ba560225127d3c[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Wed Nov 13 04:46:00 2019 +0900
+
+    Update Weekly_5주차(11.06~11.12).txt
+
+[33mcommit 5508787f72135f14cab4545cf22a23cd1d8c07cb[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Wed Nov 13 04:45:09 2019 +0900
+
+    Update 3차기획서.txt
+
+[33mcommit d64640c344360d0829cb990092dd8325be8c4f88[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Nov 13 00:23:18 2019 +0900
+
+    Update 3차기획서.txt
+
+[33mcommit 1f6d4bd0560fdc20fbf8faf6288be5bff21033b9[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Nov 12 23:26:05 2019 +0900
+
+    Update 3차기획서.txt
+
+[33mcommit c12ec967d9c4e728212b4b0020f9e56fef34d779[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Tue Nov 12 22:29:30 2019 +0900
+
+    추가
+
+[33mcommit eb84a32d1561640539372864eaa20b10274178db[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Tue Nov 12 21:18:24 2019 +0900
+
+    Create Weekly_5주차(11.06~11.12).txt
+
+[33mcommit 85b86df3ba850bf61f22bcc829a6b9a50d6e59ca[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Tue Nov 12 21:15:25 2019 +0900
+
+    Create 3차기획서.txt
+
+[33mcommit 2b09fd09af4a7ab1053dab35e057f02d5fd77df0[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Mon Nov 4 12:05:52 2019 +0900
+
+    Update 2차 기획(10.31~11.6).txt
+
+[33mcommit 5bd9d9e63a5efbd3b86c8ae5ae8c2feb5ab8c013[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sat Nov 2 14:50:50 2019 +0900
+
+    Update 2차 기획(10.31~11.6).txt
+
+[33mcommit c1c37e2b76ae186bc8d9a7b256a8a464af880577[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sat Nov 2 14:47:15 2019 +0900
+
+    Delete ~$1차 기획.docx
+
+[33mcommit 92beb9c02020b04643b932197b29bffc9a8de0f8[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Fri Nov 1 22:23:43 2019 +0900
+
+    Update 2차 기획(10.31~11.6).txt
+
+[33mcommit 6c30602e056024d79f293cbb21f09b9ac212b0ff[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Fri Nov 1 20:59:14 2019 +0900
+
+    .
+
+[33mcommit 83f115e18032f278dced1819abcb77efad90802d[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Tue Oct 15 22:29:04 2019 +0900
+
+    Update 1차 기획.docx
+
+[33mcommit 39f1ea974a6d3818a40e6792c5a4f63ed3a2137c[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Tue Oct 15 22:27:47 2019 +0900
+
+    1차기획 Commit
+
+[33mcommit 52ddeae51a8cba1251a2ba7268bfe46ec61f92b7[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Tue Oct 15 22:25:04 2019 +0900
+
+    Create 1차 기획.docx
+
+[33mcommit 10e6b951d8c1758270387faaf13e887f6c852d1d[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Tue Oct 15 22:24:24 2019 +0900
+
+    Update Weekly_4주차(10.09~10.15).txt
+
+[33mcommit 64bef677909185a84663ee055214c99f5aa5579c[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Tue Oct 15 22:01:50 2019 +0900
+
+    commit
+
+[33mcommit a5212b21c3262acdeea2429407c1b3031af8c60f[m
+Merge: e12eea7 1720b7c
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Tue Oct 15 22:01:44 2019 +0900
+
+    commit
+
+[33mcommit 1720b7ca49386b15a4a9f2bf0cfd41de5cc635f9[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Tue Oct 15 20:53:57 2019 +0900
+
+    Update Weekly_4주차(10.09~10.15).txt
+
+[33mcommit 4ef0fd3a7e75558a03d25f7f1b0a222e16a8d8d7[m
+Merge: 865e634 88d7a74
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Tue Oct 15 20:49:02 2019 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 865e63401334fe86aaceccaf224e88f99f838aad[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Tue Oct 15 20:48:47 2019 +0900
+
+    Update Weekly_4주차(10.09~10.15).txt
+
+[33mcommit 88d7a74425e103cbef303d2c4e090d7acb439bbf[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Oct 15 20:48:13 2019 +0900
+
+    Update Weekly_4주차(10.09~10.15).txt
+
+[33mcommit 5e9aa3ace55645165881171b4090e81ebde2fcbd[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Oct 15 20:45:23 2019 +0900
+
+    Update Weekly_3주차(10.2~10.08).txt
+
+[33mcommit b4f9762d7df85ef100892a370e19207396893760[m
+Merge: 98d652d b8aa740
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Tue Oct 15 20:41:52 2019 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 98d652d475df9dd347324cd5e1368bc9c8c7d966[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Tue Oct 15 20:41:38 2019 +0900
+
+    Update Weekly_3주차(10.2~10.08).txt
+
+[33mcommit b8aa740fd61624de710f307cb5d0ee53292ab1c4[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Oct 15 20:40:45 2019 +0900
+
+    Update Weekly_4주차(10.09~10.15).txt
+
+[33mcommit a94e1725ab2eac3cdccfd5b7f8348577c8d4796d[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Oct 15 20:36:26 2019 +0900
+
+    .
+
+[33mcommit c4c8e27ec9cb2bf18386e67ce3aedf941b38ce0c[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Oct 13 15:54:52 2019 +0900
+
+    정리
+
+[33mcommit e2fb03e1ce4a88d887d27ed9a3034165165cb845[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Oct 13 15:53:35 2019 +0900
+
+    추가
+
+[33mcommit e12eea7f0293dc9cdf05afea8cfb4e775bf837d5[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Fri Oct 11 10:41:17 2019 +0900
+
+    Update 게임 분석.txt
+
+[33mcommit 2e976a7402700204f376136d23090301cf3a2f78[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Fri Oct 11 10:41:14 2019 +0900
+
+    Update 게임 분석.txt
+
+[33mcommit 27f0fb4f7be2d37f05fff644891184b162be5ad8[m
+Merge: 1e1ef4d 833a7ca
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Oct 6 15:57:26 2019 +0900
+
+    Update 게임 분석.txt
+
+[33mcommit 1e1ef4d34bfee7daeea7aa3de3d5e1b60969a78d[m
+Merge: 297b0b5 4a5076e
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Oct 6 15:56:25 2019 +0900
+
+    Update 게임 분석.txt
+
+[33mcommit 833a7ca39613c28036e7eb3c002f761a8028ba41[m
+Author: LeeSiYoung-16 <55053406+LeeSiYoung-16@users.noreply.github.com>
+Date:   Sun Oct 6 15:55:29 2019 +0900
+
+    Update 게임 분석.txt
+
+[33mcommit 297b0b51737d2dfb56e16600240be5a30f57d96a[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Oct 6 15:55:16 2019 +0900
+
+    Update 게임 분석.txt
+
+[33mcommit 4a5076e7351e49f9b96ed97ecfb63dfd0fb95329[m
+Author: LeeSiYoung-16 <55053406+LeeSiYoung-16@users.noreply.github.com>
+Date:   Sun Oct 6 15:54:16 2019 +0900
+
+    Update 게임 분석.txt
+
+[33mcommit fe94a32d79fb060daeae963472b263c55d952a9f[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Sun Oct 6 15:52:17 2019 +0900
+
+    보완
+    
+    d
+
+[33mcommit 9cab5c1e3245083c701296d6082de0226d3a1bc9[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Sun Oct 6 15:30:42 2019 +0900
+
+    Update 게임 분석.txt
+
+[33mcommit 388398936716b1f2656cddf06ebe55f6521c4937[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Oct 6 15:22:24 2019 +0900
+
+    Update 게임 분석.txt
+
+[33mcommit 2ba4eb49cc8cc6d5a766c5844e702a35a0779a05[m
+Merge: 2765746 3466fd7
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Sun Oct 6 15:18:38 2019 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 2765746832a69f25ef60e410b8b2cb4b5dc33a6d[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Sun Oct 6 15:17:45 2019 +0900
+
+    Update 게임 분석.txt
+
+[33mcommit 3466fd7abd2ad784ad7ff4f688e611e9874cde4a[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Oct 6 15:17:15 2019 +0900
+
+    이름 변경
+
+[33mcommit c6d778f0edce47dfd721a793f35a11c3883ba437[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Thu Oct 3 20:24:03 2019 +0900
+
+    Create 게임 분석.txt
+
+[33mcommit 027405ac2f6c13035c817fe65eb439224966a71a[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Wed Oct 2 15:44:46 2019 +0900
+
+    Update Weekly_2주차(09.25~10.01).txt
+
+[33mcommit 8a1c16ce449e1e3ce908eaf3cb7984fa5c5429ef[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Oct 2 00:21:50 2019 +0900
+
+    Update 게임산업Steep분석.txt
+
+[33mcommit e7e225aea9ab0848f7b0ec25d9322d64c4f9aaf0[m
+Merge: 6191568 fb9b592
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Oct 2 00:21:35 2019 +0900
+
+    Update Weekly_2주차(09.25~10.01).txt
+
+[33mcommit 6191568484f7891d5de292a5475e1b803c4da4b9[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Wed Oct 2 00:20:24 2019 +0900
+
+    Update Weekly_2주차(09.25~10.01).txt
+
+[33mcommit fb9b592bef27dbf2af2240d9fb903f965b797861[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Tue Oct 1 18:12:01 2019 +0900
+
+    Update Weekly_2주차(09.25~10.01).txt
+
+[33mcommit 35d88112da4491c67fcbe066c3e7042ddfe75c66[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Sat Sep 28 22:11:35 2019 +0900
+
+    Update 게임산업Steep분석.txt
+
+[33mcommit 9f93815eb163538ade8e207e1c4f0d2225852988[m
+Merge: c3a238b f167577
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Sat Sep 28 22:03:42 2019 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit c3a238b0794d898e41ae890ced93ee90dddd6a6b[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Sat Sep 28 22:02:48 2019 +0900
+
+    Update 게임산업Steep분석.txt
+
+[33mcommit f167577a1f0eb40a891e496a5883596a6f2f6b46[m
+Merge: 6d2d209 0570049
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sat Sep 28 22:01:30 2019 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 6d2d209f71c9d99a08f431cdd149d766bf6d4a58[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sat Sep 28 22:01:13 2019 +0900
+
+    Update 게임산업Steep분석.txt
+
+[33mcommit 0570049bb4102526e41227cbce61edcc15a56bbe[m
+Author: LeeSiYoung-16 <55053406+LeeSiYoung-16@users.noreply.github.com>
+Date:   Sat Sep 28 22:01:09 2019 +0900
+
+    Update 게임산업Steep분석.txt
+
+[33mcommit cf4561fefc9cbca87d95915c68de25a1fc8eaf43[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sat Sep 28 22:00:06 2019 +0900
+
+    Update 게임산업Steep분석.txt
+
+[33mcommit e2b146f4ec2f68d9406b63112d01f7fae7efd4bc[m
+Author: LeeSiYoung-16 <55053406+LeeSiYoung-16@users.noreply.github.com>
+Date:   Sat Sep 28 21:59:00 2019 +0900
+
+    Update 게임산업Steep분석.txt
+
+[33mcommit 2e447c8d5bdfe181247bc8d19950b31e1a463358[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Sat Sep 28 21:56:56 2019 +0900
+
+    Update 게임산업Steep분석.txt
+
+[33mcommit 09e9f077a93480e05273cbc0594c136b59161191[m
+Author: LeeSiYoung-16 <55053406+LeeSiYoung-16@users.noreply.github.com>
+Date:   Sat Sep 28 21:49:24 2019 +0900
+
+    Create 게임산업Steep분석.txt
+
+[33mcommit 76d1c8f885378917eeee18e6f89f8c9492579be1[m
+Merge: bf278f3 a63d562
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Sep 23 21:32:39 2019 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit bf278f39b2c853bd5d875cf2d505d944d7a53b23[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Sep 23 21:32:22 2019 +0900
+
+    Update Weekly_1주차(09.18~09.24).txt
+
+[33mcommit a63d562d91b5e30ef823014409e7c5424fd9af2f[m
+Merge: 92ff85a cd22488
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Sep 23 21:29:05 2019 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 92ff85a8a62e9c646f4acdda71d9b1d1b14ac2e7[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Sep 23 21:29:01 2019 +0900
+
+    Update Weekly_1주차(09.18~09.24).txt
+
+[33mcommit cd2248854d2551857db9373032345932f6b4f18b[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Mon Sep 23 21:28:16 2019 +0900
+
+    Update Weekly_1주차(09.18~09.24).txt
+
+[33mcommit 2c3efa1dcce0d6a42cac94dbd4a7c151e2c72b8d[m
+Merge: 578664c 9dede58
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Mon Sep 23 21:27:04 2019 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 578664ccb1ecfebf590c1252381cc4f4d4906003[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Mon Sep 23 21:26:39 2019 +0900
+
+    Update Weekly_1주차(09.18~09.24).txt
+
+[33mcommit 9dede58bc297524d0d15af8651ea88cfa74a4544[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Sep 23 21:23:30 2019 +0900
+
+    Update Weekly_1주차(09.18~09.24).txt
+
+[33mcommit dd57bc392bb30e675a3d334fd0325599f711ca7b[m
+Merge: 3c9b414 aeb6d93
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Sep 23 21:22:33 2019 +0900
+
+    Update Weekly_1주차(09.18~09.24).txt
+
+[33mcommit 3c9b4144c7c8001d331f233a21d87ac24adcf95e[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Sep 23 21:21:44 2019 +0900
+
+    Update Weekly_1주차(09.18~09.24).txt
+
+[33mcommit aeb6d93c9d868e908452fa0347bd83d124f712b4[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Mon Sep 23 21:20:33 2019 +0900
+
+    Update Weekly_1주차(09.18~09.24).txt
+
+[33mcommit dc9eff627a222ada6c3fbca0b7ba6b82b1bb579a[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Mon Sep 23 21:10:53 2019 +0900
+
+    Update Weekly_1주차(09.18~09.24).txt
+
+[33mcommit 0a92abf5e999d6f1c8e1d45663b361281387e9c1[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Sep 23 21:06:42 2019 +0900
+
+    ㄴㄴㄴ
+
+[33mcommit 3723dfa9609ec5f60a7ef64ca345d7fd688f68c2[m
+Merge: 4a12960 8793bbb
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Sep 23 21:05:44 2019 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 4a12960fdd5712131aea400e27087a78e8c53aa5[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Sep 23 21:05:25 2019 +0900
+
+    위클리추가
+
+[33mcommit 8793bbb23c970007699dd48f5c1be040bdbf1adf[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Mon Sep 23 21:02:12 2019 +0900
+
+    Update Steep.txt
+
+[33mcommit dbc9ef7ab6926682898071d4a76b30328f784904[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Mon Sep 23 20:59:43 2019 +0900
+
+    Update Steep.txt
+
+[33mcommit ef5cc2f60f97ee0449a41e98c7c7a3916997872d[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Sep 23 19:32:38 2019 +0900
+
+    폴더지움
+
+[33mcommit 7da57dc4d209f81b9a214248d290ac2b163162f0[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Mon Sep 23 19:31:01 2019 +0900
+
+    폴더지움
+
+[33mcommit 42e841c2c48dd2d2064361c269b7545f56ea55d2[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Wed Sep 18 19:40:50 2019 +0900
+
+    Update Steep.txt
+
+[33mcommit 1cfaf499bb7b22ad0ed18eb8345b51b21ad3bf0c[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Wed Sep 18 18:51:23 2019 +0900
+
+    Create sldkjsdlfjlkfdj.txt
+
+[33mcommit f8c12c068a45812b8519fb28026d53c9657031de[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Wed Sep 18 18:27:51 2019 +0900
+
+    Steep
+
+[33mcommit 4828942f74d47891a55184e7a2d789b6735fef2f[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Wed Sep 18 02:58:11 2019 +0900
+
+    Update Steep분석.docx
+
+[33mcommit 915cebad0d654ceaf8b6ddfdb46e748d26a7beec[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Wed Sep 18 02:54:21 2019 +0900
+
+    Update 졸작위클리플랜.pptx
+
+[33mcommit 29eccc2fcffbbaf9c51069358ee5ce51a6bccf45[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Sep 17 14:43:37 2019 +0900
+
+    Update 스케줄.hwp
+
+[33mcommit c32a717ee06aaf84e3fbc803ddeee3ef7a62b08a[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Tue Sep 17 02:44:13 2019 +0900
+
+    Plan
+
+[33mcommit 12619f3f010e119beefb3f3c85e01cb16fddd28e[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Tue Sep 17 02:20:57 2019 +0900
+
+    Create Steep분석.docx
+
+[33mcommit dc71bbd20f004f991777c681f2a031763f611362[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Tue Sep 17 02:19:47 2019 +0900
+
+    Update 졸작위클리플랜.pptx
+
+[33mcommit 257bb0ec532aec1ca53752d89125012f7f5a8fd0[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Tue Sep 17 02:18:44 2019 +0900
+
+    1주차
+
+[33mcommit 30bd4956ff1a2b1ed34b4dd089709e38bffec219[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Tue Sep 17 02:11:22 2019 +0900
+
+    Create  Weekly
+
+[33mcommit 2ce54a207b1c655e736de067e090f9df961f6573[m
+Merge: 5c05db3 45930d6
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Tue Sep 17 02:10:49 2019 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit 5c05db37427f0261681f11b20d99467935cc3876[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Tue Sep 17 02:10:31 2019 +0900
+
+    Delete KHJ_Weekly
+
+[33mcommit 45930d646d9655693f41f5d2cbab65bd081a5e1f[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Tue Sep 17 02:10:16 2019 +0900
+
+    Delete KHJ_Weekly
+
+[33mcommit 0eef73cc7f8e0a59c8a6da33667ca691ea8ec2b6[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Tue Sep 17 02:01:20 2019 +0900
+
+    Create KHJ_Weekly
+    
+    KHJ Weekly
+
+[33mcommit 5f1ac72319d53b7e14116ab9961f64d2e54e72de[m
+Author: xhdrkawk1 <55053318+xhdrkawk1@users.noreply.github.com>
+Date:   Tue Sep 17 02:00:05 2019 +0900
+
+    Add files via upload
+
+[33mcommit 25c0f3c57485c1cff6f9370f3acd4b5687a11f98[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Tue Sep 17 01:59:19 2019 +0900
+
+    Create Steep분석.docx
+
+[33mcommit bbde2a25f005f184a089ff4b60e7c1ba500d7efa[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Sep 17 00:39:17 2019 +0900
+
+    Create 기획 시나리오.hwp
+
+[33mcommit 383be04ca1ca2a4d47bbf3dad4320a70f4b2e829[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Sep 17 00:03:19 2019 +0900
+
+    팀원 스케줄
+
+[33mcommit c1e65e36b34e8606d1fe04ff158a6da6adfd92b9[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Sep 16 23:13:27 2019 +0900
+
+    폴더명 변경
+
+[33mcommit a0d30fafd40ad64f3bca610b47fd0aaa58965eed[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Sep 16 23:13:17 2019 +0900
+
+    Create 기획.txt
+
+[33mcommit 84978f2c04e13950380195056d1250087462ba12[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Mon Sep 16 23:13:15 2019 +0900
+
+    Create 스케줄.txt
+
+[33mcommit 21b1d4c5ae7f4b5051079f6c223dd6e3b1f86369[m
+Merge: a1eefa9 6e08585
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Sep 15 18:48:13 2019 +0900
+
+    Merge branch 'master' of https://github.com/MinSyeoni/yodel-guardian
+
+[33mcommit a1eefa9892cc5dcb67b557c6d5884af54f7ba0b7[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Sep 15 18:48:09 2019 +0900
+
+    Update 1주차.txt
+
+[33mcommit 5be9478067ff0493bebf539e50990af1b94d4d17[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Sun Sep 15 16:23:45 2019 +0900
+
+    Update 1주차.txt
+
+[33mcommit 6e085858009683741f643712ff0452dcf82f135a[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Wed Sep 11 00:40:55 2019 +0900
+
+    Create test.txt
+
+[33mcommit 531df664ae06a615b9a732726c83040be5d8c15c[m
+Author: LeeSiYoung-16 <tldud8296@gmail.com>
+Date:   Wed Sep 11 00:24:03 2019 +0900
+
+    SiYoungTEST
+
+[33mcommit ab73904e1696a21f497d1b4ddade8cec46cc1670[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Sep 10 23:58:25 2019 +0900
+
+    링크추가
+
+[33mcommit fc9018b7b3fc44d0d7334ee31099c20391086b14[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Sep 10 23:47:46 2019 +0900
+
+    Create 190909_졸작회의.txt
+
+[33mcommit 5d31fc0cce82a1da45cb8ffbaa5e68855e3a3af8[m
+Author: MinSyeoni <33422760+MinSyeoni@users.noreply.github.com>
+Date:   Tue Sep 10 23:47:15 2019 +0900
+
+    Create 1주차.txt
