@@ -2,6 +2,7 @@
 #include "Include.h"
 #include "GameObject.h"
 #include "FlameThrower.h"
+#include "ZombiState.h"
 
 namespace Engine
 {
@@ -48,7 +49,7 @@ private:
 	CDynamicCamera*			m_pDynamicCamera = nullptr;
 
 	CFlameThrower*			m_pFlameThrower = nullptr;
-
+	CZombiState*			m_pZombiState = nullptr;
 
 private:
 	MONKIND					m_eMonName = NONAME;

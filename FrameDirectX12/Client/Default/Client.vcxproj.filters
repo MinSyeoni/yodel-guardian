@@ -190,6 +190,9 @@
     <Filter Include="01.Scene_Stage\06.Monster\00.FlameThrower">
       <UniqueIdentifier>{95102f00-49ab-42d5-aef4-48bbba25a08f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Scene_Stage\06.Monster\01.ZombiState">
+      <UniqueIdentifier>{059684e2-a709-4812-a5c6-4e18fdc16645}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -242,9 +245,6 @@
     </ClInclude>
     <ClInclude Include="..\Code\GunUI.h">
       <Filter>03.UI\01.GunUI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI.h">
-      <Filter>03.UI</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Weapon.h">
       <Filter>01.Scene_Stage\02.Weapon</Filter>
@@ -312,8 +312,14 @@
     <ClInclude Include="..\Code\Monster.h">
       <Filter>01.Scene_Stage\06.Monster</Filter>
     </ClInclude>
-    <ClInclude Include="FlameThrower.h">
+    <ClInclude Include="..\Code\FlameThrower.h">
       <Filter>01.Scene_Stage\06.Monster\00.FlameThrower</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\UI.h">
+      <Filter>03.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\ZombiState.h">
+      <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -337,9 +343,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\GunUI.cpp">
       <Filter>03.UI\01.GunUI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI.cpp">
-      <Filter>03.UI</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Weapon.cpp">
       <Filter>01.Scene_Stage\02.Weapon</Filter>
@@ -407,8 +410,14 @@
     <ClCompile Include="..\Code\Monster.cpp">
       <Filter>01.Scene_Stage\06.Monster</Filter>
     </ClCompile>
-    <ClCompile Include="FlameThrower.cpp">
+    <ClCompile Include="..\Code\FlameThrower.cpp">
       <Filter>01.Scene_Stage\06.Monster\00.FlameThrower</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\UI.cpp">
+      <Filter>03.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ZombiState.cpp">
+      <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -67,6 +67,8 @@ HRESULT CMonster::Ready_GameObject()
 		m_pFlameThrower->Set_Transform(m_pTransCom);
 		break;
 	case CMonster::ZOMBI:
+		m_pZombiState = new CZombiState;
+		m_pZombiState->Set_Transform(m_pTransCom);
 		break;
 	default:
 		break;
@@ -97,6 +99,7 @@ HRESULT CMonster::LateInit_GameObject()
 		m_pFlameThrower->Late_Initialized();
 		break;
 	case CMonster::ZOMBI:
+		m_pZombiState->Late_Initialized();
 		break;
 	default:
 		break;
@@ -136,8 +139,12 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 		break;
 	case CMonster::ZOMBI:
 	{
-		m_iCurMonState = 1;
-		m_iPreMonState = m_iCurMonState;
+		if (m_pZombiState == nullptr)
+			return E_FAIL;
+
+		m_pZombiState->Update_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
+		m_iCurMonState = m_pZombiState->Get_CurState();
+		m_iPreMonState = m_pZombiState->Get_PreState();
 	}
 		break;
 	default:
@@ -168,6 +175,9 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 		m_pFlameThrower->LateUpdate_FlameThrower(fTimeDelta, m_pTransCom, m_pMeshCom);
 		break;
 	case CMonster::ZOMBI:
+		if (m_pZombiState == nullptr)
+			return E_FAIL;
+		m_pZombiState->LateUpdate_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
 		break;
 	default:
 		break;
