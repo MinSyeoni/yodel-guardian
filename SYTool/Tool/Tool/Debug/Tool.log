@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿  CameraTool.cpp
 c:\users\huijun\desktop\git\yodel-guardian\sytool\tool\tool\cameratool.cpp(27): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 c:\users\huijun\desktop\git\yodel-guardian\sytool\tool\tool\cameratool.cpp(32): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
@@ -10,7 +9,3 @@ c:\users\huijun\desktop\git\yodel-guardian\sytool\tool\tool\cameratool.cpp(265):
 c:\users\huijun\desktop\git\yodel-guardian\sytool\tool\tool\cameratool.cpp(280): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 c:\users\huijun\desktop\git\yodel-guardian\sytool\tool\tool\cameratool.cpp(290): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   Tool.vcxproj -> C:\Users\Huijun\Desktop\Git\yodel-guardian\SYTool\Tool\Debug\Tool.exe
-=======
-﻿  NaviTab.cpp
-  Tool.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Debug\Tool.exe
->>>>>>> 636870910ca616aa6afb8d245994959796ba7731

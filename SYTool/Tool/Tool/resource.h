@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++¿¡¼­ »ý¼ºÇÑ Æ÷ÇÔ ÆÄÀÏÀÔ´Ï´Ù.
 // Tool.rc¿¡¼­ »ç¿ëµÇ°í ÀÖ½À´Ï´Ù.
-=======
-ï»¿//{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ì—ì„œ ìƒì„±í•œ í¬í•¨ íŒŒì¼ìž…ë‹ˆë‹¤.
-// Tool.rcì—ì„œ ì‚¬ìš©ë˜ê³  ìžˆìŠµë‹ˆë‹¤.
->>>>>>> 636870910ca616aa6afb8d245994959796ba7731
 //
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
@@ -15,12 +9,15 @@
 #define IDD_Myform                      313
 #define IDD_DIALOG1                     315
 #define IDD_DIALOG2                     317
+#define IDD_DIALOG3                     319
 #define IDC_TAB1                        1001
 #define IDC_LIST1                       1003
 #define IDC_EDIT1                       1004
+#define IDC_LIST4                       1004
 #define IDC_EDIT2                       1005
 #define IDC_EDIT3                       1006
 #define IDC_BUTTON1                     1007
+#define IDC_EDIT16                      1007
 #define IDC_RADIO1                      1008
 #define IDC_BUTTON10                    1008
 #define IDC_LIST2                       1009
@@ -46,6 +43,7 @@
 #define IDC_BUTTON4                     1025
 #define IDC_BUTTON5                     1026
 #define IDC_EDIT7                       1027
+#define IDC_BUTTON12                    1027
 #define IDC_EDIT8                       1028
 #define IDC_EDIT9                       1029
 #define IDC_EDIT10                      1030
@@ -69,9 +67,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        319
+#define _APS_NEXT_RESOURCE_VALUE        321
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1048
-#define _APS_NEXT_SYMED_VALUE           322
+#define _APS_NEXT_SYMED_VALUE           323
 #endif
 #endif
