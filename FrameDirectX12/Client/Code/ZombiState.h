@@ -2,12 +2,14 @@
 
 #include "Include.h"
 #include "Transform.h"
+#include "NaviMesh.h"
 
 namespace Engine
 {
 	class CTransform;
 	class CMesh;
 	class CBoxCollider;
+	class CNaviMesh;
 }
 
 class CZombiState
@@ -36,7 +38,8 @@ public:
 	void					Set_CurState(ZOMBISTATE eState) { m_eCurState = eState; }
 	void					Set_PreState(ZOMBISTATE eState) { m_ePreState = eState; }
 	
-	void					Set_Transform(CTransform* pTransform) { m_pTransCom = pTransform; m_pTransCom->AddRef(); };
+	void					Set_Transform(CTransform* pTransform) { m_pTransCom = pTransform; m_pTransCom->AddRef(); }
+	void					Set_NaviMesh(CNaviMesh* pNavimesh) { m_pNaviMesh = pNavimesh; m_pNaviMesh->AddRef(); }
 
 private:
 	void					Chase_Player(const _float& fTimeDelta);
@@ -47,11 +50,17 @@ private:
 	ZOMBISTATE				m_ePreState;
 
 	CTransform*				m_pTransCom = nullptr;
-	CMesh*					m_pMeshCom = nullptr;
+	CNaviMesh*				m_pNaviMesh = nullptr;
+	Engine::CMesh*			m_pMeshCom = nullptr;
 
 private:
 	_float					m_fTime = 0.f;
 	_float					m_fSpineAngle = 0.f;
 	_float					m_fAniTime = 0.f;
+	_float					m_fSpeed = 0.f;
+
+	_vec3					m_vPlayerPos = _vec3(0.f, 0.f, 0.f);
+
+	_bool					m_bIsTurn = false;
 };
 

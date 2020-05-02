@@ -23,7 +23,6 @@ void CZombiState::Initialized()
 
 HRESULT CZombiState::Late_Initialized()
 {
-
 	return S_OK;
 }
 
@@ -39,62 +38,113 @@ _int CZombiState::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform,
 		m_ePreState = m_eCurState;
 	}
 
+	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+	m_vPlayerPos = pPlayer->Get_Transform()->Get_PositionVector();
+
 	return S_OK();
 }
 
 void CZombiState::Chase_Player(const _float& fTimeDelta)
 {
-	//_vec3 vLook, vRight, vDir;
-	//vDir = m_pPlayerPos - m_pFlamePos;
-	//memcpy(&vLook, &m_pTransCom->Get_LookVector(), sizeof(_vec3));
-	//memcpy(&vRight, &m_pTransCom->Get_RightVector(), sizeof(_vec3));
-	//vDir.Normalize();
-	//vRight.Normalize();
-	//vLook.Normalize();
+	_vec3 vChaseDir = (m_vPlayerPos - m_pTransCom->m_vPos);
 
-	//_float fAngle = vLook.Dot(vDir);
-	//if (fAngle < -1.f)
-	//	fAngle = -1.f;
-	//_float fAngleTmp = XMConvertToDegrees(acosf(fAngle));
-	////_vec3 vTemp = vLook.Cross_InputDst(vDir);
-	////if (vTemp.y > 0.f)
-	////	fAngleTmp *= -1.f;
+	_float fAngle;
+	_vec3  vLook, vRight;
+	_matrix matRot;
 
-	//_float fDistance = sqrt(pow(m_pPlayerPos.x - m_pFlamePos.x, 2)
-	//	+ pow(m_pPlayerPos.y - m_pFlamePos.y, 2));
+	vChaseDir.y = 0.f;
+	vChaseDir.Normalize();
 
-	//if (fDistance <= 6.f)
-	//	m_bIsInArea = true;
-	//	//	m_pTransCom->m_vAngle.y += (fAngleTmp * 5.f * fTimeDelta);
-	//else
-	//	m_bIsInArea = false;
+	memcpy(&vLook, &m_pTransCom->Get_LookVector(), sizeof(_vec3));
+	memcpy(&vRight, &m_pTransCom->Get_RightVector(), sizeof(_vec3));
+	vRight.Normalize();
+	vLook.Normalize();
 
-	//if (m_bIsInArea == true)
-	//{
-	//	m_fTurnTime += fTimeDelta;
+	if (90.f >= XMConvertToDegrees(acosf(vChaseDir.Dot(vRight))))
+	{
+		vChaseDir.Normalize();
+		fAngle = XMConvertToDegrees(acosf(vChaseDir.Dot(vLook)));
+	}
+	else
+	{
+		vChaseDir.Normalize();
+		fAngle = -XMConvertToDegrees(acosf(vChaseDir.Dot(vLook)));
+	}
 
-	//	if (false == m_bIsTurn)
-	//		m_pTransCom->m_vAngle.y += (fAngleTmp * 5.f * fTimeDelta);
+	if ((fAngle > 3.f || fAngle < -3.f) && !m_bIsTurn)
+	{
+		m_pTransCom->m_vAngle.y += fAngle * 10.f * fTimeDelta;
+	}
+	else if ((fAngle <= 3.f && fAngle >= -3.f))
+	{
+		m_bIsTurn = true;
+	}
+	else if ((fAngle > 15.f || fAngle < -15.f))
+	{
+		m_bIsTurn = false;
+	}
 
-	//	if (false == m_bIsTurn && m_fTurnTime >= 2.f
-	//		/*true == m_pTransCom->Chase_Target(m_pPlayerPos, 0.3f * fTimeDelta)*/)
-	//	{
-	//		m_fTurnTime = 0.f;
-	//		m_bIsTurn = true;
-	//	}
-	//}
-	//else
-	//	m_bIsHit = false;
+	//m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &vChaseDir, m_fSpeed * fTimeDelta);
 
-	//if (m_bIsTurn == true) 
-	//	m_eCurState = CB_FireLoop;
+	/*
+		_float fAngle;
+
+	_vec3  vLook, vRight, vDirection;
+
+	_matrix matRot;
+
+	vDirection = *pTargetPos - m_vInfo[STATE_POSITION];
+	vDirection.y = 0.f;
+
+	//내각 오른쪽에 있다
+	if (90.f >= D3DXToDegree(acosf(D3DXVec3Dot(D3DXVec3Normalize(&vDirection, &vDirection),
+		D3DXVec3Normalize(&vRight, &m_vInfo[STATE_RIGHT])))))
+	{
+		fAngle = D3DXToDegree(acosf(D3DXVec3Dot(D3DXVec3Normalize(&vDirection, &vDirection),
+			D3DXVec3Normalize(&vLook, &m_vInfo[STATE_LOOK]))));
+	}
+	//둔각 왼쪽에 있다
+	else
+	{
+		fAngle = -D3DXToDegree(acosf(D3DXVec3Dot(D3DXVec3Normalize(&vDirection, &vDirection),
+			D3DXVec3Normalize(&vLook, &m_vInfo[STATE_LOOK]))));
+	}
+
+	if ((fAngle > 3.f || fAngle < -3.f) && !m_bIsTurn)
+	{
+		Set_Rotation_Axis(ROT_Y, D3DXToRadian((fAngle * 180.f * fTimeDelta)));		
+	}
+	else if ((fAngle <= 3.f && fAngle >= -3.f))
+	{
+		m_bIsTurn = true;
+	}
+	else if((fAngle > 15.f || fAngle < -15.f))
+	{
+		m_bIsTurn = false;
+	}
+	*/
+
+
+	/*
+		_matrix	 matRotY;
+
+	_vec3  vDirection, vOriginDir;
+
+	vDirection  = vOriginDir = *pTargetPos - m_vInfo[STATE_POSITION];
+	
+	D3DXMatrixRotationY(&matRotY, D3DXToRadian(30.f));
+	D3DXVec3TransformNormal(&vDirection, &vDirection, &matRotY);
+
+	Chase_Target(pTargetPos, fTimeDelta);
+
+	return (*D3DXVec3Normalize(&vDirection, &vDirection));
+	*/
 }
 
 void CZombiState::Fire_Attak()
 {
 	//CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 	//pPlayerHP = pPlayer->Get_Transform()->Get_~~HP();
-
 }
 
 _int CZombiState::LateUpdate_Zombi(const _float& fTimeDelta, CTransform* pTransform, CMesh* m_pMeshCom)
@@ -125,12 +175,50 @@ void CZombiState::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	case CZombiState::ZOM_DG_GetUpFront:
 		break;
 	case CZombiState::ZOM_EX_IdleOffset:
+	{
+		m_fAniTime += fTimeDelta;
+
+		_int iRandAni = rand() % 3;
+
+		//if (iRandAni == 0)
+		//{
+			if (m_fAniTime >= 4.f)
+			{
+				m_fAniTime = 0.f;
+				m_eCurState = ZOM_EX_Run;
+			}
+		//}
+		//else if (iRandAni == 1)
+		//{
+		//	if (m_fAniTime >= 3.f)
+		//	{
+		//		m_fAniTime = 0.f;
+		//		m_eCurState = ZOM_EX_WalkSlow;
+		//	}
+		//}
+
+
+	}
 		break;
 	case CZombiState::ZOM_EX_IdlePose:
 		break;
 	case CZombiState::ZOM_EX_Run:
+	{
+		m_fSpeed = 5.f;
+
+		Chase_Player(fTimeDelta);
+	//	m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(
+	//		&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed * fTimeDelta);
+	}
 		break;
 	case CZombiState::ZOM_EX_WalkSlow:
+	{
+		m_fSpeed = 5.f;
+
+		m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(
+			&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed * fTimeDelta);
+
+	}
 		break;
 	case CZombiState::ZOM_BC_Dead:
 		break;
@@ -150,4 +238,5 @@ void CZombiState::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 void CZombiState::Release()
 {
 	Safe_Release(m_pTransCom);
+	Safe_Release(m_pNaviMesh);
 }

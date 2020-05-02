@@ -38,8 +38,6 @@ HRESULT CMonster::Ready_GameObject()
 	NULL_CHECK_RETURN(m_pComponentMgr, E_FAIL);
 	CGameObject::Ready_GameObject();
 
-	FAILED_CHECK_RETURN(Add_Component(),E_FAIL);
-
 #ifdef _DEBUG
 	COUT_STR("Success Monster - Clone Mesh");
 #endif
@@ -49,10 +47,7 @@ HRESULT CMonster::Ready_GameObject()
 	else if (m_tMeshInfo.MeshTag == L"Zombi")
 		m_eMonName = ZOMBI;
 
-	// Buffer
-	m_pMeshCom = static_cast<Engine::CMesh*>(m_pComponentMgr->Clone_Component(m_tMeshInfo.MeshTag.c_str(), COMPONENTID::ID_STATIC));
-	NULL_CHECK_RETURN(m_pMeshCom, E_FAIL);
-	m_mapComponent[ID_STATIC].emplace(L"Com_Mesh", m_pMeshCom);
+	FAILED_CHECK_RETURN(Add_Component(),E_FAIL);
 
 	m_pTransCom->m_vPos = m_tMeshInfo.Pos + _vec3{300.f, 0.f, 350.f};
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
@@ -69,14 +64,11 @@ HRESULT CMonster::Ready_GameObject()
 	case CMonster::ZOMBI:
 		m_pZombiState = new CZombiState;
 		m_pZombiState->Set_Transform(m_pTransCom);
+		m_pZombiState->Set_NaviMesh(m_pNaviMesh);
 		break;
 	default:
 		break;
 	}
-
-	m_pBoxCom = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(300.f, 300.f, 300.f), this));
-	NULL_CHECK_RETURN(m_pBoxCom, E_FAIL);
-	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCom);
 
 	return S_OK;
 }
@@ -118,10 +110,6 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 	m_pBoxCom->Update_Collider(&m_pTransCom->m_matWorld);
 	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCom);
-
-	//CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-	//m_pPlayerPos = pPlayer->Get_Transform()->Get_PositionVector();
-	//m_pMonsterPos = m_pTransCom->Get_PositionVector();
 
 	switch (m_eMonName)
 	{
@@ -204,6 +192,18 @@ HRESULT CMonster::Add_Component()
 	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
 
+	// Buffer
+	m_pMeshCom = static_cast<Engine::CMesh*>(m_pComponentMgr->Clone_Component(m_tMeshInfo.MeshTag.c_str(), COMPONENTID::ID_STATIC));
+	NULL_CHECK_RETURN(m_pMeshCom, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_Mesh", m_pMeshCom);
+
+	m_pNaviMesh = static_cast<Engine::CNaviMesh*>(CComponentMgr::Get_Instance()->Clone_Component(L"Mesh_Navi", ID_STATIC));
+	NULL_CHECK_RETURN(m_pNaviMesh, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_NaviMesh", m_pNaviMesh);
+
+	m_pBoxCom = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(300.f, 300.f, 300.f), this));
+	NULL_CHECK_RETURN(m_pBoxCom, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCom);
 	return S_OK;
 }
 
@@ -297,4 +297,5 @@ void CMonster::Free()
 {
 	CGameObject::Free();
 	Safe_Delete(m_pFlameThrower);
+	Safe_Delete(m_pZombiState);
 }
