@@ -51,7 +51,7 @@ HRESULT CMonster::Ready_GameObject()
 
 	m_pTransCom->m_vPos = m_tMeshInfo.Pos + _vec3{300.f, 0.f, 350.f};
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
-	m_pTransCom->m_vDir = _vec3(0.f, 0.f, 1.f);
+	m_pTransCom->m_vDir = _vec3(0.f, 0.f, -1.f);
 
 	switch (m_eMonName)
 	{
@@ -140,7 +140,7 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 	}
 
 	dynamic_cast<CMesh*>(m_pMeshCom)->Set_AnimationBlend((_int)m_iCurMonState, (_int)m_iPreMonState);
-	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransformsBlend(5000.f * fTimeDelta, 5000.f * fTimeDelta, m_fSpineAngle);
+	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransformsBlend(5000.f * fTimeDelta, 5000.f * fTimeDelta);
 
 	return NO_EVENT;
 }

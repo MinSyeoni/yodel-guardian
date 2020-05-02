@@ -306,6 +306,32 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"minimap.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"minimap.x"), E_FAIL))
 		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"ammocase.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"ammocase.x"), E_FAIL))
+		return;
+	//if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"books.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"books.x"), E_FAIL))
+	//	return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"booksSet.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"booksSet.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"bottle01.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"bottle01.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"chairoffice.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"chairoffice.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"datapad.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"datapad.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"deskLamp.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"deskLamp.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"dumpster.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"dumpster.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"junk.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"junk.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"medCrate.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"medCrate.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"paper01.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"paper01.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"paper02.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"paper02.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"planter.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"planter.x"), E_FAIL))
+		return;
 
 	//if (FAILED(Engine::Ready_Mesh(m_pDevice,
 	//	RESOURCE_STAGE,

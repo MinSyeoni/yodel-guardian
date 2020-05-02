@@ -23,6 +23,7 @@ void CZombiState::Initialized()
 
 HRESULT CZombiState::Late_Initialized()
 {
+
 	return S_OK;
 }
 
@@ -40,6 +41,8 @@ _int CZombiState::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform,
 
 	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 	m_vPlayerPos = pPlayer->Get_Transform()->Get_PositionVector();
+
+	Chase_Player(fTimeDelta);
 
 	return S_OK();
 }
@@ -62,18 +65,23 @@ void CZombiState::Chase_Player(const _float& fTimeDelta)
 
 	if (90.f >= XMConvertToDegrees(acosf(vChaseDir.Dot(vRight))))
 	{
-		vChaseDir.Normalize();
+	//	vChaseDir.Normalize();
 		fAngle = XMConvertToDegrees(acosf(vChaseDir.Dot(vLook)));
 	}
 	else
 	{
-		vChaseDir.Normalize();
+	//	vChaseDir.Normalize();
 		fAngle = -XMConvertToDegrees(acosf(vChaseDir.Dot(vLook)));
 	}
 
 	if ((fAngle > 3.f || fAngle < -3.f) && !m_bIsTurn)
 	{
-		m_pTransCom->m_vAngle.y += fAngle * 10.f * fTimeDelta;
+		//#define D3DXToRadian( degree ) ((degree) * (D3DX_PI / 180.0f))
+		//		*(((_float*)&m_vAngle) + eType) += fAngle;
+		fAngle = fAngle * 180.f * fTimeDelta;
+		fAngle = fAngle * 3.141592f / 180.f;
+
+		m_pTransCom->m_vAngle.y += fAngle;
 	}
 	else if ((fAngle <= 3.f && fAngle >= -3.f))
 	{
@@ -176,17 +184,17 @@ void CZombiState::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombiState::ZOM_EX_IdleOffset:
 	{
-		m_fAniTime += fTimeDelta;
+		//m_fAniTime += fTimeDelta;
 
-		_int iRandAni = rand() % 3;
+		//_int iRandAni = rand() % 3;
 
 		//if (iRandAni == 0)
 		//{
-			if (m_fAniTime >= 4.f)
-			{
-				m_fAniTime = 0.f;
-				m_eCurState = ZOM_EX_Run;
-			}
+			//if (m_fAniTime >= 4.f)
+			//{
+			//	m_fAniTime = 0.f;
+			//	m_eCurState = ZOM_EX_Run;
+			//}
 		//}
 		//else if (iRandAni == 1)
 		//{
@@ -207,8 +215,8 @@ void CZombiState::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		m_fSpeed = 5.f;
 
 		Chase_Player(fTimeDelta);
-	//	m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(
-	//		&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed * fTimeDelta);
+		m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(
+			&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed * fTimeDelta);
 	}
 		break;
 	case CZombiState::ZOM_EX_WalkSlow:
