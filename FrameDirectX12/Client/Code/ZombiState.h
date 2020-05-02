@@ -43,7 +43,7 @@ public:
 
 private:
 	void					Chase_Player(const _float& fTimeDelta);
-	void					Fire_Attak();
+	_bool					Check_PlayerRange();
 
 private:
 	ZOMBISTATE				m_eCurState;
@@ -55,12 +55,13 @@ private:
 
 private:
 	_float					m_fTime = 0.f;
-	_float					m_fSpineAngle = 0.f;
 	_float					m_fAniTime = 0.f;
 	_float					m_fSpeed = 0.f;
+	_float					m_fAniDelay = 0.f;
 
 	_vec3					m_vPlayerPos = _vec3(0.f, 0.f, 0.f);
 
 	_bool					m_bIsTurn = false;
+	_float					m_fRange = 5.f;
 };
 

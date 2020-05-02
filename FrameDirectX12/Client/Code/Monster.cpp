@@ -49,9 +49,9 @@ HRESULT CMonster::Ready_GameObject()
 
 	FAILED_CHECK_RETURN(Add_Component(),E_FAIL);
 
-	m_pTransCom->m_vPos = m_tMeshInfo.Pos + _vec3{300.f, 0.f, 350.f};
+	m_pTransCom->m_vPos = m_tMeshInfo.Pos + _vec3{300.f, 0.f, 300.f};
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
-	m_pTransCom->m_vDir = _vec3(0.f, 0.f, -1.f);
+	m_pTransCom->m_vDir = _vec3(-1.f, 0.f, 1.f);
 
 	switch (m_eMonName)
 	{
