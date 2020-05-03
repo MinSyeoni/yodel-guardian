@@ -34,6 +34,7 @@ private:
 private:
 	void			Set_ConstantTable();
     void            Set_ShadowTable(CShader_Shadow* pShader);
+	void			Render_ShadowDepth(CShader_Shadow* pShader);
 
 private:
 	Engine::CMesh*				m_pMeshCom = nullptr;
@@ -41,7 +42,7 @@ private:
 
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
 	MeshInfo					m_tMeshInfo;
-
+	
 public:
 	virtual CGameObject*	Clone_GameObject(void* prg);
 	static CMapObject*		Create(ID3D12Device* pGraphicDevice,

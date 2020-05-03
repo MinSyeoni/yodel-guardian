@@ -49,7 +49,7 @@ HRESULT CMonster::Ready_GameObject()
 
 	FAILED_CHECK_RETURN(Add_Component(),E_FAIL);
 
-	m_pTransCom->m_vPos = m_tMeshInfo.Pos + _vec3{300.f, 0.f, 300.f};
+	m_pTransCom->m_vPos = m_tMeshInfo.Pos + _vec3{300.f, 0.f, 350.f};
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
 	m_pTransCom->m_vDir = _vec3(-1.f, 0.f, 1.f);
 
@@ -166,6 +166,9 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 		if (m_pZombiState == nullptr)
 			return E_FAIL;
 		m_pZombiState->LateUpdate_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
+
+		if (m_pZombiState->Get_IsDeadZombi())
+			m_bIsDead = true;
 		break;
 	default:
 		break;

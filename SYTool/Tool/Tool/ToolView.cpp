@@ -332,6 +332,8 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"planter.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"planter.x"), E_FAIL))
 		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"a.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"a.x"), E_FAIL))
+		return;
 
 	//if (FAILED(Engine::Ready_Mesh(m_pDevice,
 	//	RESOURCE_STAGE,

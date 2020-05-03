@@ -218,7 +218,6 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player",nullptr), E_FAIL);
 
-
 	//MeshInfo tMeshInfo;
 	//tMeshInfo.MeshTag = L"TombStone.X";
 	//tMeshInfo.Pos = _vec3(350.f,-3.f,400.f );
@@ -228,12 +227,13 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	//FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_StaticObject", L"Static", &tMeshInfo), E_FAIL);
 
 	//tMeshInfo.MeshTag = L"Mesh_Console";
-	//tMeshInfo.Pos = _vec3(250.f, 0.f, 300.f);
+	//tMeshInfo.Pos = _vec3(100.f, 0.f, 100.f);
 	//tMeshInfo.Rotation = _vec3(0.f, 0.f, 0.f);
 	//tMeshInfo.Scale = _vec3(0.1f, 0.1f, 0.1f);
 
 	//FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_StaticObject", L"Static", &tMeshInfo), E_FAIL);
-	//FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Rifle", L"Weapon", nullptr), E_FAIL);
+	
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Rifle", L"Weapon", nullptr), E_FAIL);
 
 	//Prototype_MapObject
 	Load_StageObject(L"../../../SYTool/Tool/Data/StaticObj/0430.dat");
@@ -339,7 +339,7 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 
 		if (m_tMeshInfo.MeshTag == L"Lathe.X" || m_tMeshInfo.MeshTag == L"Book2.X" || m_tMeshInfo.MeshTag == L"Book3.X" || m_tMeshInfo.MeshTag == L"Book4.X"
 			|| m_tMeshInfo.MeshTag == L"deskLamp.X")
-			break;
+			continue;
 
 		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
 	}

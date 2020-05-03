@@ -17,12 +17,26 @@ CZombiState::~CZombiState()
 
 void CZombiState::Initialized()
 {
-	m_eCurState = ZOM_CB_CombatActive_Ceiling;
+	srand((unsigned int)time(0));
+
+	int iRandAni = rand() % 4;
+
+	if(iRandAni == 0)
+		m_eCurState = ZOM_CB_CombatActive_Ceiling;
+	else if (iRandAni == 1)
+		m_eCurState = ZOM_CB_CombatActive;
+	else if (iRandAni == 2)
+		m_eCurState = ZOM_DG_GetUpBack;
+	else if (iRandAni == 3)
+		m_eCurState = ZOM_DG_GetUpFront;
+
 	m_ePreState = m_eCurState;
 }
 
 HRESULT CZombiState::Late_Initialized()
 {
+	srand((unsigned int)time(0));
+
 	return S_OK;
 }
 
@@ -39,7 +53,7 @@ _int CZombiState::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform,
 	}
 
 	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-	m_vPlayerPos = pPlayer->Get_Transform()->Get_PositionVector();
+	m_vPlayerPos = pPlayer->Get_Transform()->m_vPos;
 
 	return S_OK();
 }
@@ -47,29 +61,27 @@ _int CZombiState::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform,
 void CZombiState::Chase_Player(const _float& fTimeDelta)
 {
 	/////////// 방향 고쳐야 함 ////////////////
-	_vec3 vChaseDir = (m_vPlayerPos - m_pTransCom->m_vPos);
+	m_vChaseDir = (m_vPlayerPos - m_pTransCom->m_vPos);
 
 	_float fAngle;
 	_vec3  vLook, vRight;
 	_matrix matRot;
 
-	vChaseDir.y = 0.f;
-	vChaseDir.Normalize();
+	m_vChaseDir.y = 0.f;
+	m_vChaseDir.Normalize();
 
-	memcpy(&vLook, &m_pTransCom->m_vDir, sizeof(_vec3));
+	memcpy(&vLook, &m_pTransCom->Get_LookVector(), sizeof(_vec3));
 	memcpy(&vRight, &m_pTransCom->Get_RightVector(), sizeof(_vec3));
 	vRight.Normalize();
 	vLook.Normalize();
 
-	if (90.f >= XMConvertToDegrees(acosf(vChaseDir.Dot(vRight))))
+	if (90.f >= XMConvertToDegrees(acosf(m_vChaseDir.Dot(vRight))))
 	{
-		vChaseDir.Normalize();
-		fAngle = XMConvertToDegrees(acosf(vChaseDir.Dot(vLook)));
+		fAngle = XMConvertToDegrees(acosf(m_vChaseDir.Dot(vLook)));
 	}
 	else
 	{
-		vChaseDir.Normalize();
-		fAngle = -XMConvertToDegrees(acosf(vChaseDir.Dot(vLook)));
+		fAngle = -XMConvertToDegrees(acosf(m_vChaseDir.Dot(vLook)));
 	}
 
 	if ((fAngle > 3.f || fAngle < -3.f) && !m_bIsTurn)
@@ -84,19 +96,17 @@ void CZombiState::Chase_Player(const _float& fTimeDelta)
 	{
 		m_bIsTurn = false;
 	}
-
-	m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &vChaseDir, m_fSpeed * fTimeDelta);
+	m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_vChaseDir, m_fSpeed * fTimeDelta);
 }
 
-_bool CZombiState::Check_PlayerRange()
+_bool CZombiState::Check_PlayerRange(_float fRange)
 {
 	_bool bIsRange = false;
 
 	_vec3 vChaseDir = (m_vPlayerPos - m_pTransCom->m_vPos);
-	vChaseDir.Normalize();
-	_float fChaseRange =  vChaseDir.Get_Length();
+	_float fChaseRange = vChaseDir.Get_Length();
 
-	if (fChaseRange <= m_fRange)
+	if (fChaseRange <= fRange)
 		bIsRange = true;
 	else
 		bIsRange = false;
@@ -120,14 +130,17 @@ void CZombiState::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	case CZombiState::ZOM_CB_Active:
 		break;
 	case CZombiState::ZOM_CB_CombatActive:
+	{
+		m_fAniDelay = 10000.f;
+		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_CB_CombatActive))
+			m_eCurState = ZOM_EX_IdleOffset;
+	}
 		break;
 	case CZombiState::ZOM_CB_CombatActive_Ceiling:
 	{
-		m_fAniDelay = 6000.f;
+		m_fAniDelay = 10000.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_CB_CombatActive_Ceiling))
-		{
 			m_eCurState = ZOM_EX_IdleOffset;
-		}
 	}
 		break;
 	case CZombiState::ZOM_CB_Idle:
@@ -135,45 +148,113 @@ void CZombiState::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	case CZombiState::ZOM_CB_IdlePose:
 		break;
 	case CZombiState::ZOM_DG_GetUpBack:
+	{
+		m_fAniDelay = 22000.f;
+		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_DG_GetUpBack))
+			m_eCurState = ZOM_EX_IdleOffset;
+	}
 		break;
 	case CZombiState::ZOM_DG_GetUpFront:
+	{
+		m_fAniDelay = 22000.f;
+		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_DG_GetUpFront))
+			m_eCurState = ZOM_EX_IdleOffset;
+	}
 		break;
 	case CZombiState::ZOM_EX_IdleOffset:
 	{
-		if (Check_PlayerRange())
+		m_fAniDelay = 6000.f;
+
+		if (Check_PlayerRange(100.f))
 		{
-			m_eCurState = ZOM_EX_Run;
-		}
+			if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_IdleOffset))
+				m_eCurState = ZOM_EX_Run;
+		}		
 	}
 		break;
 	case CZombiState::ZOM_EX_IdlePose:
 		break;
 	case CZombiState::ZOM_EX_Run:
 	{
-		m_fSpeed = 5.f;
+		m_fSpeed = 7.f;
 
-		Chase_Player(fTimeDelta);
+		if (Check_PlayerRange(8.f))
+		{
+			m_fAniDelay = 2000.f;
+			int iRandAni = rand() % 2;
+			if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_Run))
+			{
+				if(iRandAni == 0)
+					m_eCurState = ZOM_LEFT_ATK;
+				else if(iRandAni == 1)
+					m_eCurState = ZOM_RIGHT_ATK;
+			}
+		}
+		else
+		{
+			Chase_Player(fTimeDelta);
+		}
 	}
 		break;
 	case CZombiState::ZOM_EX_WalkSlow:
 	{
-		m_fSpeed = 3.f;
+		m_fSpeed = 2.f;
 
-		Chase_Player(fTimeDelta);
+		m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed * fTimeDelta);
+
+		if (Check_PlayerRange(100.f))
+		{
+			m_fAniDelay = 2000.f;
+			if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_WalkSlow))
+				m_eCurState = ZOM_EX_Run;
+		}
 	}
 		break;
 	case CZombiState::ZOM_BC_Dead:
+	{
+		m_fAniDelay = 6500.f;
+		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_BC_Dead))
+			m_bIsDead = true;
+	}
 		break;
 	case CZombiState::ZOM_Base_Pose2:
 		break;
-	case CZombiState::ZOM_BC_End2:
+	case CZombiState::ZOM_LEFT_ATK:
+	{
+		m_fAniDelay = 6000.f;
+
+		Attak_Player(m_pMeshCom, ZOM_LEFT_ATK);
+	}
 		break;
 	case CZombiState::ZOM_Base_Pose3:
 		break;
-	case CZombiState::ZOM_BC_End3:
+	case CZombiState::ZOM_RIGHT_ATK:
+	{
+		m_fAniDelay = 6000.f;
+
+		Attak_Player(m_pMeshCom, ZOM_RIGHT_ATK);
+	}
 		break;
 	default:
 		break;
+	}
+}
+
+void CZombiState::Attak_Player(Engine::CMesh* m_pMeshCom, CZombiState::ZOMBISTATE eState)
+{
+	if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, eState))
+	{
+		int iRandAni = rand() % 2;
+
+		if (Check_PlayerRange(8.f))
+		{
+			if (iRandAni == 0)
+				m_eCurState = ZOM_LEFT_ATK;
+			else if (iRandAni == 1)
+				m_eCurState = ZOM_RIGHT_ATK;
+		}
+		else
+			m_eCurState = ZOM_EX_Run;
 	}
 }
 
