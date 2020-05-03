@@ -40,8 +40,8 @@ HRESULT CMapObject::Ready_GameObject()
 	NULL_CHECK_RETURN(m_pMeshCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Mesh", m_pMeshCom);
 
-	m_pTransCom->m_vPos = m_tMeshInfo.Pos;
-	//m_pTransCom->m_vPos = m_tMeshInfo.Pos + _vec3{ 300.f, 0.f, 300.f };
+	//m_pTransCom->m_vPos = m_tMeshInfo.Pos;
+	m_pTransCom->m_vPos = m_tMeshInfo.Pos + _vec3{ 300.f, 0.f, 300.f };
 	m_pTransCom->m_vScale = m_tMeshInfo.Scale;
 	m_pTransCom->m_vAngle = ToDegree(m_tMeshInfo.Rotation);
 

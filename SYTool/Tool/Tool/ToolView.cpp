@@ -284,7 +284,10 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Computer2.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Computer2.x"), E_FAIL))
 		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Container_Blue.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Container_Blue.x"), E_FAIL))
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"containerBlue.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"containerBlue.x"), E_FAIL))
+		return;
+	///// 테스트 /////
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"test.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"test.x"), E_FAIL))
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Container_Green.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Container_Green.x"), E_FAIL))
 		return;
@@ -292,7 +295,7 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Container_Red.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Container_Red.x"), E_FAIL))
 		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Desk3.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Desk3.x"), E_FAIL))
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"desk3.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"desk3.x"), E_FAIL))
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Lathe.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Lathe.x"), E_FAIL))
 		return;
@@ -400,7 +403,37 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 		{
 			bool retflag;
 			Get_TerrainInfo();
-			if (nullptr != CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_OBJECT))
+
+			_float fDistTemp = 10000000.f;
+			_float fFixDist = 0.f;
+			list<Engine::CGameObject*> pObjLst = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_OBJECT);
+			auto& iter_front = pObjLst.begin();
+
+			auto iter = pObjLst.begin();
+			for (; iter != pObjLst.end(); ++iter)
+			{
+				Engine::CTransform* pTransCom = dynamic_cast<CStaticObject*>(*iter)->Get_StaticTranscom();
+
+				if (CPickingMgr::GetInstance()->IsCheckStaticObjgectMesh(
+					dynamic_cast<CStaticObject*>(*iter),
+					*pTransCom->Get_WorldMatrix(),
+					&fFixDist,
+					&m_vMeshPos))
+				{
+					if (nullptr == dynamic_cast<CStaticObject*>(*iter))
+					{
+						AfxMessageBox(L"메쉬를 클릭하세요.");
+						continue;
+					}
+
+					if (fFixDist <= fDistTemp)
+					{
+						fDistTemp = fFixDist;
+						iter_front = iter;
+					}
+				}
+			}
+			/*if (nullptr != CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_OBJECT))
 			{
 				_float fDistTemp = 10000000.f;
 				_float fFixDist = 0.f;
@@ -420,7 +453,8 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 						break;
 					}
 				}
-			}			
+			}
+			*/
 			Create_NaviPointCell(retflag);
 			if (retflag) return;
 		}
@@ -665,33 +699,41 @@ void CToolView::Picking_MeshOnStaticObject(bool& retflag)
 
 	_float fDistTemp = 10000000.f;
 	_float fFixDist = 0.f;
-
 	list<Engine::CGameObject*> pObjLst = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_OBJECT);
-	for (auto& pObject : pObjLst)
+	auto& iter_front = pObjLst.begin();
+
+	auto iter = pObjLst.begin();
+	for (; iter != pObjLst.end(); ++iter)
 	{
-		Engine::CTransform* pTransCom = dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom();
+		Engine::CTransform* pTransCom = dynamic_cast<CStaticObject*>(*iter)->Get_StaticTranscom();
 
 		if (CPickingMgr::GetInstance()->IsCheckStaticObjgectMesh(
-			dynamic_cast<CStaticObject*>(pObject),
+			dynamic_cast<CStaticObject*>(*iter),
 			*pTransCom->Get_WorldMatrix(),
-			&fDistTemp,
+			&fFixDist,
 			&m_vMeshPos))
 		{
+			if (nullptr == dynamic_cast<CStaticObject*>(*iter))
+			{
+				AfxMessageBox(L"메쉬를 클릭하세요.");
+				continue;
+			}
+
 			if (fFixDist <= fDistTemp)
 			{
 				fDistTemp = fFixDist;
+				iter_front = iter;
 
 				if (true == m_pMapTab->m_bIsColliderMode)
 				{
-					dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom()->Get_Info(Engine::INFO_POS, &m_vMeshPos);
-					m_pMapTab->m_pPickStaticObj = dynamic_cast<CStaticObject*>(pObject);
+					dynamic_cast<CStaticObject*>(*iter_front)->Get_StaticTranscom()->Get_Info(Engine::INFO_POS, &m_vMeshPos);
+					m_pMapTab->m_pPickStaticObj = dynamic_cast<CStaticObject*>(*iter_front);
 				}
 
 				m_pMapTab->m_vMeshPos = m_vMeshPos;
 				m_pMapTab->m_fPosX = m_vMeshPos.x;
 				m_pMapTab->m_fPosY = m_vMeshPos.y;
 				m_pMapTab->m_fPosZ = m_vMeshPos.z;
-				break;
 			}
 		}
 	}
