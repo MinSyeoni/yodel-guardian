@@ -22,6 +22,7 @@
 
 #include "MapObject.h"
 #include "Monster.h"
+#include "Salone.h"
 
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
@@ -130,6 +131,12 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Rifle", pGameObject), E_FAIL);
 
+	////////////////////NPC/////////////////////////
+	pGameObject = CSalone::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Salone", pGameObject), E_FAIL);
+
+
 	////////////////////////////////// MAP /////////////////////////////////////////////
 	pGameObject = CMapObject::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -234,7 +241,7 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	//FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_StaticObject", L"Static", &tMeshInfo), E_FAIL);
 	
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Rifle", L"Weapon", nullptr), E_FAIL);
-
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Salone", L"Salone", nullptr), E_FAIL);//For.Salone
 	//Prototype_MapObject
 	Load_StageObject(L"../../../SYTool/Tool/Data/StaticObj/test.dat");
 

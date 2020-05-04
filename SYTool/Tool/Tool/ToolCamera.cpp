@@ -65,7 +65,8 @@ void CToolCamera::Update_Camera(const _float& fTimeDelta)
 	}
 
 	Change_CameraMat(&m_matView);
-	m_pGraphicDev->SetTransform(D3DTS_VIEW, &m_matView);
+	if (m_bIsCameraExecute)
+		m_pGraphicDev->SetTransform(D3DTS_VIEW, &m_matView);
 }
 
 void CToolCamera::Move_Camera(_vec3 vDir)
@@ -137,12 +138,12 @@ _matrix& CToolCamera::Change_CameraMat(_matrix* pMatView)
 	(*pMatView)(1, 1) = m_vUp.y;
 	(*pMatView)(1, 2) = m_vLook.y;
 	(*pMatView)(1, 3) = 0.f;
-	
+
 	(*pMatView)(2, 0) = m_vRight.z;
 	(*pMatView)(2, 1) = m_vUp.z;
 	(*pMatView)(2, 2) = m_vLook.z;
 	(*pMatView)(2, 3) = 0.f;
-	
+
 	(*pMatView)(3, 0) = x;
 	(*pMatView)(3, 1) = y;
 	(*pMatView)(3, 2) = z;

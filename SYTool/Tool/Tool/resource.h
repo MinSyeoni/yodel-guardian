@@ -9,23 +9,31 @@
 #define IDD_Myform                      313
 #define IDD_DIALOG1                     315
 #define IDD_DIALOG2                     317
+#define IDD_DIALOG3                     319
+#define IDD_CCameraTab                  322
 #define IDC_TAB1                        1001
 #define IDC_LIST1                       1003
 #define IDC_EDIT1                       1004
 #define IDC_EDIT2                       1005
 #define IDC_EDIT3                       1006
 #define IDC_BUTTON1                     1007
+#define IDC_LIST4                       1007
 #define IDC_RADIO1                      1008
 #define IDC_BUTTON10                    1008
+#define IDC_EDIT16                      1008
 #define IDC_LIST2                       1009
 #define IDC_BUTTON11                    1009
+#define IDC_EDIT17                      1009
 #define IDC_RADIO3                      1010
+#define IDC_LIST5                       1010
 #define IDC_RADIO2                      1011
 #define IDC_RADIO4                      1012
 #define IDC_BUTTON2                     1013
 #define IDC_EDIT13                      1013
+#define IDC_RADIO15                     1013
 #define IDC_LIST3                       1014
 #define IDC_EDIT14                      1014
+#define IDC_RADIO16                     1014
 #define IDC_RADIO5                      1015
 #define IDC_EDIT4                       1016
 #define IDC_EDIT5                       1017
@@ -40,8 +48,11 @@
 #define IDC_BUTTON4                     1025
 #define IDC_BUTTON5                     1026
 #define IDC_EDIT7                       1027
+#define IDC_BUTTON12                    1027
 #define IDC_EDIT8                       1028
+#define IDC_BUTTON13                    1028
 #define IDC_EDIT9                       1029
+#define IDC_BUTTON14                    1029
 #define IDC_EDIT10                      1030
 #define IDC_EDIT11                      1031
 #define IDC_EDIT12                      1032
@@ -63,9 +74,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        319
+#define _APS_NEXT_RESOURCE_VALUE        321
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1048
-#define _APS_NEXT_SYMED_VALUE           322
+#define _APS_NEXT_SYMED_VALUE           323
 #endif
 #endif

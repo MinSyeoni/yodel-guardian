@@ -13,7 +13,7 @@
 #include "MapTab.h"
 #include "NaviTab.h"
 #include "Myform.h"
-
+#include "CCameraTab.h"
 BEGIN(Engine)
 class CManagement;
 class CBoxCollider;
@@ -87,7 +87,7 @@ private:
 	CMapTab*				m_pMapTab = nullptr;
 	CNaviTab*				m_pNaviTab = nullptr;
 	CMyform*				m_pMyForm = nullptr;
-
+	CCameraTab*             m_pCameraTab = nullptr;
 	_int					m_iIdxCnt = 0;
 
 public:
@@ -102,6 +102,11 @@ public:
 	void				Picking_MeshOnStaticObject(bool& retflag);
 	void				Picking_MouseOnStaticObject(bool& retflag);
 	void				Picking_TerrainOnStaticObject(bool& retflag);
+	void CheckCameraTabButton();
+
+
+
+	afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
 };
 
 #ifndef _DEBUG  // ToolView.cpp의 디버그 버전

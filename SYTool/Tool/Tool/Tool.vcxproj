@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -211,6 +211,9 @@
     <ClInclude Include="..\Headers\Function.h" />
     <ClInclude Include="..\Headers\Macro.h" />
     <ClInclude Include="..\Headers\Typedef.h" />
+    <ClInclude Include="ActionCamera.h" />
+    <ClInclude Include="CameraSort.h" />
+    <ClInclude Include="CCameraTab.h" />
     <ClInclude Include="CursorMgr.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MainFrm.h" />
@@ -232,6 +235,9 @@
     <ClInclude Include="ToolView.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ActionCamera.cpp" />
+    <ClCompile Include="CameraSort.cpp" />
+    <ClCompile Include="CCameraTab.cpp" />
     <ClCompile Include="CursorMgr.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MapTab.cpp" />

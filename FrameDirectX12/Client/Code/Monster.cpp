@@ -139,8 +139,8 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 		break;
 	}
 
-	dynamic_cast<CMesh*>(m_pMeshCom)->Set_AnimationBlend((_int)m_iCurMonState, (_int)m_iPreMonState);
-	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransformsBlend(5000.f * fTimeDelta, 5000.f * fTimeDelta);
+	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)m_iCurMonState);
+	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f * fTimeDelta);
 
 	return NO_EVENT;
 }
