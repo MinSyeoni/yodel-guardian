@@ -236,7 +236,7 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Rifle", L"Weapon", nullptr), E_FAIL);
 
 	//Prototype_MapObject
-	Load_StageObject(L"../../../SYTool/Tool/Data/StaticObj/test.dat");
+	Load_StageObject(L"../../../SYTool/Tool/Data/StaticObj/0430.dat");
 
 	// Monster
 	Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/Flame_Once.dat");
@@ -336,14 +336,6 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 		m_tMeshInfo.Pos = tObjData.vPos;
 		m_tMeshInfo.Rotation = tObjData.vRotate;
 		m_tMeshInfo.Scale = tObjData.vScale;
-
-		if (m_tMeshInfo.MeshTag == L"Lathe.X" || m_tMeshInfo.MeshTag == L"Book2.X" || m_tMeshInfo.MeshTag == L"Book3.X" || m_tMeshInfo.MeshTag == L"Book4.X"
-			|| m_tMeshInfo.MeshTag == L"deskLamp.X")
-			continue;
-
-		// 나중에 삭제
-		if (m_tMeshInfo.MeshTag == L"Desk3.X")
-			m_tMeshInfo.MeshTag = L"desk.X";
 
 		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
 	}

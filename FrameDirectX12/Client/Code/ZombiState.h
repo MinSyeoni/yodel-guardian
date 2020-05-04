@@ -3,6 +3,7 @@
 #include "Include.h"
 #include "Transform.h"
 #include "NaviMesh.h"
+#include "BoxCollider.h"
 
 namespace Engine
 {
@@ -42,7 +43,11 @@ public:
 	void					Set_Transform(CTransform* pTransform) { m_pTransCom = pTransform; m_pTransCom->AddRef(); }
 	void					Set_NaviMesh(CNaviMesh* pNavimesh) { m_pNaviMesh = pNavimesh; m_pNaviMesh->AddRef(); }
 
+public:		// 상호작용 
 	const _bool&			Get_IsDeadZombi() const { return m_bIsDead; }
+	const _float&			Get_CurHp() { return m_fCurHp; }
+	const _bool&			Get_IsHit() const { return m_bIsHit; }
+	void					Set_IsHit(_bool bIsHit) { m_bIsHit = bIsHit; }
 
 private:
 	void					Chase_Player(const _float& fTimeDelta);
@@ -56,16 +61,20 @@ private:
 	CNaviMesh*				m_pNaviMesh = nullptr;
 	Engine::CMesh*			m_pMeshCom = nullptr;
 
+
 private:
 	_float					m_fTime = 0.f;
 	_float					m_fAniTime = 0.f;
-	_float					m_fSpeed = 0.f;
 	_float					m_fAniDelay = 0.f;
 
 	_vec3					m_vPlayerPos = _vec3(0.f, 0.f, 0.f);
+	_vec3					m_vChaseDir = _vec3(0.f, 0.f, 0.f);
 
 	_bool					m_bIsTurn = false;
 	_bool					m_bIsDead = false;
-	_vec3					m_vChaseDir = _vec3(0.f, 0.f, 0.f);
+	_bool					m_bIsHit = false;
+	_float					m_fSpeed = 0.f;
+	_float					m_fCurHp = 0.f;
+	_float					m_fMaxHp = 0.f;
 };
 

@@ -930,8 +930,6 @@ void CMapTab::OnBnClickedLoadStaticObj()
 					break;
 
 				strTag = tObjData.m_MeshTag;
-				if (strTag == L"Desk3.X")
-					strTag = L"desk3.X";
 
 				m_vMeshPos = tObjData.vPos;
 				m_vMeshScale = tObjData.vScale;
