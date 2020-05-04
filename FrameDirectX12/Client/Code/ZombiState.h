@@ -48,6 +48,7 @@ public:		// 상호작용
 	const _float&			Get_CurHp() { return m_fCurHp; }
 	const _bool&			Get_IsHit() const { return m_bIsHit; }
 	void					Set_IsHit(_bool bIsHit) { m_bIsHit = bIsHit; }
+	const _float&			Get_HitDamage() { return m_fRandDamage; }
 
 private:
 	void					Chase_Player(const _float& fTimeDelta);
@@ -73,6 +74,8 @@ private:
 	_bool					m_bIsTurn = false;
 	_bool					m_bIsDead = false;
 	_bool					m_bIsHit = false;
+
+	_float					m_fRandDamage = 0.f;
 	_float					m_fSpeed = 0.f;
 	_float					m_fCurHp = 0.f;
 	_float					m_fMaxHp = 0.f;
