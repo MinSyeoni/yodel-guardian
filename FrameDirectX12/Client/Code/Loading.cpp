@@ -239,7 +239,7 @@ HRESULT CLoading::Mesh_ForStage(void)
 
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"siren.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"siren.X", ID_STATIC, pComponent), E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Siren.X", ID_STATIC, pComponent), E_FAIL);
 
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"solar.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);

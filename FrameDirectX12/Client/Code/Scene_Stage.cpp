@@ -243,7 +243,7 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Rifle", L"Weapon", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Salone", L"Salone", nullptr), E_FAIL);//For.Salone
 	//Prototype_MapObject
-	Load_StageObject(L"../../../SYTool/Tool/Data/StaticObj/0430.dat");
+	Load_StageObject(L"../../../SYTool/Tool/Data/StaticObj/newmap1.dat");
 
 	// Monster
 	Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/Flame_Once.dat");
