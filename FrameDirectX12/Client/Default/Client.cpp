@@ -13,7 +13,7 @@
 #include "ObjectMgr.h"
 #include "ComponentMgr.h"
 #include "Renderer.h"
-
+#include "BaziorMgr.h"
 #define MAX_LOADSTRING 100
 
 // 전역 변수:
@@ -344,6 +344,11 @@ _ulong Release_Singleton()
 	if (dwRefCnt = CColliderMgr::Get_Instance()->Destroy_Instance())
 	{
 		return dwRefCnt;
+
+
 	}
-	return dwRefCnt;
+	if (dwRefCnt = BaziorMgr::Get_Instance()->Destroy_Instance())
+	{
+			return dwRefCnt;
+	}
 }

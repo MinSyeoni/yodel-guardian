@@ -239,8 +239,8 @@ HRESULT CGraphicDevice::Create_GraphicDevice(const _uint & iWidth, const _uint &
 	______________________________________________________________________*/
 	IDXGIAdapter1 *pd3dAdapter = nullptr;
 
-
-	m_pFactory->EnumAdapters1(0, &pd3dAdapter);
+	//시영아 여기야여기
+	m_pFactory->EnumAdapters1(1, &pd3dAdapter);
 	HRESULT hResult = D3D12CreateDevice(pd3dAdapter,             // default adapter
 										D3D_FEATURE_LEVEL_12_0,
 										IID_PPV_ARGS(&m_pGraphicDevice));

@@ -339,7 +339,7 @@
     <ClInclude Include="..\Code\ActionCamera.h">
       <Filter>01.Scene_Stage\03.Camera\01.ActionCamera</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\MathMgr.h">
+    <ClInclude Include="..\Code\BaziorMgr.h">
       <Filter>97.Mgr\00.MathMgr</Filter>
     </ClInclude>
   </ItemGroup>
@@ -446,7 +446,7 @@
     <ClCompile Include="..\Code\ActionCamera.cpp">
       <Filter>01.Scene_Stage\03.Camera\01.ActionCamera</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\MathMgr.cpp">
+    <ClCompile Include="..\Code\BaziorMgr.cpp">
       <Filter>97.Mgr\00.MathMgr</Filter>
     </ClCompile>
   </ItemGroup>

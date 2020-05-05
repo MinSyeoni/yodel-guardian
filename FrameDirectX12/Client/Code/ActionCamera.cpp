@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ActionCamera.h"
-#include "MathMgr.h"
+#include "BaziorMgr.h"
 #include "GraphicDevice.h"
 CActionCamera::CActionCamera(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	:CCamera(pGraphicDevice,pCommandList)
@@ -92,11 +92,11 @@ _vec3 CActionCamera::CheckBazior(vector<_vec3> vecPoint)
 	if (iSize == 1)
 		return vecPoint[0];
 	else if (iSize == 2)
-		return MathMgr::Bazior2(vecPoint[0], vecPoint[1], m_fAccTime);
+		return BaziorMgr::Bazior2(vecPoint[0], vecPoint[1], m_fAccTime);
 	else if (iSize == 3)
-		return MathMgr::Bazior3(vecPoint[0], vecPoint[1], vecPoint[2], m_fAccTime);
+		return BaziorMgr::Bazior3(vecPoint[0], vecPoint[1], vecPoint[2], m_fAccTime);
 	else if (iSize == 4)
-		return MathMgr::Bazior4(vecPoint[0], vecPoint[1], vecPoint[2], vecPoint[3], m_fAccTime);
+		return BaziorMgr::Bazior4(vecPoint[0], vecPoint[1], vecPoint[2], vecPoint[3], m_fAccTime);
 
 
 }

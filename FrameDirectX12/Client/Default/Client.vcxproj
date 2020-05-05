@@ -113,6 +113,7 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;_XM_NO_INTRINSICS_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>../Default;../Header;../Code;../../Reference/Header;../../DirectXMasterSDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -176,7 +177,7 @@
     <ClInclude Include="..\Code\Loading.h" />
     <ClInclude Include="..\Code\MainApp.h" />
     <ClInclude Include="..\Code\MapObject.h" />
-    <ClInclude Include="..\Code\MathMgr.h" />
+    <ClInclude Include="..\Code\BaziorMgr.h" />
     <ClInclude Include="..\Code\Monster.h" />
     <ClInclude Include="..\Code\Pistol.h" />
     <ClInclude Include="..\Code\Player.h" />
@@ -223,7 +224,7 @@
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\MapObject.cpp" />
-    <ClCompile Include="..\Code\MathMgr.cpp" />
+    <ClCompile Include="..\Code\BaziorMgr.cpp" />
     <ClCompile Include="..\Code\Monster.cpp" />
     <ClCompile Include="..\Code\Pistol.cpp" />
     <ClCompile Include="..\Code\Player.cpp" />
