@@ -18,8 +18,8 @@ IMPLEMENT_DYNAMIC(CMapTab, CDialogEx)
 
 CMapTab::CMapTab(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG1, pParent)
-	, m_iCntX(129)
-	, m_iCntZ(129)
+	, m_iCntX(768)
+	, m_iCntZ(768)
 	, m_iInterval(1)
 	, m_strTexList(_T(""))
 	, m_fPosX(0.f)
@@ -930,8 +930,6 @@ void CMapTab::OnBnClickedLoadStaticObj()
 					break;
 
 				strTag = tObjData.m_MeshTag;
-				if (strTag == L"Desk3.X")
-					strTag = L"desk3.X";
 
 				m_vMeshPos = tObjData.vPos;
 				m_vMeshScale = tObjData.vScale;

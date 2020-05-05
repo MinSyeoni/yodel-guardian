@@ -151,8 +151,8 @@ HRESULT Engine::CTerrainTex::Ready_Buffer(
 	ReadFile(m_hFile, &m_fH, sizeof(BITMAPFILEHEADER), &dwByte, NULL);
 	ReadFile(m_hFile, &m_iH, sizeof(BITMAPINFOHEADER), &dwByte, NULL);
 
-	m_dwVtxCntZ = 129;
-	m_dwVtxCntX = 129;
+	m_dwVtxCntZ = 768;
+	m_dwVtxCntX = 768;
 
 	_ulong* pPixel = new _ulong[m_iH.biWidth * m_iH.biHeight];
 

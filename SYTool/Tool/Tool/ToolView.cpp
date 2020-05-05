@@ -270,7 +270,10 @@ void CToolView::Ready_Buffer_Setting()
 		1)))
 		return;
 
-
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"ammocase.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"ammocase.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"barricade.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"barricade.x"), E_FAIL))
+		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Board.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Board.x"), E_FAIL))
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Book1.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Book1.x"), E_FAIL))
@@ -287,7 +290,13 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Book7.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Book7.x"), E_FAIL))
 		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"booksSet.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"booksSet.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"bottle01.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"bottle01.x"), E_FAIL))
+		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Box.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Box.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"chairoffice.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"chairoffice.x"), E_FAIL))
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Computer1.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Computer1.x"), E_FAIL))
 		return;
@@ -295,40 +304,15 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"containerBlue.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"containerBlue.x"), E_FAIL))
 		return;
-	///// 테스트 /////
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"test.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"test.x"), E_FAIL))
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"containerGray.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"containerGray.x"), E_FAIL))
 		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Container_Green.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Container_Green.x"), E_FAIL))
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"containerGreen.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"containerGreen.x"), E_FAIL))
 		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Container_Grey.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Container_Grey.x"), E_FAIL))
-		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Container_Red.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Container_Red.x"), E_FAIL))
-		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"desk3.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"desk3.x"), E_FAIL))
-		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Lathe.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Lathe.x"), E_FAIL))
-		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Siren.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Siren.x"), E_FAIL))
-		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Solar.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Solar.x"), E_FAIL))
-		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"map1_roof.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"map1_roof.x"), E_FAIL))
-		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"map1.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"map1.x"), E_FAIL))
-		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"minimap.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"minimap.x"), E_FAIL))
-		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"ammocase.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"ammocase.x"), E_FAIL))
-		return;
-	//if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"books.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"books.x"), E_FAIL))
-	//	return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"booksSet.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"booksSet.x"), E_FAIL))
-		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"bottle01.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"bottle01.x"), E_FAIL))
-		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"chairoffice.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"chairoffice.x"), E_FAIL))
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"containerRed.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"containerRed.x"), E_FAIL))
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"datapad.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"datapad.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"desk3.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"desk3.x"), E_FAIL))
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"deskLamp.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"deskLamp.x"), E_FAIL))
 		return;
@@ -336,7 +320,15 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"junk.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"junk.x"), E_FAIL))
 		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Lathe.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Lathe.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"map1.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"map1.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"map1_roof.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"map1_roof.x"), E_FAIL))
+		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"medCrate.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"medCrate.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"minimap.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"minimap.x"), E_FAIL))
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"paper01.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"paper01.x"), E_FAIL))
 		return;
@@ -344,7 +336,13 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"planter.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"planter.x"), E_FAIL))
 		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"a.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"a.x"), E_FAIL))
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Siren.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Siren.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Solar.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Solar.x"), E_FAIL))
+		return;
+
+	///// 테스트 /////
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"test.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"test.x"), E_FAIL))
 		return;
 
 	//if (FAILED(Engine::Ready_Mesh(m_pDevice,
@@ -464,6 +462,7 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 				}
 			}
 			*/
+
 			Create_NaviPointCell(retflag);
 			if (retflag) return;
 		}
@@ -518,6 +517,7 @@ void CToolView::Modify_NaviPointCell(bool& retflag)
 void CToolView::Create_NaviPointCell(bool& retflag)
 {
 	retflag = true;
+
 	CString	strIndex = L"";
 
 	if (!m_pNaviTab->m_pPointLst.empty())	// 겹치게 찍었을 때
@@ -553,7 +553,7 @@ void CToolView::Create_NaviPointCell(bool& retflag)
 
 		m_iIdxCnt = 0;
 	}
-
+	
 	retflag = false;
 }
 
@@ -820,47 +820,6 @@ void CToolView::Picking_MouseOnStaticObject(bool& retflag)
 		m_pMapTab->m_bIsPickingStaticObj = true;
 	}
 
-	//for (auto& pObject : pObjLst)
-	//{
-	//	Engine::CTransform* pTransCom = dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom();
-
-	//	if (CPickingMgr::GetInstance()->IsCheckStaticObjgectMesh(
-	//		dynamic_cast<CStaticObject*>(pObject),
-	//		*pTransCom->Get_WorldMatrix(),
-	//		&fDistTemp,
-	//		&m_vMeshPos))
-	//	{
-	//		if (fFixDist <= fDistTemp)
-	//		{
-	//			fDistTemp = fFixDist;
-
-	//			dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom()->Get_Info(Engine::INFO_POS, &m_vMeshPos);
-	//			m_vMeshScale = dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom()->m_vScale;
-	//			m_vMeshRot = dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom()->m_vAngle;
-
-	//			m_pMapTab->m_vMeshPos = m_vMeshPos;
-	//			m_pMapTab->m_fPosX = m_vMeshPos.x;
-	//			m_pMapTab->m_fPosY = m_vMeshPos.y;
-	//			m_pMapTab->m_fPosZ = m_vMeshPos.z;
-
-	//			m_pMapTab->m_vMeshScale = m_vMeshScale;
-	//			m_pMapTab->m_fScaleX = m_vMeshScale.x;
-	//			m_pMapTab->m_fScaleY = m_vMeshScale.y;
-	//			m_pMapTab->m_fScaleZ = m_vMeshScale.z;
-
-	//			m_pMapTab->m_vMeshRot = m_vMeshRot;
-	//			m_pMapTab->m_fRotX = m_vMeshRot.x;
-	//			m_pMapTab->m_fRotY = m_vMeshRot.y;
-	//			m_pMapTab->m_fRotZ = m_vMeshRot.z;
-
-	//			m_pMapTab->m_pPickStaticObj = dynamic_cast<CStaticObject*>(pObject);
-	//			m_pMapTab->m_bIsPickingStaticObj = true;
-	//			break;
-	//		}
-	//	}
-	//	else
-	//		m_pMapTab->m_bIsPickingStaticObj = false;
-	//}
 	retflag = false;
 }
 void CToolView::Picking_TerrainOnStaticObject(bool& retflag)

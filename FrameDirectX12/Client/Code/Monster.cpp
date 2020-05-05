@@ -153,6 +153,7 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCom), -1);
 
+
 	switch (m_eMonName)
 	{
 	case CMonster::NONAME:
@@ -166,7 +167,6 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 		if (m_pZombiState == nullptr)
 			return E_FAIL;
 		m_pZombiState->LateUpdate_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
-
 		if (m_pZombiState->Get_IsDeadZombi())
 			m_bIsDead = true;
 		break;
@@ -207,6 +207,7 @@ HRESULT CMonster::Add_Component()
 	m_pBoxCom = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(300.f, 300.f, 300.f), this));
 	NULL_CHECK_RETURN(m_pBoxCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCom);
+
 	return S_OK;
 }
 
@@ -259,20 +260,6 @@ void CMonster::Set_ShadowTable(CShader_Shadow* pShader)
 	pShader->Get_UploadBuffer_ShadowInfo()->CopyData(offset, tCB_MatrixInfo);
 }
 
-void CMonster::Update_BoundaryBox()
-{
-	_matrix matBoundary = INIT_MATRIX;
-	_matrix matScale = INIT_MATRIX;
-
-	matBoundary = m_pTransCom->m_matWorld;
-
-	matBoundary._11 = 0.2f;
-	matBoundary._33 = 0.2f;
-
-	m_pBoundary->Update_Collider(&matBoundary);
-	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoundary);
-}
-
 CGameObject * CMonster::Clone_GameObject(void * prg)
 {
 	CGameObject* pInstance = new CMonster(*this);
@@ -298,7 +285,7 @@ CMonster* CMonster::Create(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandL
 
 void CMonster::Free()
 {
-	CGameObject::Free();
 	Safe_Delete(m_pFlameThrower);
 	Safe_Delete(m_pZombiState);
+	CGameObject::Free();
 }

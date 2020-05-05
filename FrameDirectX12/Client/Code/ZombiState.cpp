@@ -31,6 +31,8 @@ void CZombiState::Initialized()
 		m_eCurState = ZOM_DG_GetUpFront;
 
 	m_ePreState = m_eCurState;
+
+	m_fCurHp = m_fMaxHp = 100.f;
 }
 
 HRESULT CZombiState::Late_Initialized()
@@ -54,6 +56,20 @@ _int CZombiState::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform,
 
 	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 	m_vPlayerPos = pPlayer->Get_Transform()->m_vPos;
+
+	// 체력 
+	if (m_fCurHp <= 0.f)
+	{
+		m_fCurHp = 0.f;
+		m_eCurState = ZOM_BC_Dead;
+	}
+
+	// 맞았는지 임시임시 플레이어에서 SetIsHit 해주세
+	if (Engine::CDirectInput::Get_Instance()->Mouse_KeyDown(DIM_LB))
+		m_bIsHit = true;	
+
+	if (m_bIsHit)
+		m_eCurState = ZOM_EX_IdleOffset;
 
 	return S_OK();
 }
@@ -96,6 +112,8 @@ void CZombiState::Chase_Player(const _float& fTimeDelta)
 	{
 		m_bIsTurn = false;
 	}
+
+	m_pTransCom->m_vDir = m_vChaseDir;
 	m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_vChaseDir, m_fSpeed * fTimeDelta);
 }
 
@@ -131,7 +149,7 @@ void CZombiState::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombiState::ZOM_CB_CombatActive:
 	{
-		m_fAniDelay = 10000.f;
+		m_fAniDelay = 12000.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_CB_CombatActive))
 			m_eCurState = ZOM_EX_IdleOffset;
 	}
@@ -149,24 +167,38 @@ void CZombiState::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombiState::ZOM_DG_GetUpBack:
 	{
-		m_fAniDelay = 22000.f;
+		m_fAniDelay = 24500.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_DG_GetUpBack))
 			m_eCurState = ZOM_EX_IdleOffset;
 	}
 		break;
 	case CZombiState::ZOM_DG_GetUpFront:
 	{
-		m_fAniDelay = 22000.f;
+		m_fAniDelay = 24500.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_DG_GetUpFront))
 			m_eCurState = ZOM_EX_IdleOffset;
 	}
 		break;
 	case CZombiState::ZOM_EX_IdleOffset:
 	{
-		m_fAniDelay = 6000.f;
+		m_fRandDamage = rand() % 15 + 15.f;
+		if (m_bIsHit)
+		{
+			m_fSpeed = 15.f;
+		
+			m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(m_pTransCom->m_vDir * -1), m_fSpeed * fTimeDelta);
+			
+			m_fAniDelay = 100.f;
+			if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_IdleOffset))
+			{
+				m_fCurHp -= m_fRandDamage;
+				m_bIsHit = false;
+			}
+		}
 
 		if (Check_PlayerRange(100.f))
 		{
+			m_fAniDelay = 6000.f;
 			if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_IdleOffset))
 				m_eCurState = ZOM_EX_Run;
 		}		
@@ -246,7 +278,7 @@ void CZombiState::Attak_Player(Engine::CMesh* m_pMeshCom, CZombiState::ZOMBISTAT
 	{
 		int iRandAni = rand() % 2;
 
-		if (Check_PlayerRange(8.f))
+		if (Check_PlayerRange(10.f))
 		{
 			if (iRandAni == 0)
 				m_eCurState = ZOM_LEFT_ATK;

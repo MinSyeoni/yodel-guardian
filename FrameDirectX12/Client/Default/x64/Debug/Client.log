@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 ﻿  ActionCamera.cpp
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\ActionCamera.cpp(90,29): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\ActionCamera.cpp(102): warning C4715: 'CActionCamera::CheckBazior': 모든 제어 경로에서 값을 반환하지는 않습니다.
   Client.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Default\../Bin\Client.exe
+=======
+﻿  MapObject.cpp
+  Client.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Default\../Bin\Client.exe
+>>>>>>> a4a8e7518572f6e7046ae0f179569d043686ffe8

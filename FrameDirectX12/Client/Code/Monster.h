@@ -46,7 +46,7 @@ private:
 	Engine::CMesh*			m_pMeshCom = nullptr;
 	Engine::CShader_Mesh*	m_pShaderCom = nullptr;
 	Engine::CBoxCollider*	m_pBoxCom = nullptr;
-	Engine::CBoxCollider*	m_pBoundary = nullptr;
+
 	Engine::CNaviMesh*		m_pNaviMesh = nullptr;
 	CDynamicCamera*			m_pDynamicCamera = nullptr;
 
