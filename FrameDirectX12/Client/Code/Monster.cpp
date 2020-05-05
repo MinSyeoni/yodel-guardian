@@ -16,7 +16,9 @@ CMonster::CMonster(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pC
 
 CMonster::CMonster(const CMonster& rhs)
 	:CGameObject(rhs),
-	m_tMeshInfo(rhs.m_tMeshInfo)
+	m_tMeshInfo(rhs.m_tMeshInfo),
+	m_pFlameThrower(rhs.m_pFlameThrower),
+	m_pZombi(rhs.m_pZombi)
 {
 }
 
@@ -65,12 +67,12 @@ HRESULT CMonster::Ready_GameObject()
 	{
 		//CZombi* pZombi = new CZombi;
 		//m_pZombiLst.push_back(pZombi);
-
 		//for (auto& pZom : m_pZombiLst)
 		//{
 		//	pZom->Set_Transform(m_pTransCom);
 		//	pZom->Set_NaviMesh(m_pNaviMesh);
 		//}
+		m_pZombi = new CZombi;
 		m_pZombi->Set_Transform(m_pTransCom);
 		m_pZombi->Set_NaviMesh(m_pNaviMesh);
 	}
@@ -120,9 +122,10 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 		return DEAD_OBJ;
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
-	m_pBoxCom->Update_Collider(&m_pTransCom->m_matWorld);
-	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCom);
+	m_pBoxCol->Update_Collider(&m_pTransCom->m_matWorld);
+	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCol);
 
+	_int iCurState = 0;
 	switch (m_eMonName)
 	{
 	case CMonster::NONAME:
@@ -131,9 +134,9 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 	{
 		if (m_pFlameThrower == nullptr)
 			return E_FAIL;
-
+		
 		m_pFlameThrower->Update_FlameThrower(fTimeDelta, m_pTransCom, m_pMeshCom);
-		dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)m_pFlameThrower->Get_CurState());
+		iCurState = m_pFlameThrower->Get_CurState();
 	}
 		break;
 	case CMonster::ZOMBI:
@@ -148,17 +151,40 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 		//}
 		if (m_pZombi == nullptr)
 			return E_FAIL;
-
+		
+		// LeftWrist
+		Update_BoneCollider(m_pShereCol[0], "LeftMiddleFinger");
+		Update_BoneCollider(m_pShereCol[1], "RightMiddleFinger");
 		m_pZombi->Update_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
-		dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)m_pZombi->Get_CurState());
+		iCurState = m_pZombi->Get_CurState();
 	}
 		break;
 	default:
 		break;
 	}
 
+	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)iCurState);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f * fTimeDelta);
+
 	return NO_EVENT;
+}
+
+void CMonster::Update_BoneCollider(CSphereCollider* pSphereCol, string strBoneName)
+{
+	if (strBoneName == "")
+		return;
+
+	_matrix matBone = *m_pMeshCom->Find_BoneMatrix(strBoneName);
+	_matrix matBoneOffset = *m_pMeshCom->Find_BoneOffset(strBoneName);
+
+	_matrix Offset = XMMatrixInverse(nullptr, matBoneOffset);
+
+	_matrix BoneMatrix = Offset * matBone * m_pTransCom->m_matWorld;
+
+	pSphereCol->Update_Collider(&BoneMatrix);
+	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, pSphereCol);
+
+	pSphereCol->Set_IsCol(true);
 }
 
 _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
@@ -167,7 +193,9 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
-	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCom), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCol), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[0]), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[1]), -1);
 
 	switch (m_eMonName)
 	{
@@ -179,11 +207,11 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 		m_pFlameThrower->LateUpdate_FlameThrower(fTimeDelta, m_pTransCom, m_pMeshCom);
 		break;
 	case CMonster::ZOMBI:
+	{
 		//for (auto& pZom : m_pZombiLst)
 		//{
 		//	if (pZom == nullptr)
 		//		return E_FAIL;
-
 		//	pZom->LateUpdate_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
 		//	if (pZom->Get_IsDeadZombi())
 		//		m_bIsDead = true;
@@ -191,8 +219,10 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 		if (m_pZombi == nullptr)
 			return E_FAIL;
 		m_pZombi->LateUpdate_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
+
 		if (m_pZombi->Get_IsDeadZombi())
 			m_bIsDead = true;	
+	}
 		break;
 	default:
 		break;
@@ -228,9 +258,16 @@ HRESULT CMonster::Add_Component()
 	NULL_CHECK_RETURN(m_pNaviMesh, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_NaviMesh", m_pNaviMesh);
 
-	m_pBoxCom = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(100.f, 100.f, 100.f), this));
-	NULL_CHECK_RETURN(m_pBoxCom, E_FAIL);
-	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCom);
+	m_pBoxCol = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(100.f, 100.f, 100.f), this));
+	NULL_CHECK_RETURN(m_pBoxCol, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCol);
+
+	for (int i = 0; i < 2; ++i)
+	{
+		m_pShereCol[i] = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 10.f/*여기반지름*/, _vec3(1.f, 1.f, 1.f), this));
+		NULL_CHECK_RETURN(m_pShereCol[i], E_FAIL);
+		m_mapComponent[ID_STATIC].emplace(L"Com_SphereCol", m_pShereCol[i]);
+	}
 
 	return S_OK;
 }

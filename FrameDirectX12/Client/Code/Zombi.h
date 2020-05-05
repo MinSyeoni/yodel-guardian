@@ -44,11 +44,17 @@ public:
 	void					Set_NaviMesh(CNaviMesh* pNavimesh) { m_pNaviMesh = pNavimesh; m_pNaviMesh->AddRef(); }
 
 public:		// 상호작용 
-	const _bool&			Get_IsDeadZombi() const { return m_bIsDead; }
+	const _bool&			Get_IsDeadZombi() const { return m_bIsZombiState[1]; }
+	const _bool&			Get_IsHit() const { return m_bIsZombiState[2]; }
+	//////////// Get_IsAtkPlayer() true일 때 충돌체크하면 피격될걸..아마도 /////////////////
+	const _bool&			Get_IsAtkPlayer() const { return m_bIsZombiState[3]; }
+	void					Set_IsHit(_bool bIsHit) { m_bIsZombiState[2] = bIsHit; }
+
 	const _float&			Get_CurHp() { return m_fCurHp; }
-	const _bool&			Get_IsHit() const { return m_bIsHit; }
-	void					Set_IsHit(_bool bIsHit) { m_bIsHit = bIsHit; }
-	const _float&			Get_HitDamage() { return m_fRandDamage; }
+	
+	/////////// 플레이어가 데미지 주면 얘가 맞을 것임 ///////////////
+	void					Set_HitDamage(_float fDamage) { m_fHitDamage = fDamage; }
+	const _float&			Get_AtkDamage() { return m_fAtkDamage; }
 
 private:
 	void					Chase_Player(const _float& fTimeDelta);
@@ -62,7 +68,6 @@ private:
 	CNaviMesh*				m_pNaviMesh = nullptr;
 	Engine::CMesh*			m_pMeshCom = nullptr;
 
-
 private:
 	_float					m_fTime = 0.f;
 	_float					m_fAniTime = 0.f;
@@ -71,11 +76,15 @@ private:
 	_vec3					m_vPlayerPos = _vec3(0.f, 0.f, 0.f);
 	_vec3					m_vChaseDir = _vec3(0.f, 0.f, 0.f);
 
-	_bool					m_bIsTurn = false;
-	_bool					m_bIsDead = false;
-	_bool					m_bIsHit = false;
+	_bool					m_bIsZombiState[4] = {false};	// 0=m_bIsTurn, 1=m_bIsDead, 2=m_bIsHit, 3=m_bIsATK;
 
-	_float					m_fRandDamage = 0.f;
+	/////////테스트////////
+	_float					m_fTestTime = 0.f;
+	_float					m_fRandTime = 0.f;
+	//////////////////////
+
+	_float					m_fHitDamage = 0.f; // 맞을때
+	_float					m_fAtkDamage = 0.f; // 때릴때
 	_float					m_fSpeed = 0.f;
 	_float					m_fCurHp = 0.f;
 	_float					m_fMaxHp = 0.f;

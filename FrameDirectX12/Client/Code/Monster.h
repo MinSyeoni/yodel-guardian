@@ -9,6 +9,7 @@ namespace Engine
 	class CMesh;
 	class CShader_Mesh;
 	class CBoxCollider;
+	class CSphereCollider;
 	class CNaviMesh;
 }
 
@@ -36,36 +37,35 @@ private:
 	void					Set_ConstantTable();
 	void					Render_ShadowDepth(CShader_Shadow* pShader);
 	void					Set_ShadowTable(CShader_Shadow* pShader);
-
-	void					Update_BoundaryBox();
+	void					Update_BoneCollider(CSphereCollider* pSphereCol, string strBoneName);
 
 private:
 	virtual HRESULT			Add_Component();
 
 private:
-	Engine::CMesh*			m_pMeshCom = nullptr;
-	Engine::CShader_Mesh*	m_pShaderCom = nullptr;
-	Engine::CBoxCollider*	m_pBoxCom = nullptr;
+	Engine::CMesh*				m_pMeshCom = nullptr;
+	Engine::CShader_Mesh*		m_pShaderCom = nullptr;
+	Engine::CBoxCollider*		m_pBoxCol = nullptr;
+	Engine::CSphereCollider*	m_pShereCol[2] = {};
+	Engine::CNaviMesh*			m_pNaviMesh = nullptr;
+	CDynamicCamera*				m_pDynamicCamera = nullptr;
 
-	Engine::CNaviMesh*		m_pNaviMesh = nullptr;
-	CDynamicCamera*			m_pDynamicCamera = nullptr;
-
-	CFlameThrower*			m_pFlameThrower = nullptr;
+	CFlameThrower*				m_pFlameThrower = nullptr;
 	
-//	list<CZombi*>			m_pZombiLst;
-	CZombi*					m_pZombi = nullptr;
+	list<CZombi*>				m_pZombiLst;
+	CZombi*						m_pZombi = nullptr;
 
 private:
-	MONKIND					m_eMonName = NONAME;
+	MONKIND						m_eMonName = NONAME;
 
-	float					m_fSpineAngle = 0.f;
+	float						m_fSpineAngle = 0.f;
 
-	MeshInfo				m_tMeshInfo;
+	MeshInfo					m_tMeshInfo;
 
-	vector<vector<_matrix>> m_vecMatrix;
+	vector<vector<_matrix>>		m_vecMatrix;
 
-	_vec3					m_pPlayerPos = _vec3(0.f, 0.f, 0.f);
-	_vec3					m_pMonsterPos = _vec3(0.f, 0.f, 0.f);
+	_vec3						m_pPlayerPos = _vec3(0.f, 0.f, 0.f);
+	_vec3						m_pMonsterPos = _vec3(0.f, 0.f, 0.f);
 
 public:
 	virtual CGameObject*	Clone_GameObject(void* prg);

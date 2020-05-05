@@ -212,6 +212,5 @@ CSalone * CSalone::Create(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandLi
 
 void CSalone::Free()
 {
-
 	CGameObject::Free();
 }

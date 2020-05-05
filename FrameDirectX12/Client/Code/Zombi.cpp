@@ -27,6 +27,8 @@ HRESULT CZombi::Late_Initialized()
 {
 	srand((unsigned int)time(0));
 
+	m_fRandTime = rand() % 10 + 5.f;
+
 	_int iRandAni = rand() % 4;
 
 	if (iRandAni == 0)
@@ -66,10 +68,18 @@ _int CZombi::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform, CMes
 	// 맞았는지 임시임시 플레이어에서 SetIsHit 해주세
 	//if (Engine::CDirectInput::Get_Instance()->Mouse_KeyDown(DIM_LB))
 	//	m_bIsHit = true;	
+	
+	/////////죽는거 랜덤 시간 테스트/////////
+	//m_fTestTime += fTimeDelta;
+	//if (m_fTestTime >= m_fRandTime)
+	//{
+	//	m_fTestTime = 0.f;
+	//	m_eCurState = ZOM_BC_Dead;
+	//}
+	//////////////////////////////////////
 
-	if (m_bIsHit)
+	if (m_bIsZombiState[2])	// m_bIsHit
 		m_eCurState = ZOM_EX_IdleOffset;
-
 
 	return S_OK();
 }
@@ -99,17 +109,17 @@ void CZombi::Chase_Player(const _float& fTimeDelta)
 		fAngle = -XMConvertToDegrees(acosf(m_vChaseDir.Dot(vLook)));
 	}
 
-	if ((fAngle > 3.f || fAngle < -3.f) && !m_bIsTurn)
+	if ((fAngle > 3.f || fAngle < -3.f) && !m_bIsZombiState[0])
 	{
 		m_pTransCom->m_vAngle.y += ToRadian(fAngle * 180.f * fTimeDelta);
 	}
 	else if ((fAngle <= 3.f && fAngle >= -3.f))
 	{
-		m_bIsTurn = true;
+		m_bIsZombiState[0] = true;
 	}
 	else if ((fAngle > 15.f || fAngle < -15.f))
 	{
-		m_bIsTurn = false;
+		m_bIsZombiState[0] = false;
 	}
 
 	m_pTransCom->m_vDir = m_vChaseDir;
@@ -180,8 +190,8 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombi::ZOM_EX_IdleOffset:
 	{
-		m_fRandDamage = rand() % 15 + 15.f;
-		if (m_bIsHit)
+		//m_fRandDamage = rand() % 15 + 15.f;
+		if (m_bIsZombiState[2])	// hit
 		{
 			m_fSpeed = 15.f;
 		
@@ -190,8 +200,8 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 			m_fAniDelay = 100.f;
 			if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_IdleOffset))
 			{
-				m_fCurHp -= m_fRandDamage;
-				m_bIsHit = false;
+				m_fCurHp -= m_fHitDamage;
+				m_bIsZombiState[2] = false;
 			}
 		}
 
@@ -245,7 +255,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	{
 		m_fAniDelay = 6500.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_BC_Dead))
-			m_bIsDead = true;
+			m_bIsZombiState[1] = true;	//dead
 	}
 		break;
 	case CZombi::ZOM_Base_Pose2:
@@ -273,9 +283,16 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 
 void CZombi::Attak_Player(Engine::CMesh* m_pMeshCom, CZombi::ZOMBISTATE eState)
 {
+	if (!m_bIsZombiState[3])
+	{
+		m_bIsZombiState[3] = true;
+		m_fAtkDamage = rand() % 15 + 15.f;
+	}
+	
 	if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, eState))
 	{
 		int iRandAni = rand() % 2;
+		m_bIsZombiState[3] = false;
 
 		if (Check_PlayerRange(10.f))
 		{
