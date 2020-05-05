@@ -31,23 +31,44 @@ HRESULT CNaviMesh::Ready_NaviMesh()
 
 	_vec3 vecPointA, vecPointB, vecPointC;
 	_int iOption=0;
+
+	// 나중에 파일도 받아올 수 있도록 해야함.
+	HANDLE hFile = CreateFile(L"../../../SYTool/Tool/Data/Navi/map1.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	NULL_CHECK_RETURN(hFile, E_FAIL);
+
+	if (INVALID_HANDLE_VALUE == hFile)
+		return E_FAIL;
+
+	DWORD dwByte = 0;
+	NAVICELL tNaviData = {};
+	CCell* pCell = nullptr;
+
+	while (true)
+	{
+		ReadFile(hFile, &tNaviData, sizeof(NAVICELL), &dwByte, nullptr);
+
+		if (dwByte == 0)
+			break;
+
+		int iPointCnt = 0;
+		
+		vecPointA = tNaviData.PointA;
+		iPointCnt++;
+		vecPointB = tNaviData.PointB;
+		iPointCnt++;
+		vecPointC = tNaviData.PointC;
+		iPointCnt++;
+
+		if (3 == iPointCnt)
+		{
+			pCell = CCell::Create(m_pGraphicDevice, m_pCommandList, _ulong(m_vecCell.size()), &vecPointA, &vecPointB, &vecPointC, 0);
+			m_vecCell.push_back(pCell);
+
+			iPointCnt = 0;
+		}
+	}
+	CloseHandle(hFile);
 	
-	vecPointA = _vec3(200.f, 0.f, 200.f);
-	vecPointB = _vec3(300.f, 0.f, 400.f);
-	vecPointC = _vec3(500.f, 0.f, 300.f);
-
-	CCell*pCell = nullptr;
-
-	pCell = CCell::Create(m_pGraphicDevice, m_pCommandList, _ulong(m_vecCell.size()), &vecPointA, &vecPointB, &vecPointC, 0);
-	m_vecCell.push_back(pCell);
-
-	vecPointA = _vec3(300.f, 0.f, 400.f);
-	vecPointB = _vec3(500.f, 0.f, 700.f);
-	vecPointC = _vec3(500.f, 0.f, 300.f);
-
-	pCell = CCell::Create(m_pGraphicDevice, m_pCommandList, _ulong(m_vecCell.size()), &vecPointA, &vecPointB, &vecPointC, 0);
-	m_vecCell.push_back(pCell);
-
 	vector<CNaviBuffer::NAVIINFO> vecInfo;
 	vecInfo.reserve(vecInfo.size());
 	for (int i = 0; i < m_vecCell.size(); ++i)
@@ -56,14 +77,14 @@ HRESULT CNaviMesh::Ready_NaviMesh()
 		tNaviInfo.vPosition[0] = *m_vecCell[i]->Get_Point(CCell::POINT_A);
 		tNaviInfo.vPosition[1] = *m_vecCell[i]->Get_Point(CCell::POINT_B);
 		tNaviInfo.vPosition[2] = *m_vecCell[i]->Get_Point(CCell::POINT_C);
-		   
-	 _uint iOption = m_vecCell[i]->Get_Option();
-	 _vec4 vColor;
-	 if (iOption == 0)
-		 vColor = _vec4(1.f, 0.f, 0.f, 1.0f);
-	 tNaviInfo.vColor = vColor;
 
-	 vecInfo.push_back(tNaviInfo);
+		_uint iOption = m_vecCell[i]->Get_Option();
+		_vec4 vColor;
+		if (iOption == 0)
+			vColor = _vec4(1.f, 0.f, 0.f, 1.0f);
+		tNaviInfo.vColor = vColor;
+
+		vecInfo.push_back(tNaviInfo);
 	}
 	m_pNaviBuffer = CNaviBuffer::Create(m_pGraphicDevice, m_pCommandList, vecInfo);
 	if (m_pNaviBuffer == nullptr)

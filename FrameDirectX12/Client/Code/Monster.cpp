@@ -62,9 +62,18 @@ HRESULT CMonster::Ready_GameObject()
 		m_pFlameThrower->Set_Transform(m_pTransCom);
 		break;
 	case CMonster::ZOMBI:
-		m_pZombiState = new CZombiState;
-		m_pZombiState->Set_Transform(m_pTransCom);
-		m_pZombiState->Set_NaviMesh(m_pNaviMesh);
+	{
+		//CZombi* pZombi = new CZombi;
+		//m_pZombiLst.push_back(pZombi);
+
+		//for (auto& pZom : m_pZombiLst)
+		//{
+		//	pZom->Set_Transform(m_pTransCom);
+		//	pZom->Set_NaviMesh(m_pNaviMesh);
+		//}
+		m_pZombi->Set_Transform(m_pTransCom);
+		m_pZombi->Set_NaviMesh(m_pNaviMesh);
+	}
 		break;
 	default:
 		break;
@@ -78,6 +87,7 @@ HRESULT CMonster::LateInit_GameObject()
 #ifdef _DEBUG
 	COUT_STR("LateInit Monster");
 #endif
+
 	m_pDynamicCamera = static_cast<CDynamicCamera*>(m_pObjectMgr->Get_GameObject(L"Layer_Camera", L"DynamicCamera"));
 	NULL_CHECK_RETURN(m_pDynamicCamera, E_FAIL);
 
@@ -91,7 +101,9 @@ HRESULT CMonster::LateInit_GameObject()
 		m_pFlameThrower->Late_Initialized();
 		break;
 	case CMonster::ZOMBI:
-		m_pZombiState->Late_Initialized();
+		//for (auto& pZom : m_pZombiLst)
+		//	pZom->Late_Initialized();
+		m_pZombi->Late_Initialized();
 		break;
 	default:
 		break;
@@ -121,27 +133,31 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 			return E_FAIL;
 
 		m_pFlameThrower->Update_FlameThrower(fTimeDelta, m_pTransCom, m_pMeshCom);
-		m_iCurMonState = m_pFlameThrower->Get_CurState();
-		m_iPreMonState = m_pFlameThrower->Get_PreState();
+		dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)m_pFlameThrower->Get_CurState());
 	}
 		break;
 	case CMonster::ZOMBI:
 	{
-		if (m_pZombiState == nullptr)
+		//for (auto& pZom : m_pZombiLst)
+		//{
+		//	if (pZom == nullptr)
+		//		return E_FAIL;
+
+		//	pZom->Update_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
+		//	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)pZom->Get_CurState());		
+		//}
+		if (m_pZombi == nullptr)
 			return E_FAIL;
 
-		m_pZombiState->Update_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
-		m_iCurMonState = m_pZombiState->Get_CurState();
-		m_iPreMonState = m_pZombiState->Get_PreState();
+		m_pZombi->Update_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
+		dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)m_pZombi->Get_CurState());
 	}
 		break;
 	default:
 		break;
 	}
 
-	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)m_iCurMonState);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f * fTimeDelta);
-
 	return NO_EVENT;
 }
 
@@ -153,7 +169,6 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCom), -1);
 
-
 	switch (m_eMonName)
 	{
 	case CMonster::NONAME:
@@ -164,11 +179,20 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 		m_pFlameThrower->LateUpdate_FlameThrower(fTimeDelta, m_pTransCom, m_pMeshCom);
 		break;
 	case CMonster::ZOMBI:
-		if (m_pZombiState == nullptr)
+		//for (auto& pZom : m_pZombiLst)
+		//{
+		//	if (pZom == nullptr)
+		//		return E_FAIL;
+
+		//	pZom->LateUpdate_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
+		//	if (pZom->Get_IsDeadZombi())
+		//		m_bIsDead = true;
+		//}
+		if (m_pZombi == nullptr)
 			return E_FAIL;
-		m_pZombiState->LateUpdate_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
-		if (m_pZombiState->Get_IsDeadZombi())
-			m_bIsDead = true;
+		m_pZombi->LateUpdate_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
+		if (m_pZombi->Get_IsDeadZombi())
+			m_bIsDead = true;	
 		break;
 	default:
 		break;
@@ -204,7 +228,7 @@ HRESULT CMonster::Add_Component()
 	NULL_CHECK_RETURN(m_pNaviMesh, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_NaviMesh", m_pNaviMesh);
 
-	m_pBoxCom = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(300.f, 300.f, 300.f), this));
+	m_pBoxCom = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(100.f, 100.f, 100.f), this));
 	NULL_CHECK_RETURN(m_pBoxCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCom);
 
@@ -286,6 +310,12 @@ CMonster* CMonster::Create(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandL
 void CMonster::Free()
 {
 	Safe_Delete(m_pFlameThrower);
-	Safe_Delete(m_pZombiState);
+	Safe_Delete(m_pZombi);
+	//for (auto& pZom : m_pZombiLst)
+	//{
+	//	Safe_Delete(pZom);
+	//}
+	//m_pZombiLst.clear();
+
 	CGameObject::Free();
 }

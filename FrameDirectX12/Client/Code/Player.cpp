@@ -63,13 +63,13 @@ HRESULT CPlayer::Ready_GameObject()
 	 m_pStatus->SetMesh(static_cast<CMesh*>(m_pArm->Get_Component(L"Com_Mesh",ID_STATIC)));
 
 
-	 m_pTransCom->m_vPos = _vec3(300.f, 0.f, 300.f);
+	 m_pTransCom->m_vPos = _vec3(300.f, 0.f, 450.f);
 	 m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
 	 m_pTransCom->m_vDir = _vec3(0.f, 0.0f, 1.f);
 
 	 m_pTransCom->m_matWorld._41 = 300.f;
 	 m_pTransCom->m_matWorld._42 = 0.f;
-	 m_pTransCom->m_matWorld._43 = 300.f;
+	 m_pTransCom->m_matWorld._43 = 450.f;
 	return S_OK;
 }
 

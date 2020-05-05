@@ -340,7 +340,8 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Solar.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Solar.x"), E_FAIL))
 		return;
-
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Missile.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Missile.x"), E_FAIL))
+		return;
 	///// 테스트 /////
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"test.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"test.x"), E_FAIL))
 		return;
