@@ -148,7 +148,6 @@ void CNaviTab::Modify_NaviPointPos()
 	}	
 }
 
-
 BOOL CNaviTab::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();

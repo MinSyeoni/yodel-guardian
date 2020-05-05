@@ -93,7 +93,7 @@ private:
 public:
 	afx_msg void		OnLButtonDown(UINT nFlags, CPoint point);
 
-	void Modify_NaviPointCell(bool& retflag);
+	void				Modify_NaviPointCell(bool& retflag);
 
 	void				Create_NaviPointCell(bool& retflag);
 	void				Check_ClockDirection(bool& retflag);
@@ -102,7 +102,7 @@ public:
 	void				Picking_MeshOnStaticObject(bool& retflag);
 	void				Picking_MouseOnStaticObject(bool& retflag);
 	void				Picking_TerrainOnStaticObject(bool& retflag);
-	void CheckCameraTabButton();
+	void				CheckCameraTabButton();
 
 
 
