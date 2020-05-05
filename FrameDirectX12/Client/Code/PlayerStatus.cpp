@@ -98,8 +98,8 @@ void CPlayerStatus::KeyInput()
 	if (m_eCurState == CPlayer::RIFLEDRAW || m_eCurState == CPlayer::RIFLEHOLSTER)
 		return;
 
-
-
+	if (m_pCamera == nullptr)
+		return;
 	if (m_eEquip == RIFLE)
 	{
 		if (!m_bIsShoot)

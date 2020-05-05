@@ -232,6 +232,8 @@ call CopyEngine.bat</Command>
     <ClInclude Include="..\Code\Shader_Terrain.h" />
     <ClInclude Include="..\Code\Shader_UI.h" />
     <ClInclude Include="..\Code\ShadowDepthTarget.h" />
+    <ClInclude Include="..\Code\SphereCollider.h" />
+    <ClInclude Include="..\Code\SphereTex.h" />
     <ClInclude Include="..\Code\SSAOTarget.h" />
     <ClInclude Include="..\Code\Target.h" />
     <ClInclude Include="..\Code\TerrainTex.h" />
@@ -306,6 +308,8 @@ call CopyEngine.bat</Command>
     <ClCompile Include="..\Code\Shader_Terrain.cpp" />
     <ClCompile Include="..\Code\Shader_UI.cpp" />
     <ClCompile Include="..\Code\ShadowDepthTarget.cpp" />
+    <ClCompile Include="..\Code\SphereCollider.cpp" />
+    <ClCompile Include="..\Code\SphereTex.cpp" />
     <ClCompile Include="..\Code\SSAOTarget.cpp" />
     <ClCompile Include="..\Code\Target.cpp" />
     <ClCompile Include="..\Code\TerrainTex.cpp" />

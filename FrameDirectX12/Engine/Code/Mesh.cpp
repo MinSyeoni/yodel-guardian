@@ -10,11 +10,12 @@ CMesh::CMesh(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommand
 CMesh::CMesh(const CMesh & rhs)
 	:m_pScene(rhs.m_pScene)
 	,m_pMeshComponent(rhs.m_pMeshComponent)
-	, m_pAnimationComponent(rhs.m_pAnimationComponent)
 {
 	m_pMeshComponent->AddRef();
-	if(m_pAnimationComponent!=nullptr)
-	m_pAnimationComponent->AddRef();
+	if (m_pScene->mNumAnimations)
+	{
+		m_pAnimationComponent = new CAniCtrl(*rhs.m_pAnimationComponent);
+	}
 }
 
 
@@ -37,11 +38,10 @@ HRESULT CMesh::Ready_Mesh(const _tchar * pFilePath, const _tchar * pFileName)
 	string szFullPath = psz;
 	delete[] psz;
 
-	m_pScene = m_Importer.ReadFile(szFullPath.c_str(), aiProcess_Triangulate | aiProcess_GenSmoothNormals
-		| aiProcess_FlipUVs
-		| aiProcess_JoinIdenticalVertices
-		| aiProcess_OptimizeMeshes
-		| aiPostProcessSteps::aiProcess_FlipWindingOrder);
+	m_pScene = m_Importer.ReadFile(szFullPath.c_str(),
+		aiProcess_MakeLeftHanded
+		| aiPostProcessSteps::aiProcess_FlipWindingOrder
+		| aiProcess_FlipUVs);
 	
 	if (m_pScene->mNumMeshes)
 	{

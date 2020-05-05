@@ -287,9 +287,9 @@ HRESULT CMeshComponent::InitMesh(int MeshIndex, const aiMesh* paiMesh, vector<VT
     {
         aiFace face = paiMesh->mFaces[i];
         assert(face.mNumIndices == 3);
-        vecIndex.push_back(face.mIndices[2]);
-        vecIndex.push_back(face.mIndices[1]);
         vecIndex.push_back(face.mIndices[0]);
+        vecIndex.push_back(face.mIndices[1]);
+        vecIndex.push_back(face.mIndices[2]);
     }
 
     int inumBones = 0;

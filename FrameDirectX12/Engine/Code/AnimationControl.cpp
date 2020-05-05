@@ -4,14 +4,42 @@ USING(Engine)
 
 CAniCtrl::CAniCtrl(const aiScene * pScene)
 	: m_pScene(pScene)
+	,m_matCamera(INIT_MATRIX)
+	,m_matRootFinal(INIT_MATRIX)
+	,m_matWeapon(INIT_MATRIX)
 {
+	
+}
+
+CAniCtrl::CAniCtrl(const CAniCtrl& rhs)
+	:m_matRootFinal(rhs.m_matRootFinal),
+	m_pScene(rhs.m_pScene),
+	m_matCamera(rhs.m_matCamera),
+	m_matWeapon(rhs.m_matWeapon)
+{
+	m_vecBoneInfo.reserve(rhs.m_vecBoneInfo.size());
+	m_vecBoneInfo = rhs.m_vecBoneInfo;
+
+	m_mapNodeHierarchy.reserve(rhs.m_mapNodeHierarchy.size());
+	m_mapNodeHierarchy = rhs.m_mapNodeHierarchy;
+
+	m_vecBoneNameMap.reserve(rhs.m_vecBoneNameMap.size());
+	m_vecBoneNameMap = rhs.m_vecBoneNameMap;
+
+
+	//깊은복사
+	m_vecBoneTransform = new vector<VECTOR_MATRIX>;
+	m_vecBoneTransform->reserve(rhs.m_vecBoneTransform->size());
+	(*m_vecBoneTransform) = *(rhs.m_vecBoneTransform);
+
+	m_bIsClone = true;
 }
 
 HRESULT CAniCtrl::Ready_AniCtrl()
 {
 
-
-	m_vecBoneTransform.resize(m_pScene->mNumMeshes);
+	m_vecBoneTransform = new vector<VECTOR_MATRIX>;
+	m_vecBoneTransform->resize(m_pScene->mNumMeshes);
 	m_vecBoneNameMap.resize(m_pScene->mNumMeshes);
 	m_vecBoneInfo.resize(m_pScene->mNumMeshes);
 
@@ -23,7 +51,7 @@ HRESULT CAniCtrl::Ready_AniCtrl()
 		/*__________________________________________________________________________________________________________
 		- 뼈 행렬을 담아둘 컨테이너 초기화.
 		____________________________________________________________________________________________________________*/
-		m_vecBoneTransform[i].resize(pSubsetMesh->mNumBones);
+		(*m_vecBoneTransform)[i].resize(pSubsetMesh->mNumBones);
 
 		for (_uint j = 0; j < pSubsetMesh->mNumBones; ++j, ++iNumBones)
 		{
@@ -218,7 +246,7 @@ vector<VECTOR_MATRIX> CAniCtrl::Extract_BoneBlendingTransform(_float fAniTimeFir
 	}
 
 
-	return m_vecBoneTransform;
+	return *m_vecBoneTransform;
 }
 
 vector<VECTOR_MATRIX> CAniCtrl::Extract_BoneTransform(_float fAnimationTime)
@@ -267,7 +295,7 @@ vector<VECTOR_MATRIX> CAniCtrl::Extract_BoneTransform(_float fAnimationTime)
 
 	}
 
-	return m_vecBoneTransform;
+	return *m_vecBoneTransform;
 }
 
 void CAniCtrl::Update_NodeHierarchy(_float fAnimationTime,
@@ -350,7 +378,7 @@ void CAniCtrl::Update_NodeHierarchy(_float fAnimationTime,
 				* matGlobalTransform
 				* Convert_AiToMat4(m_pScene->mRootNode->mTransformation);
 
-			m_vecBoneTransform[iIdx][uiBoneIdx] = m_vecBoneInfo[iIdx][uiBoneIdx].matfinalTransform;
+			(*m_vecBoneTransform)[iIdx][uiBoneIdx] = m_vecBoneInfo[iIdx][uiBoneIdx].matfinalTransform;
 		}
 
 	}
@@ -497,7 +525,7 @@ void CAniCtrl::Update_NodeHirearchyBlend(_float fAnimationTime, _float fAnimatio
 				* matGlobalTransform
 				* Convert_AiToMat4(m_pScene->mRootNode->mTransformation);
 
-			m_vecBoneTransform[iIdx][uiBoneIdx] = m_vecBoneInfo[iIdx][uiBoneIdx].matfinalTransform;
+			(*m_vecBoneTransform)[iIdx][uiBoneIdx] = m_vecBoneInfo[iIdx][uiBoneIdx].matfinalTransform;
 		}
 
 	}
@@ -766,8 +794,20 @@ CAniCtrl * CAniCtrl::Create(const aiScene * pScece)
 
 void CAniCtrl::Free()
 {
-	for (auto& MyPair : m_mapNodeHierarchy)
-		Safe_Delete(MyPair.second);
+
+
+	if (!m_bIsClone)
+	{
+		for (auto& MyPair : m_mapNodeHierarchy)
+		{
+			Safe_Delete(MyPair.second);
+		}
+		m_mapNodeHierarchy.clear();
+
+		m_pScene = nullptr;
+	}
+
+	Safe_Delete(m_vecBoneTransform);
 
 	m_mapNodeHierarchy.clear();
 }

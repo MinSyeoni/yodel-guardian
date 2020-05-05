@@ -199,6 +199,12 @@
     <Filter Include="01.Scene_Stage\07.NPC\00.Salone">
       <UniqueIdentifier>{44ea816e-5153-4117-a1aa-ffd0743d3f5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Scene_Stage\03.Camera\01.ActionCamera">
+      <UniqueIdentifier>{1feec561-2e19-4342-b303-25e5e1749cbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Mgr\00.MathMgr">
+      <UniqueIdentifier>{cd7bde85-26a6-4014-a359-0d317f4c3bc5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -330,6 +336,12 @@
     <ClInclude Include="..\Code\Salone.h">
       <Filter>01.Scene_Stage\07.NPC\00.Salone</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\ActionCamera.h">
+      <Filter>01.Scene_Stage\03.Camera\01.ActionCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\MathMgr.h">
+      <Filter>97.Mgr\00.MathMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -430,6 +442,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\Salone.cpp">
       <Filter>01.Scene_Stage\07.NPC\00.Salone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ActionCamera.cpp">
+      <Filter>01.Scene_Stage\03.Camera\01.ActionCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MathMgr.cpp">
+      <Filter>97.Mgr\00.MathMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -40,13 +40,13 @@ c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\info.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\graphicdevice.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\gameobject.obj
-c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\transform.obj
-c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\timer.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\timemgr.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\texture.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\terraintex.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\target.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\ssaotarget.obj
+c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\spheretex.obj
+c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\spherecollider.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\shadowdepthtarget.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_ui.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_terrain.obj
@@ -62,6 +62,8 @@ c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_blur.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\vlline.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\vibuffer.obj
+c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\transform.obj
+c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\timer.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\bin\engine.lib
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\bin\engine.exp
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\bin\shader_blend.cso

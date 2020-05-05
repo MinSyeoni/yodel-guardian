@@ -33,7 +33,6 @@ typedef struct tagHierarchyInfo
 } HIERARCHY_INFO;
 
 
-
 class ENGINE_DLL CAniCtrl : public CComponent
 {
 public:
@@ -42,6 +41,8 @@ public:
 private:
 	explicit CAniCtrl(const aiScene* pScene);
 	virtual ~CAniCtrl() = default;
+public:
+	explicit CAniCtrl(const CAniCtrl& rhs);
 
 public:
 	HRESULT               Ready_AniCtrl();
@@ -95,7 +96,7 @@ private:
 
 	vector<MAP_BONENAME>   m_vecBoneNameMap;               // 뼈의 이름이 몇 번째인지 알려주는 컨테이너.
 	vector<VECTOR_BONEINFO>   m_vecBoneInfo;                  // 뼈의 행렬 정보를 갖고있는 컨테이너.
-	vector<VECTOR_MATRIX>   m_vecBoneTransform;               // Mesh의 애니메이션 최종 변환 행렬.
+	vector<VECTOR_MATRIX>*   m_vecBoneTransform;               // Mesh의 애니메이션 최종 변환 행렬.
 
 	_uint               m_uiCurAniIndex = 0;            // 현재 애니메이션의 Index
 	_uint               m_uiNewAniIndex = 0;            // 새로운 애니메이션이 Index
@@ -117,9 +118,9 @@ private:
 
 	unordered_map<string, HIERARCHY_INFO*>   m_mapNodeHierarchy;   // Node Hierarchy 정보.
 
-	_matrix            m_matRootFinal;
-	_matrix            m_matWeapon;
-	_matrix            m_matCamera;
+	_matrix            m_matRootFinal =INIT_MATRIX;
+	_matrix            m_matWeapon= INIT_MATRIX;
+	_matrix            m_matCamera= INIT_MATRIX;
 	_float  m_fAngle = 0.f;
 
 private:

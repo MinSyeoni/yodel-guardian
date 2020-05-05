@@ -53,7 +53,7 @@ HRESULT CBoxCollider::Ready_Collider(  CMesh * pMesh, const _vec3 & vAddPos, con
 	if (pOwner != nullptr)
 		m_pOwner = pOwner;
 
-	m_pDrawMesh = static_cast<CVIBuffer*>( CComponentMgr::Get_Instance()->Clone_Component(L"Prototype_CubeColor",ID_STATIC));
+	m_pDrawMesh = static_cast<CVIBuffer*>(CComponentMgr::Get_Instance()->Clone_Component(L"Prototype_SphereColor", ID_STATIC));
 	if (m_pDrawMesh == nullptr)
 		return E_FAIL;
 

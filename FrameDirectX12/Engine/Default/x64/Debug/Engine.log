@@ -5,9 +5,9 @@
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Destortion.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_DownSample.cso
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(82,12-69): warning X3206: implicit truncation of vector type
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_LightAcc.cso
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(121,12-69): warning X3206: implicit truncation of vector type
   
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_LightAcc.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Mesh.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ShadowDepth.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_SSAO.cso
@@ -34,7 +34,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_L
   FrameMgr.cpp
   Frustom.cpp
   코드를 생성하고 있습니다...
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\AnimationControl.cpp(697): warning C4715: 'Engine::CAniCtrl::Find_BoneOffset': 모든 제어 경로에서 값을 반환하지는 않습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\AnimationControl.cpp(725): warning C4715: 'Engine::CAniCtrl::Find_BoneOffset': 모든 제어 경로에서 값을 반환하지는 않습니다.
   컴파일하고 있습니다...
   GameObject.cpp
   GraphicDevice.cpp
@@ -75,15 +75,18 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\Shader_
   Shader_Terrain.cpp
   Shader_UI.cpp
   ShadowDepthTarget.cpp
+  SphereCollider.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\SphereCollider.cpp(22,10): warning C4091: '': 변수를 선언하지 않으면 'Engine::CCubeTex' 왼쪽은 무시됩니다.
+  SphereTex.cpp
   SSAOTarget.cpp
   Target.cpp
   TerrainTex.cpp
   Texture.cpp
   TimeMgr.cpp
-  Timer.cpp
-  Transform.cpp
   코드를 생성하고 있습니다...
   컴파일하고 있습니다...
+  Timer.cpp
+  Transform.cpp
   VIBuffer.cpp
   VlLine.cpp
   코드를 생성하고 있습니다...
@@ -147,6 +150,8 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\Shader_
   .\Engine\Code\Shader_Terrain.h
   .\Engine\Code\Shader_UI.h
   .\Engine\Code\ShadowDepthTarget.h
+  .\Engine\Code\SphereCollider.h
+  .\Engine\Code\SphereTex.h
   .\Engine\Code\SSAOTarget.h
   .\Engine\Code\StaticMesh.h
   .\Engine\Code\Target.h
@@ -158,7 +163,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\Shader_
   .\Engine\Code\Transform.h
   .\Engine\Code\VIBuffer.h
   .\Engine\Code\VlLine.h
-         64개 파일이 복사되었습니다.
+         66개 파일이 복사되었습니다.
   .\Engine\Header\Engine_Const.h
   .\Engine\Header\Engine_Enum.h
   .\Engine\Header\Engine_Function.h

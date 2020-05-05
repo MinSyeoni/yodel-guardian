@@ -164,6 +164,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Code\ActionCamera.h" />
     <ClInclude Include="..\Code\Aim.h" />
     <ClInclude Include="..\Code\BackGround.h" />
     <ClInclude Include="..\Code\CubeObject.h" />
@@ -175,6 +176,7 @@
     <ClInclude Include="..\Code\Loading.h" />
     <ClInclude Include="..\Code\MainApp.h" />
     <ClInclude Include="..\Code\MapObject.h" />
+    <ClInclude Include="..\Code\MathMgr.h" />
     <ClInclude Include="..\Code\Monster.h" />
     <ClInclude Include="..\Code\Pistol.h" />
     <ClInclude Include="..\Code\Player.h" />
@@ -209,6 +211,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\ActionCamera.cpp" />
     <ClCompile Include="..\Code\Aim.cpp" />
     <ClCompile Include="..\Code\BackGround.cpp" />
     <ClCompile Include="..\Code\CubeObject.cpp" />
@@ -220,6 +223,7 @@
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\MapObject.cpp" />
+    <ClCompile Include="..\Code\MathMgr.cpp" />
     <ClCompile Include="..\Code\Monster.cpp" />
     <ClCompile Include="..\Code\Pistol.cpp" />
     <ClCompile Include="..\Code\Player.cpp" />
