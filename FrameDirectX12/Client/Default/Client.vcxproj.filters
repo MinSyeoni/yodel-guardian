@@ -330,9 +330,6 @@
     <ClInclude Include="..\Code\UI.h">
       <Filter>03.UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\ZombiState.h">
-      <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\Salone.h">
       <Filter>01.Scene_Stage\07.NPC\00.Salone</Filter>
     </ClInclude>
@@ -341,6 +338,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\BaziorMgr.h">
       <Filter>97.Mgr\00.MathMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Zombi.h">
+      <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -437,9 +437,6 @@
     <ClCompile Include="..\Code\UI.cpp">
       <Filter>03.UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\ZombiState.cpp">
-      <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Salone.cpp">
       <Filter>01.Scene_Stage\07.NPC\00.Salone</Filter>
     </ClCompile>
@@ -448,6 +445,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\BaziorMgr.cpp">
       <Filter>97.Mgr\00.MathMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Zombi.cpp">
+      <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

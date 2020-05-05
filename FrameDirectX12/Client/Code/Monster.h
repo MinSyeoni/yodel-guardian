@@ -2,7 +2,7 @@
 #include "Include.h"
 #include "GameObject.h"
 #include "FlameThrower.h"
-#include "ZombiState.h"
+#include "Zombi.h"
 
 namespace Engine
 {
@@ -51,12 +51,12 @@ private:
 	CDynamicCamera*			m_pDynamicCamera = nullptr;
 
 	CFlameThrower*			m_pFlameThrower = nullptr;
-	CZombiState*			m_pZombiState = nullptr;
+	
+//	list<CZombi*>			m_pZombiLst;
+	CZombi*					m_pZombi = nullptr;
 
 private:
 	MONKIND					m_eMonName = NONAME;
-	_int					m_iCurMonState = 0;
-	_int					m_iPreMonState = 0;
 
 	float					m_fSpineAngle = 0.f;
 

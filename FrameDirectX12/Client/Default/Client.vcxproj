@@ -197,7 +197,7 @@
     <ClInclude Include="..\Code\Terrain.h" />
     <ClInclude Include="..\Code\UI.h" />
     <ClInclude Include="..\Code\Weapon.h" />
-    <ClInclude Include="..\Code\ZombiState.h" />
+    <ClInclude Include="..\Code\Zombi.h" />
     <ClInclude Include="..\Header\Const.h" />
     <ClInclude Include="..\Header\Define.h" />
     <ClInclude Include="..\Header\Extern.h" />
@@ -244,7 +244,7 @@
     <ClCompile Include="..\Code\Terrain.cpp" />
     <ClCompile Include="..\Code\UI.cpp" />
     <ClCompile Include="..\Code\Weapon.cpp" />
-    <ClCompile Include="..\Code\ZombiState.cpp" />
+    <ClCompile Include="..\Code\Zombi.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

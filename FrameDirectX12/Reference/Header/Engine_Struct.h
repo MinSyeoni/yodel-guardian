@@ -775,5 +775,14 @@ typedef struct _D3DLIGHT {
     float m_fRange;
 }D3DLIGHT;
 
+// 네비메쉬용 
+typedef struct tagCell
+{
+    _vec3        PointA = _vec3(0.f,0.f,0.f);
+    _vec3        PointB = _vec3(0.f, 0.f, 0.f);
+    _vec3        PointC = _vec3(0.f, 0.f, 0.f);
+    int			 Option = 0;
+    int			 DrawID = 0;
+}NAVICELL;
 
 #endif // Engine_Struct_h__
