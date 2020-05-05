@@ -64,36 +64,38 @@ HRESULT CDynamicCamera::LateInit_GameObject()
 
 _int CDynamicCamera::Update_GameObject(const _float& fTimeDelta)
 {
-    FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
-    /*____________________________________________________________________
-    View 행렬 Update.
-    ______________________________________________________________________*/
+	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
-    if (m_bIsZoom == true)
-    {
-        m_fZoom -= fTimeDelta * 500.f;
-        if (m_fMaxZoom > m_fZoom)
-            m_fZoom = m_fMaxZoom;
-        Set_ProjForV(45.f);
-    }
-    else
-    {
-        m_fZoom += fTimeDelta * 500.f;
-        if (m_fMinZoom < m_fZoom)
-            m_fZoom = m_fMinZoom;
-        Set_ProjForV(60.f);
-    }
+	/*____________________________________________________________________
+	View 행렬 Update.
+	______________________________________________________________________*/
+
+	if (m_bIsZoom == true)
+	{
+		m_fZoom -= fTimeDelta * 500.f;
+		if (m_fMaxZoom > m_fZoom)
+			m_fZoom = m_fMaxZoom;
+		Set_ProjForV(45.f);
+	}
+	else
+	{
+		m_fZoom += fTimeDelta * 500.f;
+		if (m_fMinZoom < m_fZoom)
+			m_fZoom = m_fMinZoom;
+		Set_ProjForV(60.f);
+	}
 
 
-    MouseInput();
-    Engine::CGameObject::Update_GameObject(fTimeDelta);
-    Engine::CCamera::Update_GameObject(fTimeDelta);
+	MouseInput();
+	Engine::CGameObject::Update_GameObject(fTimeDelta);
+	Engine::CCamera::Update_GameObject(fTimeDelta);
+	
+	CGraphicDevice::Get_Instance()->SetViewMatrix(m_tCameraInfo.matView);
+	CGraphicDevice::Get_Instance()->SetProjMatrix(m_tProjInfo.matProj);
 
-    CGraphicDevice::Get_Instance()->SetViewMatrix(m_tCameraInfo.matView);
-    CGraphicDevice::Get_Instance()->SetProjMatrix(m_tProjInfo.matProj);
+	return NO_EVENT;
 
-    return NO_EVENT;
 }
 
 _int CDynamicCamera::LateUpdate_GameObject(const _float& fTimeDelta)
@@ -132,9 +134,16 @@ void CDynamicCamera::MouseInput()
         memcpy(&CameraLook, &CameraMatrix._31, sizeof(_vec3));//높이
         memcpy(&CameraPos, &CameraMatrix._41, sizeof(_vec3));
 
+<<<<<<< HEAD
+		m_tCameraInfo.vEye.y += 10.f;
+		m_tCameraInfo.vAt.y += 10.f;
+		if (m_tCameraInfo.vEye.x == 0 && m_tCameraInfo.vEye.z == 0)
+			m_tCameraInfo.vEye.x = 3;
+=======
 
         _float fSpine = m_pPlayer->Get_SpineAngle();
 
+>>>>>>> a4a8e7518572f6e7046ae0f179569d043686ffe8
 
         m_tCameraInfo.vEye = CameraPos - (CameraLook * (70.f + fSpine)) - CameraRight * m_fZoom + CameraUp * 50.f;
         m_tCameraInfo.vAt = CameraPos - (CameraLook * (70.f - fSpine)) + CameraUp * 50.f;
@@ -151,8 +160,14 @@ void CDynamicCamera::MouseInput()
 
 void CDynamicCamera::Set_ZoomInOut(_bool ZoomIn)
 {
+<<<<<<< HEAD
+
+	if (m_fZoom >= 150.f && ZoomIn == true&&m_bIsZoom ==false)
+		m_bIsZoom = true;
+=======
     if (m_fZoom >= 150.f && ZoomIn == true && m_bIsZoom == false)
         m_bIsZoom = true;
+>>>>>>> a4a8e7518572f6e7046ae0f179569d043686ffe8
 
     if (m_fZoom <= 50.f && ZoomIn == false && m_bIsZoom == true)
         m_bIsZoom = false;

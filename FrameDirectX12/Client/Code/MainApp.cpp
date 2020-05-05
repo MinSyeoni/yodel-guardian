@@ -192,6 +192,12 @@ HRESULT CMainApp::SetUp_ComponentPrototype()
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_BoxCol", ID_STATIC, pComponent), E_FAIL);
 
+	pComponent = Engine::CSphereCollider::Create(m_pGraphicDevice, m_pCommandList, CCollider::COL_SPHERE);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_SphereCol", ID_STATIC, pComponent), E_FAIL);
+
+
+
 	return S_OK;
 }
 

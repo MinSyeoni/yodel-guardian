@@ -211,6 +211,9 @@
     <Filter Include="01.Utility\05.Shader\11.Shader_UI">
       <UniqueIdentifier>{63e62930-d721-4aa4-96e5-7ead971eef12}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\06.SphereTex">
+      <UniqueIdentifier>{05f999fc-28ad-4d23-88bd-ffb0ce5edfd5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\Engine_Functor.h">
@@ -429,6 +432,12 @@
     <ClInclude Include="..\Code\Shader_UI.h">
       <Filter>01.Utility\05.Shader\11.Shader_UI</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\SphereTex.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\06.SphereTex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\SphereCollider.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\03.Collider\01.SphereCollider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\DirectInput.cpp">
@@ -616,6 +625,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\Shader_UI.cpp">
       <Filter>01.Utility\05.Shader\11.Shader_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SphereTex.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\06.SphereTex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SphereCollider.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\03.Collider\01.SphereCollider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@
 #include "Management.h"
 #include "Scene_Logo.h"
 #include "GraphicDevice.h"
-
+#include "ActionCamera.h"
 
 CLoading::CLoading(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	:m_pGraphicDev(pGraphicDevice)
@@ -45,6 +45,12 @@ _uint CLoading::Loading_ForStage(void)
 	pFont->Set_Color(D2D1::ColorF::Red);
 	Load_Shader();
 
+	pFont->Set_Text(L"Camera_Loading");
+	pFont->Set_Color(D2D1::ColorF::Blue);
+	Load_Camera();
+
+
+
 	pFont->Set_Text(L"Loading_Finish");
 	pFont->Set_Color(D2D1::ColorF::Red);
 	m_bFinish = true;
@@ -68,6 +74,69 @@ HRESULT CLoading::Load_Shader()
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_SkyDome", ID_STATIC, pComponent), E_FAIL);
 
 	// Shader_ColorBuffer
+
+
+	return S_OK;
+}
+
+HRESULT CLoading::Load_Camera()
+{
+	wstring fileName = L"../../../SYTool/Tool/Data/Camera/CameraData.dat";
+	HANDLE hFile = CreateFile(fileName.c_str(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	NULL_CHECK_RETURN(hFile, E_FAIL);
+
+	if (INVALID_HANDLE_VALUE == hFile)
+		return E_FAIL;
+
+	CGameObject* pGameObject = nullptr;
+	DWORD dwByte = 0;
+	TCHAR strName[128] = L"";
+	int iStrLength = 0;
+	float PlayTime = 0;
+	int iSpotEye = 0;
+	int iSpotAt = 0;
+	_vec3 vEye = _vec3{0.f,0.f,0.f};
+	_vec3 vAt = _vec3{0.f,0.f,0.f};
+	while (true)
+	{
+		ReadFile(hFile, &iStrLength, sizeof(int), &dwByte, nullptr);
+		ReadFile(hFile, &strName, sizeof(TCHAR) * iStrLength, &dwByte, nullptr);
+		ReadFile(hFile, &PlayTime, sizeof(float), &dwByte, nullptr);
+		ReadFile(hFile, &iSpotEye, sizeof(int), &dwByte, nullptr);
+		ReadFile(hFile, &iSpotAt, sizeof(int), &dwByte, nullptr);
+		if (0 == dwByte)
+		{
+			break;
+		}
+		vector<_vec3> vecEyePosList;
+		vector<_vec3> vecAtPosList;
+
+		for (int i = 0; i < iSpotEye; i++)
+		{
+			ReadFile(hFile, &vEye, sizeof(_vec3), &dwByte, nullptr);
+			vecEyePosList.push_back(vEye);
+		}
+		for (int i = 0; i < iSpotAt; i++)
+		{
+			ReadFile(hFile, &vAt, sizeof(_vec3), &dwByte, nullptr);
+			vecAtPosList.push_back(vAt);
+		}
+		
+		pGameObject = CActionCamera::Create(m_pGraphicDev, m_pCommandList, vecEyePosList, vecAtPosList, strName, PlayTime);
+		NULL_CHECK_RETURN(pGameObject, E_FAIL);
+		FAILED_CHECK_RETURN(CObjectMgr::Get_Instance()->Add_GameObjectPrototype(strName,pGameObject), E_FAIL);
+
+
+
+		if (0 == dwByte)
+		{
+			break;
+		}
+
+	}
+
+	CloseHandle(hFile);
+
 
 
 	return S_OK;

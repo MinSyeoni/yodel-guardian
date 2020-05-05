@@ -7,6 +7,17 @@ CMesh::CMesh(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandLi
 {
 }
 
+<<<<<<< HEAD
+CMesh::CMesh(const CMesh & rhs)
+	:m_pScene(rhs.m_pScene)
+	,m_pMeshComponent(rhs.m_pMeshComponent)
+{
+	m_pMeshComponent->AddRef();
+	if (m_pScene->mNumAnimations)
+	{
+		m_pAnimationComponent = new CAniCtrl(*rhs.m_pAnimationComponent);
+	}
+=======
 CMesh::CMesh(const CMesh& rhs)
     : m_pScene(rhs.m_pScene)
     , m_pMeshComponent(rhs.m_pMeshComponent)
@@ -16,6 +27,7 @@ CMesh::CMesh(const CMesh& rhs)
     {
         m_pAnimationComponent = new CAniCtrl(*rhs.m_pAnimationComponent);
     }
+>>>>>>> a4a8e7518572f6e7046ae0f179569d043686ffe8
 }
 
 
@@ -38,10 +50,21 @@ HRESULT CMesh::Ready_Mesh(const _tchar* pFilePath, const _tchar* pFileName)
     string szFullPath = psz;
     delete[] psz;
 
+<<<<<<< HEAD
+	m_pScene = m_Importer.ReadFile(szFullPath.c_str(),
+		aiProcess_MakeLeftHanded
+		| aiPostProcessSteps::aiProcess_FlipWindingOrder
+		| aiProcess_FlipUVs);
+	
+	if (m_pScene->mNumMeshes)
+	{
+		m_pMeshComponent = new CMeshComponent(m_pScene, m_pGraphicDevice, m_pCommandList, m_szFilePath);
+=======
     m_pScene = m_Importer.ReadFile(szFullPath.c_str(),
         aiProcess_MakeLeftHanded
         | aiPostProcessSteps::aiProcess_FlipWindingOrder
         | aiProcess_FlipUVs);
+>>>>>>> a4a8e7518572f6e7046ae0f179569d043686ffe8
 
     if (m_pScene->mNumMeshes)
     {

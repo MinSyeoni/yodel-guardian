@@ -93,12 +93,22 @@ HRESULT CCollider::SetOn_ConstantTable(CShader_DefaultTex* pShader,_uint offset)
 
 	CB_MATRIX_INFO	tCB_MatrixInfo;
 	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
+	_matrix matScale = m_matScale;
 
 
 
-	_matrix matWVP = m_matScale* m_matTrans * m_matWorld * matView * matProj;
+	_matrix matWorld = m_matScale * m_matTrans * m_matWorld;
+
+	if (m_eShape == COL_SPHERE)
+	{
+		matWorld._11 = m_fRadius;
+		matWorld._22 = m_fRadius;
+		matWorld._33 = m_fRadius;
+	}
+	_matrix matWVP = matWorld * matView * matProj;
+
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
-	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_matScale*m_matTrans*m_matWorld));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(matWorld));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
 

@@ -145,7 +145,7 @@ void CDynamicObject::Set_ConstantTable()
 	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
 
-
+	
 
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(m_fTime*3000.f);
 
