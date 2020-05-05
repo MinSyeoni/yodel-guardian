@@ -134,16 +134,10 @@ void CDynamicCamera::MouseInput()
         memcpy(&CameraLook, &CameraMatrix._31, sizeof(_vec3));//≥Ù¿Ã
         memcpy(&CameraPos, &CameraMatrix._41, sizeof(_vec3));
 
-<<<<<<< HEAD
-		m_tCameraInfo.vEye.y += 10.f;
-		m_tCameraInfo.vAt.y += 10.f;
-		if (m_tCameraInfo.vEye.x == 0 && m_tCameraInfo.vEye.z == 0)
-			m_tCameraInfo.vEye.x = 3;
-=======
+
 
         _float fSpine = m_pPlayer->Get_SpineAngle();
 
->>>>>>> a4a8e7518572f6e7046ae0f179569d043686ffe8
 
         m_tCameraInfo.vEye = CameraPos - (CameraLook * (70.f + fSpine)) - CameraRight * m_fZoom + CameraUp * 50.f;
         m_tCameraInfo.vAt = CameraPos - (CameraLook * (70.f - fSpine)) + CameraUp * 50.f;
@@ -160,14 +154,10 @@ void CDynamicCamera::MouseInput()
 
 void CDynamicCamera::Set_ZoomInOut(_bool ZoomIn)
 {
-<<<<<<< HEAD
+
 
 	if (m_fZoom >= 150.f && ZoomIn == true&&m_bIsZoom ==false)
 		m_bIsZoom = true;
-=======
-    if (m_fZoom >= 150.f && ZoomIn == true && m_bIsZoom == false)
-        m_bIsZoom = true;
->>>>>>> a4a8e7518572f6e7046ae0f179569d043686ffe8
 
     if (m_fZoom <= 50.f && ZoomIn == false && m_bIsZoom == true)
         m_bIsZoom = false;

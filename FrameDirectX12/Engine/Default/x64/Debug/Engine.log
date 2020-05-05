@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Blend.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Blur.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ColorBuffer.cso
@@ -16,36 +15,66 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_L
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_UI.cso
   AnimationControl.cpp
   Base.cpp
-=======
-﻿  AnimationControl.cpp
->>>>>>> a4a8e7518572f6e7046ae0f179569d043686ffe8
   BloomTarget.cpp
   BoxCollider.cpp
   Camera.cpp
+  Cell.cpp
   Collider.cpp
+  ColliderMgr.cpp
+  Component.cpp
   ComponentMgr.cpp
+  CubeTex.cpp
+  DDSTextureLoader.cpp
+  DirectInput.cpp
+  DirectSound.cpp
+  DistortionTarget.cpp
   DownSampleTarget.cpp
   Font.cpp
-<<<<<<< HEAD
   Frame.cpp
   FrameMgr.cpp
   Frustom.cpp
   코드를 생성하고 있습니다...
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\AnimationControl.cpp(725): warning C4715: 'Engine::CAniCtrl::Find_BoneOffset': 모든 제어 경로에서 값을 반환하지는 않습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\AnimationControl.cpp(733): warning C4715: 'Engine::CAniCtrl::Find_BoneOffset': 모든 제어 경로에서 값을 반환하지는 않습니다.
   컴파일하고 있습니다...
-=======
->>>>>>> a4a8e7518572f6e7046ae0f179569d043686ffe8
   GameObject.cpp
+  GraphicDevice.cpp
+  Info.cpp
   Layer.cpp
   Light.cpp
+  LightMgr.cpp
+  LightTarget.cpp
+  Line.cpp
   Management.cpp
+  MathMgr.cpp
   Mesh.cpp
+  MeshComponent.cpp
+  NaviBuffer.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviBuffer.cpp(27,41): warning C4267: '=': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  NaviMesh.cpp
   ObjectMgr.cpp
+  RcTex.cpp
   Renderer.cpp
-  SSAOTarget.cpp
   Scene.cpp
+  Shader.cpp
+  Shader_Blend.cpp
+  코드를 생성하고 있습니다...
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMesh.cpp(128): warning C4715: 'Engine::CNaviMesh::MoveOn_NaviMesh': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  컴파일하고 있습니다...
+  Shader_Blur.cpp
+  Shader_ColorBuffer.cpp
+  Shader_Default.cpp
+  Shader_DefaultTex.cpp
+  Shader_Destortion.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\Shader_Destortion.cpp(75,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Shader_DownSample.cpp
+  Shader_LightAcc.cpp
+  Shader_Mesh.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\Shader_Mesh.cpp(57,45): warning C4267: '=': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Shader_Shadow.cpp
+  Shader_SSAO.cpp
+  Shader_Terrain.cpp
+  Shader_UI.cpp
   ShadowDepthTarget.cpp
-<<<<<<< HEAD
   SphereCollider.cpp
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\SphereCollider.cpp(22,10): warning C4091: '': 변수를 선언하지 않으면 'Engine::CCubeTex' 왼쪽은 무시됩니다.
   SphereTex.cpp
@@ -60,12 +89,9 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\SphereC
   Transform.cpp
   VIBuffer.cpp
   VlLine.cpp
-=======
->>>>>>> a4a8e7518572f6e7046ae0f179569d043686ffe8
   코드를 생성하고 있습니다...
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Engine\Code\AnimationControl.cpp(725): warning C4715: 'Engine::CAniCtrl::Find_BoneOffset': 모든 제어 경로에서 값을 반환하지는 않습니다.
      ../Bin\Engine.lib 라이브러리 및 ../Bin\Engine.exp 개체를 생성하고 있습니다.
-  Engine.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Engine\Default\../Bin\Engine.dll
+  Engine.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Default\../Bin\Engine.dll
   '//'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
   배치 파일이 아닙니다.
           1개 파일이 복사되었습니다.
