@@ -39,7 +39,7 @@ private:
 	void					Set_ConstantTable();
 	void					Render_ShadowDepth(CShader_Shadow* pShader);
 	void					Set_ShadowTable(CShader_Shadow* pShader);
-	void					Update_BoneCollider(CSphereCollider* pSphereCol, string strBoneName);
+	void					Update_BoneCollider(CSphereCollider* pSphereCol, string strBoneName, CColliderMgr::COLLIDER_TAG eTag);
 
 private:
 	virtual HRESULT			Add_Component();
@@ -48,7 +48,7 @@ private:
 	Engine::CMesh*				m_pMeshCom = nullptr;
 	Engine::CShader_Mesh*		m_pShaderCom = nullptr;
 	Engine::CBoxCollider*		m_pBoxCol = nullptr;
-	Engine::CSphereCollider*	m_pShereCol[2] = {};
+	Engine::CSphereCollider*	m_pShereCol[3] = {};
 	Engine::CNaviMesh*			m_pNaviMesh = nullptr;
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
 

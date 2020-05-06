@@ -19,10 +19,12 @@
 #include "PlayerHP.h"
 #include "PlayerUI.h"
 #include "GunUI.h"
+#include "Trigger.h"
 
 #include "MapObject.h"
 #include "Monster.h"
 #include "Salone.h"
+#include "Trigger.h"
 
 #include "LightObject.h"
 
@@ -168,6 +170,11 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_RifleUI", pGameObject), E_FAIL);
 
+	////////////////////////// 트리거 /////////////////////////////////////
+	pGameObject = CTrigger::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Trigger", pGameObject), E_FAIL);
+
 	/////////////////////////조명쓰////////////////////////////////////////
 
 	pGameObject = CLightObject::Create(m_pGraphicDevice, m_pCommandList);
@@ -234,29 +241,18 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player",nullptr), E_FAIL);
 
-	//MeshInfo tMeshInfo;
-	//tMeshInfo.MeshTag = L"TombStone.X";
-	//tMeshInfo.Pos = _vec3(350.f,-3.f,400.f );
-	//tMeshInfo.Rotation = _vec3( 0.f,0.f,0.f );
-	//tMeshInfo.Scale = _vec3(0.1f, 0.1f, 0.1f);
-
-	//FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_StaticObject", L"Static", &tMeshInfo), E_FAIL);
-
-	//tMeshInfo.MeshTag = L"Mesh_Console";
-	//tMeshInfo.Pos = _vec3(100.f, 0.f, 100.f);
-	//tMeshInfo.Rotation = _vec3(0.f, 0.f, 0.f);
-	//tMeshInfo.Scale = _vec3(0.1f, 0.1f, 0.1f);
-
-	//FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_StaticObject", L"Static", &tMeshInfo), E_FAIL);
-	
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Rifle", L"Weapon", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Salone", L"Salone", nullptr), E_FAIL);//For.Salone
-	//Prototype_MapObject
-	Load_StageObject(L"../../../SYTool/Tool/Data/StaticObj/newmap1.dat");
+
+																													 //Prototype_MapObject
+	Load_StageObject(L"../../../SYTool/Tool/Data/StaticObj/mapAddoutside.dat");
 
 	// Monster
-	Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/Flame_Once.dat");
-	Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/MonsterTest.dat");
+	Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/Flame.dat");
+	//Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/MonsterTest.dat");
+	
+	// Trigger
+	Load_TriggerPos(L"../../../SYTool/Tool/Data/Collider/Trigger.dat");
 
 	return S_OK;
 }
@@ -298,9 +294,9 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 	DWORD dwByte = 0;
 	COLLIDER tColData = {};
 
-	if (wstrFilePath == L"../../../SYTool/Tool/Data/Collider/Flame_Once.dat")
+	if (wstrFilePath == L"../../../SYTool/Tool/Data/Collider/Flame.dat")
 		m_tMeshInfo.MeshTag = L"Flamethrower";
-	else if (wstrFilePath == L"../../../SYTool/Tool/Data/Collider/MonsterTest.dat")
+	else if (wstrFilePath == L"../../../SYTool/Tool/Data/Collider/Zombi.dat")
 		m_tMeshInfo.MeshTag = L"Zombi";
 
 	while (true)
@@ -312,8 +308,30 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 
 		m_tMeshInfo.Pos = tColData.vCenter;
 		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Monster", m_tMeshInfo.MeshTag, &m_tMeshInfo);
+	}
+	CloseHandle(hFile);
+}
 
+void CScene_Stage::Load_TriggerPos(const wstring& wstrFilePath)
+{
+	HANDLE hFile = CreateFile(wstrFilePath.c_str(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	NULL_CHECK(hFile, E_FAIL);
 
+	if (INVALID_HANDLE_VALUE == hFile)
+		return;
+
+	DWORD dwByte = 0;
+	COLLIDER tColData = {};
+
+	while (true)
+	{
+		ReadFile(hFile, &tColData, sizeof(COLLIDER), &dwByte, nullptr);
+
+		if (dwByte == 0)
+			break;
+
+		if(3 == tColData.iOptionID)
+			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Trigger", L"Trigger", &tColData);
 	}
 	CloseHandle(hFile);
 }

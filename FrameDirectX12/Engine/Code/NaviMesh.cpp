@@ -33,7 +33,7 @@ HRESULT CNaviMesh::Ready_NaviMesh()
 	_int iOption=0;
 
 	// 나중에 파일도 받아올 수 있도록 해야함.
-	HANDLE hFile = CreateFile(L"../../../SYTool/Tool/Data/Navi/map1.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	HANDLE hFile = CreateFile(L"../../../SYTool/Tool/Data/Navi/map1addoutside.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	NULL_CHECK_RETURN(hFile, E_FAIL);
 
 	if (INVALID_HANDLE_VALUE == hFile)

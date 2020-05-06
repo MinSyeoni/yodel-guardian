@@ -190,9 +190,6 @@
     <Filter Include="01.Scene_Stage\06.Monster\00.FlameThrower">
       <UniqueIdentifier>{95102f00-49ab-42d5-aef4-48bbba25a08f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene_Stage\06.Monster\01.ZombiState">
-      <UniqueIdentifier>{059684e2-a709-4812-a5c6-4e18fdc16645}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01.Scene_Stage\07.NPC">
       <UniqueIdentifier>{ab0e7f12-a9fe-44ac-8492-29e44a448ece}</UniqueIdentifier>
     </Filter>
@@ -204,6 +201,12 @@
     </Filter>
     <Filter Include="97.Mgr\00.MathMgr">
       <UniqueIdentifier>{cd7bde85-26a6-4014-a359-0d317f4c3bc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\06.Monster\01.Zombi">
+      <UniqueIdentifier>{059684e2-a709-4812-a5c6-4e18fdc16645}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\08.Trigger">
+      <UniqueIdentifier>{449659f9-1cbf-40a0-9918-9820bc8f73bc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -330,9 +333,6 @@
     <ClInclude Include="..\Code\UI.h">
       <Filter>03.UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\ZombiState.h">
-      <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\Salone.h">
       <Filter>01.Scene_Stage\07.NPC\00.Salone</Filter>
     </ClInclude>
@@ -342,15 +342,13 @@
     <ClInclude Include="..\Code\BaziorMgr.h">
       <Filter>97.Mgr\00.MathMgr</Filter>
     </ClInclude>
-
-
-
     <ClInclude Include="..\Code\Zombi.h">
-      <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
+      <Filter>01.Scene_Stage\06.Monster\01.Zombi</Filter>
     </ClInclude>
-
-
-
+    <ClInclude Include="..\Code\LightObject.h" />
+    <ClInclude Include="..\Code\Trigger.h">
+      <Filter>01.Scene_Stage\08.Trigger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -446,9 +444,6 @@
     <ClCompile Include="..\Code\UI.cpp">
       <Filter>03.UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\ZombiState.cpp">
-      <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Salone.cpp">
       <Filter>01.Scene_Stage\07.NPC\00.Salone</Filter>
     </ClCompile>
@@ -458,15 +453,13 @@
     <ClCompile Include="..\Code\BaziorMgr.cpp">
       <Filter>97.Mgr\00.MathMgr</Filter>
     </ClCompile>
-
-
-
     <ClCompile Include="..\Code\Zombi.cpp">
-      <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
+      <Filter>01.Scene_Stage\06.Monster\01.Zombi</Filter>
     </ClCompile>
-
-
-
+    <ClCompile Include="..\Code\LightObject.cpp" />
+    <ClCompile Include="..\Code\Trigger.cpp">
+      <Filter>01.Scene_Stage\08.Trigger</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

@@ -30,7 +30,6 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
 {
     LateInit();
 
-
     _matrix matRot;
 
     matRot = XMMatrixRotationY(XMConvertToRadians(-90.f));
@@ -57,6 +56,7 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
     //   AttackCheck();
 
     m_pBoxCollider->Update_Collider(&m_pTransCom->m_matWorld);
+    CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::PLAYER, m_pBoxCollider);
 
     return NO_EVENT;
 }

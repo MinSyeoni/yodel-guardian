@@ -46,13 +46,9 @@ public:
 public:		// 상호작용 
 	const _bool&			Get_IsDeadZombi() const { return m_bIsZombiState[1]; }
 	const _bool&			Get_IsHit() const { return m_bIsZombiState[2]; }
-	//////////// Get_IsAtkPlayer() true일 때 충돌체크하면 피격될걸..아마도 /////////////////
 	const _bool&			Get_IsAtkPlayer() const { return m_bIsZombiState[3]; }
 	void					Set_IsHit(_bool bIsHit) { m_bIsZombiState[2] = bIsHit; }
-
-	const _float&			Get_CurHp() { return m_fCurHp; }
-	
-	/////////// 플레이어가 데미지 주면 얘가 맞을 것임 ///////////////
+	const _float&			Get_CurHp() { return m_fCurHp; }	
 	void					Set_HitDamage(_float fDamage) { m_fHitDamage = fDamage; }
 	const _float&			Get_AtkDamage() { return m_fAtkDamage; }
 
@@ -77,11 +73,6 @@ private:
 	_vec3					m_vChaseDir = _vec3(0.f, 0.f, 0.f);
 
 	_bool					m_bIsZombiState[4] = {false};	// 0=m_bIsTurn, 1=m_bIsDead, 2=m_bIsHit, 3=m_bIsATK;
-
-	/////////테스트////////
-	_float					m_fTestTime = 0.f;
-	_float					m_fRandTime = 0.f;
-	//////////////////////
 
 	_float					m_fHitDamage = 0.f; // 맞을때
 	_float					m_fAtkDamage = 0.f; // 때릴때
