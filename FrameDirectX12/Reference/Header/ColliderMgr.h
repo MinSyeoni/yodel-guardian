@@ -11,7 +11,7 @@ class ENGINE_DLL CColliderMgr : public CBase
 
 public:
 	enum SHAPE{SPHERE,BOX,SHAPE_END};
-	enum COLLIDER_TAG{PLAYER,OBJECT,TAG_END};
+	enum COLLIDER_TAG{PLAYER,OBJECT,MONSTER,TAG_END};
 
 
 private:

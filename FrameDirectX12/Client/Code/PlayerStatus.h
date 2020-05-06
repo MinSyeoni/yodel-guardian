@@ -17,10 +17,11 @@ public:
 	void SetMesh(CMesh* m_pMesh);
 	void KeyInput();
 	void WeaponChange();
+	void ShootingCheck();
 	void StatusUpdate(const _float& fTimeDelta);
 	void Rotation(const _float& fTimeDelta);
 	void PlayerDirection(const _float&fTimeDelta);
-	void AttackCheck();
+	void AttackCheck(const _float& fTimeDelta);
 	float Get_Spine() { return m_fSpine; };
 public:
 	CPlayer::STATE m_eCurState= CPlayer::RIFLEIDLE;
@@ -39,8 +40,8 @@ public:
 	_vec3 m_vecTargetPos = _vec3{ 0.f,0.f,0.f };
 	float m_fSpeed = 5.0f;//º”µµ
 
-	_bool m_bIsShoot = false;
-
+	_float m_fShootingTime = 0;//√—«¡∑π¿”¡¶«—
+	_bool m_bIsShoot = false;//√—ΩÓ¥¬¡ﬂ
 	EQUIPTYPE m_eEquip = NONE;
 
 

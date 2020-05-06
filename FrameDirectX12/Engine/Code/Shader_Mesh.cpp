@@ -222,9 +222,17 @@ HRESULT CShader_Mesh::Create_PipelineState()
 {
     vector<D3D12_INPUT_ELEMENT_DESC> vecInputLayout;
 
-    m_pVS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_Mesh.hlsl", nullptr, "VS_MAIN", "vs_5_1");
-    m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_Mesh.hlsl", nullptr, "PS_MAIN", "ps_5_1");
+    if (m_eType == SKYDOME)
+    {
+        m_pVS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_Mesh.hlsl", nullptr, "VS_MAIN", "vs_5_1");
+        m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_Mesh.hlsl", nullptr, "PS_SKYDOME", "ps_5_1");
 
+    }
+    else
+    {
+        m_pVS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_Mesh.hlsl", nullptr, "VS_MAIN", "vs_5_1");
+        m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_Mesh.hlsl", nullptr, "PS_MAIN", "ps_5_1");
+    }
     vecInputLayout =
     {
 

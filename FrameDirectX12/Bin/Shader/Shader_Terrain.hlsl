@@ -81,7 +81,7 @@ ps_output PS_MAIN(VS_OUTPUT input) : SV_TARGET
     
     ps_output output;
     
-    output.albedo = gTexture.Sample(gsamLinearWrap, input.uv*100.f);
+    output.albedo = gTexture.Sample(gsamLinearWrap, input.uv*10.f);
     
     float2 uv = input.vLightPos.xy / input.vLightPos.w;
     uv.y = -uv.y;
@@ -92,7 +92,7 @@ ps_output PS_MAIN(VS_OUTPUT input) : SV_TARGET
     if (vShadow.r + 0.000125f < input.vLightPos.z / input.vLightPos.w)
         output.albedo.rgb *= 0.5f;
 
-    float3 tangentNormal = gNormalTexture.Sample(gsamLinearWrap, input.uv).xyz;
+    float3 tangentNormal = gNormalTexture.Sample(gsamLinearWrap, input.uv*10.f).xyz;
     tangentNormal = normalize(tangentNormal * 2.f - 1.f);
     float3x3 TBN = float3x3(normalize(input.vT), normalize(input.vB), normalize(input.vN));
     TBN = transpose(TBN);

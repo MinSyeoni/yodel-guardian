@@ -1,6 +1,7 @@
 #include "Light.h"
 #include "ComponentMgr.h"
 #include "GraphicDevice.h"
+#include "LightMgr.h"
 CLight::CLight(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	:m_pGraphicDevice(pGraphicDevice),m_pCommandList(pCommandList)
 {
@@ -13,14 +14,14 @@ HRESULT CLight::Ready_Light(D3DLIGHT tagLightInfo)
 	m_pBuffer = CRcTex::Create(m_pGraphicDevice, m_pCommandList);
 
 	if(tagLightInfo.m_eType==LIGHTTYPE::D3DLIGHT_DIRECTIONAL)
-	m_pShader = dynamic_cast<CShader_LightAcc*>( CComponentMgr::Get_Instance()->Get_Component(L"Prototype_Shader_LightDirect", ID_STATIC));
+	m_pShader = dynamic_cast<CShader_LightAcc*>( CComponentMgr::Get_Instance()->Clone_Component(L"Prototype_Shader_LightDirect", ID_STATIC));
 
 
 	if(tagLightInfo.m_eType==LIGHTTYPE::D3DLIGHT_POINT)
-		m_pShader= dynamic_cast<CShader_LightAcc*>(CComponentMgr::Get_Instance()->Get_Component(L"Prototype_Shader_LightPoint", ID_STATIC));
+		m_pShader= dynamic_cast<CShader_LightAcc*>(CComponentMgr::Get_Instance()->Clone_Component(L"Prototype_Shader_LightPoint", ID_STATIC));
 
-
-
+	m_LightIndex= CLight_Manager::Get_Instance()->Get_LightIndex();
+	m_LightIndex += 1;
 	return S_OK;
 }
 
@@ -74,7 +75,7 @@ HRESULT CLight::Render_Light(vector<ComPtr<ID3D12Resource>> pTargetTexture)
 
 	m_pShader->Begin_Shader();
 	m_pBuffer->Begin_Buffer();
-	m_pShader->End_Shader(1);
+	m_pShader->End_Shader(0);
 	m_pBuffer->Render_Buffer();
 
 
@@ -94,5 +95,8 @@ CLight * CLight::Create(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList
 void CLight::Free()
 {
 	Safe_Release(m_pShader);
+
+
+
 	Safe_Release(m_pBuffer);
 }

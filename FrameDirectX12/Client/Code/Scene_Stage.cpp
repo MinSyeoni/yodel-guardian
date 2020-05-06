@@ -24,6 +24,8 @@
 #include "Monster.h"
 #include "Salone.h"
 
+#include "LightObject.h"
+
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -166,6 +168,13 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_RifleUI", pGameObject), E_FAIL);
 
+	/////////////////////////조명쓰////////////////////////////////////////
+
+	pGameObject = CLightObject::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_LightObject", pGameObject), E_FAIL);
+
+
 	return S_OK;
 }
 
@@ -247,7 +256,7 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	// Monster
 	Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/Flame_Once.dat");
-	Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/해파리_Once.dat");
+	Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/MonsterTest.dat");
 
 	return S_OK;
 }
@@ -291,7 +300,7 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 
 	if (wstrFilePath == L"../../../SYTool/Tool/Data/Collider/Flame_Once.dat")
 		m_tMeshInfo.MeshTag = L"Flamethrower";
-	else if (wstrFilePath == L"../../../SYTool/Tool/Data/Collider/해파리_Once.dat")
+	else if (wstrFilePath == L"../../../SYTool/Tool/Data/Collider/MonsterTest.dat")
 		m_tMeshInfo.MeshTag = L"Zombi";
 
 	while (true)
@@ -303,6 +312,8 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 
 		m_tMeshInfo.Pos = tColData.vCenter;
 		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Monster", m_tMeshInfo.MeshTag, &m_tMeshInfo);
+
+
 	}
 	CloseHandle(hFile);
 }
@@ -343,8 +354,10 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 		m_tMeshInfo.Pos = tObjData.vPos;
 		m_tMeshInfo.Rotation = tObjData.vRotate;
 		m_tMeshInfo.Scale = tObjData.vScale;
-
+		if(m_tMeshInfo.MeshTag!=L"Siren.X")
 		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
+		else
+		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LightObject", L"LightObject", &m_tMeshInfo);//조명처리
 	}
 	CloseHandle(hFile);
 }

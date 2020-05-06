@@ -14,6 +14,12 @@ typedef struct tagOBB
 
 }OBB;
 
+typedef struct tagRay
+{
+	_vec3 vOri;
+	_vec3 vDir;
+}RAY;
+
 class ENGINE_DLL CMathMgr : public CBase
 {
 	DECLARE_SINGLETON(CMathMgr)
@@ -25,12 +31,15 @@ public:
 	_bool	Collision_AABB(CCollider* pDstCollider, CCollider * pSrcCollider, _vec3* vDir);
 	_bool	Collision_OBB(CCollider* pDstCollider, CCollider * pSrcCollider, _vec3* vDir);
 	_bool	Collision_Spere(CCollider* pDstCollider, CCollider * pSrcCollider, _vec3* vDir);
+	_int    Collision_Ray(CCollider* pDstCollider);
 
+	void Transloation_ViewSpace(void);
+	void Translation_LocalSpace();
 public:
 	void	Set_Point(OBB* pObb, const _vec3* pMin, const _vec3* pMax);
 	void	Set_Axis(OBB* pObb);
 
-
+	RAY m_tRay;
 private:
 	virtual void Free();
 };

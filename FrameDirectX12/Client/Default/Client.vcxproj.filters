@@ -205,6 +205,9 @@
     <Filter Include="97.Mgr\00.MathMgr">
       <UniqueIdentifier>{cd7bde85-26a6-4014-a359-0d317f4c3bc5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Scene_All\06.LightObject">
+      <UniqueIdentifier>{e3579fbb-0ccd-4b19-8461-8c3ca355130c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -330,9 +333,6 @@
     <ClInclude Include="..\Code\UI.h">
       <Filter>03.UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\ZombiState.h">
-      <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\Salone.h">
       <Filter>01.Scene_Stage\07.NPC\00.Salone</Filter>
     </ClInclude>
@@ -341,6 +341,12 @@
     </ClInclude>
     <ClInclude Include="..\Code\BaziorMgr.h">
       <Filter>97.Mgr\00.MathMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Zombi.h">
+      <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\LightObject.h">
+      <Filter>02.Scene_All\06.LightObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -437,9 +443,6 @@
     <ClCompile Include="..\Code\UI.cpp">
       <Filter>03.UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\ZombiState.cpp">
-      <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Salone.cpp">
       <Filter>01.Scene_Stage\07.NPC\00.Salone</Filter>
     </ClCompile>
@@ -448,6 +451,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\BaziorMgr.cpp">
       <Filter>97.Mgr\00.MathMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Zombi.cpp">
+      <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\LightObject.cpp">
+      <Filter>02.Scene_All\06.LightObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

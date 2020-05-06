@@ -1,5 +1,6 @@
 #include "MathMgr.h"
 #include "Collider.h"
+#include "GraphicDevice.h"
 USING(Engine)
 IMPLEMENT_SINGLETON(CMathMgr)
 
@@ -203,6 +204,65 @@ _bool CMathMgr::Collision_OBB(CCollider * pDstCollider, CCollider * pSrcCollider
 _bool CMathMgr::Collision_Spere(CCollider * pDstCollider, CCollider * pSrcCollider, _vec3 * vDir)
 {
 	return true;
+}
+
+_int CMathMgr::Collision_Ray(CCollider* pDstCollider)
+{
+	
+	_matrix matView;
+
+	_vec3 vRayPos,vRayDir;
+
+  matView=	Engine::CGraphicDevice::Get_Instance()->GetViewMatrix();
+	
+  matView = XMMatrixInverse(nullptr, matView);
+  vRayPos = _vec3{ matView._41,matView._42,matView._43 };
+  vRayDir = _vec3{ matView._31,matView._32,matView._33 };
+
+  vRayDir.Normalize();
+
+
+
+  _matrix matWorld;
+  matWorld = pDstCollider->Get_WorldMat();
+  _vec3 vPos;
+  vPos = pDstCollider->Get_WorldPos();
+ 
+  _matrix matPos,matInv;
+  matPos= XMMatrixTranslation(vPos.x, vPos.y, vPos.z);
+ matInv= XMMatrixInverse(nullptr,matPos);
+
+ _vec3 vDist = vPos - vRayPos;
+
+ float fDist = vPos.Get_Distance(vRayPos*-1);
+
+ fDist = vDist.Get_Length();
+
+  _vec3 vRayOrigin = vRayPos;
+  _vec3 vRayOriginDir = vRayDir;
+
+  vRayOrigin.TransformCoord(vRayPos, matInv);
+  vRayOriginDir.TransformNormal(vRayDir, matInv);
+
+  _float fRadius = pDstCollider->Get_Radius()*10.f;
+ 
+
+  float a = vRayOriginDir.Dot(vRayOriginDir);
+  float b = vRayOriginDir.Dot(vRayOrigin);
+  float c = (vRayOrigin.x * vRayOrigin.x + vRayOrigin.y * vRayOrigin.y + vRayOrigin.z * vRayOrigin.z);
+  float d =( fRadius*0.1f) * (fRadius * 0.1f);
+  
+  fDist -= (fRadius * 0.1f);
+  if (b * b - a * (c-d) >= 0)
+  {
+	  return fDist;
+
+  }
+
+
+
+
+	return 999;
 }
 
 void CMathMgr::Set_Point(OBB * pObb, const _vec3 * pMin, const _vec3 * pMax)

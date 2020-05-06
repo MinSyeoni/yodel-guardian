@@ -84,7 +84,7 @@ void CShader_LightAcc::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTe
 		hDescriptor.Offset(1, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 	}
 	CGraphicDevice::Get_Instance()->Wait_ForGpuComplete();
-	m_pCB_LightInfo = new CUploadBuffer<CB_LIGHT_INFO>(DEVICE, 2, true);
+	m_pCB_LightInfo = new CUploadBuffer<CB_LIGHT_INFO>(DEVICE, 10, true);
 	m_pCB_InverseInfo = new CUploadBuffer<CB_INVERSEMATRIX_INFO>(DEVICE, 1, true);
 	//CGraphicDevice::Get_Instance()->End_ResetCmdList();
 }
@@ -194,15 +194,15 @@ D3D12_BLEND_DESC CShader_LightAcc::Create_BlendState()
 
 	// ºí·»µå ¼³Á¤.
 	ZeroMemory(&BlendDesc, sizeof(D3D12_BLEND_DESC));
-	BlendDesc.AlphaToCoverageEnable = TRUE;
-	BlendDesc.IndependentBlendEnable = TRUE;
+	BlendDesc.AlphaToCoverageEnable = FALSE;
+	BlendDesc.IndependentBlendEnable = FALSE;
 	BlendDesc.RenderTarget[0].BlendEnable = TRUE;
 	BlendDesc.RenderTarget[0].LogicOpEnable = FALSE;
 	BlendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_ONE;
 	BlendDesc.RenderTarget[0].DestBlend = D3D12_BLEND_ONE;
 	BlendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
 	BlendDesc.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
-	BlendDesc.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ONE;
+	BlendDesc.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;
 	BlendDesc.RenderTarget[0].BlendOpAlpha = D3D12_BLEND_OP_ADD;
 	BlendDesc.RenderTarget[0].LogicOp = D3D12_LOGIC_OP_NOOP;
 	BlendDesc.RenderTarget[0].RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;
@@ -213,7 +213,7 @@ D3D12_BLEND_DESC CShader_LightAcc::Create_BlendState()
 	BlendDesc.RenderTarget[1].DestBlend = D3D12_BLEND_ONE;
 	BlendDesc.RenderTarget[1].BlendOp = D3D12_BLEND_OP_ADD;
 	BlendDesc.RenderTarget[1].SrcBlendAlpha = D3D12_BLEND_ONE;
-	BlendDesc.RenderTarget[1].DestBlendAlpha = D3D12_BLEND_ONE;
+	BlendDesc.RenderTarget[1].DestBlendAlpha = D3D12_BLEND_ZERO;
 	BlendDesc.RenderTarget[1].BlendOpAlpha = D3D12_BLEND_OP_ADD;
 	BlendDesc.RenderTarget[1].LogicOp = D3D12_LOGIC_OP_NOOP;
 	BlendDesc.RenderTarget[1].RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;

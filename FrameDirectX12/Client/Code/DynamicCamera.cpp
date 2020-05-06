@@ -65,36 +65,36 @@ HRESULT CDynamicCamera::LateInit_GameObject()
 _int CDynamicCamera::Update_GameObject(const _float& fTimeDelta)
 {
 
-	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
+    FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
-	/*____________________________________________________________________
-	View 행렬 Update.
-	______________________________________________________________________*/
+    /*____________________________________________________________________
+    View 행렬 Update.
+    ______________________________________________________________________*/
 
-	if (m_bIsZoom == true)
-	{
-		m_fZoom -= fTimeDelta * 500.f;
-		if (m_fMaxZoom > m_fZoom)
-			m_fZoom = m_fMaxZoom;
-		Set_ProjForV(45.f);
-	}
-	else
-	{
-		m_fZoom += fTimeDelta * 500.f;
-		if (m_fMinZoom < m_fZoom)
-			m_fZoom = m_fMinZoom;
-		Set_ProjForV(60.f);
-	}
+    if (m_bIsZoom == true)
+    {
+        m_fZoom -= fTimeDelta * 500.f;
+        if (m_fMaxZoom > m_fZoom)
+            m_fZoom = m_fMaxZoom;
+        Set_ProjForV(45.f);
+    }
+    else
+    {
+        m_fZoom += fTimeDelta * 500.f;
+        if (m_fMinZoom < m_fZoom)
+            m_fZoom = m_fMinZoom;
+        Set_ProjForV(60.f);
+    }
 
 
-	MouseInput();
-	Engine::CGameObject::Update_GameObject(fTimeDelta);
-	Engine::CCamera::Update_GameObject(fTimeDelta);
-	
-	CGraphicDevice::Get_Instance()->SetViewMatrix(m_tCameraInfo.matView);
-	CGraphicDevice::Get_Instance()->SetProjMatrix(m_tProjInfo.matProj);
+    MouseInput();
+    Engine::CGameObject::Update_GameObject(fTimeDelta);
+    Engine::CCamera::Update_GameObject(fTimeDelta);
 
-	return NO_EVENT;
+    CGraphicDevice::Get_Instance()->SetViewMatrix(m_tCameraInfo.matView);
+    CGraphicDevice::Get_Instance()->SetProjMatrix(m_tProjInfo.matProj);
+
+    return NO_EVENT;
 
 }
 
@@ -139,11 +139,12 @@ void CDynamicCamera::MouseInput()
         _float fSpine = m_pPlayer->Get_SpineAngle();
 
 
-        m_tCameraInfo.vEye = CameraPos - (CameraLook * (70.f + fSpine)) - CameraRight * m_fZoom + CameraUp * 50.f;
-        m_tCameraInfo.vAt = CameraPos - (CameraLook * (70.f - fSpine)) + CameraUp * 50.f;
 
-        m_tCameraInfo.vEye.y += 10.f;
-        m_tCameraInfo.vAt.y += 10.f;
+        m_tCameraInfo.vEye = CameraPos + (CameraLook * (70.f-fSpine)) + CameraRight * m_fZoom - CameraUp * 50.f;
+        m_tCameraInfo.vAt = CameraPos + (CameraLook * (70.f + fSpine)) - CameraUp * 50.f;
+
+   
+
         if (m_tCameraInfo.vEye.x == 0 && m_tCameraInfo.vEye.z == 0)
             m_tCameraInfo.vEye.x = 3;
 
@@ -156,8 +157,8 @@ void CDynamicCamera::Set_ZoomInOut(_bool ZoomIn)
 {
 
 
-	if (m_fZoom >= 150.f && ZoomIn == true&&m_bIsZoom ==false)
-		m_bIsZoom = true;
+    if (m_fZoom >= 150.f && ZoomIn == true && m_bIsZoom == false)
+        m_bIsZoom = true;
 
     if (m_fZoom <= 50.f && ZoomIn == false && m_bIsZoom == true)
         m_bIsZoom = false;

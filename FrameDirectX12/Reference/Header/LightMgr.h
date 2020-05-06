@@ -17,7 +17,7 @@ public:
 	HRESULT Set_LightInfo(const _uint& iIndex, D3DLIGHT LightInfo);
 	HRESULT Set_LightOnOff(const _uint&iIdex, _bool blsLight);
     
-
+	_uint Get_LightIndex() { return m_LightList.size()-1; };
 public:
 	HRESULT Add_Light(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList, const D3DLIGHT* tagLight);
 	HRESULT Render_Light(vector<ComPtr<ID3D12Resource>> pTargetTexture);

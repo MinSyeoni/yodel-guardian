@@ -103,3 +103,13 @@ ps_output PS_MAIN(VS_OUTPUT input) : SV_TARGET
 
     return(output);
 };
+
+
+float4 PS_SKYDOME(VS_OUTPUT input) :SV_TARGET
+{
+    float4 vColor;
+    vColor = gTexture.Sample(gsamLinearWrap, input.uv*5.f);
+
+    return vColor;
+
+}

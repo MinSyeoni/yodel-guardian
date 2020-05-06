@@ -39,7 +39,7 @@ private:
 	_bool m_blsLight;
 	ID3D12Device* m_pGraphicDevice;
 	ID3D12GraphicsCommandList* m_pCommandList;
-
+	_uint              m_LightIndex;
 	CRcTex*            m_pBuffer;
 	CShader_LightAcc*  m_pShader;
 	_bool m_bIsInit = false;
