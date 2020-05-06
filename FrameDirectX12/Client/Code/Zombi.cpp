@@ -66,8 +66,10 @@ _int CZombi::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform, CMes
 	}
 
 	// 맞았는지 임시임시 플레이어에서 SetIsHit 해주세
-	/*if (Engine::CDirectInput::Get_Instance()->Mouse_KeyDown(DIM_LB))
-		m_bIsHit = true;	*/
+
+	//if (Engine::CDirectInput::Get_Instance()->Mouse_KeyDown(DIM_LB))
+	//	m_bIsHit = true;	
+
 	
 	/////////죽는거 랜덤 시간 테스트/////////
 	//m_fTestTime += fTimeDelta;

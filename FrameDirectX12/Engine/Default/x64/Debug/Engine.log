@@ -5,9 +5,9 @@
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Destortion.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_DownSample.cso
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(82,12-69): warning X3206: implicit truncation of vector type
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_LightAcc.cso
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(121,12-69): warning X3206: implicit truncation of vector type
   
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_LightAcc.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Mesh.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ShadowDepth.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_SSAO.cso

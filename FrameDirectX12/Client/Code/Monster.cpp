@@ -182,8 +182,13 @@ void CMonster::Update_BoneCollider(CSphereCollider* pSphereCol, string strBoneNa
 	_matrix BoneMatrix = Offset * matBone * m_pTransCom->m_matWorld;
 
 	pSphereCol->Update_Collider(&BoneMatrix);
+
 	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::MONSTER, pSphereCol);
 
+
+
+
+	pSphereCol->Set_IsCol(true);
 
 }
 
@@ -263,6 +268,7 @@ HRESULT CMonster::Add_Component()
 	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCol);
 
 
+
 	m_pShereCol[0] = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 20.f/*여기반지름*/, _vec3(1.f, 1.f, 1.f), this));
 	NULL_CHECK_RETURN(m_pShereCol[0], E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_SphereCol1", m_pShereCol[0]);
@@ -270,6 +276,7 @@ HRESULT CMonster::Add_Component()
 	m_pShereCol[1] = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 20.f/*여기반지름*/, _vec3(1.f, 1.f, 1.f), this));
 	NULL_CHECK_RETURN(m_pShereCol[1], E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_SphereCol2", m_pShereCol[1]);
+
 
 
 

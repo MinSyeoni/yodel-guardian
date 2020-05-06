@@ -124,6 +124,7 @@ void CRifle::FallowPlayer()
 void CRifle::FallowBag()
 {
 
+
     _matrix RotationX = XMMatrixRotationX(XMConvertToRadians(90.f));
     _matrix RotationY = XMMatrixRotationY(XMConvertToRadians(-90.f));
 
@@ -147,14 +148,17 @@ void CRifle::FallowBag()
         vPos += vLook * -15.f + vRight * -8.f;
 
 
+
         matBlend._41 = vPos.x;
         matBlend._42 = vPos.y;
         matBlend._43 = vPos.z;
 
 
 
+
         m_pTransCom->m_matWorld = RotationX * RotationY * RotationZ * matBlend * (RotationY * *m_pPlayerMatrix);
     }
+
 
 
 

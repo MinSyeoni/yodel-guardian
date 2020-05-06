@@ -80,7 +80,9 @@ _int CPlayerStatus::LateUpdate(const _float& fTimeDelta)
         }
     }
 
+
     AttackCheck(fTimeDelta);
+
     return S_OK;
 }
 
@@ -288,6 +290,7 @@ void CPlayerStatus::WeaponChange()
 
     }
 
+
 }
 
 void CPlayerStatus::ShootingCheck()
@@ -325,7 +328,6 @@ void CPlayerStatus::ShootingCheck()
 
     }
     
-
 
 
 }
@@ -389,6 +391,7 @@ void CPlayerStatus::PlayerDirection(const _float& fTimeDelta)
 
     _long dwMouseMove;
 
+
     if (dwMouseMove = CDirectInput::Get_Instance()->Get_DIMouseMove(CDirectInput::DIMM_X))
     {
 
@@ -423,6 +426,7 @@ void CPlayerStatus::AttackCheck(const _float& fTimeDelta)
     if (m_eCurState == CPlayer::RIFLEATTACK)
     {
 
+
         m_fShootingTime += fTimeDelta;
 
         if (m_fShootingTime > 0.3f)
@@ -436,5 +440,6 @@ void CPlayerStatus::AttackCheck(const _float& fTimeDelta)
     if (m_bIsShoot == false)
         m_fShootingTime = 0.f;
   
+
 
 }

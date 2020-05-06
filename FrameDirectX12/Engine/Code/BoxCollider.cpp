@@ -54,9 +54,9 @@ HRESULT CBoxCollider::Ready_Collider(CMesh* pMesh, const _vec3& vAddPos, const _
         m_pOwner = pOwner;
 
 
-	m_pDrawMesh = static_cast<CVIBuffer*>(CComponentMgr::Get_Instance()->Clone_Component(L"Prototype_CubeColor", ID_STATIC));
-	if (m_pDrawMesh == nullptr)
-		return E_FAIL;
+    m_pDrawMesh = static_cast<CVIBuffer*>(CComponentMgr::Get_Instance()->Clone_Component(L"Prototype_CubeColor", ID_STATIC));
+    if (m_pDrawMesh == nullptr)
+        return E_FAIL;
 
 
     return S_OK;
@@ -70,6 +70,7 @@ HRESULT CBoxCollider::Ready_Collider(const _vec3& vAddPos, const _vec3& vAngle, 
     if (m_pDrawMesh == nullptr)
         return E_FAIL;
 
+
     m_matScale = XMMatrixScaling(vScale.x, vScale.y, vScale.z);
 
     m_vAddPos = vAddPos;
@@ -80,6 +81,7 @@ HRESULT CBoxCollider::Ready_Collider(const _vec3& vAddPos, const _vec3& vAngle, 
 
     if (pOwner != nullptr)
         m_pOwner = pOwner;
+
 
     return S_OK;
 }

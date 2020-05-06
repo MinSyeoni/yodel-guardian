@@ -140,6 +140,7 @@ void CDynamicCamera::MouseInput()
 
 
 
+
         m_tCameraInfo.vEye = CameraPos + (CameraLook * (70.f-fSpine)) + CameraRight * m_fZoom - CameraUp * 50.f;
         m_tCameraInfo.vAt = CameraPos + (CameraLook * (70.f + fSpine)) - CameraUp * 50.f;
 
