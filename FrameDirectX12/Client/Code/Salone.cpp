@@ -2,6 +2,7 @@
 #include "Salone.h"
 #include "ObjectMgr.h"
 #include "GraphicDevice.h"
+#include "DynamicCamera.h"
 #include"Frustom.h"
 CSalone::CSalone(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -48,9 +49,9 @@ HRESULT CSalone::Ready_GameObject()
 #ifdef _DEBUG
 	COUT_STR("Success Static - Clone Mesh");
 #endif
-	m_pTransCom->m_vPos = _vec3(300.f, 0.f, 300.f);
+	m_pTransCom->m_vPos = _vec3(300.f, 0.f, 508.f);
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
-	m_pTransCom->m_vAngle =  _vec3(0.f, 0.f, 0.f);
+	m_pTransCom->m_vAngle =  _vec3(0.f, 180.f, 0.f);
 
 	return S_OK;
 }
@@ -64,6 +65,16 @@ HRESULT CSalone::LateInit_GameObject()
 	______________________________________________________________________*/
 
 	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
+
+
+
+	CDynamicCamera* pCamera = static_cast<CDynamicCamera*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_Camera", L"DynamicCamera"));
+	if (pCamera == nullptr)
+		return DEADOBJ;
+	pCamera->Dead_GameObject();
+
+
+	CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_Camera", L"prototype_Cam1",L"ActionCame" ,nullptr);
 
 	return S_OK;
 

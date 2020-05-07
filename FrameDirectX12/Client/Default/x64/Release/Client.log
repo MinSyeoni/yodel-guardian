@@ -1,15 +1,75 @@
-﻿  PlayerStatus.cpp
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(137,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(137,9): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(162,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(162,9): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(172,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(172,9): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(191,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(191,9): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(201,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(201,9): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(213,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(213,9): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(369,17): warning C4101: 'matRot' :참조되지 않은 지역 변수입니다.
+﻿  stdafx.cpp
+  ActionCamera.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\ActionCamera.cpp(92,29): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Aim.cpp
+  BackGround.cpp
+  CubeObject.cpp
+  DamageBlood.cpp
+  DynamicCamera.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\DynamicCamera.cpp(117,11): warning C4101: 'dwMouseMove' :참조되지 않은 지역 변수입니다.
+  Dynamic_Object.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Dynamic_Object.cpp(135,15): warning C4101: 'tCB_BoneInfo' :참조되지 않은 지역 변수입니다.
+  FlameThrower.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\FlameThrower.cpp(42,14): warning C4353: 비표준 확장을 사용했습니다. 함수 식으로 상수 0을 사용했습니다.  '__noop' 내장 함수를 대신 사용하십시오.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\FlameThrower.cpp(105,14): warning C4353: 비표준 확장을 사용했습니다. 함수 식으로 상수 0을 사용했습니다.  '__noop' 내장 함수를 대신 사용하십시오.
+  GlassObject.cpp
+  GunUI.cpp
+  LightObject.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\LightMgr.h(20,25): warning C4267: 'return': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\LightObject.cpp(34,11): warning C4553: '==': 식의 결과가 사용되지 않습니다. '='을(를) 의도했습니까?
+  Loading.cpp
+  MainApp.cpp
+  MapObject.cpp
+  BaziorMgr.cpp
+  Monster.cpp
+  Pistol.cpp
+  Player.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.h(55,17): warning C4244: '초기화 중': 'float'에서 '_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  PlayerArm.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerArm.cpp(175,15): warning C4101: 'tCB_BoneInfo' :참조되지 않은 지역 변수입니다.
+  PlayerHP.cpp
+  코드를 생성하고 있습니다...
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\ActionCamera.cpp(104): warning C4715: 'CActionCamera::CheckBazior': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  컴파일하고 있습니다...
+  PlayerLeg.cpp
+  PlayerStatus.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.h(55,17): warning C4244: '초기화 중': 'float'에서 '_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(153,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(153,9): warning C4309: '인수': 상수 값이 잘립니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(178,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(178,9): warning C4309: '인수': 상수 값이 잘립니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(188,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(188,9): warning C4309: '인수': 상수 값이 잘립니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(207,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(207,9): warning C4309: '인수': 상수 값이 잘립니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(217,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(217,9): warning C4309: '인수': 상수 값이 잘립니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(229,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(229,9): warning C4309: '인수': 상수 값이 잘립니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(316,18): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(410,17): warning C4101: 'matRot' :참조되지 않은 지역 변수입니다.
+  PlayerUI.cpp
+  RectObject.cpp
+  Rifle.cpp
+  Salone.cpp
+  Scene_Logo.cpp
+  Scene_Menu.cpp
+  Scene_Stage.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\LightMgr.h(20,25): warning C4267: 'return': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Scene_Stage.cpp(297,2): warning C4002: 함수 같은 매크로 호출 'NULL_CHECK'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Scene_Stage.cpp(328,2): warning C4002: 함수 같은 매크로 호출 'NULL_CHECK'에 대해 인수가 너무 많습니다.
+  SkyDome.cpp
+  StaticObject.cpp
+  Terrain.cpp
+  UI.cpp
+  Weapon.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Weapon.cpp(55,15): warning C4101: 'tCB_BoneInfo' :참조되지 않은 지역 변수입니다.
+  Zombi.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Zombi.cpp(86,14): warning C4353: 비표준 확장을 사용했습니다. 함수 식으로 상수 0을 사용했습니다.  '__noop' 내장 함수를 대신 사용하십시오.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Zombi.cpp(95,10): warning C4101: 'matRot' :참조되지 않은 지역 변수입니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Zombi.cpp(150,14): warning C4353: 비표준 확장을 사용했습니다. 함수 식으로 상수 0을 사용했습니다.  '__noop' 내장 함수를 대신 사용하십시오.
+  Client.cpp
+  코드를 생성하고 있습니다...
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Default\Client.cpp(354): warning C4715: 'Release_Singleton': 모든 제어 경로에서 값을 반환하지는 않습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Weapon.cpp(30): warning C4715: 'CWeapon::AddComponent': 모든 제어 경로에서 값을 반환하지는 않습니다.
   Client.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Default\../Release\Client.exe

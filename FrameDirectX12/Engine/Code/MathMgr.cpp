@@ -203,7 +203,16 @@ _bool CMathMgr::Collision_OBB(CCollider * pDstCollider, CCollider * pSrcCollider
 
 _bool CMathMgr::Collision_Spere(CCollider * pDstCollider, CCollider * pSrcCollider, _vec3 * vDir)
 {
-	return true;
+	_vec3 vDstPos = pDstCollider->Get_WorldPos();
+	_vec3 vSrcPos = pSrcCollider->Get_WorldPos();
+
+	_float vDist = vDstPos.Get_Distance(vSrcPos);
+	_float vRadiusDist = pDstCollider->Get_Radius() + pSrcCollider->Get_Radius();
+
+	if (vDist <= vRadiusDist)
+		return true;
+
+	return false;
 }
 
 _int CMathMgr::Collision_Ray(CCollider* pDstCollider)

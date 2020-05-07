@@ -22,6 +22,7 @@ public:
 	void Rotation(const _float& fTimeDelta);
 	void PlayerDirection(const _float&fTimeDelta);
 	void AttackCheck(const _float& fTimeDelta);
+	void DamageByMonster(const _float& fTimeDelta);
 	float Get_Spine() { return m_fSpine; };
 public:
 	CPlayer::STATE m_eCurState= CPlayer::RIFLEIDLE;
@@ -29,9 +30,14 @@ public:
 
 	CPlayer::STATE m_eLegState = CPlayer::RIFLEIDLE;
 
+	_matrix* m_matChestOffset;
+	_matrix* m_matChest;
+
 	CTransform* m_pTransCom;
 	CMesh*  m_pMesh;
 	CBoxCollider* m_pBoxCollider;
+	CSphereCollider* m_pSphereCollider;
+
 	CNaviMesh* m_pNaviMesh;
 
 	float m_fSpine = 0.f;;
@@ -43,6 +49,10 @@ public:
 	_float m_fShootingTime = 0;//√—«¡∑π¿”¡¶«—
 	_bool m_bIsShoot = false;//√—ΩÓ¥¬¡ﬂ
 	EQUIPTYPE m_eEquip = NONE;
+
+	_bool m_bIshit = false;
+	_float m_fhitCool = 0.f;
+	_uint m_uiHp = 10.f;
 
 
 	_bool m_bIsInit = false;

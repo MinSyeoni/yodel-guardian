@@ -25,6 +25,7 @@
 #include "Salone.h"
 
 #include "LightObject.h"
+#include "DamageBlood.h"
 
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
@@ -49,16 +50,16 @@ HRESULT CScene_Stage::Ready_LightInfo()
 
 
 	tagLight.m_eType = LIGHTTYPE::D3DLIGHT_POINT;
-	tagLight.m_vDiffuse = _vec4{ 1.0f,1.0f,0.0f,1.0f };
+	tagLight.m_vDiffuse = _vec4{ 1.0f,1.0f,1.0f,1.0f };
 	tagLight.m_vAmbient = _vec4{ 0.35f,0.35f,0.35f,1.0f };
 	tagLight.m_vSpecular = _vec4{ 0.3f,0.3f,0.3f,1.0f };
 	tagLight.m_vDirection = _vec4{ 1.0f,1.0f,-1.f,1.0f };
-	tagLight.m_vPosition = _vec4{ 300.f,10.f,400.f,0.f };
-	tagLight.m_fRange = 100.f;
+	tagLight.m_vPosition = _vec4{ 300.f,15.f,500.f,0.f };
+	tagLight.m_fRange = 30.f;
 
 
-	//if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &tagLight)))
-	//	return E_FAIL;
+	if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &tagLight)))
+		return E_FAIL;
 
 
 	return S_OK;
@@ -167,6 +168,10 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = CGunUI::Create(m_pGraphicDevice, m_pCommandList, L"Prototype_Texture_Rifle");
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_RifleUI", pGameObject), E_FAIL);
+
+	pGameObject = CDamageBlood::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_DamageBlood", pGameObject), E_FAIL);
 
 	/////////////////////////Α¶ΈνΎ²////////////////////////////////////////
 
@@ -282,7 +287,6 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_PlayerHP", L"PlayerHP", nullptr), E_FAIL);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
-
 
 	return S_OK;
 }

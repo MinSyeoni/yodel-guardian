@@ -50,8 +50,7 @@ float4 PS_MAIN(VS_OUTPUT input) : SV_TARGET
     float4 vSSaoInfo = gSSAOTexture.Sample(gsamLinearWrap, DistUV)*1.5f;
     
     OutColor = (vAlbedoInfo * vShadeInfo*vSSaoInfo) + vSpecInfo + vBlurInfo + vEmissiveInfo;
-  //  OutColor = vAlbedoInfo;
-
+  
     return OutColor;
 
 };

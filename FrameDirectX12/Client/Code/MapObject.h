@@ -40,7 +40,6 @@ private:
 	Engine::CMesh*				m_pMeshCom = nullptr;
 	Engine::CShader_Mesh*       m_pShaderCom = nullptr;
 
-	CDynamicCamera*				m_pDynamicCamera = nullptr;
 	MeshInfo					m_tMeshInfo;
 	
 public:
