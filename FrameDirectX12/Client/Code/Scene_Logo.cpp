@@ -7,6 +7,7 @@
 #include "GraphicDevice.h"
 #include "BackGround.h"
 #include "DynamicCamera.h"
+#include "DirectSound.h"
 CScene_Logo::CScene_Logo(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -36,7 +37,6 @@ HRESULT CScene_Logo::Ready_Scene()
 	m_pFont->Ready_GameObjectClone(L"Mesh_Loading", _vec2{ 50.f,50.f }, D2D1::ColorF::Red);
 	m_pLoading = CLoading::Create(m_pGraphicDevice,m_pCommandList,CLoading::LOADING_STAGE);
 	NULL_CHECK_RETURN(m_pLoading, E_FAIL);
-
 
 
 
@@ -100,6 +100,11 @@ HRESULT CScene_Logo::Ready_GameObjectPrototype()
 
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_DynamicCamera", pGameObject), E_FAIL);
+
+
+	CDirectSound::Get_Instance()->LoadDirectSoundFile(L"Siren");//여기야시영
+	CDirectSound::Get_Instance()->PlayDirectSoundFile(L"Siren", true);
+
 	return S_OK;
 }
 
