@@ -25,10 +25,6 @@ void CZombi::Initialized()
 
 HRESULT CZombi::Late_Initialized()
 {
-	srand((unsigned int)time(0));
-
-	m_fRandTime = rand() % 10 + 5.f;
-
 	_int iRandAni = rand() % 4;
 
 	if (iRandAni == 0)
@@ -64,21 +60,6 @@ _int CZombi::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform, CMes
 		m_fCurHp = 0.f;
 		m_eCurState = ZOM_BC_Dead;
 	}
-
-	// 맞았는지 임시임시 플레이어에서 SetIsHit 해주세
-
-	//if (Engine::CDirectInput::Get_Instance()->Mouse_KeyDown(DIM_LB))
-	//	m_bIsHit = true;	
-
-	
-	/////////죽는거 랜덤 시간 테스트/////////
-	//m_fTestTime += fTimeDelta;
-	//if (m_fTestTime >= m_fRandTime)
-	//{
-	//	m_fTestTime = 0.f;
-	//	m_eCurState = ZOM_BC_Dead;
-	//}
-	//////////////////////////////////////
 
 	if (m_bIsZombiState[2])	// m_bIsHit
 		m_eCurState = ZOM_EX_IdleOffset;
@@ -192,34 +173,40 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombi::ZOM_EX_IdleOffset:
 	{
-		//m_fRandDamage = rand() % 15 + 15.f;
 		if (m_bIsZombiState[2])	// hit
 		{
 			m_fSpeed = 15.f;
 		
 			m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(m_pTransCom->m_vDir * -1), m_fSpeed * fTimeDelta);
 			
-			m_fAniDelay = 100.f;
+			m_fAniDelay = 300.f;
 			if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_IdleOffset))
 			{
 				m_fCurHp -= m_fHitDamage;
 				m_bIsZombiState[2] = false;
 			}
 		}
-
-		if (Check_PlayerRange(100.f))
+		else
 		{
 			m_fAniDelay = 6000.f;
-			if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_IdleOffset))
-				m_eCurState = ZOM_EX_Run;
-		}		
+			if (Check_PlayerRange(100.f))
+			{
+				if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_IdleOffset))
+					m_eCurState = ZOM_EX_Run;
+			}
+			else
+			{
+				if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_IdleOffset))
+					m_eCurState = ZOM_EX_WalkSlow;
+			}
+		}
 	}
 		break;
 	case CZombi::ZOM_EX_IdlePose:
 		break;
 	case CZombi::ZOM_EX_Run:
 	{
-		m_fSpeed = 7.f;
+		m_fSpeed = 3.5f;
 
 		if (Check_PlayerRange(8.f))
 		{
@@ -241,7 +228,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombi::ZOM_EX_WalkSlow:
 	{
-		m_fSpeed = 2.f;
+		m_fSpeed = 1.5f;
 
 		m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed * fTimeDelta);
 

@@ -33,7 +33,6 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
 {
     LateInit();
 
-
     _matrix matRot;
 
     matRot = XMMatrixRotationY(XMConvertToRadians(-90.f));
@@ -56,8 +55,6 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
 
 
     m_ePreState = m_eCurState;
-
-
 
     
     _matrix matBone = XMMatrixInverse(nullptr, *m_matChestOffset);

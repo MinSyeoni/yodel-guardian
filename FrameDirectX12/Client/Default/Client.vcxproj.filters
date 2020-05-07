@@ -205,8 +205,13 @@
     <Filter Include="97.Mgr\00.MathMgr">
       <UniqueIdentifier>{cd7bde85-26a6-4014-a359-0d317f4c3bc5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.UI\04.DamageBlood">
-      <UniqueIdentifier>{663bf4fd-a9ad-41fb-8da0-7a4e903b33e4}</UniqueIdentifier>
+
+
+    <Filter Include="01.Scene_Stage\06.Monster\01.Zombi">
+      <UniqueIdentifier>{059684e2-a709-4812-a5c6-4e18fdc16645}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\08.Trigger">
+      <UniqueIdentifier>{449659f9-1cbf-40a0-9918-9820bc8f73bc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -333,6 +338,9 @@
     <ClInclude Include="..\Code\UI.h">
       <Filter>03.UI</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\ZombiState.h">
+      <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
+    </ClInclude>
     <ClInclude Include="..\Code\Salone.h">
       <Filter>01.Scene_Stage\07.NPC\00.Salone</Filter>
     </ClInclude>
@@ -342,12 +350,19 @@
     <ClInclude Include="..\Code\BaziorMgr.h">
       <Filter>97.Mgr\00.MathMgr</Filter>
     </ClInclude>
+
+
+
     <ClInclude Include="..\Code\Zombi.h">
       <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
+      <Filter>01.Scene_Stage\06.Monster\01.Zombi</Filter>
     </ClInclude>
+
+
+
     <ClInclude Include="..\Code\LightObject.h" />
-    <ClInclude Include="..\Code\DamageBlood.h">
-      <Filter>03.UI\04.DamageBlood</Filter>
+    <ClInclude Include="..\Code\Trigger.h">
+      <Filter>01.Scene_Stage\08.Trigger</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -444,6 +459,9 @@
     <ClCompile Include="..\Code\UI.cpp">
       <Filter>03.UI</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\ZombiState.cpp">
+      <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\Salone.cpp">
       <Filter>01.Scene_Stage\07.NPC\00.Salone</Filter>
     </ClCompile>
@@ -453,12 +471,19 @@
     <ClCompile Include="..\Code\BaziorMgr.cpp">
       <Filter>97.Mgr\00.MathMgr</Filter>
     </ClCompile>
+
+
+
     <ClCompile Include="..\Code\Zombi.cpp">
       <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
+      <Filter>01.Scene_Stage\06.Monster\01.Zombi</Filter>
     </ClCompile>
+
+
+
     <ClCompile Include="..\Code\LightObject.cpp" />
-    <ClCompile Include="..\Code\DamageBlood.cpp">
-      <Filter>03.UI\04.DamageBlood</Filter>
+    <ClCompile Include="..\Code\Trigger.cpp">
+      <Filter>01.Scene_Stage\08.Trigger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

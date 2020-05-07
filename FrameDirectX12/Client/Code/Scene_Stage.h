@@ -24,6 +24,7 @@ private:
 
 private:
 	void			Load_MonsterPos(const wstring& wstrFilePath);
+	void			Load_TriggerPos(const wstring& wstrFilePath);
 	void			Load_StageObject(const wstring& wstrFilePath);
 
 	MeshInfo		m_tMeshInfo;

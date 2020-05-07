@@ -51,7 +51,7 @@ HRESULT CMonster::Ready_GameObject()
 
 	FAILED_CHECK_RETURN(Add_Component(),E_FAIL);
 
-	m_pTransCom->m_vPos = m_tMeshInfo.Pos + _vec3{300.f, 0.f, 350.f};
+	m_pTransCom->m_vPos = m_tMeshInfo.Pos;
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
 	m_pTransCom->m_vDir = _vec3(-1.f, 0.f, 1.f);
 
@@ -65,13 +65,6 @@ HRESULT CMonster::Ready_GameObject()
 		break;
 	case CMonster::ZOMBI:
 	{
-		//CZombi* pZombi = new CZombi;
-		//m_pZombiLst.push_back(pZombi);
-		//for (auto& pZom : m_pZombiLst)
-		//{
-		//	pZom->Set_Transform(m_pTransCom);
-		//	pZom->Set_NaviMesh(m_pNaviMesh);
-		//}
 		m_pZombi = new CZombi;
 		m_pZombi->Set_Transform(m_pTransCom);
 		m_pZombi->Set_NaviMesh(m_pNaviMesh);
@@ -101,8 +94,6 @@ HRESULT CMonster::LateInit_GameObject()
 		m_pFlameThrower->Late_Initialized();
 		break;
 	case CMonster::ZOMBI:
-		//for (auto& pZom : m_pZombiLst)
-		//	pZom->Late_Initialized();
 		m_pZombi->Late_Initialized();
 		break;
 	default:
@@ -139,20 +130,13 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 		break;
 	case CMonster::ZOMBI:
 	{
-		//for (auto& pZom : m_pZombiLst)
-		//{
-		//	if (pZom == nullptr)
-		//		return E_FAIL;
-
-		//	pZom->Update_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
-		//	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)pZom->Get_CurState());		
-		//}
 		if (m_pZombi == nullptr)
 			return E_FAIL;
 		
 		// LeftWrist
-		Update_BoneCollider(m_pShereCol[0], "LeftMiddleFinger");
-		Update_BoneCollider(m_pShereCol[1], "RightMiddleFinger");
+		Update_BoneCollider(m_pShereCol[0], "LeftMiddleFinger", CColliderMgr::COMBAT);
+		Update_BoneCollider(m_pShereCol[1], "RightMiddleFinger", CColliderMgr::COMBAT);
+		Update_BoneCollider(m_pShereCol[2], "Chest", CColliderMgr::MONSTER);
 		m_pZombi->Update_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
 		iCurState = m_pZombi->Get_CurState();
 	}
@@ -167,7 +151,7 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 	return NO_EVENT;
 }
 
-void CMonster::Update_BoneCollider(CSphereCollider* pSphereCol, string strBoneName)
+void CMonster::Update_BoneCollider(CSphereCollider* pSphereCol, string strBoneName, CColliderMgr::COLLIDER_TAG eTag)
 {
 	if (strBoneName == "")
 		return;
@@ -181,13 +165,9 @@ void CMonster::Update_BoneCollider(CSphereCollider* pSphereCol, string strBoneNa
 
 	pSphereCol->Update_Collider(&BoneMatrix);
 
-	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::MONSTER, pSphereCol);
-
-
-
+	CColliderMgr::Get_Instance()->Add_Collider(eTag, pSphereCol);
 
 	pSphereCol->Set_IsCol(true);
-
 }
 
 _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
@@ -199,6 +179,7 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCol), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[0]), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[1]), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[2]), -1);
 
 	switch (m_eMonName)
 	{
@@ -211,14 +192,6 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 		break;
 	case CMonster::ZOMBI:
 	{
-		//for (auto& pZom : m_pZombiLst)
-		//{
-		//	if (pZom == nullptr)
-		//		return E_FAIL;
-		//	pZom->LateUpdate_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
-		//	if (pZom->Get_IsDeadZombi())
-		//		m_bIsDead = true;
-		//}
 		if (m_pZombi == nullptr)
 			return E_FAIL;
 		m_pZombi->LateUpdate_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
@@ -265,20 +238,17 @@ HRESULT CMonster::Add_Component()
 	NULL_CHECK_RETURN(m_pBoxCol, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCol);
 
-
-
-	m_pShereCol[0] = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 20.f/*여기반지름*/, _vec3(1.f, 1.f, 1.f), this));
+	m_pShereCol[0] = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 20.f, _vec3(1.f, 1.f, 1.f), this));
 	NULL_CHECK_RETURN(m_pShereCol[0], E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_SphereCol1", m_pShereCol[0]);
 	
-	m_pShereCol[1] = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 20.f/*여기반지름*/, _vec3(1.f, 1.f, 1.f), this));
+	m_pShereCol[1] = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 20.f, _vec3(1.f, 1.f, 1.f), this));
 	NULL_CHECK_RETURN(m_pShereCol[1], E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_SphereCol2", m_pShereCol[1]);
 
-
-
-
-
+	m_pShereCol[2] = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 60.f, _vec3(1.f, 1.f, 1.f), this));
+	NULL_CHECK_RETURN(m_pShereCol[2], E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_SphereCol3", m_pShereCol[2]);
 	return S_OK;
 }
 
@@ -358,11 +328,6 @@ void CMonster::Free()
 {
 	Safe_Delete(m_pFlameThrower);
 	Safe_Delete(m_pZombi);
-	//for (auto& pZom : m_pZombiLst)
-	//{
-	//	Safe_Delete(pZom);
-	//}
-	//m_pZombiLst.clear();
 
 	CGameObject::Free();
 }
