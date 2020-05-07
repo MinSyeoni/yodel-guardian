@@ -1,7 +1,4 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppClean.targets(76,5): warning : 'c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\component.obj' 파일은 다른 프로세스에서 사용 중이므로 프로세스에서 액세스할 수 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppClean.targets(76,5): warning : 'c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\layer.obj' 파일은 다른 프로세스에서 사용 중이므로 프로세스에서 액세스할 수 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppClean.targets(76,5): warning : 'c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\shader_blur.obj' 파일은 다른 프로세스에서 사용 중이므로 프로세스에서 액세스할 수 없습니다.
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Blend.cso
+﻿  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Blend.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Blur.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_ColorBuffer.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Default.cso

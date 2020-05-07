@@ -4,7 +4,7 @@
 #include "GraphicDevice.h"
 #include "ObjectMgr.h"
 #include "ColliderMgr.h"
-
+#include "DirectSound.h"
 CZombi::CZombi()
 {
 	Initialized();
@@ -19,7 +19,7 @@ void CZombi::Initialized()
 {
 	m_eCurState = ZOM_BasePose;
 	m_ePreState = m_eCurState;
-
+	m_bIsDeadSound = false;
 	m_fCurHp = m_fMaxHp = 100.f;
 }
 
@@ -60,6 +60,11 @@ _int CZombi::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform, CMes
 		m_fCurHp = 0.f;
 		m_bIsZombiState[2] = false;
 		m_eCurState = ZOM_BC_Dead;
+	}
+	if (m_bIsDeadSound == false && m_eCurState == ZOM_BC_Dead)
+	{
+		m_bIsDeadSound = true;
+		CDirectSound::Get_Instance()->PlayDirectSoundFile(L"ZombiDead");
 	}
 
 	if (m_bIsZombiState[2])	// m_bIsHit

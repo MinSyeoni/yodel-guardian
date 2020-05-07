@@ -102,9 +102,14 @@ HRESULT CScene_Logo::Ready_GameObjectPrototype()
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_DynamicCamera", pGameObject), E_FAIL);
 
 
-	CDirectSound::Get_Instance()->LoadDirectSoundFile(L"Nothin_Yet");//여기야시영
-	CDirectSound::Get_Instance()->PlayDirectSoundFile(L"Nothin_Yet", true);
+	CDirectSound::Get_Instance()->LoadDirectSoundFile(L"GUNSHOT");//여기야시영
+	CDirectSound::Get_Instance()->LoadDirectSoundFile(L"ZombiDead");//여기야시영
+	CDirectSound::Get_Instance()->LoadDirectSoundFile(L"Siren");//여기야시영
+	CDirectSound::Get_Instance()->LoadDirectSoundFile(L"Bgm");//여기야시영
 
+
+
+	CDirectSound::Get_Instance()->PlayDirectSoundEffect(L"Bgm");//여기야시영
 	return S_OK;
 }
 

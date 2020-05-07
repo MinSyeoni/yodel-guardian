@@ -9,6 +9,7 @@
 #include "DynamicCamera.h"
 #include "Monster.h"
 #include "Aim.h"
+#include "DirectSound.h"
 CPlayerStatus::CPlayerStatus()
 {
 }
@@ -440,6 +441,7 @@ void CPlayerStatus::AttackCheck(const _float& fTimeDelta)
 
         if (m_fShootingTime > 0.3f)
         {
+            CDirectSound::Get_Instance()->PlayDirectSoundFile(L"GUNSHOT");
             ShootingCheck();
             m_fShootingTime = 0.f;
         }

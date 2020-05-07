@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Trigger.h"
-
+#include "DirectSound.h"
 #include "ObjectMgr.h"
 #include "ColliderMgr.h"
 #include "GraphicDevice.h"
@@ -109,6 +109,7 @@ _int CTrigger::LateUpdate_GameObject(const _float & fTimeDelta)
 			if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCol, pCol, &vShaveDir))
 			{
 				Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/Zombi.dat");
+				CDirectSound::Get_Instance()->PlayDirectSoundFile(L"Siren");
 				m_bIsDead = true;
 			}
 		}

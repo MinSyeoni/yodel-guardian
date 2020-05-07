@@ -79,5 +79,8 @@ private:
 	_float					m_fSpeed = 0.f;
 	_float					m_fCurHp = 0.f;
 	_float					m_fMaxHp = 0.f;
+
+	//여기좀추가햇으
+	_bool m_bIsDeadSound = false;
 };
 
