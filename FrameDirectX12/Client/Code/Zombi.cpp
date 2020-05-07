@@ -58,6 +58,7 @@ _int CZombi::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform, CMes
 	if (m_fCurHp <= 0.f)
 	{
 		m_fCurHp = 0.f;
+		m_bIsZombiState[2] = false;
 		m_eCurState = ZOM_BC_Dead;
 	}
 
@@ -242,6 +243,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombi::ZOM_BC_Dead:
 	{
+		m_bIsZombiState[2] = false;
 		m_fAniDelay = 6500.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_BC_Dead))
 			m_bIsZombiState[1] = true;	//dead
