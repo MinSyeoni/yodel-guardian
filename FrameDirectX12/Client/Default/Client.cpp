@@ -56,6 +56,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MSG msg;
 	msg.message = WM_NULL;
 
+	if (FAILED(Engine::CDirectSound::Get_Instance()->Ready_DirectSound(g_hWnd)))
+	{
+		Engine::CDirectSound::Get_Instance()->Destroy_Instance();
+		return FALSE;
+	}
 	/*____________________________________________________________________
 	MainApp 생성.
 	______________________________________________________________________*/

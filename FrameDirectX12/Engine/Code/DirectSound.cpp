@@ -142,7 +142,8 @@ HRESULT CDirectSound::LoadDirectSoundFile(const wstring wstrFilename)
 	unsigned char*			bufferPtr;
 	unsigned long			bufferSize;
 
-	TCHAR szFile[256] = L"../../Bin/Resources/05.Sound/";
+
+	TCHAR szFile[256] = L"../../Resource/Sound/";
 	lstrcat(szFile, wstrFilename.c_str());
 	lstrcat(szFile, L".wav");
 
@@ -304,7 +305,7 @@ HRESULT CDirectSound::Load3DSoundFile(TCHAR * filename)
 	unsigned char*			bufferPtr;
 	unsigned long			bufferSize;
 
-	TCHAR szFile[256] = L"../../Bin/Resources/05.Sound/";
+	TCHAR szFile[256] = L"../../Resource/Sound/";
 	lstrcat(szFile, filename);
 	lstrcat(szFile, L".wav");
 
