@@ -8,7 +8,7 @@ cbuffer cbShadowInfo : register(b0)
 };
 cbuffer cbBoneInfo : register(b1)
 {
-    float4x4 gmatBones[64] : packoffset(c0);
+    float4x4 gmatBones[80] : packoffset(c0);
 };
 
 struct VS_INPUT
