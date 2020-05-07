@@ -24,6 +24,7 @@ public:
 	void AttackCheck(const _float& fTimeDelta);
 	void DamageByMonster(const _float& fTimeDelta);
 	float Get_Spine() { return m_fSpine; };
+	void CheckAim();
 public:
 	CPlayer::STATE m_eCurState= CPlayer::RIFLEIDLE;
 	CPlayer::STATE m_ePreState = CPlayer::RIFLEIDLE;

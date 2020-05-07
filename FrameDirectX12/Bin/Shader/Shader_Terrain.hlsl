@@ -46,10 +46,10 @@ VS_OUTPUT VS_MAIN(VS_INPUT Input)
     
     matLightWV = mul(matWorld, matLightView);
     matLightWVP = mul(matLightWV, matLightProj);
+    output.vLightPos = mul(float4(Input.position, 1.0f), matLightWVP);
     
     output.position = mul(float4(Input.position, 1.0f), matWVP);
     output.uv = Input.uv;
-    output.vLightPos = mul(float4(Input.position, 1.0f), matLightWVP);
     
  
     float3 worldNormal = mul(Input.normal, (float3x3) matWorld);

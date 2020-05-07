@@ -52,8 +52,8 @@ _int CGunUI::Update_GameObject(const _float& fTimeDelta)
 
 	m_pTransCom->m_vScale = _vec3(0.25f, 0.2f, 0.21f);
 	//m_pTransCom->m_vPos = _vec3(0.7f, -0.8f, 0.f);
-	m_pTransCom->m_vPos.x = _float(2.f / WINCX * 1360) - 1.f;
-	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * 818) + 1.f;
+	m_pTransCom->m_vPos.x = _float(2.f / WINCX * 1620) - 1.f;
+	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * 980) + 1.f;
 
 	///// [임시]총알 폰트 설정 ///// 
 	wstring strText = L"";

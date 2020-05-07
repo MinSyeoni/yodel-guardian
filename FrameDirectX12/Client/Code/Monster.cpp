@@ -173,9 +173,6 @@ void CMonster::Update_BoneCollider(CSphereCollider* pSphereCol, string strBoneNa
 _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
-
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCol), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[0]), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[1]), -1);
@@ -204,6 +201,9 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 		break;
 	}
 
+
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	return NO_EVENT;
 }
 
@@ -275,13 +275,13 @@ void CMonster::Set_ConstantTable()
 void CMonster::Render_ShadowDepth(CShader_Shadow * pShader)
 {
 	Set_ShadowTable(pShader);
-	m_pMeshCom->Render_ShadowMesh(pShader);
+	m_pMeshCom->Render_ShadowMesh(pShader, m_vecMatrix, true);
 	pShader->Set_ShadowFinish();
 }
 
 void CMonster::Set_ShadowTable(CShader_Shadow* pShader)
 {
-	_matrix matRotY = XMMatrixRotationY(XMConvertToRadians(-90));
+
 
 	_matrix matView = INIT_MATRIX;
 	_matrix matProj = INIT_MATRIX;
@@ -292,10 +292,12 @@ void CMonster::Set_ShadowTable(CShader_Shadow* pShader)
 
 	matView = CFrustom::Get_Instance()->Get_LightView();
 	matProj = CFrustom::Get_Instance()->Get_LightProj();
-	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(matRotY * m_pTransCom->m_matWorld));
+
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_pTransCom->m_matWorld));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
 	tCB_MatrixInfo.blsMesh = true;
+
 
 	_int offset = pShader->Get_CBMeshCount();
 	pShader->Get_UploadBuffer_ShadowInfo()->CopyData(offset, tCB_MatrixInfo);

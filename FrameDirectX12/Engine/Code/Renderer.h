@@ -124,6 +124,7 @@ private:
 
 	CTexture* m_pDebugTexture;
 	_bool m_bIsDebugInit;
+	_bool m_bIsDebugRender;
 private:
 	CDistortionTarget* m_pDestortionTarget;
 

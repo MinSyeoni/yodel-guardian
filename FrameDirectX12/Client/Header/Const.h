@@ -1,8 +1,8 @@
 #pragma once
 #include "Typedef.h"
 
-const _int WINCX	= 1600;
-const _int WINCY	= 900;
+const _int WINCX	= 1920;
+const _int WINCY	= 1080;
 const _int WINPOS_X = 200;
 const _int WINPOS_Y = 0;
 

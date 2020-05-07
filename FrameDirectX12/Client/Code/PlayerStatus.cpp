@@ -8,7 +8,7 @@
 #include "Weapon.h"
 #include "DynamicCamera.h"
 #include "Monster.h"
-
+#include "Aim.h"
 CPlayerStatus::CPlayerStatus()
 {
 }
@@ -46,6 +46,7 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
     StatusUpdate(fTimeDelta);
     PlayerDirection(fTimeDelta);
     WeaponChange();
+    CheckAim();
     if (m_bIsShoot)
     {
         m_eCurState = CPlayer::RIFLEATTACK;
@@ -501,5 +502,21 @@ void CPlayerStatus::DamageByMonster(const _float& fTimeDelta)
 
     }
 
+
+}
+
+void CPlayerStatus::CheckAim()
+{
+   CGameObject* pAim =  CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"Aim");
+   if (pAim == nullptr)
+       return;
+
+   if (m_eEquip == RIFLE)
+   {
+       dynamic_cast<CAim*>(pAim)->SetRender(true);
+       
+   }
+   else
+       dynamic_cast<CAim*>(pAim)->SetRender(false);
 
 }

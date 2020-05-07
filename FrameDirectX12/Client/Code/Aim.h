@@ -27,7 +27,7 @@ public:
 	virtual _int				Update_GameObject(const _float& fTimeDelta);
 	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void				Render_GameObject(const _float& fTimeDelta);
-
+	void SetRender(_bool bIsRender) { m_bIsRender = bIsRender; };
 private:
 	virtual HRESULT				Add_Component();
 
@@ -42,7 +42,7 @@ private:
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
 
 	POINT						m_pt = {};
-
+	_bool                      m_bIsRender=false;
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);
 	static CAim*				Create(ID3D12Device* pGraphicDevice,

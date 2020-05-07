@@ -73,7 +73,7 @@ _int CMapObject::LateUpdate_GameObject(const _float & fTimeDelta)
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
-
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	return NO_EVENT;
 }
 
@@ -123,11 +123,14 @@ void CMapObject::Set_ConstantTable()
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
 
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
+
+
+
 }
 
 void CMapObject::Set_ShadowTable(CShader_Shadow * pShader)
 {
-	_matrix matRotY = XMMatrixRotationY(XMConvertToRadians(-90));
+
 
 	_matrix matView = INIT_MATRIX;
 	_matrix matProj = INIT_MATRIX;
@@ -138,7 +141,7 @@ void CMapObject::Set_ShadowTable(CShader_Shadow * pShader)
 
 	matView = CFrustom::Get_Instance()->Get_LightView();
 	matProj = CFrustom::Get_Instance()->Get_LightProj();
-	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(matRotY * m_pTransCom->m_matWorld));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_pTransCom->m_matWorld));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
 	tCB_MatrixInfo.blsMesh = true;

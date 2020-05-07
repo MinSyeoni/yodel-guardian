@@ -115,6 +115,9 @@ void CRenderer::Render_Renderer(const _float& fTimeDelta)
 
 	if (KEY_DOWN(8))
 		m_blsShowTarget = !m_blsShowTarget;
+    if (KEY_DOWN(9))
+        m_bIsDebugRender = !m_bIsDebugRender;
+
 	if (m_blsShowTarget == true)//디퍼드 타켓랜더
 	{
 		m_ShadowDepthTarget->Render_RenderTarget();
@@ -366,23 +369,28 @@ HRESULT CRenderer::Render_SSAO()
 HRESULT CRenderer::Render_DebugBuffer()
 {
 
-    m_pDebugShader->Begin_Shader();
     _uint uiOffset = 0;
-    for (auto& pCol : m_ColliderList)
-    {
-        pCol->Render_Collider(m_pDebugShader, uiOffset);
-        uiOffset++;
-    }
 
+    if (m_bIsDebugRender == true)
+    {
+    m_pDebugShader->Begin_Shader();
+        for (auto& pCol : m_ColliderList)
+        {
+            pCol->Render_Collider(m_pDebugShader, uiOffset);
+            uiOffset++;
+        }
+    }
     m_ColliderList.clear();
 
 
-    m_pColorShader->Begin_Shader();
-
-    for (auto& pSrc : m_NaviList)
+    if (m_bIsDebugRender == true)
     {
-        pSrc->Render_NaviMesh(m_pColorShader);
+    m_pColorShader->Begin_Shader();
+        for (auto& pSrc : m_NaviList)
+        {
+            pSrc->Render_NaviMesh(m_pColorShader);
 
+        }
     }
     m_NaviList.clear();
 

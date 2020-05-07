@@ -34,10 +34,10 @@ public:
 	virtual void			Render_GameObject(const _float& fTimeDelta);
 	CZombi* Get_Zombi() { return m_pZombi; };//이거넣엇어
 	MONKIND    Get_MONKIND() { return m_eMonName; }//이것두넣엇어
+	virtual void    Render_ShadowDepth(CShader_Shadow* pShader);
 
 private:
 	void					Set_ConstantTable();
-	void					Render_ShadowDepth(CShader_Shadow* pShader);
 	void					Set_ShadowTable(CShader_Shadow* pShader);
 	void					Update_BoneCollider(CSphereCollider* pSphereCol, string strBoneName, CColliderMgr::COLLIDER_TAG eTag);
 
