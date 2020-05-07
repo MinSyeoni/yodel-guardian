@@ -94,6 +94,9 @@ _int CDynamicCamera::Update_GameObject(const _float& fTimeDelta)
     CGraphicDevice::Get_Instance()->SetViewMatrix(m_tCameraInfo.matView);
     CGraphicDevice::Get_Instance()->SetProjMatrix(m_tProjInfo.matProj);
 
+    if (m_bIsDead)
+        return DEAD_OBJ;
+
     return NO_EVENT;
 
 }

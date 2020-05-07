@@ -8,6 +8,7 @@
 #include "Weapon.h"
 #include "DynamicCamera.h"
 #include "Monster.h"
+
 CPlayerStatus::CPlayerStatus()
 {
 }
@@ -15,6 +16,7 @@ CPlayerStatus::CPlayerStatus()
 CPlayerStatus::~CPlayerStatus()
 {
     Safe_Release(m_pBoxCollider);
+    Safe_Release(m_pSphereCollider);
     Safe_Release(m_pMesh);
     Safe_Release(m_pNaviMesh);
 }
@@ -23,6 +25,7 @@ void CPlayerStatus::LateInit()
 {
     m_pCamera = static_cast<CDynamicCamera*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_Camera", L"DynamicCamera"));
 
+  
     m_bIsInit = true;
 }
 
@@ -53,11 +56,13 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
 
     m_ePreState = m_eCurState;
 
-    //   AttackCheck();
+    
+    _matrix matBone = XMMatrixInverse(nullptr, *m_matChestOffset);
+    matBone = matBone * *m_matChest;
 
     m_pBoxCollider->Update_Collider(&m_pTransCom->m_matWorld);
+    m_pSphereCollider->Update_Collider(&(matBone*m_pTransCom->m_matWorld));
     CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::PLAYER, m_pBoxCollider);
-
     return NO_EVENT;
 }
 
@@ -65,7 +70,7 @@ _int CPlayerStatus::LateUpdate(const _float& fTimeDelta)
 {
 
 
-
+    CRenderer::Get_Instance()->Add_ColliderGroup(m_pSphereCollider);
     CRenderer::Get_Instance()->Add_ColliderGroup(m_pBoxCollider);
     CRenderer::Get_Instance()->Add_NaviGroup(m_pNaviMesh);
     _vec3 vShaveDir;
@@ -82,7 +87,7 @@ _int CPlayerStatus::LateUpdate(const _float& fTimeDelta)
 
 
     AttackCheck(fTimeDelta);
-
+    DamageByMonster(fTimeDelta);
     return S_OK;
 }
 
@@ -92,10 +97,13 @@ void CPlayerStatus::SetMesh(CMesh* pMesh)
     m_pMesh->AddRef();
 
     m_pBoxCollider = static_cast<Engine::CBoxCollider*>(CComponentMgr::Get_Instance()->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, false, nullptr, _vec3(0.f, 6.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(100.f, 150.f, 100.f), nullptr));
+    m_pSphereCollider = static_cast<Engine::CSphereCollider*>(CComponentMgr::Get_Instance()->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, nullptr, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 30.f/*여기반지름*/, _vec3(1.f, 1.f, 1.f), nullptr));
+
 
     m_pNaviMesh = static_cast<Engine::CNaviMesh*>(CComponentMgr::Get_Instance()->Clone_Component(L"Mesh_Navi", ID_STATIC));
 
-
+    m_matChest = m_pMesh->Find_BoneMatrix("Chest");
+    m_matChestOffset = m_pMesh->Find_BoneOffset("Chest");
 }
 
 void CPlayerStatus::KeyInput()
@@ -440,6 +448,58 @@ void CPlayerStatus::AttackCheck(const _float& fTimeDelta)
     if (m_bIsShoot == false)
         m_fShootingTime = 0.f;
   
+
+
+}
+
+void CPlayerStatus::DamageByMonster(const _float& fTimeDelta)
+{
+    if (m_bIshit == true)
+    {
+        m_fhitCool += fTimeDelta;
+
+        if (m_fhitCool > 1.f)
+        {
+            m_fhitCool = 0.f;
+            m_bIshit = false;
+        }
+
+    }
+
+    if (m_bIshit)
+        return;
+
+
+    for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::SPHERE, CColliderMgr::MONSTER))
+    {
+        _vec3 vDir;
+        if (CMathMgr::Get_Instance()->Collision_Spere(pCol, m_pSphereCollider, &vDir))
+        {
+
+            CGameObject* pMonster = pCol->Get_Owner();
+
+            if (pMonster == nullptr)
+                return;
+            CMonster::MONKIND  eMonKind = CMonster::NONAME;
+            eMonKind = dynamic_cast<CMonster*>(pMonster)->Get_MONKIND();
+
+            if (eMonKind == CMonster::ZOMBI)
+            {
+                CZombi* pZombi = dynamic_cast<CMonster*>(pMonster)->Get_Zombi();
+                if (pZombi->Get_IsAtkPlayer())
+                {
+                   CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_UI", L"Prototype_DamageBlood", L"Damage", nullptr);
+                  m_bIshit = true;
+                  m_uiHp -= 1;
+
+                }
+
+            }
+
+        }
+        
+
+    }
 
 
 }

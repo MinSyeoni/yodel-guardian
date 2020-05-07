@@ -1,1 +1,187 @@
+<<<<<<< HEAD
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppClean.targets(76,5): warning : 'c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\font.obj' 파일은 다른 프로세스에서 사용 중이므로 프로세스에서 액세스할 수 없습니다.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppClean.targets(76,5): warning : 'c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\scene.obj' 파일은 다른 프로세스에서 사용 중이므로 프로세스에서 액세스할 수 없습니다.
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Blend.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Blur.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ColorBuffer.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Default.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Destortion.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_DownSample.cso
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(82,12-69): warning X3206: implicit truncation of vector type
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(121,12-69): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_LightAcc.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Mesh.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ShadowDepth.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_SSAO.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Terrain.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_UI.cso
+  AnimationControl.cpp
+  Base.cpp
+  BloomTarget.cpp
+  BoxCollider.cpp
+  Camera.cpp
+  Cell.cpp
+  Collider.cpp
+  ColliderMgr.cpp
+  Component.cpp
+  ComponentMgr.cpp
+  CubeTex.cpp
+  DDSTextureLoader.cpp
+  DirectInput.cpp
+  DirectSound.cpp
+  DistortionTarget.cpp
+  DownSampleTarget.cpp
+  Font.cpp
+  Frame.cpp
+  FrameMgr.cpp
+  Frustom.cpp
+  코드를 생성하고 있습니다...
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\AnimationControl.cpp(733): warning C4715: 'Engine::CAniCtrl::Find_BoneOffset': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  컴파일하고 있습니다...
+  GameObject.cpp
+  GraphicDevice.cpp
+  Info.cpp
+  Layer.cpp
+  Light.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\LightMgr.h(20,25): warning C4267: 'return': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  LightMgr.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\LightMgr.h(20,25): warning C4267: 'return': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  LightTarget.cpp
+  Line.cpp
+  Management.cpp
+  MathMgr.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\MathMgr.cpp(267,11): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Mesh.cpp
+  MeshComponent.cpp
+  NaviBuffer.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviBuffer.cpp(27,41): warning C4267: '=': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  NaviMesh.cpp
+  ObjectMgr.cpp
+  RcTex.cpp
+  Renderer.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\LightMgr.h(20,25): warning C4267: 'return': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Scene.cpp
+  Shader.cpp
+  Shader_Blend.cpp
+  코드를 생성하고 있습니다...
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMesh.cpp(149): warning C4715: 'Engine::CNaviMesh::MoveOn_NaviMesh': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  컴파일하고 있습니다...
+  Shader_Blur.cpp
+  Shader_ColorBuffer.cpp
+  Shader_Default.cpp
+  Shader_DefaultTex.cpp
+  Shader_Destortion.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\Shader_Destortion.cpp(75,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Shader_DownSample.cpp
+  Shader_LightAcc.cpp
+  Shader_Mesh.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\Shader_Mesh.cpp(57,45): warning C4267: '=': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Shader_Shadow.cpp
+  Shader_SSAO.cpp
+  Shader_Terrain.cpp
+  Shader_UI.cpp
+  ShadowDepthTarget.cpp
+  SphereCollider.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\SphereCollider.cpp(22,10): warning C4091: '': 변수를 선언하지 않으면 'Engine::CCubeTex' 왼쪽은 무시됩니다.
+  SphereTex.cpp
+  SSAOTarget.cpp
+  Target.cpp
+  TerrainTex.cpp
+  Texture.cpp
+  TimeMgr.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  Timer.cpp
+  Transform.cpp
+  VIBuffer.cpp
+  VlLine.cpp
+  코드를 생성하고 있습니다...
+     ../Bin\Engine.lib 라이브러리 및 ../Bin\Engine.exp 개체를 생성하고 있습니다.
+  Engine.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Default\../Bin\Engine.dll
+  '//'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+  배치 파일이 아닙니다.
+          1개 파일이 복사되었습니다.
+          1개 파일이 복사되었습니다.
+          1개 파일이 복사되었습니다.
+  .\Engine\Code\AnimationControl.h
+  .\Engine\Code\Base.h
+  .\Engine\Code\BloomTarget.h
+  .\Engine\Code\BoxCollider.h
+  .\Engine\Code\Camera.h
+  .\Engine\Code\Cell.h
+  .\Engine\Code\Collider.h
+  .\Engine\Code\ColliderMgr.h
+  .\Engine\Code\Component.h
+  .\Engine\Code\ComponentMgr.h
+  .\Engine\Code\CubeTex.h
+  .\Engine\Code\DDSTextureLoader.h
+  .\Engine\Code\DirectInput.h
+  .\Engine\Code\DirectSound.h
+  .\Engine\Code\DistortionTarget.h
+  .\Engine\Code\DownSampleTarget.h
+  .\Engine\Code\Font.h
+  .\Engine\Code\Frame.h
+  .\Engine\Code\FrameMgr.h
+  .\Engine\Code\Frustom.h
+  .\Engine\Code\GameObject.h
+  .\Engine\Code\GraphicDevice.h
+  .\Engine\Code\Info.h
+  .\Engine\Code\Layer.h
+  .\Engine\Code\Light.h
+  .\Engine\Code\LightMgr.h
+  .\Engine\Code\LightTarget.h
+  .\Engine\Code\Line.h
+  .\Engine\Code\Management.h
+  .\Engine\Code\MathMgr.h
+  .\Engine\Code\Mesh.h
+  .\Engine\Code\MeshComponent.h
+  .\Engine\Code\NaviBuffer.h
+  .\Engine\Code\NaviMesh.h
+  .\Engine\Code\ObjectMgr.h
+  .\Engine\Code\RcTex.h
+  .\Engine\Code\Renderer.h
+  .\Engine\Code\Scene.h
+  .\Engine\Code\Shader.h
+  .\Engine\Code\Shader_Blend.h
+  .\Engine\Code\Shader_Blur.h
+  .\Engine\Code\Shader_ColorBuffer.h
+  .\Engine\Code\Shader_Default.h
+  .\Engine\Code\Shader_DefaultTex.h
+  .\Engine\Code\Shader_Destortion.h
+  .\Engine\Code\Shader_DownSample.h
+  .\Engine\Code\Shader_LightAcc.h
+  .\Engine\Code\Shader_Mesh.h
+  .\Engine\Code\Shader_Shadow.h
+  .\Engine\Code\Shader_SSAO.h
+  .\Engine\Code\Shader_Terrain.h
+  .\Engine\Code\Shader_UI.h
+  .\Engine\Code\ShadowDepthTarget.h
+  .\Engine\Code\SphereCollider.h
+  .\Engine\Code\SphereTex.h
+  .\Engine\Code\SSAOTarget.h
+  .\Engine\Code\StaticMesh.h
+  .\Engine\Code\Target.h
+  .\Engine\Code\TargetMgr.h
+  .\Engine\Code\TerrainTex.h
+  .\Engine\Code\Texture.h
+  .\Engine\Code\TimeMgr.h
+  .\Engine\Code\Timer.h
+  .\Engine\Code\Transform.h
+  .\Engine\Code\VIBuffer.h
+  .\Engine\Code\VlLine.h
+         66개 파일이 복사되었습니다.
+  .\Engine\Header\Engine_Const.h
+  .\Engine\Header\Engine_Enum.h
+  .\Engine\Header\Engine_Function.h
+  .\Engine\Header\Engine_Functor.h
+  .\Engine\Header\Engine_Geometry.h
+  .\Engine\Header\Engine_Include.h
+  .\Engine\Header\Engine_Macro.h
+  .\Engine\Header\Engine_Struct.h
+  .\Engine\Header\Engine_Template.h
+  .\Engine\Header\Engine_Typedef.h
+         10개 파일이 복사되었습니다.
+=======
 ﻿
+>>>>>>> 1f735a4214c48c91bf06fee786352022b63a2d3b

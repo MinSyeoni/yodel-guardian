@@ -2,6 +2,7 @@
 #include "ActionCamera.h"
 #include "BaziorMgr.h"
 #include "GraphicDevice.h"
+#include "ObjectMgr.h"
 CActionCamera::CActionCamera(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	:CCamera(pGraphicDevice,pCommandList)
 {
@@ -62,6 +63,7 @@ _int CActionCamera::Update_GameObject(const _float& fTimeDelta)
 
 	if (m_fAccTime > 1.0f)
 	{
+    	m_pObjectMgr->Add_GameObject(L"Layer_Camera", L"Prototype_DynamicCamera", L"DynamicCamera", nullptr);
 		return DEADOBJ;
 	}
 

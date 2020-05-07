@@ -83,8 +83,6 @@ HRESULT CMonster::LateInit_GameObject()
 	COUT_STR("LateInit Monster");
 #endif
 
-	m_pDynamicCamera = static_cast<CDynamicCamera*>(m_pObjectMgr->Get_GameObject(L"Layer_Camera", L"DynamicCamera"));
-	NULL_CHECK_RETURN(m_pDynamicCamera, E_FAIL);
 
 	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
 
