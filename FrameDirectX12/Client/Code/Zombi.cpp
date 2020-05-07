@@ -17,7 +17,7 @@ CZombi::~CZombi()
 
 void CZombi::Initialized()
 {
-	m_eCurState = ZOM_BasePose;
+	m_eCurState = ZOM_CB_CombatActive_Ceiling;
 	m_ePreState = m_eCurState;
 	m_bIsDeadSound = false;
 	m_fCurHp = m_fMaxHp = 100.f;
@@ -25,16 +25,16 @@ void CZombi::Initialized()
 
 HRESULT CZombi::Late_Initialized()
 {
-	_int iRandAni = rand() % 4;
+	//_int iRandAni = rand() % 4;
 
-	if (iRandAni == 0)
-		m_eCurState = ZOM_CB_CombatActive_Ceiling;
-	else if (iRandAni == 1)
-		m_eCurState = ZOM_CB_CombatActive;
-	else if (iRandAni == 2)
-		m_eCurState = ZOM_DG_GetUpBack;
-	else if (iRandAni == 3)
-		m_eCurState = ZOM_DG_GetUpFront;
+	//if (iRandAni == 0)
+	//	m_eCurState = ZOM_CB_CombatActive_Ceiling;
+	//else if (iRandAni == 1)
+	//	m_eCurState = ZOM_CB_CombatActive;
+	//else if (iRandAni == 2)
+	//	m_eCurState = ZOM_DG_GetUpBack;
+	//else if (iRandAni == 3)
+	//	m_eCurState = ZOM_DG_GetUpFront;
 
 	return S_OK;
 }
