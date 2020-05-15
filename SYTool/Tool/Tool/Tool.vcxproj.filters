@@ -64,6 +64,12 @@
     <Filter Include="04.Tab\02.CameraTool">
       <UniqueIdentifier>{1d574ca3-435b-489e-b1c8-86431391d466}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05.GameObject\04.EffectDefault">
+      <UniqueIdentifier>{cbcb5e94-898d-490e-8c35-e07da6730912}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Tab\03.EffectTool">
+      <UniqueIdentifier>{f9fe038f-6143-4456-b8a1-2dd527a8ad93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainFrm.h">
@@ -147,6 +153,12 @@
     <ClInclude Include="CCameraTab.h">
       <Filter>04.Tab\02.CameraTool</Filter>
     </ClInclude>
+    <ClInclude Include="EffectDefault.h">
+      <Filter>05.GameObject\04.EffectDefault</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectTab.h">
+      <Filter>04.Tab\03.EffectTool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainFrm.cpp">
@@ -205,6 +217,12 @@
     </ClCompile>
     <ClCompile Include="CCameraTab.cpp">
       <Filter>04.Tab\02.CameraTool</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectDefault.cpp">
+      <Filter>05.GameObject\04.EffectDefault</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectTab.cpp">
+      <Filter>04.Tab\03.EffectTool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -4,7 +4,7 @@
 #include "pch.h"
 #include "Tool.h"
 #include "Myform.h"
-
+#include "ToolCamera.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -63,6 +63,7 @@ void CMyform::OnInitialUpdate()
 	m_MainTab.InsertItem(0, L"MapTool", 0);
 	m_MainTab.InsertItem(1, L"NaviTool", 1);
 	m_MainTab.InsertItem(2, L"CameraTool", 2);
+	m_MainTab.InsertItem(3, L"EffectTool", 3);
 
 	m_MainTab.SetCurSel(0);
 
@@ -84,12 +85,21 @@ void CMyform::OnInitialUpdate()
 	m_pCameraTab->Create(IDD_DIALOG3, &m_MainTab);
 	m_pCameraTab->MoveWindow(0, 25, rc.Width(), rc.Height());
 	m_pCameraTab->ShowWindow(SW_HIDE);
+
+	m_pEffectTab = new CEffectTab;
+	m_pEffectTab->Create(IDD_DIALOG4, &m_MainTab);
+	m_pEffectTab->MoveWindow(0, 25, rc.Width(), rc.Height());
+	m_pEffectTab->ShowWindow(SW_HIDE);
+
 }
 
 void CMyform::Free()
 {
 	Engine::Safe_Delete(m_pMapTab);
 	Engine::Safe_Delete(m_pNaviTab);
+	Engine::Safe_Delete(m_pCameraTab);
+		Engine::Safe_Delete(m_pEffectTab);
+
 }
 
 
@@ -97,7 +107,7 @@ void CMyform::OnTcnSelchangeTab(NMHDR* pNMHDR, LRESULT* pResult)
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	int iCurTab = m_MainTab.GetCurSel();
-
+	CToolCamera::GetInstance()->SetCameraFix(false);
 	switch (iCurTab)
 	{
 	case 0:
@@ -105,19 +115,29 @@ void CMyform::OnTcnSelchangeTab(NMHDR* pNMHDR, LRESULT* pResult)
 		m_pMapTab->ShowWindow(SW_SHOW);
 		m_pNaviTab->ShowWindow(SW_HIDE);
 		m_pCameraTab->ShowWindow(SW_HIDE);
+		m_pEffectTab->ShowWindow(SW_HIDE);
 		break;
 	case 1:
 		m_iCurTab = 1;
 		m_pMapTab->ShowWindow(SW_HIDE);
 		m_pNaviTab->ShowWindow(SW_SHOW);
 		m_pCameraTab->ShowWindow(SW_HIDE);
+		m_pEffectTab->ShowWindow(SW_HIDE);
 		break;
 	case 2:
 		m_iCurTab = 2;
 		m_pMapTab->ShowWindow(SW_HIDE);
 		m_pNaviTab->ShowWindow(SW_HIDE);
 		m_pCameraTab->ShowWindow(SW_SHOW);
+		m_pEffectTab->ShowWindow(SW_HIDE);
 		break;
+	case 3 :
+		m_iCurTab = 3;
+		m_pMapTab->ShowWindow(SW_HIDE);
+		m_pNaviTab->ShowWindow(SW_HIDE);
+		m_pCameraTab->ShowWindow(SW_HIDE);
+		m_pEffectTab->ShowWindow(SW_SHOW);
+		CToolCamera::GetInstance()->SetCameraFix(true);
 	default:
 		break;
 	}

@@ -63,6 +63,13 @@ void CToolCamera::Update_Camera(const _float& fTimeDelta)
 		m_vPos.x -= (m_vLook.x) * 40.f * fTimeDelta;
 		m_vPos.z -= (m_vLook.z) * 40.f * fTimeDelta;
 	}
+	if (m_bIsFixCamera == true)
+	{
+		m_vPos = { 0.f,0.f,-8.f };
+		m_vLook = { 0.f,0.f,1.f };
+	}
+
+
 
 	Change_CameraMat(&m_matView);
 	if (m_bIsCameraExecute)

@@ -215,6 +215,8 @@
     <ClInclude Include="CameraSort.h" />
     <ClInclude Include="CCameraTab.h" />
     <ClInclude Include="CursorMgr.h" />
+    <ClInclude Include="EffectDefault.h" />
+    <ClInclude Include="EffectTab.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MapTab.h" />
@@ -239,6 +241,8 @@
     <ClCompile Include="CameraSort.cpp" />
     <ClCompile Include="CCameraTab.cpp" />
     <ClCompile Include="CursorMgr.cpp" />
+    <ClCompile Include="EffectDefault.cpp" />
+    <ClCompile Include="EffectTab.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MapTab.cpp" />
     <ClCompile Include="Myform.cpp" />

@@ -359,6 +359,7 @@ void CToolView::Ready_Buffer_Setting()
 		Engine::BUFFER_CUBETEX))))
 		return;
 
+
 	if (FAILED(Engine::Ready_Texture(m_pDevice,
 		RESOURCE_STAGE,
 		L"Texture_Terrain",
@@ -366,6 +367,14 @@ void CToolView::Ready_Buffer_Setting()
 		L"../Resources/Texture/Terrain/Terrain%d.png", 2)))
 		return;
 
+	if (FAILED(Engine::Ready_Texture(m_pDevice,
+		RESOURCE_STAGE,
+		L"Texture_Default",
+		Engine::TEX_NORMAL,
+		L"../Resources/Texture/Default/Default.png", 1)))
+		return;
+
+	int  i = 0;
 	//if (FAILED(Engine::Ready_Texture(m_pDevice,
 	//	RESOURCE_STAGE,
 	//	L"Texture_Brush",
