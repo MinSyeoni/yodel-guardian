@@ -6,6 +6,7 @@
 #include "MapTab.h"
 #include "NaviTab.h"
 #include "CCameraTab.h"
+#include "EffectTab.h"
 class CMapTab;
 class CNaviTab;
 class CCameraTab;
@@ -40,6 +41,7 @@ public:
 	CMapTab*	m_pMapTab = nullptr;
 	CNaviTab*	m_pNaviTab = nullptr;
 	CCameraTab* m_pCameraTab = nullptr;
+	CEffectTab* m_pEffectTab = nullptr;
 	_int		m_iCurTab = 0;	// 0-MAP, 1-NAVI
 private:
 	void		Free();

@@ -31,6 +31,8 @@ public:
 
 	void      SetCameraOnOff(bool bIsOnOff) { m_bIsCameraExecute = bIsOnOff; }
 
+	void      SetCameraFix(_bool bIsFixCamera) { m_bIsFixCamera = bIsFixCamera; };
+
 private:
 	LPDIRECT3DDEVICE9		m_pGraphicDev;
 
@@ -44,7 +46,7 @@ private:
 	_matrix					m_matView;
 	_matrix					m_matProj;
 
-
+	bool m_bIsFixCamera = false;
 	bool m_bIsCameraExecute = true;
 };
 
