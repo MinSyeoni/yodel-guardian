@@ -31,7 +31,6 @@ public:
 	void					Set_TerrainDrawID(_int iDrawID) { m_iDrawID = iDrawID; };
 	
 	Engine::CTransform*		Get_TransCom() { return m_pTransCom; };
-	Engine::CTerrainTex*	Get_BufferCom() { return m_pBufferCom; };
 
 private:
 	HRESULT					Add_Component(void);

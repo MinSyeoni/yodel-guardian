@@ -31,6 +31,9 @@ CMapTab::CMapTab(CWnd* pParent /*=nullptr*/)
 	, m_fRotX(0.f)
 	, m_fRotY(0.f)
 	, m_fRotZ(0.f)
+	, m_fTerrainPosX(0.f)
+	, m_fTerrainPosY(0.f)
+	, m_fTerrainPosZ(0.f)
 {
 }
 
@@ -72,6 +75,10 @@ void CMapTab::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CHECK2, m_BnShowCollider);
 	DDX_Control(pDX, IDC_CHECK3, m_BnSetOn);
 	DDX_Control(pDX, IDC_COMBO1, m_CbColliderID);
+	DDX_Text(pDX, IDC_EDIT27, m_fTerrainPosX);
+
+	DDX_Text(pDX, IDC_EDIT34, m_fTerrainPosY);
+	DDX_Text(pDX, IDC_EDIT35, m_fTerrainPosZ);
 }
 
 
@@ -227,6 +234,7 @@ BOOL CMapTab::OnInitDialog()
 
 	Initialize_String();
 
+	m_vTerrainPos = { 0.f, 0.f, 0.f };
 	m_vMeshScale = { 0.1f, 0.1f, 0.1f };
 
 	CButton* pButton = (CButton*)GetDlgItem(IDC_RADIO3);
@@ -292,6 +300,9 @@ void CMapTab::OnBnClickedTextureMode()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	m_iTexToolMode = 0;
+
+	for (int i = 0; i < 3; ++i)
+		m_bIsBrushMode[i] = false;
 }
 
 void CMapTab::OnBnClickedHeightMode()
@@ -1027,7 +1038,7 @@ void CMapTab::OnBnClickedSaveTerrain()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 		// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-		// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
 	CFileDialog Dlg(FALSE, L"dat", L"제목없음.dat", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
 		L"Data Files(*.dat)|*.dat||", this);
 

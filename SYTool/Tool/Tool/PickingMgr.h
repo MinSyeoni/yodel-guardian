@@ -22,6 +22,7 @@ public:
     void	        PickTerrainCubePos(D3DXVECTOR3* pOut, const VTXTEX* pTerrainVtx , float fDeap );
 	void	        PickTerrainIndex(DWORD* pOutIndex, const VTXTEX* pTerrainVtx);
 	void	        SetTerrainSize(DWORD dwCol, DWORD dwRow);
+    _float          Compute_HeightOnTerrain(const _vec3* pPos, const _vec3* pTerrainVtx, const _ulong& dwCntX, const _ulong& dwCntZ);
     void	        PickingTerrain(D3DXVECTOR3* pOut, const VTXTEX* pVertex, const D3DXMATRIX* pmatWorld);
 	void	        PickTerrainTextPos(D3DXVECTOR3 * pOut, const VTXTEX * pTerrainVtx, float fDeap);
 

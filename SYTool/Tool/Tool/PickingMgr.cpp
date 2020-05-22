@@ -14,6 +14,7 @@ CPickingMgr::~CPickingMgr()
 	//Release();
 }
 
+
 void CPickingMgr::PickTerrainCubePos(D3DXVECTOR3 * pOut, const VTXTEX * pTerrainVtx, float fDeap)
 {
 	Translation_ViewSpace();
@@ -104,6 +105,37 @@ void CPickingMgr::SetTerrainSize(DWORD dwCol, DWORD dwRow)
 	m_dwCol = dwCol;
 	m_dwRow = dwRow;
 }
+
+_float CPickingMgr::Compute_HeightOnTerrain(const _vec3* pPos,
+	const _vec3* pTerrainVtx,
+	const _ulong& dwCntX,
+	const _ulong& dwCntZ)
+{
+	_ulong	dwIndex = _ulong(pPos->z / 1.f) * _ulong(dwCntX) + _ulong(pPos->x / 1.f);
+
+	_float	fRatioX = (pPos->x - pTerrainVtx[dwIndex + dwCntX].x) / 1.f;
+	_float	fRatioZ = (pTerrainVtx[dwIndex + dwCntX].z - pPos->z) / 1.f;
+
+	_float	fHeight[4] = {
+
+		pTerrainVtx[dwIndex + dwCntX].y,
+		pTerrainVtx[dwIndex + dwCntX + 1].y,
+		pTerrainVtx[dwIndex + 1].y,
+		pTerrainVtx[dwIndex].y
+	};
+
+	// 오른쪽 위
+	if (fRatioX > fRatioZ)
+	{
+		return fHeight[0] + (fHeight[1] - fHeight[0]) * fRatioX + (fHeight[2] - fHeight[1]) * fRatioZ;
+	}
+	// 왼쪽 아래
+	else
+	{
+		return fHeight[0] + (fHeight[2] - fHeight[3]) * fRatioX + (fHeight[3] - fHeight[0]) * fRatioZ;
+	}
+}
+
 
 void CPickingMgr::PickingTerrain(D3DXVECTOR3 * pOut, const VTXTEX * pVertex, const D3DXMATRIX * pmatWorld)
 {

@@ -89,6 +89,8 @@
 #define IDC_RADIO17                     1045
 #define IDC_COMBO2                      1046
 #define IDC_RADIO18                     1046
+#define IDC_EDIT34                      1047
+#define IDC_EDIT35                      1048
 #define IDC_CHECK4                      1051
 #define IDC_CHECK5                      1052
 #define IDC_SPIN3                       1053
