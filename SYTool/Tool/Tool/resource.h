@@ -86,7 +86,9 @@
 #define IDC_CHECK2                      1042
 #define IDC_CHECK3                      1043
 #define IDC_COMBO1                      1044
+#define IDC_RADIO17                     1045
 #define IDC_COMBO2                      1046
+#define IDC_RADIO18                     1046
 #define IDC_CHECK4                      1051
 #define IDC_CHECK5                      1052
 #define IDC_SPIN3                       1053

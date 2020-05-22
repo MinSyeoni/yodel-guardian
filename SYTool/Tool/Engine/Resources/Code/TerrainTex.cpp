@@ -47,7 +47,6 @@ HRESULT CTerrainTex::Ready_Buffer(
 	const _ulong& dwCntZ,
 	const _ulong& dwVtxItv)
 {
-
 	m_dwTriCnt = (dwCntX - 1) * (dwCntZ - 1) * 2;
 	m_dwVtxCnt = dwCntX * dwCntZ;
 	m_pVtxTexOrigin = new VTXTEX[m_dwVtxCnt];
@@ -153,6 +152,9 @@ HRESULT Engine::CTerrainTex::Ready_Buffer(
 
 	m_dwVtxCntZ = 768;
 	m_dwVtxCntX = 768;
+	// 나중에 꼭 수정
+	m_iH.biWidth = 768;
+	m_iH.biHeight = 768;
 
 	_ulong* pPixel = new _ulong[m_iH.biWidth * m_iH.biHeight];
 

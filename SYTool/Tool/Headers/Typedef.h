@@ -49,6 +49,19 @@ typedef struct tagMeshData
 	BYTE			byMeshID = 0;
 }MESHDATA;
 
+typedef struct tagTerrainData
+{
+	wchar_t			szFilePath[128] = L"";
+	wchar_t			szFileName[128] = L"";
+	wchar_t			m_TerrainTag[128] = L"";
+
+	D3DXVECTOR3		vPos = { 0.f,0.f,0.f };
+	
+	_ulong			dwVtxCntZ = 0;
+	_ulong			dwVtxCntX = 0;
+	_ulong			dwInterval = 0;
+}TERRAIN_DATA;
+
 typedef struct tagSphere
 {
 	D3DXVECTOR3		vCenter;
