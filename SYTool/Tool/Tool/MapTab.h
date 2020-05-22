@@ -57,7 +57,7 @@ public:
 	afx_msg void			OnBnClickedColliderBoxMode();
 	afx_msg	void			OnBnClickedColliderShow();
 	afx_msg	void			OnBnClickedSetOn_Mesh();
-
+	afx_msg void			OnBnClickedAddHeight();
 	afx_msg BOOL			OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
 	virtual BOOL			OnInitDialog();
 
@@ -94,6 +94,8 @@ public:
 
 	CStaticObject*			m_pPickStaticObj = nullptr;
 	CToolCollider*			m_pPickCollider = nullptr;
+
+	_bool					m_bIsBrushMode[3] = {false};	// 0. AddHeight
 
 	// 테스트
 	CSphereCollider*			m_pSphereCol = nullptr;
@@ -145,4 +147,7 @@ private:
 
 public:
 	CComboBox				m_CbColliderID;
+	
+	afx_msg void OnBnClickedSaveTerrain();
+	afx_msg void OnBnClickedLoadTerrain();
 };

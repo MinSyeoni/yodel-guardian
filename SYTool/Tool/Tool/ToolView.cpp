@@ -265,8 +265,8 @@ void CToolView::Ready_Buffer_Setting()
 		RESOURCE_STATIC,
 		L"Buffer_TerrainTex",
 		Engine::BUFFER_TERRAINTEX,
-		129,
-		129,
+		768,
+		768,
 		1)))
 		return;
 

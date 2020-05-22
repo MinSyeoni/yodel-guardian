@@ -212,6 +212,7 @@
     <ClInclude Include="..\Headers\Macro.h" />
     <ClInclude Include="..\Headers\Typedef.h" />
     <ClInclude Include="ActionCamera.h" />
+    <ClInclude Include="ToolBrush.h" />
     <ClInclude Include="CameraSort.h" />
     <ClInclude Include="CCameraTab.h" />
     <ClInclude Include="CursorMgr.h" />
@@ -238,6 +239,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActionCamera.cpp" />
+    <ClCompile Include="ToolBrush.cpp" />
     <ClCompile Include="CameraSort.cpp" />
     <ClCompile Include="CCameraTab.cpp" />
     <ClCompile Include="CursorMgr.cpp" />
