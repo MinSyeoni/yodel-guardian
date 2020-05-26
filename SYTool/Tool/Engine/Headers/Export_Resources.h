@@ -17,6 +17,7 @@ inline HRESULT	Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	const _ushort& wContainerIdx,
 	const _tchar* pBufferTag,
 	BUFFERID eID,
+	const _tchar* pPath,
 	const _ulong& dwCntX = 1,
 	const _ulong& dwCntZ = 1,
 	const _ulong& dwVtxItv = 1);

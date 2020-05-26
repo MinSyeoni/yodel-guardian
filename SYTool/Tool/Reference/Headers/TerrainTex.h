@@ -16,6 +16,7 @@ public:
 	const _vec3*		Get_VtxPos(void) const {	return m_pPos;	}
 	_ulong				Get_VtxCntX(void) const { return m_iH.biWidth; }
 	_ulong				Get_VtxCntZ(void) const { return m_iH.biHeight; }
+	void				Set_TerrainHeight(_float fRange, _float fHeight, _vec3 vPos);
 
 	VTXTEX*				m_pVtxTex = nullptr;
 	VTXTEX*				m_pVtxTexOrigin = nullptr;
@@ -27,7 +28,7 @@ public:
 	HRESULT	Ready_Buffer(const _ulong& dwCntX, 
 						 const _ulong& dwCntZ, 
 						 const _ulong& dwVtxItv);
-	HRESULT	Ready_Buffer(_tchar* pPath,
+	HRESULT	Ready_Buffer(const _tchar* pPath,
 						const _ulong& dwCntX,
 						const _ulong& dwCntZ,
 						const _ulong& dwVtxItv);
@@ -44,7 +45,6 @@ private:
 	_ulong				m_dwVtxCntX;
 
 
-
 public:
 	static CTerrainTex*		Create(LPDIRECT3DDEVICE9 pGraphicDev, 
 									const _ulong& dwCntX,
@@ -52,6 +52,12 @@ public:
 									const _ulong& dwVtxItv);
 
 	virtual CResources*		Clone(void);
+	static CTerrainTex*		Create(LPDIRECT3DDEVICE9 pGraphicDev, 
+							const _tchar* pPath, 
+							const _ulong& dwCntX, 
+							const _ulong& dwCntZ, 
+							const _ulong& dwVtxItv);
+
 	virtual void			Free(void);
 };
 

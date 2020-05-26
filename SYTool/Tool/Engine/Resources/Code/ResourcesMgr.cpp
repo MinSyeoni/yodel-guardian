@@ -30,6 +30,7 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 											const _ushort& wContainerIdx, 
 											const _tchar* pBufferTag, 
 											BUFFERID eID,
+											const _tchar* pPath,
 											const _ulong& dwCntX,
 											const _ulong& dwCntZ,
 											const _ulong& dwVtxItv)
@@ -63,8 +64,8 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 		pResources = CTerrainTex::Create(pGraphicDev, dwCntX, dwCntZ, dwVtxItv);
 		break;
 
-	case BUFFER_TERRAIN:
-		pResources = CBuffer_Terrain::Create(pGraphicDev, dwCntX, dwCntZ, dwVtxItv);
+	case BUFFER_TERRAINTEXPATH:
+		pResources = CTerrainTex::Create(pGraphicDev, pPath, dwCntX, dwCntZ, dwVtxItv);
 		break;
 
 	case BUFFER_CUBETEX:

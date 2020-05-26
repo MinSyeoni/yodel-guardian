@@ -22,7 +22,7 @@ private:
 	virtual ~CTerrain(void);
 
 public:
-	virtual HRESULT			Ready_Object(void);
+	virtual HRESULT			Ready_Object();
 	virtual _int			Update_Object(const _float& fTimeDelta);
 	virtual void			Render_Object(void);
 	
@@ -33,7 +33,7 @@ public:
 	Engine::CTransform*		Get_TransCom() { return m_pTransCom; };
 
 private:
-	HRESULT					Add_Component(void);
+	HRESULT					Add_Component();
 	HRESULT					Set_Material(void);
 	HRESULT					Set_ConstantTable(LPD3DXEFFECT pEffect);
 

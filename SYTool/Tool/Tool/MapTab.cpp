@@ -34,6 +34,8 @@ CMapTab::CMapTab(CWnd* pParent /*=nullptr*/)
 	, m_fTerrainPosX(0.f)
 	, m_fTerrainPosY(0.f)
 	, m_fTerrainPosZ(0.f)
+	, m_fBrushRange(1)
+	, m_fBrushHeight(1)
 {
 }
 
@@ -79,6 +81,10 @@ void CMapTab::DoDataExchange(CDataExchange* pDX)
 
 	DDX_Text(pDX, IDC_EDIT34, m_fTerrainPosY);
 	DDX_Text(pDX, IDC_EDIT35, m_fTerrainPosZ);
+	DDX_Text(pDX, IDC_EDIT36, m_fBrushRange);
+	DDX_Control(pDX, IDC_EDIT36, m_EditRange);
+	DDX_Control(pDX, IDC_EDIT37, m_EditHeight);
+	DDX_Text(pDX, IDC_EDIT37, m_fBrushHeight);
 }
 
 
@@ -107,7 +113,6 @@ BEGIN_MESSAGE_MAP(CMapTab, CDialogEx)
 	ON_BN_CLICKED(IDC_CHECK3, &CMapTab::OnBnClickedSetOn_Mesh)
 	ON_BN_CLICKED(IDC_RADIO13, &CMapTab::OnBnClickedAddHeight)
 	ON_BN_CLICKED(IDC_BUTTON6, &CMapTab::OnBnClickedSaveTerrain)
-	ON_BN_CLICKED(IDC_BUTTON7, &CMapTab::OnBnClickedLoadTerrain)
 END_MESSAGE_MAP()
 
 
@@ -156,12 +161,7 @@ void CMapTab::OnBnClickedCreateTerrain()
 		return;
 	}
 	else
-	{
-		//Engine::CGameObject* pObj = CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN);
-		//Engine::CComponent* pComponent = pObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC);
-		//dynamic_cast<Engine::CTerrainTex*>(pComponent)->Ready_Buffer(m_iCntX, m_iCntZ, m_iInterval);
 		return;
-	}
 }
 
 void CMapTab::Change_TerrainTexture()
@@ -245,6 +245,7 @@ BOOL CMapTab::OnInitDialog()
 
 	pButton = (CButton*)GetDlgItem(IDC_RADIO12);
 	pButton->SetCheck(TRUE);
+
 	m_iColliderState = 1;
 
 	ZeroMemory(m_matColliderWorld, sizeof(_matrix));
@@ -287,13 +288,14 @@ void CMapTab::Change_HeightMapTexture()
 {
 	CString strPath;
 	_int iIdx = m_HeightTexLst.GetCurSel();
+
 	m_HeightTexLst.GetText(iIdx, strPath);
 
 	strPath = L"../Resources/Texture/HeightMap/" + strPath;
 
-	auto pObj = CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN);
+	Engine::CGameObject* pObj = CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN);
 	Engine::CComponent* pComponent = pObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC);
-	dynamic_cast<Engine::CTerrainTex*>(pComponent)->Ready_Buffer((TCHAR*)(LPCTSTR)strPath, m_iCntX, m_iCntZ, m_iInterval);
+	dynamic_cast<Engine::CTerrainTex*>(pComponent)->Ready_Buffer(strPath, m_iCntX, m_iCntZ, m_iInterval);
 }
 
 void CMapTab::OnBnClickedTextureMode()
@@ -303,6 +305,11 @@ void CMapTab::OnBnClickedTextureMode()
 
 	for (int i = 0; i < 3; ++i)
 		m_bIsBrushMode[i] = false;
+
+	CButton* pButton = (CButton*)GetDlgItem(IDC_RADIO13);
+	pButton->SetCheck(FALSE);
+	pButton = (CButton*)GetDlgItem(IDC_RADIO14);
+	pButton->SetCheck(FALSE);
 }
 
 void CMapTab::OnBnClickedHeightMode()
@@ -536,9 +543,31 @@ BOOL CMapTab::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 
 	ModifyStaticObj(rc, pt, zDelta);
 
+	m_EditRange.GetWindowRect(&rc[9]);
+	m_EditHeight.GetWindowRect(&rc[10]);
+	ModifyBrush(rc, pt, zDelta);
+
 	UpdateData(FALSE);
 
 	return CDialogEx::OnMouseWheel(nFlags, zDelta, pt);
+}
+
+void CMapTab::ModifyBrush(RECT  rc[11], CPoint& pt, short zDelta)
+{
+	if (PtInRect(&rc[9], pt))
+	{
+		if (zDelta > 0)
+			m_fBrushRange += 1.f;
+		else
+			m_fBrushRange -= 1.f;
+	}
+	if (PtInRect(&rc[10], pt))
+	{
+		if (zDelta > 0)
+			m_fBrushHeight += 0.1f;
+		else
+			m_fBrushHeight -= 0.1f;
+	}
 }
 
 void CMapTab::ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta)
@@ -1025,8 +1054,11 @@ void CMapTab::OnBnClickedSetOn_Mesh()
 void CMapTab::OnBnClickedAddHeight()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	if(1 == m_iTexToolMode)
+	if (1 == m_iTexToolMode)
+	{
 		m_bIsBrushMode[0] = true;
+		m_bIsBrushMode[1] = false;
+	}
 	else
 	{
 		MessageBox(L"Height모드 먼저 클릭할 것");
@@ -1037,7 +1069,6 @@ void CMapTab::OnBnClickedAddHeight()
 void CMapTab::OnBnClickedSaveTerrain()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-		// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 
 	CFileDialog Dlg(FALSE, L"dat", L"제목없음.dat", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
 		L"Data Files(*.dat)|*.dat||", this);
@@ -1071,94 +1102,52 @@ void CMapTab::OnBnClickedSaveTerrain()
 		DWORD dwByte = 0;
 
 		TERRAIN_DATA tTerrainData;
-		list<Engine::CGameObject*> pLst = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_TERRAIN);
 
-		for (auto& pTerrain : pLst)
+		if (nullptr == CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN))
+			return;
+
+		LPDIRECT3DTEXTURE9 pHeight = nullptr;
+		D3DXCreateTexture(Engine::CGraphicDev::GetInstance()->GetDevice(), m_iCntX, m_iCntZ, m_iInterval, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, &pHeight);
+		D3DLOCKED_RECT LockRect;
+		ZeroMemory(&LockRect, sizeof(D3DLOCKED_RECT));	// 제로 메모리 필수
+
+		pHeight->LockRect(0, &LockRect, nullptr, 0);
+		DWORD* pColor = (DWORD*)LockRect.pBits;
+
+		Engine::CGameObject* pObj = CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN);
+		Engine::CTerrainTex* pBufferCom = dynamic_cast<Engine::CTerrainTex*>(pObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC));
+		auto pBufferPos = pBufferCom->Get_VtxPos();
+
+		for (_ulong i = 0; i < m_iCntX; ++i)
 		{
-			if (nullptr == pTerrain)
-				return;
+			for (_int j = 0; j < m_iCntZ; ++j)
+			{
+				_ulong dwIndex = (i * m_iCntX) + j;
+				_ulong dwInvndex = ((m_iCntX - i - 1) * m_iCntX) + j;
+				D3DXCOLOR temp = *pBufferPos[dwInvndex];
 
-			tTerrainData.dwVtxCntX = m_iCntX;
-			tTerrainData.dwVtxCntZ = m_iCntZ;
-			tTerrainData.dwInterval = m_iInterval;
+				temp.a = pBufferPos[dwInvndex].y / 7.f;
+				temp.r = pBufferPos[dwInvndex].y / 7.f;
+				temp.g = pBufferPos[dwInvndex].y / 7.f;
+				temp.b = pBufferPos[dwInvndex].y / 7.f;
 
-			WriteFile(hFile, &tTerrainData, sizeof(MESHDATA), &dwByte, nullptr);
+				pColor[dwIndex] = temp;
+			}
 		}
+		pHeight->UnlockRect(0);
+
+		auto pBMPFileName = PathFindFileName(strFileName); // 경로에서 파일 이름만 찾기 
+		PathRenameExtension(pBMPFileName, L".bmp");		// 파일 확장자 교체
+		CString strPath;
+		strPath = L"../Resources/Texture/HeightMap/" + (CString)pBMPFileName;
+		D3DXSaveTextureToFile(strPath, D3DXIFF_BMP, pHeight, NULL);
+
+		tTerrainData.dwVtxCntX = m_iCntX;
+		tTerrainData.dwVtxCntZ = m_iCntZ;
+		tTerrainData.dwInterval = m_iInterval;
+
+		WriteFile(hFile, &tTerrainData, sizeof(MESHDATA), &dwByte, nullptr);
+		
 		CloseHandle(hFile);
 	}
-}
-
-
-void CMapTab::OnBnClickedLoadTerrain()
-{
-	// 로드 기능은 딱히 필요 없을 것 같음
-	//// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	//CFileDialog Dlg(TRUE, L"dat", L"제목없음.dat", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
-	//	L"Data Files(*.dat)|*.dat||", this);
-
-	//TCHAR szCurPath[256] = L"";
-
-	//// GetCurrentDirectory: 현재 작업 경로를 얻어오는 함수.
-	//GetCurrentDirectory(256, szCurPath);
-
-	//// PathRemoveFileSpec: 현재 경로 상에서 파일명을 제거하는 함수.
-	//// 제거해야할 파일명이 없을 경우에는 가장 말단 폴더명을 제거한다.
-	//PathRemoveFileSpec(szCurPath);
-
-	//if (m_iTexToolMode == 1)
-	//	lstrcat(szCurPath, L"\\Data\\Terrain\\HeightMap");
-	//else
-	//	return;
-
-	//// 대화상자를 열 때 초기 경로를 설정한다.
-	//Dlg.m_ofn.lpstrInitialDir = szCurPath;
-
-	//if (IDOK == Dlg.DoModal())
-	//{
-	//	CString strFileName = Dlg.GetPathName();
-
-	//	HANDLE hFile = CreateFile(strFileName.GetString(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
-
-	//	if (INVALID_HANDLE_VALUE == hFile)
-	//		return;
-
-	//	DWORD dwByte = 0;
-
-	//	CTerrain* pTerrain = nullptr;
-
-	//	TERRAIN_DATA tObjData = {};
-
-	//	if (nullptr != CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN))
-	//	{
-	//		list<Engine::CGameObject*> pLst = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_TERRAIN);
-	//		for (auto& pGameObj : pLst)
-	//		{
-	//			dynamic_cast<CTerrain*>(pGameObj)->m_bisDead = true;
-	//		}
-	//		pLst.clear();
-	//	}
-
-	//	while (1)
-	//	{
-	//		ReadFile(hFile, &tObjData, sizeof(TERRAIN_DATA), &dwByte, nullptr);
-
-	//		if (dwByte == 0)
-	//			break;
-
-	//		m_vMeshPos = tObjData.vPos;
-	//		m_iCntX = tObjData.dwVtxCntX;
-	//		m_iCntZ = tObjData.dwVtxCntZ;
-	//		m_iInterval = tObjData.dwInterval;
-
-	//		Engine::CGameObject* pObj = CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN);
-	//		Engine::CComponent* pComponent = pObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC);
-	//		dynamic_cast<Engine::CTerrainTex*>(pComponent)->Ready_Buffer(m_iCntX, m_iCntZ, m_iInterval);
-
-	//		//Engine::CGameObject* pTerrain = CTerrain::Create(m_pToolView->Get_ToolViewDevice());
-	//		//CObjMgr::GetInstance()->AddObject(pTerrain, CObjMgr::OBJ_TERRAIN);
-	//	}
-	//	
-	//	m_pToolView->Invalidate(TRUE);
-	//	CloseHandle(hFile);
-	//}
 }
