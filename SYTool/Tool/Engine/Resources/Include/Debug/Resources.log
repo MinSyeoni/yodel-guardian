@@ -1,0 +1,41 @@
+﻿  TerrainTex.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(105,57): warning C4244: '인수': 'unsigned long'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(105,37): warning C4244: '인수': 'unsigned long'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Resources.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Include\../Bin\Resources.dll
+  .\Engine\Resources\Code\AniCtrl.h
+  .\Engine\Resources\Code\Buffer_Terrain.h
+  .\Engine\Resources\Code\Cell.h
+  .\Engine\Resources\Code\CubeTex.h
+  .\Engine\Resources\Code\DynamicMesh.h
+  .\Engine\Resources\Code\HierarchyLoader.h
+  .\Engine\Resources\Code\Line.h
+  .\Engine\Resources\Code\Mesh.h
+  .\Engine\Resources\Code\NaviMesh.h
+  .\Engine\Resources\Code\RcCol.h
+  .\Engine\Resources\Code\RcTex.h
+  .\Engine\Resources\Code\Resources.h
+  .\Engine\Resources\Code\ResourcesMgr.h
+  .\Engine\Resources\Code\StaticMesh.h
+  .\Engine\Resources\Code\TerrainTex.h
+  .\Engine\Resources\Code\Texture.h
+  .\Engine\Resources\Code\TriCol.h
+  .\Engine\Resources\Code\VIBuffer.h
+         18개 파일이 복사되었습니다.
+  지정된 경로를 찾을 수 없습니다.
+          0개 파일이 복사되었습니다.
+          1개 파일이 복사되었습니다.
+  .\Engine\Headers\Engine_Defines.h
+  .\Engine\Headers\Engine_Enum.h
+  .\Engine\Headers\Engine_Function.h
+  .\Engine\Headers\Engine_Macro.h
+  .\Engine\Headers\Engine_Struct.h
+  .\Engine\Headers\Engine_Typedef.h
+  .\Engine\Headers\Export_Function.h
+  .\Engine\Headers\Export_Resources.h
+  .\Engine\Headers\Export_System.h
+  .\Engine\Headers\Export_Utility.h
+         10개 파일이 복사되었습니다.
+  .\Engine\Headers\Export_Resources.inl
+  .\Engine\Headers\Export_System.inl
+  .\Engine\Headers\Export_Utility.inl
+          3개 파일이 복사되었습니다.

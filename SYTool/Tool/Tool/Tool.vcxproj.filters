@@ -70,9 +70,6 @@
     <Filter Include="04.Tab\03.EffectTool">
       <UniqueIdentifier>{f9fe038f-6143-4456-b8a1-2dd527a8ad93}</UniqueIdentifier>
     </Filter>
-    <Filter Include="06.Manager\03.Brush">
-      <UniqueIdentifier>{68648b05-05cc-43c4-ad34-027e7ff7d601}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainFrm.h">
@@ -162,9 +159,6 @@
     <ClInclude Include="EffectTab.h">
       <Filter>04.Tab\03.EffectTool</Filter>
     </ClInclude>
-    <ClInclude Include="ToolBrush.h">
-      <Filter>06.Manager\03.Brush</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainFrm.cpp">
@@ -229,9 +223,6 @@
     </ClCompile>
     <ClCompile Include="EffectTab.cpp">
       <Filter>04.Tab\03.EffectTool</Filter>
-    </ClCompile>
-    <ClCompile Include="ToolBrush.cpp">
-      <Filter>06.Manager\03.Brush</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

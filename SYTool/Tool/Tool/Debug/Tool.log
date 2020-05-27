@@ -123,10 +123,6 @@ C:\Program Files (x86)\Windows Kits\8.1\Include\shared\winerror.h(50975): messag
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ActionCamera.cpp(16,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ActionCamera.cpp(29,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ActionCamera.cpp(64,29): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  ToolBrush.cpp
-  CameraSort.cpp
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CameraSort.cpp(130,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CameraSort.cpp(136,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   CCameraTab.cpp
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(27,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(32,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
@@ -137,11 +133,16 @@ C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(94
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(249,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(264,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(274,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  CameraSort.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CameraSort.cpp(130,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CameraSort.cpp(136,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   CursorMgr.cpp
   EffectDefault.cpp
   EffectTab.cpp
   MainFrm.cpp
   MapTab.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\MapTab.cpp(1121,24): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\MapTab.cpp(1127,43): warning C4244: '인수': 'const FLOAT'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Myform.cpp
   NaviTab.cpp
   ObjMgr.cpp
@@ -155,17 +156,10 @@ C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolCell.cpp(93,4
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolCell.cpp(94,43): warning C4244: '=': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ToolDoc.cpp
   ToolPoint.cpp
-  코드를 생성하고 있습니다...
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolPoint.cpp(62): warning C4715: 'CToolPoint::Add_Component': 모든 제어 경로에서 값을 반환하지는 않습니다.
-  컴파일하고 있습니다...
   ToolView.cpp
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(251,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(251,98): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(256,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(273,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(275,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(277,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(279,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(257,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(257,98): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(262,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(281,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(283,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(285,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
@@ -198,8 +192,13 @@ C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(337,
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(339,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(341,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(343,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(346,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(256,66): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(345,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(347,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(349,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(351,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(354,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(262,66): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(398,64): warning C4554: '&': 연산자 우선 순위에 오류가 있는지 확인하세요. 괄호를 사용하여 우선 순위를 명확하게 지정하세요.
   코드를 생성하고 있습니다...
-     C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Debug\Tool.lib 라이브러리 및 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Debug\Tool.exp 개체를 생성하고 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolPoint.cpp(62): warning C4715: 'CToolPoint::Add_Component': 모든 제어 경로에서 값을 반환하지는 않습니다.
   Tool.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Debug\Tool.exe

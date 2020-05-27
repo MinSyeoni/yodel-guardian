@@ -8,7 +8,6 @@ CPickingMgr::CPickingMgr()
 {
 }
 
-
 CPickingMgr::~CPickingMgr()
 {
 	//Release();
@@ -103,6 +102,35 @@ void CPickingMgr::SetTerrainSize(DWORD dwCol, DWORD dwRow)
 {
 	m_dwCol = dwCol;
 	m_dwRow = dwRow;
+}
+
+_float CPickingMgr::Compute_HeightOnTerrain(const _vec3* pPos,
+	const _vec3* pTerrainVtx,
+	const _ulong& dwCntX,
+	const _ulong& dwCntZ)
+{
+	_ulong	dwIndex = _ulong(pPos->z / 1.f) * _ulong(dwCntX) + _ulong(pPos->x / 1.f);
+
+	_float	fRatioX = (pPos->x - pTerrainVtx[dwIndex + dwCntX].x) / 1.f;
+	_float	fRatioZ = (pTerrainVtx[dwIndex + dwCntX].z - pPos->z) / 1.f;
+
+	_float	fHeight[4] = {
+		pTerrainVtx[dwIndex + dwCntX].y,
+		pTerrainVtx[dwIndex + dwCntX + 1].y,
+		pTerrainVtx[dwIndex + 1].y,
+		pTerrainVtx[dwIndex].y
+	};
+
+	// 오른쪽 위
+	if (fRatioX > fRatioZ)
+	{
+		return fHeight[0] + (fHeight[1] - fHeight[0]) * fRatioX + (fHeight[2] - fHeight[1]) * fRatioZ;
+	}
+	// 왼쪽 아래
+	else
+	{
+		return fHeight[0] + (fHeight[2] - fHeight[3]) * fRatioX + (fHeight[3] - fHeight[0]) * fRatioZ;
+	}
 }
 
 void CPickingMgr::PickingTerrain(D3DXVECTOR3 * pOut, const VTXTEX * pVertex, const D3DXMATRIX * pmatWorld)
@@ -463,6 +491,44 @@ void CPickingMgr::Translation_Local(const D3DXMATRIX * pWorld)
 
 	D3DXVec3TransformCoord(&m_tRay.vOri, &m_tRay.vOri, &matWorld);
 	D3DXVec3TransformNormal(&m_tRay.vDir, &m_tRay.vDir, &matWorld);
+}
+
+void CPickingMgr::Draw_PickingBrush(_float fRange, const _vec3 vPos, _bool bIsTrue)
+{
+	_vec3 vInitPos = { 1.f,0.f,0.f };
+	_int nCount = 50;
+	_float fRadian = D3DX_PI * 2.f / nCount;
+	_vec3 vNewPos = { 0.f,0.f,0.f };
+	_matrix matRot;
+
+	m_vBrush[1].vPos = vInitPos * fRange + vPos;
+	//m_vBrush[1].vPos.y = vPos.y + 0.01f;
+	m_vBrush[1].dwColor = m_vBrush[0].dwColor = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
+
+	for (int i = 1; i < nCount + 1; ++i)
+	{
+		m_vBrush[0] = m_vBrush[1];
+
+		D3DXMatrixRotationY(&matRot, i * fRadian);
+		D3DXVec3TransformCoord(&vNewPos, &vInitPos, &matRot);
+		D3DXVec3Normalize(&vNewPos, &vNewPos);
+
+		m_vBrush[1].vPos = vNewPos * fRange + vPos;
+		//m_vBrush[1].vPos.y = vPos.y + 0.01f;
+
+		// 맵 밖으로 나갔을 때 선 안그림
+		if (m_vBrush[1].vPos.x < 0 || m_vBrush[1].vPos.x > 768 ||
+			m_vBrush[1].vPos.z < 0 || m_vBrush[1].vPos.x > 768)
+			continue;
+		else
+		{
+			if (bIsTrue)
+			{
+				Engine::CGraphicDev::GetInstance()->GetDevice()->SetFVF(FVF_COL);
+				Engine::CGraphicDev::GetInstance()->GetDevice()->DrawPrimitiveUP(D3DPT_LINELIST, 2, m_vBrush, sizeof(VTXCOL));
+			}
+		}
+	}
 }
 
 void CPickingMgr::Free()

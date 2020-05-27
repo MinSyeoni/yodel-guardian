@@ -22,7 +22,7 @@ private:
 	virtual ~CTerrain(void);
 
 public:
-	virtual HRESULT			Ready_Object(void);
+	virtual HRESULT			Ready_Object();
 	virtual _int			Update_Object(const _float& fTimeDelta);
 	virtual void			Render_Object(void);
 	
@@ -31,10 +31,9 @@ public:
 	void					Set_TerrainDrawID(_int iDrawID) { m_iDrawID = iDrawID; };
 	
 	Engine::CTransform*		Get_TransCom() { return m_pTransCom; };
-	Engine::CTerrainTex*	Get_BufferCom() { return m_pBufferCom; };
 
 private:
-	HRESULT					Add_Component(void);
+	HRESULT					Add_Component();
 	HRESULT					Set_Material(void);
 	HRESULT					Set_ConstantTable(LPD3DXEFFECT pEffect);
 

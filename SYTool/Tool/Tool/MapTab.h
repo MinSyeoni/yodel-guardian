@@ -61,12 +61,16 @@ public:
 	afx_msg BOOL			OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
 	virtual BOOL			OnInitDialog();
 
+	afx_msg	void			OnBnClickedSaveTerrain();
 	void					Initialize_String();
 
 public:
 	float					m_fPosX;
 	float					m_fPosY;
 	float					m_fPosZ;
+	float					m_fTerrainPosX;
+	float					m_fTerrainPosY;
+	float					m_fTerrainPosZ;
 	float					m_fScaleX;
 	float					m_fScaleY;
 	float					m_fScaleZ;
@@ -74,7 +78,11 @@ public:
 	float					m_fRotY;
 	float					m_fRotZ;
 
+	float					m_fBrushRange;
+	float					m_fBrushHeight;
+
 	_vec3					m_vMeshPos = { 0.f,0.f,0.f };
+	_vec3					m_vTerrainPos = { 0.f,0.f,0.f };
 	_vec3					m_vMeshRot = { 0.f,0.f,0.f };
 	_vec3					m_vMeshScale = { 1.f, 1.f, 1.f };
 
@@ -85,7 +93,7 @@ public:
 	_uint					m_iTexToolMode = 0;	// 0-TEX, 1-HEIGHT, 2-SPLATTING
 	_uint					m_iObjToolMode = 0;	// 0-CREATE, 1-MODY, 2-DEL
 	_uint					m_iColliderState = 0; // 0-SPHERE, 1-BOX
-	
+
 	_bool					m_bIsPickingStaticObj = false;
 	_bool					m_bIsPickingCollider = false;
 	_bool					m_bIsColliderMode = false;
@@ -95,7 +103,7 @@ public:
 	CStaticObject*			m_pPickStaticObj = nullptr;
 	CToolCollider*			m_pPickCollider = nullptr;
 
-	_bool					m_bIsBrushMode[3] = {false};	// 0. AddHeight
+	_bool					m_bIsBrushMode[2] = {false};	// 0. AddHeight, 1. Splatting
 
 	// 테스트
 	CSphereCollider*			m_pSphereCol = nullptr;
@@ -104,11 +112,11 @@ public:
 	_matrix						m_matColliderWorld;
 
 private:
-
 	void					Load_ResourceList(CString strPath, CListBox* pListBox, CString pDir);
 	void					Change_TerrainTexture();
 	void					Change_HeightMapTexture();
 	void					ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta);
+	void					ModifyBrush(RECT  rc[11], CPoint& pt, short zDelta);
 
 private:
 	Engine::CComponent*		m_pComponent = nullptr;
@@ -135,6 +143,9 @@ private:
 	CEdit					m_EditRotY;
 	CEdit					m_EditRotZ;
 
+	CEdit					m_EditRange;
+	CEdit					m_EditHeight;
+
 	MESHDATA*				m_pMeshData = nullptr;
 	CString					m_strPath = L"";
 	VTXTEX*					m_pTerrainVtx = nullptr;
@@ -145,9 +156,7 @@ private:
 	CButton					m_BnShowCollider;
 	CButton					m_BnSetOn;
 
+	_bool					bIsSet = false;
 public:
 	CComboBox				m_CbColliderID;
-	
-	afx_msg void OnBnClickedSaveTerrain();
-	afx_msg void OnBnClickedLoadTerrain();
 };

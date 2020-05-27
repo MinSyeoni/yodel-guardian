@@ -22,6 +22,7 @@ public:
     void	        PickTerrainCubePos(D3DXVECTOR3* pOut, const VTXTEX* pTerrainVtx , float fDeap );
 	void	        PickTerrainIndex(DWORD* pOutIndex, const VTXTEX* pTerrainVtx);
 	void	        SetTerrainSize(DWORD dwCol, DWORD dwRow);
+    _float          Compute_HeightOnTerrain(const _vec3* pPos, const _vec3* pTerrainVtx, const _ulong& dwCntX, const _ulong& dwCntZ);
     void	        PickingTerrain(D3DXVECTOR3* pOut, const VTXTEX* pVertex, const D3DXMATRIX* pmatWorld);
 	void	        PickTerrainTextPos(D3DXVECTOR3 * pOut, const VTXTEX * pTerrainVtx, float fDeap);
 
@@ -33,14 +34,19 @@ public:
     void	        Translation_ViewSpace(void);
     void	        Translation_Local(const D3DXMATRIX* pWorld);
 
+    void            Draw_PickingBrush(_float fRange, const _vec3 vPos, _bool bIsTrue);
+
 private:
     HRESULT	        Initialize(void);
-    //_ulong	Release(void);
+    //_ulong	    Release(void);
     void            Free();
-public:
-	DWORD	m_dwCol;
-	DWORD	m_dwRow;
+
+private:
+	DWORD	                m_dwCol;
+	DWORD	                m_dwRow;
 	
+    VTXCOL                  m_vBrush[2];
+
     //CInfoSubject*			m_pInfoSubject;
     //CCameraObserver*		m_pCameraObserver;
     RAY						m_tRay;
