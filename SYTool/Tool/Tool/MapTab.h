@@ -93,6 +93,7 @@ public:
 	_uint					m_iTexToolMode = 0;	// 0-TEX, 1-HEIGHT, 2-SPLATTING
 	_uint					m_iObjToolMode = 0;	// 0-CREATE, 1-MODY, 2-DEL
 	_uint					m_iColliderState = 0; // 0-SPHERE, 1-BOX
+	_uint					m_iBrushShape = 0; //0-Box, 1-Circle
 
 	_bool					m_bIsPickingStaticObj = false;
 	_bool					m_bIsPickingCollider = false;
@@ -117,6 +118,8 @@ private:
 	void					Change_HeightMapTexture();
 	void					ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta);
 	void					ModifyBrush(RECT  rc[11], CPoint& pt, short zDelta);
+	afx_msg void			OnBnClickedBoxBrush();
+	afx_msg void			OnBnClickedCircleBrush();
 
 private:
 	Engine::CComponent*		m_pComponent = nullptr;
@@ -159,4 +162,5 @@ private:
 	_bool					bIsSet = false;
 public:
 	CComboBox				m_CbColliderID;
+
 };

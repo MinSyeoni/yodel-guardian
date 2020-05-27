@@ -80,6 +80,7 @@
 #define IDC_RADIO14                     1036
 #define IDC_BUTTON6                     1037
 #define IDC_BUTTON7                     1038
+#define IDC_RADIO19                     1038
 #define IDC_BUTTON8                     1039
 #define IDC_BUTTON9                     1040
 #define IDC_CHECK1                      1041
@@ -87,6 +88,7 @@
 #define IDC_CHECK3                      1043
 #define IDC_COMBO1                      1044
 #define IDC_RADIO17                     1045
+#define IDC_RADIO20                     1045
 #define IDC_COMBO2                      1046
 #define IDC_RADIO18                     1046
 #define IDC_EDIT34                      1047

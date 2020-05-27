@@ -60,6 +60,7 @@ typedef struct tagTerrainData
 	_ulong			dwVtxCntZ = 0;
 	_ulong			dwVtxCntX = 0;
 	_ulong			dwInterval = 0;
+	_float			fHeight = 0.f;
 }TERRAIN_DATA;
 
 typedef struct tagSphere
