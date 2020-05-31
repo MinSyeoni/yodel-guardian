@@ -895,7 +895,7 @@ void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 		if ((nFlags & MK_LBUTTON) == MK_LBUTTON) 
 		{
 			CPickingMgr::GetInstance()->PickTerrainIndex(&dwIdx, pBufferCom->m_pVtxTexOrigin);
-			dynamic_cast<Engine::CTerrainTex*>(pComponent)->Set_TerrainHeight(m_pMapTab->m_fBrushRange, m_pMapTab->m_fBrushHeight, m_vMeshPos);
+			dynamic_cast<Engine::CTerrainTex*>(pComponent)->Set_TerrainHeight(m_pMapTab->m_fBrushRange, m_pMapTab->m_fBrushHeight, m_vMeshPos, m_pMapTab->m_iBrushShape);
 		}		
 	}
 	else if (2 == m_pMapTab->m_iTexToolMode)	// SplattingMode

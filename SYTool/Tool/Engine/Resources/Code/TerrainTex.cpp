@@ -29,7 +29,7 @@ Engine::CTerrainTex::~CTerrainTex(void)
 
 }
 
-void CTerrainTex::Set_TerrainHeight(_float fRange, _float fHeight, _vec3 vPos)
+void CTerrainTex::Set_TerrainHeight(_float fRange, _float fHeight, _vec3 vPos, _int iMode)
 {
 	m_dwVtxCntZ = 768;
 	m_dwVtxCntX = 768;
@@ -43,20 +43,45 @@ void CTerrainTex::Set_TerrainHeight(_float fRange, _float fHeight, _vec3 vPos)
 		{
 			dwIndex = i * m_dwVtxCntX + j;
 
-			// 브러쉬 반지름 계산
-			if (vPos.x - fRange <= pVtxTex[dwIndex].vPos.x &&
-				vPos.x + fRange >= pVtxTex[dwIndex].vPos.x &&
-				vPos.z - fRange <= pVtxTex[dwIndex].vPos.z && 
-				vPos.z + fRange >= pVtxTex[dwIndex].vPos.z)
+			if (0 == iMode)	// 네모 브러쉬
 			{
-				pVtxTex[dwIndex].vPos.y = fHeight;
-				m_pPos[dwIndex].y = fHeight;
-				vPos.y = fHeight;
+				if (vPos.x - fRange <= pVtxTex[dwIndex].vPos.x &&
+					vPos.x + fRange >= pVtxTex[dwIndex].vPos.x &&
+					vPos.z - fRange <= pVtxTex[dwIndex].vPos.z &&
+					vPos.z + fRange >= pVtxTex[dwIndex].vPos.z)
+				{
+					pVtxTex[dwIndex].vPos.y = fHeight;
+					m_pPos[dwIndex].y = fHeight;
+					vPos.y = fHeight;
+				}
+			}
+			else if (1 == iMode)	// 원 브러쉬
+			{
+				_float fdistance = sqrt(pow(vPos.x - pVtxTex[dwIndex].vPos.x, 2) + pow(vPos.z - pVtxTex[dwIndex].vPos.z, 2));
+
+				if (fdistance <= fRange)
+				{
+					pVtxTex[dwIndex].vPos.y = fHeight;
+					m_pPos[dwIndex].y = fHeight;
+					vPos.y = fHeight;
+				}
 			}
 		}
 	}
 
 	m_pVB->Unlock();
+}
+
+_float CTerrainTex::Get_TerrainHeight(_ulong dwIndex)
+{
+	VTXTEX* pVtxTex = nullptr;
+	m_pVB->Lock(0, 0, (void**)&pVtxTex, 0);
+
+	m_fHeight = pVtxTex[dwIndex].vPos.y;
+
+	m_pVB->Unlock();
+
+	return m_fHeight;
 }
 
 void CTerrainTex::Copy_Index(Engine::INDEX32* pIndex, const _ulong& dwTriCnt)

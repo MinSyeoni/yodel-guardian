@@ -113,6 +113,8 @@ BEGIN_MESSAGE_MAP(CMapTab, CDialogEx)
 	ON_BN_CLICKED(IDC_CHECK3, &CMapTab::OnBnClickedSetOn_Mesh)
 	ON_BN_CLICKED(IDC_RADIO13, &CMapTab::OnBnClickedAddHeight)
 	ON_BN_CLICKED(IDC_BUTTON6, &CMapTab::OnBnClickedSaveTerrain)
+	ON_BN_CLICKED(IDC_RADIO19, &CMapTab::OnBnClickedBoxBrush)
+	ON_BN_CLICKED(IDC_RADIO20, &CMapTab::OnBnClickedCircleBrush)
 END_MESSAGE_MAP()
 
 
@@ -1132,6 +1134,8 @@ void CMapTab::OnBnClickedSaveTerrain()
 				temp.b = pBufferPos[dwInvndex].y / 7.f;
 
 				pColor[dwIndex] = temp;
+
+				//tTerrainData.fHeight = 
 			}
 		}
 		pHeight->UnlockRect(0);
@@ -1146,8 +1150,22 @@ void CMapTab::OnBnClickedSaveTerrain()
 		tTerrainData.dwVtxCntZ = m_iCntZ;
 		tTerrainData.dwInterval = m_iInterval;
 
-		WriteFile(hFile, &tTerrainData, sizeof(MESHDATA), &dwByte, nullptr);
+		WriteFile(hFile, &tTerrainData, sizeof(TERRAIN_DATA), &dwByte, nullptr);
 		
 		CloseHandle(hFile);
 	}
+}
+
+
+void CMapTab::OnBnClickedBoxBrush()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	m_iBrushShape = 0;
+}
+
+
+void CMapTab::OnBnClickedCircleBrush()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	m_iBrushShape = 1;
 }

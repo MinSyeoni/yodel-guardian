@@ -16,7 +16,8 @@ public:
 	const _vec3*		Get_VtxPos(void) const {	return m_pPos;	}
 	_ulong				Get_VtxCntX(void) const { return m_iH.biWidth; }
 	_ulong				Get_VtxCntZ(void) const { return m_iH.biHeight; }
-	void				Set_TerrainHeight(_float fRange, _float fHeight, _vec3 vPos);
+	void				Set_TerrainHeight(_float fRange, _float fHeight, _vec3 vPos, _int iMode);
+	_float				Get_TerrainHeight(_ulong dwIndex);
 
 	VTXTEX*				m_pVtxTex = nullptr;
 	VTXTEX*				m_pVtxTexOrigin = nullptr;
@@ -44,7 +45,7 @@ private:
 	_ulong				m_dwVtxCntZ;
 	_ulong				m_dwVtxCntX;
 
-
+	_float				m_fHeight = 0.f;
 public:
 	static CTerrainTex*		Create(LPDIRECT3DDEVICE9 pGraphicDev, 
 									const _ulong& dwCntX,
