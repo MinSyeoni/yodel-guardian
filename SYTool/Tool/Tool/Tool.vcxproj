@@ -76,6 +76,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>./Bin</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -217,6 +218,7 @@
     <ClInclude Include="CursorMgr.h" />
     <ClInclude Include="EffectDefault.h" />
     <ClInclude Include="EffectTab.h" />
+    <ClInclude Include="EffectTab2.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MapTab.h" />
@@ -243,6 +245,7 @@
     <ClCompile Include="CursorMgr.cpp" />
     <ClCompile Include="EffectDefault.cpp" />
     <ClCompile Include="EffectTab.cpp" />
+    <ClCompile Include="EffectTab2.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MapTab.cpp" />
     <ClCompile Include="Myform.cpp" />

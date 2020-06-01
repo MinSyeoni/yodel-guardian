@@ -24,6 +24,7 @@
 HINSTANCE g_hInst;
 HWND	  g_hWnd;
 
+
 IMPLEMENT_DYNCREATE(CToolView, CView)
 
 BEGIN_MESSAGE_MAP(CToolView, CView)
@@ -75,13 +76,14 @@ BOOL CToolView::PreCreateWindow(CREATESTRUCT& cs)
 
 void CToolView::OnDraw(CDC* /*pDC*/)
 {
+	Render_MainApp();
 	CToolDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
 
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
-	Render_MainApp();
+
 }
 
 
@@ -174,6 +176,13 @@ _int CToolView::Update_MainApp(const _float& fTimeDelta)
 	{
 		m_pCameraTab->UPdateCameraTool(fTimeDelta);
 	}
+	if (m_pMyForm->m_iCurTab == 3)
+		m_pEffectTab->UpdateEffectTool(fTimeDelta);
+	if (m_pMyForm->m_iCurTab == 4)
+		m_pEffectTab2->UpdateEffectTool2(fTimeDelta);
+
+
+
 	Engine::CKeyMgr::GetInstance()->KeyCheck();
 	CObjMgr::GetInstance()->Update_Object(fTimeDelta);
 	CToolCamera::GetInstance()->Update_Camera(fTimeDelta);
@@ -213,7 +222,7 @@ void CToolView::OnInitialUpdate()
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 	g_hWnd = m_hWnd;
 	g_hInst = AfxGetInstanceHandle();
-
+	
 	Ready_MainApp();
 	Ready_Buffer_Setting();
 
@@ -228,6 +237,10 @@ void CToolView::OnInitialUpdate()
 	m_pMapTab = m_pMyForm->m_pMapTab;
 	m_pNaviTab = m_pMyForm->m_pNaviTab;
 	m_pCameraTab = m_pMyForm->m_pCameraTab;
+	m_pEffectTab = m_pMyForm->m_pEffectTab;
+	m_pEffectTab2 = m_pMyForm->m_pEffectTab2;
+
+
 }
 
 void CToolView::Initalize_Object()
@@ -371,8 +384,26 @@ void CToolView::Ready_Buffer_Setting()
 		RESOURCE_STAGE,
 		L"Texture_Default",
 		Engine::TEX_NORMAL,
-		L"../Resources/Texture/Default/Default.png", 1)))
+		L"../Resources/Texture/Default/Default%d.png", 1)))
 		return;
+
+	if (FAILED(Engine::Ready_Texture(m_pDevice,
+		RESOURCE_STAGE,
+		L"Texture_AlphaTest",
+		Engine::TEX_NORMAL,
+		L"../Resources/Texture/AlphaTest/AlphaTest%d.png", 1)))
+		return;
+
+	if (FAILED(Engine::Ready_Texture(m_pDevice,
+		RESOURCE_STAGE,
+		L"Texture_AlphaBlend",
+		Engine::TEX_NORMAL,
+		L"../Resources/Texture/AlphaBlend/AlphaBlend%d.tga", 1)))
+		return;
+
+
+
+
 
 	int  i = 0;
 	//if (FAILED(Engine::Ready_Texture(m_pDevice,

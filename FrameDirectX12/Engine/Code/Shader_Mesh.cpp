@@ -54,7 +54,7 @@ void CShader_Mesh::End_Shader(_uint Texnum, _int boneIndex)
 {
     int TexCount = Texnum;
     if (Texnum > m_vecTextureType.size() - 1)
-        Texnum = m_vecTextureType.size() - 1;
+        Texnum = (_uint)m_vecTextureType.size() - 1;
 
 
     CB_TEXTURE_INFO pTexInfo;

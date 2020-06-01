@@ -48,7 +48,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
+    <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
@@ -145,9 +145,9 @@
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;_XM_NO_INTRINSICS_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -183,6 +183,7 @@
     <ClInclude Include="..\Code\MapObject.h" />
     <ClInclude Include="..\Code\BaziorMgr.h" />
     <ClInclude Include="..\Code\Monster.h" />
+    <ClInclude Include="..\Code\Normandy.h" />
     <ClInclude Include="..\Code\Pistol.h" />
     <ClInclude Include="..\Code\Player.h" />
     <ClInclude Include="..\Code\PlayerArm.h" />
@@ -233,6 +234,7 @@
     <ClCompile Include="..\Code\MapObject.cpp" />
     <ClCompile Include="..\Code\BaziorMgr.cpp" />
     <ClCompile Include="..\Code\Monster.cpp" />
+    <ClCompile Include="..\Code\Normandy.cpp" />
     <ClCompile Include="..\Code\Pistol.cpp" />
     <ClCompile Include="..\Code\Player.cpp" />
     <ClCompile Include="..\Code\PlayerArm.cpp" />

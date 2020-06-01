@@ -64,6 +64,8 @@ void CMyform::OnInitialUpdate()
 	m_MainTab.InsertItem(1, L"NaviTool", 1);
 	m_MainTab.InsertItem(2, L"CameraTool", 2);
 	m_MainTab.InsertItem(3, L"EffectTool", 3);
+	m_MainTab.InsertItem(4, L"EffectTool2", 4);
+
 
 	m_MainTab.SetCurSel(0);
 
@@ -91,6 +93,20 @@ void CMyform::OnInitialUpdate()
 	m_pEffectTab->MoveWindow(0, 25, rc.Width(), rc.Height());
 	m_pEffectTab->ShowWindow(SW_HIDE);
 
+	m_pEffectTab2 = new EffectTab2;
+	m_pEffectTab2->Create(IDD_Effect2, &m_MainTab);
+	m_pEffectTab2->MoveWindow(0, 25, rc.Width(), rc.Height());
+	m_pEffectTab2->ShowWindow(SW_HIDE);
+
+
+
+
+
+
+
+
+
+
 }
 
 void CMyform::Free()
@@ -98,7 +114,9 @@ void CMyform::Free()
 	Engine::Safe_Delete(m_pMapTab);
 	Engine::Safe_Delete(m_pNaviTab);
 	Engine::Safe_Delete(m_pCameraTab);
-		Engine::Safe_Delete(m_pEffectTab);
+	Engine::Safe_Delete(m_pEffectTab);
+	Engine::Safe_Delete(m_pEffectTab2);
+
 
 }
 
@@ -116,6 +134,7 @@ void CMyform::OnTcnSelchangeTab(NMHDR* pNMHDR, LRESULT* pResult)
 		m_pNaviTab->ShowWindow(SW_HIDE);
 		m_pCameraTab->ShowWindow(SW_HIDE);
 		m_pEffectTab->ShowWindow(SW_HIDE);
+		m_pEffectTab2->ShowWindow(SW_HIDE);
 		break;
 	case 1:
 		m_iCurTab = 1;
@@ -123,6 +142,7 @@ void CMyform::OnTcnSelchangeTab(NMHDR* pNMHDR, LRESULT* pResult)
 		m_pNaviTab->ShowWindow(SW_SHOW);
 		m_pCameraTab->ShowWindow(SW_HIDE);
 		m_pEffectTab->ShowWindow(SW_HIDE);
+		m_pEffectTab2->ShowWindow(SW_HIDE);
 		break;
 	case 2:
 		m_iCurTab = 2;
@@ -130,6 +150,7 @@ void CMyform::OnTcnSelchangeTab(NMHDR* pNMHDR, LRESULT* pResult)
 		m_pNaviTab->ShowWindow(SW_HIDE);
 		m_pCameraTab->ShowWindow(SW_SHOW);
 		m_pEffectTab->ShowWindow(SW_HIDE);
+		m_pEffectTab2->ShowWindow(SW_HIDE);
 		break;
 	case 3 :
 		m_iCurTab = 3;
@@ -137,7 +158,20 @@ void CMyform::OnTcnSelchangeTab(NMHDR* pNMHDR, LRESULT* pResult)
 		m_pNaviTab->ShowWindow(SW_HIDE);
 		m_pCameraTab->ShowWindow(SW_HIDE);
 		m_pEffectTab->ShowWindow(SW_SHOW);
+		m_pEffectTab2->ShowWindow(SW_HIDE);
 		CToolCamera::GetInstance()->SetCameraFix(true);
+		break;
+	case 4:
+		m_iCurTab = 4;
+		m_pMapTab->ShowWindow(SW_HIDE);
+		m_pNaviTab->ShowWindow(SW_HIDE);
+		m_pCameraTab->ShowWindow(SW_HIDE);
+		m_pEffectTab->ShowWindow(SW_HIDE);
+		m_pEffectTab2->ShowWindow(SW_SHOW);
+		m_pEffectTab2->FindEffectData();
+		CToolCamera::GetInstance()->SetCameraFix(true);
+		break;
+
 	default:
 		break;
 	}

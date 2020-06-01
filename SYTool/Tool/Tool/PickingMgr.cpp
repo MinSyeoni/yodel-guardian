@@ -423,6 +423,7 @@ void CPickingMgr::Translation_ViewSpace(void)
 	//Engine::CGameObject* pDynamicCamera = Engine::Get_GameObject(SCENE_STAGE, LAYER_CAMERA);
 	//_matrix	matProj = dynamic_cast<CCamera_Dynamic*>(pDynamicCamera)->Get_Transform(D3DTS_PROJECTION);
 
+
 	// ∫‰ ∆˜∆Æ -> ≈ıøµ -> ∫‰ Ω∫∆‰¿ÃΩ∫
 	D3DXVECTOR3	vTemp;
 

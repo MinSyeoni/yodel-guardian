@@ -13,9 +13,6 @@
     <Filter Include="97.Mgr">
       <UniqueIdentifier>{27876c48-0016-46b3-87e1-89e8fb599f1a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene">
-      <UniqueIdentifier>{256c4ed2-d49e-45f9-a77a-d6dfb12066fc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject">
       <UniqueIdentifier>{ca6f4b3b-0852-42ed-89f9-fb933331dd10}</UniqueIdentifier>
     </Filter>
@@ -24,18 +21,6 @@
     </Filter>
     <Filter Include="02.GameObject\01.Environment">
       <UniqueIdentifier>{c032b6d9-f4d5-4740-9507-36a2e633f142}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\02.Menu">
-      <UniqueIdentifier>{51fd0ff7-39a3-4557-b9b9-cc8eb69fb283}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\01.Logo">
-      <UniqueIdentifier>{fd93da88-aeef-4df4-a63a-e362f97fa376}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\00.Loading">
-      <UniqueIdentifier>{414ce8cb-454b-482a-95af-49b027ded482}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\03.Stage">
-      <UniqueIdentifier>{af574c80-212e-42e6-9a44-0bbdcdee06c7}</UniqueIdentifier>
     </Filter>
     <Filter Include="96.Camera">
       <UniqueIdentifier>{fd951fef-76fb-4e49-bf03-6a0843ab4a01}</UniqueIdentifier>
@@ -211,6 +196,9 @@
     <Filter Include="01.Scene_Stage\08.Trigger">
       <UniqueIdentifier>{449659f9-1cbf-40a0-9918-9820bc8f73bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Scene_Stage\07.NPC\01.Normandy">
+      <UniqueIdentifier>{de5ac362-3fcb-4da0-b736-d5c69a8650f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -354,6 +342,9 @@
       <Filter>01.Scene_Stage\08.Trigger</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\DamageBlood.h" />
+    <ClInclude Include="..\Code\Normandy.h">
+      <Filter>01.Scene_Stage\07.NPC\01.Normandy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -467,6 +458,9 @@
       <Filter>01.Scene_Stage\08.Trigger</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\DamageBlood.cpp" />
+    <ClCompile Include="..\Code\Normandy.cpp">
+      <Filter>01.Scene_Stage\07.NPC\01.Normandy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

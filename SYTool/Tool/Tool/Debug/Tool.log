@@ -1,2 +1,69 @@
-﻿  ToolCamera.cpp
-  Tool.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Debug\Tool.exe
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(453,5): warning MSB8004: Output 디렉터리가 슬래시로 끝나지 않습니다. Output 디렉터리의 적절한 평가를 허용하는 데 필요하므로 이 빌드 인스턴스에서 슬래시를 추가합니다.
+  CCameraTab.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(27,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(32,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(72,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(77,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(89,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(94,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(249,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(264,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(274,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  EffectTab.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\EffectTab.cpp(351,44): warning C4244: '=': 'float'에서 '_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\EffectTab.cpp(352,46): warning C4244: '=': 'float'에서 '_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  EffectTab2.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\EffectTab2.cpp(99,42): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\EffectTab2.cpp(100,41): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\EffectTab2.cpp(174,42): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\EffectTab2.cpp(175,43): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  MainFrm.cpp
+  MapTab.cpp
+  Myform.cpp
+  NaviTab.cpp
+  Tool.cpp
+  ToolDoc.cpp
+  ToolView.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(264,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(264,98): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(269,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(286,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(288,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(290,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(292,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(294,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(296,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(298,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(300,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(302,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(304,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(306,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(308,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(310,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(312,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(314,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(316,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(318,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(320,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(322,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(324,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(326,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(328,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(330,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(332,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(334,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(336,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(338,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(340,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(342,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(344,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(346,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(348,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(350,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(352,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(354,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(356,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(359,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(269,66): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
+  코드를 생성하고 있습니다...
+  Tool.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\./Bin\Tool.exe

@@ -8,6 +8,8 @@ float g_fChapterY = 0.f;
 float g_fX = 1.0f;
 float g_fY = 1.0f;
 
+
+float g_fAlpha = 1.0f;
 float g_fTime;
 //sampler 란 : 색상 정보만 담고 있는 팔레트 형태의 텍스쳐 정의 구조체
 
@@ -67,6 +69,8 @@ VS_OUT VS_MAIN(VS_IN In)
 	matWV = mul(g_matWorld, g_matView);
 	matWVP = mul(matWV, g_matProj);
 
+
+
 	Out.vPostion = mul(vector(In.vPostion.xyz, 1.f), matWVP);
 	Out.vTexUV = In.vTexUV;
 
@@ -91,8 +95,19 @@ PS_OUT		PS_MAIN(PS_IN In)
 {
 	PS_OUT			Out = (PS_OUT)0;
 
-	Out.vColor = tex2D(BaseSampler, In.vTexUV);	// 2차원 텍스쳐로부터 uv좌표에 해당하는 색을 얻어와 vector 타입으로 반환해주는 함수
+	float2 uv;
 
+	uv.x = (In.vTexUV.x / g_fX)+ g_fChapterX;
+	uv.y = (In.vTexUV.y / g_fY)+ g_fChapterY;
+
+	Out.vColor = tex2D(BaseSampler, uv);	// 2차원 텍스쳐로부터 uv좌표에 해당하는 색을 얻어와 vector 타입으로 반환해주는 함수
+	Out.vColor.a = Out.vColor.r;
+
+	 Out.vColor.a = saturate(Out.vColor.a);
+
+	Out.vColor.a = Out.vColor.a* g_fAlpha;
+
+	
 	return Out;
 }
 
@@ -110,4 +125,29 @@ technique Default_Device
 		vertexshader = compile vs_3_0 VS_MAIN();
 		pixelshader = compile ps_3_0 PS_MAIN();
 	}
+	pass 
+	{
+			alphatestenable = true;
+		alphafunc = Greater;
+		alpharef = 0xc0;
+		cullmode = none;
+		vertexshader = compile vs_3_0 VS_MAIN();
+		pixelshader = compile ps_3_0 PS_MAIN();
+
+
+	}
+	pass		
+	{
+			cullmode = none;
+		zwriteEnable = true;
+		alphablendenable = true;
+		srcblend = srcalpha;
+		destblend = invsrcalpha;
+		vertexshader = compile vs_3_0 VS_MAIN();
+		pixelshader = compile ps_3_0 PS_MAIN();
+
+
+	}
+
+
 };

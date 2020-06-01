@@ -150,6 +150,8 @@ _vec3 CNaviMesh::MoveOn_NaviMesh(const _vec3* pTargetPos,
 HRESULT CNaviMesh::Link_Cell(void)
 {
 	for (_ulong i = 0; i < m_vecCell.size(); ++i)
+	
+	
 	{
 		for (_ulong j = 0; j < m_vecCell.size(); ++j)
 		{

@@ -14,6 +14,8 @@
 #include "NaviTab.h"
 #include "Myform.h"
 #include "CCameraTab.h"
+#include "EffectTab.h"
+#include "EffectTab2.h"
 BEGIN(Engine)
 class CManagement;
 class CBoxCollider;
@@ -88,6 +90,10 @@ private:
 	CNaviTab*				m_pNaviTab = nullptr;
 	CMyform*				m_pMyForm = nullptr;
 	CCameraTab*             m_pCameraTab = nullptr;
+	CEffectTab*				m_pEffectTab = nullptr;
+	EffectTab2* m_pEffectTab2 = nullptr;
+
+
 	_int					m_iIdxCnt = 0;
 
 public:

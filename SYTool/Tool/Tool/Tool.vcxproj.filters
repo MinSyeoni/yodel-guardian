@@ -67,7 +67,10 @@
     <Filter Include="05.GameObject\04.EffectDefault">
       <UniqueIdentifier>{cbcb5e94-898d-490e-8c35-e07da6730912}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.Tab\03.EffectTool">
+    <Filter Include="04.Tab\04.EffectTool2">
+      <UniqueIdentifier>{cbd9527c-eb37-4fd8-967c-66c6a4cb5d78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Tab\03.EffectTool1">
       <UniqueIdentifier>{f9fe038f-6143-4456-b8a1-2dd527a8ad93}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -157,7 +160,10 @@
       <Filter>05.GameObject\04.EffectDefault</Filter>
     </ClInclude>
     <ClInclude Include="EffectTab.h">
-      <Filter>04.Tab\03.EffectTool</Filter>
+      <Filter>04.Tab\03.EffectTool1</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectTab2.h">
+      <Filter>04.Tab\04.EffectTool2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -222,7 +228,10 @@
       <Filter>05.GameObject\04.EffectDefault</Filter>
     </ClCompile>
     <ClCompile Include="EffectTab.cpp">
-      <Filter>04.Tab\03.EffectTool</Filter>
+      <Filter>04.Tab\03.EffectTool1</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectTab2.cpp">
+      <Filter>04.Tab\04.EffectTool2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

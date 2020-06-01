@@ -7,6 +7,8 @@
 #include "NaviTab.h"
 #include "CCameraTab.h"
 #include "EffectTab.h"
+#include "EffectTab2.h"
+
 class CMapTab;
 class CNaviTab;
 class CCameraTab;
@@ -36,12 +38,17 @@ protected:
 public:
 	virtual void OnInitialUpdate();
 	
-	//CMapTab		 Get_MapTab() { return m_pMapTab; };
+	//CMapTab		 Get_MapTab() { return m_pMapTab; };\
+
+
 
 	CMapTab*	m_pMapTab = nullptr;
 	CNaviTab*	m_pNaviTab = nullptr;
 	CCameraTab* m_pCameraTab = nullptr;
 	CEffectTab* m_pEffectTab = nullptr;
+	EffectTab2* m_pEffectTab2 = nullptr;
+
+
 	_int		m_iCurTab = 0;	// 0-MAP, 1-NAVI
 private:
 	void		Free();

@@ -22,7 +22,37 @@ typedef struct tagEFFECTDATA
 
 	_float fStartTime = 0.f;
 	_float fEndTime = 1.f;
-	_int iRepeat = 1;
+	_int iDeadRepeat = 1;
+
+
+
+	_vec3 vScalePat = { 1.f,1.f,1.f };
+	_vec3 vRotPat = { 0.f,0.f,0.f };
+
+	_float fStartScale = 0.f;//시작시간
+	_float fEndScale = 0.f;
+
+	_float fStartRot = 0.f;
+	_float fEndRot = 0.f;
+
+	_int iScaleRepeat = 1;
+	_int iRotRepeat = 1;
+
+
+	_bool bIsFadeOut = false;
+	_bool bIsFadeIn = false;
+
+	_float fFadeInStartTime = 0.f;
+	_float fFadeInEndTime = 0.f;
+	_float fFadeOutStartTime = 0.f;
+	_float fFadeOutEndTime = 0.f;
+
+	int iUvWidth = 1;
+	int iUvHeight = 1;
+
+	_float fSpriteSpeed =0.f;
+	_bool bIsUvSprite = false;
+
 
 }EFFECTDATA;
 
@@ -41,7 +71,11 @@ public:
 	virtual _int			Update_Object(const _float& fTimeDelta);
 	virtual void			Render_Object(void);
 	HRESULT					Set_ConstantTable(LPD3DXEFFECT pEffect);
+	HRESULT SetTexture(int iDrawId, TEXTURE_STATE eState);
 
+	void UvAnimation();
+	void SetTime(float fTime) { m_fAccTime = fTime; };
+	void SetCheck(_bool bIsCheck);
 private:
 	HRESULT					Add_Component(void);
 
@@ -51,14 +85,37 @@ private:
 public:
 	static CToolEffect* Create(LPDIRECT3DDEVICE9 pGraphicDev);
 public:
+	bool m_bIsCheck = true;//이게 지금 툴에서 사용하는 이펙트인지?
 	EFFECTDATA m_tEffectData;
+	TEXTURE_STATE m_eState = NONE;
+	_float m_fAccTime = 0.f;
+
+	int m_iDrawId = 0;
+	float m_fChapterX = 0;
+	float m_fChapterY = 0;
+
+
+	_bool m_bIsPlayPattern = false; //저장된 패턴 실행 . 
+
+	_float m_fAlpha = 1.f;
+
+	_float m_fSpriteTime = 0.f;
+	_int m_iSpriteRow = 0;
+
+	void UpdateAnimation();
+	void UpdateScaleAni();
+	void UpdateRotAni();
+	void UpdateFadeOut();
+	void UpdateFadeIn();
+
+
 private:
 	Engine::CTransform* m_pTransCom = nullptr;
 	Engine::CCalculator* m_pCalculatorCom = nullptr;
 	Engine::CRcTex* m_pBufferCom = nullptr;
 	Engine::CTexture* m_pTexCom = nullptr;
 	Engine::CShader* m_pShaderCom = nullptr;
-
+	Engine::CSphereCollider* m_pSphereCol = nullptr;
 };
 
 #endif // ToolEffect_h__

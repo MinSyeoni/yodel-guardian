@@ -89,7 +89,7 @@ void CActionCamera::Render_GameObject(const _float& fTimeDelta)
 _vec3 CActionCamera::CheckBazior(vector<_vec3> vecPoint)
 {
 	_vec3 Temp;
-	int iSize = vecPoint.size();
+	int iSize = (int)vecPoint.size();
 
 	if (iSize == 1)
 		return vecPoint[0];
@@ -100,7 +100,7 @@ _vec3 CActionCamera::CheckBazior(vector<_vec3> vecPoint)
 	else if (iSize == 4)
 		return BaziorMgr::Bazior4(vecPoint[0], vecPoint[1], vecPoint[2], vecPoint[3], m_fAccTime);
 
-
+	return _vec3(0.f, 0.f, 0.f);
 }
 
 CGameObject* CActionCamera::Clone_GameObject(void* pArg)

@@ -264,7 +264,7 @@ _int CMathMgr::Collision_Ray(CCollider* pDstCollider)
   fDist -= (fRadius * 0.1f);
   if (b * b - a * (c-d) >= 0)
   {
-	  return fDist;
+	  return (_int)fDist;
 
   }
 
