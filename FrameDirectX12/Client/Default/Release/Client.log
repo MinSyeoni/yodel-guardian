@@ -1,0 +1,2 @@
+﻿  stdafx.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Default\stdafx.h(57,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'MathMgr.h': No such file or directory
