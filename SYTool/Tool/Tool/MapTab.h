@@ -59,14 +59,24 @@ public:
 	afx_msg	void			OnBnClickedSetOn_Mesh();
 
 	afx_msg BOOL			OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
+	void ModifyBrush(RECT rc[11], CPoint& pt, short zDelta);
 	virtual BOOL			OnInitDialog();
 
 	void					Initialize_String();
+	afx_msg void			OnBnClickedAddHeight();
+	afx_msg void			OnBnClickedBoxBrush();
+	afx_msg void			OnBnClickedCircleBrush();
 
 public:
 	float					m_fPosX;
 	float					m_fPosY;
 	float					m_fPosZ;
+	float					m_fBrushRange;
+	float					m_fBrushHeight;
+	float					m_fTerrianPosX;
+	float					m_fTerrianPosY;
+	float					m_fTerrainPosZ;
+
 	float					m_fScaleX;
 	float					m_fScaleY;
 	float					m_fScaleZ;
@@ -75,6 +85,7 @@ public:
 	float					m_fRotZ;
 
 	_vec3					m_vMeshPos = { 0.f,0.f,0.f };
+	_vec3					m_vTerrainPos = { 0.f,0.f,0.f };
 	_vec3					m_vMeshRot = { 0.f,0.f,0.f };
 	_vec3					m_vMeshScale = { 1.f, 1.f, 1.f };
 
@@ -85,7 +96,8 @@ public:
 	_uint					m_iTexToolMode = 0;	// 0-TEX, 1-HEIGHT, 2-SPLATTING
 	_uint					m_iObjToolMode = 0;	// 0-CREATE, 1-MODY, 2-DEL
 	_uint					m_iColliderState = 0; // 0-SPHERE, 1-BOX
-	
+	_uint					m_iBrushShape = 0; //0-Box, 1-Circle
+
 	_bool					m_bIsPickingStaticObj = false;
 	_bool					m_bIsPickingCollider = false;
 	_bool					m_bIsColliderMode = false;
@@ -94,6 +106,8 @@ public:
 
 	CStaticObject*			m_pPickStaticObj = nullptr;
 	CToolCollider*			m_pPickCollider = nullptr;
+
+	_bool					m_bIsBrushMode[2] = { false };	// 0. AddHeight, 1. Splatting
 
 	// 테스트
 	CSphereCollider*			m_pSphereCol = nullptr;
@@ -145,4 +159,8 @@ private:
 
 public:
 	CComboBox				m_CbColliderID;
+
+	afx_msg void			OnBnClickedSaveTerrain();
+	CEdit					m_EditRange;
+	CEdit					m_EditHeight;
 };

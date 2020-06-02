@@ -98,6 +98,7 @@
 #define IDC_EDIT76                      1036
 #define IDC_BUTTON6                     1037
 #define IDC_BUTTON7                     1038
+#define IDC_RADIO17                     1038
 #define IDC_BUTTON8                     1039
 #define IDC_BUTTON9                     1040
 #define IDC_CHECK1                      1041
@@ -106,11 +107,16 @@
 #define IDC_COMBO1                      1044
 #define IDC_BUTTON16                    1044
 #define IDC_BUTTON17                    1045
+#define IDC_RADIO18                     1045
 #define IDC_COMBO2                      1046
 #define IDC_BUTTON18                    1046
+#define IDC_EDIT59                      1046
 #define IDC_BUTTON19                    1047
+#define IDC_EDIT64                      1047
 #define IDC_BUTTON20                    1048
+#define IDC_EDIT77                      1048
 #define IDC_BUTTON21                    1049
+#define IDC_EDIT78                      1049
 #define IDC_BUTTON22                    1050
 #define IDC_CHECK4                      1051
 #define IDC_CHECK5                      1052

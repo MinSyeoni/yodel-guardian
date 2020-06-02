@@ -36,6 +36,7 @@ BEGIN_MESSAGE_MAP(CToolView, CView)
 	ON_WM_RBUTTONUP()
 	ON_WM_LBUTTONDOWN()
 	ON_WM_MOUSEWHEEL()
+	ON_WM_MOUSEMOVE()
 END_MESSAGE_MAP()
 
 // CToolView 생성/소멸
@@ -144,6 +145,11 @@ HRESULT CToolView::Render_MainApp()
 
 	m_pManagement->Render_Scene(m_pDevice);
 	CObjMgr::GetInstance()->Render_Object();
+
+	if (1 == m_pMapTab->m_iTexToolMode)
+		CPickingMgr::GetInstance()->Draw_PickingBrush(m_pMapTab->m_fBrushRange, m_vMeshPos, true);
+	else
+		CPickingMgr::GetInstance()->Draw_PickingBrush(m_pMapTab->m_fBrushRange, m_vMeshPos, false);
 
 	// 나중에 고쳐야함
 	if (!m_pMapTab->m_pColliderLst.empty() && true == m_pMapTab->m_bIsColliderShow)
@@ -271,15 +277,17 @@ void CToolView::Ready_Buffer_Setting()
 	if (FAILED(Engine::Ready_Buffer(m_pDevice,
 		RESOURCE_STATIC,
 		L"Buffer_RcTex",
-		Engine::BUFFER_RCTEX)))
+		Engine::BUFFER_RCTEX,
+		nullptr)))
 		return;
 
 	if (FAILED(Engine::Ready_Buffer(m_pDevice,
 		RESOURCE_STATIC,
 		L"Buffer_TerrainTex",
 		Engine::BUFFER_TERRAINTEX,
-		129,
-		129,
+		nullptr,
+		768,
+		768,
 		1)))
 		return;
 
@@ -369,9 +377,9 @@ void CToolView::Ready_Buffer_Setting()
 	if (FAILED((Engine::Ready_Buffer(m_pDevice,
 		RESOURCE_STATIC,
 		L"Buffer_CubeTex",
-		Engine::BUFFER_CUBETEX))))
+		Engine::BUFFER_CUBETEX,
+		nullptr))))
 		return;
-
 
 	if (FAILED(Engine::Ready_Texture(m_pDevice,
 		RESOURCE_STAGE,
@@ -400,18 +408,6 @@ void CToolView::Ready_Buffer_Setting()
 		Engine::TEX_NORMAL,
 		L"../Resources/Texture/AlphaBlend/AlphaBlend%d.tga", 1)))
 		return;
-
-
-
-
-
-	int  i = 0;
-	//if (FAILED(Engine::Ready_Texture(m_pDevice,
-	//	RESOURCE_STAGE,
-	//	L"Texture_Brush",
-	//	Engine::TEX_NORMAL,
-	//	L"../../../Resource/Texture/Brush/Brush%d.tga", 2)))
-	//	return;
 }
 
 void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
@@ -481,29 +477,6 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 					}
 				}
 			}
-			/*if (nullptr != CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_OBJECT))
-			{
-				_float fDistTemp = 10000000.f;
-				_float fFixDist = 0.f;
-				list<Engine::CGameObject*> pObjLst = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_OBJECT);
-				for (auto& pObject : pObjLst)
-				{
-					Engine::CTransform* pTransCom = dynamic_cast<CStaticObject*>(pObject)->Get_StaticTranscom();
-
-					if (CPickingMgr::GetInstance()->IsCheckStaticObjgectMesh(
-						dynamic_cast<CStaticObject*>(pObject),
-						*pTransCom->Get_WorldMatrix(),
-						&fDistTemp,
-						&m_vMeshPos))
-					{
-						if (fFixDist <= fDistTemp)
-							fDistTemp = fFixDist;
-						break;
-					}
-				}
-			}
-			*/
-
 			Create_NaviPointCell(retflag);
 			if (retflag) return;
 		}
@@ -689,11 +662,16 @@ void CToolView::Get_TerrainInfo()
 		return;
 	}
 	Engine::CGameObject* pObj = CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN);
-	Engine::CTerrainTex* pBufferCom = dynamic_cast<CTerrain*>(pObj)->Get_BufferCom();
+	Engine::CTerrainTex* pBufferCom = dynamic_cast<Engine::CTerrainTex*>(pObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC));
 	Engine::CTransform* pTransCom = dynamic_cast<CTerrain*>(pObj)->Get_TransCom();
 
 	CPickingMgr::GetInstance()->SetTerrainSize(m_pMapTab->m_iCntX, m_pMapTab->m_iCntZ);
+
+	//Engine::CTransform* pTransCom = dynamic_cast<Engine::CTransform*>(pObj->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
 	CPickingMgr::GetInstance()->PickingTerrain(&m_vMeshPos, pBufferCom->m_pVtxTexOrigin, pTransCom->Get_WorldMatrix());
+	m_vMeshPos.y = CPickingMgr::GetInstance()->Compute_HeightOnTerrain(&m_vMeshPos, pBufferCom->Get_VtxPos(), m_pMapTab->m_iCntX, m_pMapTab->m_iCntZ);
+	if (m_vMeshPos.y <= -431602080.)		///////////// ???
+		m_vMeshPos.y = 0.f;
 }
 void CToolView::Picking_MouseOnCollider(bool& retflag)
 {
@@ -876,6 +854,19 @@ void CToolView::Picking_TerrainOnStaticObject(bool& retflag)
 	retflag = false;
 }
 
+void CToolView::Picking_Terrain(bool& retflag)
+{
+	retflag = true;
+
+	Get_TerrainInfo();
+	m_pMapTab->m_vTerrainPos = m_vMeshPos;
+	m_pMapTab->m_fTerrianPosX = m_vMeshPos.x;
+	m_pMapTab->m_fTerrianPosY = m_vMeshPos.y;
+	m_pMapTab->m_fTerrainPosZ = m_vMeshPos.z;
+
+	retflag = false;
+}
+
 void CToolView::CheckCameraTabButton()
 {
 	if (m_pCameraTab->m_AddAtButton.GetCheck() || m_pCameraTab->m_AddEyeButton.GetCheck())
@@ -891,7 +882,6 @@ void CToolView::CheckCameraTabButton()
 }
 
 
-
 BOOL CToolView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
@@ -904,3 +894,36 @@ BOOL CToolView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 
 	return CView::OnMouseWheel(nFlags, zDelta, pt);
 }
+
+void CToolView::OnMouseMove(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	m_pMapTab->UpdateData(TRUE);
+
+	if (nullptr == CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN))
+		return;
+
+	Engine::CGameObject* pObj = CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN);
+	Engine::CTerrainTex* pBufferCom = dynamic_cast<Engine::CTerrainTex*>(pObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC));
+	Engine::CComponent* pComponent = pObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC);
+
+	bool retflag;
+	Picking_Terrain(retflag);
+	if (retflag) return;
+
+	if (1 == m_pMapTab->m_iTexToolMode)	// HeightMode
+	{
+		DWORD dwIdx = 0;
+		if ((nFlags & MK_LBUTTON) == MK_LBUTTON)
+		{
+			CPickingMgr::GetInstance()->PickTerrainIndex(&dwIdx, pBufferCom->m_pVtxTexOrigin);
+			dynamic_cast<Engine::CTerrainTex*>(pComponent)->Set_TerrainHeight(m_pMapTab->m_fBrushRange, m_pMapTab->m_fBrushHeight, m_vMeshPos, m_pMapTab->m_iBrushShape);
+		}
+	}
+	else if (2 == m_pMapTab->m_iTexToolMode)	// SplattingMode
+		return;
+
+	m_pMapTab->UpdateData(FALSE);
+	CView::OnMouseMove(nFlags, point);
+}
+

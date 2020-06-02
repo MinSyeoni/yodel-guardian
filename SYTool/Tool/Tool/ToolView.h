@@ -108,11 +108,13 @@ public:
 	void				Picking_MeshOnStaticObject(bool& retflag);
 	void				Picking_MouseOnStaticObject(bool& retflag);
 	void				Picking_TerrainOnStaticObject(bool& retflag);
+	void				Picking_Terrain(bool& retflag);
 	void				CheckCameraTabButton();
 
 
 
 	afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // ToolView.cpp의 디버그 버전

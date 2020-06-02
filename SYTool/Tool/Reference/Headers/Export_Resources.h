@@ -8,7 +8,7 @@ BEGIN(Engine)
 
 // ResourcesMgr
 // Get
-inline CResources*		Clone_Resources(const _ushort& wContainerIdx, const _tchar* pResourceTag);
+inline CResources* Clone_Resources(const _ushort& wContainerIdx, const _tchar* pResourceTag);
 // Set
 // General
 inline HRESULT	Reserve_ContainerSize(const _ushort& wSize);
@@ -17,6 +17,7 @@ inline HRESULT	Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	const _ushort& wContainerIdx,
 	const _tchar* pBufferTag,
 	BUFFERID eID,
+	const _tchar* pPath,
 	const _ulong& dwCntX = 1,
 	const _ulong& dwCntZ = 1,
 	const _ulong& dwVtxItv = 1);

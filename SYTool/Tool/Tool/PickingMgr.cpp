@@ -8,20 +8,19 @@ CPickingMgr::CPickingMgr()
 {
 }
 
-
 CPickingMgr::~CPickingMgr()
 {
 	//Release();
 }
 
-void CPickingMgr::PickTerrainCubePos(D3DXVECTOR3 * pOut, const VTXTEX * pTerrainVtx, float fDeap)
+void CPickingMgr::PickTerrainCubePos(D3DXVECTOR3* pOut, const VTXTEX* pTerrainVtx, float fDeap)
 {
 	Translation_ViewSpace();
 	D3DXMATRIX	matIdentity;
 	D3DXMatrixIdentity(&matIdentity);
 	Translation_Local(&matIdentity);
 
-	const VTXTEX*		pVertex = pTerrainVtx;
+	const VTXTEX* pVertex = pTerrainVtx;
 
 	float	fU, fV, fDist;
 
@@ -58,14 +57,14 @@ void CPickingMgr::PickTerrainCubePos(D3DXVECTOR3 * pOut, const VTXTEX * pTerrain
 	}
 }
 
-void CPickingMgr::PickTerrainIndex(DWORD * pOutIndex, const VTXTEX * pTerrainVtx)
+void CPickingMgr::PickTerrainIndex(DWORD* pOutIndex, const VTXTEX* pTerrainVtx)
 {
 	Translation_ViewSpace();
 	D3DXMATRIX	matIdentity;
 	D3DXMatrixIdentity(&matIdentity);
 	Translation_Local(&matIdentity);
 
-	const VTXTEX*		pVertex = pTerrainVtx;
+	const VTXTEX* pVertex = pTerrainVtx;
 
 	float	fU, fV, fDist;
 
@@ -105,7 +104,36 @@ void CPickingMgr::SetTerrainSize(DWORD dwCol, DWORD dwRow)
 	m_dwRow = dwRow;
 }
 
-void CPickingMgr::PickingTerrain(D3DXVECTOR3 * pOut, const VTXTEX * pVertex, const D3DXMATRIX * pmatWorld)
+_float CPickingMgr::Compute_HeightOnTerrain(const _vec3* pPos,
+	const _vec3* pTerrainVtx,
+	const _ulong& dwCntX,
+	const _ulong& dwCntZ)
+{
+	_ulong	dwIndex = _ulong(pPos->z / 1.f) * _ulong(dwCntX) + _ulong(pPos->x / 1.f);
+
+	_float	fRatioX = (pPos->x - pTerrainVtx[dwIndex + dwCntX].x) / 1.f;
+	_float	fRatioZ = (pTerrainVtx[dwIndex + dwCntX].z - pPos->z) / 1.f;
+
+	_float	fHeight[4] = {
+		pTerrainVtx[dwIndex + dwCntX].y,
+		pTerrainVtx[dwIndex + dwCntX + 1].y,
+		pTerrainVtx[dwIndex + 1].y,
+		pTerrainVtx[dwIndex].y
+	};
+
+	// 오른쪽 위
+	if (fRatioX > fRatioZ)
+	{
+		return fHeight[0] + (fHeight[1] - fHeight[0]) * fRatioX + (fHeight[2] - fHeight[1]) * fRatioZ;
+	}
+	// 왼쪽 아래
+	else
+	{
+		return fHeight[0] + (fHeight[2] - fHeight[3]) * fRatioX + (fHeight[3] - fHeight[0]) * fRatioZ;
+	}
+}
+
+void CPickingMgr::PickingTerrain(D3DXVECTOR3* pOut, const VTXTEX* pVertex, const D3DXMATRIX* pmatWorld)
 {
 	Translation_ViewSpace();
 	Translation_Local(pmatWorld);
@@ -153,14 +181,14 @@ void CPickingMgr::PickingTerrain(D3DXVECTOR3 * pOut, const VTXTEX * pVertex, con
 	return;
 }
 
-void CPickingMgr::PickTerrainTextPos(D3DXVECTOR3 * pOut, const VTXTEX * pTerrainVtx, float fDeap)
+void CPickingMgr::PickTerrainTextPos(D3DXVECTOR3* pOut, const VTXTEX* pTerrainVtx, float fDeap)
 {
 	Translation_ViewSpace();
 	D3DXMATRIX	matIdentity;
 	D3DXMatrixIdentity(&matIdentity);
 	Translation_Local(&matIdentity);
 
-	const VTXTEX*		pVertex = pTerrainVtx;
+	const VTXTEX* pVertex = pTerrainVtx;
 
 	float	fU, fV, fDist;
 
@@ -178,7 +206,7 @@ void CPickingMgr::PickTerrainTextPos(D3DXVECTOR3 * pOut, const VTXTEX * pTerrain
 			{
 				D3DXVECTOR3 MousePos = (pVertex[iIndex + m_dwCol + 2].vPos +
 					(pVertex[iIndex + m_dwCol + 1].vPos - pVertex[iIndex + m_dwCol + 2].vPos) * fV +
-					(pVertex[iIndex + 1].vPos - pVertex[iIndex + m_dwCol + 2].vPos)	*fU);
+					(pVertex[iIndex + 1].vPos - pVertex[iIndex + m_dwCol + 2].vPos) * fU);
 
 				*pOut = { MousePos.x , MousePos.y
 					, fDeap };
@@ -242,7 +270,7 @@ bool CPickingMgr::IsCheckColiderMesh(const LPD3DXMESH* pMesh, D3DXMATRIX pMeshWo
 	BOOL      bCheck;
 
 	D3DXIntersect(*pMesh, &m_tRay.vOri, &m_tRay.vDir, &bCheck, nullptr, &fU, &fV, &fDist, nullptr, nullptr);
-	
+
 	if (false == bCheck)
 		return false;
 
@@ -297,7 +325,7 @@ bool CPickingMgr::IsCheckStaticObjgectMesh(CStaticObject* pMesh, D3DXMATRIX pMes
 	vRayDir = vMousePos - vRayPos;
 
 	pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
-	
+
 	D3DXMatrixInverse(&matView, NULL, &matView);
 	D3DXVec3TransformNormal(&vRayDir, &vRayDir, &matView);
 	D3DXVec3TransformCoord(&vRayPos, &vRayPos, &matView);
@@ -418,11 +446,10 @@ void CPickingMgr::Translation_ViewSpace(void)
 {
 	D3DXVECTOR3	vMouse = CCursorMgr::GetCursPos(g_hWnd);
 	_matrix	matProj;
-	
+
 	Engine::CGraphicDev::GetInstance()->GetDevice()->GetTransform(D3DTS_PROJECTION, &matProj);
 	//Engine::CGameObject* pDynamicCamera = Engine::Get_GameObject(SCENE_STAGE, LAYER_CAMERA);
 	//_matrix	matProj = dynamic_cast<CCamera_Dynamic*>(pDynamicCamera)->Get_Transform(D3DTS_PROJECTION);
-
 
 	// 뷰 포트 -> 투영 -> 뷰 스페이스
 	D3DXVECTOR3	vTemp;
@@ -446,14 +473,14 @@ void CPickingMgr::Translation_ViewSpace(void)
 
 }
 
-void CPickingMgr::Translation_Local(const D3DXMATRIX * pWorld)
+void CPickingMgr::Translation_Local(const D3DXMATRIX* pWorld)
 {
 	//D3DXMATRIX	matProj = CToolCamera::GetInstance()->Get_Transform(D3DTS_PROJECTION);
 	//D3DXMATRIX	matView = CToolCamera::GetInstance()->Get_Transform(D3DTS_VIEW);
 	_matrix matProj, matView;
 	Engine::CGraphicDev::GetInstance()->GetDevice()->GetTransform(D3DTS_PROJECTION, &matProj);
 	Engine::CGraphicDev::GetInstance()->GetDevice()->GetTransform(D3DTS_VIEW, &matView);
-	
+
 	D3DXMatrixInverse(&matView, 0, &matView);
 
 	D3DXVec3TransformCoord(&m_tRay.vOri, &m_tRay.vOri, &matView);
@@ -464,6 +491,44 @@ void CPickingMgr::Translation_Local(const D3DXMATRIX * pWorld)
 
 	D3DXVec3TransformCoord(&m_tRay.vOri, &m_tRay.vOri, &matWorld);
 	D3DXVec3TransformNormal(&m_tRay.vDir, &m_tRay.vDir, &matWorld);
+}
+
+void CPickingMgr::Draw_PickingBrush(_float fRange, const _vec3 vPos, _bool bIsTrue)
+{
+	_vec3 vInitPos = { 1.f,0.f,0.f };
+	_int nCount = 50;
+	_float fRadian = D3DX_PI * 2.f / nCount;
+	_vec3 vNewPos = { 0.f,0.f,0.f };
+	_matrix matRot;
+
+	m_vBrush[1].vPos = vInitPos * fRange + vPos;
+	//m_vBrush[1].vPos.y = vPos.y + 0.01f;
+	m_vBrush[1].dwColor = m_vBrush[0].dwColor = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
+
+	for (int i = 1; i < nCount + 1; ++i)
+	{
+		m_vBrush[0] = m_vBrush[1];
+
+		D3DXMatrixRotationY(&matRot, i * fRadian);
+		D3DXVec3TransformCoord(&vNewPos, &vInitPos, &matRot);
+		D3DXVec3Normalize(&vNewPos, &vNewPos);
+
+		m_vBrush[1].vPos = vNewPos * fRange + vPos;
+		//m_vBrush[1].vPos.y = vPos.y + 0.01f;
+
+		// 맵 밖으로 나갔을 때 선 안그림
+		if (m_vBrush[1].vPos.x < 0 || m_vBrush[1].vPos.x > 768 ||
+			m_vBrush[1].vPos.z < 0 || m_vBrush[1].vPos.x > 768)
+			continue;
+		else
+		{
+			if (bIsTrue)
+			{
+				Engine::CGraphicDev::GetInstance()->GetDevice()->SetFVF(FVF_COL);
+				Engine::CGraphicDev::GetInstance()->GetDevice()->DrawPrimitiveUP(D3DPT_LINELIST, 2, m_vBrush, sizeof(VTXCOL));
+			}
+		}
+	}
 }
 
 void CPickingMgr::Free()
