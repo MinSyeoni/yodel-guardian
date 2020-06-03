@@ -24,6 +24,7 @@
 HINSTANCE g_hInst;
 HWND	  g_hWnd;
 
+
 IMPLEMENT_DYNCREATE(CToolView, CView)
 
 BEGIN_MESSAGE_MAP(CToolView, CView)
@@ -76,13 +77,14 @@ BOOL CToolView::PreCreateWindow(CREATESTRUCT& cs)
 
 void CToolView::OnDraw(CDC* /*pDC*/)
 {
+	Render_MainApp();
 	CToolDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
 
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
-	Render_MainApp();
+
 }
 
 
@@ -180,6 +182,13 @@ _int CToolView::Update_MainApp(const _float& fTimeDelta)
 	{
 		m_pCameraTab->UPdateCameraTool(fTimeDelta);
 	}
+	if (m_pMyForm->m_iCurTab == 3)
+		m_pEffectTab->UpdateEffectTool(fTimeDelta);
+	if (m_pMyForm->m_iCurTab == 4)
+		m_pEffectTab2->UpdateEffectTool2(fTimeDelta);
+
+
+
 	Engine::CKeyMgr::GetInstance()->KeyCheck();
 	CObjMgr::GetInstance()->Update_Object(fTimeDelta);
 	CToolCamera::GetInstance()->Update_Camera(fTimeDelta);
@@ -219,7 +228,7 @@ void CToolView::OnInitialUpdate()
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 	g_hWnd = m_hWnd;
 	g_hInst = AfxGetInstanceHandle();
-
+	
 	Ready_MainApp();
 	Ready_Buffer_Setting();
 
@@ -234,6 +243,10 @@ void CToolView::OnInitialUpdate()
 	m_pMapTab = m_pMyForm->m_pMapTab;
 	m_pNaviTab = m_pMyForm->m_pNaviTab;
 	m_pCameraTab = m_pMyForm->m_pCameraTab;
+	m_pEffectTab = m_pMyForm->m_pEffectTab;
+	m_pEffectTab2 = m_pMyForm->m_pEffectTab2;
+
+
 }
 
 void CToolView::Initalize_Object()
@@ -368,7 +381,6 @@ void CToolView::Ready_Buffer_Setting()
 		nullptr))))
 		return;
 
-
 	if (FAILED(Engine::Ready_Texture(m_pDevice,
 		RESOURCE_STAGE,
 		L"Texture_Terrain",
@@ -380,28 +392,33 @@ void CToolView::Ready_Buffer_Setting()
 		RESOURCE_STAGE,
 		L"Texture_Default",
 		Engine::TEX_NORMAL,
-		L"../Resources/Texture/Default/Default.png", 1)))
+		L"../Resources/Texture/Default/Default%d.png", 1)))
 		return;
 
-	int  i = 0;
-	//if (FAILED(Engine::Ready_Texture(m_pDevice,
-	//	RESOURCE_STAGE,
-	//	L"Texture_Brush",
-	//	Engine::TEX_NORMAL,
-	//	L"../../../Resource/Texture/Brush/Brush%d.tga", 2)))
-	//	return;
+	if (FAILED(Engine::Ready_Texture(m_pDevice,
+		RESOURCE_STAGE,
+		L"Texture_AlphaTest",
+		Engine::TEX_NORMAL,
+		L"../Resources/Texture/AlphaTest/AlphaTest%d.png", 1)))
+		return;
+
+	if (FAILED(Engine::Ready_Texture(m_pDevice,
+		RESOURCE_STAGE,
+		L"Texture_AlphaBlend",
+		Engine::TEX_NORMAL,
+		L"../Resources/Texture/AlphaBlend/AlphaBlend%d.tga", 1)))
+		return;
 }
 
 void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	if (0 == m_pMyForm->m_iCurTab & 0 == m_pMapTab->m_iTexToolMode)
+	if (0 == m_pMyForm->m_iCurTab)
 	{
-		m_pMapTab->UpdateData(TRUE);	// MapTab	
+		m_pMapTab->UpdateData(TRUE);	// MapTab
 		if (0 == m_pMapTab->m_iObjToolMode)	// 생성 모드
 		{
 			bool retflag;
-
 			Picking_TerrainOnStaticObject(retflag);
 			Picking_MeshOnStaticObject(retflag);
 			if (retflag) return;
@@ -420,7 +437,7 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 				Picking_MouseOnStaticObject(retflag);
 				if (retflag) return;
 			}
-		}		
+		}
 		m_pMapTab->UpdateData(FALSE);
 	}
 	else if (1 == m_pMyForm->m_iCurTab)
@@ -429,7 +446,6 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 		if (0 == m_pNaviTab->m_iCurNaviMode)	// 생성 모드
 		{
 			bool retflag;
-
 			Get_TerrainInfo();
 
 			_float fDistTemp = 10000000.f;
@@ -475,6 +491,7 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 	else if (2 == m_pMyForm->m_iCurTab)
 	{
 		CheckCameraTabButton();
+
 	}
 
 	CView::OnLButtonDown(nFlags, point);
@@ -510,6 +527,7 @@ void CToolView::Modify_NaviPointCell(bool& retflag)
 
 	retflag = false;
 }
+
 void CToolView::Create_NaviPointCell(bool& retflag)
 {
 	retflag = true;
@@ -527,6 +545,7 @@ void CToolView::Create_NaviPointCell(bool& retflag)
 			}
 		}
 	}
+
 	m_pNaviTab->m_vNaviPos = m_vMeshPos;
 	m_pNaviTab->m_fPosX = m_vMeshPos.x;
 	m_pNaviTab->m_fPosY = m_vMeshPos.y;
@@ -551,6 +570,7 @@ void CToolView::Create_NaviPointCell(bool& retflag)
 	
 	retflag = false;
 }
+
 void CToolView::Check_ClockDirection(bool& retflag)
 {
 	if (CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_CELL) != nullptr)
@@ -614,7 +634,8 @@ void CToolView::Check_ClockDirection(bool& retflag)
 				i++;
 			}
 
-			_vec3 PointAtoB = pToolPoint2->m_pTransCom->m_vInfo[Engine::INFO_POS] - pToolPoint1->m_pTransCom->m_vInfo[Engine::INFO_POS];
+			_vec3 PointAtoB = pToolPoint2->m_pTransCom->m_vInfo[Engine::INFO_POS]
+				- pToolPoint1->m_pTransCom->m_vInfo[Engine::INFO_POS];
 			_vec3 PointAtoC = m_vMeshPos - pToolPoint1->m_pTransCom->m_vInfo[Engine::INFO_POS];
 			_vec3 Cross;
 			D3DXVec3Cross(&Cross, &PointAtoB, &PointAtoC);
@@ -645,14 +666,13 @@ void CToolView::Get_TerrainInfo()
 	Engine::CTransform* pTransCom = dynamic_cast<CTerrain*>(pObj)->Get_TransCom();
 
 	CPickingMgr::GetInstance()->SetTerrainSize(m_pMapTab->m_iCntX, m_pMapTab->m_iCntZ);
-	
+
 	//Engine::CTransform* pTransCom = dynamic_cast<Engine::CTransform*>(pObj->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
 	CPickingMgr::GetInstance()->PickingTerrain(&m_vMeshPos, pBufferCom->m_pVtxTexOrigin, pTransCom->Get_WorldMatrix());
 	m_vMeshPos.y = CPickingMgr::GetInstance()->Compute_HeightOnTerrain(&m_vMeshPos, pBufferCom->Get_VtxPos(), m_pMapTab->m_iCntX, m_pMapTab->m_iCntZ);
 	if (m_vMeshPos.y <= -431602080.)		///////////// ???
 		m_vMeshPos.y = 0.f;
 }
-
 void CToolView::Picking_MouseOnCollider(bool& retflag)
 {
 	retflag = true;
@@ -833,14 +853,15 @@ void CToolView::Picking_TerrainOnStaticObject(bool& retflag)
 
 	retflag = false;
 }
+
 void CToolView::Picking_Terrain(bool& retflag)
 {
 	retflag = true;
 
 	Get_TerrainInfo();
 	m_pMapTab->m_vTerrainPos = m_vMeshPos;
-	m_pMapTab->m_fTerrainPosX = m_vMeshPos.x;
-	m_pMapTab->m_fTerrainPosY = m_vMeshPos.y;
+	m_pMapTab->m_fTerrianPosX = m_vMeshPos.x;
+	m_pMapTab->m_fTerrianPosY = m_vMeshPos.y;
 	m_pMapTab->m_fTerrainPosZ = m_vMeshPos.z;
 
 	retflag = false;
@@ -859,6 +880,7 @@ void CToolView::CheckCameraTabButton()
 
 	}
 }
+
 
 BOOL CToolView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 {
@@ -890,13 +912,13 @@ void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 	if (retflag) return;
 
 	if (1 == m_pMapTab->m_iTexToolMode)	// HeightMode
-	{		
+	{
 		DWORD dwIdx = 0;
-		if ((nFlags & MK_LBUTTON) == MK_LBUTTON) 
+		if ((nFlags & MK_LBUTTON) == MK_LBUTTON)
 		{
 			CPickingMgr::GetInstance()->PickTerrainIndex(&dwIdx, pBufferCom->m_pVtxTexOrigin);
 			dynamic_cast<Engine::CTerrainTex*>(pComponent)->Set_TerrainHeight(m_pMapTab->m_fBrushRange, m_pMapTab->m_fBrushHeight, m_vMeshPos, m_pMapTab->m_iBrushShape);
-		}		
+		}
 	}
 	else if (2 == m_pMapTab->m_iTexToolMode)	// SplattingMode
 		return;
@@ -904,3 +926,4 @@ void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 	m_pMapTab->UpdateData(FALSE);
 	CView::OnMouseMove(nFlags, point);
 }
+

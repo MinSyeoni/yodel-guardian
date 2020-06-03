@@ -13,7 +13,7 @@ CTerrain::~CTerrain(void)
 	m_bIsReset = false;
 }
 
-HRESULT CTerrain::Ready_Object()
+HRESULT CTerrain::Ready_Object(void)
 {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
@@ -53,7 +53,7 @@ void CTerrain::Render_Object(void)
 	tEffect->End();
 }
 
-HRESULT CTerrain::Add_Component()
+HRESULT CTerrain::Add_Component(void)
 {
 	Engine::CComponent*	pComponent = nullptr;
 

@@ -146,9 +146,7 @@ HRESULT CLoading::Mesh_ForStage(void)
 {
 	Engine::CComponent* pComponent = nullptr;
 
-	pComponent = Engine::CNaviMesh::Create(m_pGraphicDev, m_pCommandList);
-	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Navi", ID_STATIC, pComponent), E_FAIL);
+
 
 
 
@@ -339,6 +337,11 @@ HRESULT CLoading::Mesh_ForStage(void)
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/DynamicMesh/Monster/Stage1/Zombi/", L"Zombi.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Zombi", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/DynamicMesh/Normandy/", L"Normandy.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Normandy", ID_STATIC, pComponent), E_FAIL);
+
 
 	return S_OK;
 }

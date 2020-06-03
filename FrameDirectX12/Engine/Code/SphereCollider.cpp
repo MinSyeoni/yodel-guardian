@@ -19,7 +19,7 @@ CSphereCollider::CSphereCollider(const CSphereCollider& rhs)
 
 HRESULT CSphereCollider::Ready_Collider_ProtoType(const COLLSHAPE& eColShape)
 {
-	CCubeTex;
+	
 
 	if (eColShape == COL_SPHERE)
 	{

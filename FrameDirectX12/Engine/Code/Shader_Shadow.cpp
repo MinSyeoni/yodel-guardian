@@ -86,7 +86,7 @@ HRESULT CShader_Shadow::Create_DescriptorHeaps()
 HRESULT CShader_Shadow::Create_ConstantBufferView()
 {
 	// 물체 n개의 상수 자료를 담을 상수 버퍼.
-	m_pCB_ShadowInfo = new CUploadBuffer<CB_SHADOW_INFO>(m_pGraphicDevice, 100, true);
+	m_pCB_ShadowInfo = new CUploadBuffer<CB_SHADOW_INFO>(m_pGraphicDevice, 500, true);
 	m_pCB_BoneInfo = new CUploadBuffer<CB_BONE_INFO>(m_pGraphicDevice, 60, true);
 
 	return S_OK;

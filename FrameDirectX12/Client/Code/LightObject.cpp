@@ -31,7 +31,7 @@ HRESULT CLightObject::Ready_GameObjectPrototype()
 HRESULT CLightObject::Ready_GameObject()
 {
 
-		m_eType == SYREN;
+
 
 	NULL_CHECK_RETURN(m_pComponentMgr, E_FAIL);
 	CGameObject::Ready_GameObject();

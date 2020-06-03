@@ -179,7 +179,7 @@ HRESULT CMainApp::SetUp_ComponentPrototype()
 	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_RcTex", ID_STATIC, pComponent), E_FAIL);
 
 	//TerrainTex
-	pComponent = Engine::CTerrainTex::Create(m_pGraphicDevice, m_pCommandList,128,128,1);
+	pComponent = Engine::CTerrainTex::Create(m_pGraphicDevice, m_pCommandList,768,768,1);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_TerrainTex", ID_STATIC, pComponent), E_FAIL);
 
@@ -197,6 +197,9 @@ HRESULT CMainApp::SetUp_ComponentPrototype()
 	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_SphereCol", ID_STATIC, pComponent), E_FAIL);
 
 
+	pComponent = Engine::CNaviMesh::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Navi", ID_STATIC, pComponent), E_FAIL);
 
 	return S_OK;
 }

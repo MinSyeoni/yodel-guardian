@@ -70,7 +70,7 @@ _int CZombi::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform, CMes
 	if (m_bIsZombiState[2])	// m_bIsHit
 		m_eCurState = ZOM_EX_IdleOffset;
 
-	return S_OK();
+	return S_OK;
 }
 
 void CZombi::Chase_Player(const _float& fTimeDelta)
@@ -79,7 +79,6 @@ void CZombi::Chase_Player(const _float& fTimeDelta)
 
 	_float fAngle;
 	_vec3  vLook, vRight;
-	_matrix matRot;
 
 	m_vChaseDir.y = 0.f;
 	m_vChaseDir.Normalize();
@@ -134,7 +133,7 @@ _int CZombi::LateUpdate_Zombi(const _float& fTimeDelta, CTransform* pTransform, 
 {
 	Animation_Test(fTimeDelta, m_pMeshCom);
 
-	return S_OK();
+	return S_OK;
 }
 
 void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)

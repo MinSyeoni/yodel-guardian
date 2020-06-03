@@ -8,7 +8,7 @@ BEGIN(Engine)
 
 // ResourcesMgr
 // Get
-inline CResources*		Clone_Resources(const _ushort& wContainerIdx, const _tchar* pResourceTag);
+inline CResources* Clone_Resources(const _ushort& wContainerIdx, const _tchar* pResourceTag);
 // Set
 // General
 inline HRESULT	Reserve_ContainerSize(const _ushort& wSize);

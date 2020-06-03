@@ -13,14 +13,14 @@ CPickingMgr::~CPickingMgr()
 	//Release();
 }
 
-void CPickingMgr::PickTerrainCubePos(D3DXVECTOR3 * pOut, const VTXTEX * pTerrainVtx, float fDeap)
+void CPickingMgr::PickTerrainCubePos(D3DXVECTOR3* pOut, const VTXTEX* pTerrainVtx, float fDeap)
 {
 	Translation_ViewSpace();
 	D3DXMATRIX	matIdentity;
 	D3DXMatrixIdentity(&matIdentity);
 	Translation_Local(&matIdentity);
 
-	const VTXTEX*		pVertex = pTerrainVtx;
+	const VTXTEX* pVertex = pTerrainVtx;
 
 	float	fU, fV, fDist;
 
@@ -57,14 +57,14 @@ void CPickingMgr::PickTerrainCubePos(D3DXVECTOR3 * pOut, const VTXTEX * pTerrain
 	}
 }
 
-void CPickingMgr::PickTerrainIndex(DWORD * pOutIndex, const VTXTEX * pTerrainVtx)
+void CPickingMgr::PickTerrainIndex(DWORD* pOutIndex, const VTXTEX* pTerrainVtx)
 {
 	Translation_ViewSpace();
 	D3DXMATRIX	matIdentity;
 	D3DXMatrixIdentity(&matIdentity);
 	Translation_Local(&matIdentity);
 
-	const VTXTEX*		pVertex = pTerrainVtx;
+	const VTXTEX* pVertex = pTerrainVtx;
 
 	float	fU, fV, fDist;
 
@@ -133,7 +133,7 @@ _float CPickingMgr::Compute_HeightOnTerrain(const _vec3* pPos,
 	}
 }
 
-void CPickingMgr::PickingTerrain(D3DXVECTOR3 * pOut, const VTXTEX * pVertex, const D3DXMATRIX * pmatWorld)
+void CPickingMgr::PickingTerrain(D3DXVECTOR3* pOut, const VTXTEX* pVertex, const D3DXMATRIX* pmatWorld)
 {
 	Translation_ViewSpace();
 	Translation_Local(pmatWorld);
@@ -181,14 +181,14 @@ void CPickingMgr::PickingTerrain(D3DXVECTOR3 * pOut, const VTXTEX * pVertex, con
 	return;
 }
 
-void CPickingMgr::PickTerrainTextPos(D3DXVECTOR3 * pOut, const VTXTEX * pTerrainVtx, float fDeap)
+void CPickingMgr::PickTerrainTextPos(D3DXVECTOR3* pOut, const VTXTEX* pTerrainVtx, float fDeap)
 {
 	Translation_ViewSpace();
 	D3DXMATRIX	matIdentity;
 	D3DXMatrixIdentity(&matIdentity);
 	Translation_Local(&matIdentity);
 
-	const VTXTEX*		pVertex = pTerrainVtx;
+	const VTXTEX* pVertex = pTerrainVtx;
 
 	float	fU, fV, fDist;
 
@@ -206,7 +206,7 @@ void CPickingMgr::PickTerrainTextPos(D3DXVECTOR3 * pOut, const VTXTEX * pTerrain
 			{
 				D3DXVECTOR3 MousePos = (pVertex[iIndex + m_dwCol + 2].vPos +
 					(pVertex[iIndex + m_dwCol + 1].vPos - pVertex[iIndex + m_dwCol + 2].vPos) * fV +
-					(pVertex[iIndex + 1].vPos - pVertex[iIndex + m_dwCol + 2].vPos)	*fU);
+					(pVertex[iIndex + 1].vPos - pVertex[iIndex + m_dwCol + 2].vPos) * fU);
 
 				*pOut = { MousePos.x , MousePos.y
 					, fDeap };
@@ -270,7 +270,7 @@ bool CPickingMgr::IsCheckColiderMesh(const LPD3DXMESH* pMesh, D3DXMATRIX pMeshWo
 	BOOL      bCheck;
 
 	D3DXIntersect(*pMesh, &m_tRay.vOri, &m_tRay.vDir, &bCheck, nullptr, &fU, &fV, &fDist, nullptr, nullptr);
-	
+
 	if (false == bCheck)
 		return false;
 
@@ -325,7 +325,7 @@ bool CPickingMgr::IsCheckStaticObjgectMesh(CStaticObject* pMesh, D3DXMATRIX pMes
 	vRayDir = vMousePos - vRayPos;
 
 	pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
-	
+
 	D3DXMatrixInverse(&matView, NULL, &matView);
 	D3DXVec3TransformNormal(&vRayDir, &vRayDir, &matView);
 	D3DXVec3TransformCoord(&vRayPos, &vRayPos, &matView);
@@ -446,7 +446,7 @@ void CPickingMgr::Translation_ViewSpace(void)
 {
 	D3DXVECTOR3	vMouse = CCursorMgr::GetCursPos(g_hWnd);
 	_matrix	matProj;
-	
+
 	Engine::CGraphicDev::GetInstance()->GetDevice()->GetTransform(D3DTS_PROJECTION, &matProj);
 	//Engine::CGameObject* pDynamicCamera = Engine::Get_GameObject(SCENE_STAGE, LAYER_CAMERA);
 	//_matrix	matProj = dynamic_cast<CCamera_Dynamic*>(pDynamicCamera)->Get_Transform(D3DTS_PROJECTION);
@@ -473,14 +473,14 @@ void CPickingMgr::Translation_ViewSpace(void)
 
 }
 
-void CPickingMgr::Translation_Local(const D3DXMATRIX * pWorld)
+void CPickingMgr::Translation_Local(const D3DXMATRIX* pWorld)
 {
 	//D3DXMATRIX	matProj = CToolCamera::GetInstance()->Get_Transform(D3DTS_PROJECTION);
 	//D3DXMATRIX	matView = CToolCamera::GetInstance()->Get_Transform(D3DTS_VIEW);
 	_matrix matProj, matView;
 	Engine::CGraphicDev::GetInstance()->GetDevice()->GetTransform(D3DTS_PROJECTION, &matProj);
 	Engine::CGraphicDev::GetInstance()->GetDevice()->GetTransform(D3DTS_VIEW, &matView);
-	
+
 	D3DXMatrixInverse(&matView, 0, &matView);
 
 	D3DXVec3TransformCoord(&m_tRay.vOri, &m_tRay.vOri, &matView);

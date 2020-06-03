@@ -20,6 +20,8 @@ CTerrainTex::~CTerrainTex()
 
 HRESULT CTerrainTex::Ready_Buffer(const _uint& iNumVerticesX, const _uint& iNumVerticesZ, const _float& fInterval)
 {
+
+
 	m_fInterval = fInterval;
 	FAILED_CHECK_RETURN(CVIBuffer::Ready_Buffer(), E_FAIL);
 	std::vector<VTXTEX> Vertices;
@@ -29,19 +31,20 @@ HRESULT CTerrainTex::Ready_Buffer(const _uint& iNumVerticesX, const _uint& iNumV
 
 	Vertices.resize(vertexCount);
 
+
 	for (uint32_t i = 0; i < iNumVerticesZ; ++i)
 	{
 		for (uint32_t j = 0; j < iNumVerticesX; ++j)
 		{
 			_uint		iIndex = i * iNumVerticesX + j;
 
-			Vertices[iIndex].vPos   = _vec3(j * m_fInterval, 0.0f, i * m_fInterval);
+			Vertices[iIndex].vPos   = _vec3(j * m_fInterval, (float)pHeightMapPixels[j+i*iNumVerticesZ], i * m_fInterval);
 			Vertices[iIndex].vNormal = _vec3(0.0f, 0.0f, 0.0f);
 			Vertices[iIndex].vTexUV = _vec2((j / (iNumVerticesX - 1.f)) * 5.f, (i / (iNumVerticesZ - 1.f)) * 5.f);
 
 		}
 	}
-
+	Safe_Delete_Array(pHeightMapPixels);
 	Indices32.resize(faceCount * 3);
 	uint32_t k = 0;
 	for (uint32_t i = 0; i < iNumVerticesZ - 1; ++i)

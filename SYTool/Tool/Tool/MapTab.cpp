@@ -31,11 +31,11 @@ CMapTab::CMapTab(CWnd* pParent /*=nullptr*/)
 	, m_fRotX(0.f)
 	, m_fRotY(0.f)
 	, m_fRotZ(0.f)
-	, m_fTerrainPosX(0.f)
-	, m_fTerrainPosY(0.f)
-	, m_fTerrainPosZ(0.f)
-	, m_fBrushRange(1)
-	, m_fBrushHeight(1)
+	, m_fBrushRange(0)
+	, m_fBrushHeight(0)
+	, m_fTerrainPosZ(0)
+	, m_fTerrianPosX(0)
+	, m_fTerrianPosY(0)
 {
 }
 
@@ -77,14 +77,13 @@ void CMapTab::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CHECK2, m_BnShowCollider);
 	DDX_Control(pDX, IDC_CHECK3, m_BnSetOn);
 	DDX_Control(pDX, IDC_COMBO1, m_CbColliderID);
-	DDX_Text(pDX, IDC_EDIT27, m_fTerrainPosX);
-
-	DDX_Text(pDX, IDC_EDIT34, m_fTerrainPosY);
-	DDX_Text(pDX, IDC_EDIT35, m_fTerrainPosZ);
-	DDX_Text(pDX, IDC_EDIT36, m_fBrushRange);
-	DDX_Control(pDX, IDC_EDIT36, m_EditRange);
-	DDX_Control(pDX, IDC_EDIT37, m_EditHeight);
-	DDX_Text(pDX, IDC_EDIT37, m_fBrushHeight);
+	DDX_Text(pDX, IDC_EDIT77, m_fBrushRange);
+	DDX_Text(pDX, IDC_EDIT78, m_fBrushHeight);
+	DDX_Text(pDX, IDC_EDIT64, m_fTerrainPosZ);
+	DDX_Text(pDX, IDC_EDIT27, m_fTerrianPosX);
+	DDX_Text(pDX, IDC_EDIT59, m_fTerrianPosY);
+	DDX_Control(pDX, IDC_EDIT77, m_EditRange);
+	DDX_Control(pDX, IDC_EDIT78, m_EditHeight);
 }
 
 
@@ -112,9 +111,9 @@ BEGIN_MESSAGE_MAP(CMapTab, CDialogEx)
 	ON_BN_CLICKED(IDC_CHECK2, &CMapTab::OnBnClickedColliderShow)
 	ON_BN_CLICKED(IDC_CHECK3, &CMapTab::OnBnClickedSetOn_Mesh)
 	ON_BN_CLICKED(IDC_RADIO13, &CMapTab::OnBnClickedAddHeight)
+	ON_BN_CLICKED(IDC_RADIO17, &CMapTab::OnBnClickedBoxBrush)
+	ON_BN_CLICKED(IDC_RADIO18, &CMapTab::OnBnClickedCircleBrush)
 	ON_BN_CLICKED(IDC_BUTTON6, &CMapTab::OnBnClickedSaveTerrain)
-	ON_BN_CLICKED(IDC_RADIO19, &CMapTab::OnBnClickedBoxBrush)
-	ON_BN_CLICKED(IDC_RADIO20, &CMapTab::OnBnClickedCircleBrush)
 END_MESSAGE_MAP()
 
 
@@ -290,14 +289,13 @@ void CMapTab::Change_HeightMapTexture()
 {
 	CString strPath;
 	_int iIdx = m_HeightTexLst.GetCurSel();
-
 	m_HeightTexLst.GetText(iIdx, strPath);
 
 	strPath = L"../Resources/Texture/HeightMap/" + strPath;
 
 	Engine::CGameObject* pObj = CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN);
 	Engine::CComponent* pComponent = pObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC);
-	dynamic_cast<Engine::CTerrainTex*>(pComponent)->Ready_Buffer(strPath, m_iCntX, m_iCntZ, m_iInterval);
+	dynamic_cast<Engine::CTerrainTex*>(pComponent)->Ready_Buffer((TCHAR*)(LPCTSTR)strPath, m_iCntX, m_iCntZ, m_iInterval);
 }
 
 void CMapTab::OnBnClickedTextureMode()
@@ -1053,6 +1051,7 @@ void CMapTab::OnBnClickedSetOn_Mesh()
 		m_bIsSetOnMesh = false;
 }
 
+
 void CMapTab::OnBnClickedAddHeight()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
@@ -1068,10 +1067,24 @@ void CMapTab::OnBnClickedAddHeight()
 	}
 }
 
+
+void CMapTab::OnBnClickedBoxBrush()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	m_iBrushShape = 0;
+}
+
+
+void CMapTab::OnBnClickedCircleBrush()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	m_iBrushShape = 1;
+}
+
+
 void CMapTab::OnBnClickedSaveTerrain()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-
 	CFileDialog Dlg(FALSE, L"dat", L"제목없음.dat", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
 		L"Data Files(*.dat)|*.dat||", this);
 
@@ -1083,7 +1096,8 @@ void CMapTab::OnBnClickedSaveTerrain()
 	// PathRemoveFileSpec: 현재 경로 상에서 파일명을 제거하는 함수.
 	// 제거해야할 파일명이 없을 경우에는 가장 말단 폴더명을 제거한다.
 	PathRemoveFileSpec(szCurPath);
-	
+
+	// C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Data\Terrain
 	if (m_iTexToolMode == 1)
 		lstrcat(szCurPath, L"\\Data\\Terrain\\HeightMap");
 	else
@@ -1134,8 +1148,6 @@ void CMapTab::OnBnClickedSaveTerrain()
 				temp.b = pBufferPos[dwInvndex].y / 7.f;
 
 				pColor[dwIndex] = temp;
-
-				//tTerrainData.fHeight = 
 			}
 		}
 		pHeight->UnlockRect(0);
@@ -1151,21 +1163,7 @@ void CMapTab::OnBnClickedSaveTerrain()
 		tTerrainData.dwInterval = m_iInterval;
 
 		WriteFile(hFile, &tTerrainData, sizeof(TERRAIN_DATA), &dwByte, nullptr);
-		
+
 		CloseHandle(hFile);
 	}
-}
-
-
-void CMapTab::OnBnClickedBoxBrush()
-{
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	m_iBrushShape = 0;
-}
-
-
-void CMapTab::OnBnClickedCircleBrush()
-{
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	m_iBrushShape = 1;
 }

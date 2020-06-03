@@ -98,7 +98,7 @@ void CTerrainTex::Copy_Index(Engine::INDEX32* pIndex, const _ulong& dwTriCnt)
 }
 
 HRESULT CTerrainTex::Ready_Buffer(
-	const _ulong& dwCntX, 
+	const _ulong& dwCntX,
 	const _ulong& dwCntZ,
 	const _ulong& dwVtxItv)
 {

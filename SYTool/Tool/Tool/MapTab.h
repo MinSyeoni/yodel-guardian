@@ -57,29 +57,32 @@ public:
 	afx_msg void			OnBnClickedColliderBoxMode();
 	afx_msg	void			OnBnClickedColliderShow();
 	afx_msg	void			OnBnClickedSetOn_Mesh();
-	afx_msg void			OnBnClickedAddHeight();
+
 	afx_msg BOOL			OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
+	void ModifyBrush(RECT rc[11], CPoint& pt, short zDelta);
 	virtual BOOL			OnInitDialog();
 
-	afx_msg	void			OnBnClickedSaveTerrain();
 	void					Initialize_String();
+	afx_msg void			OnBnClickedAddHeight();
+	afx_msg void			OnBnClickedBoxBrush();
+	afx_msg void			OnBnClickedCircleBrush();
 
 public:
 	float					m_fPosX;
 	float					m_fPosY;
 	float					m_fPosZ;
-	float					m_fTerrainPosX;
-	float					m_fTerrainPosY;
+	float					m_fBrushRange;
+	float					m_fBrushHeight;
+	float					m_fTerrianPosX;
+	float					m_fTerrianPosY;
 	float					m_fTerrainPosZ;
+
 	float					m_fScaleX;
 	float					m_fScaleY;
 	float					m_fScaleZ;
 	float					m_fRotX;
 	float					m_fRotY;
 	float					m_fRotZ;
-
-	float					m_fBrushRange;
-	float					m_fBrushHeight;
 
 	_vec3					m_vMeshPos = { 0.f,0.f,0.f };
 	_vec3					m_vTerrainPos = { 0.f,0.f,0.f };
@@ -104,7 +107,7 @@ public:
 	CStaticObject*			m_pPickStaticObj = nullptr;
 	CToolCollider*			m_pPickCollider = nullptr;
 
-	_bool					m_bIsBrushMode[2] = {false};	// 0. AddHeight, 1. Splatting
+	_bool					m_bIsBrushMode[2] = { false };	// 0. AddHeight, 1. Splatting
 
 	// 테스트
 	CSphereCollider*			m_pSphereCol = nullptr;
@@ -113,13 +116,11 @@ public:
 	_matrix						m_matColliderWorld;
 
 private:
+
 	void					Load_ResourceList(CString strPath, CListBox* pListBox, CString pDir);
 	void					Change_TerrainTexture();
 	void					Change_HeightMapTexture();
 	void					ModifyStaticObj(RECT  rc[11], CPoint& pt, short zDelta);
-	void					ModifyBrush(RECT  rc[11], CPoint& pt, short zDelta);
-	afx_msg void			OnBnClickedBoxBrush();
-	afx_msg void			OnBnClickedCircleBrush();
 
 private:
 	Engine::CComponent*		m_pComponent = nullptr;
@@ -146,9 +147,6 @@ private:
 	CEdit					m_EditRotY;
 	CEdit					m_EditRotZ;
 
-	CEdit					m_EditRange;
-	CEdit					m_EditHeight;
-
 	MESHDATA*				m_pMeshData = nullptr;
 	CString					m_strPath = L"";
 	VTXTEX*					m_pTerrainVtx = nullptr;
@@ -159,8 +157,10 @@ private:
 	CButton					m_BnShowCollider;
 	CButton					m_BnSetOn;
 
-	_bool					bIsSet = false;
 public:
 	CComboBox				m_CbColliderID;
 
+	afx_msg void			OnBnClickedSaveTerrain();
+	CEdit					m_EditRange;
+	CEdit					m_EditHeight;
 };

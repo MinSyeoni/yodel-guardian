@@ -14,6 +14,8 @@
 #include "NaviTab.h"
 #include "Myform.h"
 #include "CCameraTab.h"
+#include "EffectTab.h"
+#include "EffectTab2.h"
 BEGIN(Engine)
 class CManagement;
 class CBoxCollider;
@@ -88,11 +90,15 @@ private:
 	CNaviTab*				m_pNaviTab = nullptr;
 	CMyform*				m_pMyForm = nullptr;
 	CCameraTab*             m_pCameraTab = nullptr;
+	CEffectTab*				m_pEffectTab = nullptr;
+	EffectTab2* m_pEffectTab2 = nullptr;
+
+
 	_int					m_iIdxCnt = 0;
 
 public:
 	afx_msg void		OnLButtonDown(UINT nFlags, CPoint point);
-	afx_msg BOOL		OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
+
 	void				Modify_NaviPointCell(bool& retflag);
 
 	void				Create_NaviPointCell(bool& retflag);
@@ -104,7 +110,11 @@ public:
 	void				Picking_TerrainOnStaticObject(bool& retflag);
 	void				Picking_Terrain(bool& retflag);
 	void				CheckCameraTabButton();
-	afx_msg void		OnMouseMove(UINT nFlags, CPoint point);
+
+
+
+	afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // ToolView.cpp의 디버그 버전

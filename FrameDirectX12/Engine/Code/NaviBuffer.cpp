@@ -24,7 +24,7 @@ HRESULT CNaviBuffer::Ready_Buffer(vector< NAVIINFO>vecNaviInfo)
 	FAILED_CHECK_RETURN(CVIBuffer::Ready_Buffer(), E_FAIL);
 
 	m_PrimitiveTopology = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-	m_iVertexCount = vecNaviInfo.size() * 3;
+	m_iVertexCount = _uint(vecNaviInfo.size() * 3);
 	/*____________________________________________________________________
 	[ Vertex Buffer ]
 	______________________________________________________________________*/

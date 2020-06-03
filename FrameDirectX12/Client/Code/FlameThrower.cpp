@@ -39,7 +39,7 @@ _int CFlameThrower::Update_FlameThrower(const _float& fTimeDelta, CTransform* pT
 		m_ePreState = m_eCurState;
 	}
 
-	return S_OK();
+	return S_OK;
 }
 
 void CFlameThrower::Chase_Player(const _float& fTimeDelta)
@@ -102,7 +102,7 @@ _int CFlameThrower::LateUpdate_FlameThrower(const _float& fTimeDelta, CTransform
 {
 	Animation_Test(fTimeDelta, m_pMeshCom);
 
-	return S_OK();
+	return S_OK;
 }
 
 void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)

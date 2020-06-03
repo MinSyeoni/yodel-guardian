@@ -56,7 +56,7 @@ typedef struct tagTerrainData
 	wchar_t			m_TerrainTag[128] = L"";
 
 	D3DXVECTOR3		vPos = { 0.f,0.f,0.f };
-	
+
 	_ulong			dwVtxCntZ = 0;
 	_ulong			dwVtxCntX = 0;
 	_ulong			dwInterval = 0;
@@ -73,7 +73,7 @@ typedef struct tagSphere
 
 typedef struct tagCollider
 {
-	D3DXVECTOR3		vCenter = {0.f,0.f,0.f};
+	D3DXVECTOR3		vCenter = { 0.f,0.f,0.f };
 	D3DXVECTOR3		vScale = { 0.f,0.f,0.f };
 	D3DXVECTOR3		vRotate = { 0.f,0.f,0.f };
 	D3DXVECTOR3		dwVtxPos = { 0.f,0.f,0.f };

@@ -356,4 +356,6 @@ _ulong Release_Singleton()
 	{
 			return dwRefCnt;
 	}
+
+	return 0;
 }

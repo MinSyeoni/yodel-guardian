@@ -39,6 +39,8 @@ HRESULT CPlayer::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_PlayerLeg", pGameObject), E_FAIL);
 
+
+
 	return S_OK;
 }
 

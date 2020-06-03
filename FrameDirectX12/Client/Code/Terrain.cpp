@@ -46,7 +46,7 @@ HRESULT CTerrain::LateInit_GameObject()
 #ifdef _DEBUG
 	COUT_STR("LateInit CubeObject");
 #endif
-	m_pTransCom->m_vScale = _vec3{ 10.f, 10.f, 10.f };
+
 
 	m_pShaderCom->Set_Shader_Texture(m_pDiffuseTexture->Get_Texture(), m_pNormalTexture->Get_Texture());
 	return S_OK;

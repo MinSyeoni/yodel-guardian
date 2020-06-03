@@ -55,6 +55,7 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
 
 
 
+    cout << m_pTransCom->m_vPos.x << "-" << m_pTransCom->m_vPos.y << "-" << m_pTransCom->m_vPos.z << endl;
 
     m_ePreState = m_eCurState;
 
@@ -406,7 +407,7 @@ void CPlayerStatus::PlayerDirection(const _float& fTimeDelta)
     {
 
         _vec3 vUp = _vec3{ 0.f,1.f,0.f };
-        _matrix matRot;
+
 
         m_pTransCom->m_vAngle.y += (_float)dwMouseMove * fTimeDelta * 1.5f;
         m_pTransCom->m_vDir = _vec3{ m_pTransCom->m_matWorld._31,m_pTransCom->m_matWorld._32,m_pTransCom->m_matWorld._33 };

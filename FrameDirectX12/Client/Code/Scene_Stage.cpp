@@ -28,6 +28,8 @@
 
 #include "LightObject.h"
 #include "DamageBlood.h"
+#include "Normandy.h"
+
 
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
@@ -188,6 +190,12 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_LightObject", pGameObject), E_FAIL);
 
 
+	pGameObject = CNormandy::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Normandy", pGameObject), E_FAIL);
+
+
+
 	return S_OK;
 }
 
@@ -243,6 +251,8 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	m_pObjectMgr->Add_Layer(wstrLayerTag, pLayer);
 
 	// Terrain
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Normandy", L"Normandy", nullptr), E_FAIL);
+
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Terrain", L"Terrain", nullptr), E_FAIL);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player",nullptr), E_FAIL);
