@@ -163,12 +163,6 @@
     <Filter Include="02.Scene_All\05.RectObject">
       <UniqueIdentifier>{ac3817b5-9267-43b3-854b-f82508c1fd87}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Scene_All\03.StaticObject\00.Map">
-      <UniqueIdentifier>{e4248776-55b2-4aec-ab3c-16fe3f0cfb80}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Scene_All\03.StaticObject\01.MapObject">
-      <UniqueIdentifier>{022f3627-9f5b-4127-89b8-fa62a5174368}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01.Scene_Stage\06.Monster">
       <UniqueIdentifier>{eb15a1db-72e5-459c-bad8-04305adacdfc}</UniqueIdentifier>
     </Filter>
@@ -198,6 +192,12 @@
     </Filter>
     <Filter Include="01.Scene_Stage\07.NPC\01.Normandy">
       <UniqueIdentifier>{de5ac362-3fcb-4da0-b736-d5c69a8650f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_All\03.StaticObject\00.MapObject">
+      <UniqueIdentifier>{022f3627-9f5b-4127-89b8-fa62a5174368}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_All\03.StaticObject\01.HPkit">
+      <UniqueIdentifier>{e4248776-55b2-4aec-ab3c-16fe3f0cfb80}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -313,7 +313,7 @@
       <Filter>02.Scene_All\05.RectObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\MapObject.h">
-      <Filter>02.Scene_All\03.StaticObject\01.MapObject</Filter>
+      <Filter>02.Scene_All\03.StaticObject\00.MapObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Monster.h">
       <Filter>01.Scene_Stage\06.Monster</Filter>
@@ -344,6 +344,9 @@
     <ClInclude Include="..\Code\DamageBlood.h" />
     <ClInclude Include="..\Code\Normandy.h">
       <Filter>01.Scene_Stage\07.NPC\01.Normandy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\HPKit.h">
+      <Filter>02.Scene_All\03.StaticObject\01.HPkit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -429,7 +432,7 @@
       <Filter>02.Scene_All\05.RectObject</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MapObject.cpp">
-      <Filter>02.Scene_All\03.StaticObject\01.MapObject</Filter>
+      <Filter>02.Scene_All\03.StaticObject\00.MapObject</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Monster.cpp">
       <Filter>01.Scene_Stage\06.Monster</Filter>
@@ -460,6 +463,9 @@
     <ClCompile Include="..\Code\DamageBlood.cpp" />
     <ClCompile Include="..\Code\Normandy.cpp">
       <Filter>01.Scene_Stage\07.NPC\01.Normandy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\HPKit.cpp">
+      <Filter>02.Scene_All\03.StaticObject\01.HPkit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

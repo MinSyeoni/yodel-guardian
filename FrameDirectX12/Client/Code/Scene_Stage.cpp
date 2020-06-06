@@ -22,6 +22,7 @@
 #include "Trigger.h"
 
 #include "MapObject.h"
+#include "HPKit.h"
 #include "Monster.h"
 #include "Salone.h"
 #include "Trigger.h"
@@ -149,6 +150,10 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_MapObject", pGameObject), E_FAIL);
 	
+	pGameObject = CHPKit::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_ItemObject", pGameObject), E_FAIL);
+
 	pGameObject = CMonster::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Monster", pGameObject), E_FAIL);
@@ -387,10 +392,12 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 		m_tMeshInfo.Pos = tObjData.vPos;
 		m_tMeshInfo.Rotation = tObjData.vRotate;
 		m_tMeshInfo.Scale = tObjData.vScale;
-		if(m_tMeshInfo.MeshTag!=L"Siren.X")
-		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
+		if(m_tMeshInfo.MeshTag!=L"Siren.X" && m_tMeshInfo.MeshTag != L"medCrate.X")
+			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
+		else if (m_tMeshInfo.MeshTag == L"medCrate.X")
+			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_ItemObject", L"ItemObject", &m_tMeshInfo);
 		else
-		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LightObject", L"LightObject", &m_tMeshInfo);//炼疙贸府
+			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LightObject", L"LightObject", &m_tMeshInfo);//炼疙贸府
 	}
 	CloseHandle(hFile);
 }
