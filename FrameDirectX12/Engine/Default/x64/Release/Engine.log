@@ -1,110 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-﻿  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Blend.cso
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Blur.cso
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_ColorBuffer.cso
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Default.cso
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Destortion.cso
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_DownSample.cso
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(82,12-69): warning X3206: implicit truncation of vector type
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_LightAcc.cso
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(121,12-69): warning X3206: implicit truncation of vector type
-  
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Mesh.cso
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_ShadowDepth.cso
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_SSAO.cso
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Terrain.cso
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_UI.cso
-  AnimationControl.cpp
-  Base.cpp
-  BloomTarget.cpp
-  BoxCollider.cpp
-  Camera.cpp
-  Cell.cpp
-  Collider.cpp
-  ColliderMgr.cpp
-  Component.cpp
-  ComponentMgr.cpp
-  CubeTex.cpp
-  DDSTextureLoader.cpp
-  DirectInput.cpp
-  DirectSound.cpp
-  DistortionTarget.cpp
-  DownSampleTarget.cpp
-  Font.cpp
-  Frame.cpp
-  FrameMgr.cpp
-  Frustom.cpp
-  컴파일하고 있습니다...
-  GameObject.cpp
-  GraphicDevice.cpp
-  Info.cpp
-  Layer.cpp
-  Light.cpp
-  LightMgr.cpp
-  LightTarget.cpp
-  Line.cpp
-  Management.cpp
-  MathMgr.cpp
-  Mesh.cpp
-  MeshComponent.cpp
-  NaviBuffer.cpp
-  NaviMesh.cpp
-  ObjectMgr.cpp
-  RcTex.cpp
-  Renderer.cpp
-  Scene.cpp
-  Shader.cpp
-  Shader_Blend.cpp
-  컴파일하고 있습니다...
-  Shader_Blur.cpp
-  Shader_ColorBuffer.cpp
-  Shader_Default.cpp
-  Shader_DefaultTex.cpp
-  Shader_Destortion.cpp
-  Shader_DownSample.cpp
-  Shader_LightAcc.cpp
-  Shader_Mesh.cpp
-  Shader_Shadow.cpp
-  Shader_SSAO.cpp
-  Shader_Terrain.cpp
-  Shader_UI.cpp
-  ShadowDepthTarget.cpp
-  SphereCollider.cpp
-  SphereTex.cpp
-  SSAOTarget.cpp
-  Target.cpp
-  TerrainTex.cpp
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\TerrainTex.cpp(41,60): error C2065: 'pHeightMapPixels': 선언되지 않은 식별자입니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\TerrainTex.cpp(41,112): error C2440: '<function-style-cast>': 'initializer list'에서 '_vec3'(으)로 변환할 수 없습니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\TerrainTex.cpp(41,112): message : 소스 형식을 가져올 수 있는 생성자가 없거나 생성자 오버로드 확인이 모호합니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\TerrainTex.cpp(41,30): error C2064: 항은 2개의 인수를 받아들이는 함수로 계산되지 않습니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\TerrainTex.cpp(47,20): error C2065: 'pHeightMapPixels': 선언되지 않은 식별자입니다.
-  Texture.cpp
-  TimeMgr.cpp
-  컴파일하고 있습니다...
-  Timer.cpp
-  Transform.cpp
-  VIBuffer.cpp
-  VlLine.cpp
-=======
-=======
->>>>>>> aaf496b6af9480de582511801c3527926f20cb37
-﻿  compilation object save succeeded; see C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Blend.cso
-  compilation object save succeeded; see C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Blur.cso
-  compilation object save succeeded; see C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Engine\Release\Shader_ColorBuffer.cso
-  compilation object save succeeded; see C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Default.cso
-  compilation object save succeeded; see C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Destortion.cso
-  compilation object save succeeded; see C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Engine\Release\Shader_DownSample.cso
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(82,12-69): warning X3206: implicit truncation of vector type
-  compilation object save succeeded; see C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Engine\Release\Shader_LightAcc.cso
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(121,12-69): warning X3206: implicit truncation of vector type
-  
-  compilation object save succeeded; see C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Engine\Release\Shader_ShadowDepth.cso
-  compilation object save succeeded; see C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Engine\Release\Shader_SSAO.cso
-  compilation object save succeeded; see C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Terrain.cso
-  compilation object save succeeded; see C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Engine\Release\Shader_UI.cso
-  GraphicDevice.cpp
+﻿  GraphicDevice.cpp
      ../Release\Engine.lib 라이브러리 및 ../Release\Engine.exp 개체를 생성하고 있습니다.
   코드를 생성하고 있습니다.
   1 of 5297 functions (<0.1%) were compiled, the rest were copied from previous compilation.
@@ -151,6 +45,7 @@ C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_L
   .\Engine\Code\MeshComponent.h
   .\Engine\Code\NaviBuffer.h
   .\Engine\Code\NaviMesh.h
+  .\Engine\Code\Normandy.h
   .\Engine\Code\ObjectMgr.h
   .\Engine\Code\RcTex.h
   .\Engine\Code\Renderer.h
@@ -183,7 +78,7 @@ C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_L
   .\Engine\Code\Transform.h
   .\Engine\Code\VIBuffer.h
   .\Engine\Code\VlLine.h
-         66개 파일이 복사되었습니다.
+         67개 파일이 복사되었습니다.
   .\Engine\Header\Engine_Const.h
   .\Engine\Header\Engine_Enum.h
   .\Engine\Header\Engine_Function.h
@@ -195,7 +90,3 @@ C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_L
   .\Engine\Header\Engine_Template.h
   .\Engine\Header\Engine_Typedef.h
          10개 파일이 복사되었습니다.
-<<<<<<< HEAD
->>>>>>> aaf496b6af9480de582511801c3527926f20cb37
-=======
->>>>>>> aaf496b6af9480de582511801c3527926f20cb37
