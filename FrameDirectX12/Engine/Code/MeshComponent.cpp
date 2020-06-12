@@ -472,7 +472,7 @@ void CMeshComponent::Render_Mesh(CShader* pShader, vector<vector<_matrix>> vecBo
         {
             for (int j = 0; j < vecBoneMatrix[i].size(); j++)
                 XMStoreFloat4x4(&tCB_BoneInfo.matbone[j], XMMatrixTranspose(vecBoneMatrix[i][j]));
-            dynamic_cast<CShader_Mesh*>(pShader)->Get_UploadBuffer_BoneInfo()->CopyData(CBOffset + i, tCB_BoneInfo);
+            (pShader)->Get_UploadBuffer_BoneInfo()->CopyData(CBOffset + i, tCB_BoneInfo);
         }
 
         if (vecBoneMatrix.size() != 0)

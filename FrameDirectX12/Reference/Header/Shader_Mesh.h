@@ -33,7 +33,6 @@ public:
 public:
 	void Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture, vector< ComPtr<ID3D12Resource>> pVecNormalTexture, vector< ComPtr<ID3D12Resource>> pVecSpecularTexture, vector< ComPtr<ID3D12Resource>> pEmissiveTexture);;
 
-	CUploadBuffer<CB_BONE_INFO>*	Get_UploadBuffer_BoneInfo();
 private:
 	// CShader을(를) 통해 상속됨
 	virtual HRESULT						Create_DescriptorHeaps() override;
@@ -45,7 +44,7 @@ private:
 	virtual D3D12_DEPTH_STENCIL_DESC	Create_DepthStencilState() override;
 	virtual D3D12_INPUT_LAYOUT_DESC		Create_InputLayout() override;
 private:
-	CUploadBuffer<CB_BONE_INFO>*	m_pCB_BoneInfo = nullptr;
+
 	CUploadBuffer<CB_TEXTURE_INFO>* m_pCB_TextureInfo = nullptr;
 
 	vector<MESHTEXTURE> m_vecTextureType;

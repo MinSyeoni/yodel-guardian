@@ -737,6 +737,7 @@ enum class ROOT_SIG_TYPE
     INPUT_SSAO,
     INPUT_BLUR,
     INPUT_DISTORT,
+    INPUT_DISSOLVE,
     ENDSIG,
 };
 

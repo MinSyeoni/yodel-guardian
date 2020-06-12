@@ -50,5 +50,7 @@ public:
 
 private:
 	virtual void			Free();
+
+	_bool						m_bIsActive = false;
 };
 

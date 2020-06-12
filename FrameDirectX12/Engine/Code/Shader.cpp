@@ -64,11 +64,15 @@ ID3DBlob * CShader::Compile_Shader(const wstring & wstrFilename,
 	return pByteCode;
 }
 
+CUploadBuffer<CB_BONE_INFO>* CShader::Get_UploadBuffer_BoneInfo()
+{
+	return m_pCB_BoneInfo;
+}
 
 void CShader::Free()
 {
 	CComponent::Free();
-
+	
 	Engine::Safe_Release(m_pPipelineState);
 
 	Engine::Safe_Release(m_pVS_ByteCode);

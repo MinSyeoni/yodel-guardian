@@ -1,10 +1,4 @@
-﻿  GraphicDevice.cpp
-     ../Release\Engine.lib 라이브러리 및 ../Release\Engine.exp 개체를 생성하고 있습니다.
-  코드를 생성하고 있습니다.
-  1 of 5297 functions (<0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    7 functions had inline decision re-evaluated but remain unchanged
-  코드를 생성했습니다.
+﻿  compilation object save succeeded; see C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Dissolve.cso
   Engine.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Engine\Default\../Release\Engine.dll
   '//'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
   배치 파일이 아닙니다.
@@ -57,6 +51,7 @@
   .\Engine\Code\Shader_Default.h
   .\Engine\Code\Shader_DefaultTex.h
   .\Engine\Code\Shader_Destortion.h
+  .\Engine\Code\Shader_Dissolve.h
   .\Engine\Code\Shader_DownSample.h
   .\Engine\Code\Shader_LightAcc.h
   .\Engine\Code\Shader_Mesh.h
@@ -78,7 +73,7 @@
   .\Engine\Code\Transform.h
   .\Engine\Code\VIBuffer.h
   .\Engine\Code\VlLine.h
-         67개 파일이 복사되었습니다.
+         68개 파일이 복사되었습니다.
   .\Engine\Header\Engine_Const.h
   .\Engine\Header\Engine_Enum.h
   .\Engine\Header\Engine_Function.h

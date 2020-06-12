@@ -270,8 +270,8 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	// Monster
 	Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/Flame.dat");
-	//Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/MonsterTest.dat");
-	
+	Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/Zombi.dat");
+
 	// Trigger
 	Load_TriggerPos(L"../../../SYTool/Tool/Data/Collider/Trigger.dat");
 
