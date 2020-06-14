@@ -1,2 +1,61 @@
-﻿  Normandy.cpp
-  Client.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Default\../Bin\Client.exe
+﻿  ActionCamera.cpp
+  Aim.cpp
+  BackGround.cpp
+  CubeObject.cpp
+  DamageBlood.cpp
+  DynamicCamera.cpp
+  Dynamic_Object.cpp
+  FlameThrower.cpp
+  GlassObject.cpp
+  GunUI.cpp
+  HPKit.cpp
+  LightObject.cpp
+  Loading.cpp
+  MainApp.cpp
+  MapObject.cpp
+  Monster.cpp
+  Normandy.cpp
+  Pistol.cpp
+  Player.cpp
+  PlayerArm.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  PlayerHP.cpp
+  PlayerLeg.cpp
+  PlayerStatus.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(153,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(153,9): warning C4309: '인수': 상수 값이 잘립니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(178,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(178,9): warning C4309: '인수': 상수 값이 잘립니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(188,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(188,9): warning C4309: '인수': 상수 값이 잘립니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(207,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(207,9): warning C4309: '인수': 상수 값이 잘립니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(217,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(217,9): warning C4309: '인수': 상수 값이 잘립니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(229,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(229,9): warning C4309: '인수': 상수 값이 잘립니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(316,18): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  PlayerUI.cpp
+  RectObject.cpp
+  Rifle.cpp
+  Salone.cpp
+  Scene_Logo.cpp
+  Scene_Menu.cpp
+  Scene_Stage.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Scene_Stage.cpp(309,2): warning C4002: 함수 같은 매크로 호출 'NULL_CHECK'에 대해 인수가 너무 많습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Scene_Stage.cpp(338,2): warning C4002: 함수 같은 매크로 호출 'NULL_CHECK'에 대해 인수가 너무 많습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Scene_Stage.cpp(362,2): warning C4002: 함수 같은 매크로 호출 'NULL_CHECK'에 대해 인수가 너무 많습니다.
+  SkyDome.cpp
+  StaticObject.cpp
+  Terrain.cpp
+  Trigger.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Trigger.cpp(130,2): warning C4002: 함수 같은 매크로 호출 'NULL_CHECK'에 대해 인수가 너무 많습니다.
+  UI.cpp
+  Weapon.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Weapon.cpp(55,15): warning C4101: 'tCB_BoneInfo' :참조되지 않은 지역 변수입니다.
+  Zombi.cpp
+  Client.cpp
+  코드를 생성하고 있습니다...
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Weapon.cpp(30): warning C4715: 'CWeapon::AddComponent': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  Client.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Default\../Bin\Client.exe

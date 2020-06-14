@@ -169,9 +169,6 @@
     <Filter Include="01.Scene_Stage\06.Monster\00.FlameThrower">
       <UniqueIdentifier>{95102f00-49ab-42d5-aef4-48bbba25a08f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene_Stage\06.Monster\01.ZombiState">
-      <UniqueIdentifier>{059684e2-a709-4812-a5c6-4e18fdc16645}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01.Scene_Stage\07.NPC">
       <UniqueIdentifier>{ab0e7f12-a9fe-44ac-8492-29e44a448ece}</UniqueIdentifier>
     </Filter>

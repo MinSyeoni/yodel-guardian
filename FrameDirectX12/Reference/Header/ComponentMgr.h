@@ -21,6 +21,7 @@
 #include "Collider.h"
 #include "BoxCollider.h"
 #include "SphereCollider.h"
+#include "Shader_Dissolve.h"
 
 BEGIN(Engine)
 
