@@ -20,6 +20,7 @@ public:
 	ID3D12DescriptorHeap*			Get_CBVDescriptorHeap() { return m_pCBV_DescriptorHeap; }
 	CUploadBuffer<CB_MATRIX_INFO>*	Get_UploadBuffer_MatrixInfo() { return m_pCB_MatrixInfo; }
 
+	CUploadBuffer<CB_BONE_INFO>*	Get_UploadBuffer_BoneInfo();
 protected:
 	ID3DBlob* Compile_Shader(const wstring& wstrFilename,
 							 const D3D_SHADER_MACRO* tDefines,
@@ -58,6 +59,7 @@ protected:
 
 public:
 	virtual CComponent* Clone() PURE;
+	CUploadBuffer<CB_BONE_INFO>* m_pCB_BoneInfo = nullptr;
 protected:
 	virtual void		Free();
 };

@@ -3,6 +3,7 @@
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ColorBuffer.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Default.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Destortion.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Dissolve.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_DownSample.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Effect.cso
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(82,12-69): warning X3206: implicit truncation of vector type
@@ -65,6 +66,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   Shader_Default.cpp
   Shader_DefaultTex.cpp
   Shader_Destortion.cpp
+  Shader_Dissolve.cpp
   Shader_DownSample.cpp
   Shader_Effect.cpp
   Shader_LightAcc.cpp
@@ -79,9 +81,9 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   SSAOTarget.cpp
   Target.cpp
   TerrainTex.cpp
-  Texture.cpp
   코드를 생성하고 있습니다...
   컴파일하고 있습니다...
+  Texture.cpp
   TimeMgr.cpp
   Timer.cpp
   Transform.cpp
@@ -92,10 +94,10 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   Engine.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Default\../Bin\Engine.dll
   '//'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
   배치 파일이 아닙니다.
-          1개 파일이 복사되었습니다.
-          1개 파일이 복사되었습니다.
-  다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다.
+  요청한 작업은, 사용자가 매핑한 구역이 열려 있는 상태인 파일에서 수행할 수 없습니다.
           0개 파일이 복사되었습니다.
+          1개 파일이 복사되었습니다.
+          1개 파일이 복사되었습니다.
   .\Engine\Code\AnimationControl.h
   .\Engine\Code\Base.h
   .\Engine\Code\BloomTarget.h
@@ -142,6 +144,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   .\Engine\Code\Shader_Default.h
   .\Engine\Code\Shader_DefaultTex.h
   .\Engine\Code\Shader_Destortion.h
+  .\Engine\Code\Shader_Dissolve.h
   .\Engine\Code\Shader_DownSample.h
   .\Engine\Code\Shader_Effect.h
   .\Engine\Code\Shader_LightAcc.h
@@ -164,7 +167,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   .\Engine\Code\Transform.h
   .\Engine\Code\VIBuffer.h
   .\Engine\Code\VlLine.h
-         68개 파일이 복사되었습니다.
+         69개 파일이 복사되었습니다.
   .\Engine\Header\Engine_Const.h
   .\Engine\Header\Engine_Enum.h
   .\Engine\Header\Engine_Function.h

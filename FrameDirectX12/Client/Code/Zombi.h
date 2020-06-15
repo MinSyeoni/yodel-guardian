@@ -51,7 +51,6 @@ public:		// 상호작용
 	const _float&			Get_CurHp() { return m_fCurHp; }	
 	void					Set_HitDamage(_float fDamage) { m_fHitDamage = fDamage; }
 	const _float&			Get_AtkDamage() { return m_fAtkDamage; }
-
 private:
 	void					Chase_Player(const _float& fTimeDelta);
 	_bool					Check_PlayerRange(_float fRange);

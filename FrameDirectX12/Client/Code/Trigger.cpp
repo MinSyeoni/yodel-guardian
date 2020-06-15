@@ -4,6 +4,7 @@
 #include "ObjectMgr.h"
 #include "ColliderMgr.h"
 #include "GraphicDevice.h"
+#include "Monster.h"
 
 CTrigger::CTrigger(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	:CGameObject(pGraphicDevice,pCommandList)
@@ -78,6 +79,16 @@ _int CTrigger::Update_GameObject(const _float & fTimeDelta)
 	{
 		m_pBoxCol->Update_Collider(&m_pTransCom->m_matWorld);
 		CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCol);		
+	
+		_vec3 vShaveDir;
+		for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYER))
+		{
+			if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCol, pCol, &vShaveDir))
+			{
+				//	CDirectSound::Get_Instance()->PlayDirectSoundFile(L"Siren");
+				m_bIsActive = true;
+			}
+		}
 	}
 		break;
 	case CTrigger::TRIGGER_END:
@@ -102,16 +113,15 @@ _int CTrigger::LateUpdate_GameObject(const _float & fTimeDelta)
 	{
 		FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCol), -1);
 
-		// 임시...나중에 고쳐야 할듯.
-		_vec3 vShaveDir;
-		for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYER))
+		list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Zombi");
+		if (m_bIsActive)
 		{
-			if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCol, pCol, &vShaveDir))
+			for (auto& pSrc : *pList)
 			{
-				//Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/Zombi.dat");
-				CDirectSound::Get_Instance()->PlayDirectSoundFile(L"Siren");
-				m_bIsDead = true;
+				if (static_cast<CMonster*>(pSrc)->Get_MONKIND() == CMonster::ZOMBI)
+					static_cast<CMonster*>(pSrc)->Set_IsActiveStart(true);
 			}
+			m_bIsDead = true;
 		}
 	}
 		break;

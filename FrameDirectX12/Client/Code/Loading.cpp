@@ -79,6 +79,11 @@ HRESULT CLoading::Load_Shader()
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_SkyDome", ID_STATIC, pComponent), E_FAIL);
 
+	pComponent = CShader_Dissolve::Create(DEVICE, m_pCommandList);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_Dissolve", ID_STATIC, pComponent), E_FAIL);
+
+
 	// Shader_ColorBuffer
 
 
@@ -424,6 +429,10 @@ HRESULT CLoading::Texture_ForStage(void)
 	//////////////////EFFECT
 
 
+	/////// rµðÁ¹ºê 
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/Dissolve/Dissolve%d.dds", 1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_Dissolve", ID_STATIC, pComponent), E_FAIL);
 
 	return S_OK;
 }

@@ -225,6 +225,7 @@ call CopyEngine.bat</Command>
     <ClInclude Include="..\Code\Shader_Default.h" />
     <ClInclude Include="..\Code\Shader_DefaultTex.h" />
     <ClInclude Include="..\Code\Shader_Destortion.h" />
+    <ClInclude Include="..\Code\Shader_Dissolve.h" />
     <ClInclude Include="..\Code\Shader_DownSample.h" />
     <ClInclude Include="..\Code\Shader_Effect.h" />
     <ClInclude Include="..\Code\Shader_LightAcc.h" />
@@ -302,6 +303,7 @@ call CopyEngine.bat</Command>
     <ClCompile Include="..\Code\Shader_Default.cpp" />
     <ClCompile Include="..\Code\Shader_DefaultTex.cpp" />
     <ClCompile Include="..\Code\Shader_Destortion.cpp" />
+    <ClCompile Include="..\Code\Shader_Dissolve.cpp" />
     <ClCompile Include="..\Code\Shader_DownSample.cpp" />
     <ClCompile Include="..\Code\Shader_Effect.cpp" />
     <ClCompile Include="..\Code\Shader_LightAcc.cpp" />
@@ -329,6 +331,7 @@ call CopyEngine.bat</Command>
     <FxCompile Include="..\..\Bin\Shader\Shader_ColorBuffer.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_Default.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_Destortion.hlsl" />
+    <FxCompile Include="..\..\Bin\Shader\Shader_Dissolve.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_DownSample.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_Effect.hlsl" />
     <FxCompile Include="..\..\Bin\Shader\Shader_LightAcc.hlsl" />

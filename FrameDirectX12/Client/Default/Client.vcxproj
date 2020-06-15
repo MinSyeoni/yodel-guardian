@@ -179,6 +179,7 @@
     <ClInclude Include="..\Code\FlameThrower.h" />
     <ClInclude Include="..\Code\GlassObject.h" />
     <ClInclude Include="..\Code\GunUI.h" />
+    <ClInclude Include="..\Code\HPKit.h" />
     <ClInclude Include="..\Code\LightObject.h" />
     <ClInclude Include="..\Code\Loading.h" />
     <ClInclude Include="..\Code\MainApp.h" />
@@ -235,6 +236,7 @@
     <ClCompile Include="..\Code\FlameThrower.cpp" />
     <ClCompile Include="..\Code\GlassObject.cpp" />
     <ClCompile Include="..\Code\GunUI.cpp" />
+    <ClCompile Include="..\Code\HPKit.cpp" />
     <ClCompile Include="..\Code\LightObject.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />

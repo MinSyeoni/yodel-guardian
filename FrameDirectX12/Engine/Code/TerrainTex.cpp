@@ -67,12 +67,14 @@ HRESULT CTerrainTex::Ready_Buffer(const _uint& iNumVerticesX, const _uint& iNumV
 		{
 			_uint		iIndex = i * iNumVerticesX + j;
 
+
 			Vertices[iIndex].vPos   = _vec3(j * m_fInterval, vecHeight[iIndex], i * m_fInterval);
 			Vertices[iIndex].vNormal = _vec3(0.0f, 0.0f, 0.0f);
 			Vertices[iIndex].vTexUV = _vec2((j / (iNumVerticesX - 1.f)) * 5.f, (i / (iNumVerticesZ - 1.f)) * 5.f);
 
 		}
 	}
+
 	Indices32.resize(faceCount * 3);
 	uint32_t k = 0;
 	for (uint32_t i = 0; i < iNumVerticesZ - 1; ++i)
