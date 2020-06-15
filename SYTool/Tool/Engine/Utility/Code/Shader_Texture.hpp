@@ -11,6 +11,9 @@ float g_fY = 1.0f;
 
 float g_fAlpha = 1.0f;
 float g_fTime;
+
+vector g_vColor;
+
 //sampler 란 : 색상 정보만 담고 있는 팔레트 형태의 텍스쳐 정의 구조체
 
 texture		g_BaseTexture;
@@ -97,17 +100,16 @@ PS_OUT		PS_MAIN(PS_IN In)
 
 	float2 uv;
 
-	uv.x = (In.vTexUV.x / g_fX)+ g_fChapterX;
-	uv.y = (In.vTexUV.y / g_fY)+ g_fChapterY;
+	uv.x = (In.vTexUV.x / g_fX) + g_fChapterX;
+	uv.y = (In.vTexUV.y / g_fY) + g_fChapterY;
 
 	Out.vColor = tex2D(BaseSampler, uv);	// 2차원 텍스쳐로부터 uv좌표에 해당하는 색을 얻어와 vector 타입으로 반환해주는 함수
-	Out.vColor.a = Out.vColor.r;
 
-	 Out.vColor.a = saturate(Out.vColor.a);
+	Out.vColor.a = saturate(Out.vColor.a);
 
-	Out.vColor.a = Out.vColor.a* g_fAlpha;
+	Out.vColor.a = Out.vColor.a * g_fAlpha;
 
-	
+	Out.vColor = Out.vColor * g_vColor;
 	return Out;
 }
 
@@ -125,7 +127,7 @@ technique Default_Device
 		vertexshader = compile vs_3_0 VS_MAIN();
 		pixelshader = compile ps_3_0 PS_MAIN();
 	}
-	pass 
+	pass
 	{
 			alphatestenable = true;
 		alphafunc = Greater;
@@ -136,7 +138,7 @@ technique Default_Device
 
 
 	}
-	pass		
+	pass
 	{
 			cullmode = none;
 		zwriteEnable = true;

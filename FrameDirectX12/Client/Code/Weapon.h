@@ -18,7 +18,7 @@ protected:
 public:
 	virtual HRESULT AddComponent();
 
-
+	 virtual void CreateShootEffect();
 
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 	virtual void    Render_ShadowDepth(CShader_Shadow* pShader);

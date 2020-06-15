@@ -96,7 +96,7 @@ public:
 	_uint					m_iTexToolMode = 0;	// 0-TEX, 1-HEIGHT, 2-SPLATTING
 	_uint					m_iObjToolMode = 0;	// 0-CREATE, 1-MODY, 2-DEL
 	_uint					m_iColliderState = 0; // 0-SPHERE, 1-BOX
-	_uint					m_iBrushShape = 0; //0-Box, 1-Circle
+	_uint					m_iBrushShape = 0; //0-Box, 1-Circle 2 -다듬기
 
 	_bool					m_bIsPickingStaticObj = false;
 	_bool					m_bIsPickingCollider = false;
@@ -163,4 +163,6 @@ public:
 	afx_msg void			OnBnClickedSaveTerrain();
 	CEdit					m_EditRange;
 	CEdit					m_EditHeight;
+	afx_msg void OnBnClickedGradually();
+	afx_msg void OnBnSaveForClient();
 };

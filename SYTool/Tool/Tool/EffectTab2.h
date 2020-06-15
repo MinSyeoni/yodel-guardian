@@ -56,4 +56,6 @@ public:
 	CButton m_UvSpriteButton;
 	float m_fOriUvSpeed;
 	float m_fUvSpeed;
+	CMFCColorButton m_ColorList;
+	CButton m_InputColorButton;
 };

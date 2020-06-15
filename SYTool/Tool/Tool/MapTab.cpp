@@ -7,7 +7,7 @@
 #include "afxdialogex.h"
 #include "SphereCollider.h"
 #include "BoxCollider.h"
-
+#include "TerrainTex.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -114,6 +114,8 @@ BEGIN_MESSAGE_MAP(CMapTab, CDialogEx)
 	ON_BN_CLICKED(IDC_RADIO17, &CMapTab::OnBnClickedBoxBrush)
 	ON_BN_CLICKED(IDC_RADIO18, &CMapTab::OnBnClickedCircleBrush)
 	ON_BN_CLICKED(IDC_BUTTON6, &CMapTab::OnBnClickedSaveTerrain)
+	ON_BN_CLICKED(IDC_RADIO19, &CMapTab::OnBnClickedGradually)
+	ON_BN_CLICKED(IDC_BUTTON22, &CMapTab::OnBnSaveForClient)
 END_MESSAGE_MAP()
 
 
@@ -1166,4 +1168,77 @@ void CMapTab::OnBnClickedSaveTerrain()
 
 		CloseHandle(hFile);
 	}
+}
+
+
+void CMapTab::OnBnClickedGradually()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	m_iBrushShape = 2;
+}
+
+
+void CMapTab::OnBnSaveForClient()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	UpdateData(TRUE);
+
+	CFileDialog Dlg(FALSE, L"dat", L"제목없음.dat", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
+		L"Data Files(*.dat)|*.dat||", this);
+
+	TCHAR szCurPath[256] = L"";
+	GetCurrentDirectory(256, szCurPath);
+	PathRemoveFileSpec(szCurPath);
+	lstrcat(szCurPath, L"\\Data");
+	lstrcat(szCurPath, L"\\Terrain\\HeightMapClient");
+	Dlg.m_ofn.lpstrInitialDir = szCurPath;
+
+	if (IDOK == Dlg.DoModal())
+	{
+		CString strFileName = Dlg.GetPathName();
+
+		HANDLE hFile = CreateFile(strFileName.GetString(), GENERIC_WRITE, 0, 0,
+			CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+
+		if (INVALID_HANDLE_VALUE == hFile)
+			return;
+		Engine::CGameObject* pObj = CObjMgr::GetInstance()->GetGameObject(CObjMgr::OBJ_TERRAIN);
+		if (pObj == nullptr)
+		{
+			CloseHandle(hFile);
+			return;
+
+		}
+
+
+		Engine::CTerrainTex* pBufferCom = dynamic_cast<Engine::CTerrainTex*>(pObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC));
+		if (pBufferCom == nullptr)
+		{
+		    CloseHandle(hFile);
+			return;
+		}
+		_uint dwX = pBufferCom->Get_VtxCntX();
+		_uint dwZ = pBufferCom->Get_VtxCntZ();
+		DWORD dwByte = 0;
+		WriteFile(hFile, &dwX, sizeof(_uint), &dwByte, nullptr);
+		WriteFile(hFile, &dwZ, sizeof(_uint), &dwByte, nullptr);
+		_ulong dwIndex = 0;
+		const _vec3* pPos = pBufferCom->Get_VtxPos();
+
+		for (_ulong i = 0; i < dwZ; ++i)
+		{
+			for (_ulong j = 0; j < dwX; ++j)
+			{
+				dwIndex = i * dwX + j;
+
+				_float posY = pPos[dwIndex].y;
+				WriteFile(hFile, &posY, sizeof(_float), &dwByte, nullptr);
+			}
+		}
+
+		CloseHandle(hFile);
+
+	}
+	UpdateData(FALSE);
 }

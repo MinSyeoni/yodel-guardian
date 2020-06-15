@@ -111,7 +111,7 @@ void CPlayerStatus::SetMesh(CMesh* pMesh)
 
 void CPlayerStatus::KeyInput()
 {
-    if (m_eCurState == CPlayer::RIFLEDRAW || m_eCurState == CPlayer::RIFLEHOLSTER)
+    if (m_eCurState == CPlayer::RIFLEDRAW || m_eCurState == CPlayer::RIFLEHOLSTER)//무기드는중 리턴 
         return;
 
     if (m_pCamera == nullptr)
@@ -328,13 +328,27 @@ void CPlayerStatus::ShootingCheck()
         CMonster::MONKIND  eMonKind = CMonster::NONAME;
         eMonKind=  dynamic_cast<CMonster*>(pMonster)->Get_MONKIND();
 
-        if (eMonKind == CMonster::ZOMBI)
-        {
-            CZombi* pZombi = dynamic_cast<CMonster*>(pMonster)->Get_Zombi();
-            pZombi->Set_HitDamage(30); 
-             pZombi->Set_IsHit(true);
-             
-        }
+        //if (eMonKind == CMonster::ZOMBI)
+        //{
+        //    CZombi* pZombi = dynamic_cast<CMonster*>(pMonster)->Get_Zombi();
+        //    pZombi->Set_HitDamage(30); 
+        //     pZombi->Set_IsHit(true);
+        //     
+        //     MeshInfo tData;
+
+        //     tData.MeshTag = L"DistortDisk";
+        //     tData.Pos = pMonster->Get_Transform()->m_vPos;
+        //     tData.Pos.y += 10.f;
+        //     tData.Pos.z -= 10.f;
+        //     tData.Rotation = _vec3{ 90.f,0.f,0.f };
+        //     tData.Scale = _vec3{ 0.3f,0.3f,0.3f };
+
+
+        //     CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_Environment", L"Prototype_DistortEffect", L"DistortEffect", &tData);
+
+
+
+        //}
 
 
     }
@@ -442,6 +456,17 @@ void CPlayerStatus::AttackCheck(const _float& fTimeDelta)
 
         if (m_fShootingTime > 0.3f)
         {
+            list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Weapon");
+
+            for (auto& pSrc : *pList)
+            {
+                if (static_cast<CWeapon*>(pSrc)->Get_WeaponType() == CWeapon::RIFLE && static_cast<CWeapon*>(pSrc)->Get_WeaponState() == CWeapon::EQUIP)
+                {
+                    
+                    static_cast<CWeapon*>(pSrc)->CreateShootEffect();
+                }
+            }
+
             CDirectSound::Get_Instance()->PlayDirectSoundFile(L"GUNSHOT");
             ShootingCheck();
             m_fShootingTime = 0.f;

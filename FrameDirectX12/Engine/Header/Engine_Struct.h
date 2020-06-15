@@ -636,6 +636,17 @@ typedef struct BoneInfo
     _matrix matfinalTransform;
 }BONE_INFO;
 
+typedef struct EffectInfo
+{
+    XMFLOAT4 SpriteInfo;//ChapterX,ChapterY,g_fX,g_fy
+    XMFLOAT4 AlphaTimeInfo; // g_vAlpha,g_vTime
+    XMFLOAT4 ColorInfo; // g_vColor;
+
+
+}CB_EFFECT_INFO;
+
+
+
 typedef struct tagSubmeshGeometry
 {
     _uint   uiIndexCount = 0;
@@ -737,6 +748,7 @@ enum class ROOT_SIG_TYPE
     INPUT_SSAO,
     INPUT_BLUR,
     INPUT_DISTORT,
+    INPUT_EFFECT,
     ENDSIG,
 };
 

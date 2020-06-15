@@ -20,6 +20,7 @@ public:
 	HRESULT				Ready_Loading(LOADINGID eLoadingID);
 	_uint				Loading_ForStage(void);
 	HRESULT             Load_Shader();
+	HRESULT             Load_Effect();
 	HRESULT             Load_Camera();
 	HRESULT             Mesh_ForStage(void);
 	HRESULT             Texture_ForStage(void);

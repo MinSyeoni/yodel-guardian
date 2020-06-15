@@ -11,7 +11,7 @@ private:
 	virtual ~CTerrainTex();
 
 public:
-	HRESULT	Ready_Buffer(const _uint& iNumVerticesX, const _uint& iNumVerticesZ, const _float& fInterval = 1.f);
+	HRESULT	Ready_Buffer(const _uint& iNumVerticesX, const _uint& iNumVerticesZ,  wstring strHeightMapPath, const _float& fInterval = 1.f);
 	void	Begin_Buffer();
 	void	End_Buffer();
 	void	Render_Buffer();
@@ -21,7 +21,7 @@ private:
 	_float  m_fInterval = 0.f;
 public:
 	virtual CComponent* Clone();
-	static	CTerrainTex*	Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList, const _uint& iNumVerticesX, const _uint& iNumVerticesZ, const _float& fInterval = 1.f);
+	static	CTerrainTex*	Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList, const _uint& iNumVerticesX, const _uint& iNumVerticesZ, wstring strHeightMapPath, const _float& fInterval = 1.f);
 private:
 	virtual void		Free();
 };

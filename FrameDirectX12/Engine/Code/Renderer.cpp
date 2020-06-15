@@ -448,6 +448,16 @@ HRESULT CRenderer::Ready_ShaderPrototype()
     NULL_CHECK_RETURN(pShader, E_FAIL);
 
     FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_Terrain", ID_STATIC, pShader), E_FAIL);
+
+
+    pShader = CShader_Effect::Create(DEVICE, m_pCommandList);
+    NULL_CHECK_RETURN(pShader, E_FAIL);
+    FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_Effect", ID_STATIC, pShader), E_FAIL);
+
+    pShader = CShader_Effect::Create(DEVICE, m_pCommandList,CShader_Effect::ALPHABLENDTEX);
+    NULL_CHECK_RETURN(pShader, E_FAIL);
+    FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_EffectAlphaBlend", ID_STATIC, pShader), E_FAIL);
+
     return S_OK;
 }
 

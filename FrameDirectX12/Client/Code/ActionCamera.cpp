@@ -61,7 +61,7 @@ _int CActionCamera::Update_GameObject(const _float& fTimeDelta)
 	m_tCameraInfo.vAt = CheckBazior(m_vecAt);
 	m_tCameraInfo.vUp = _vec3(0.f, 1.f, 0.f);
 
-	if (m_fAccTime > 1.0f)
+	if (m_fAccTime > 0.0f)
 	{
     	m_pObjectMgr->Add_GameObject(L"Layer_Camera", L"Prototype_DynamicCamera", L"DynamicCamera", nullptr);
 		return DEADOBJ;

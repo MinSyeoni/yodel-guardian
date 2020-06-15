@@ -29,7 +29,8 @@
 #include "LightObject.h"
 #include "DamageBlood.h"
 #include "Normandy.h"
-
+#include "DistortionEffect.h"
+#include "Shepard.h"
 
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
@@ -195,6 +196,16 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Normandy", pGameObject), E_FAIL);
 
 
+	pGameObject = CDistortionEffect::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_DistortEffect", pGameObject), E_FAIL);
+
+
+	pGameObject = CShepard::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Shepard", pGameObject), E_FAIL);
+
+
 
 	return S_OK;
 }
@@ -259,6 +270,8 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Rifle", L"Weapon", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Salone", L"Salone", nullptr), E_FAIL);//For.Salone
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Shepard", L"Shepard", nullptr), E_FAIL);
+		
 
 																													 //Prototype_MapObject
 	Load_StageObject(L"../../../SYTool/Tool/Data/StaticObj/mapAddoutside.dat");
@@ -387,8 +400,8 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 		m_tMeshInfo.Pos = tObjData.vPos;
 		m_tMeshInfo.Rotation = tObjData.vRotate;
 		m_tMeshInfo.Scale = tObjData.vScale;
-		if(m_tMeshInfo.MeshTag!=L"Siren.X")
-		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
+		if (m_tMeshInfo.MeshTag != L"Siren.X")
+			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
 		else
 		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LightObject", L"LightObject", &m_tMeshInfo);//조명처리
 	}

@@ -61,12 +61,14 @@ void EffectTab2::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CHECK5, m_UvSpriteButton);
 	DDX_Text(pDX, IDC_EDIT63, m_fOriUvSpeed);
 	DDX_Text(pDX, IDC_EDIT76, m_fUvSpeed);
+	DDX_Control(pDX, IDC_MFCCOLORBUTTON1, m_ColorList);
+	DDX_Control(pDX, IDC_CHECK3, m_InputColorButton);
 }
 
 void EffectTab2::FindEffectData()
 {
 	for (auto& pSRC : CObjMgr::GetInstance()->m_ObjLst[CObjMgr::OBJ_EFFECT])
-	{	
+	{
 		if (dynamic_cast<CToolEffect*>(pSRC)->m_bIsCheck == true)
 			m_pEffectData = dynamic_cast<CToolEffect*>(pSRC);
 	}
@@ -106,10 +108,24 @@ void EffectTab2::FindEffectData()
 	m_fOriWidth = m_fWidth;
 	m_fOriHeight = m_fHeight;
 
+	m_InputColorButton.SetCheck(m_pEffectData->m_tEffectData.bIsColorInput);
 
 
+	COLORREF temp;
+	_vec4 vColor = m_pEffectData->m_tEffectData.vColor;
+	float fR, fG, fB;
+	fR = vColor.x;
+	fG = vColor.y;
+	fB = vColor.z;
+	int iR, iG, iB;
+	iR = int(fR * 255.f);
+	iG = int(fG * 255.f);
+	iB = int(fB * 255.f);
+
+	temp = RGB(iR, iG, iB);
 
 
+	m_ColorList.SetColor(temp);
 
 	UpdateData(FALSE);
 
@@ -156,7 +172,7 @@ void EffectTab2::ClickInput()
 	UpdateData(TRUE);
 
 	if (m_pEffectData == nullptr)
-	return;
+		return;
 
 
 	m_pEffectData->m_tEffectData.bIsFadeIn = m_FadeInButton.GetCheck();
@@ -168,7 +184,7 @@ void EffectTab2::ClickInput()
 
 
 	m_pEffectData->m_tEffectData.fFadeOutStartTime = m_fFadeOutStart;
-	m_pEffectData->m_tEffectData.fFadeOutEndTime= m_fFadeOutEnd;
+	m_pEffectData->m_tEffectData.fFadeOutEndTime = m_fFadeOutEnd;
 
 
 	m_pEffectData->m_tEffectData.iUvWidth = m_fWidth;
@@ -188,6 +204,26 @@ void EffectTab2::ClickInput()
 	m_fOriHeight = m_fHeight;
 
 	m_fOriUvSpeed = m_fUvSpeed;
+
+
+	COLORREF eColor = m_ColorList.GetColor();
+
+	int iR, iG, iB;
+
+	iR = BYTE(eColor);
+	iG = ((BYTE)(((WORD)(eColor)) >> 8));
+	iB = ((BYTE)((eColor) >> 16));
+
+	float fR, fG, fB;
+
+	fR = (float)iR / 255.f;
+	fG = (float)iG / 255.f;
+	fB = (float)iB / 255.f;
+
+	bool bIsColorInput = m_InputColorButton.GetCheck();
+
+	m_pEffectData->m_tEffectData.vColor = _vec4(fR, fG, fB, 1.f);
+	m_pEffectData->m_tEffectData.bIsColorInput = bIsColorInput;
 
 
 	UpdateData(FALSE);

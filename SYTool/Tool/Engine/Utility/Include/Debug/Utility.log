@@ -1,18 +1,18 @@
 ﻿  BoxCollider.cpp
   Calculator.cpp
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(372,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(383,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(393,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(404,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(415,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(425,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(435,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(445,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(456,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(466,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(478,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(487,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(489,11): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(372,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(383,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(393,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(404,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(415,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(425,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(435,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(445,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(456,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(466,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(478,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(487,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(489,11): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Camera.cpp
   Collider.cpp
   Component.cpp
@@ -20,7 +20,7 @@ C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Ca
   Frustum.cpp
   GameObject.cpp
   Layer.cpp
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Layer.cpp(22,7): warning C4101: 'isEnd' :참조되지 않은 지역 변수입니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Layer.cpp(22,7): warning C4101: 'isEnd' :참조되지 않은 지역 변수입니다.
   Light.cpp
   LightMgr.cpp
   Management.cpp
@@ -33,17 +33,18 @@ C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\La
   Scene.cpp
   Shader.cpp
   코드를 생성하고 있습니다...
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ToolCollider.h(29): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ToolCollider.h(29): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
   컴파일하고 있습니다...
   SphereCollider.cpp
   ToolCollider.cpp
   TrailColor.cpp
   Transform.cpp
   코드를 생성하고 있습니다...
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ToolCollider.h(29): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ToolCollider.h(29): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ToolCollider.h(29): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ToolCollider.h(29): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
+  LINK : ..\Bin\Utility.dll을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
      ../Bin\Utility.lib 라이브러리 및 ../Bin\Utility.exp 개체를 생성하고 있습니다.
-  Utility.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Include\../Bin\Utility.dll
+  Utility.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Engine\Utility\Include\../Bin\Utility.dll
   .\Engine\Utility\Code\BoxCollider.h
   .\Engine\Utility\Code\Calculator.h
   .\Engine\Utility\Code\Camera.h

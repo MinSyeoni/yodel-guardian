@@ -14,8 +14,18 @@ class CStaticMesh;
 class CCollider;
 class CShader;
 END
+
+enum TEXTURE_STATE { NONE, ALPHABLEND, ALPHATEST };
+enum BUFFER_TYPE{TEXTURE,MESH};
+
 typedef struct tagEFFECTDATA
 {
+	BUFFER_TYPE  eType = TEXTURE;
+	TEXTURE_STATE eState = NONE;
+
+	int iDrawId = 0;
+
+
 	_vec3 vOriPos = { 0.f,0.f,0.f };
 	_vec3 vOriRot = { 0.f,0.f,0.f };
 	_vec3 vOriScale = { 1.f,1.f,1.f };
@@ -50,9 +60,12 @@ typedef struct tagEFFECTDATA
 	int iUvWidth = 1;
 	int iUvHeight = 1;
 
-	_float fSpriteSpeed =0.f;
+	_float fSpriteSpeed = 0.f;
 	_bool bIsUvSprite = false;
+	_bool bIsUvInfinite = false;
 
+	_bool bIsColorInput = false;
+	_vec4 vColor = { 1.f,1.f,1.f,1.f };
 
 }EFFECTDATA;
 
@@ -60,8 +73,6 @@ typedef struct tagEFFECTDATA
 
 class CToolEffect : public Engine::CGameObject
 {
-public:
-	enum TEXTURE_STATE { NONE, ALPHABLEND, ALPHATEST };
 private:
 	explicit CToolEffect(LPDIRECT3DDEVICE9 pGraphicDev);
 	virtual ~CToolEffect(void);
@@ -72,10 +83,12 @@ public:
 	virtual void			Render_Object(void);
 	HRESULT					Set_ConstantTable(LPD3DXEFFECT pEffect);
 	HRESULT SetTexture(int iDrawId, TEXTURE_STATE eState);
-
+	CSphereCollider* Get_Collider() { return m_pSphereCol; };
 	void UvAnimation();
 	void SetTime(float fTime) { m_fAccTime = fTime; };
 	void SetCheck(_bool bIsCheck);
+
+	HRESULT SetEffectData(EFFECTDATA tData);
 private:
 	HRESULT					Add_Component(void);
 
@@ -101,6 +114,9 @@ public:
 
 	_float m_fSpriteTime = 0.f;
 	_int m_iSpriteRow = 0;
+
+	_bool m_bIsUvStop = false;
+
 
 	void UpdateAnimation();
 	void UpdateScaleAni();

@@ -37,6 +37,7 @@ BEGIN_MESSAGE_MAP(CToolView, CView)
 	ON_WM_LBUTTONDOWN()
 	ON_WM_MOUSEWHEEL()
 	ON_WM_MOUSEMOVE()
+	ON_WM_RBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // CToolView 생성/소멸
@@ -406,7 +407,7 @@ void CToolView::Ready_Buffer_Setting()
 		RESOURCE_STAGE,
 		L"Texture_AlphaBlend",
 		Engine::TEX_NORMAL,
-		L"../Resources/Texture/AlphaBlend/AlphaBlend%d.tga", 1)))
+		L"../Resources/Texture/AlphaBlend/AlphaBlend%d.tga", 9)))
 		return;
 }
 
@@ -493,7 +494,49 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 		CheckCameraTabButton();
 
 	}
+	else if (3 == m_pMyForm->m_iCurTab || m_pMyForm->m_iCurTab == 4)
+	{
+		bool bIsChange = false;
 
+		CToolEffect* pEffectSelect = nullptr;
+
+		for (auto& pSrc : CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_EFFECT))
+		{
+
+			CToolEffect* pEffect = dynamic_cast<CToolEffect*>(pSrc);
+			CToolCollider* pToolCollider = pEffect->Get_Collider();
+
+			if (pToolCollider == nullptr)
+				continue;
+
+
+
+			if (true == CPickingMgr::GetInstance()->IsCheckColiderMesh((pToolCollider)->Get_ColliderMesh(), pToolCollider->Get_WorldMat()))
+			{
+				pEffect->m_bIsCheck = true;
+				m_pEffectTab->m_pEffectData = pEffect;
+				m_pEffectTab2->m_pEffectData = pEffect;
+			
+			
+				bIsChange = true;
+				pEffectSelect = pEffect;
+				break;
+			}
+
+		}
+		if (pEffectSelect == nullptr)
+			return;
+
+		for (auto& pSrc : CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_EFFECT))
+		{
+			CToolEffect* pEffect = dynamic_cast<CToolEffect*>(pSrc);
+			if (pEffectSelect != pEffect)
+				pEffect->SetCheck(false);
+
+		}
+		m_pEffectTab->InitEffect();
+		m_pEffectTab2->FindEffectData();
+	}
 	CView::OnLButtonDown(nFlags, point);
 }
 
@@ -927,3 +970,23 @@ void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 	CView::OnMouseMove(nFlags, point);
 }
 
+
+
+void CToolView::OnRButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	if (3 == m_pMyForm->m_iCurTab || 4 == m_pMyForm->m_iCurTab)
+	{
+		for (auto& pSrc : CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_EFFECT))
+		{
+
+			dynamic_cast<CToolEffect*>(pSrc)->m_bIsCheck = false;
+
+		}
+
+
+	}
+	m_pEffectTab->m_pEffectData = nullptr;
+	m_pEffectTab2->m_pEffectData = nullptr;
+	CView::OnRButtonDown(nFlags, point);
+}

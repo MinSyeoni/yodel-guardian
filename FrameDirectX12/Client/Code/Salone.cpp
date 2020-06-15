@@ -41,9 +41,7 @@ HRESULT CSalone::Ready_GameObject()
 	NULL_CHECK_RETURN(m_pMeshCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Mesh", m_pMeshCom);
 
-	m_pShereCol = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 10.f/*여기반지름*/, _vec3(1.f, 1.f, 1.f), this));
-	NULL_CHECK_RETURN(m_pShereCol, E_FAIL);
-	m_mapComponent[ID_STATIC].emplace(L"Com_SphereCol", m_pShereCol);
+
 	//여기야시영
 
 #ifdef _DEBUG
@@ -90,15 +88,7 @@ _int CSalone::Update_GameObject(const _float & fTimeDelta)
 	TransCom - Update WorldMatrix.
 	______________________________________________________________________*/
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
-	_matrix matBone = *m_pMeshCom->Find_BoneMatrix("Chest");//이거포인터라서 한번만 받아도되시영 예시는 그냥 값만받앗어
-	_matrix matBoneOffset = *m_pMeshCom->Find_BoneOffset("Chest");
 
-	_matrix Offset = XMMatrixInverse(nullptr, matBoneOffset);
-
-	_matrix BoneMatrix = Offset * matBone * m_pTransCom->m_matWorld;
-
-	m_pShereCol->Update_Collider(&BoneMatrix);//여기
-	m_pShereCol->Set_IsCol(true);
 
 	return NO_EVENT;
 }
@@ -118,7 +108,6 @@ _int CSalone::LateUpdate_GameObject(const _float & fTimeDelta)
 	m_pMeshCom->Set_Animation((int)m_eCurState);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(fTimeDelta*3000.f);
 
-	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol), -1);
 	return NO_EVENT;
 }
 

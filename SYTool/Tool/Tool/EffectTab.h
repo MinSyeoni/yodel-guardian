@@ -11,7 +11,7 @@ public:
 	CEffectTab(CWnd* pParent = nullptr);   // 표준 생성자입니다.
 	virtual ~CEffectTab();
 
-// 대화 상자 데이터입니다.
+	// 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_DIALOG4 };
 #endif
@@ -42,7 +42,7 @@ public:
 	float m_fRotY;
 	float m_fRotZ;
 
-	CToolEffect* m_pEffectData=nullptr;
+	CToolEffect* m_pEffectData = nullptr;
 
 	CButton m_Pass0;
 	CButton m_Pass1;
@@ -53,7 +53,7 @@ public:
 	virtual BOOL OnInitDialog();
 
 
-	void LoadTexture(wstring strPath,CToolEffect::TEXTURE_STATE eState);
+	void LoadTexture(wstring strPath, TEXTURE_STATE eState);
 
 	void UpdateEffect();
 	void InitEffect();
@@ -78,7 +78,7 @@ public:
 	afx_msg void RotZDown();
 	afx_msg void ClickInput();
 	afx_msg void ClickToOri();
-	
+
 	float m_fOriScaleStartTime;
 	float m_fOriScaleEndTime;
 	float m_fOriScaleXPat;
@@ -103,7 +103,7 @@ public:
 	float m_fRotYPat;
 	float m_fRotZPat;
 	float m_fRotRepeat;
-	
+
 
 
 	_bool m_bIsStartEffect = false;
@@ -112,5 +112,16 @@ public:
 	float m_fAccTime;
 	afx_msg void PlayPattern();
 	afx_msg void ClickPatStop();
-	CListBox m_Temp;
+	float m_fDeadStart;
+	float m_fDeadEnd;
+	float m_fOriStartTime;
+	float m_fOriEndTIme;
+	afx_msg void OnBnClickedInputStartEnd();
+	CListBox m_MadeEffectList;
+	afx_msg void EffectChangeClick();
+	afx_msg void ClickDeleteButton();
+	afx_msg void ClickCopy();
+	afx_msg void OnBnClickedSaveEffect();
+	afx_msg void OnBnClickedEffectLoad();
+	CButton m_ButtonSelectAll;
 };

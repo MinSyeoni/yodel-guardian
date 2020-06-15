@@ -4,7 +4,7 @@
 #include "PlayerArm.h"
 #include "PlayerLeg.h"
 #include "ObjectMgr.h"
-
+#include "LightMgr.h"
 CRifle::CRifle(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
     :CWeapon(pGraphicDevice, pCommandList)
 {
@@ -26,6 +26,26 @@ HRESULT CRifle::Ready_GameObject()
 {
     CWeapon::AddComponent();
     AddComponent();
+
+
+  
+        m_tagLight.m_eType = LIGHTTYPE::D3DLIGHT_POINT;
+        m_tagLight.m_vDiffuse = _vec4{ 0.3f,0.3f,0.0f,1.0f };
+        m_tagLight.m_vAmbient = _vec4{ 0.4f,0.4f,0.4f,1.0f };
+        m_tagLight.m_vSpecular = _vec4{ 0.4f,0.4f,0.4f,1.0f };
+        m_tagLight.m_vDirection = _vec4{ 1.0f,1.0f,-1.f,1.0f };
+        m_tagLight.m_vPosition = _vec4{ 300.f,10.f,300.f,0.f };
+        m_tagLight.m_fRange = 30.f;
+    
+    m_tagLight.m_vPosition.x = m_pTransCom->m_vPos.x;
+    m_tagLight.m_vPosition.y = m_pTransCom->m_vPos.y;
+    m_tagLight.m_vPosition.z = m_pTransCom->m_vPos.z;
+
+    if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &m_tagLight)))
+        return E_FAIL;
+
+    m_uiLightIndex= CLight_Manager::Get_Instance()->Get_LightIndex();
+    CLight_Manager::Get_Instance()->Set_LightOnOff(m_uiLightIndex, false);
 
     return S_OK;
 }
@@ -55,6 +75,12 @@ HRESULT CRifle::LateInit_GameObject()
 
     m_eWeaponType = RIFLE;
 
+
+    m_pFireMatrix = m_pMeshCom->Find_BoneMatrix("Mid_Assembly_Front");//ÃÑ±¸
+    m_pFireMatrixOffset = m_pMeshCom->Find_BoneOffset("Mid_Assembly_Front");
+
+
+
     return S_OK;
 }
 
@@ -69,7 +95,7 @@ _int CRifle::Update_GameObject(const _float& fTimeDelta)
     Engine::CGameObject::Update_GameObject(fTimeDelta);
 
     AniCheck();
-
+    LightCheck(fTimeDelta);
 
     dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation(m_eCurAniState);
 
@@ -115,7 +141,7 @@ void CRifle::FallowPlayer()
     if (m_pPlayerEquipMatrix != nullptr)
     {
 
-        matBlend = (*m_pPlayerEquipMatrix * 1.0f);
+        matBlend = *m_pPlayerEquipMatrix;
         m_pTransCom->m_matWorld = matBlend * (Rotation * *m_pPlayerMatrix);
 
     };
@@ -190,6 +216,56 @@ void CRifle::AniCheck()
     }
 
 
+}
+
+void CRifle::LightCheck(const _float& fTimeDelta)
+{
+    if (!m_bIsLight)
+    {
+        m_fLightAccTime = 0.f;
+        CLight_Manager::Get_Instance()->Set_LightOnOff(m_uiLightIndex, false);
+        return;
+
+    }
+    m_fLightAccTime += fTimeDelta;
+
+    if (m_fLightAccTime > 0.12)
+    {
+        m_fLightAccTime = 0.f;
+        m_bIsLight = false;
+    }
+
+
+    _vec4 vLightPos = _vec4{ m_vLightPos.x,m_vLightPos.y,m_vLightPos.z,1.f };
+    m_tagLight.m_vPosition = vLightPos;
+
+
+    CLight_Manager::Get_Instance()->Set_LightInfo(m_uiLightIndex, m_tagLight);
+
+    CLight_Manager::Get_Instance()->Set_LightOnOff(m_uiLightIndex, true);
+}
+
+void CRifle::CreateShootEffect()
+{
+
+    _matrix matBlend;
+
+    matBlend=  XMMatrixInverse(nullptr, *m_pFireMatrixOffset);
+
+    matBlend = matBlend * *m_pFireMatrix;
+
+
+
+    _matrix Rotation = XMMatrixRotationY(XMConvertToRadians(-90.f));
+
+    _matrix matShootPos = matBlend * *m_pPlayerEquipMatrix * (Rotation * *m_pPlayerMatrix);;
+
+    _vec3 vPos = _vec3{ matShootPos._41,matShootPos._42,matShootPos._43 };
+    
+    m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Effect_GunFire", L"Effect", &vPos);
+
+    m_vLightPos = vPos;
+    m_bIsLight = true;
 }
 
 CGameObject* CRifle::Clone_GameObject(void* prg)

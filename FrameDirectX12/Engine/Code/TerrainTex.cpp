@@ -18,8 +18,37 @@ CTerrainTex::~CTerrainTex()
 {
 }
 
-HRESULT CTerrainTex::Ready_Buffer(const _uint& iNumVerticesX, const _uint& iNumVerticesZ, const _float& fInterval)
+HRESULT CTerrainTex::Ready_Buffer(const _uint& iNumVerticesX, const _uint& iNumVerticesZ,  wstring strHeightMapPath,const _float& fInterval)
 {
+
+
+	HANDLE hFile = CreateFile(strHeightMapPath.c_str(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	NULL_CHECK_RETURN(hFile, E_FAIL);
+
+	_uint dwX = 0;
+	_uint dwZ = 0;
+
+	DWORD dwByte = 0;
+	ReadFile(hFile, &dwX, sizeof(_uint), &dwByte, nullptr);
+	ReadFile(hFile, &dwZ, sizeof(_uint), &dwByte, nullptr);
+
+	vector<float> vecHeight;
+	vecHeight.reserve(dwX * dwX);
+	while (1)
+	{
+		float fTemp;
+		ReadFile(hFile, &fTemp, sizeof(float), &dwByte, nullptr);
+
+		vecHeight.push_back(fTemp);
+		if (dwByte == 0)
+			break;
+
+
+	}
+
+
+
+
 
 
 	m_fInterval = fInterval;
@@ -38,13 +67,12 @@ HRESULT CTerrainTex::Ready_Buffer(const _uint& iNumVerticesX, const _uint& iNumV
 		{
 			_uint		iIndex = i * iNumVerticesX + j;
 
-			Vertices[iIndex].vPos   = _vec3(j * m_fInterval, (float)pHeightMapPixels[j+i*iNumVerticesZ], i * m_fInterval);
+			Vertices[iIndex].vPos   = _vec3(j * m_fInterval, vecHeight[iIndex], i * m_fInterval);
 			Vertices[iIndex].vNormal = _vec3(0.0f, 0.0f, 0.0f);
 			Vertices[iIndex].vTexUV = _vec2((j / (iNumVerticesX - 1.f)) * 5.f, (i / (iNumVerticesZ - 1.f)) * 5.f);
 
 		}
 	}
-	Safe_Delete_Array(pHeightMapPixels);
 	Indices32.resize(faceCount * 3);
 	uint32_t k = 0;
 	for (uint32_t i = 0; i < iNumVerticesZ - 1; ++i)
@@ -153,11 +181,11 @@ CComponent * CTerrainTex::Clone()
 	return new CTerrainTex(*this);
 }
 
-CTerrainTex * CTerrainTex::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList, const _uint& iNumVerticesX, const _uint& iNumVerticesZ, const _float& fInterval )
+CTerrainTex * CTerrainTex::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList, const _uint& iNumVerticesX, const _uint& iNumVerticesZ,  wstring strHeightMapPath, const _float& fInterval )
 {
 	CTerrainTex* pInstance = new CTerrainTex(pGraphicDevice, pCommandList);
 
-	if (FAILED(pInstance->Ready_Buffer(iNumVerticesX,  iNumVerticesZ, fInterval)))
+	if (FAILED(pInstance->Ready_Buffer(iNumVerticesX,  iNumVerticesZ, strHeightMapPath,fInterval)))
 		Engine::Safe_Release(pInstance);
 
 	return pInstance;

@@ -38,10 +38,10 @@ float4 PS_MAIN(VS_OUTPUT input) : SV_TARGET
     
     float4 vDistortion = gDestortionTexture.Sample(gsamLinearWrap, input.uv);
     
-    float2 DistUV =  vDistortion.xy * 0.04f;
+    float2 DistUV =  vDistortion.xy * 0.02f;
 
     DistUV = DistUV + input.uv;
-    DistUV += vDistortion.z * 0.04;
+    DistUV += vDistortion.z * 0.02;
     float4 vAlbedoInfo = gAlbedoTexture.Sample(gsamLinearWrap, DistUV);
     float4 vSpecInfo = gSpecTexture.Sample(gsamLinearWrap, DistUV);
     float4 vShadeInfo = gShadeTexture.Sample(gsamLinearWrap, DistUV);

@@ -6,6 +6,7 @@
 #include "EffectTab.h"
 #include "afxdialogex.h"
 #include "EffectDefault.h"
+#include "ObjMgr.h"
 
 // EffectTab 대화 상자
 
@@ -56,8 +57,12 @@ CEffectTab::CEffectTab(CWnd* pParent /*=nullptr*/)
 	, m_fRotZPat(0)
 	, m_fRotRepeat(0)
 	, m_fAccTime(0)
+	, m_fDeadStart(0)
+	, m_fDeadEnd(1)
+	, m_fOriStartTime(0)
+	, m_fOriEndTIme(1)
 {
-	
+
 }
 
 CEffectTab::~CEffectTab()
@@ -65,7 +70,7 @@ CEffectTab::~CEffectTab()
 
 
 
-	
+
 }
 
 void CEffectTab::DoDataExchange(CDataExchange* pDX)
@@ -117,7 +122,13 @@ void CEffectTab::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT55, m_fRotZPat);
 	DDX_Text(pDX, IDC_EDIT56, m_fRotRepeat);
 	DDX_Text(pDX, IDC_EDIT57, m_fAccTime);
-	DDX_Control(pDX, IDC_LIST1, m_Temp);
+
+	DDX_Text(pDX, IDC_EDIT30, m_fDeadStart);
+	DDX_Text(pDX, IDC_EDIT31, m_fDeadEnd);
+	DDX_Text(pDX, IDC_EDIT29, m_fOriStartTime);
+	DDX_Text(pDX, IDC_EDIT27, m_fOriEndTIme);
+	DDX_Control(pDX, IDC_LIST1, m_MadeEffectList);
+	DDX_Control(pDX, IDC_CHECK6, m_ButtonSelectAll);
 }
 
 void CEffectTab::UpdateEffectTool(const float& fTimeDelte)
@@ -130,7 +141,23 @@ void CEffectTab::UpdateEffectTool(const float& fTimeDelte)
 		m_fAccTime += fTimeDelte;
 		UpdateData(FALSE);
 
-		m_pEffectData->SetTime(m_fAccTime);
+
+		list <CGameObject*>pList = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_EFFECT);
+
+
+		if (m_pEffectData != nullptr && !m_ButtonSelectAll.GetCheck())
+		{
+			m_pEffectData->SetTime(m_fAccTime);
+		}
+		else
+		{
+
+			for (auto& pSrc : pList)
+				dynamic_cast<CToolEffect*>(pSrc)->SetTime(m_fAccTime);
+
+
+
+		}
 	}
 
 }
@@ -164,6 +191,12 @@ BEGIN_MESSAGE_MAP(CEffectTab, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON33, &CEffectTab::OnBnClickedPatternInput)
 	ON_BN_CLICKED(IDC_BUTTON34, &CEffectTab::PlayPattern)
 	ON_BN_CLICKED(IDC_BUTTON35, &CEffectTab::ClickPatStop)
+	ON_BN_CLICKED(IDC_BUTTON6, &CEffectTab::OnBnClickedInputStartEnd)
+	ON_BN_CLICKED(IDC_BUTTON36, &CEffectTab::EffectChangeClick)
+	ON_BN_CLICKED(IDC_BUTTON37, &CEffectTab::ClickDeleteButton)
+	ON_BN_CLICKED(IDC_BUTTON38, &CEffectTab::ClickCopy)
+	ON_BN_CLICKED(IDC_BUTTON39, &CEffectTab::OnBnClickedSaveEffect)
+	ON_BN_CLICKED(IDC_BUTTON40, &CEffectTab::OnBnClickedEffectLoad)
 END_MESSAGE_MAP()
 
 
@@ -182,6 +215,7 @@ void CEffectTab::OnBnClickedRcTex()
 
 	UpdateData(TRUE);
 
+	m_MadeEffectList.AddString(L"RCEffect");
 
 
 	UpdateData(FALSE);
@@ -207,7 +241,7 @@ void CEffectTab::OnBnClickedPass0()
 	m_Pass1.SetCheck(false);
 	m_Pass2.SetCheck(false);
 
-	LoadTexture(L"\\Resources\\Texture\\Default\\",CToolEffect::NONE);
+	LoadTexture(L"\\Resources\\Texture\\Default\\", NONE);
 	UpdateData(FALSE);
 }
 
@@ -228,7 +262,7 @@ void CEffectTab::OnBnClickedPass1()
 	m_Pass2.SetCheck(false);
 
 
-	LoadTexture(L"\\Resources\\Texture\\AlphaTest\\", CToolEffect::ALPHATEST);
+	LoadTexture(L"\\Resources\\Texture\\AlphaTest\\", ALPHATEST);
 
 
 	UpdateData(FALSE);
@@ -250,7 +284,7 @@ void CEffectTab::OnBnClickedPass2()
 	m_Pass0.SetCheck(false);
 	m_Pass1.SetCheck(false);
 
-	LoadTexture(L"\\Resources\\Texture\\AlphaBlend\\", CToolEffect::ALPHABLEND);
+	LoadTexture(L"\\Resources\\Texture\\AlphaBlend\\", ALPHABLEND);
 
 	UpdateData(FALSE);
 }
@@ -271,7 +305,7 @@ BOOL CEffectTab::OnInitDialog()
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
 
-void CEffectTab::LoadTexture(wstring strPath, CToolEffect::TEXTURE_STATE eState)
+void CEffectTab::LoadTexture(wstring strPath,TEXTURE_STATE eState)
 {
 
 	CFileDialog Dlg(TRUE, L"", L"", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
@@ -288,7 +322,7 @@ void CEffectTab::LoadTexture(wstring strPath, CToolEffect::TEXTURE_STATE eState)
 	PathRemoveFileSpec(szCurPath);
 
 
-	 lstrcat(szCurPath, strPath.c_str());
+	lstrcat(szCurPath, strPath.c_str());
 
 	// 대화상자를 열 때 초기 경로를 설정한다.
 	Dlg.m_ofn.lpstrInitialDir = szCurPath;
@@ -309,8 +343,8 @@ void CEffectTab::LoadTexture(wstring strPath, CToolEffect::TEXTURE_STATE eState)
 		strFileName.pop_back();
 		strFileName.pop_back();
 		strFileName.pop_back();
-	
-		wstring temp =&strFileName.c_str()[strFileName.size()-1];
+
+		wstring temp = &strFileName.c_str()[strFileName.size() - 1];
 		int iIndex = 0;
 		iIndex = _wtoi(temp.c_str());
 		m_pEffectData->SetTexture(iIndex, eState);
@@ -326,7 +360,7 @@ void CEffectTab::UpdateEffect()
 	if (m_pEffectData == nullptr)
 		return;
 
-	CTransform* pTransForm = dynamic_cast<CTransform*>(m_pEffectData->Get_Component(L"Com_Transform",ID_DYNAMIC));
+	CTransform* pTransForm = dynamic_cast<CTransform*>(m_pEffectData->Get_Component(L"Com_Transform", ID_DYNAMIC));
 
 	pTransForm->m_vInfo[INFO_POS].x = m_fPosX;
 	pTransForm->m_vInfo[INFO_POS].y = m_fPosY;
@@ -343,7 +377,7 @@ void CEffectTab::UpdateEffect()
 
 
 	m_pEffectData->m_tEffectData.vScalePat = _vec3(m_fOriScaleXPat, m_fOriScaleYPat, m_fOriScaleZPat);
-	m_pEffectData->m_tEffectData.vRotPat = _vec3(m_fOriRotXPat,m_fOriRotYPat,m_fOriRotZPat);
+	m_pEffectData->m_tEffectData.vRotPat = _vec3(m_fOriRotXPat, m_fOriRotYPat, m_fOriRotZPat);
 
 	m_pEffectData->m_tEffectData.fStartRot = m_fOriRotStartTime;
 	m_pEffectData->m_tEffectData.fEndRot = m_fOriRotEndTime;
@@ -353,6 +387,9 @@ void CEffectTab::UpdateEffect()
 
 	m_pEffectData->m_tEffectData.iRotRepeat = m_fOriRotRepeat;
 	m_pEffectData->m_tEffectData.iScaleRepeat = m_fOriScaleRepeat;
+
+	m_pEffectData->m_tEffectData.fStartTime = m_fOriStartTime;
+	m_pEffectData->m_tEffectData.fEndTime = m_fOriEndTIme;
 
 
 }
@@ -368,65 +405,72 @@ void CEffectTab::InitEffect()
 
 	UpdateData(TRUE);
 
-	 m_fPosX = pTransForm->m_vInfo[INFO_POS].x;
-	 m_fPosY = pTransForm->m_vInfo[INFO_POS].y;
-	 m_fPosZ = pTransForm->m_vInfo[INFO_POS].z;
+	m_fPosX = pTransForm->m_vInfo[INFO_POS].x;
+	m_fPosY = pTransForm->m_vInfo[INFO_POS].y;
+	m_fPosZ = pTransForm->m_vInfo[INFO_POS].z;
 
-	 m_fScaleX = pTransForm->m_vScale.x;
-	 m_fScaleY = pTransForm->m_vScale.y;
-	 m_fScaleZ = pTransForm->m_vScale.z;
-
-
-	 m_fRotX = pTransForm->m_vAngle.x;
-	 m_fRotY = pTransForm->m_vAngle.y;
-	 m_fRotZ = pTransForm->m_vAngle.z;
+	m_fScaleX = pTransForm->m_vScale.x;
+	m_fScaleY = pTransForm->m_vScale.y;
+	m_fScaleZ = pTransForm->m_vScale.z;
 
 
-	 m_fOriPosX = m_fPosX;
-	 m_fOriPosY = m_fPosY;
-	 m_fOriPosZ = m_fPosZ;
-
-	 m_fOriRotX = m_fRotX;
-	 m_fOriRotY = m_fRotY;
-	 m_fOriRotZ = m_fRotZ;
-
-	 m_fOriScaleX = m_fScaleX;
-	 m_fOriScaleY = m_fScaleY;
-	 m_fOriScaleZ = m_fScaleZ;
-
-	 
-	 m_fRotXPat = m_pEffectData->m_tEffectData.vRotPat.x;
-	 m_fRotYPat = m_pEffectData->m_tEffectData.vRotPat.y;
-	 m_fRotZPat = m_pEffectData->m_tEffectData.vRotPat.z;
-
-	 m_fScaleXPat = m_pEffectData->m_tEffectData.vScalePat.x;
-	 m_fScaleYPat = m_pEffectData->m_tEffectData.vScalePat.y;
-	 m_fScaleZPat = m_pEffectData->m_tEffectData.vScalePat.z;
-
-	 m_fRotStartTime = m_pEffectData->m_tEffectData.fStartRot;
-	 m_fRotEndTime = m_pEffectData->m_tEffectData.fEndRot;
-	 m_fScaleStartTIme = m_pEffectData->m_tEffectData.fStartScale;
-	 m_fScaleEndTime = m_pEffectData->m_tEffectData.fEndScale;
+	m_fRotX = pTransForm->m_vAngle.x;
+	m_fRotY = pTransForm->m_vAngle.y;
+	m_fRotZ = pTransForm->m_vAngle.z;
 
 
+	m_fOriPosX = m_fPosX;
+	m_fOriPosY = m_fPosY;
+	m_fOriPosZ = m_fPosZ;
+
+	m_fOriRotX = m_fRotX;
+	m_fOriRotY = m_fRotY;
+	m_fOriRotZ = m_fRotZ;
+
+	m_fOriScaleX = m_fScaleX;
+	m_fOriScaleY = m_fScaleY;
+	m_fOriScaleZ = m_fScaleZ;
 
 
-	 m_fOriScaleXPat = m_fScaleXPat;
-	 m_fOriScaleYPat = m_fScaleYPat;
-	 m_fOriScaleZPat = m_fScaleZPat;
-	 m_fOriRotXPat = m_fRotXPat;
-	 m_fOriRotYPat = m_fRotYPat;
-	 m_fOriRotZPat = m_fRotZPat;
+	m_fRotXPat = m_pEffectData->m_tEffectData.vRotPat.x;
+	m_fRotYPat = m_pEffectData->m_tEffectData.vRotPat.y;
+	m_fRotZPat = m_pEffectData->m_tEffectData.vRotPat.z;
+
+	m_fScaleXPat = m_pEffectData->m_tEffectData.vScalePat.x;
+	m_fScaleYPat = m_pEffectData->m_tEffectData.vScalePat.y;
+	m_fScaleZPat = m_pEffectData->m_tEffectData.vScalePat.z;
+
+	m_fRotStartTime = m_pEffectData->m_tEffectData.fStartRot;
+	m_fRotEndTime = m_pEffectData->m_tEffectData.fEndRot;
+	m_fScaleStartTIme = m_pEffectData->m_tEffectData.fStartScale;
+	m_fScaleEndTime = m_pEffectData->m_tEffectData.fEndScale;
 
 
-	 m_fOriScaleStartTime = m_fScaleStartTIme;
-	 m_fOriScaleEndTime = m_fScaleEndTime;
-
-	 m_fOriRotStartTime = m_fRotStartTime;
-	 m_fOriRotEndTime = m_fRotEndTime;
+	m_fOriStartTime = m_pEffectData->m_tEffectData.fStartTime;
+	m_fOriEndTIme = m_pEffectData->m_tEffectData.fEndTime;
 
 
-	 UpdateData(FALSE);
+	m_fDeadStart = m_fOriStartTime;
+	m_fDeadEnd = m_fOriEndTIme;
+
+
+
+	m_fOriScaleXPat = m_fScaleXPat;
+	m_fOriScaleYPat = m_fScaleYPat;
+	m_fOriScaleZPat = m_fScaleZPat;
+	m_fOriRotXPat = m_fRotXPat;
+	m_fOriRotYPat = m_fRotYPat;
+	m_fOriRotZPat = m_fRotZPat;
+
+
+	m_fOriScaleStartTime = m_fScaleStartTIme;
+	m_fOriScaleEndTime = m_fScaleEndTime;
+
+	m_fOriRotStartTime = m_fRotStartTime;
+	m_fOriRotEndTime = m_fRotEndTime;
+
+
+	UpdateData(FALSE);
 
 }
 
@@ -711,7 +755,7 @@ void CEffectTab::ClickToOri()
 	m_fPosX = m_fOriPosX;
 	m_fPosY = m_fOriPosY;
 	m_fPosZ = m_fOriPosZ;
-	
+
 
 	m_fRotX = m_fOriRotX;
 	m_fRotY = m_fOriRotY;
@@ -766,9 +810,24 @@ void CEffectTab::PlayPattern()
 	UpdateData(TRUE);
 	m_bIsStartEffect = true;
 	m_fAccTime = 0.f;
-	if (m_pEffectData != nullptr)
+
+
+
+	list <CGameObject*>pList = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_EFFECT);
+
+
+	if (m_pEffectData != nullptr &&! m_ButtonSelectAll.GetCheck())
 	{
 		m_pEffectData->SetCheck(true);
+	}
+	else
+	{
+
+		for (auto& pSrc : pList)
+			dynamic_cast<CToolEffect*>(pSrc)->SetCheck(true);
+
+
+
 	}
 
 
@@ -786,11 +845,260 @@ void CEffectTab::ClickPatStop()
 	m_bIsStartEffect = false;
 	m_fAccTime = 0.f;
 
-	if (m_pEffectData != nullptr)
+	list <CGameObject*>pList = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_EFFECT);
+
+	
+	if (m_pEffectData != nullptr && !m_ButtonSelectAll.GetCheck())
 	{
 		m_pEffectData->SetCheck(false);
+	}
+	else
+	{
+
+		for (auto& pSrc : pList)
+			dynamic_cast<CToolEffect*>(pSrc)->SetCheck(false);
+
+
+
 	}
 
 
 	UpdateData(FALSE);
+}
+
+
+void CEffectTab::OnBnClickedInputStartEnd()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	UpdateData(TRUE);
+
+	m_fOriEndTIme = m_fDeadEnd;
+	m_fOriStartTime = m_fDeadStart;
+
+	UpdateEffect();
+
+	UpdateData(FALSE);
+
+}
+
+
+void CEffectTab::EffectChangeClick()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	UpdateData(TRUE);
+	int iIndex =   m_MadeEffectList.GetCurSel();
+
+	if (iIndex == -1)
+		return;
+	list<CGameObject*> pList = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_EFFECT);
+	
+	int iListIndex = 0;
+	for (auto& pSrc : pList)
+	{
+		dynamic_cast<CToolEffect*>(pSrc)->m_bIsCheck = false;
+		if (iListIndex == iIndex)
+		{
+			dynamic_cast<CToolEffect*>(pSrc)->m_bIsCheck = true;
+			m_pEffectData = dynamic_cast<CToolEffect*>(pSrc);
+			InitEffect();
+		}
+		iListIndex++;
+
+	}
+
+
+
+	UpdateData(FALSE);
+
+
+}
+
+
+void CEffectTab::ClickDeleteButton()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	UpdateData(TRUE);
+	int iIndex = m_MadeEffectList.GetCurSel();
+
+	if (iIndex == -1)
+		return;
+	list<CGameObject*> pList = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_EFFECT);
+
+	m_pEffectData = nullptr;
+
+	int iListIndex = 0;
+	for (auto& pSrc : pList)
+	{
+		if (iListIndex == iIndex)
+		{
+			dynamic_cast<CToolEffect*>(pSrc)->m_bisDead = true;
+			break;
+		}
+		iListIndex++;
+
+	}
+
+	m_MadeEffectList.DeleteString(iIndex);
+	UpdateData(FALSE);
+
+
+}
+
+
+void CEffectTab::ClickCopy()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	UpdateData(TRUE);
+	int iIndex = m_MadeEffectList.GetCurSel();
+
+	if (iIndex == -1)
+		return;
+	CString strIndex;
+	m_MadeEffectList.GetText(iIndex, strIndex);
+	m_MadeEffectList.AddString(strIndex);
+
+
+	int iListIndex = 0;
+	list<CGameObject*> pList = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_EFFECT);
+
+	EFFECTDATA eData;
+	for (auto& pSrc : pList)
+	{
+		if (iListIndex == iIndex)
+		{
+			eData = dynamic_cast<CToolEffect*>(pSrc)->m_tEffectData;
+			break;
+		}
+		iListIndex++;
+
+	}
+
+
+
+
+	CToolEffect* pDefaultEffect = CToolEffect::Create(CGraphicDev::GetInstance()->GetDevice());
+	pDefaultEffect->SetEffectData(eData);
+	CObjMgr::GetInstance()->AddObject(pDefaultEffect, CObjMgr::OBJ_EFFECT);
+
+
+
+
+
+}
+
+
+void CEffectTab::OnBnClickedSaveEffect()
+{
+	UpdateData(TRUE);
+
+	CFileDialog Dlg(FALSE, L"dat", L"제목없음.dat", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
+		L"Data Files(*.dat)|*.dat||", this);
+
+	TCHAR szCurPath[256] = L"";
+	GetCurrentDirectory(256, szCurPath);
+	PathRemoveFileSpec(szCurPath);
+	lstrcat(szCurPath, L"\\Data");
+	lstrcat(szCurPath, L"\\Effect\\");
+	Dlg.m_ofn.lpstrInitialDir = szCurPath;
+
+	if (IDOK == Dlg.DoModal())
+	{
+
+
+		CString strFileName = Dlg.GetPathName();
+
+		HANDLE hFile = CreateFile(strFileName.GetString(), GENERIC_WRITE, 0, 0,
+			CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+
+		if (INVALID_HANDLE_VALUE == hFile)
+			return;
+
+
+		list<CGameObject*> pList = CObjMgr::GetInstance()->GetGameObjectLst(CObjMgr::OBJ_EFFECT);
+
+		EFFECTDATA eData;
+		DWORD dwByte = 0;
+		for (auto& pSrc : pList)
+		{
+			   eData =  dynamic_cast<CToolEffect*>(pSrc)->m_tEffectData;
+
+			   WriteFile(hFile, &eData, sizeof(EFFECTDATA), &dwByte, nullptr);
+
+
+		}
+			CloseHandle(hFile);
+
+	}
+
+	UpdateData(FALSE);
+
+
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CEffectTab::OnBnClickedEffectLoad()
+{
+	UpdateData(TRUE);
+
+
+
+	CFileDialog Dlg(TRUE, L"dat", L"제목없음.dat", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
+		L"Data Files(*.dat)|*.dat||", this);
+
+
+	TCHAR szCurPath[128] = L"";
+	GetCurrentDirectory(256, szCurPath);
+
+	// PathRemoveFileSpec: 현재 경로 상에서 파일명을 제거하는 함수.
+	// 제거해야할 파일명이 없을 경우에는 가장 말단 폴더명을 제거한다.
+	PathRemoveFileSpec(szCurPath);
+	lstrcat(szCurPath, L"\\Data");
+	lstrcat(szCurPath, L"\\Effect\\");
+
+	Dlg.m_ofn.lpstrInitialDir = szCurPath;
+
+	DWORD dwByte = 0;
+	if (IDOK == Dlg.DoModal())
+	{
+		CString strFileName = Dlg.GetPathName();
+
+		HANDLE hFile = CreateFile(strFileName.GetString(), GENERIC_READ, 0, 0,
+			OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+		while (1)
+		{
+			EFFECTDATA tData;
+			ReadFile(hFile, &tData, sizeof(EFFECTDATA), &dwByte, nullptr);
+
+
+				if (0 == dwByte)
+				{
+					break;
+				}
+				CToolEffect* pObj = CToolEffect::Create(CGraphicDev::GetInstance()->GetDevice());
+				pObj->SetEffectData(tData);
+				if (pObj->m_tEffectData.eType == TEXTURE)
+				{
+					m_MadeEffectList.AddString(L"RCTexEffect");
+
+				}
+				else
+					m_MadeEffectList.AddString(L"MeshEffect");
+
+
+				CObjMgr::GetInstance()->AddObject(pObj, CObjMgr::OBJ_EFFECT);
+
+
+		}
+
+
+
+	CloseHandle(hFile);
+	}
+
+
+	UpdateData(FALSE);
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }

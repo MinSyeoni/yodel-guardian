@@ -14,8 +14,8 @@ private:
 
 public:
 	const _vec3* Get_VtxPos(void) const { return m_pPos; }
-	_ulong				Get_VtxCntX(void) const { return m_iH.biWidth; }
-	_ulong				Get_VtxCntZ(void) const { return m_iH.biHeight; }
+	_ulong				Get_VtxCntX(void) const { return m_dwVtxCntX; }
+	_ulong				Get_VtxCntZ(void) const { return m_dwVtxCntZ; }
 	void				Set_TerrainHeight(_float fRange, _float fHeight, _vec3 vPos, _int iMode);
 	_float				Get_TerrainHeight(_ulong dwIndex);
 

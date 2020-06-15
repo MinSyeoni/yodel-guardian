@@ -15,7 +15,7 @@ HRESULT CToolEffect::Ready_Object()
 
 	m_bisDead = 0;
 
-	
+
 
 
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
@@ -34,13 +34,19 @@ _int CToolEffect::Update_Object(const _float& fTimeDelta)
 	}
 	else
 	{
+		m_bIsUvStop = false;
+		m_iSpriteRow = 0;
+		m_fChapterX = 0;
+		m_fChapterY = 0;
+		m_fSpriteTime = 0.f;
 		m_tEffectData.vOriPos = m_pTransCom->m_vInfo[INFO_POS];
 		m_tEffectData.vOriScale = m_pTransCom->m_vScale;
+		m_fAccTime = 0.f;
 	}
 
 
 
-	
+
 
 	m_pSphereCol->Update_Collider(&m_pTransCom->m_matWorld);
 	m_pSphereCol->Set_ColType(CToolCollider::COL_TRUE);
@@ -51,6 +57,8 @@ _int CToolEffect::Update_Object(const _float& fTimeDelta)
 void CToolEffect::Render_Object(void)
 {
 
+	if (((m_tEffectData.fEndTime - m_tEffectData.fStartTime) < m_fAccTime) || m_fAccTime < m_tEffectData.fStartTime)
+		return;
 
 	LPD3DXEFFECT	pEffect = m_pShaderCom->Get_EffectHandle();
 	NULL_CHECK(pEffect);
@@ -75,13 +83,13 @@ void CToolEffect::Render_Object(void)
 	pEffect->BeginPass(iPass);
 
 	m_pBufferCom->Render();
-	
+
 
 	pEffect->EndPass();
 	pEffect->End();
 	m_pSphereCol->Set_WorldMat(m_pTransCom->m_matWorld);
-	if(m_bIsCheck==true)
-	m_pSphereCol->Render_Collider();
+	if (m_bIsCheck == true)
+		m_pSphereCol->Render_Collider();
 
 
 
@@ -105,6 +113,8 @@ HRESULT CToolEffect::Set_ConstantTable(LPD3DXEFFECT pEffect)
 	pEffect->SetFloat("g_fY", m_tEffectData.iUvHeight);
 	pEffect->SetFloat("g_fChapterX", m_fChapterX);
 	pEffect->SetFloat("g_fChapterY", m_fChapterY);
+	pEffect->SetVector("g_vColor", &m_tEffectData.vColor);
+
 
 	m_pTexCom->Set_Texture(pEffect, "g_BaseTexture", m_iDrawId);
 
@@ -123,7 +133,7 @@ HRESULT CToolEffect::SetTexture(int iDrawId, TEXTURE_STATE eState)
 	if (m_eState != eState)
 	{
 		m_eState = eState;
-		
+
 		Engine::Safe_Release(m_pTexCom);
 		m_mapComponent[ID_STATIC].erase(L"Com_Tex");
 
@@ -144,9 +154,12 @@ HRESULT CToolEffect::SetTexture(int iDrawId, TEXTURE_STATE eState)
 			m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Tex", pComponent);
 
 		}
-       
+
 
 	}
+	m_tEffectData.iDrawId = m_iDrawId;
+	m_tEffectData.eState = m_eState;
+
 
 
 
@@ -163,18 +176,22 @@ void CToolEffect::UvAnimation()
 		if (m_iSpriteRow >= m_tEffectData.iUvHeight)
 		{
 			m_iSpriteRow = 0;
+			m_bIsUvStop = true;
 		}
 
 
 	}
 	int iRow = m_fSpriteTime;
 	int iCol = m_iSpriteRow;
-    
-	m_fChapterX = (float)iRow/m_tEffectData.iUvWidth;
-	m_fChapterY = (float)iCol /m_tEffectData.iUvHeight;
 
+	m_fChapterX = (float)iRow / m_tEffectData.iUvWidth;
+	m_fChapterY = (float)iCol / m_tEffectData.iUvHeight;
 
-
+	if (m_bIsUvStop == true)
+	{
+		m_fChapterX = float(m_tEffectData.iUvWidth-1) / m_tEffectData.iUvWidth;
+		m_fChapterY = float(m_tEffectData.iUvHeight-1) / m_tEffectData.iUvHeight;
+	}
 }
 
 void CToolEffect::SetCheck(_bool bIsCheck)
@@ -189,7 +206,48 @@ void CToolEffect::SetCheck(_bool bIsCheck)
 
 		m_fAlpha = 1.f;
 	}
-                                 
+
+}
+
+HRESULT CToolEffect::SetEffectData(EFFECTDATA tData)
+{
+
+	m_tEffectData = tData;
+
+	m_iDrawId = m_tEffectData.iDrawId;
+
+	TEXTURE_STATE eState = m_tEffectData.eState;
+	
+	if (m_eState != eState)
+	{
+		m_eState = eState;
+
+		Engine::Safe_Release(m_pTexCom);
+		m_mapComponent[ID_STATIC].erase(L"Com_Tex");
+
+		Engine::CComponent* pComponent = nullptr;
+
+		if (m_eState == ALPHABLEND)
+		{
+
+			pComponent = m_pTexCom = static_cast <Engine::CTexture*>(Engine::Clone_Resources(RESOURCE_STAGE, L"Texture_AlphaBlend"));
+			NULL_CHECK_RETURN(pComponent, E_FAIL);
+			m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Tex", pComponent);
+
+		}
+		else if (m_eState == ALPHATEST)
+		{
+			pComponent = m_pTexCom = static_cast<Engine::CTexture*>(Engine::Clone_Resources(RESOURCE_STAGE, L"Texture_AlphaTest"));
+			NULL_CHECK_RETURN(pComponent, E_FAIL);
+			m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Tex", pComponent);
+
+		}
+
+
+	}
+
+	
+
 }
 
 HRESULT CToolEffect::Add_Component(void)
@@ -260,14 +318,14 @@ void CToolEffect::UpdateAnimation()
 
 	UpdateScaleAni();
 	UpdateRotAni();
-	if(m_tEffectData.bIsFadeIn)
-	UpdateFadeIn();
+	if (m_tEffectData.bIsFadeIn)
+		UpdateFadeIn();
 
-	if(m_tEffectData.bIsFadeOut)
-	UpdateFadeOut();
-	
+	if (m_tEffectData.bIsFadeOut)
+		UpdateFadeOut();
 
-	
+
+
 	UvAnimation();
 
 }
@@ -284,8 +342,8 @@ void CToolEffect::UpdateScaleAni()
 	float fScalePattenTime = m_tEffectData.fEndScale - m_tEffectData.fStartScale;
 
 	float fAccTime = m_fAccTime - m_tEffectData.fStartScale;
-	
-	m_pTransCom->m_vScale = ((m_tEffectData.vScalePat-m_tEffectData.vOriScale) * fAccTime / fScalePattenTime)+(m_tEffectData.vOriScale);
+
+	m_pTransCom->m_vScale = ((m_tEffectData.vScalePat - m_tEffectData.vOriScale) * fAccTime / fScalePattenTime) + (m_tEffectData.vOriScale);
 
 
 	if (fAccTime / fScalePattenTime >= 1.f)
@@ -323,14 +381,15 @@ void CToolEffect::UpdateRotAni()
 
 void CToolEffect::UpdateFadeOut()
 {
-	if (m_fAccTime < m_tEffectData.fFadeOutStartTime)
+	if (m_fAccTime < (m_tEffectData.fFadeOutStartTime*0.1f))
 		return;
 
 	float fFadeInPattenTime = m_tEffectData.fFadeOutEndTime - m_tEffectData.fFadeOutStartTime;
 
+	fFadeInPattenTime = fFadeInPattenTime * 0.1f;
 	float fAccTime = m_fAccTime - m_tEffectData.fFadeOutStartTime;
 
-	m_fAlpha =1.f-(fAccTime / fFadeInPattenTime);
+	m_fAlpha = 1.f - (fAccTime / fFadeInPattenTime);
 
 	if (m_fAlpha < 0.f)
 		m_fAlpha = 0.f;
@@ -340,14 +399,15 @@ void CToolEffect::UpdateFadeOut()
 void CToolEffect::UpdateFadeIn()
 {
 
-	if (m_fAccTime < m_tEffectData.fFadeInStartTime)
+	if (m_fAccTime < m_tEffectData.fFadeInStartTime*0.1f)
 		return;
 
 	float fFadeInPattenTime = m_tEffectData.fFadeInEndTime - m_tEffectData.fFadeInStartTime;
-
+	fFadeInPattenTime = fFadeInPattenTime * 0.1f;
 	float fAccTime = m_fAccTime - m_tEffectData.fFadeInStartTime;
 
 	m_fAlpha = (fAccTime / fFadeInPattenTime);
-
+	if (m_fAlpha > 1)
+		m_fAlpha = 1;
 
 }

@@ -240,7 +240,7 @@ HRESULT CGraphicDevice::Create_GraphicDevice(const _uint & iWidth, const _uint &
 	IDXGIAdapter1 *pd3dAdapter = nullptr;
 
 	//시영아 여기야여기
-	m_pFactory->EnumAdapters1(0, &pd3dAdapter);
+	m_pFactory->EnumAdapters1(1, &pd3dAdapter);
 	HRESULT hResult = D3D12CreateDevice(pd3dAdapter,             // default adapter
 										D3D_FEATURE_LEVEL_12_0,
 										IID_PPV_ARGS(&m_pGraphicDevice));
@@ -255,7 +255,7 @@ HRESULT CGraphicDevice::Create_GraphicDevice(const _uint & iWidth, const _uint &
 		ThrowIfFailed(m_pFactory->EnumWarpAdapter(IID_PPV_ARGS(&pWarpAdapter)));
 
 		ThrowIfFailed(D3D12CreateDevice(pWarpAdapter,
-										D3D_FEATURE_LEVEL_11_0,
+										D3D_FEATURE_LEVEL_12_0,
 										IID_PPV_ARGS(&m_pGraphicDevice)));
 	}
 
@@ -399,7 +399,7 @@ HRESULT CGraphicDevice::Create_RootSig()
 	Create_BlurRoot();
 	Create_DistortRoot();
 	Create_SSAORoot();
-
+	Create_EffectRoot();
 	return S_OK;
 }
 
@@ -927,6 +927,50 @@ HRESULT CGraphicDevice::Create_SSAORoot()
 
 	return S_OK;
 }
+
+HRESULT CGraphicDevice::Create_EffectRoot()
+{
+	CD3DX12_DESCRIPTOR_RANGE texTable;
+	texTable.Init(
+		D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+		1,  // number of descriptors
+		0); // register t0
+
+	// Root parameter can be a table, root descriptor or root constants.
+	CD3DX12_ROOT_PARAMETER slotRootParameter[3];
+
+	slotRootParameter[0].InitAsDescriptorTable(1, &texTable, D3D12_SHADER_VISIBILITY_PIXEL);
+	slotRootParameter[1].InitAsConstantBufferView(0);
+	slotRootParameter[2].InitAsConstantBufferView(1);
+
+
+	auto staticSamplers = GetStaticSamplers();
+
+	CD3DX12_ROOT_SIGNATURE_DESC rootSigDesc(3, slotRootParameter,
+		(UINT)staticSamplers.size(), staticSamplers.data(),
+		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
+
+	// create a root signature with a single slot which points to a descriptor range consisting of a single constant buffer
+	ComPtr<ID3DBlob> serializedRootSig = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
+	HRESULT hr = D3D12SerializeRootSignature(&rootSigDesc, D3D_ROOT_SIGNATURE_VERSION_1,
+		serializedRootSig.GetAddressOf(), errorBlob.GetAddressOf());
+
+	if (errorBlob != nullptr)
+	{
+		::OutputDebugStringA((char*)errorBlob->GetBufferPointer());
+	}
+	ThrowIfFailed(hr);
+
+	ThrowIfFailed(m_pGraphicDevice->CreateRootSignature(
+		0,
+		serializedRootSig->GetBufferPointer(),
+		serializedRootSig->GetBufferSize(),
+		IID_PPV_ARGS(&m_arrSig[(UINT)ROOT_SIG_TYPE::INPUT_EFFECT])));
+
+	return S_OK;
+}
+
 
 HRESULT CGraphicDevice::OnResize(const _uint& iWidth, const _uint& iHeight)
 {

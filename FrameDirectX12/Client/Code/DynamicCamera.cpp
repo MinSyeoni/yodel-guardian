@@ -88,6 +88,8 @@ _int CDynamicCamera::Update_GameObject(const _float& fTimeDelta)
 
 
     MouseInput();
+
+ 
     Engine::CGameObject::Update_GameObject(fTimeDelta);
     Engine::CCamera::Update_GameObject(fTimeDelta);
 

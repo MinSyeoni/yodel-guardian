@@ -29,6 +29,10 @@ HRESULT CWeapon::AddComponent()
 
 }
 
+void CWeapon::CreateShootEffect()
+{
+}
+
 void CWeapon::Render_GameObject(const _float & fTimeDelta)
 {
 	Set_ConstantTable();
@@ -52,7 +56,7 @@ void CWeapon::Set_ConstantTable()
 	_matrix matProj = INIT_MATRIX;
 
 	CB_MATRIX_INFO	tCB_MatrixInfo;
-	CB_BONE_INFO	tCB_BoneInfo;
+
 
 	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
 

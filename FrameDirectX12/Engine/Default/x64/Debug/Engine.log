@@ -1,12 +1,10 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppClean.targets(76,5): warning : 'c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\animationcontrol.obj' 파일은 다른 프로세스에서 사용 중이므로 프로세스에서 액세스할 수 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppClean.targets(76,5): warning : 'c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\gameobject.obj' 파일은 다른 프로세스에서 사용 중이므로 프로세스에서 액세스할 수 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppClean.targets(76,5): warning : 'c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\debug\shader_blur.obj' 파일은 다른 프로세스에서 사용 중이므로 프로세스에서 액세스할 수 없습니다.
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Blend.cso
+﻿  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Blend.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Blur.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ColorBuffer.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Default.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Destortion.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_DownSample.cso
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Effect.cso
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(82,12-69): warning X3206: implicit truncation of vector type
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(121,12-69): warning X3206: implicit truncation of vector type
   
@@ -68,6 +66,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   Shader_DefaultTex.cpp
   Shader_Destortion.cpp
   Shader_DownSample.cpp
+  Shader_Effect.cpp
   Shader_LightAcc.cpp
   Shader_Mesh.cpp
   Shader_Shadow.cpp
@@ -81,9 +80,9 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   Target.cpp
   TerrainTex.cpp
   Texture.cpp
-  TimeMgr.cpp
   코드를 생성하고 있습니다...
   컴파일하고 있습니다...
+  TimeMgr.cpp
   Timer.cpp
   Transform.cpp
   VIBuffer.cpp
@@ -95,7 +94,8 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   배치 파일이 아닙니다.
           1개 파일이 복사되었습니다.
           1개 파일이 복사되었습니다.
-          1개 파일이 복사되었습니다.
+  다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다.
+          0개 파일이 복사되었습니다.
   .\Engine\Code\AnimationControl.h
   .\Engine\Code\Base.h
   .\Engine\Code\BloomTarget.h
@@ -143,6 +143,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   .\Engine\Code\Shader_DefaultTex.h
   .\Engine\Code\Shader_Destortion.h
   .\Engine\Code\Shader_DownSample.h
+  .\Engine\Code\Shader_Effect.h
   .\Engine\Code\Shader_LightAcc.h
   .\Engine\Code\Shader_Mesh.h
   .\Engine\Code\Shader_Shadow.h
@@ -163,7 +164,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   .\Engine\Code\Transform.h
   .\Engine\Code\VIBuffer.h
   .\Engine\Code\VlLine.h
-         67개 파일이 복사되었습니다.
+         68개 파일이 복사되었습니다.
   .\Engine\Header\Engine_Const.h
   .\Engine\Header\Engine_Enum.h
   .\Engine\Header\Engine_Function.h

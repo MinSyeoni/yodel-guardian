@@ -73,7 +73,8 @@ void CPickingMgr::PickTerrainIndex(DWORD* pOutIndex, const VTXTEX* pTerrainVtx)
 		for (_uint x = 0; x < m_dwCol; ++x)
 		{
 			int		iIndex = y * (m_dwCol + 1) + x;
-
+			if (m_dwCol < iIndex + m_dwCol + 2)
+				continue;
 			// 오른쪽 위
 			if (D3DXIntersectTri(&pVertex[iIndex + m_dwCol + 2].vPos,
 				&pVertex[iIndex + 1].vPos,

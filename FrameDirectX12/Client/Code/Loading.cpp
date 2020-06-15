@@ -6,6 +6,7 @@
 #include "Scene_Logo.h"
 #include "GraphicDevice.h"
 #include "ActionCamera.h"
+#include "Effect.h"
 
 CLoading::CLoading(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	:m_pGraphicDev(pGraphicDevice)
@@ -36,6 +37,11 @@ _uint CLoading::Loading_ForStage(void)
 	pFont->Set_Text(L"Mesh_Loading");
 	pFont->Set_Color(D2D1::ColorF::Red);
 	Mesh_ForStage();
+
+	pFont->Set_Text(L"Effect_Loading");
+	pFont->Set_Color(D2D1::ColorF::Green);
+	Load_Effect();
+
 
 	pFont->Set_Text(L"Texture_Loading");
 	pFont->Set_Color(D2D1::ColorF::Red);
@@ -74,6 +80,17 @@ HRESULT CLoading::Load_Shader()
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_SkyDome", ID_STATIC, pComponent), E_FAIL);
 
 	// Shader_ColorBuffer
+
+
+	return S_OK;
+}
+
+HRESULT CLoading::Load_Effect()
+{
+
+	CGameObject* pObj = CEffect::Create(DEVICE, m_pCommandList, L"../../Data/Effect/GunFire.dat");
+	NULL_CHECK_RETURN(pObj, E_FAIL);
+	FAILED_CHECK_RETURN(CObjectMgr::Get_Instance()->Add_GameObjectPrototype(L"Prototype_Effect_GunFire", pObj),E_FAIL);
 
 
 	return S_OK;
@@ -343,6 +360,21 @@ HRESULT CLoading::Mesh_ForStage(void)
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Normandy", ID_STATIC, pComponent), E_FAIL);
 
 
+
+	//왜곡용
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/DistortDisk/", L"DistortDisk.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"DistortDisk", ID_STATIC, pComponent), E_FAIL);
+
+	//SHepard
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/DynamicMesh/Shepard/", L"Shepard.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Shepard", ID_STATIC, pComponent), E_FAIL);
+
+
+
+
+
 	return S_OK;
 }
 
@@ -380,10 +412,17 @@ HRESULT CLoading::Texture_ForStage(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_Rifle", ID_STATIC, pComponent), E_FAIL);
 
-	/////////////////////////데메지
+
 	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/DamageBlood/blood%d.dds", 3);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_DamageBlood", ID_STATIC, pComponent), E_FAIL);
+	/////////////////////////데메지
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Effect/Alphablend/Alphablend%d.dds", 8);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Effect_AlphaBlend", ID_STATIC, pComponent), E_FAIL);
+
+	//////////////////EFFECT
+
 
 
 	return S_OK;

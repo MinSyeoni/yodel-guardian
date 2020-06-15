@@ -41,8 +41,7 @@ private:
 	______________________________________________________________________*/
 	Engine::CMesh*				m_pMeshCom = nullptr;
 	Engine::CShader_Mesh*         	m_pShaderCom = nullptr;
-	Engine::CSphereCollider* m_pShereCol = nullptr;//½Ã¿µ ÀÌ°Å¾å
-	CDynamicCamera*	m_pDynamicCamera = nullptr;
+
 
 	vector<vector<_matrix>> m_vecMatrix;
 public:

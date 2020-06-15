@@ -22,6 +22,8 @@ HRESULT CLight::Ready_Light(D3DLIGHT tagLightInfo)
 
 	m_LightIndex= CLight_Manager::Get_Instance()->Get_LightIndex();
 	m_LightIndex += 1;
+
+	m_blsLight = true;
 	return S_OK;
 }
 
@@ -71,6 +73,8 @@ HRESULT CLight::Render_Light(vector<ComPtr<ID3D12Resource>> pTargetTexture)
 		m_bIsInit = true;
 		return S_OK;
 	}
+	if (!m_blsLight)
+		return S_OK;
 	SetUp_ConstateTable();
 
 	m_pShader->Begin_Shader();
