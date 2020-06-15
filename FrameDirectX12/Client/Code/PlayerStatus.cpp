@@ -26,7 +26,7 @@ void CPlayerStatus::LateInit()
 {
     m_pCamera = static_cast<CDynamicCamera*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_Camera", L"DynamicCamera"));
 
-  
+
     m_bIsInit = true;
 }
 
@@ -59,12 +59,12 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
 
     m_ePreState = m_eCurState;
 
-    
+
     _matrix matBone = XMMatrixInverse(nullptr, *m_matChestOffset);
     matBone = matBone * *m_matChest;
 
     m_pBoxCollider->Update_Collider(&m_pTransCom->m_matWorld);
-    m_pSphereCollider->Update_Collider(&(matBone*m_pTransCom->m_matWorld));
+    m_pSphereCollider->Update_Collider(&(matBone * m_pTransCom->m_matWorld));
     CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::PLAYER, m_pBoxCollider);
     return NO_EVENT;
 }
@@ -185,7 +185,7 @@ void CPlayerStatus::KeyInput()
     }
 
 
-    if (KEY_PRESSING(DIKEYBOARD_F))
+    if (KEY_PRESSING(DIKEYBOARD_G))
     {
         if (m_eEquip == RIFLE)
         {
@@ -306,14 +306,14 @@ void CPlayerStatus::WeaponChange()
 
 void CPlayerStatus::ShootingCheck()
 {
-        CGameObject* pMonster = nullptr;
+    CGameObject* pMonster = nullptr;
 
-        _uint iMinDist = 999;
-        int iDist = 0;
+    _uint iMinDist = 999;
+    int iDist = 0;
     for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::SPHERE, CColliderMgr::MONSTER))
     {
         iDist = CMathMgr::Get_Instance()->Collision_Ray(pCol);
-        if (iDist<iMinDist)
+        if (iDist < iMinDist)
         {
             iMinDist = iDist;
             pMonster = pCol->Get_Owner();
@@ -326,33 +326,21 @@ void CPlayerStatus::ShootingCheck()
     else
     {
         CMonster::MONKIND  eMonKind = CMonster::NONAME;
-        eMonKind=  dynamic_cast<CMonster*>(pMonster)->Get_MONKIND();
+        eMonKind = dynamic_cast<CMonster*>(pMonster)->Get_MONKIND();
 
-        //if (eMonKind == CMonster::ZOMBI)
-        //{
-        //    CZombi* pZombi = dynamic_cast<CMonster*>(pMonster)->Get_Zombi();
-        //    pZombi->Set_HitDamage(30); 
-        //     pZombi->Set_IsHit(true);
-        //     
-        //     MeshInfo tData;
-
-        //     tData.MeshTag = L"DistortDisk";
-        //     tData.Pos = pMonster->Get_Transform()->m_vPos;
-        //     tData.Pos.y += 10.f;
-        //     tData.Pos.z -= 10.f;
-        //     tData.Rotation = _vec3{ 90.f,0.f,0.f };
-        //     tData.Scale = _vec3{ 0.3f,0.3f,0.3f };
-
-
-        //     CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_Environment", L"Prototype_DistortEffect", L"DistortEffect", &tData);
+        if (eMonKind == CMonster::ZOMBI)
+        {
+            CZombi* pZombi = dynamic_cast<CMonster*>(pMonster)->Get_Zombi();
+            pZombi->Set_HitDamage(30);
+            pZombi->Set_IsHit(true);
 
 
 
-        //}
+        }
 
 
     }
-    
+
 
 
 }
@@ -462,7 +450,7 @@ void CPlayerStatus::AttackCheck(const _float& fTimeDelta)
             {
                 if (static_cast<CWeapon*>(pSrc)->Get_WeaponType() == CWeapon::RIFLE && static_cast<CWeapon*>(pSrc)->Get_WeaponState() == CWeapon::EQUIP)
                 {
-                    
+
                     static_cast<CWeapon*>(pSrc)->CreateShootEffect();
                 }
             }
@@ -476,7 +464,7 @@ void CPlayerStatus::AttackCheck(const _float& fTimeDelta)
 
     if (m_bIsShoot == false)
         m_fShootingTime = 0.f;
-  
+
 
 
 }
@@ -517,16 +505,16 @@ void CPlayerStatus::DamageByMonster(const _float& fTimeDelta)
                 CZombi* pZombi = dynamic_cast<CMonster*>(pMonster)->Get_Zombi();
                 if (pZombi->Get_IsAtkPlayer())
                 {
-                   CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_UI", L"Prototype_DamageBlood", L"Damage", nullptr);
-                  m_bIshit = true;
-                  m_uiHp -= 1;
+                    CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_UI", L"Prototype_DamageBlood", L"Damage", nullptr);
+                    m_bIshit = true;
+                    m_uiHp -= 1;
 
                 }
 
             }
 
         }
-        
+
 
     }
 
@@ -535,16 +523,16 @@ void CPlayerStatus::DamageByMonster(const _float& fTimeDelta)
 
 void CPlayerStatus::CheckAim()
 {
-   CGameObject* pAim =  CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"Aim");
-   if (pAim == nullptr)
-       return;
+    CGameObject* pAim = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"Aim");
+    if (pAim == nullptr)
+        return;
 
-   if (m_eEquip == RIFLE)
-   {
-       dynamic_cast<CAim*>(pAim)->SetRender(true);
-       
-   }
-   else
-       dynamic_cast<CAim*>(pAim)->SetRender(false);
+    if (m_eEquip == RIFLE)
+    {
+        dynamic_cast<CAim*>(pAim)->SetRender(true);
+
+    }
+    else
+        dynamic_cast<CAim*>(pAim)->SetRender(false);
 
 }

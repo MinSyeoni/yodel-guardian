@@ -84,7 +84,8 @@ protected:
 	_matrix m_matScale = INIT_MATRIX;
 	CGameObject* m_pOwner = nullptr;
 	CVIBuffer* m_pDrawMesh = nullptr;
-
+	BoundingBox m_pBoxInfo;
+	BoundingSphere m_pSphereINfo;
 public:
 	virtual CComponent*		Clone() PURE;
 	virtual CComponent*     Clone_Collider(const _bool& bIsAttatch,  CMesh* pMesh, const _vec3& vAddPos, const _vec3& vAngle, const _float& fRadius, const _vec3&vScale, CGameObject* pOwner = nullptr)PURE;

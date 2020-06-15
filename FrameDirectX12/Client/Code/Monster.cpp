@@ -139,15 +139,12 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 		m_pZombi->Update_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
 		iCurState = m_pZombi->Get_CurState();
 
-		//if (m_bIsDead)
-//{
-//	// CDirectInput::Get_Instance()->KEY_DOWN(DIK_F))
-//	if (CDirectInput::Get_Instance()->KEY_PRESSING(DIK_N))
-//	{
-		//m_fDissolve -= 0.01f * m_fTime;
-		//	}
-		//m_matDissolve._11 = m_fDissolve;
-		//}
+		if (CDirectInput::Get_Instance()->KEY_PRESSING(DIK_N))
+		{
+			m_fDissolve -= 0.2f * fTimeDelta;
+			
+			m_matDissolve._11 = m_fDissolve;
+		}
 	}
 		break;
 	default:
@@ -206,10 +203,10 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 
 		if (m_pZombi->Get_IsDeadZombi())
 		{
-			m_fDissolve -= 0.01f * fTimeDelta;
+			m_fDissolve -= 1.f * fTimeDelta;
 			m_matDissolve._11 = m_fDissolve;
 			
-			if (m_fDissolve <= 0.f)
+			if (m_fDissolve <= -0.5f)
 				m_bIsDead = true;	
 		}
 	}
