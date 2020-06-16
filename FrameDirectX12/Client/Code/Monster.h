@@ -7,7 +7,7 @@
 namespace Engine
 {
 	class CMesh;
-	class CShader_Mesh;
+	class CShader_Dissolve;
 	class CBoxCollider;
 	class CSphereCollider;
 	class CNaviMesh;
@@ -36,6 +36,8 @@ public:
 	MONKIND    Get_MONKIND() { return m_eMonName; }//이것두넣엇어
 	virtual void    Render_ShadowDepth(CShader_Shadow* pShader);
 
+	void					Set_IsActiveStart(_bool bIsActive) { m_bIsActive = bIsActive; }
+
 private:
 	void					Set_ConstantTable();
 	void					Set_ShadowTable(CShader_Shadow* pShader);
@@ -46,10 +48,12 @@ private:
 
 private:
 	Engine::CMesh*				m_pMeshCom = nullptr;
-	Engine::CShader_Mesh*		m_pShaderCom = nullptr;
+	Engine::CShader_Dissolve*	m_pShaderCom = nullptr;
 	Engine::CBoxCollider*		m_pBoxCol = nullptr;
 	Engine::CSphereCollider*	m_pShereCol[3] = {};
 	Engine::CNaviMesh*			m_pNaviMesh = nullptr;
+	Engine::CTexture*			m_pDissolveTex = nullptr;
+
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
 
 	CFlameThrower*				m_pFlameThrower = nullptr;
@@ -69,11 +73,17 @@ private:
 	_vec3						m_pPlayerPos = _vec3(0.f, 0.f, 0.f);
 	_vec3						m_pMonsterPos = _vec3(0.f, 0.f, 0.f);
 
+protected:
+	float						m_fDissolve = 1.f;
+	_matrix						m_matDissolve = INIT_MATRIX;
+
 public:
 	virtual CGameObject*	Clone_GameObject(void* prg);
 	static	CMonster*		Create(ID3D12Device* pGraphicDevice,ID3D12GraphicsCommandList* pCommandList);
 
 private:
 	virtual void			Free();
+
+	_bool					m_bIsActive = false;
 };
 

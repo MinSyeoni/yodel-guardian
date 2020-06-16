@@ -122,7 +122,7 @@ void CShepard::Render_ShadowDepth(CShader_Shadow* pShader)
 void CShepard::TurnToPlayer()
 {
 
-	m_pTransCom->Chase_Target()
+//	m_pTransCom->Chase_Target();
 
 
 }

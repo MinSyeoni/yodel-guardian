@@ -62,6 +62,7 @@ HRESULT CMonster::Ready_GameObject()
 	case CMonster::FLAMETHROWER:
 		m_pFlameThrower = new CFlameThrower;
 		m_pFlameThrower->Set_Transform(m_pTransCom);
+		m_bIsActive = true;
 		break;
 	case CMonster::ZOMBI:
 	{
@@ -82,9 +83,7 @@ HRESULT CMonster::LateInit_GameObject()
 #ifdef _DEBUG
 	COUT_STR("LateInit Monster");
 #endif
-
-
-	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
+	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture(), m_pDissolveTex->Get_Texture());
 
 	switch (m_eMonName)
 	{
@@ -107,8 +106,8 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 {
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
-	if (m_bIsDead)
-		return DEAD_OBJ;
+	if (m_bIsDead)	return DEAD_OBJ;
+	if (!m_bIsActive)	return E_FAIL;
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 	m_pBoxCol->Update_Collider(&m_pTransCom->m_matWorld);
@@ -139,6 +138,13 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 		Update_BoneCollider(m_pShereCol[2], "Chest", CColliderMgr::MONSTER);
 		m_pZombi->Update_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
 		iCurState = m_pZombi->Get_CurState();
+
+		if (CDirectInput::Get_Instance()->KEY_PRESSING(DIK_N))
+		{
+			m_fDissolve -= 0.2f * fTimeDelta;
+			
+			m_matDissolve._11 = m_fDissolve;
+		}
 	}
 		break;
 	default:
@@ -172,6 +178,8 @@ void CMonster::Update_BoneCollider(CSphereCollider* pSphereCol, string strBoneNa
 
 _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 {
+	if (!m_bIsActive)	return E_FAIL;
+
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCol), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[0]), -1);
@@ -194,13 +202,18 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 		m_pZombi->LateUpdate_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
 
 		if (m_pZombi->Get_IsDeadZombi())
-			m_bIsDead = true;	
+		{
+			m_fDissolve -= 1.f * fTimeDelta;
+			m_matDissolve._11 = m_fDissolve;
+			
+			if (m_fDissolve <= -0.5f)
+				m_bIsDead = true;	
+		}
 	}
 		break;
 	default:
 		break;
 	}
-
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
@@ -209,6 +222,8 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 
 void CMonster::Render_GameObject(const _float & fTimeDelta)
 {
+	if (!m_bIsActive)	return;
+
 	Set_ConstantTable();
 
 	m_pShaderCom->Begin_Shader();
@@ -221,7 +236,7 @@ HRESULT CMonster::Add_Component()
 	NULL_CHECK_RETURN(m_pComponentMgr, E_FAIL);
 
 	// Shader
-	m_pShaderCom = static_cast<Engine::CShader_Mesh*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_Mesh", COMPONENTID::ID_STATIC));
+	m_pShaderCom = static_cast<Engine::CShader_Dissolve*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_Dissolve", COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
 
@@ -249,6 +264,12 @@ HRESULT CMonster::Add_Component()
 	m_pShereCol[2] = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 60.f, _vec3(1.f, 1.f, 1.f), this));
 	NULL_CHECK_RETURN(m_pShereCol[2], E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_SphereCol3", m_pShereCol[2]);
+
+	// µðÁ¹ºê
+	m_pDissolveTex = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_Dissolve", COMPONENTID::ID_STATIC));
+	NULL_CHECK_RETURN(m_pDissolveTex, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pDissolveTex);
+
 	return S_OK;
 }
 
@@ -256,7 +277,7 @@ void CMonster::Set_ConstantTable()
 {
 	_matrix matView = INIT_MATRIX;
 	_matrix matProj = INIT_MATRIX;
-
+	
 	CB_MATRIX_INFO	tCB_MatrixInfo;
 	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
 
@@ -264,8 +285,9 @@ void CMonster::Set_ConstantTable()
 	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
 
 	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
+
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
-	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_pTransCom->m_matWorld));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_matDissolve));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
 
@@ -274,6 +296,8 @@ void CMonster::Set_ConstantTable()
 
 void CMonster::Render_ShadowDepth(CShader_Shadow * pShader)
 {
+	if (!m_bIsActive)	return;
+
 	Set_ShadowTable(pShader);
 	m_pMeshCom->Render_ShadowMesh(pShader, m_vecMatrix, true);
 	pShader->Set_ShadowFinish();
@@ -281,8 +305,6 @@ void CMonster::Render_ShadowDepth(CShader_Shadow * pShader)
 
 void CMonster::Set_ShadowTable(CShader_Shadow* pShader)
 {
-
-
 	_matrix matView = INIT_MATRIX;
 	_matrix matProj = INIT_MATRIX;
 

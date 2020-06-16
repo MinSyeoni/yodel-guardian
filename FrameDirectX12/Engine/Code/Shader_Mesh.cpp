@@ -187,14 +187,6 @@ void CShader_Mesh::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTextur
     CGraphicDevice::Get_Instance()->End_ResetCmdList();
 }
 
-CUploadBuffer<CB_BONE_INFO>* CShader_Mesh::Get_UploadBuffer_BoneInfo()
-{
-    m_pCB_BoneInfo;
-    int i = 0;
-    return m_pCB_BoneInfo;
-
-}
-
 HRESULT CShader_Mesh::Create_DescriptorHeaps()
 {
     D3D12_DESCRIPTOR_HEAP_DESC CBV_HeapDesc;

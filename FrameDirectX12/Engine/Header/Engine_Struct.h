@@ -749,6 +749,7 @@ enum class ROOT_SIG_TYPE
     INPUT_BLUR,
     INPUT_DISTORT,
     INPUT_EFFECT,
+    INPUT_DISSOLVE,
     ENDSIG,
 };
 

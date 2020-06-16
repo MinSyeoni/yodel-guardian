@@ -31,7 +31,7 @@ HRESULT CMainApp::Ready_MainApp()
 {
 	srand(unsigned int(time(nullptr)));
 
-	FAILED_CHECK_RETURN(SetUp_DefaultSetting(CGraphicDevice::MODE_FULL, WINCX, WINCY), E_FAIL);
+	FAILED_CHECK_RETURN(SetUp_DefaultSetting(CGraphicDevice::MODE_WIN, WINCX, WINCY), E_FAIL);
 	FAILED_CHECK_RETURN(SetUp_ComponentPrototype(), E_FAIL);
 	FAILED_CHECK_RETURN(SetUp_Resource(),E_FAIL);
 	FAILED_CHECK_RETURN(SetUp_Font(),E_FAIL);
