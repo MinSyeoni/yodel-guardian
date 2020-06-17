@@ -1,305 +1,377 @@
-﻿  Transform.cpp
-c:\users\huijun\desktop\earthfall\engine\utility\code\transform.cpp(6): warning C4273: 'Engine::CTransform::CTransform': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\transform.h(11): note: '{ctor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\transform.cpp(13): warning C4273: 'Engine::CTransform::~CTransform': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\transform.h(12): note: '{dtor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\transform.cpp(18): warning C4273: 'Engine::CTransform::Chase_Target': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\transform.h(50): note: 'Chase_Target'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\transform.cpp(34): warning C4273: 'Engine::CTransform::Compute_LookAtTarget': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\transform.h(51): note: 'Compute_LookAtTarget'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\transform.cpp(50): warning C4273: 'Engine::CTransform::Move_TargetPos': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\transform.h(58): note: 'Move_TargetPos'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\transform.cpp(56): warning C4273: 'Engine::CTransform::Ready_Transform': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\transform.h(74): note: 'Ready_Transform'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\transform.cpp(67): warning C4273: 'Engine::CTransform::Create': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\transform.h(84): note: 'Create'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\transform.cpp(78): warning C4273: 'Engine::CTransform::Update_Component': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\transform.h(75): note: 'Update_Component'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\transform.cpp(120): warning C4273: 'Engine::CTransform::Free': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\transform.h(87): note: 'Free'의 이전 정의를 참조하십시오.
-  Shader.cpp
-c:\users\huijun\desktop\earthfall\engine\utility\code\shader.cpp(6): warning C4273: 'Engine::CShader::CShader': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\shader.h(12): note: '{ctor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\shader.cpp(14): warning C4273: 'Engine::CShader::CShader': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\shader.h(13): note: '{ctor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\shader.cpp(23): warning C4273: 'Engine::CShader::~CShader': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\shader.h(14): note: '{dtor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\shader.cpp(28): warning C4273: 'Engine::CShader::Ready_Shader': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\shader.h(20): note: 'Ready_Shader'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\shader.cpp(58): warning C4273: 'Engine::CShader::Create': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\shader.h(28): note: 'Create'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\shader.cpp(68): warning C4273: 'Engine::CShader::Clone': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\shader.h(29): note: 'Clone'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\shader.cpp(73): warning C4273: 'Engine::CShader::Free': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\shader.h(30): note: 'Free'의 이전 정의를 참조하십시오.
-  Scene.cpp
-c:\users\huijun\desktop\earthfall\engine\utility\code\scene.cpp(6): warning C4273: 'Engine::CScene::CScene': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\scene.h(13): note: '{ctor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\scene.cpp(12): warning C4273: 'Engine::CScene::~CScene': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\scene.h(14): note: '{dtor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\scene.cpp(17): warning C4273: 'Engine::CScene::Ready_Scene': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\scene.h(23): note: 'Ready_Scene'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\scene.cpp(22): warning C4273: 'Engine::CScene::Update_Scene': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\scene.h(24): note: 'Update_Scene'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\scene.cpp(37): warning C4273: 'Engine::CScene::Render_Scene': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\scene.h(25): note: 'Render_Scene'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\scene.cpp(43): warning C4273: 'Engine::CScene::Free': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\scene.h(32): note: 'Free'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\scene.cpp(54): warning C4273: 'Engine::CScene::Get_Component': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\scene.h(17): note: 'Get_Component'의 이전 정의를 참조하십시오.
-  Renderer.cpp
-c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.cpp(4): warning C4273: 'm_pInstance': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.h(13): note: 'private: static Engine::CRenderer * Engine::CRenderer::m_pInstance'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.cpp(4): error C2491: 'Engine::CRenderer::m_pInstance': dllimport 정적 데이터 멤버을(를) 정의할 수 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.cpp(4): warning C4273: 'Engine::CRenderer::GetInstance': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.h(13): note: 'GetInstance'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.cpp(4): warning C4273: 'Engine::CRenderer::DestroyInstance': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.h(13): note: 'DestroyInstance'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.cpp(7): warning C4273: 'Engine::CRenderer::CRenderer': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.h(16): note: '{ctor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.cpp(12): warning C4273: 'Engine::CRenderer::~CRenderer': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.h(17): note: '{dtor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.cpp(17): warning C4273: 'Engine::CRenderer::AddGroup': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.h(20): note: 'AddGroup'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.cpp(27): warning C4273: 'Engine::CRenderer::Render_GameObject': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.h(21): note: 'Render_GameObject'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.cpp(49): warning C4273: 'Engine::CRenderer::Clear_RenderGroup': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.h(22): note: 'Clear_RenderGroup'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.cpp(58): warning C4273: 'Engine::CRenderer::Render_Priority': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.h(25): note: 'Render_Priority'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.cpp(70): warning C4273: 'Engine::CRenderer::Render_NonAlpha': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.h(26): note: 'Render_NonAlpha'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.cpp(82): warning C4273: 'Engine::CRenderer::Render_Alpha': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.h(27): note: 'Render_Alpha'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.cpp(98): warning C4273: 'Engine::CRenderer::Render_UI': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.h(28): note: 'Render_UI'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.cpp(117): warning C4273: 'Engine::CRenderer::Free': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\renderer.h(34): note: 'Free'의 이전 정의를 참조하십시오.
-  ProtoMgr.cpp
-c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.cpp(4): warning C4273: 'm_pInstance': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.h(12): note: 'private: static Engine::CProtoMgr * Engine::CProtoMgr::m_pInstance'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.cpp(4): error C2491: 'Engine::CProtoMgr::m_pInstance': dllimport 정적 데이터 멤버을(를) 정의할 수 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.cpp(4): warning C4273: 'Engine::CProtoMgr::GetInstance': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.h(12): note: 'GetInstance'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.cpp(4): warning C4273: 'Engine::CProtoMgr::DestroyInstance': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.h(12): note: 'DestroyInstance'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.cpp(7): warning C4273: 'Engine::CProtoMgr::CProtoMgr': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.h(15): note: '{ctor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.cpp(12): warning C4273: 'Engine::CProtoMgr::~CProtoMgr': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.h(16): note: '{dtor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.cpp(17): warning C4273: 'Engine::CProtoMgr::Ready_Prototype': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.h(19): note: 'Ready_Prototype'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.cpp(29): warning C4273: 'Engine::CProtoMgr::Clone_Prototype': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.h(20): note: 'Clone_Prototype'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.cpp(39): warning C4273: 'Engine::CProtoMgr::Find_Prototype': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.h(26): note: 'Find_Prototype'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.cpp(49): warning C4273: 'Engine::CProtoMgr::Free': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\protomgr.h(28): note: 'Free'의 이전 정의를 참조하십시오.
-  Management.cpp
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(7): warning C4273: 'm_pInstance': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\management.h(14): note: 'private: static Engine::CManagement * Engine::CManagement::m_pInstance'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(7): error C2491: 'Engine::CManagement::m_pInstance': dllimport 정적 데이터 멤버을(를) 정의할 수 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(7): warning C4273: 'Engine::CManagement::GetInstance': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\management.h(14): note: 'GetInstance'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(7): warning C4273: 'Engine::CManagement::DestroyInstance': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\management.h(14): note: 'DestroyInstance'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(10): warning C4273: 'Engine::CManagement::CManagement': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\management.h(17): note: '{ctor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(16): warning C4273: 'Engine::CManagement::~CManagement': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\management.h(18): note: '{dtor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(21): warning C4273: 'Engine::CManagement::Set_Scene': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\management.h(27): note: 'Set_Scene'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(32): warning C4273: 'Engine::CManagement::Update_Scene': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\management.h(29): note: 'Update_Scene'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(42): warning C4273: 'Engine::CManagement::Render_Scene': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\management.h(30): note: 'Render_Scene'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(54): warning C4273: 'Engine::CManagement::Free': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\management.h(36): note: 'Free'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(62): warning C4273: 'Engine::CManagement::Get_Component': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\management.h(21): note: 'Get_Component'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(70): warning C4273: 'Engine::CManagement::Ready_Management': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\management.h(28): note: 'Ready_Management'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(74): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(74): warning C4091: '': 변수를 선언하지 않으면 'int' 왼쪽은 무시됩니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(74): error C2143: 구문 오류: ';'이(가) '상수' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(74): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(75): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(75): warning C4091: '': 변수를 선언하지 않으면 'int' 왼쪽은 무시됩니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(75): error C2143: 구문 오류: ';'이(가) '상수' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(75): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(78): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(78): warning C4091: '': 변수를 선언하지 않으면 'int' 왼쪽은 무시됩니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(78): error C2143: 구문 오류: ';'이(가) '상수' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(78): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(79): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(79): warning C4091: '': 변수를 선언하지 않으면 'int' 왼쪽은 무시됩니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(79): error C2143: 구문 오류: ';'이(가) '상수' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(79): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(82): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(82): warning C4091: '': 변수를 선언하지 않으면 'int' 왼쪽은 무시됩니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(82): error C2143: 구문 오류: ';'이(가) '상수' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(82): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(83): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(83): warning C4091: '': 변수를 선언하지 않으면 'int' 왼쪽은 무시됩니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(83): error C2143: 구문 오류: ';'이(가) '상수' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\management.cpp(83): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
-  LightMgr.cpp
-c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.cpp(4): warning C4273: 'm_pInstance': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.h(13): note: 'private: static Engine::CLightMgr * Engine::CLightMgr::m_pInstance'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.cpp(4): error C2491: 'Engine::CLightMgr::m_pInstance': dllimport 정적 데이터 멤버을(를) 정의할 수 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.cpp(4): warning C4273: 'Engine::CLightMgr::GetInstance': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.h(13): note: 'GetInstance'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.cpp(4): warning C4273: 'Engine::CLightMgr::DestroyInstance': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.h(13): note: 'DestroyInstance'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.cpp(7): warning C4273: 'Engine::CLightMgr::CLightMgr': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.h(16): note: '{ctor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.cpp(12): warning C4273: 'Engine::CLightMgr::~CLightMgr': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.h(17): note: '{dtor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.cpp(17): warning C4273: 'Engine::CLightMgr::Free': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.h(31): note: 'Free'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.cpp(25): warning C4273: 'Engine::CLightMgr::Ready_Light': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.h(23): note: 'Ready_Light'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.cpp(28): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.cpp(28): warning C4091: '': 변수를 선언하지 않으면 'int' 왼쪽은 무시됩니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.cpp(28): error C2143: 구문 오류: ';'이(가) '상수' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.cpp(28): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.cpp(36): warning C4273: 'Engine::CLightMgr::Get_LightInfo': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\lightmgr.h(20): note: 'Get_LightInfo'의 이전 정의를 참조하십시오.
-  Light.cpp
-c:\users\huijun\desktop\earthfall\engine\utility\code\light.cpp(6): warning C4273: 'Engine::CLight::CLight': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\light.h(12): note: '{ctor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\light.cpp(13): warning C4273: 'Engine::CLight::~CLight': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\light.h(13): note: '{dtor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\light.cpp(19): warning C4273: 'Engine::CLight::Ready_Light': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\light.h(17): note: 'Ready_Light'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\light.cpp(49): warning C4273: 'Engine::CLight::Create': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\light.h(26): note: 'Create'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\light.cpp(59): warning C4273: 'Engine::CLight::Free': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\light.h(30): note: 'Free'의 이전 정의를 참조하십시오.
-  Layer.cpp
-c:\users\huijun\desktop\earthfall\engine\utility\code\layer.cpp(6): warning C4273: 'Engine::CLayer::CLayer': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\layer.h(13): note: '{ctor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\layer.cpp(11): warning C4273: 'Engine::CLayer::~CLayer': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\layer.h(14): note: '{dtor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\layer.cpp(16): warning C4273: 'Engine::CLayer::Ready_Layer': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\layer.h(21): note: 'Ready_Layer'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\layer.cpp(21): warning C4273: 'Engine::CLayer::Update_Layer': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\layer.h(22): note: 'Update_Layer'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\layer.cpp(36): warning C4273: 'Engine::CLayer::Render_Layer': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\layer.h(23): note: 'Render_Layer'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\layer.cpp(42): warning C4273: 'Engine::CLayer::Create': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\layer.h(29): note: 'Create'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\layer.cpp(55): warning C4273: 'Engine::CLayer::Free': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\layer.h(30): note: 'Free'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\layer.cpp(61): warning C4273: 'Engine::CLayer::Add_GameObject': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\layer.h(17): note: 'Add_GameObject'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\layer.cpp(73): warning C4273: 'Engine::CLayer::Get_Component': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\layer.h(18): note: 'Get_Component'의 이전 정의를 참조하십시오.
-  GameObject.cpp
-c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.cpp(6): warning C4273: 'Engine::CGameObject::CGameObject': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.h(11): note: '{ctor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.cpp(12): warning C4273: 'Engine::CGameObject::~CGameObject': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.h(13): note: '{dtor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.cpp(17): warning C4273: 'Engine::CGameObject::Ready_Object': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.h(21): note: 'Ready_Object'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.cpp(22): warning C4273: 'Engine::CGameObject::Update_Object': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.h(22): note: 'Update_Object'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.cpp(30): warning C4273: 'Engine::CGameObject::Render_Object': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.h(23): note: 'Render_Object'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.cpp(35): warning C4273: 'Engine::CGameObject::Free': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.h(36): note: 'Free'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.cpp(47): warning C4273: 'Engine::CGameObject::Get_Component': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.h(17): note: 'Get_Component'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.cpp(57): warning C4273: 'Engine::CGameObject::Find_Component': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.h(33): note: 'Find_Component'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.cpp(67): warning C4273: 'Engine::CGameObject::Compute_ViewZ': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\gameobject.h(26): note: 'Compute_ViewZ'의 이전 정의를 참조하십시오.
-  CSCollider.cpp
-c:\users\huijun\desktop\earthfall\engine\utility\code\cscollider.cpp(6): warning C4273: 'Engine::CSCollider::CSCollider': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\cscollider.h(12): note: '{ctor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\cscollider.cpp(12): warning C4273: 'Engine::CSCollider::~CSCollider': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\cscollider.h(13): note: '{dtor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\cscollider.cpp(17): warning C4273: 'Engine::CSCollider::Ready_Collider': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\cscollider.h(25): note: 'Ready_Collider'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\cscollider.cpp(51): warning C4273: 'Engine::CSCollider::Render_Collider': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\cscollider.h(28): note: 'Render_Collider'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\cscollider.cpp(72): warning C4273: 'Engine::CSCollider::Create': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\cscollider.h(44): note: 'Create'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\cscollider.cpp(82): warning C4273: 'Engine::CSCollider::Free': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\cscollider.h(47): note: 'Free'의 이전 정의를 참조하십시오.
-  Component.cpp
-c:\users\huijun\desktop\earthfall\engine\utility\code\component.cpp(6): warning C4273: 'Engine::CComponent::CComponent': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\component.h(15): note: '{ctor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\component.cpp(11): warning C4273: 'Engine::CComponent::~CComponent': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\component.h(16): note: '{dtor}'의 이전 정의를 참조하십시오.
-  Collider.cpp
-c:\users\huijun\desktop\earthfall\engine\utility\code\collider.cpp(6): warning C4273: 'Engine::CCollider::CCollider': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\collider.h(12): note: '{ctor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\collider.cpp(12): warning C4273: 'Engine::CCollider::~CCollider': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\collider.h(13): note: '{dtor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\collider.cpp(19): warning C4273: 'Engine::CCollider::Ready_Collider': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\collider.h(25): note: 'Ready_Collider'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\collider.cpp(30): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\collider.cpp(30): warning C4091: '': 변수를 선언하지 않으면 'int' 왼쪽은 무시됩니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\collider.cpp(25): error C2143: 구문 오류: ';'이(가) '상수' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\collider.cpp(25): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\collider.cpp(37): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\collider.cpp(37): warning C4091: '': 변수를 선언하지 않으면 'int' 왼쪽은 무시됩니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\collider.cpp(32): error C2143: 구문 오류: ';'이(가) '상수' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\collider.cpp(32): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\collider.cpp(152): warning C4273: 'Engine::CCollider::Render_Collider': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\collider.h(29): note: 'Render_Collider'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\collider.cpp(177): warning C4273: 'Engine::CCollider::Create': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\collider.h(46): note: 'Create'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\collider.cpp(187): warning C4273: 'Engine::CCollider::Free': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\collider.h(51): note: 'Free'의 이전 정의를 참조하십시오.
+﻿  Calculator.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(6,2): warning C4273: 'Engine::CCalculator::CCalculator': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.h(16,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(12,1): warning C4273: 'Engine::CCalculator::~CCalculator': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.h(17,11): message : '{dtor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(17,1): warning C4273: 'Engine::CCalculator::Ready_Calculator': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.h(20,10): message : 'Ready_Calculator'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(25,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(25,1): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(38,1): warning C4273: 'Engine::CCalculator::Compute_HeightOnTerrain': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.h(21,9): message : 'Compute_HeightOnTerrain'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(68,1): warning C4273: 'Engine::CCalculator::Create': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.h(47,23): message : 'Create'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(82,1): warning C4273: 'Engine::CCalculator::Free': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.h(49,15): message : 'Free'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(90,1): warning C4273: 'Engine::CCalculator::Picking_OnTerrain': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.h(26,9): message : 'Picking_OnTerrain'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(179,1): warning C4273: 'Engine::CCalculator::Picking_OnTerrainMax': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.h(30,12): message : 'Picking_OnTerrainMax'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(279,1): warning C4273: 'Engine::CCalculator::Picking_Collider': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.h(33,11): message : 'Picking_Collider'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(372,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(383,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(393,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(404,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(415,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(425,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(435,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(445,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(456,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(466,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(478,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(487,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(489,11): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(495,1): warning C4273: 'Engine::CCalculator::Picking_Spere': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.h(35,11): message : 'Picking_Spere'의 이전 정의를 참조하십시오.
   Camera.cpp
-c:\users\huijun\desktop\earthfall\engine\utility\code\camera.cpp(6): warning C4273: 'Engine::CCamera::CCamera': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\camera.h(11): note: '{ctor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\camera.cpp(12): warning C4273: 'Engine::CCamera::~CCamera': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\camera.h(12): note: '{dtor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\camera.cpp(17): warning C4273: 'Engine::CCamera::Ready_Object': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\camera.h(15): note: 'Ready_Object'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\camera.cpp(26): warning C4273: 'Engine::CCamera::Update_Object': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\camera.h(16): note: 'Update_Object'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\camera.cpp(35): warning C4273: 'Engine::CCamera::Free': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\camera.h(23): note: 'Free'의 이전 정의를 참조하십시오.
-  Calculator.cpp
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(6): warning C4273: 'Engine::CCalculator::CCalculator': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.h(16): note: '{ctor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(12): warning C4273: 'Engine::CCalculator::~CCalculator': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.h(17): note: '{dtor}'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(17): warning C4273: 'Engine::CCalculator::Ready_Calculator': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.h(20): note: 'Ready_Calculator'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(25): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(25): warning C4091: '': 변수를 선언하지 않으면 'int' 왼쪽은 무시됩니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(20): error C2143: 구문 오류: ';'이(가) '상수' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(20): error C2143: 구문 오류: ';'이(가) '}' 앞에 없습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(38): warning C4273: 'Engine::CCalculator::Compute_HeightOnTerrain': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.h(21): note: 'Compute_HeightOnTerrain'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(68): warning C4273: 'Engine::CCalculator::Create': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.h(47): note: 'Create'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(82): warning C4273: 'Engine::CCalculator::Free': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.h(49): note: 'Free'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(87): warning C4273: 'Engine::CCalculator::Picking_OnTerrain': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.h(26): note: 'Picking_OnTerrain'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(172): warning C4273: 'Engine::CCalculator::Picking_OnTerrainMax': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.h(30): note: 'Picking_OnTerrainMax'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(270): warning C4273: 'Engine::CCalculator::Picking_Collider': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.h(33): note: 'Picking_Collider'의 이전 정의를 참조하십시오.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(363): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(374): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(384): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(395): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(406): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(416): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(426): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(436): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(447): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(457): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(469): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(478): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(480): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.cpp(486): warning C4273: 'Engine::CCalculator::Picking_Spere': dll 링크가 일치하지 않습니다.
-  c:\users\huijun\desktop\earthfall\engine\utility\code\calculator.h(35): note: 'Picking_Spere'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Camera.cpp(6,2): warning C4273: 'Engine::CCamera::CCamera': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Camera.h(11,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Camera.cpp(12,1): warning C4273: 'Engine::CCamera::~CCamera': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Camera.h(12,11): message : '{dtor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Camera.cpp(17,1): warning C4273: 'Engine::CCamera::Ready_Object': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Camera.h(15,19): message : 'Ready_Object'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Camera.cpp(28,1): warning C4273: 'Engine::CCamera::Update_Object': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Camera.h(16,16): message : 'Update_Object'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Camera.cpp(40,1): warning C4273: 'Engine::CCamera::Free': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Camera.h(27,15): message : 'Free'의 이전 정의를 참조하십시오.
+  Collider.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Collider.cpp(6,2): warning C4273: 'Engine::CCollider::CCollider': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Collider.h(12,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Collider.cpp(12,1): warning C4273: 'Engine::CCollider::~CCollider': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Collider.h(13,11): message : '{dtor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Collider.cpp(19,1): warning C4273: 'Engine::CCollider::Ready_Collider': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Collider.h(25,10): message : 'Ready_Collider'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Collider.cpp(30,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Collider.cpp(30,1): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Collider.cpp(37,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Collider.cpp(37,1): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Collider.cpp(157,1): warning C4273: 'Engine::CCollider::Render_Collider': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Collider.h(29,7): message : 'Render_Collider'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Collider.cpp(182,1): warning C4273: 'Engine::CCollider::Create': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Collider.h(46,20): message : 'Create'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Collider.cpp(192,1): warning C4273: 'Engine::CCollider::Free': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Collider.h(51,16): message : 'Free'의 이전 정의를 참조하십시오.
+  Component.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Component.cpp(6,1): warning C4273: 'Engine::CComponent::CComponent': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Component.h(15,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Component.cpp(11,1): warning C4273: 'Engine::CComponent::~CComponent': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Component.h(16,11): message : '{dtor}'의 이전 정의를 참조하십시오.
+  Light.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Light.cpp(6,2): warning C4273: 'Engine::CLight::CLight': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Light.h(14,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Light.cpp(13,1): warning C4273: 'Engine::CLight::~CLight': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Light.h(15,11): message : '{dtor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Light.cpp(19,1): warning C4273: 'Engine::CLight::Ready_Light': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Light.h(19,10): message : 'Ready_Light'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Light.cpp(29,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Light.cpp(29,1): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Light.cpp(36,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Light.cpp(36,1): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Light.cpp(82,1): warning C4273: 'Engine::CLight::Create': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Light.h(37,18): message : 'Create'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Light.cpp(93,1): warning C4273: 'Engine::CLight::Free': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Light.h(41,16): message : 'Free'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Light.cpp(103,1): warning C4273: 'Engine::CLight::Render': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Light.h(22,8): message : 'Render'의 이전 정의를 참조하십시오.
+  LightMgr.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.cpp(5,1): warning C4273: 'm_pInstance': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.h(13,2): message : 'private: static Engine::CLightMgr * Engine::CLightMgr::m_pInstance'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.cpp(5,1): error C2491: 'Engine::CLightMgr::m_pInstance': dllimport 정적 데이터 멤버을(를) 정의할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.cpp(5,1): warning C4273: 'Engine::CLightMgr::GetInstance': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.h(13,2): message : 'GetInstance'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.cpp(5,1): warning C4273: 'Engine::CLightMgr::DestroyInstance': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.h(13,2): message : 'DestroyInstance'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.cpp(8,1): warning C4273: 'Engine::CLightMgr::CLightMgr': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.h(17,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.cpp(13,1): warning C4273: 'Engine::CLightMgr::~CLightMgr': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.h(18,11): message : '{dtor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.cpp(18,1): warning C4273: 'Engine::CLightMgr::Free': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.h(36,15): message : 'Free'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.cpp(26,1): warning C4273: 'Engine::CLightMgr::Ready_Light': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.h(24,11): message : 'Ready_Light'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.cpp(29,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.cpp(29,2): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.cpp(37,1): warning C4273: 'Engine::CLightMgr::Get_LightInfo': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.h(21,19): message : 'Get_LightInfo'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.cpp(47,1): warning C4273: 'Engine::CLightMgr::Render_Light': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\LightMgr.h(30,8): message : 'Render_Light'의 이전 정의를 참조하십시오.
+  Management.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(7,1): warning C4273: 'm_pInstance': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.h(14,2): message : 'private: static Engine::CManagement * Engine::CManagement::m_pInstance'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(7,1): error C2491: 'Engine::CManagement::m_pInstance': dllimport 정적 데이터 멤버을(를) 정의할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(7,1): warning C4273: 'Engine::CManagement::GetInstance': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.h(14,2): message : 'GetInstance'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(7,1): warning C4273: 'Engine::CManagement::DestroyInstance': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.h(14,2): message : 'DestroyInstance'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(10,2): warning C4273: 'Engine::CManagement::CManagement': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.h(17,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(15,1): warning C4273: 'Engine::CManagement::~CManagement': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.h(18,11): message : '{dtor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(20,1): warning C4273: 'Engine::CManagement::Get_Layer': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.h(21,11): message : 'Get_Layer'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(28,1): warning C4273: 'Engine::CManagement::Set_Scene': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.h(24,11): message : 'Set_Scene'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(39,1): warning C4273: 'Engine::CManagement::Update_Scene': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.h(26,9): message : 'Update_Scene'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(49,1): warning C4273: 'Engine::CManagement::Render_Scene': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.h(27,8): message : 'Render_Scene'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(60,1): warning C4273: 'Engine::CManagement::Free': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.h(33,15): message : 'Free'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(65,1): warning C4273: 'Engine::CManagement::Ready_Management': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.h(25,11): message : 'Ready_Management'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(69,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(69,2): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(70,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(70,2): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(73,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(73,2): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(74,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(74,2): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(77,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(77,2): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(78,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(78,2): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(81,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(81,2): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(82,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Management.cpp(82,2): error C2059: 구문 오류: '상수'
+  Optimization.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.cpp(6,2): warning C4273: 'Engine::COptimization::COptimization': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.h(16,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.cpp(14,2): warning C4273: 'Engine::COptimization::COptimization': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.h(17,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.cpp(23,1): warning C4273: 'Engine::COptimization::~COptimization': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.h(18,11): message : '{dtor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.cpp(30,1): warning C4273: 'Engine::COptimization::Ready_Optimization': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.h(21,10): message : 'Ready_Optimization'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.cpp(46,1): warning C4273: 'Engine::COptimization::Is_InFrustum_ForObject': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.h(26,14): message : 'Is_InFrustum_ForObject'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.cpp(55,1): warning C4273: 'Engine::COptimization::Create': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.h(40,25): message : 'Create'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.cpp(65,1): warning C4273: 'Engine::COptimization::Clone': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.h(45,18): message : 'Clone'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.cpp(70,1): warning C4273: 'Engine::COptimization::Free': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.h(46,18): message : 'Free'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.cpp(81,1): warning C4273: 'Engine::COptimization::Is_InFrustum_ForTerrain': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Optimization.h(27,8): message : 'Is_InFrustum_ForTerrain'의 이전 정의를 참조하십시오.
+  ProtoMgr.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.cpp(4,1): warning C4273: 'm_pInstance': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.h(13,2): message : 'private: static Engine::CProtoMgr * Engine::CProtoMgr::m_pInstance'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.cpp(4,1): error C2491: 'Engine::CProtoMgr::m_pInstance': dllimport 정적 데이터 멤버을(를) 정의할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.cpp(4,1): warning C4273: 'Engine::CProtoMgr::GetInstance': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.h(13,2): message : 'GetInstance'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.cpp(4,1): warning C4273: 'Engine::CProtoMgr::DestroyInstance': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.h(13,2): message : 'DestroyInstance'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.cpp(7,1): warning C4273: 'Engine::CProtoMgr::CProtoMgr': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.h(16,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.cpp(12,1): warning C4273: 'Engine::CProtoMgr::~CProtoMgr': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.h(17,11): message : '{dtor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.cpp(17,1): warning C4273: 'Engine::CProtoMgr::Ready_Prototype': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.h(20,11): message : 'Ready_Prototype'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.cpp(29,1): warning C4273: 'Engine::CProtoMgr::Clone_Prototype': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.h(21,14): message : 'Clone_Prototype'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.cpp(39,1): warning C4273: 'Engine::CProtoMgr::Find_Prototype': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.h(27,15): message : 'Find_Prototype'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.cpp(49,1): warning C4273: 'Engine::CProtoMgr::Free': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ProtoMgr.h(29,15): message : 'Free'의 이전 정의를 참조하십시오.
+  QuadTree.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.cpp(7,1): warning C4273: 'Engine::CQuadTree::CQuadTree': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.h(17,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.cpp(14,1): warning C4273: 'Engine::CQuadTree::~CQuadTree': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.h(18,11): message : '{dtor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.cpp(19,1): warning C4273: 'Engine::CQuadTree::Ready_QuadTree': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.h(21,11): message : 'Ready_QuadTree'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.cpp(36,1): warning C4273: 'Engine::CQuadTree::CullingForTerrain': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.h(24,8): message : 'CullingForTerrain'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.cpp(239,1): warning C4273: 'Engine::CQuadTree::Make_ChildCorner': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.h(27,8): message : 'Make_ChildCorner'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.cpp(288,1): warning C4273: 'Engine::CQuadTree::Make_ChildQuadTree': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.h(38,8): message : 'Make_ChildQuadTree'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.cpp(313,1): warning C4273: 'Engine::CQuadTree::Set_Corner': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.h(41,8): message : 'Set_Corner'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.cpp(323,1): warning C4273: 'Engine::CQuadTree::Create': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.h(56,20): message : 'Create'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.cpp(336,1): warning C4273: 'Engine::CQuadTree::Create': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.h(57,15): message : 'Create'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.cpp(345,1): warning C4273: 'Engine::CQuadTree::Free': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.h(58,16): message : 'Free'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.cpp(351,1): warning C4273: 'Engine::CQuadTree::LevelOfDetail': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.h(46,9): message : 'LevelOfDetail'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.cpp(369,1): warning C4273: 'Engine::CQuadTree::Ready_Neighbor': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.h(22,11): message : 'Ready_Neighbor'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.cpp(376,1): warning C4273: 'Engine::CQuadTree::Make_Neighbor': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\QuadTree.h(39,8): message : 'Make_Neighbor'의 이전 정의를 참조하십시오.
+  Renderer.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(4,1): warning C4273: 'm_pInstance': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(13,2): message : 'private: static Engine::CRenderer * Engine::CRenderer::m_pInstance'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(4,1): error C2491: 'Engine::CRenderer::m_pInstance': dllimport 정적 데이터 멤버을(를) 정의할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(4,1): warning C4273: 'Engine::CRenderer::GetInstance': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(13,2): message : 'GetInstance'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(4,1): warning C4273: 'Engine::CRenderer::DestroyInstance': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(13,2): message : 'DestroyInstance'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(7,1): warning C4273: 'Engine::CRenderer::CRenderer': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(16,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(12,1): warning C4273: 'Engine::CRenderer::~CRenderer': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(17,11): message : '{dtor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(17,1): warning C4273: 'Engine::CRenderer::AddGroup': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(21,7): message : 'AddGroup'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(27,1): warning C4273: 'Engine::CRenderer::Render_GameObject': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(22,7): message : 'Render_GameObject'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(36,1): warning C4273: 'Engine::CRenderer::Clear_RenderGroup': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(24,7): message : 'Clear_RenderGroup'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(45,1): warning C4273: 'Engine::CRenderer::Ready_Renderer': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(20,10): message : 'Ready_Renderer'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(51,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(51,1): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(58,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(58,1): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(99,1): warning C4273: 'Engine::CRenderer::Render_Priority': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(27,7): message : 'Render_Priority'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(110,1): warning C4273: 'Engine::CRenderer::Render_NonAlpha': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(28,7): message : 'Render_NonAlpha'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(125,1): warning C4273: 'Engine::CRenderer::Render_Alpha': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(29,7): message : 'Render_Alpha'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(136,1): warning C4273: 'Engine::CRenderer::Render_UI': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(30,7): message : 'Render_UI'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(147,1): warning C4273: 'Engine::CRenderer::Render_Depth': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(31,10): message : 'Render_Depth'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(176,1): warning C4273: 'Engine::CRenderer::Render_Blend': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(34,7): message : 'Render_Blend'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(206,1): warning C4273: 'Engine::CRenderer::Render_Flash': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(35,10): message : 'Render_Flash'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(217,1): warning C4273: 'Engine::CRenderer::Render_Player': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(36,10): message : 'Render_Player'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(224,1): warning C4273: 'Engine::CRenderer::Render_Light': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(37,10): message : 'Render_Light'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(232,1): warning C4273: 'Engine::CRenderer::Render_Terrain': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(38,10): message : 'Render_Terrain'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(240,1): warning C4273: 'Engine::CRenderer::Render_LightAcc': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(33,7): message : 'Render_LightAcc'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(267,1): warning C4273: 'Engine::CRenderer::Render_Defferd': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(32,7): message : 'Render_Defferd'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.cpp(279,1): warning C4273: 'Engine::CRenderer::Free': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Renderer.h(47,15): message : 'Free'의 이전 정의를 참조하십시오.
+  RenderTarget.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.cpp(6,2): warning C4273: 'Engine::CRenderTarget::CRenderTarget': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.h(12,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.cpp(15,1): warning C4273: 'Engine::CRenderTarget::~CRenderTarget': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.h(13,11): message : '{dtor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.cpp(23,1): warning C4273: 'Engine::CRenderTarget::Ready_RenderTarget': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.h(16,11): message : 'Ready_RenderTarget'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.cpp(32,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.cpp(32,1): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.cpp(44,1): warning C4273: 'Engine::CRenderTarget::Set_OnGraphicDev': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.h(17,8): message : 'Set_OnGraphicDev'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.cpp(51,1): warning C4273: 'Engine::CRenderTarget::Clear_RenderTarget': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.h(19,8): message : 'Clear_RenderTarget'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.cpp(65,1): warning C4273: 'Engine::CRenderTarget::Release_OnGraphicDev': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.h(20,8): message : 'Release_OnGraphicDev'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.cpp(71,1): warning C4273: 'Engine::CRenderTarget::Ready_DebugBuffer': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.h(22,11): message : 'Ready_DebugBuffer'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.cpp(77,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.cpp(77,1): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.cpp(84,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.cpp(84,1): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.cpp(122,1): warning C4273: 'Engine::CRenderTarget::Render_DebugBuffer': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.h(27,8): message : 'Render_DebugBuffer'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.cpp(131,1): warning C4273: 'Engine::CRenderTarget::Set_OnShader': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.h(28,8): message : 'Set_OnShader'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.cpp(136,1): warning C4273: 'Engine::CRenderTarget::Create': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.h(44,25): message : 'Create'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.cpp(146,1): warning C4273: 'Engine::CRenderTarget::Free': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTarget.h(49,15): message : 'Free'의 이전 정의를 참조하십시오.
+  RenderTargetMgr.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(4,1): warning C4273: 'm_pInstance': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.h(12,2): message : 'private: static Engine::CRenderTargetMgr * Engine::CRenderTargetMgr::m_pInstance'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(4,1): error C2491: 'Engine::CRenderTargetMgr::m_pInstance': dllimport 정적 데이터 멤버을(를) 정의할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(4,1): warning C4273: 'Engine::CRenderTargetMgr::GetInstance': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.h(12,2): message : 'GetInstance'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(4,1): warning C4273: 'Engine::CRenderTargetMgr::DestroyInstance': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.h(12,2): message : 'DestroyInstance'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(7,1): warning C4273: 'Engine::CRenderTargetMgr::CRenderTargetMgr': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.h(15,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(12,1): warning C4273: 'Engine::CRenderTargetMgr::~CRenderTargetMgr': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.h(16,11): message : '{dtor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(17,1): warning C4273: 'Engine::CRenderTargetMgr::Ready_RenderTarget': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.h(19,11): message : 'Ready_RenderTarget'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(33,1): warning C4273: 'Engine::CRenderTargetMgr::Ready_MRT': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.h(35,11): message : 'Ready_MRT'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(55,1): warning C4273: 'Engine::CRenderTargetMgr::Find_RenderTarget': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.h(44,18): message : 'Find_RenderTarget'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(65,1): warning C4273: 'Engine::CRenderTargetMgr::Find_MRT': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.h(45,24): message : 'Find_MRT'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(75,1): warning C4273: 'Engine::CRenderTargetMgr::Free': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.h(56,16): message : 'Free'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(85,1): warning C4273: 'Engine::CRenderTargetMgr::Begin_MRT': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.h(37,11): message : 'Begin_MRT'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(107,1): warning C4273: 'Engine::CRenderTargetMgr::End_MRT': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.h(38,11): message : 'End_MRT'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(125,1): warning C4273: 'Engine::CRenderTargetMgr::Set_OnShader': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.h(40,8): message : 'Set_OnShader'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(139,1): warning C4273: 'Engine::CRenderTargetMgr::Ready_DebugBuffer': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.h(26,11): message : 'Ready_DebugBuffer'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(145,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(145,2): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.cpp(151,1): warning C4273: 'Engine::CRenderTargetMgr::Render_DebugBuffer': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\RenderTargetMgr.h(32,8): message : 'Render_DebugBuffer'의 이전 정의를 참조하십시오.
+  Scene.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Scene.cpp(6,2): warning C4273: 'Engine::CScene::CScene': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Scene.h(13,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Scene.cpp(12,1): warning C4273: 'Engine::CScene::~CScene': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Scene.h(14,11): message : '{dtor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Scene.cpp(17,1): warning C4273: 'Engine::CScene::Ready_Scene': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Scene.h(21,18): message : 'Ready_Scene'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Scene.cpp(22,1): warning C4273: 'Engine::CScene::Update_Scene': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Scene.h(22,15): message : 'Update_Scene'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Scene.cpp(37,1): warning C4273: 'Engine::CScene::Render_Scene': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Scene.h(23,15): message : 'Render_Scene'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Scene.cpp(43,1): warning C4273: 'Engine::CScene::Free': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Scene.h(32,15): message : 'Free'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Scene.cpp(56,1): warning C4273: 'Engine::CScene::Get_Layer': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Scene.h(18,11): message : 'Get_Layer'의 이전 정의를 참조하십시오.
+  Shader.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Shader.cpp(6,2): warning C4273: 'Engine::CShader::CShader': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Shader.h(12,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Shader.cpp(14,2): warning C4273: 'Engine::CShader::CShader': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Shader.h(13,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Shader.cpp(23,1): warning C4273: 'Engine::CShader::~CShader': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Shader.h(14,11): message : '{dtor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Shader.cpp(28,1): warning C4273: 'Engine::CShader::Ready_Shader': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Shader.h(20,11): message : 'Ready_Shader'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Shader.cpp(64,1): warning C4273: 'Engine::CShader::Create': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Shader.h(28,18): message : 'Create'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Shader.cpp(74,1): warning C4273: 'Engine::CShader::Clone': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Shader.h(29,22): message : 'Clone'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Shader.cpp(79,1): warning C4273: 'Engine::CShader::Free': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Shader.h(30,15): message : 'Free'의 이전 정의를 참조하십시오.
+  Transform.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.cpp(6,2): warning C4273: 'Engine::CTransform::CTransform': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.h(11,2): message : '{ctor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.cpp(13,1): warning C4273: 'Engine::CTransform::~CTransform': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.h(12,11): message : '{dtor}'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.cpp(18,1): warning C4273: 'Engine::CTransform::Chase_Target': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.h(50,7): message : 'Chase_Target'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.cpp(34,1): warning C4273: 'Engine::CTransform::Compute_LookAtTarget': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.h(51,17): message : 'Compute_LookAtTarget'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.cpp(50,1): warning C4273: 'Engine::CTransform::Move_TargetPos': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.h(58,7): message : 'Move_TargetPos'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.cpp(56,1): warning C4273: 'Engine::CTransform::Ready_Transform': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.h(74,11): message : 'Ready_Transform'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.cpp(67,1): warning C4273: 'Engine::CTransform::Create': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.h(84,22): message : 'Create'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.cpp(78,1): warning C4273: 'Engine::CTransform::Update_Component': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.h(75,15): message : 'Update_Component'의 이전 정의를 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.cpp(119,1): warning C4273: 'Engine::CTransform::Free': dll 연결이 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Transform.h(87,15): message : 'Free'의 이전 정의를 참조하십시오.
   코드를 생성하고 있습니다...

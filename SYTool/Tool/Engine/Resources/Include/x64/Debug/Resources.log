@@ -1,52 +1,59 @@
-﻿  AniCtrl.cpp
-  Cell.cpp
-c:\users\huijun\desktop\tool\engine\resources\code\cell.cpp(42): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\cell.cpp(42): error C2059: 구문 오류: '상수'
+﻿  Cell.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Cell.cpp(41,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Cell.cpp(41,2): error C2059: 구문 오류: '상수'
   CubeTex.cpp
-c:\users\huijun\desktop\tool\engine\resources\code\cubetex.cpp(32): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\cubetex.cpp(32): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\CubeTex.cpp(32,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\CubeTex.cpp(32,2): error C2059: 구문 오류: '상수'
   DynamicMesh.cpp
-c:\users\huijun\desktop\tool\engine\resources\code\dynamicmesh.cpp(49): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\dynamicmesh.cpp(49): error C2059: 구문 오류: '상수'
-  HierarchyLoader.cpp
-c:\users\huijun\desktop\tool\engine\resources\code\hierarchyloader.cpp(97): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\hierarchyloader.cpp(228): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Line.cpp
-  Mesh.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\DynamicMesh.cpp(47,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\DynamicMesh.cpp(47,1): error C2059: 구문 오류: '상수'
   NaviMesh.cpp
-c:\users\huijun\desktop\tool\engine\resources\code\navimesh.cpp(37): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\navimesh.cpp(83): warning C4267: '인수': 'size_t'에서 'const Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\navimesh.cpp(93): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\navimesh.cpp(93): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\NaviMesh.cpp(36,28): warning C4267: '인수': 'size_t'에서 'const Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\NaviMesh.cpp(44,28): warning C4267: '인수': 'size_t'에서 'const Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\NaviMesh.cpp(52,28): warning C4267: '인수': 'size_t'에서 'const Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\NaviMesh.cpp(60,28): warning C4267: '인수': 'size_t'에서 'const Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\NaviMesh.cpp(64,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\NaviMesh.cpp(64,2): error C2059: 구문 오류: '상수'
   RcCol.cpp
-c:\users\huijun\desktop\tool\engine\resources\code\rccol.cpp(32): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\rccol.cpp(32): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\RcCol.cpp(32,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\RcCol.cpp(32,2): error C2059: 구문 오류: '상수'
   RcTex.cpp
-c:\users\huijun\desktop\tool\engine\resources\code\rctex.cpp(32): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\rctex.cpp(32): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\RcTex.cpp(32,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\RcTex.cpp(32,2): error C2059: 구문 오류: '상수'
   Resources.cpp
-  ResourcesMgr.cpp
   StaticMesh.cpp
-c:\users\huijun\desktop\tool\engine\resources\code\staticmesh.cpp(69): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\staticmesh.cpp(69): error C2059: 구문 오류: '상수'
-c:\users\huijun\desktop\tool\engine\resources\code\staticmesh.cpp(140): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\StaticMesh.cpp(58,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\StaticMesh.cpp(58,1): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\StaticMesh.cpp(120,11): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\StaticMesh.cpp(207,35): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   TerrainTex.cpp
-c:\users\huijun\desktop\tool\engine\resources\code\terraintex.cpp(86): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\terraintex.cpp(86): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(277,34): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(279,57): warning C4244: '인수': 'size_t'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(279,37): warning C4244: '인수': 'size_t'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(281,49): warning C4244: '인수': 'size_t'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(281,29): warning C4244: '인수': 'size_t'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(299,48): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(300,52): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(301,43): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(312,48): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(313,43): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(314,39): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(448,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(448,2): error C2059: 구문 오류: '상수'
   Texture.cpp
-c:\users\huijun\desktop\tool\engine\resources\code\texture.cpp(14): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\texture.cpp(49): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\texture.cpp(49): error C2059: 구문 오류: '상수'
-c:\users\huijun\desktop\tool\engine\resources\code\texture.cpp(56): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\texture.cpp(56): error C2059: 구문 오류: '상수'
-c:\users\huijun\desktop\tool\engine\resources\code\texture.cpp(69): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\texture.cpp(96): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Texture.cpp(14,48): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Texture.cpp(49,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Texture.cpp(49,1): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Texture.cpp(56,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Texture.cpp(56,1): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Texture.cpp(69,44): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Texture.cpp(96,44): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   TriCol.cpp
-c:\users\huijun\desktop\tool\engine\resources\code\tricol.cpp(32): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\tricol.cpp(32): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TriCol.cpp(32,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TriCol.cpp(32,2): error C2059: 구문 오류: '상수'
   VIBuffer.cpp
-c:\users\huijun\desktop\tool\engine\resources\code\vibuffer.cpp(38): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\vibuffer.cpp(38): error C2059: 구문 오류: '상수'
-c:\users\huijun\desktop\tool\engine\resources\code\vibuffer.cpp(45): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-c:\users\huijun\desktop\tool\engine\resources\code\vibuffer.cpp(45): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\VIBuffer.cpp(38,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\VIBuffer.cpp(38,1): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\VIBuffer.cpp(45,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\VIBuffer.cpp(45,1): error C2059: 구문 오류: '상수'
   코드를 생성하고 있습니다...
