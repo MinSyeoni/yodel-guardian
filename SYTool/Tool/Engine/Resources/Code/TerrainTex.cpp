@@ -31,7 +31,8 @@ Engine::CTerrainTex::~CTerrainTex(void)
 
 void CTerrainTex::Set_TerrainHeight(_float fRange, _float fHeight, _vec3 vPos, _int iMode)
 {
-
+	m_dwVtxCntZ = 768;
+	m_dwVtxCntX = 768;
 
 	VTXTEX* pVtxTex = nullptr;
 	m_pVB->Lock(0, 0, (void**)&pVtxTex, 0);
@@ -42,163 +43,17 @@ void CTerrainTex::Set_TerrainHeight(_float fRange, _float fHeight, _vec3 vPos, _
 		{
 			dwIndex = i * m_dwVtxCntX + j;
 
-			if (0 == iMode || 2 == iMode)	// 네모 브러쉬
+			if (0 == iMode)	// 네모 브러쉬
 			{
 				if (vPos.x - fRange <= pVtxTex[dwIndex].vPos.x &&
 					vPos.x + fRange >= pVtxTex[dwIndex].vPos.x &&
 					vPos.z - fRange <= pVtxTex[dwIndex].vPos.z &&
 					vPos.z + fRange >= pVtxTex[dwIndex].vPos.z)
 				{
-					if (iMode == 0)
-					{
-						pVtxTex[dwIndex].vPos.y = fHeight;
-						m_pPos[dwIndex].y = fHeight;
-						vPos.y = fHeight;
-					}
-					if (0 == dwIndex)
-					{
-						_float fPosY =
-							(
-								pVtxTex[dwIndex + 1].vPos.y +
-								pVtxTex[dwIndex + m_dwVtxCntX].vPos.y +
-								pVtxTex[dwIndex + m_dwVtxCntX + 1].vPos.y
-								) / 3;
-
-						pVtxTex[dwIndex].vPos.y = (pVtxTex[dwIndex].vPos.y + fPosY) * 0.5f;
-						m_pPos[dwIndex] = pVtxTex[dwIndex].vPos;
-
-						continue;
-					}
-
-					if (m_dwVtxCntX - 1 == dwIndex)
-					{
-						_float fPosY =
-							(
-								pVtxTex[dwIndex - 1].vPos.y +
-								pVtxTex[dwIndex + m_dwVtxCntX - 1].vPos.y +
-								pVtxTex[dwIndex + m_dwVtxCntX].vPos.y
-								) / 3;
-
-						pVtxTex[dwIndex].vPos.y = (pVtxTex[dwIndex].vPos.y + fPosY) * 0.5f;
-						m_pPos[dwIndex] = pVtxTex[dwIndex].vPos;
-
-						continue;
-					}
-
-					if (m_dwVtxCntX * (m_dwVtxCntZ - 1) == dwIndex)
-					{
-						_float fPosY =
-							(
-								pVtxTex[dwIndex + 1].vPos.y +
-								pVtxTex[dwIndex - m_dwVtxCntX].vPos.y +
-								pVtxTex[dwIndex - m_dwVtxCntX + 1].vPos.y
-								) / 3;
-
-						pVtxTex[dwIndex].vPos.y = (pVtxTex[dwIndex].vPos.y + fPosY) * 0.5f;
-						m_pPos[dwIndex] = pVtxTex[dwIndex].vPos;
-
-						continue;
-					}
-
-					if ((m_dwVtxCntX * m_dwVtxCntZ) - 1 == dwIndex)
-					{
-						_float fPosY =
-							(
-								pVtxTex[dwIndex - 1].vPos.y +
-								pVtxTex[dwIndex - m_dwVtxCntX - 1].vPos.y +
-								pVtxTex[dwIndex - m_dwVtxCntX].vPos.y
-								) / 3;
-
-						pVtxTex[dwIndex].vPos.y = (pVtxTex[dwIndex].vPos.y + fPosY) * 0.5f;
-						m_pPos[dwIndex] = pVtxTex[dwIndex].vPos;
-
-						continue;
-					}
-
-					if (m_dwVtxCntX > dwIndex)
-					{
-						_float fPosY =
-							(
-								pVtxTex[dwIndex - 1].vPos.y +
-								pVtxTex[dwIndex + m_dwVtxCntX - 1].vPos.y +
-								pVtxTex[dwIndex + m_dwVtxCntX].vPos.y +
-								pVtxTex[dwIndex + m_dwVtxCntX + 1].vPos.y +
-								pVtxTex[dwIndex + 1].vPos.y
-								) / 5;
-
-						pVtxTex[dwIndex].vPos.y = (pVtxTex[dwIndex].vPos.y + fPosY) * 0.5f;
-						m_pPos[dwIndex] = pVtxTex[dwIndex].vPos;
-
-						continue;
-					}
-
-					if (i * m_dwVtxCntX == dwIndex)
-					{
-						_float fPosY =
-							(
-								pVtxTex[dwIndex - m_dwVtxCntX].vPos.y +
-								pVtxTex[dwIndex - m_dwVtxCntX + 1].vPos.y +
-								pVtxTex[dwIndex + 1].vPos.y +
-								pVtxTex[dwIndex + m_dwVtxCntX + 1].vPos.y +
-								pVtxTex[dwIndex + m_dwVtxCntX].vPos.y
-								) / 5;
-
-						pVtxTex[dwIndex].vPos.y = (pVtxTex[dwIndex].vPos.y + fPosY) * 0.5f;
-						m_pPos[dwIndex] = pVtxTex[dwIndex].vPos;
-
-						continue;
-					}
-
-					if ((i * m_dwVtxCntX) + (m_dwVtxCntX - 1) == dwIndex)
-					{
-						_float fPosY =
-							(
-								pVtxTex[dwIndex - m_dwVtxCntX].vPos.y +
-								pVtxTex[dwIndex - m_dwVtxCntX - 1].vPos.y +
-								pVtxTex[dwIndex - 1].vPos.y +
-								pVtxTex[dwIndex + m_dwVtxCntX - 1].vPos.y +
-								pVtxTex[dwIndex + m_dwVtxCntX].vPos.y
-								) / 5;
-
-						pVtxTex[dwIndex].vPos.y = (pVtxTex[dwIndex].vPos.y + fPosY) * 0.5f;
-						m_pPos[dwIndex] = pVtxTex[dwIndex].vPos;
-
-						continue;
-					}
-
-					if ((m_dwVtxCntX * (m_dwVtxCntZ - 1)) - 1 < dwIndex)
-					{
-						_float fPosY =
-							(
-								pVtxTex[dwIndex - 1].vPos.y +
-								pVtxTex[dwIndex - m_dwVtxCntX - 1].vPos.y +
-								pVtxTex[dwIndex - m_dwVtxCntX].vPos.y +
-								pVtxTex[dwIndex - m_dwVtxCntX + 1].vPos.y +
-								pVtxTex[dwIndex + 1].vPos.y
-								) / 5;
-
-						pVtxTex[dwIndex].vPos.y = (pVtxTex[dwIndex].vPos.y + fPosY) * 0.5f;
-						m_pPos[dwIndex] = pVtxTex[dwIndex].vPos;
-
-						continue;
-					}
-
-					_float fPosY =
-						(
-							pVtxTex[dwIndex - 1].vPos.y +
-							pVtxTex[dwIndex - m_dwVtxCntX - 1].vPos.y +
-							pVtxTex[dwIndex - m_dwVtxCntX].vPos.y +
-							pVtxTex[dwIndex - m_dwVtxCntX + 1].vPos.y +
-							pVtxTex[dwIndex + 1].vPos.y +
-							pVtxTex[dwIndex + m_dwVtxCntX + 1].vPos.y +
-							pVtxTex[dwIndex + m_dwVtxCntX].vPos.y +
-							pVtxTex[dwIndex + m_dwVtxCntX - 1].vPos.y
-							) / 8;
-
-					pVtxTex[dwIndex].vPos.y = (pVtxTex[dwIndex].vPos.y + fPosY) * 0.5f;
-					m_pPos[dwIndex] = pVtxTex[dwIndex].vPos;
+					pVtxTex[dwIndex].vPos.y = fHeight;
+					m_pPos[dwIndex].y = fHeight;
+					vPos.y = fHeight;
 				}
-
 			}
 			else if (1 == iMode)	// 원 브러쉬
 			{
@@ -247,10 +102,6 @@ HRESULT CTerrainTex::Ready_Buffer(
 	const _ulong& dwCntZ,
 	const _ulong& dwVtxItv)
 {
-
-	m_dwVtxCntZ = dwCntZ;
-	m_dwVtxCntX = dwCntX;
-
 	m_dwTriCnt = (dwCntX - 1) * (dwCntZ - 1) * 2;
 	m_dwVtxCnt = dwCntX * dwCntZ;
 	m_pVtxTexOrigin = new VTXTEX[m_dwVtxCnt];
@@ -278,7 +129,7 @@ HRESULT CTerrainTex::Ready_Buffer(
 
 			pVertices[iIndex].vPos = _vec3(j * dwVtxItv, 0.0f, i * dwVtxItv);
 			pVertices[iIndex].vTexUV = _vec2(j / (dwCntX - 1.f), i / (dwCntZ - 1.f));
-			m_pPos[iIndex] = _vec3(j * dwVtxItv, 0.0f, i * dwVtxItv);
+
 			m_pVtxTexOrigin[iIndex].vPos = pVertices[iIndex].vPos;
 		}
 	}
