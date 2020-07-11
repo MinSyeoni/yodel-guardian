@@ -43,9 +43,9 @@ _int CPlayerHP::Update_GameObject(const _float& fTimeDelta)
 		return DEAD_OBJ;
 
 	m_pTransCom->m_vScale = _vec3(0.15f, 0.2f, 0.f);
-	//m_pTransCom->m_vPos = _vec3(-0.8f, -0.8f, 0.f);
-	m_pTransCom->m_vPos.x = _float(2.f / WINCX * 200) - 1.f;
-	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * 1000) + 1.f;
+
+	m_pTransCom->m_vPos.x = _float(WINCX / 2.f) / _float(WINCX / 0.5f) - 1.f;
+	m_pTransCom->m_vPos.y = _float(WINCY / 1.5f) / _float(WINCY / 0.1f) - 0.8f;
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 

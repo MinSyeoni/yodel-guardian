@@ -51,9 +51,9 @@ _int CGunUI::Update_GameObject(const _float& fTimeDelta)
 		return DEAD_OBJ;
 
 	m_pTransCom->m_vScale = _vec3(0.25f, 0.2f, 0.21f);
-	//m_pTransCom->m_vPos = _vec3(0.7f, -0.8f, 0.f);
-	m_pTransCom->m_vPos.x = _float(2.f / WINCX * 1620) - 1.f;
-	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * 980) + 1.f;
+
+	m_pTransCom->m_vPos.x = _float(WINCX / 2.f) / _float(WINCX / 1.4f);
+	m_pTransCom->m_vPos.y = _float(WINCY / 1.5f) / _float(WINCY / 0.1f) - 0.85f;
 
 	///// [임시]총알 폰트 설정 ///// 
 	wstring strText = L"";
@@ -64,7 +64,7 @@ _int CGunUI::Update_GameObject(const _float& fTimeDelta)
 	strTemp += to_string(m_iMaxBullet);
 
 	strText.assign(strTemp.begin(), strTemp.end());
-	m_pBulletFont->Set_Pos(_vec2(WINCX * 0.9f, WINCY * 0.9f));
+	m_pBulletFont->Set_Pos(_vec2(WINCX * 0.9f, WINCY * 0.89f));
 	m_pBulletFont->Set_Text(strText.c_str());
 	////////////////////////
 

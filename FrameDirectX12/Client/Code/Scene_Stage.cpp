@@ -406,7 +406,7 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 		m_tMeshInfo.Rotation = tObjData.vRotate;
 		m_tMeshInfo.Scale = tObjData.vScale;
 
-		if(m_tMeshInfo.MeshTag!=L"Siren.X" && m_tMeshInfo.MeshTag != L"medCrate.X")
+		if(m_tMeshInfo.MeshTag !=L"Siren.X" && m_tMeshInfo.MeshTag != L"medCrate.X")
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
 		else if (m_tMeshInfo.MeshTag == L"medCrate.X")
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_ItemObject", L"ItemObject", &m_tMeshInfo);
