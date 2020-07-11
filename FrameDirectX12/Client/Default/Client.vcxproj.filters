@@ -199,8 +199,6 @@
     <Filter Include="01.Scene_Stage\07.NPC\01.Normandy">
       <UniqueIdentifier>{de5ac362-3fcb-4da0-b736-d5c69a8650f4}</UniqueIdentifier>
     </Filter>
-
-
     <Filter Include="02.Scene_All\06.EffectObject">
       <UniqueIdentifier>{1de5a495-de30-4ed8-a691-f4960a5cc30b}</UniqueIdentifier>
     </Filter>
@@ -221,6 +219,9 @@
     </Filter>
     <Filter Include="01.Scene_Stage\03.Camera\02.TalkingCamera">
       <UniqueIdentifier>{abbfa033-05fe-4a65-8f67-e55a054e5052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\04.NpcWords">
+      <UniqueIdentifier>{7cef0d6c-b16d-41b6-880f-5a4d3cf2828e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -368,8 +369,6 @@
     <ClInclude Include="..\Code\Normandy.h">
       <Filter>01.Scene_Stage\07.NPC\01.Normandy</Filter>
     </ClInclude>
-
-
     <ClInclude Include="..\Code\Effect.h">
       <Filter>02.Scene_All\06.EffectObject</Filter>
     </ClInclude>
@@ -384,6 +383,10 @@
     </ClInclude>
     <ClInclude Include="..\Code\Shepard.h">
       <Filter>01.Scene_Stage\07.NPC\02.Shapard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\HPKit.h" />
+    <ClInclude Include="..\Code\NpcWords.h">
+      <Filter>03.UI\04.NpcWords</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -501,8 +504,6 @@
     <ClCompile Include="..\Code\Normandy.cpp">
       <Filter>01.Scene_Stage\07.NPC\01.Normandy</Filter>
     </ClCompile>
-
-
     <ClCompile Include="..\Code\Effect.cpp">
       <Filter>02.Scene_All\06.EffectObject</Filter>
     </ClCompile>
@@ -517,6 +518,10 @@
     </ClCompile>
     <ClCompile Include="..\Code\Shepard.cpp">
       <Filter>01.Scene_Stage\07.NPC\02.Shapard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\HPKit.cpp" />
+    <ClCompile Include="..\Code\NpcWords.cpp">
+      <Filter>03.UI\04.NpcWords</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

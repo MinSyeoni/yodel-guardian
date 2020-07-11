@@ -20,6 +20,7 @@
 #include "PlayerUI.h"
 #include "GunUI.h"
 #include "Trigger.h"
+#include "NpcWords.h"
 
 #include "MapObject.h"
 #include "HPKit.h"
@@ -94,6 +95,14 @@ _int CScene_Stage::Update_Scene(const _float & fTimeDelta)
 
 _int CScene_Stage::LateUpdate_Scene(const _float & fTimeDelta)
 {
+	// 대화창 enum 값 바꾸는 것. 나중에 NPC 상호작용으로 바꿔주세요.
+	if (KEY_DOWN(DIK_P))
+	{
+		CGameObject* pWordsUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"NpcBoard");
+		dynamic_cast<CNpcWords*>(pWordsUI)->Set_CurWordsType(CNpcWords::NPC);
+		dynamic_cast<CNpcWords*>(pWordsUI)->Ready_NpcWords();
+	}
+
 	return Engine::CScene::LateUpdate_Scene(fTimeDelta);
 }
 
@@ -158,6 +167,7 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = CMonster::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Monster", pGameObject), E_FAIL);
+
 	////////////////////////////////// UI /////////////////////////////////////////////
 	pGameObject = CUI::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -178,6 +188,10 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = CGunUI::Create(m_pGraphicDevice, m_pCommandList, L"Prototype_Texture_Rifle");
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_RifleUI", pGameObject), E_FAIL);
+
+	pGameObject = CNpcWords::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_NpcBoard", pGameObject), E_FAIL);
 
 
 	pGameObject = CDamageBlood::Create(m_pGraphicDevice, m_pCommandList);
@@ -209,7 +223,6 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = CShepard::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Shepard", pGameObject), E_FAIL);
-
 
 
 	return S_OK;
@@ -313,6 +326,8 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcBoard", L"NpcBoard", nullptr), E_FAIL);
+
 	return S_OK;
 }
 
@@ -406,12 +421,13 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 		m_tMeshInfo.Rotation = tObjData.vRotate;
 		m_tMeshInfo.Scale = tObjData.vScale;
 
-		if(m_tMeshInfo.MeshTag !=L"Siren.X" && m_tMeshInfo.MeshTag != L"medCrate.X")
-			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
+		if(m_tMeshInfo.MeshTag ==L"Siren.X" )
+			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LightObject", L"LightObject", &m_tMeshInfo);//조명처리
 		else if (m_tMeshInfo.MeshTag == L"medCrate.X")
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_ItemObject", L"ItemObject", &m_tMeshInfo);
+		// 여기 문 처리 할 곳
 		else
-			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LightObject", L"LightObject", &m_tMeshInfo);//조명처리
+			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
 	}
 	CloseHandle(hFile);
 }
