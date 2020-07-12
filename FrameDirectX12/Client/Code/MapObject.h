@@ -41,7 +41,7 @@ private:
 	Engine::CShader_Mesh*       m_pShaderCom = nullptr;
 
 	MeshInfo					m_tMeshInfo;
-	
+	vector<vector<_matrix>>		m_vecMatrix;
 public:
 	virtual CGameObject*	Clone_GameObject(void* prg);
 	static CMapObject*		Create(ID3D12Device* pGraphicDevice,

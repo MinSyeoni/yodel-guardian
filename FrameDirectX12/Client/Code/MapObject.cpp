@@ -35,14 +35,9 @@ HRESULT CMapObject::Ready_GameObject()
 
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
-	// Buffer
-	m_pMeshCom = static_cast<Engine::CMesh*>(m_pComponentMgr->Clone_Component(m_tMeshInfo.MeshTag.c_str(), COMPONENTID::ID_STATIC));
-	NULL_CHECK_RETURN(m_pMeshCom, E_FAIL);
-	m_mapComponent[ID_STATIC].emplace(L"Com_Mesh", m_pMeshCom);
-
 	m_pTransCom->m_vPos = m_tMeshInfo.Pos;
-	//m_pTransCom->m_vPos = m_tMeshInfo.Pos - _vec3{ 0.f, 0.f, 180.f };
 	m_pTransCom->m_vScale = m_tMeshInfo.Scale;
+
 	m_pTransCom->m_vAngle = ToDegree(m_tMeshInfo.Rotation);
 
 	return S_OK;
@@ -50,7 +45,6 @@ HRESULT CMapObject::Ready_GameObject()
 
 HRESULT CMapObject::LateInit_GameObject()
 {
-
 	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
 
 	return S_OK;
@@ -74,6 +68,7 @@ _int CMapObject::LateUpdate_GameObject(const _float & fTimeDelta)
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
+
 	return NO_EVENT;
 }
 
@@ -102,6 +97,11 @@ HRESULT CMapObject::Add_Component()
 	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
 
+	// Buffer
+	m_pMeshCom = static_cast<Engine::CMesh*>(m_pComponentMgr->Clone_Component(m_tMeshInfo.MeshTag.c_str(), COMPONENTID::ID_STATIC));
+	NULL_CHECK_RETURN(m_pMeshCom, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_Mesh", m_pMeshCom);
+
 	return S_OK;
 }
 
@@ -117,15 +117,13 @@ void CMapObject::Set_ConstantTable()
 	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
 
 	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
+
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_pTransCom->m_matWorld));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
 
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
-
-
-
 }
 
 void CMapObject::Set_ShadowTable(CShader_Shadow * pShader)

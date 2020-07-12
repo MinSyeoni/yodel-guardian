@@ -27,6 +27,7 @@
 #include "Monster.h"
 #include "Salone.h"
 #include "Trigger.h"
+#include "LobbyDoor.h"
 
 #include "LightObject.h"
 #include "DamageBlood.h"
@@ -167,6 +168,10 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = CMonster::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Monster", pGameObject), E_FAIL);
+
+	pGameObject = CLobbyDoor::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_LobbyDoor", pGameObject), E_FAIL);
 
 	////////////////////////////////// UI /////////////////////////////////////////////
 	pGameObject = CUI::Create(m_pGraphicDevice, m_pCommandList);
@@ -425,7 +430,8 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LightObject", L"LightObject", &m_tMeshInfo);//조명처리
 		else if (m_tMeshInfo.MeshTag == L"medCrate.X")
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_ItemObject", L"ItemObject", &m_tMeshInfo);
-		// 여기 문 처리 할 곳
+		else if (m_tMeshInfo.MeshTag == L"door1.X")
+			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LobbyDoor", L"LobbyDoor", &m_tMeshInfo);
 		else
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
 	}

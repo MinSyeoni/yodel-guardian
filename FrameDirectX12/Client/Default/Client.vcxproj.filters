@@ -223,6 +223,9 @@
     <Filter Include="03.UI\04.NpcWords">
       <UniqueIdentifier>{7cef0d6c-b16d-41b6-880f-5a4d3cf2828e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Scene_All\01.DynamicObject\00.LobbyDoor">
+      <UniqueIdentifier>{eb25b983-03da-4a3b-9078-2c4b3ba83b62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -388,6 +391,9 @@
     <ClInclude Include="..\Code\NpcWords.h">
       <Filter>03.UI\04.NpcWords</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\LobbyDoor.h">
+      <Filter>02.Scene_All\01.DynamicObject\00.LobbyDoor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -522,6 +528,9 @@
     <ClCompile Include="..\Code\HPKit.cpp" />
     <ClCompile Include="..\Code\NpcWords.cpp">
       <Filter>03.UI\04.NpcWords</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\LobbyDoor.cpp">
+      <Filter>02.Scene_All\01.DynamicObject\00.LobbyDoor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

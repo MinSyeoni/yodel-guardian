@@ -2,7 +2,6 @@ c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\stdafx.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\vc142.pdb
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\monster.obj
-c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\baziormgr.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\mapobject.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\mainapp.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\loading.obj
@@ -18,6 +17,7 @@ c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\distortioneffect.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\damageblood.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\cubeobject.obj
+c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\baziormgr.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\background.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\aim.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\actioncamera.obj
@@ -45,6 +45,8 @@ c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\zombi.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\weapon.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\ui.obj
+c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\npcwords.obj
+c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\lobbydoor.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\release\client.exe
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\release\client.pdb
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\client.res

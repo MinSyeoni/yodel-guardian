@@ -182,6 +182,7 @@
     <ClInclude Include="..\Code\HPKit.h" />
     <ClInclude Include="..\Code\LightObject.h" />
     <ClInclude Include="..\Code\Loading.h" />
+    <ClInclude Include="..\Code\LobbyDoor.h" />
     <ClInclude Include="..\Code\MainApp.h" />
     <ClInclude Include="..\Code\MapObject.h" />
     <ClInclude Include="..\Code\BaziorMgr.h" />
@@ -240,6 +241,7 @@
     <ClCompile Include="..\Code\HPKit.cpp" />
     <ClCompile Include="..\Code\LightObject.cpp" />
     <ClCompile Include="..\Code\Loading.cpp" />
+    <ClCompile Include="..\Code\LobbyDoor.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\MapObject.cpp" />
     <ClCompile Include="..\Code\BaziorMgr.cpp" />
