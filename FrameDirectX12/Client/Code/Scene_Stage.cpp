@@ -97,11 +97,20 @@ _int CScene_Stage::Update_Scene(const _float & fTimeDelta)
 _int CScene_Stage::LateUpdate_Scene(const _float & fTimeDelta)
 {
 	// 대화창 enum 값 바꾸는 것. 나중에 NPC 상호작용으로 바꿔주세요.
-	if (KEY_DOWN(DIK_P))
+	if (KEY_DOWN(DIK_P) && nullptr != CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"NpcBoard"))
 	{
 		CGameObject* pWordsUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"NpcBoard");
 		dynamic_cast<CNpcWords*>(pWordsUI)->Set_CurWordsType(CNpcWords::NPC);
+		dynamic_cast<CNpcWords*>(pWordsUI)->Set_ShowUI(true);
 		dynamic_cast<CNpcWords*>(pWordsUI)->Ready_NpcWords();
+
+		// 대화창 나올 땐 다른 UI 끔
+		CGameObject* pPlayerHP = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"PlayerHP");
+		dynamic_cast<CPlayerHP*>(pPlayerHP)->Set_ShowUI(false);
+		CGameObject* pPlayerUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"PlayerUI");
+		dynamic_cast<CPlayerUI*>(pPlayerUI)->Set_ShowUI(false);
+		CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
+		dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(false);
 	}
 
 	return Engine::CScene::LateUpdate_Scene(fTimeDelta);

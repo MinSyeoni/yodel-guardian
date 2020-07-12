@@ -27,6 +27,9 @@ private:
 	virtual ~CNpcWords();
 
 public:
+	void						Set_ShowUI(_bool bIsShow) { m_bIsShow = bIsShow; }
+
+public:
 	void						Set_CurWordsType(WORDS_TYPE eType) { m_eWordsType = eType; }
 	void						Ready_NpcWords();
 
@@ -73,4 +76,6 @@ private:
 	_bool						m_bIsNext = false;
 	_bool						m_bIsFinish = false;
 	_float						m_fNextTime = 0.f;
+
+	_bool						m_bIsShow = false;
 };

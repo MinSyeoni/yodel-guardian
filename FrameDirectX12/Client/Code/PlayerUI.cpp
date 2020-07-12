@@ -63,6 +63,9 @@ _int CPlayerUI::LateUpdate_GameObject(const _float& fTimeDelta)
 
 void CPlayerUI::Render_GameObject(const _float& fTimeDelta)
 {
+	if (!m_bIsShow)
+		return;
+
 	Set_ConstantTable();
 
 	m_pShaderCom->Begin_Shader();

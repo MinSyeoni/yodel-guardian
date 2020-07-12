@@ -64,11 +64,13 @@ _int CGunUI::Update_GameObject(const _float& fTimeDelta)
 	strTemp += to_string(m_iMaxBullet);
 
 	strText.assign(strTemp.begin(), strTemp.end());
+
 	m_pBulletFont->Set_Pos(_vec2(WINCX * 0.9f, WINCY * 0.89f));
 	m_pBulletFont->Set_Text(strText.c_str());
 	////////////////////////
-
-	m_pBulletFont->Update_GameObject(fTimeDelta);
+	
+	if (m_bIsShow)
+		m_pBulletFont->Update_GameObject(fTimeDelta);
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
@@ -79,7 +81,8 @@ _int CGunUI::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
-	m_pBulletFont->LateUpdate_GameObject(fTimeDelta);
+	if (m_bIsShow)
+		m_pBulletFont->LateUpdate_GameObject(fTimeDelta);
 
 	////// <юс╫ц> //////
 	if (Engine::CDirectInput::Get_Instance()->Mouse_KeyDown(DIM_LB))
@@ -98,6 +101,9 @@ _int CGunUI::LateUpdate_GameObject(const _float& fTimeDelta)
 
 void CGunUI::Render_GameObject(const _float& fTimeDelta)
 {
+	if (!m_bIsShow)
+		return;
+
 	Set_ConstantTable();
 
 	m_pShaderCom->Begin_Shader();

@@ -226,6 +226,9 @@
     <Filter Include="02.Scene_All\01.DynamicObject\00.LobbyDoor">
       <UniqueIdentifier>{eb25b983-03da-4a3b-9078-2c4b3ba83b62}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.UI\05.QuestUI">
+      <UniqueIdentifier>{66177720-cdb3-4e75-82b1-ab1a7672ec4c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -348,9 +351,6 @@
     <ClInclude Include="..\Code\FlameThrower.h">
       <Filter>01.Scene_Stage\06.Monster\00.FlameThrower</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\UI.h">
-      <Filter>03.UI</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\Salone.h">
       <Filter>01.Scene_Stage\07.NPC\00.Salone</Filter>
     </ClInclude>
@@ -393,6 +393,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\LobbyDoor.h">
       <Filter>02.Scene_All\01.DynamicObject\00.LobbyDoor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\UI.h">
+      <Filter>03.UI\05.QuestUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -486,9 +489,6 @@
     <ClCompile Include="..\Code\FlameThrower.cpp">
       <Filter>01.Scene_Stage\06.Monster\00.FlameThrower</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\UI.cpp">
-      <Filter>03.UI</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Salone.cpp">
       <Filter>01.Scene_Stage\07.NPC\00.Salone</Filter>
     </ClCompile>
@@ -531,6 +531,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\LobbyDoor.cpp">
       <Filter>02.Scene_All\01.DynamicObject\00.LobbyDoor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\UI.cpp">
+      <Filter>03.UI\05.QuestUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

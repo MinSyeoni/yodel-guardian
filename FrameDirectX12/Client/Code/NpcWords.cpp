@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "NpcWords.h"
 #include "Font.h"
+#include "PlayerHP.h"
+#include "PlayerUI.h"
+#include "GunUI.h"
 
 CNpcWords::CNpcWords(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -40,7 +43,7 @@ void CNpcWords::Ready_NpcWords()
 	{
 	case CNpcWords::NPC:
 	{
-		wstring wstrWords = L"Å×½ºÆ® ÀÔ´Ï´Ù. ¹Î¼ö¿° ¼ö¿° ¹Î¼ö¿¬¾î ±èÈñÁÜ¤Ç";
+		wstring wstrWords = L"Å×½ºÆ® ÀÔ´Ï´Ù. ¹Î¼ö¿° ¼ö¿° ¹Î¼ö¿¬¾î ±èÈñÁÜÁÜ";
 		m_vWords.push_back(wstrWords);
 		m_iWordsCnt++;
 
@@ -71,16 +74,16 @@ _int CNpcWords::Update_GameObject(const _float& fTimeDelta)
 {
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
+	if (m_eWordsType == TYPE_END)
+		return E_FAIL;
+
 	m_fAccTime += fTimeDelta * 8.f;
 	
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
-	if (m_eWordsType != TYPE_END)
-	{
-		Next_Conversation(fTimeDelta);
-		Show_ConversationWords();
-	}
+	Next_Conversation(fTimeDelta);
+	Show_ConversationWords();	
 
 	m_pWordsFont->Update_GameObject(fTimeDelta);
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
@@ -121,10 +124,13 @@ void CNpcWords::Next_Conversation(const _float& fTimeDelta)
 _int CNpcWords::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
+
+	if (m_eWordsType == TYPE_END)
+		return E_FAIL;
+
 	m_pWordsFont->LateUpdate_GameObject(fTimeDelta);
 
-	if (m_eWordsType != TYPE_END)
-		Next_ConversationJudje();
+	Next_ConversationJudje();
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 	return NO_EVENT;
@@ -139,13 +145,26 @@ void CNpcWords::Next_ConversationJudje()
 		m_fAccTime = 0.f;
 
 		if (m_iWordsCnt <= m_iWordsNum)
-			m_bIsDead = true;
+		{
+			CGameObject* pPlayerHP = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"PlayerHP");
+			dynamic_cast<CPlayerHP*>(pPlayerHP)->Set_ShowUI(true);
+			CGameObject* pPlayerUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"PlayerUI");
+			dynamic_cast<CPlayerUI*>(pPlayerUI)->Set_ShowUI(true);
+			CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
+			dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(true);
+
+			m_eWordsType = TYPE_END;
+			m_bIsShow = false;
+		//	m_bIsDead = true;
+		}
 	}
 }
 
 void CNpcWords::Render_GameObject(const _float& fTimeDelta)
 {
 	if (m_eWordsType == TYPE_END)
+		return;
+	if (!m_bIsShow)
 		return;
 
 	Set_ConstantTable();

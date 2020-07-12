@@ -23,6 +23,9 @@ private:
 	virtual ~CGunUI();
 
 public:
+	void						Set_ShowUI(_bool bIsShow) { m_bIsShow = bIsShow; }
+
+public:
 	HRESULT						Ready_GameObjectPrototype();
 	virtual HRESULT				Ready_GameObject();
 	virtual HRESULT				LateInit_GameObject();
@@ -50,6 +53,7 @@ private:
 	_int						m_iMaxBullet = 0;
 
 	Engine::CFont*				m_pBulletFont = nullptr;
+	_bool						m_bIsShow = true;
 
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);

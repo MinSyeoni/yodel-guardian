@@ -63,6 +63,8 @@ _int CPlayerHP::LateUpdate_GameObject(const _float& fTimeDelta)
 
 void CPlayerHP::Render_GameObject(const _float& fTimeDelta)
 {
+	if (!m_bIsShow)
+		return;
 	Set_ConstantTable();
 
 	m_pShaderCom->Begin_Shader();

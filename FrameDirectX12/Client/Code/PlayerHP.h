@@ -21,6 +21,9 @@ private:
 	virtual ~CPlayerHP();
 
 public:
+	void						Set_ShowUI(_bool bIsShow) { m_bIsShow = bIsShow; }
+
+public:
 	HRESULT						Ready_GameObjectPrototype();
 	virtual HRESULT				Ready_GameObject();
 	virtual HRESULT				LateInit_GameObject();
@@ -42,6 +45,8 @@ private:
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
 
 	POINT						m_pt = {};
+	_bool						m_bIsShow = true;
+
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);
 	static  CPlayerHP*			Create(ID3D12Device* pGraphicDevice,
