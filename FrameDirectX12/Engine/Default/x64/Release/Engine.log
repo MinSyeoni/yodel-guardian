@@ -16,6 +16,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_L
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Terrain.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_UI.cso
   AnimationControl.cpp
+  Astar.cpp
   Base.cpp
   BloomTarget.cpp
   BoxCollider.cpp
@@ -34,8 +35,8 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_L
   Font.cpp
   Frame.cpp
   FrameMgr.cpp
-  Frustom.cpp
   컴파일하고 있습니다...
+  Frustom.cpp
   GameObject.cpp
   GraphicDevice.cpp
   Info.cpp
@@ -55,8 +56,8 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_L
   Renderer.cpp
   Scene.cpp
   Shader.cpp
-  Shader_Blend.cpp
   컴파일하고 있습니다...
+  Shader_Blend.cpp
   Shader_Blur.cpp
   Shader_ColorBuffer.cpp
   Shader_Default.cpp
@@ -76,8 +77,8 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_L
   SphereTex.cpp
   SSAOTarget.cpp
   Target.cpp
-  TerrainTex.cpp
   컴파일하고 있습니다...
+  TerrainTex.cpp
   Texture.cpp
   TimeMgr.cpp
   Timer.cpp
@@ -86,11 +87,10 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_L
   VlLine.cpp
      ../Release\Engine.lib 라이브러리 및 ../Release\Engine.exp 개체를 생성하고 있습니다.
   코드를 생성하고 있습니다.
+  Previous IPDB not found, fall back to full compilation.
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMesh.cpp(149): warning C4715: 'Engine::CNaviMesh::MoveOn_NaviMesh': 모든 제어 경로에서 값을 반환하지는 않습니다.
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\AnimationControl.cpp(733): warning C4715: 'Engine::CAniCtrl::Find_BoneOffset': 모든 제어 경로에서 값을 반환하지는 않습니다.
-  5405 of 5445 functions (99.3%) were compiled, the rest were copied from previous compilation.
-    11 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+  All 5684 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   코드를 생성했습니다.
   Engine.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Default\../Release\Engine.dll
   '//'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
@@ -99,6 +99,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\Animati
           1개 파일이 복사되었습니다.
           1개 파일이 복사되었습니다.
   .\Engine\Code\AnimationControl.h
+  .\Engine\Code\Astar.h
   .\Engine\Code\Base.h
   .\Engine\Code\BloomTarget.h
   .\Engine\Code\BoxCollider.h
@@ -167,7 +168,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\Animati
   .\Engine\Code\Transform.h
   .\Engine\Code\VIBuffer.h
   .\Engine\Code\VlLine.h
-         69개 파일이 복사되었습니다.
+         70개 파일이 복사되었습니다.
   .\Engine\Header\Engine_Const.h
   .\Engine\Header\Engine_Enum.h
   .\Engine\Header\Engine_Function.h

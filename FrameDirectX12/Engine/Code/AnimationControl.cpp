@@ -159,11 +159,11 @@ void CAniCtrl::Set_BlendAnimationKey(_int FirstAniKey, _int SecondAniKey)
 
 }
 
-_bool CAniCtrl::Set_IsFinish()
+_bool CAniCtrl::Set_IsFinish(_float fEndTIme)
 {
     _float fDestTime = (_float)(fmod(m_fAnimationTime, (m_pScene->mAnimations[m_uiCurAniIndex]->mDuration)));
 
-    if (fDestTime > (m_pScene->mAnimations[m_uiCurAniIndex]->mDuration) - 200.f)
+    if (fDestTime > (m_pScene->mAnimations[m_uiCurAniIndex]->mDuration) - fEndTIme)
         return true;
 
 

@@ -93,9 +93,9 @@ void CMesh::Set_AnimationBlend(_int FirstAni, _int SecondAni)
         m_pAnimationComponent->Set_BlendAnimationKey(FirstAni, SecondAni);
 }
 
-_bool CMesh::Set_IsAniFinsh()
+_bool CMesh::Set_IsAniFinsh(float fEndTime)
 {
-    return m_pAnimationComponent->Set_IsFinish();
+      return m_pAnimationComponent->Set_IsFinish(fEndTime);
 }
 
 _bool CMesh::Set_FindAnimation(_float fTime, _int AniKey)

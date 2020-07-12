@@ -6,13 +6,11 @@
 
 class CPlayerArm;
 class CPlayerLeg;
-class CPlayerHed;
 class CPlayerStatus;
-
 class CPlayer : public Engine::CGameObject
 {
 public:
-	enum STATE {RIFLEIDLE, RIFLEWALKNORTH, RIFLEWALKSOUTH, RIFLEWALKEAST,RIFLEWALKWEST,NONEIDLE,NONEWALK,RIFLEHOLSTER,RIFLEDRAW,RIFLEATTACK};
+	enum STATE {RIFLEIDLE, RIFLEWALKNORTH, RIFLEWALKSOUTH, RIFLEWALKEAST,RIFLEWALKWEST,NONEIDLE,NONEWALK,RIFLEHOLSTER,RIFLEDRAW,RIFLEATTACK,SNIPERDRAW,SNIPERHOSTER,SNIPERATTACK};
 	enum LEGSTATE {LEGIDLE,LEGNORTH,LEGSOUTH, LEGRIFLEWALKSOUTH,LEGRIFLEWALKEAST};
 
 
@@ -22,9 +20,11 @@ private:
 	virtual ~CPlayer();
 
 public:
+	void            KeyLockPlayer(_bool bIsLock );
 	HRESULT			Ready_GameObjectPrototype();
 	virtual HRESULT	Ready_GameObject();
 	virtual HRESULT	LateInit_GameObject();
+
 	virtual _int	Update_GameObject(const _float& fTimeDelta);
 	void UpdateParts(const _float& fTimeDelta);
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
@@ -34,6 +34,7 @@ public:
 public:
 	CPlayerArm*  Get_PlayerArm() { return m_pArm; };//ÆÈ
 	CPlayerLeg*  Get_PlayerLeg() { return m_pLeg; };//´Ù¸®
+	CPlayerStatus* Get_Status() { return m_pStatus; };
 private:
 	virtual HRESULT Add_Component();
 private:

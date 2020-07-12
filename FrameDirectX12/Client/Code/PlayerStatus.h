@@ -5,7 +5,7 @@ class CDynamicCamera;
 class CPlayerStatus 
 {
 public:
-	enum EQUIPTYPE { NONE, RIFLE };
+	enum EQUIPTYPE { NONE, RIFLE,SNIPER };
 
 
 public:
@@ -60,6 +60,6 @@ public:
 	//Ä«¸Þ¶ó
 	CDynamicCamera* m_pCamera;
 
-
+	_bool m_bIsKeyLock = false;
 };
 

@@ -30,7 +30,7 @@ public:
 	void Set_Animation(_int Animation);
 	void Set_AnimationBlend(_int FirstAni, _int SecondAni);
 
-	_bool Set_IsAniFinsh();
+	_bool Set_IsAniFinsh(float fEndTime = 200.f);
 	_bool Set_FindAnimation(_float fTime, _int AniKey);
 	void  Set_AnimationStart();
 

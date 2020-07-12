@@ -160,7 +160,7 @@ HRESULT CTerrainTex::Ready_Buffer(const _uint& iNumVerticesX, const _uint& iNumV
 	m_tSubMeshGeometry.iBaseVertexLocation = 0;
 
 	
-
+	CloseHandle(hFile);
 	return S_OK;
 }
 

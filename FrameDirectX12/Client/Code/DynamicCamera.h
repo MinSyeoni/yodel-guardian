@@ -20,7 +20,7 @@ public:
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 	void MouseInput();
 	_bool Get_ZoomOut() { return m_bIsZoom; };
-	void Set_ZoomInOut(_bool ZoomIn);
+	void Set_ZoomInOut(_bool ZoomIn,float Fov =45.f);
 private:
 	/*____________________________________________________________________
 	[ Value ]
@@ -45,6 +45,9 @@ private:
 
 	_matrix* m_pmatArmCamera = nullptr;
 	_matrix* m_pmatLegCamera = nullptr;
+
+
+	float m_fFov = 45.f;
 public:
 	virtual CGameObject*	Clone_GameObject(void* pArg);
 	static CDynamicCamera*	Create(ID3D12Device* pGraphicDevice,

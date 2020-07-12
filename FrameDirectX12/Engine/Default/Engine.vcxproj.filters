@@ -214,10 +214,11 @@
     <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\06.SphereTex">
       <UniqueIdentifier>{05f999fc-28ad-4d23-88bd-ffb0ce5edfd5}</UniqueIdentifier>
     </Filter>
-
-
     <Filter Include="01.Utility\05.Shader\12.Shader_Dissolve">
       <UniqueIdentifier>{14afb047-5859-4c44-9685-93e6b47e2d7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\02.SuperClass\04.Component\04.Astar">
+      <UniqueIdentifier>{11fd8a58-5c12-4781-981f-55dcf949ab7b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -443,10 +444,12 @@
     <ClInclude Include="..\Code\SphereCollider.h">
       <Filter>01.Utility\02.SuperClass\04.Component\03.Collider\01.SphereCollider</Filter>
     </ClInclude>
-
-
     <ClInclude Include="..\Code\Shader_Dissolve.h">
       <Filter>01.Utility\05.Shader\12.Shader_Dissolve</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Shader_Effect.h" />
+    <ClInclude Include="..\Code\Astar.h">
+      <Filter>01.Utility\02.SuperClass\04.Component\04.Astar</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -642,10 +645,12 @@
     <ClCompile Include="..\Code\SphereCollider.cpp">
       <Filter>01.Utility\02.SuperClass\04.Component\03.Collider\01.SphereCollider</Filter>
     </ClCompile>
-
-
     <ClCompile Include="..\Code\Shader_Dissolve.cpp">
       <Filter>01.Utility\05.Shader\12.Shader_Dissolve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shader_Effect.cpp" />
+    <ClCompile Include="..\Code\Astar.cpp">
+      <Filter>01.Utility\02.SuperClass\04.Component\04.Astar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -685,10 +690,9 @@
     <FxCompile Include="..\..\Bin\Shader\Shader_UI.hlsl">
       <Filter>01.Utility\05.Shader\11.Shader_UI</Filter>
     </FxCompile>
-
-
     <FxCompile Include="..\..\Bin\Shader\Shader_Dissolve.hlsl">
       <Filter>01.Utility\05.Shader\12.Shader_Dissolve</Filter>
     </FxCompile>
+    <FxCompile Include="..\..\Bin\Shader\Shader_Effect.hlsl" />
   </ItemGroup>
 </Project>

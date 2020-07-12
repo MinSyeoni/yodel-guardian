@@ -32,6 +32,8 @@
 #include "Normandy.h"
 #include "DistortionEffect.h"
 #include "Shepard.h"
+#include "NpcRifle.h"
+#include "Sniper.h"
 
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
@@ -211,6 +213,14 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Shepard", pGameObject), E_FAIL);
 
 
+	pGameObject = CNpcRifle::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_NpcRifle", pGameObject), E_FAIL);
+
+	pGameObject = CSniper::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Sniper", pGameObject), E_FAIL);
+
 
 	return S_OK;
 }
@@ -276,7 +286,9 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Rifle", L"Weapon", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Salone", L"Salone", nullptr), E_FAIL);//For.Salone
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Shepard", L"Shepard", nullptr), E_FAIL);
-		
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcRifle", L"Weapon", nullptr), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Sniper", L"Weapon", nullptr), E_FAIL);
+
 
 																													 //Prototype_MapObject
 	Load_StageObject(L"../../../SYTool/Tool/Data/StaticObj/mapAddoutside.dat");

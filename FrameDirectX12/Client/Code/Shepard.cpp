@@ -3,7 +3,11 @@
 #include "ObjectMgr.h"
 #include "GraphicDevice.h"
 #include "DynamicCamera.h"
+#include "DirectInput.h"
 #include"Frustom.h"
+#include "PlayerStatus.h"
+
+
 CShepard::CShepard(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -42,6 +46,13 @@ HRESULT CShepard::Ready_GameObject()
 	m_mapComponent[ID_STATIC].emplace(L"Com_Mesh", m_pMeshCom);
 
 
+	m_pAstarCom = static_cast<Engine::CAstar*>(m_pComponentMgr->Clone_Component(L"Prototype_Astar", COMPONENTID::ID_STATIC));
+	NULL_CHECK_RETURN(m_pAstarCom, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_Astar", m_pAstarCom);
+
+	m_pNaviCom = static_cast<Engine::CNaviMesh*>(CComponentMgr::Get_Instance()->Clone_Component(L"Mesh_Navi", ID_STATIC));
+	NULL_CHECK_RETURN(m_pNaviCom, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_Navi", m_pNaviCom);
 	//여기야시영
 
 #ifdef _DEBUG
@@ -65,6 +76,16 @@ HRESULT CShepard::LateInit_GameObject()
 	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
 
 
+      m_pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+
+	  if (m_pPlayer == nullptr)
+		  return E_FAIL;
+
+	  m_pNaviCom->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(0.f,0.f,0.f ), 0, false);
+
+
+
+	  m_pAstarCom->Init_AstarCell(m_pNaviCom->GetNaviCell());
 
 	return S_OK;
 
@@ -79,6 +100,15 @@ _int CShepard::Update_GameObject(const _float& fTimeDelta)
 	/*____________________________________________________________________
 	TransCom - Update WorldMatrix.
 	______________________________________________________________________*/
+	if (KEY_DOWN(DIK_C))
+	{
+		m_eCurChapter = TURNPLAYER;
+	}
+
+
+	ChapterCheck(fTimeDelta);
+	if(KEY_PRESSING(DIK_0))
+	MoveByAstar(fTimeDelta);
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
 
@@ -97,8 +127,8 @@ _int CShepard::LateUpdate_GameObject(const _float& fTimeDelta)
 	/*____________________________________________________________________
 	[ Set PipelineState ]
 	______________________________________________________________________*/
-	m_pMeshCom->Set_Animation((int)m_eCurState);
-	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(fTimeDelta * 3000.f);
+	m_pMeshCom->Set_AnimationBlend((int)m_eCurState, (int)m_eCurState);
+	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransformsBlend(fTimeDelta * 3000.f, fTimeDelta * 3000.f);
 
 	return NO_EVENT;
 }
@@ -119,15 +149,70 @@ void CShepard::Render_ShadowDepth(CShader_Shadow* pShader)
 	pShader->Set_ShadowFinish();
 }
 
-void CShepard::TurnToPlayer()
+void CShepard::TurnToPlayer(const _float& fTimeDelta)
 {
+	_vec3 vPos = static_cast<CTransform*>(m_pPlayer->Get_Component(L"Com_Transform", ID_DYNAMIC))->m_vPos;
 
-//	m_pTransCom->Chase_Target();
+	if (m_pTransCom->Chase_Target(vPos, fTimeDelta * 0.03) && m_pMeshCom->Set_IsAniFinsh(400.f))
+	{
+		m_eCurChapter = GOTOPLAYER;
+	}
 
 
 }
 
-void CShepard::ChapterCheck()
+void CShepard::MoveByAstar(const _float& fTimeDelta)
+{
+
+	CPlayer* pPlayer = static_cast<CPlayer*>(  CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player"));
+	if (pPlayer == nullptr)
+		return;
+
+	CTransform* pPlayerTranForm = pPlayer->Get_Transform();
+
+	CNaviMesh* pPlayerNavi = pPlayer->Get_Status()->m_pNaviMesh;
+	m_pAstarCom->Start_Aster(m_pTransCom->m_vPos,pPlayerTranForm->m_vPos,m_pNaviCom->GetIndex(), pPlayerNavi->GetIndex());
+
+	list<Engine::CCell*>& BestLst = m_pAstarCom->GetBestLst();
+
+
+	if (!BestLst.empty())
+	{
+		_vec3 vecDir = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
+		
+		BestLst.pop_front();
+		if (!BestLst.empty())
+		{
+			_vec3 vecDir2 = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
+
+			vecDir = (vecDir + vecDir2) *0.5;
+			BestLst.pop_front();
+			if (!BestLst.empty())
+			{
+				vecDir2 = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
+				vecDir = (vecDir + vecDir2) * 0.5;
+			}
+
+		}
+
+		vecDir.Normalize();
+		_vec3 vMovePos;
+
+		vMovePos = m_pNaviCom->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &vecDir, fTimeDelta * 12.f);
+
+		m_pTransCom->m_vPos = vMovePos;
+
+
+
+	}
+
+     
+
+
+
+}
+
+void CShepard::ChapterCheck(const _float& fTimeDelta)
 {
 
 	switch (m_eCurChapter)	
@@ -138,14 +223,14 @@ void CShepard::ChapterCheck()
 	case TURNPLAYER:
 	{
 		m_eCurState = TURNRIGHT;
-		TurnToPlayer();
+		TurnToPlayer(fTimeDelta);
 		break;
 	}
 	case GOTOPLAYER:
 	{
 		m_eCurState = RUNNORTH;
 
-
+		break;
 
 	}
 

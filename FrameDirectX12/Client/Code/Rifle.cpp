@@ -114,7 +114,7 @@ _int CRifle::LateUpdate_GameObject(const _float& fTimeDelta)
 
     if (m_eWeaponState == EQUIP)
         FallowPlayer();
-    else if (m_eWeaponState == BAG)
+    else if (m_eWeaponState == BAG)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
         FallowBag();
 
 

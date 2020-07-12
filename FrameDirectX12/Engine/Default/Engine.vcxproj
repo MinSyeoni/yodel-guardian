@@ -181,6 +181,7 @@ call CopyEngine.bat</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Code\AnimationControl.h" />
+    <ClInclude Include="..\Code\Astar.h" />
     <ClInclude Include="..\Code\Base.h" />
     <ClInclude Include="..\Code\BloomTarget.h" />
     <ClInclude Include="..\Code\BoxCollider.h" />
@@ -259,6 +260,7 @@ call CopyEngine.bat</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\AnimationControl.cpp" />
+    <ClCompile Include="..\Code\Astar.cpp" />
     <ClCompile Include="..\Code\Base.cpp" />
     <ClCompile Include="..\Code\BloomTarget.cpp" />
     <ClCompile Include="..\Code\BoxCollider.cpp" />

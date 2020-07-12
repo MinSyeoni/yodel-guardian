@@ -23,6 +23,7 @@
 #include "SphereCollider.h"
 #include "Shader_Effect.h"
 #include "Shader_Dissolve.h"
+#include "Astar.h"
 
 BEGIN(Engine)
 

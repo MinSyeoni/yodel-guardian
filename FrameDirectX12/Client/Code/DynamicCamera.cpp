@@ -76,14 +76,14 @@ _int CDynamicCamera::Update_GameObject(const _float& fTimeDelta)
         m_fZoom -= fTimeDelta * 500.f;
         if (m_fMaxZoom > m_fZoom)
             m_fZoom = m_fMaxZoom;
-        Set_ProjForV(45.f);
+        Set_ProjForV(m_fFov);
     }
     else
     {
         m_fZoom += fTimeDelta * 500.f;
         if (m_fMinZoom < m_fZoom)
             m_fZoom = m_fMinZoom;
-        Set_ProjForV(60.f);
+        Set_ProjForV(65.f);
     }
 
 
@@ -159,7 +159,7 @@ void CDynamicCamera::MouseInput()
     }
 }
 
-void CDynamicCamera::Set_ZoomInOut(_bool ZoomIn)
+void CDynamicCamera::Set_ZoomInOut(_bool ZoomIn,float fov)
 {
 
 
@@ -169,7 +169,7 @@ void CDynamicCamera::Set_ZoomInOut(_bool ZoomIn)
     if (m_fZoom <= 50.f && ZoomIn == false && m_bIsZoom == true)
         m_bIsZoom = false;
 
-
+    m_fFov = fov;
 }
 
 

@@ -187,6 +187,7 @@
     <ClInclude Include="..\Code\BaziorMgr.h" />
     <ClInclude Include="..\Code\Monster.h" />
     <ClInclude Include="..\Code\Normandy.h" />
+    <ClInclude Include="..\Code\NpcRifle.h" />
     <ClInclude Include="..\Code\Pistol.h" />
     <ClInclude Include="..\Code\Player.h" />
     <ClInclude Include="..\Code\PlayerArm.h" />
@@ -202,6 +203,7 @@
     <ClInclude Include="..\Code\Scene_Stage.h" />
     <ClInclude Include="..\Code\Shepard.h" />
     <ClInclude Include="..\Code\SkyDome.h" />
+    <ClInclude Include="..\Code\Sniper.h" />
     <ClInclude Include="..\Code\StaticObject.h" />
     <ClInclude Include="..\Code\Terrain.h" />
     <ClInclude Include="..\Code\TrailEffect.h" />
@@ -244,6 +246,7 @@
     <ClCompile Include="..\Code\BaziorMgr.cpp" />
     <ClCompile Include="..\Code\Monster.cpp" />
     <ClCompile Include="..\Code\Normandy.cpp" />
+    <ClCompile Include="..\Code\NpcRifle.cpp" />
     <ClCompile Include="..\Code\Pistol.cpp" />
     <ClCompile Include="..\Code\Player.cpp" />
     <ClCompile Include="..\Code\PlayerArm.cpp" />
@@ -259,6 +262,7 @@
     <ClCompile Include="..\Code\Scene_Stage.cpp" />
     <ClCompile Include="..\Code\Shepard.cpp" />
     <ClCompile Include="..\Code\SkyDome.cpp" />
+    <ClCompile Include="..\Code\Sniper.cpp" />
     <ClCompile Include="..\Code\StaticObject.cpp" />
     <ClCompile Include="..\Code\Terrain.cpp" />
     <ClCompile Include="..\Code\TrailEffect.cpp" />
