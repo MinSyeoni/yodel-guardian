@@ -14,7 +14,7 @@ class CDynamicCamera;
 class CLobbyDoor : public Engine::CGameObject
 {
 public:
-	enum DOORSTATE { DOOR_IDLE, DOOR_ALREADYOPEN, DOOR_OPEN, DOOR_END };
+	enum DOORSTATE { DOOR_IDLE, DOOR_ALREADYOPEN, DOOR_OPEN, DOOR_CLOSE };
 
 private:
 	explicit CLobbyDoor(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);

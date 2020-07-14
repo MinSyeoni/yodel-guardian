@@ -1,70 +1,89 @@
 #include "stdafx.h"
-#include "PlayerHP.h"
+#include "ColleagueHP.h"
 
-
-CPlayerHP::CPlayerHP(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
+CColleagueHP::CColleagueHP(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
 }
 
-CPlayerHP::CPlayerHP(const CPlayerHP& rhs)
+CColleagueHP::CColleagueHP(const CColleagueHP& rhs)
 	: Engine::CGameObject(rhs)
 {
 }
 
-CPlayerHP::~CPlayerHP()
+CColleagueHP::~CColleagueHP()
 {
 }
 
-HRESULT CPlayerHP::Ready_GameObjectPrototype()
+HRESULT CColleagueHP::Ready_GameObjectPrototype()
 {
 	return S_OK;
 }
 
-HRESULT CPlayerHP::Ready_GameObject()
+HRESULT CColleagueHP::Ready_GameObject()
 {
 	Add_Component();
 
 	return S_OK;
 }
 
-HRESULT CPlayerHP::LateInit_GameObject()
+HRESULT CColleagueHP::LateInit_GameObject()
 {
 	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());	
+
+	// 동료 HP로 
+//	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+//	m_fPreHp = m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
 
 	return S_OK;
 }
 
-_int CPlayerHP::Update_GameObject(const _float& fTimeDelta)
+_int CColleagueHP::Update_GameObject(const _float& fTimeDelta)
 {
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
-	m_pTransCom->m_vScale = _vec3(0.15f, 0.2f, 0.f);
+	m_pTransCom->m_vScale = _vec3(0.15f, 0.2f, 0.15f);
 
 	m_pTransCom->m_vPos.x = _float(WINCX / 2.f) / _float(WINCX / 0.5f) - 1.f;
 	m_pTransCom->m_vPos.y = _float(WINCY / 1.5f) / _float(WINCY / 0.1f) - 0.8f;
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
+	// 동료 HP로 
+	//CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+
+	//m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
+
+	//if (m_fPreHp > m_fCurHp)
+	//{
+	//	m_fPreHp -= 15.f * fTimeDelta;
+
+	//	if (m_fPreHp <= m_fCurHp)
+	//		m_fPreHp = m_fCurHp;
+	//}
+
 	return NO_EVENT;
 }
 
-_int CPlayerHP::LateUpdate_GameObject(const _float& fTimeDelta)
+_int CColleagueHP::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
+//	m_matHPWorld._11 = (m_fPreHp * 2 - 314) * 0.01;
+
 	return NO_EVENT;
 }
 
-void CPlayerHP::Render_GameObject(const _float& fTimeDelta)
+void CColleagueHP::Render_GameObject(const _float& fTimeDelta)
 {
-	if (!m_bIsShow)
+	if (!m_bIsShow || m_fPreHp <= 0.f)
 		return;
+
 	Set_ConstantTable();
 
 	m_pShaderCom->Begin_Shader();
@@ -76,7 +95,7 @@ void CPlayerHP::Render_GameObject(const _float& fTimeDelta)
 	m_pBufferCom->Render_Buffer();
 }
 
-HRESULT CPlayerHP::Add_Component()
+HRESULT CColleagueHP::Add_Component()
 {
 	NULL_CHECK_RETURN(m_pComponentMgr, E_FAIL);
 
@@ -103,7 +122,7 @@ HRESULT CPlayerHP::Add_Component()
 	return S_OK;
 }
 
-void CPlayerHP::Set_ConstantTable()
+void CColleagueHP::Set_ConstantTable()
 {
 	_matrix matView = INIT_MATRIX;
 	_matrix matProj = INIT_MATRIX;
@@ -112,6 +131,7 @@ void CPlayerHP::Set_ConstantTable()
 	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
 
 	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
+
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_pTransCom->m_matWorld));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
@@ -120,9 +140,9 @@ void CPlayerHP::Set_ConstantTable()
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
 }
 
-CGameObject* CPlayerHP::Clone_GameObject(void* pArg)
+CGameObject* CColleagueHP::Clone_GameObject(void* pArg)
 {
-	CGameObject* pInstance = new CPlayerHP(*this);
+	CGameObject* pInstance = new CColleagueHP(*this);
 
 	if (FAILED(pInstance->Ready_GameObject()))
 		return nullptr;
@@ -130,9 +150,9 @@ CGameObject* CPlayerHP::Clone_GameObject(void* pArg)
 	return pInstance;
 }
 
-CPlayerHP* CPlayerHP::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
+CColleagueHP* CColleagueHP::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 {
-	CPlayerHP* pInstance = new CPlayerHP(pGraphicDevice, pCommandList);
+	CColleagueHP* pInstance = new CColleagueHP(pGraphicDevice, pCommandList);
 
 	if (FAILED(pInstance->Ready_GameObjectPrototype()))
 		Engine::Safe_Release(pInstance);
@@ -140,7 +160,7 @@ CPlayerHP* CPlayerHP::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommand
 	return pInstance;
 }
 
-void CPlayerHP::Free()
+void CColleagueHP::Free()
 {
 	CGameObject::Free();
 }

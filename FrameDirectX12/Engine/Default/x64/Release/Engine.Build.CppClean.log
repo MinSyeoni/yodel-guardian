@@ -65,10 +65,6 @@ c:\users\user\documents\github\yodel-guardian\framedirectx12\engine\default\x64\
 c:\users\user\documents\github\yodel-guardian\framedirectx12\engine\default\x64\release\timer.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\engine\default\x64\release\timemgr.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\engine\default\x64\release\texture.obj
-c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\release\engine.lib
-c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\release\engine.exp
-c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\release\engine.ipdb
-c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\release\engine.iobj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\engine\release\engine.lib
 c:\users\user\documents\github\yodel-guardian\framedirectx12\engine\release\engine.exp
 c:\users\user\documents\github\yodel-guardian\framedirectx12\engine\release\engine.ipdb
@@ -87,8 +83,6 @@ c:\users\user\documents\github\yodel-guardian\framedirectx12\engine\release\shad
 c:\users\user\documents\github\yodel-guardian\framedirectx12\engine\release\shader_ssao.cso
 c:\users\user\documents\github\yodel-guardian\framedirectx12\engine\release\shader_terrain.cso
 c:\users\user\documents\github\yodel-guardian\framedirectx12\engine\release\shader_ui.cso
-c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\release\engine.dll
-c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\release\engine.pdb
 c:\users\user\documents\github\yodel-guardian\framedirectx12\engine\release\engine.dll
 c:\users\user\documents\github\yodel-guardian\framedirectx12\engine\release\engine.pdb
 c:\users\user\documents\github\yodel-guardian\framedirectx12\engine\default\../release\engine.dll

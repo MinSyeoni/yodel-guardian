@@ -80,15 +80,11 @@ HRESULT CPlayer::LateInit_GameObject()
 #endif
 
 	return S_OK;
-
 }
 
 _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 {
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
-
-
-
 
 	if (KEY_DOWN(DIK_L))
 	{
@@ -142,6 +138,11 @@ _int CPlayer::LateUpdate_GameObject(const _float & fTimeDelta)
 
 void CPlayer::Render_GameObject(const _float & fTimeDelta)
 {
+}
+
+_float CPlayer::Get_CurHP()
+{
+	return m_pStatus->m_uiHp;
 }
 
 HRESULT CPlayer::Add_Component()

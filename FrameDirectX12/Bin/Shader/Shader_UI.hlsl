@@ -51,6 +51,28 @@ float4 PS_MAIN(VS_TEXTURED_OUTPUT input) : SV_TARGET
 	return(cColor);
 }
 
+float4 PS_HPBAR(VS_TEXTURED_OUTPUT input) : SV_TARGET
+{
+	float fAlpha = 1.f;
+	float2 fTemp = input.uv - float2(0.5f, 0.5f);
+	float fAngle = 0.f;
+
+	float fHp = matWorld._11;
+
+	fTemp = normalize(fTemp);
+	float fRad = acos(dot(fTemp, float2(0.f, 1.f)));
+
+	if (input.uv.x <= 0.5f)
+		fRad *= -1.f;
+
+	if (fRad >= fHp)
+		fAlpha = 0.f;
+
+	float4 cColor = gTexture.Sample(gsamLinearWrap, input.uv);
+	cColor.a *= fAlpha;
+
+	return(cColor);
+}
 
 VS_TEXTURED_OUTPUT VS_NNOMAL(VS_NTEXTURED_INPUT Input)
 {

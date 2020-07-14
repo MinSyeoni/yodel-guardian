@@ -13,12 +13,15 @@ namespace Engine
 
 class CDynamicCamera;
 
-class CPlayerUI : public Engine::CGameObject
+class CHPBar : public Engine::CGameObject
 {
+public:
+	enum HPBAR_TYPE { PLAYER_HPBAER, COLLEAGUE_HPBAR };
+
 private:
-	explicit CPlayerUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
-	explicit CPlayerUI(const CPlayerUI& rhs);
-	virtual ~CPlayerUI();
+	explicit CHPBar(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
+	explicit CHPBar(const CHPBar& rhs);
+	virtual ~CHPBar();
 
 public:
 	void						Set_ShowUI(_bool bIsShow) { m_bIsShow = bIsShow; }
@@ -47,9 +50,15 @@ private:
 	POINT						m_pt = {};
 	_bool						m_bIsShow = true;
 
+	_float						m_fCurHp = 0.f;
+	_float						m_fPreHp = 0.f;
+	_matrix						m_matHPWorld = INIT_MATRIX;
+
+	HPBAR_TYPE					m_eType;
+
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);
-	static  CPlayerUI*			Create(ID3D12Device* pGraphicDevice,
+	static  CHPBar*				Create(ID3D12Device* pGraphicDevice,
 										ID3D12GraphicsCommandList* pCommandList);
 private:
 	virtual void				Free();

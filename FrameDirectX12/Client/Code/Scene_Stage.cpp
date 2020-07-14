@@ -16,11 +16,13 @@
 
 #include "UI.h"	// 나중에 ui로 묶을것
 #include "Aim.h"
-#include "PlayerHP.h"
-#include "PlayerUI.h"
+#include "HPBar.h"
+#include "IconUI.h"
+#include "InvenUI.h"
 #include "GunUI.h"
 #include "Trigger.h"
 #include "NpcWords.h"
+#include "OptionUI.h"
 
 #include "MapObject.h"
 #include "HPKit.h"
@@ -105,12 +107,20 @@ _int CScene_Stage::LateUpdate_Scene(const _float & fTimeDelta)
 		dynamic_cast<CNpcWords*>(pWordsUI)->Ready_NpcWords();
 
 		// 대화창 나올 땐 다른 UI 끔
-		CGameObject* pPlayerHP = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"PlayerHP");
-		dynamic_cast<CPlayerHP*>(pPlayerHP)->Set_ShowUI(false);
-		CGameObject* pPlayerUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"PlayerUI");
-		dynamic_cast<CPlayerUI*>(pPlayerUI)->Set_ShowUI(false);
+		list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
+		for (auto& pSrc : *pHpBarUIList)
+			dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(false);
+
+		list<CGameObject*>* pIconUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"IconUI");
+		for (auto& pSrc : *pIconUIList)
+			dynamic_cast<CIconUI*>(pSrc)->Set_ShowUI(false);
+
 		CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
 		dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(false);
+
+		list<CGameObject*>* pInvenList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"InvenUI");
+		for (auto& pSrc : *pInvenList)
+			dynamic_cast<CInvenUI*>(pSrc)->Set_ShowUI(false);
 	}
 
 	return Engine::CScene::LateUpdate_Scene(fTimeDelta);
@@ -191,13 +201,17 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Aim", pGameObject), E_FAIL);
 
-	pGameObject = CPlayerUI::Create(m_pGraphicDevice, m_pCommandList);
+	pGameObject = COptionUI::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_PlayerUI", pGameObject), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_OptionUI", pGameObject), E_FAIL);
 
-	pGameObject = CPlayerHP::Create(m_pGraphicDevice, m_pCommandList);
+	pGameObject = CIconUI::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_PlayerHP", pGameObject), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_IconUI", pGameObject), E_FAIL);
+
+	pGameObject = CHPBar::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_HPBarUI", pGameObject), E_FAIL);
 
 	pGameObject = CGunUI::Create(m_pGraphicDevice, m_pCommandList, L"Prototype_Texture_Rifle");
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -207,6 +221,9 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_NpcBoard", pGameObject), E_FAIL);
 
+	pGameObject = CInvenUI::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_InvenUI", pGameObject), E_FAIL);
 
 	pGameObject = CDamageBlood::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -298,13 +315,12 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Terrain", L"Terrain", nullptr), E_FAIL);
 
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player",nullptr), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player", nullptr), E_FAIL);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Rifle", L"Weapon", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Salone", L"Salone", nullptr), E_FAIL);//For.Salone
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Shepard", L"Shepard", nullptr), E_FAIL);
-		
-
+	
 																													 //Prototype_MapObject
 	Load_StageObject(L"../../../SYTool/Tool/Data/StaticObj/mapAddoutside.dat");
 
@@ -333,10 +349,22 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_UI", L"Quest", nullptr), E_FAIL);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Aim", L"Aim", nullptr), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_OptionUI", L"OptionUI", nullptr), E_FAIL);
 
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_PlayerUI", L"PlayerUI", nullptr), E_FAIL);
+	//////// 플레이어 아이콘 //////
+	_uint iType = 0;
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_IconUI", L"IconUI", &iType), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &iType), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", &iType), E_FAIL);
 
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_PlayerHP", L"PlayerHP", nullptr), E_FAIL);
+	iType = 1;
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_IconUI", L"IconUI", &iType), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &iType), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", &iType), E_FAIL);
+
+	iType = 2;
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", &iType), E_FAIL);
+	/////////////////////////////
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 

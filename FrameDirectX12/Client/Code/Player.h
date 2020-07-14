@@ -34,6 +34,11 @@ public:
 public:
 	CPlayerArm*  Get_PlayerArm() { return m_pArm; };//ÆÈ
 	CPlayerLeg*  Get_PlayerLeg() { return m_pLeg; };//´Ù¸®
+
+	/////////// HHHHHHHHPPPPPPPPP
+	_float			Get_CurHP();
+
+
 private:
 	virtual HRESULT Add_Component();
 private:

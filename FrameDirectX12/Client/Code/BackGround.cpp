@@ -59,7 +59,6 @@ HRESULT CBackGround::LateInit_GameObject()
 #endif
 	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());	// 셰이더에 텍스쳐 알려줘여 함.
 
-
 	return S_OK;
 }
 

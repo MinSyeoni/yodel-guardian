@@ -1,67 +1,103 @@
 #include "stdafx.h"
-#include "PlayerUI.h"
+#include "OptionUI.h"
+#include "HPBar.h"
+#include "IconUI.h"
+#include "GunUI.h"
+#include "InvenUI.h"
+#include "DirectInput.h"
 
-
-CPlayerUI::CPlayerUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
+COptionUI::COptionUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
 }
 
-CPlayerUI::CPlayerUI(const CPlayerUI& rhs)
+COptionUI::COptionUI(const COptionUI& rhs)
 	: Engine::CGameObject(rhs)
 {
 }
 
-CPlayerUI::~CPlayerUI()
+COptionUI::~COptionUI()
 {
 }
 
-HRESULT CPlayerUI::Ready_GameObjectPrototype()
+HRESULT COptionUI::Ready_GameObjectPrototype()
 {
 	return S_OK;
 }
 
-HRESULT CPlayerUI::Ready_GameObject()
+HRESULT COptionUI::Ready_GameObject()
 {
 	Add_Component();
 
 	return S_OK;
 }
 
-HRESULT CPlayerUI::LateInit_GameObject()
+HRESULT COptionUI::LateInit_GameObject()
 {
 	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());	
+
+	m_pTransCom->m_vPos.x = _float(2.f / WINCX * WINCX / 2) - 1.f;
+	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * WINCY / 2) + 1.f;
 
 	return S_OK;
 }
 
-_int CPlayerUI::Update_GameObject(const _float& fTimeDelta)
+_int COptionUI::Update_GameObject(const _float& fTimeDelta)
 {
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
-	m_pTransCom->m_vScale = _vec3(0.15f, 0.2f, 0.f);
-
-	m_pTransCom->m_vPos.x = _float(WINCX / 2.f) / _float(WINCX / 0.5f) - 1.f;
-	m_pTransCom->m_vPos.y = _float(WINCY / 1.5f) / _float(WINCY / 0.1f) - 0.8f;
+	GetCursorPos(&m_pt);
+	ScreenToClient(g_hWnd, &m_pt);
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
 	return NO_EVENT;
 }
 
-_int CPlayerUI::LateUpdate_GameObject(const _float& fTimeDelta)
+_int COptionUI::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
+
+	Show_OptionUI();
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
 	return NO_EVENT;
 }
 
-void CPlayerUI::Render_GameObject(const _float& fTimeDelta)
+void COptionUI::Show_OptionUI()
+{
+	if (!m_bIsDead && CDirectInput::Get_Instance()->KEY_DOWN(DIK_0) && !m_bIsShow)
+	{
+		m_bIsShow = true;
+		Show_OtherUI();
+	}
+	else if (!m_bIsDead && CDirectInput::Get_Instance()->KEY_DOWN(DIK_0) && m_bIsShow)
+	{
+		m_bIsShow = false;
+		Show_OtherUI();
+	}
+}
+
+void COptionUI::Show_OtherUI()
+{
+	list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
+	for (auto& pSrc : *pHpBarUIList)
+		dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(!m_bIsShow);
+	list<CGameObject*>* pIconUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"IconUI");
+	for (auto& pSrc : *pIconUIList)
+		dynamic_cast<CIconUI*>(pSrc)->Set_ShowUI(!m_bIsShow);
+	CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
+	dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(!m_bIsShow);
+	list<CGameObject*>* pInvenList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"InvenUI");
+	for (auto& pSrc : *pInvenList)
+		dynamic_cast<CInvenUI*>(pSrc)->Set_ShowUI(!m_bIsShow);
+}
+
+void COptionUI::Render_GameObject(const _float& fTimeDelta)
 {
 	if (!m_bIsShow)
 		return;
@@ -77,7 +113,7 @@ void CPlayerUI::Render_GameObject(const _float& fTimeDelta)
 	m_pBufferCom->Render_Buffer();
 }
 
-HRESULT CPlayerUI::Add_Component()
+HRESULT COptionUI::Add_Component()
 {
 	NULL_CHECK_RETURN(m_pComponentMgr, E_FAIL);
 
@@ -92,19 +128,19 @@ HRESULT CPlayerUI::Add_Component()
 	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
 
 	// Texture
-	m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_PlayerUI", COMPONENTID::ID_STATIC));
+	m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_OptionUI", COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
 
 	// TransCom 
 	m_pTransCom = static_cast<CTransform*>(m_pComponentMgr->Clone_Component(L"Prototype_Transform", COMPONENTID::ID_DYNAMIC));
-	if (nullptr != m_pTransCom)
+	if (nullptr != m_pTransCom) 
 		m_mapComponent[ID_DYNAMIC].emplace(L"Com_Transform", m_pTransCom);
 
 	return S_OK;
 }
 
-void CPlayerUI::Set_ConstantTable()
+void COptionUI::Set_ConstantTable()
 {
 	_matrix matView = INIT_MATRIX;
 	_matrix matProj = INIT_MATRIX;
@@ -121,9 +157,9 @@ void CPlayerUI::Set_ConstantTable()
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
 }
 
-CGameObject* CPlayerUI::Clone_GameObject(void* pArg)
+CGameObject* COptionUI::Clone_GameObject(void* pArg)
 {
-	CGameObject* pInstance = new CPlayerUI(*this);
+	CGameObject* pInstance = new COptionUI(*this);
 
 	if (FAILED(pInstance->Ready_GameObject()))
 		return nullptr;
@@ -131,9 +167,9 @@ CGameObject* CPlayerUI::Clone_GameObject(void* pArg)
 	return pInstance;
 }
 
-CPlayerUI* CPlayerUI::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
+COptionUI* COptionUI::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 {
-	CPlayerUI* pInstance = new CPlayerUI(pGraphicDevice, pCommandList);
+	COptionUI* pInstance = new COptionUI(pGraphicDevice, pCommandList);
 
 	if (FAILED(pInstance->Ready_GameObjectPrototype()))
 		Engine::Safe_Release(pInstance);
@@ -141,7 +177,7 @@ CPlayerUI* CPlayerUI::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommand
 	return pInstance;
 }
 
-void CPlayerUI::Free()
+void COptionUI::Free()
 {
 	CGameObject::Free();
 }
