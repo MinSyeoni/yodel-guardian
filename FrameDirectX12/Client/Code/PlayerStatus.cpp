@@ -507,8 +507,9 @@ void CPlayerStatus::DamageByMonster(const _float& fTimeDelta)
                 {
                     CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_UI", L"Prototype_DamageBlood", L"Damage", nullptr);
                     m_bIshit = true;
-                    m_uiHp -= 1;
-
+                    m_uiHp -= 11.f;
+                    if (m_uiHp <= 0.f)
+                        m_uiHp = 0.f;
                 }
 
             }

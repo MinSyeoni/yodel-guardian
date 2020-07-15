@@ -27,8 +27,10 @@ CShader_UI::~CShader_UI()
 
 HRESULT CShader_UI::Ready_Shader(TYPE eType)
 {
-	if (eType == ALPHA)
+	if (eType == ALPHA || eType == HPBAR)
 		m_bIsAlpha = true;
+
+	m_eType = eType;
 
 	FAILED_CHECK_RETURN(Create_PipelineState(), E_FAIL);
 
@@ -62,6 +64,7 @@ void CShader_UI::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture,
 {
 	CGraphicDevice::Get_Instance()->Begin_ResetCmdList();
 	int iTexSize = (int)pVecTexture.size();
+
 
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
 	srvHeapDesc.NumDescriptors = iTexSize;
@@ -119,14 +122,16 @@ HRESULT CShader_UI::Create_PipelineState()
 	vector<D3D12_INPUT_ELEMENT_DESC> vecInputLayout;
 
 	m_pVS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_UI.hlsl", nullptr, "VS_NNOMAL", "vs_5_1");
-	m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_UI.hlsl", nullptr, "PS_NNOMAL", "ps_5_1");
+	
+	if(m_eType == HPBAR)
+		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_UI.hlsl", nullptr, "PS_HPBAR", "ps_5_1");
+	else
+		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_UI.hlsl", nullptr, "PS_NNOMAL", "ps_5_1");
 
 	vecInputLayout =
 	{
-
 	   { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
 	   { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
-
 	};
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC PipelineStateDesc;

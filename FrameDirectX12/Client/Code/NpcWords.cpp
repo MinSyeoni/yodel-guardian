@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #include "NpcWords.h"
 #include "Font.h"
-#include "PlayerHP.h"
-#include "PlayerUI.h"
+#include "HPBar.h"
+#include "IconUI.h"
 #include "GunUI.h"
+#include "InvenUI.h"
 
 CNpcWords::CNpcWords(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -86,6 +87,7 @@ _int CNpcWords::Update_GameObject(const _float& fTimeDelta)
 	Show_ConversationWords();	
 
 	m_pWordsFont->Update_GameObject(fTimeDelta);
+	
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
 	return NO_EVENT;
@@ -146,12 +148,20 @@ void CNpcWords::Next_ConversationJudje()
 
 		if (m_iWordsCnt <= m_iWordsNum)
 		{
-			CGameObject* pPlayerHP = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"PlayerHP");
-			dynamic_cast<CPlayerHP*>(pPlayerHP)->Set_ShowUI(true);
-			CGameObject* pPlayerUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"PlayerUI");
-			dynamic_cast<CPlayerUI*>(pPlayerUI)->Set_ShowUI(true);
+			list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
+			for (auto& pSrc : *pHpBarUIList)
+				dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(true);
+
+			list<CGameObject*>* pIconUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"IconUI");
+			for (auto& pSrc : *pIconUIList)
+				dynamic_cast<CIconUI*>(pSrc)->Set_ShowUI(true);
+
 			CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
 			dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(true);
+
+			list<CGameObject*>* pInvenList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"InvenUI");
+			for (auto& pSrc : *pInvenList)
+				dynamic_cast<CInvenUI*>(pSrc)->Set_ShowUI(true);
 
 			m_eWordsType = TYPE_END;
 			m_bIsShow = false;

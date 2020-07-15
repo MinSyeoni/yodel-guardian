@@ -142,9 +142,6 @@
     <Filter Include="01.Scene_Stage\00.Player\01.PlayerStatus">
       <UniqueIdentifier>{a66796dc-9b78-40be-a3dd-b617722c6bc1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.UI\02.PlayerHP">
-      <UniqueIdentifier>{e99cac33-ee3e-4971-9466-288c7895bc60}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.UI\03.PlayerUI">
       <UniqueIdentifier>{5bc3d12b-32ee-47ff-80e1-66ac7d11fb48}</UniqueIdentifier>
     </Filter>
@@ -228,6 +225,15 @@
     </Filter>
     <Filter Include="03.UI\05.QuestUI">
       <UniqueIdentifier>{66177720-cdb3-4e75-82b1-ab1a7672ec4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\02.HPBar">
+      <UniqueIdentifier>{e99cac33-ee3e-4971-9466-288c7895bc60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\06.InvenUI">
+      <UniqueIdentifier>{65520a3f-9dfd-40dd-83a7-21791fa53d3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\07.OptionUI">
+      <UniqueIdentifier>{bcdabc72-8273-4931-b7fc-15b3620c9efe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -318,12 +324,6 @@
     <ClInclude Include="..\Code\PlayerStatus.h">
       <Filter>01.Scene_Stage\00.Player\01.PlayerStatus</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\PlayerHP.h">
-      <Filter>03.UI\02.PlayerHP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\PlayerUI.h">
-      <Filter>03.UI\03.PlayerUI</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\Loading.h">
       <Filter>05.Loading</Filter>
     </ClInclude>
@@ -397,6 +397,18 @@
     <ClInclude Include="..\Code\UI.h">
       <Filter>03.UI\05.QuestUI</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\IconUI.h">
+      <Filter>03.UI\03.PlayerUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\HPBar.h">
+      <Filter>03.UI\02.HPBar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\InvenUI.h">
+      <Filter>03.UI\06.InvenUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\OptionUI.h">
+      <Filter>03.UI\07.OptionUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -455,12 +467,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\PlayerStatus.cpp">
       <Filter>01.Scene_Stage\00.Player\01.PlayerStatus</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\PlayerHP.cpp">
-      <Filter>03.UI\02.PlayerHP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\PlayerUI.cpp">
-      <Filter>03.UI\03.PlayerUI</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Loading.cpp">
       <Filter>05.Loading</Filter>
@@ -534,6 +540,18 @@
     </ClCompile>
     <ClCompile Include="..\Code\UI.cpp">
       <Filter>03.UI\05.QuestUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\IconUI.cpp">
+      <Filter>03.UI\03.PlayerUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\HPBar.cpp">
+      <Filter>03.UI\02.HPBar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\InvenUI.cpp">
+      <Filter>03.UI\06.InvenUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\OptionUI.cpp">
+      <Filter>03.UI\07.OptionUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

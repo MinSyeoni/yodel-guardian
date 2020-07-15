@@ -64,6 +64,8 @@ _int CLobbyDoor::Update_GameObject(const _float & fTimeDelta)
 	// 일단 M누르면 열림 나중에 npc 상호작용 해줘야 함. 
 	if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_M) && !m_bIsOpen && m_bIsCollision)
 		m_eDoorState = DOOR_OPEN;
+	else if (!m_bIsCollision && m_bIsOpen)
+		m_eDoorState = DOOR_CLOSE;
 
 	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)m_eDoorState);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f * fTimeDelta);
@@ -75,6 +77,7 @@ _int CLobbyDoor::LateUpdate_GameObject(const _float & fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCol), -1);
+
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 
@@ -104,6 +107,9 @@ void CLobbyDoor::LobbyDoor_AniState()
 	switch (m_eDoorState)
 	{
 	case CLobbyDoor::DOOR_IDLE:
+	{
+		m_bIsOpen = false;
+	}
 		break;
 	case CLobbyDoor::DOOR_ALREADYOPEN:
 	{
@@ -117,7 +123,13 @@ void CLobbyDoor::LobbyDoor_AniState()
 			m_eDoorState = DOOR_ALREADYOPEN;
 	}
 	break;
-	case CLobbyDoor::DOOR_END:
+	case CLobbyDoor::DOOR_CLOSE:
+	{		
+		m_bIsOpen = false;
+		m_fAniDelay = 3000.f;
+		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, DOOR_CLOSE))
+			m_eDoorState = DOOR_IDLE;
+	}
 		break;
 	default:
 		break;
