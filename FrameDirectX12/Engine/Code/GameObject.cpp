@@ -5,19 +5,19 @@
 USING(Engine)
 
 CGameObject::CGameObject(ID3D12Device* pGraphicDevice,
-						 ID3D12GraphicsCommandList*	pCommandList)
+	ID3D12GraphicsCommandList* pCommandList)
 	: m_pGraphicDevice(pGraphicDevice)
 	, m_pCommandList(pCommandList)
 	, m_pObjectMgr(CObjectMgr::Get_Instance())
 	, m_pRenderer(CRenderer::Get_Instance())
 	, m_pComponentMgr(CComponentMgr::Get_Instance())
 {
-	
-	
-	
+
+
+
 }
 
-CGameObject::CGameObject(const CGameObject & rhs)
+CGameObject::CGameObject(const CGameObject& rhs)
 	: m_pGraphicDevice(rhs.m_pGraphicDevice)
 	, m_pCommandList(rhs.m_pCommandList)
 	, m_pObjectMgr(rhs.m_pObjectMgr)
@@ -37,7 +37,7 @@ CGameObject::~CGameObject()
 {
 }
 
-CComponent * CGameObject::Get_Component(wstring wstrComponentTag, COMPONENTID eID)
+CComponent* CGameObject::Get_Component(wstring wstrComponentTag, COMPONENTID eID)
 {
 	CComponent* pComponent = Find_Component(wstrComponentTag, eID);
 	NULL_CHECK_RETURN(pComponent, nullptr);
@@ -72,7 +72,7 @@ HRESULT CGameObject::LateInit_GameObject()
 	return S_OK;
 }
 
-_int CGameObject::Update_GameObject(const _float & fTimeDelta)
+_int CGameObject::Update_GameObject(const _float& fTimeDelta)
 {
 	for (auto& iter : m_mapComponent[ID_DYNAMIC])
 		iter.second->Update_Component(fTimeDelta);
@@ -81,20 +81,24 @@ _int CGameObject::Update_GameObject(const _float & fTimeDelta)
 	return 0;
 }
 
-_int CGameObject::LateUpdate_GameObject(const _float & fTimeDelta)
+_int CGameObject::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 	return 0;
 }
 
-void CGameObject::Render_GameObject(const _float & fTimeDelta)
+void CGameObject::Render_GameObject(const _float& fTimeDelta)
 {
 }
 
-void CGameObject::Render_Distortion(const _float & fTimeDelta)
+void CGameObject::Render_Distortion(const _float& fTimeDelta)
 {
 }
 
 void CGameObject::Render_ShadowDepth(CShader_Shadow* pShader)
+{
+}
+
+void CGameObject::Render_LimLight(CShader_LimLight* pShader)
 {
 }
 
@@ -103,7 +107,7 @@ HRESULT CGameObject::Add_Component()
 	return S_OK;
 }
 
-void CGameObject::Compute_ViewZ(const _vec4 * pPosInWorld)
+void CGameObject::Compute_ViewZ(const _vec4* pPosInWorld)
 {
 	//_matrix		matView = m_pGraphic_Interface->Get_Transform(CGraphic_Interface::MATRIX_VIEW);
 
@@ -119,7 +123,7 @@ void CGameObject::Compute_ViewZ(const _vec4 * pPosInWorld)
 }
 
 
-CComponent * CGameObject::Find_Component(wstring wstrComponentTag, const COMPONENTID & eID)
+CComponent* CGameObject::Find_Component(wstring wstrComponentTag, const COMPONENTID& eID)
 {
 	auto iter_find = m_mapComponent[eID].find(wstrComponentTag);
 

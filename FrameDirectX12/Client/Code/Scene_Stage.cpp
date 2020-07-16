@@ -38,7 +38,7 @@
 #include "Normandy.h"
 #include "DistortionEffect.h"
 #include "Shepard.h"
-
+#include "Sniper.h"
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -53,25 +53,12 @@ HRESULT CScene_Stage::Ready_LightInfo()
 {
 	D3DLIGHT tagLight;
 	tagLight.m_eType = LIGHTTYPE::D3DLIGHT_DIRECTIONAL;
-	tagLight.m_vDiffuse = _vec4{ 0.9f,0.9f,0.9f,1.0f };
-	tagLight.m_vAmbient = _vec4{ 0.2f,0.2f,0.2f,1.0f };
-	tagLight.m_vSpecular = _vec4{ 1.0f,1.0f,1.0f,1.0f };
+	tagLight.m_vDiffuse = _vec4{ 0.1f,0.1f,0.1f,1.0f };
+	tagLight.m_vAmbient = _vec4{ 0.1f,0.1f,0.1f,1.0f };
+	tagLight.m_vSpecular = _vec4{ 0.5f,0.5f,0.5f,1.0f };
 	tagLight.m_vDirection= _vec4{ -1.0f,-1.0f,1.f,1.0f };
 	if(FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &tagLight)))
 	   return E_FAIL;
-
-
-	tagLight.m_eType = LIGHTTYPE::D3DLIGHT_POINT;
-	tagLight.m_vDiffuse = _vec4{ 1.0f,1.0f,1.0f,1.0f };
-	tagLight.m_vAmbient = _vec4{ 0.35f,0.35f,0.35f,1.0f };
-	tagLight.m_vSpecular = _vec4{ 0.3f,0.3f,0.3f,1.0f };
-	tagLight.m_vDirection = _vec4{ 1.0f,1.0f,-1.f,1.0f };
-	tagLight.m_vPosition = _vec4{ 300.f,15.f,500.f,0.f };
-	tagLight.m_fRange = 30.f;
-
-
-	if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &tagLight)))
-		return E_FAIL;
 
 
 	return S_OK;
@@ -165,6 +152,11 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = CRifle::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Rifle", pGameObject), E_FAIL);
+
+	pGameObject = CSniper::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Sniper", pGameObject), E_FAIL);
+
 
 	////////////////////NPC/////////////////////////
 	pGameObject = CSalone::Create(m_pGraphicDevice, m_pCommandList);
@@ -319,6 +311,8 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player", nullptr), E_FAIL);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Rifle", L"Weapon", nullptr), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Sniper", L"Weapon", nullptr), E_FAIL);
+
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Salone", L"Salone", nullptr), E_FAIL);//For.Salone
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Shepard", L"Shepard", nullptr), E_FAIL);
 	
@@ -353,6 +347,7 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_OptionUI", L"OptionUI", nullptr), E_FAIL);
 
 	//////// ¾ÆÀÌÄÜ //////
+
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_IconUI", L"IconUI", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", nullptr), E_FAIL);
 
@@ -364,6 +359,7 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 	for (int i = 0; i < 7; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_OnUI", L"OnUI", &(iType = i)), E_FAIL);
 
+
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcBoard", L"NpcBoard", nullptr), E_FAIL);
@@ -374,7 +370,7 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 {
 	HANDLE hFile = CreateFile(wstrFilePath.c_str(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
-	NULL_CHECK(hFile, E_FAIL);
+	NULL_CHECK(hFile);
 
 	if (INVALID_HANDLE_VALUE == hFile)
 		return;
@@ -403,7 +399,7 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 void CScene_Stage::Load_TriggerPos(const wstring& wstrFilePath)
 {
 	HANDLE hFile = CreateFile(wstrFilePath.c_str(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
-	NULL_CHECK(hFile, E_FAIL);
+	NULL_CHECK(hFile);
 
 	if (INVALID_HANDLE_VALUE == hFile)
 		return;
@@ -427,7 +423,7 @@ void CScene_Stage::Load_TriggerPos(const wstring& wstrFilePath)
 void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 {
 	HANDLE hFile = CreateFile(wstrFilePath.c_str(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
-	NULL_CHECK(hFile, E_FAIL);
+	NULL_CHECK(hFile);
 
 	if (INVALID_HANDLE_VALUE == hFile)
 		return;

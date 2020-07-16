@@ -161,6 +161,12 @@ void CNpcWords::Next_ConversationJudje()
 			CGameObject* pInvenList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
 			dynamic_cast<CInvenUI*>(pInvenList)->Set_ShowUI(true);
 
+
+			//list<CGameObject*>* pInvenList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"InvenUI");
+			//for (auto& pSrc : *pInvenList)
+			//	dynamic_cast<CInvenUI*>(pSrc)->Set_ShowUI(true);
+
+
 			m_eWordsType = TYPE_END;
 			m_bIsShow = false;
 		//	m_bIsDead = true;

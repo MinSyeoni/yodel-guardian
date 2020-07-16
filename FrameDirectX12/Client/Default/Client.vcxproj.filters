@@ -142,6 +142,9 @@
     <Filter Include="01.Scene_Stage\00.Player\01.PlayerStatus">
       <UniqueIdentifier>{a66796dc-9b78-40be-a3dd-b617722c6bc1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.UI\03.PlayerUI">
+      <UniqueIdentifier>{5bc3d12b-32ee-47ff-80e1-66ac7d11fb48}</UniqueIdentifier>
+    </Filter>
     <Filter Include="05.Loading">
       <UniqueIdentifier>{b12196e0-3829-4a1c-8527-7392b0c7418d}</UniqueIdentifier>
     </Filter>
@@ -240,6 +243,12 @@
     </Filter>
     <Filter Include="03.UI\07.OptionUI\00.On">
       <UniqueIdentifier>{782e0da7-9a72-4561-aa31-b4ef776aacde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\02.Weapon\03.Sniper">
+      <UniqueIdentifier>{fababfaa-5eab-4e95-99d3-1d4760a7128d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\02.Weapon\04.NPCRifle">
+      <UniqueIdentifier>{35892646-e06f-4793-bbcd-da2faf298e22}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -404,6 +413,7 @@
       <Filter>03.UI\05.QuestUI</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\IconUI.h">
+      <Filter>03.UI\03.PlayerUI</Filter>
       <Filter>03.UI\03.IconUI</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\HPBar.h">
@@ -420,6 +430,12 @@
     </ClInclude>
     <ClInclude Include="..\Code\OnUI.h">
       <Filter>03.UI\07.OptionUI\00.On</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\NpcRifle.h">
+      <Filter>01.Scene_Stage\02.Weapon\04.NPCRifle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Sniper.h">
+      <Filter>01.Scene_Stage\02.Weapon\03.Sniper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -554,6 +570,7 @@
       <Filter>03.UI\05.QuestUI</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\IconUI.cpp">
+      <Filter>03.UI\03.PlayerUI</Filter>
       <Filter>03.UI\03.IconUI</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\HPBar.cpp">
@@ -570,6 +587,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\OnUI.cpp">
       <Filter>03.UI\07.OptionUI\00.On</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\NpcRifle.cpp">
+      <Filter>01.Scene_Stage\02.Weapon\04.NPCRifle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sniper.cpp">
+      <Filter>01.Scene_Stage\02.Weapon\03.Sniper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

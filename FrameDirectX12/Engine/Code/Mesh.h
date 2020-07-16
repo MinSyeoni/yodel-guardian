@@ -9,9 +9,9 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-	BEGIN(Engine)
+BEGIN(Engine)
 
-	class ENGINE_DLL CMesh : public CComponent
+class ENGINE_DLL CMesh : public CComponent
 {
 	explicit CMesh(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 	explicit CMesh(const CMesh& rhs);
@@ -20,24 +20,25 @@
 	HRESULT         Ready_Mesh(const _tchar* pFilePath, const _tchar* pFileName);
 public:
 	vector<vector<_matrix>> ExtractBoneTransforms(float fanimationTime);
-	vector<vector<_matrix>> ExtractBoneTransformsBlend(float fanimationTime,float fanimationTimeSub, _float fAngle = 0.f);
+	vector<vector<_matrix>> ExtractBoneTransformsBlend(float fanimationTime, float fanimationTimeSub, _float fAngle = 0.f);
 
-	void			   Render_Mesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix= vector<vector<_matrix>>(),_int iCBoffset=0,_int MeshId=0,bool Draw =true);
+	void			   Render_Mesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix = vector<vector<_matrix>>(), _int iCBoffset = 0, _int MeshId = 0, bool Draw = true);
 	void               Render_ShadowMesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix = vector<vector<_matrix>>(), bool blsBone = false);
+	void               Render_LimMesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix = vector<vector<_matrix>>(), bool blsBone = false);
 	void               Render_Destortion(CShader* pMesh);
 
 
 	void Set_Animation(_int Animation);
 	void Set_AnimationBlend(_int FirstAni, _int SecondAni);
 
-	_bool Set_IsAniFinsh();
+	_bool Set_IsAniFinsh(float fEndTime = 200.f);
 	_bool Set_FindAnimation(_float fTime, _int AniKey);
 	void  Set_AnimationStart();
 
-	_matrix*           Get_RootFrame() { return m_pAnimationComponent->Get_RootFrame(); };
+	_matrix* Get_RootFrame() { return m_pAnimationComponent->Get_RootFrame(); };
 public:
-	_matrix*            Find_BoneMatrix(string strBoneName);
-	_matrix*            Find_BoneOffset(string strBoneName);
+	_matrix* Find_BoneMatrix(string strBoneName);
+	_matrix* Find_BoneOffset(string strBoneName);
 
 public:
 	vector< ComPtr<ID3D12Resource>> Get_Texture() { return m_pMeshComponent->Get_Texture(); };
@@ -50,7 +51,7 @@ public:
 private:
 	const aiScene* m_pScene = nullptr;
 	Assimp::Importer m_Importer;
-	CMeshComponent*  m_pMeshComponent;
+	CMeshComponent* m_pMeshComponent;
 	CAniCtrl* m_pAnimationComponent;
 
 private:

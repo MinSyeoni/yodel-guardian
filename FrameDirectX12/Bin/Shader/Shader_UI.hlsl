@@ -3,10 +3,10 @@ SamplerState gsamLinearWrap       : register(s0);
 
 cbuffer cbMatrixInfo	: register(b0)
 {
-    float4x4 matWorld : packoffset(c0);
-    float4x4 matView : packoffset(c4);
-    float4x4 matProj : packoffset(c8);
-    float4x4 matWVP : packoffset(c12);
+	float4x4 matWorld : packoffset(c0);
+	float4x4 matView : packoffset(c4);
+	float4x4 matProj : packoffset(c8);
+	float4x4 matWVP : packoffset(c12);
 };
 
 struct VS_TEXTURED_INPUT

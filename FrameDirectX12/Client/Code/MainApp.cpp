@@ -11,7 +11,7 @@
 #include "Scene_Stage.h"
 #include "DynamicCamera.h"
 #include "Font.h"
-
+#include "Astar.h"
 CMainApp::CMainApp()
 	: m_pDeviceClass(CGraphicDevice::Get_Instance())
 	, m_pComponentMgr(CComponentMgr::Get_Instance())
@@ -199,6 +199,11 @@ HRESULT CMainApp::SetUp_ComponentPrototype()
 	pComponent = Engine::CNaviMesh::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Navi", ID_STATIC, pComponent), E_FAIL);
+
+
+	pComponent = Engine::CAstar::Create(m_pGraphicDevice);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Astar", ID_STATIC, pComponent), E_FAIL);
 
 	return S_OK;
 }

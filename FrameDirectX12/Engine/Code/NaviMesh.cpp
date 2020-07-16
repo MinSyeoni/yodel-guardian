@@ -1,15 +1,15 @@
 #include "NaviMesh.h"
 #include "NaviBuffer.h"
 #include "GraphicDevice.h"
-CNaviMesh::CNaviMesh(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
-	:CComponent(pGraphicDevice,pCommandList)
+CNaviMesh::CNaviMesh(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
+	:CComponent(pGraphicDevice, pCommandList)
 {
 }
 
-CNaviMesh::CNaviMesh(const CNaviMesh & rhs)
-	:m_vecCell(rhs.m_vecCell)
-	,m_dwIndex(rhs.m_dwIndex)
-	,m_pNaviBuffer(rhs.m_pNaviBuffer)
+CNaviMesh::CNaviMesh(const CNaviMesh& rhs)
+	: m_vecCell(rhs.m_vecCell)
+	, m_dwIndex(rhs.m_dwIndex)
+	, m_pNaviBuffer(rhs.m_pNaviBuffer)
 {
 	for (auto iter : m_vecCell)
 		iter->AddRef();
@@ -30,7 +30,7 @@ HRESULT CNaviMesh::Ready_NaviMesh()
 	m_vecCell.shrink_to_fit();
 
 	_vec3 vecPointA, vecPointB, vecPointC;
-	_int iOption=0;
+	_int iOption = 0;
 
 	// 나중에 파일도 받아올 수 있도록 해야함.
 	HANDLE hFile = CreateFile(L"../../../SYTool/Tool/Data/Navi/map1addoutside.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
@@ -51,7 +51,7 @@ HRESULT CNaviMesh::Ready_NaviMesh()
 			break;
 
 		int iPointCnt = 0;
-		
+
 		vecPointA = tNaviData.PointA;
 		iPointCnt++;
 		vecPointB = tNaviData.PointB;
@@ -68,7 +68,7 @@ HRESULT CNaviMesh::Ready_NaviMesh()
 		}
 	}
 	CloseHandle(hFile);
-	
+
 	vector<CNaviBuffer::NAVIINFO> vecInfo;
 	vecInfo.reserve(vecInfo.size());
 	for (int i = 0; i < m_vecCell.size(); ++i)
@@ -150,8 +150,8 @@ _vec3 CNaviMesh::MoveOn_NaviMesh(const _vec3* pTargetPos,
 HRESULT CNaviMesh::Link_Cell(void)
 {
 	for (_ulong i = 0; i < m_vecCell.size(); ++i)
-	
-	
+
+
 	{
 		for (_ulong j = 0; j < m_vecCell.size(); ++j)
 		{
@@ -193,7 +193,7 @@ HRESULT CNaviMesh::Link_Cell(void)
 	return S_OK;
 }
 
-void CNaviMesh::Render_NaviMesh(CShader_ColorBuffer * pShader)
+void CNaviMesh::Render_NaviMesh(CShader_ColorBuffer* pShader)
 {
 	SetConstantTable(pShader);
 
@@ -203,7 +203,7 @@ void CNaviMesh::Render_NaviMesh(CShader_ColorBuffer * pShader)
 
 }
 
-void CNaviMesh::SetConstantTable(CShader_ColorBuffer * pShader)
+void CNaviMesh::SetConstantTable(CShader_ColorBuffer* pShader)
 {
 	_matrix matWorld = INIT_MATRIX;
 	_matrix matView = INIT_MATRIX;
@@ -217,7 +217,7 @@ void CNaviMesh::SetConstantTable(CShader_ColorBuffer * pShader)
 	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
 
 
-	_matrix matWVP = matWorld* matView * matProj;
+	_matrix matWVP = matWorld * matView * matProj;
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(matWorld));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
@@ -231,7 +231,7 @@ void CNaviMesh::SetConstantTable(CShader_ColorBuffer * pShader)
 
 
 
-CNaviMesh * CNaviMesh::Create(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
+CNaviMesh* CNaviMesh::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 {
 	CNaviMesh* pInstance = new CNaviMesh(pGraphicDevice, pCommandList);
 
@@ -241,7 +241,7 @@ CNaviMesh * CNaviMesh::Create(ID3D12Device * pGraphicDevice, ID3D12GraphicsComma
 	return pInstance;
 }
 
-CComponent * CNaviMesh::Clone()
+CComponent* CNaviMesh::Clone()
 {
 	return new CNaviMesh(*this);
 }

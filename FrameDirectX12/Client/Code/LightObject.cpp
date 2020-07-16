@@ -51,9 +51,9 @@ HRESULT CLightObject::Ready_GameObject()
 	if (m_eType == SYREN)
 	{
 		m_tagLight.m_eType = LIGHTTYPE::D3DLIGHT_POINT;
-		m_tagLight.m_vDiffuse = _vec4{ 0.6f,0.0f,0.0f,1.0f };
+		m_tagLight.m_vDiffuse = _vec4{ 0.9f,0.0f,0.0f,1.0f };
 		m_tagLight.m_vAmbient = _vec4{ 0.6f,0.6f,0.6f,1.0f };
-		m_tagLight.m_vSpecular = _vec4{ 0.4f,0.4f,0.4f,1.0f };
+		m_tagLight.m_vSpecular = _vec4{ 0.6f,0.6f,0.6f,1.0f };
 		m_tagLight.m_vDirection = _vec4{ 1.0f,1.0f,-1.f,1.0f };
 		m_tagLight.m_vPosition = _vec4{ 300.f,10.f,300.f,0.f };
 

@@ -4,12 +4,12 @@
 #include "GraphicDevice.h"
 #include "DynamicCamera.h"
 #include"Frustom.h"
-CSalone::CSalone(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
+CSalone::CSalone(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
 }
 
-CSalone::CSalone(const CSalone & rhs)
+CSalone::CSalone(const CSalone& rhs)
 	: Engine::CGameObject(rhs)
 {
 
@@ -49,7 +49,7 @@ HRESULT CSalone::Ready_GameObject()
 #endif
 	m_pTransCom->m_vPos = _vec3(300.f, 0.f, 508.f);
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
-	m_pTransCom->m_vAngle =  _vec3(0.f, 180.f, 0.f);
+	m_pTransCom->m_vAngle = _vec3(0.f, 180.f, 0.f);
 
 	return S_OK;
 }
@@ -72,13 +72,13 @@ HRESULT CSalone::LateInit_GameObject()
 	pCamera->Dead_GameObject();
 
 
-	CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_Camera", L"prototype_Cam1",L"ActionCame" ,nullptr);
+	CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_Camera", L"prototype_Cam1", L"ActionCame", nullptr);
 
 	return S_OK;
 
 }
 
-_int CSalone::Update_GameObject(const _float & fTimeDelta)
+_int CSalone::Update_GameObject(const _float& fTimeDelta)
 {
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
@@ -93,7 +93,7 @@ _int CSalone::Update_GameObject(const _float & fTimeDelta)
 	return NO_EVENT;
 }
 
-_int CSalone::LateUpdate_GameObject(const _float & fTimeDelta)
+_int CSalone::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
@@ -101,17 +101,18 @@ _int CSalone::LateUpdate_GameObject(const _float & fTimeDelta)
 	[ Renderer - Add Render Group ]
 	______________________________________________________________________*/
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_LIMLIGHT, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	/*____________________________________________________________________
 	[ Set PipelineState ]
 	______________________________________________________________________*/
 	m_pMeshCom->Set_Animation((int)m_eCurState);
-	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(fTimeDelta*3000.f);
+	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(fTimeDelta * 3000.f);
 
 	return NO_EVENT;
 }
 
-void CSalone::Render_GameObject(const _float & fTimeDelta)
+void CSalone::Render_GameObject(const _float& fTimeDelta)
 {
 	Set_ConstantTable();
 
@@ -120,11 +121,18 @@ void CSalone::Render_GameObject(const _float & fTimeDelta)
 	m_pMeshCom->Render_Mesh(m_pShaderCom, m_vecMatrix);
 }
 
-void CSalone::Render_ShadowDepth(CShader_Shadow * pShader)
+void CSalone::Render_ShadowDepth(CShader_Shadow* pShader)
 {
 	Set_ShadowTable(pShader);
 	m_pMeshCom->Render_ShadowMesh(pShader, m_vecMatrix, true);
 	pShader->Set_ShadowFinish();
+}
+
+void CSalone::Render_LimLight(CShader_LimLight* pShader)
+{
+	Set_LimTable(pShader);
+	m_pMeshCom->Render_LimMesh(pShader, m_vecMatrix, true);
+	pShader->Set_LimFinish();
 }
 
 HRESULT CSalone::Add_Component()
@@ -157,16 +165,16 @@ void CSalone::Set_ConstantTable()
 	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
 
 
-	_matrix matWVP = matRotY * m_pTransCom->m_matWorld* matView * matProj;
+	_matrix matWVP = matRotY * m_pTransCom->m_matWorld * matView * matProj;
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
-	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(matRotY*m_pTransCom->m_matWorld));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(matRotY * m_pTransCom->m_matWorld));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
 
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
 
 }
-void CSalone::Set_ShadowTable(CShader_Shadow * pShader)
+void CSalone::Set_ShadowTable(CShader_Shadow* pShader)
 {
 	_matrix matRotY = XMMatrixRotationY(XMConvertToRadians(-90));
 	_matrix matView = INIT_MATRIX;
@@ -179,7 +187,7 @@ void CSalone::Set_ShadowTable(CShader_Shadow * pShader)
 	matView = CFrustom::Get_Instance()->Get_LightView();
 	matProj = CFrustom::Get_Instance()->Get_LightProj();
 
-	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(matRotY*m_pTransCom->m_matWorld));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(matRotY * m_pTransCom->m_matWorld));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
 	tCB_MatrixInfo.blsMesh = true;
@@ -189,7 +197,35 @@ void CSalone::Set_ShadowTable(CShader_Shadow * pShader)
 	pShader->Get_UploadBuffer_ShadowInfo()->CopyData(offset, tCB_MatrixInfo);
 
 }
-CGameObject * CSalone::Clone_GameObject(void * prg)
+void CSalone::Set_LimTable(CShader_LimLight* pShader)
+{
+	_matrix matRotY = XMMatrixRotationY(XMConvertToRadians(90));
+	_matrix matView = INIT_MATRIX;
+	_matrix matProj = INIT_MATRIX;
+
+	CB_MATRIX_INFO	tCB_MatrixInfo;
+
+	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
+
+	matView = CGraphicDevice::Get_Instance()->GetViewMatrix();
+	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
+
+	_matrix matWorld = m_pTransCom->m_matWorld;
+	matWorld._11 = 0.1005f;
+	matWorld._22 = 0.1005f;
+	matWorld._33 = 0.1005f;
+	_matrix matWVP = matRotY * matWorld * matView * matProj;
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(matRotY * matWorld));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
+
+
+
+	_int offset = pShader->Get_CBMeshCount();
+	pShader->Get_UploadBuffer_MatrixInfo()->CopyData(offset, tCB_MatrixInfo);
+}
+CGameObject* CSalone::Clone_GameObject(void* prg)
 {
 	CGameObject* pInstance = new CSalone(*this);
 
@@ -200,7 +236,7 @@ CGameObject * CSalone::Clone_GameObject(void * prg)
 	return pInstance;
 }
 
-CSalone * CSalone::Create(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
+CSalone* CSalone::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 {
 	CSalone* pInstance = new CSalone(pGraphicDevice, pCommandList);
 

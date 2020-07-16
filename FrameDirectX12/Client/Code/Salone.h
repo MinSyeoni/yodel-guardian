@@ -13,7 +13,7 @@ class CDynamicCamera;
 
 class CSalone : public Engine::CGameObject
 {
-	enum STATE{IDLE,EYEBLINK,RUN,WALK};
+	enum STATE { IDLE, EYEBLINK, RUN, WALK };
 
 private:
 	explicit CSalone(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
@@ -28,9 +28,10 @@ public:
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 	virtual void    Render_ShadowDepth(CShader_Shadow* pShader);
-
+	virtual void    Render_LimLight(CShader_LimLight* pShader);
 private:
 	void            Set_ShadowTable(CShader_Shadow* pShader);
+	void            Set_LimTable(CShader_LimLight* pShader);
 private:
 	virtual HRESULT Add_Component();
 private:
@@ -39,14 +40,14 @@ private:
 	/*____________________________________________________________________
 	[ Component ]
 	______________________________________________________________________*/
-	Engine::CMesh*				m_pMeshCom = nullptr;
-	Engine::CShader_Mesh*         	m_pShaderCom = nullptr;
+	Engine::CMesh* m_pMeshCom = nullptr;
+	Engine::CShader_Mesh* m_pShaderCom = nullptr;
 
 
 	vector<vector<_matrix>> m_vecMatrix;
 public:
-	virtual CGameObject*	Clone_GameObject(void* prg);
-	static CSalone*		Create(ID3D12Device* pGraphicDevice,
+	virtual CGameObject* Clone_GameObject(void* prg);
+	static CSalone* Create(ID3D12Device* pGraphicDevice,
 		ID3D12GraphicsCommandList* pCommandList);
 private:
 	STATE m_eCurState = EYEBLINK;

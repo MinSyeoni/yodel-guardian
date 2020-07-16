@@ -8,19 +8,20 @@
 #include "DirectInput.h"
 
 
-CPlayer::CPlayer(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
-	:CGameObject(pGraphicDevice,pCommandList)
+CPlayer::CPlayer(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
+	:CGameObject(pGraphicDevice, pCommandList)
 {
 }
 
-CPlayer::CPlayer(const CPlayer & rhs)
-	:CGameObject(rhs)
+CPlayer::CPlayer(const CPlayer& rhs)
+	: CGameObject(rhs)
 {
 }
 
 CPlayer::~CPlayer()
 {
 }
+
 
 HRESULT CPlayer::Ready_GameObjectPrototype()
 {
@@ -49,25 +50,25 @@ HRESULT CPlayer::Ready_GameObject()
 	NULL_CHECK_RETURN(m_pComponentMgr, E_FAIL);
 	CGameObject::Ready_GameObject();
 
-	FAILED_CHECK_RETURN(Add_Component(),E_FAIL);
+	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
 #ifdef _DEBUG
 	COUT_STR("Success Player - Clone Mesh");
 #endif
 
-	 m_pLeg = static_cast<CPlayerLeg*>(m_pObjectMgr->Get_NewGameObject(L"Prototype_PlayerLeg", L"TPlayerLeg",nullptr));
-	 m_pLeg->SetPlayerTransform(m_pTransCom);
+	m_pLeg = static_cast<CPlayerLeg*>(m_pObjectMgr->Get_NewGameObject(L"Prototype_PlayerLeg", L"TPlayerLeg", nullptr));
+	m_pLeg->SetPlayerTransform(m_pTransCom);
 
-	 m_pArm= static_cast<CPlayerArm*>(m_pObjectMgr->Get_NewGameObject( L"Prototype_PlayerArm", L"TPlayerArm", nullptr));
-	 m_pArm->SetPlayerTransform(m_pTransCom);
-	 
-	 m_pStatus = new CPlayerStatus();
-	 m_pStatus->SetMesh(static_cast<CMesh*>(m_pArm->Get_Component(L"Com_Mesh",ID_STATIC)));
+	m_pArm = static_cast<CPlayerArm*>(m_pObjectMgr->Get_NewGameObject(L"Prototype_PlayerArm", L"TPlayerArm", nullptr));
+	m_pArm->SetPlayerTransform(m_pTransCom);
+
+	m_pStatus = new CPlayerStatus();
+	m_pStatus->SetMesh(static_cast<CMesh*>(m_pArm->Get_Component(L"Com_Mesh", ID_STATIC)));
 
 
-	 m_pTransCom->m_vPos = _vec3(300.f, 0.f, 480.f);
-	 m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
-	 m_pTransCom->m_vDir = _vec3(0.f, 0.0f, 1.f);
+	m_pTransCom->m_vPos = _vec3(300.f, 0.f, 480.f);
+	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
+	m_pTransCom->m_vDir = _vec3(0.f, 0.0f, 1.f);
 
 
 	return S_OK;
@@ -82,7 +83,7 @@ HRESULT CPlayer::LateInit_GameObject()
 	return S_OK;
 }
 
-_int CPlayer::Update_GameObject(const _float & fTimeDelta)
+_int CPlayer::Update_GameObject(const _float& fTimeDelta)
 {
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
@@ -96,12 +97,13 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 		tData.Pos.z -= 10.f;
 		tData.Rotation = _vec3{ 90.f,0.f,0.f };
 		tData.Scale = _vec3{ 1.0f,1.0f,1.0f };
-	   
 
-		CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_Environment",L"Prototype_DistortEffect",L"DistortEffect",&tData);
+
+		CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_Environment", L"Prototype_DistortEffect", L"DistortEffect", &tData);
 
 
 	}
+
 
 
 
@@ -117,7 +119,7 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 	return NO_EVENT;
 }
 
-void CPlayer::UpdateParts(const _float & fTimeDelta)
+void CPlayer::UpdateParts(const _float& fTimeDelta)
 {
 	m_pArm->Set_Spine(m_fSpineAngle);
 
@@ -126,7 +128,7 @@ void CPlayer::UpdateParts(const _float & fTimeDelta)
 	m_eCurLegState = m_pStatus->m_eLegState;
 }
 
-_int CPlayer::LateUpdate_GameObject(const _float & fTimeDelta)
+_int CPlayer::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 
 	m_pStatus->LateUpdate(fTimeDelta);
@@ -136,7 +138,7 @@ _int CPlayer::LateUpdate_GameObject(const _float & fTimeDelta)
 	return  NO_EVENT;
 }
 
-void CPlayer::Render_GameObject(const _float & fTimeDelta)
+void CPlayer::Render_GameObject(const _float& fTimeDelta)
 {
 }
 
@@ -151,7 +153,7 @@ HRESULT CPlayer::Add_Component()
 }
 
 
-CGameObject * CPlayer::Clone_GameObject(void * prg)
+CGameObject* CPlayer::Clone_GameObject(void* prg)
 {
 
 	CGameObject* pInstance = new CPlayer(*this);
@@ -162,7 +164,7 @@ CGameObject * CPlayer::Clone_GameObject(void * prg)
 	return pInstance;
 }
 
-CPlayer * CPlayer::Create(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
+CPlayer* CPlayer::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 {
 	CPlayer* pInstance = new CPlayer(pGraphicDevice, pCommandList);
 

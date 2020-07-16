@@ -87,6 +87,7 @@ void COptionUI::Show_OtherUI()
 	for (auto& pSrc : *pHpBarUIList)
 		dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(!m_bIsShow);
 
+
 	list<CGameObject*>* pOnUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"OnUI");
 	for (auto& pSrc : *pOnUIList)
 		dynamic_cast<COnUI*>(pSrc)->Set_ShowUI(m_bIsShow);
@@ -96,6 +97,7 @@ void COptionUI::Show_OtherUI()
 
 	CGameObject* pQuestUIList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"Quest");
 	dynamic_cast<CUI*>(pQuestUIList)->Set_ShowUI(!m_bIsShow);
+
 
 	CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
 	dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(!m_bIsShow);

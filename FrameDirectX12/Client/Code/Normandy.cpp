@@ -43,22 +43,16 @@ HRESULT CNormandy::Ready_GameObject()
 #ifdef _DEBUG
 	COUT_STR("Success Static - Clone Mesh");
 #endif
-	m_pTransCom->m_vPos = _vec3(300.f, 100.f, 200);
-	m_pTransCom->m_vScale = _vec3(0.01f, 0.01f, 0.01f);
-	XMVECTOR vVec = { 1.f,1.f,1.f };
+	m_pTransCom->m_vPos = _vec3(0.f, 0.f, 50.f);
+
+
 	m_fTime = 0.f;
 	return S_OK;
 }
 
 HRESULT CNormandy::LateInit_GameObject()
 {
-	//  HFILE hFile =CreateFile
 
-
-	/*	Engine::Safe_Delete_Array(pHeightMapPixels);*/
-	/*____________________________________________________________________
-	Get GameObject - DynamicCamera
-	______________________________________________________________________*/
 
 	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
 
@@ -80,10 +74,6 @@ _int CNormandy::Update_GameObject(const _float& fTimeDelta)
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
 	m_fTime += fTimeDelta;
-
-	
-
-
 	return NO_EVENT;
 }
 
@@ -99,8 +89,8 @@ _int CNormandy::LateUpdate_GameObject(const _float& fTimeDelta)
 	/*____________________________________________________________________
 	[ Set PipelineState ]
 	______________________________________________________________________*/
-	m_pMeshCom->Set_Animation((int)0);
-	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(fTimeDelta * 3000.f);
+
+
 	return NO_EVENT;
 }
 
@@ -111,10 +101,6 @@ void CNormandy::Render_GameObject(const _float& fTimeDelta)
 	m_pShaderCom->Begin_Shader();
 
 	m_pMeshCom->Render_Mesh(m_pShaderCom, m_vecMatrix);
-
-
-
-
 }
 
 HRESULT CNormandy::Add_Component()
@@ -135,23 +121,21 @@ HRESULT CNormandy::Add_Component()
 
 void CNormandy::Set_ConstantTable()
 {
-	_matrix matRotY = XMMatrixRotationY(XMConvertToRadians(-90));
-	_matrix matView = INIT_MATRIX;
-	_matrix matProj = INIT_MATRIX;
+	_matrix matView = CGraphicDevice::Get_Instance()->GetViewMatrix();
+	_matrix matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
 
 	CB_MATRIX_INFO	tCB_MatrixInfo;
+	CB_BONE_INFO	tCB_BoneInfo;
 
 	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
 
-	matView = CGraphicDevice::Get_Instance()->GetViewMatrix();
-	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
 
-
-	_matrix matWVP = matRotY * m_pTransCom->m_matWorld * matView * matProj;
+	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
-	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(matRotY * m_pTransCom->m_matWorld));
-	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
-	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
+
+
+
+	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(m_fTime * 3000.f);
 
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
 }

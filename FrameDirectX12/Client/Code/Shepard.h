@@ -2,15 +2,10 @@
 #include "Include.h"
 #include "GameObject.h"
 
-
-
-
-
-
 class CShepard : public Engine::CGameObject
 {
-	enum STATE { SEARCH,CHECK, RUNNORTH,TURNRIGHT };
-	enum CHAPTER{START,TURNPLAYER,GOTOPLAYER,FIRSTTALK,FIRSTFIGHT,MOVING};
+	enum STATE { SEARCH, CHECK, RUNNORTH, IDLE, TURNRIGHT };
+	enum CHAPTER { START, TURNPLAYER, GOTOPLAYER, FIRSTTALK, FIRSTFIGHT, MOVING };
 private:
 	explicit CShepard(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 	explicit CShepard(const CShepard& rhs);
@@ -24,8 +19,10 @@ public:
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 	virtual void    Render_ShadowDepth(CShader_Shadow* pShader);
-	void ChapterCheck();
-	void TurnToPlayer();
+	void ChapterCheck(const _float& fTimeDelta);
+	void TurnToPlayer(const _float& fTimeDelta);
+
+	void MoveByAstar(const _float& fTimeDelta);
 private:
 	void            Set_ShadowTable(CShader_Shadow* pShader);
 private:
@@ -38,6 +35,9 @@ private:
 	______________________________________________________________________*/
 	Engine::CMesh* m_pMeshCom = nullptr;
 	Engine::CShader_Mesh* m_pShaderCom = nullptr;
+	Engine::CAstar* m_pAstarCom = nullptr;
+	Engine::CNaviMesh* m_pNaviCom = nullptr;
+
 
 
 	vector<vector<_matrix>> m_vecMatrix;
@@ -46,6 +46,9 @@ public:
 	static CShepard* Create(ID3D12Device* pGraphicDevice,
 		ID3D12GraphicsCommandList* pCommandList);
 private:
+	CGameObject* m_pPlayer;
+
+
 	STATE m_eCurState = SEARCH;
 	CHAPTER m_eCurChapter = START;
 private:

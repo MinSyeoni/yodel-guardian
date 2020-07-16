@@ -1,10 +1,15 @@
 0~119 RilfeIdle
-120~151 RifleWalkNorth
-152~184 RifleWalkSouth
+120~150 RifleWalkNorth
+151~184 RifleWalkSouth
 185~217 RifleWarkEase
 218~250 RifleWalkWest
 251~399 NoneIdle
 400~447 NoneWalk
 448~482 RifleHolster
 483~522 RilfeDraw
-523~537 RifleAttack
+523~537 RifleAttack 578?
+
+579~618 SniperDraw
+619~653 Sniper Holster
+654~ 700 Sniper Reload
+701~730 Sniper Fire

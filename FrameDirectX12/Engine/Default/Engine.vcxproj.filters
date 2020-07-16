@@ -214,10 +214,17 @@
     <Filter Include="01.Utility\02.SuperClass\04.Component\02.Resource\00.Buffer\06.SphereTex">
       <UniqueIdentifier>{05f999fc-28ad-4d23-88bd-ffb0ce5edfd5}</UniqueIdentifier>
     </Filter>
-
-
     <Filter Include="01.Utility\05.Shader\12.Shader_Dissolve">
       <UniqueIdentifier>{14afb047-5859-4c44-9685-93e6b47e2d7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\05.Shader\13.Shader_Effect">
+      <UniqueIdentifier>{3e7557ee-1870-4b34-bba4-f324fc76256c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\05.Shader\14.Shader_LimLight">
+      <UniqueIdentifier>{ffcbbf56-f4a9-4ef3-b5eb-0d594789cce0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\07.Astar">
+      <UniqueIdentifier>{e256e812-cce4-40a0-82c7-d75a5781b610}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -443,10 +450,17 @@
     <ClInclude Include="..\Code\SphereCollider.h">
       <Filter>01.Utility\02.SuperClass\04.Component\03.Collider\01.SphereCollider</Filter>
     </ClInclude>
-
-
     <ClInclude Include="..\Code\Shader_Dissolve.h">
       <Filter>01.Utility\05.Shader\12.Shader_Dissolve</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Shader_Effect.h">
+      <Filter>01.Utility\05.Shader\13.Shader_Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Shader_LimLIght.h">
+      <Filter>01.Utility\05.Shader\14.Shader_LimLight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Astar.h">
+      <Filter>01.Utility\07.Astar</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -642,10 +656,17 @@
     <ClCompile Include="..\Code\SphereCollider.cpp">
       <Filter>01.Utility\02.SuperClass\04.Component\03.Collider\01.SphereCollider</Filter>
     </ClCompile>
-
-
     <ClCompile Include="..\Code\Shader_Dissolve.cpp">
       <Filter>01.Utility\05.Shader\12.Shader_Dissolve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shader_Effect.cpp">
+      <Filter>01.Utility\05.Shader\13.Shader_Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Shader_LimLIght.cpp">
+      <Filter>01.Utility\05.Shader\14.Shader_LimLight</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Astar.cpp">
+      <Filter>01.Utility\07.Astar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -685,10 +706,11 @@
     <FxCompile Include="..\..\Bin\Shader\Shader_UI.hlsl">
       <Filter>01.Utility\05.Shader\11.Shader_UI</Filter>
     </FxCompile>
-
-
     <FxCompile Include="..\..\Bin\Shader\Shader_Dissolve.hlsl">
       <Filter>01.Utility\05.Shader\12.Shader_Dissolve</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Bin\Shader\Shader_Effect.hlsl">
+      <Filter>01.Utility\05.Shader\13.Shader_Effect</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

@@ -181,6 +181,7 @@ call CopyEngine.bat</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Code\AnimationControl.h" />
+    <ClInclude Include="..\Code\Astar.h" />
     <ClInclude Include="..\Code\Base.h" />
     <ClInclude Include="..\Code\BloomTarget.h" />
     <ClInclude Include="..\Code\BoxCollider.h" />
@@ -229,6 +230,7 @@ call CopyEngine.bat</Command>
     <ClInclude Include="..\Code\Shader_DownSample.h" />
     <ClInclude Include="..\Code\Shader_Effect.h" />
     <ClInclude Include="..\Code\Shader_LightAcc.h" />
+    <ClInclude Include="..\Code\Shader_LimLIght.h" />
     <ClInclude Include="..\Code\Shader_Mesh.h" />
     <ClInclude Include="..\Code\Shader_Shadow.h" />
     <ClInclude Include="..\Code\Shader_SSAO.h" />
@@ -259,6 +261,7 @@ call CopyEngine.bat</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\AnimationControl.cpp" />
+    <ClCompile Include="..\Code\Astar.cpp" />
     <ClCompile Include="..\Code\Base.cpp" />
     <ClCompile Include="..\Code\BloomTarget.cpp" />
     <ClCompile Include="..\Code\BoxCollider.cpp" />
@@ -307,6 +310,7 @@ call CopyEngine.bat</Command>
     <ClCompile Include="..\Code\Shader_DownSample.cpp" />
     <ClCompile Include="..\Code\Shader_Effect.cpp" />
     <ClCompile Include="..\Code\Shader_LightAcc.cpp" />
+    <ClCompile Include="..\Code\Shader_LimLIght.cpp" />
     <ClCompile Include="..\Code\Shader_Mesh.cpp" />
     <ClCompile Include="..\Code\Shader_Shadow.cpp" />
     <ClCompile Include="..\Code\Shader_SSAO.cpp" />

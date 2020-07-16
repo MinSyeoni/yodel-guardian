@@ -9,7 +9,7 @@ namespace Engine
 	class CShader_Mesh;
 }
 
-class CDynamicCamera;
+
 
 class CNormandy : public Engine::CGameObject
 {
