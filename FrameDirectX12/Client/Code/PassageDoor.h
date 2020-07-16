@@ -14,7 +14,7 @@ class CDynamicCamera;
 class CPassageDoor : public Engine::CGameObject
 {
 public:
-	enum PASSAGE_STATE { PASSAGE_IDLE, PASSAGE_ALREADYOPEN, PASSAGE_OPEN, PASSAGE_CLOSE};
+	enum PASSAGE_STATE { PASSAGE_ALREADYOPEN, PASSAGE_IDLE, PASSAGE_OPEN, PASSAGE_CLOSE};
 
 private:
 	explicit CPassageDoor(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);

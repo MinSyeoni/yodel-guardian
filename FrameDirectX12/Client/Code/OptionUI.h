@@ -15,6 +15,10 @@ class CDynamicCamera;
 
 class COptionUI : public Engine::CGameObject
 {
+public:
+	enum OPTION_TYPE { OPTION_SSAO, OPTION_METALIC, OPTION_EMISSIVE, OPTION_DISTORITION,
+						OPTION_SHADOW, OPTION_RIMLIGHT, OPTION_TONEMAPPING };
+
 private:
 	explicit COptionUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 	explicit COptionUI(const COptionUI& rhs);
@@ -32,7 +36,7 @@ public:
 	void						Set_ShowUI(_bool bIsShow) { m_bIsShow = bIsShow; }
 	void						Show_OptionUI();
 
-	void Show_OtherUI();
+	void						Show_OtherUI();
 
 private:
 	virtual HRESULT				Add_Component();
@@ -49,6 +53,9 @@ private:
 
 	POINT						m_pt = {};
 	_bool						m_bIsShow = false;
+	wstring						m_strOptionTag = L"";
+
+	OPTION_TYPE					m_eOptionType;
 
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);

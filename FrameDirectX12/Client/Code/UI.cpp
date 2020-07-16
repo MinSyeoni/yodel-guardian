@@ -72,6 +72,9 @@ _int CUI::LateUpdate_GameObject(const _float& fTimeDelta)
 
 void CUI::Render_GameObject(const _float& fTimeDelta)
 {
+	if (!m_bIsShow)
+		return;
+
 	Set_ConstantTable();
 	// 세이더 - 버퍼 - 세이더 - 버퍼 순서 중요 
 

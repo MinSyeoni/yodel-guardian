@@ -238,6 +238,9 @@
     <Filter Include="02.Scene_All\01.DynamicObject\01.PassageDoor">
       <UniqueIdentifier>{e6214335-cf8c-4e6f-96ac-89a229f1f507}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.UI\07.OptionUI\00.On">
+      <UniqueIdentifier>{782e0da7-9a72-4561-aa31-b4ef776aacde}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -415,6 +418,9 @@
     <ClInclude Include="..\Code\PassageDoor.h">
       <Filter>02.Scene_All\01.DynamicObject\01.PassageDoor</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\OnUI.h">
+      <Filter>03.UI\07.OptionUI\00.On</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -561,6 +567,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\PassageDoor.cpp">
       <Filter>02.Scene_All\01.DynamicObject\01.PassageDoor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\OnUI.cpp">
+      <Filter>03.UI\07.OptionUI\00.On</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
