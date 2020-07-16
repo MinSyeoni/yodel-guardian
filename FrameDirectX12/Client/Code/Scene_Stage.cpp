@@ -30,6 +30,7 @@
 #include "Salone.h"
 #include "Trigger.h"
 #include "LobbyDoor.h"
+#include "PassageDoor.h"
 
 #include "LightObject.h"
 #include "DamageBlood.h"
@@ -110,17 +111,12 @@ _int CScene_Stage::LateUpdate_Scene(const _float & fTimeDelta)
 		list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
 		for (auto& pSrc : *pHpBarUIList)
 			dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(false);
-
-		list<CGameObject*>* pIconUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"IconUI");
-		for (auto& pSrc : *pIconUIList)
-			dynamic_cast<CIconUI*>(pSrc)->Set_ShowUI(false);
-
+		CGameObject* pIconUIList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"IconUI");
+		dynamic_cast<CIconUI*>(pIconUIList)->Set_ShowUI(false);
 		CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
 		dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(false);
-
-		list<CGameObject*>* pInvenList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"InvenUI");
-		for (auto& pSrc : *pInvenList)
-			dynamic_cast<CInvenUI*>(pSrc)->Set_ShowUI(false);
+		CGameObject* pInvenList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
+		dynamic_cast<CInvenUI*>(pInvenList)->Set_ShowUI(false);
 	}
 
 	return Engine::CScene::LateUpdate_Scene(fTimeDelta);
@@ -191,6 +187,10 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = CLobbyDoor::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_LobbyDoor", pGameObject), E_FAIL);
+
+	pGameObject = CPassageDoor::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_PassageDoor", pGameObject), E_FAIL);
 
 	////////////////////////////////// UI /////////////////////////////////////////////
 	pGameObject = CUI::Create(m_pGraphicDevice, m_pCommandList);
@@ -321,15 +321,15 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Salone", L"Salone", nullptr), E_FAIL);//For.Salone
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Shepard", L"Shepard", nullptr), E_FAIL);
 	
-																													 //Prototype_MapObject
-	Load_StageObject(L"../../../SYTool/Tool/Data/StaticObj/mapAddoutside.dat");
+	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj																		 //Prototype_MapObject
+	Load_StageObject(L"../../Data/StaticObj/mapAddoutside.dat");
 
 	// Monster
-	Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/Flame.dat");
-	Load_MonsterPos(L"../../../SYTool/Tool/Data/Collider/Zombi.dat");
+	Load_MonsterPos(L"../../Data/Collider/Flame.dat");
+	Load_MonsterPos(L"../../Data/Collider/Zombi.dat");
 
 	// Trigger
-	Load_TriggerPos(L"../../../SYTool/Tool/Data/Collider/Trigger.dat");
+	Load_TriggerPos(L"../../Data/Collider/Trigger.dat");
 
 	return S_OK;
 }
@@ -351,19 +351,21 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Aim", L"Aim", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_OptionUI", L"OptionUI", nullptr), E_FAIL);
 
-	//////// 플레이어 아이콘 //////
+	//////// 아이콘 //////
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_IconUI", L"IconUI", nullptr), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", nullptr), E_FAIL);
+
 	_uint iType = 0;
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_IconUI", L"IconUI", &iType), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &iType), E_FAIL);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", &iType), E_FAIL);
+	//FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", &iType), E_FAIL);
 
 	iType = 1;
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_IconUI", L"IconUI", &iType), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &iType), E_FAIL);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", &iType), E_FAIL);
+	//FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", &iType), E_FAIL);
 
 	iType = 2;
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", &iType), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &iType), E_FAIL);
+	//FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", &iType), E_FAIL);
 	/////////////////////////////
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
@@ -384,9 +386,9 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 	DWORD dwByte = 0;
 	COLLIDER tColData = {};
 
-	if (wstrFilePath == L"../../../SYTool/Tool/Data/Collider/Flame.dat")
+	if (wstrFilePath == L"../../Data/Collider/Flame.dat")
 		m_tMeshInfo.MeshTag = L"Flamethrower";
-	else if (wstrFilePath == L"../../../SYTool/Tool/Data/Collider/Zombi.dat")
+	else if (wstrFilePath == L"../../Data/Collider/Zombi.dat")
 		m_tMeshInfo.MeshTag = L"Zombi";
 
 	while (true)
@@ -469,6 +471,8 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_ItemObject", L"ItemObject", &m_tMeshInfo);
 		else if (m_tMeshInfo.MeshTag == L"door1.X")
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LobbyDoor", L"LobbyDoor", &m_tMeshInfo);
+		else if (m_tMeshInfo.MeshTag == L"door2.X")
+			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_PassageDoor", L"PassageDoor", &m_tMeshInfo);
 		else
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
 	}

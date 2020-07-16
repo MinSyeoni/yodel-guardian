@@ -9,7 +9,6 @@ CIconUI::CIconUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pComma
 
 CIconUI::CIconUI(const CIconUI& rhs)
 	: Engine::CGameObject(rhs)
-	, m_eIconType(rhs.m_eIconType)
 {
 }
 
@@ -33,25 +32,8 @@ HRESULT CIconUI::LateInit_GameObject()
 {
 	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());	
 
-	switch (m_eIconType)
-	{
-	case CIconUI::ICON_PLAYER:
-	{
-		m_pTransCom->m_vScale = _vec3(0.15f, 0.2f, 0.15f);
-		m_pTransCom->m_vPos.x = _float(WINCX / 2.f) / _float(WINCX / 0.5f) - 1.05f;
-		m_pTransCom->m_vPos.y = _float(WINCY / 1.5f) / _float(WINCY / 0.1f) - 0.8f;
-	}
-	break;
-	case CIconUI::ICON_COLLEAGUE:
-	{
-		m_pTransCom->m_vScale = _vec3(0.15f, 0.2f, 0.15f);
-		m_pTransCom->m_vPos.x = _float(WINCX / 2.f) / _float(WINCX / 0.5f) - 0.75f;
-		m_pTransCom->m_vPos.y = _float(WINCY / 1.5f) / _float(WINCY / 0.1f) - 0.8f;
-	}
-	break;
-	default:
-		break;
-	}
+	m_pTransCom->m_vPos.x = _float(2.f / WINCX * WINCX / 2) - 1.f;
+	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * WINCY / 2) + 1.f;
 
 	return S_OK;
 }
@@ -112,13 +94,9 @@ HRESULT CIconUI::Add_Component()
 	if (nullptr != m_pTransCom)
 		m_mapComponent[ID_DYNAMIC].emplace(L"Com_Transform", m_pTransCom);
 
-//	if (m_eIconType == ICON_PLAYER)
-//	{
-		// Texture
-		m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_PlayerIcon", COMPONENTID::ID_STATIC));
-		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
-		m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
-//	}
+	m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_PlayerIcon", COMPONENTID::ID_STATIC));
+	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
 
 	return S_OK;
 }
@@ -143,9 +121,6 @@ void CIconUI::Set_ConstantTable()
 CGameObject* CIconUI::Clone_GameObject(void* pArg)
 {
 	CGameObject* pInstance = new CIconUI(*this);
-
-	ICONTYPE tIconType = *reinterpret_cast<ICONTYPE*>(pArg);
-	static_cast<CIconUI*>(pInstance)->m_eIconType = tIconType;
 
 	if (FAILED(pInstance->Ready_GameObject()))
 		return nullptr;

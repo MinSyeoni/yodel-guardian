@@ -15,9 +15,6 @@ class CDynamicCamera;
 
 class CIconUI : public Engine::CGameObject
 {
-public:
-	enum ICONTYPE { ICON_PLAYER, ICON_COLLEAGUE };
-
 private:
 	explicit CIconUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 	explicit CIconUI(const CIconUI& rhs);
@@ -49,8 +46,6 @@ private:
 
 	POINT						m_pt = {};
 	_bool						m_bIsShow = true;
-
-	ICONTYPE					m_eIconType;
 
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);

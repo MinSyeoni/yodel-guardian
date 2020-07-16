@@ -435,6 +435,14 @@ HRESULT CRenderer::Ready_ShaderPrototype()
     NULL_CHECK_RETURN(pShader, E_FAIL);
     FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_HPBAR", ID_STATIC, pShader), E_FAIL);
 
+    pShader = CShader_UI::Create(m_pGraphicDevice, m_pCommandList, CShader_UI::HPBAR1);
+    NULL_CHECK_RETURN(pShader, E_FAIL);
+    FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_HPBAR1", ID_STATIC, pShader), E_FAIL);
+
+    pShader = CShader_UI::Create(m_pGraphicDevice, m_pCommandList, CShader_UI::HPBAR2);
+    NULL_CHECK_RETURN(pShader, E_FAIL);
+    FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_HPBAR2", ID_STATIC, pShader), E_FAIL);
+
     pShader = CShader_LightAcc::Create(m_pGraphicDevice, m_pCommandList, LIGHTTYPE::D3DLIGHT_DIRECTIONAL);
     NULL_CHECK_RETURN(pShader, E_FAIL);
     FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_LightDirect", ID_STATIC, pShader), E_FAIL);

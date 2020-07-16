@@ -27,7 +27,7 @@ CShader_UI::~CShader_UI()
 
 HRESULT CShader_UI::Ready_Shader(TYPE eType)
 {
-	if (eType == ALPHA || eType == HPBAR)
+	if (eType != NONE)
 		m_bIsAlpha = true;
 
 	m_eType = eType;
@@ -125,6 +125,10 @@ HRESULT CShader_UI::Create_PipelineState()
 	
 	if(m_eType == HPBAR)
 		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_UI.hlsl", nullptr, "PS_HPBAR", "ps_5_1");
+	else if (m_eType == HPBAR1)
+		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_UI.hlsl", nullptr, "PS_HPBAR1", "ps_5_1");
+	else if (m_eType == HPBAR2)
+		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_UI.hlsl", nullptr, "PS_HPBAR2", "ps_5_1");
 	else
 		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_UI.hlsl", nullptr, "PS_NNOMAL", "ps_5_1");
 

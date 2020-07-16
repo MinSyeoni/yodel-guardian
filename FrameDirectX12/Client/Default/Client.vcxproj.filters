@@ -142,9 +142,6 @@
     <Filter Include="01.Scene_Stage\00.Player\01.PlayerStatus">
       <UniqueIdentifier>{a66796dc-9b78-40be-a3dd-b617722c6bc1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.UI\03.PlayerUI">
-      <UniqueIdentifier>{5bc3d12b-32ee-47ff-80e1-66ac7d11fb48}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05.Loading">
       <UniqueIdentifier>{b12196e0-3829-4a1c-8527-7392b0c7418d}</UniqueIdentifier>
     </Filter>
@@ -234,6 +231,12 @@
     </Filter>
     <Filter Include="03.UI\07.OptionUI">
       <UniqueIdentifier>{bcdabc72-8273-4931-b7fc-15b3620c9efe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\03.IconUI">
+      <UniqueIdentifier>{5bc3d12b-32ee-47ff-80e1-66ac7d11fb48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_All\01.DynamicObject\01.PassageDoor">
+      <UniqueIdentifier>{e6214335-cf8c-4e6f-96ac-89a229f1f507}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -398,7 +401,7 @@
       <Filter>03.UI\05.QuestUI</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\IconUI.h">
-      <Filter>03.UI\03.PlayerUI</Filter>
+      <Filter>03.UI\03.IconUI</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\HPBar.h">
       <Filter>03.UI\02.HPBar</Filter>
@@ -408,6 +411,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\OptionUI.h">
       <Filter>03.UI\07.OptionUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\PassageDoor.h">
+      <Filter>02.Scene_All\01.DynamicObject\01.PassageDoor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -542,7 +548,7 @@
       <Filter>03.UI\05.QuestUI</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\IconUI.cpp">
-      <Filter>03.UI\03.PlayerUI</Filter>
+      <Filter>03.UI\03.IconUI</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\HPBar.cpp">
       <Filter>03.UI\02.HPBar</Filter>
@@ -552,6 +558,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\OptionUI.cpp">
       <Filter>03.UI\07.OptionUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PassageDoor.cpp">
+      <Filter>02.Scene_All\01.DynamicObject\01.PassageDoor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

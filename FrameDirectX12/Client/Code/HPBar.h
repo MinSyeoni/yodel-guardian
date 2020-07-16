@@ -16,7 +16,7 @@ class CDynamicCamera;
 class CHPBar : public Engine::CGameObject
 {
 public:
-	enum HPBAR_TYPE { PLAYER_HPBAER, COLLEAGUE_HPBAR };
+	enum HPBAR_TYPE { PLAYER_HPBAER, COLLEAGUE_HPBAR, COLLEAGUE2_HPBAR};
 
 private:
 	explicit CHPBar(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
@@ -30,7 +30,9 @@ public:
 	HRESULT						Ready_GameObjectPrototype();
 	virtual HRESULT				Ready_GameObject();
 	virtual HRESULT				LateInit_GameObject();
+	void Init_CharacterHp();
 	virtual _int				Update_GameObject(const _float& fTimeDelta);
+	void Set_HP_Damage(const _float& fTimeDelta);
 	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void				Render_GameObject(const _float& fTimeDelta);
 

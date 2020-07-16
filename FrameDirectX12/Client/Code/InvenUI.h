@@ -4,9 +4,11 @@
 #include "ObjectMgr.h"
 #include "DynamicCamera.h"
 #include "GraphicDevice.h"
+#include "DirectInput.h"
 
 namespace Engine
 {
+	class CFont;
 	class CRcTex;
 	class CShader_ColorBuffer;
 }
@@ -15,9 +17,6 @@ class CDynamicCamera;
 
 class CInvenUI : public Engine::CGameObject
 {
-public:
-	enum INVEN_ICON { ICON_MEDICINE, ICON_BANDAGE, ICON_SYRINGE};
-
 private:
 	explicit CInvenUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 	explicit CInvenUI(const CInvenUI& rhs);
@@ -39,18 +38,21 @@ private:
 
 private:
 	void						Set_ConstantTable();
+	void						Set_FontText();
+	void						Set_InvenIconPos();
 
 private:
 	Engine::CRcTex*				m_pBufferCom = nullptr;
 	Engine::CShader_UI*			m_pShaderCom = nullptr;
 	Engine::CTexture*			m_pTexture = nullptr;
+	Engine::CFont*				m_pFont[3] = {};
 
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
 
 	POINT						m_pt = {};
 	_bool						m_bIsShow = true;
 
-	INVEN_ICON					m_eIconType;
+	_uint						m_iItemNum[3] = {};
 
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);

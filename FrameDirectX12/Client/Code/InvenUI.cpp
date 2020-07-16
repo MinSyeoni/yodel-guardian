@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "InvenUI.h"
-
+#include "Font.h"
 
 CInvenUI::CInvenUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -9,7 +9,6 @@ CInvenUI::CInvenUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCom
 
 CInvenUI::CInvenUI(const CInvenUI& rhs)
 	: Engine::CGameObject(rhs)
-	, m_eIconType(rhs.m_eIconType)
 	, m_bIsShow(rhs.m_bIsShow)
 {
 }
@@ -34,32 +33,8 @@ HRESULT CInvenUI::LateInit_GameObject()
 {
 	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());	
 
-	switch (m_eIconType)
-	{
-	case CInvenUI::ICON_MEDICINE:
-	{
-		m_pTransCom->m_vScale = _vec3(0.045f, 0.045f, 0.045f);
-		m_pTransCom->m_vPos.x = _float(WINCX / 2.f) / _float(WINCX / 0.5f) + 0.6f;
-		m_pTransCom->m_vPos.y = _float(WINCY / 1.5f) / _float(WINCY / 0.1f) - 0.47f;
-	}
-	break;
-	case CInvenUI::ICON_BANDAGE:
-	{
-		m_pTransCom->m_vScale = _vec3(0.045f, 0.045f, 0.045f);
-		m_pTransCom->m_vPos.x = _float(WINCX / 2.f) / _float(WINCX / 0.5f) + 0.6f;
-		m_pTransCom->m_vPos.y = _float(WINCY / 1.5f) / _float(WINCY / 0.1f) - 0.57f;
-	}
-	break;
-	case CInvenUI::ICON_SYRINGE:
-	{
-		m_pTransCom->m_vScale = _vec3(0.045f, 0.045f, 0.045f);
-		m_pTransCom->m_vPos.x = _float(WINCX / 2.f) / _float(WINCX / 0.5f) + 0.6f;
-		m_pTransCom->m_vPos.y = _float(WINCY / 1.5f) / _float(WINCY / 0.1f) - 0.67f;
-	}
-	break;
-	default:
-		break;
-	}
+	for (int i = 0; i < 3; ++i)
+		m_pFont[i]->LateInit_GameObject();
 
 	return S_OK;
 }
@@ -73,12 +48,40 @@ _int CInvenUI::Update_GameObject(const _float& fTimeDelta)
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
+	Set_FontText();
+
+	if (m_bIsShow)
+		for (int i = 0; i < 3; ++i)
+			m_pFont[i]->Update_GameObject(fTimeDelta);
+
 	return NO_EVENT;
+}
+
+void CInvenUI::Set_FontText()
+{
+	wstring strText[3];
+	string strTemp[3];
+
+	for (int i = 0; i < 3; ++i)
+	{
+		strTemp[i] = to_string(m_iItemNum[i]);
+		strText[i].assign(strTemp[i].begin(), strTemp[i].end());
+	}
+
+	for (int i = 0; i < 3; ++i)
+	{
+		m_pFont[i]->Set_Pos(_vec2(WINCX * 0.93f, WINCY * (0.65f + i * 0.07f)));
+		m_pFont[i]->Set_Text(strText[i].c_str());
+	}
 }
 
 _int CInvenUI::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
+
+	if (m_bIsShow)
+		for (int i = 0; i < 3; ++i)
+			m_pFont[i]->LateUpdate_GameObject(fTimeDelta);
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
@@ -119,23 +122,17 @@ HRESULT CInvenUI::Add_Component()
 	m_pTransCom = static_cast<CTransform*>(m_pComponentMgr->Clone_Component(L"Prototype_Transform", COMPONENTID::ID_DYNAMIC));
 	if (nullptr != m_pTransCom)
 		m_mapComponent[ID_DYNAMIC].emplace(L"Com_Transform", m_pTransCom);
-	
-	// TextureCom
-	switch (m_eIconType)
+
+	// Font
+	for (int i = 0; i < 3; ++i)
 	{
-	case CInvenUI::ICON_MEDICINE:
-		m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_MedicineIcon", COMPONENTID::ID_STATIC));
-		break;
-	case CInvenUI::ICON_BANDAGE:
-		m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_BandageIcon", COMPONENTID::ID_STATIC));
-		break;
-	case CInvenUI::ICON_SYRINGE:
-		m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_SyringeIcon", COMPONENTID::ID_STATIC));
-		break;
-	default:
-		break;
+		m_pFont[i] = static_cast<CFont*>(CObjectMgr::Get_Instance()->Get_NewGameObject(L"Prototype_Font_NetmarbleLight", L"fuck", nullptr));
+		m_pFont[i]->Ready_GameObjectClone(L"", _vec2{ 0.f, 0.f }, D2D1::ColorF::White);
 	}
-	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+
+	//Texture
+	m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_MedicineIcon", COMPONENTID::ID_STATIC));
+	NULL_CHECK_RETURN(m_pTexture, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
 
 	return S_OK;
@@ -162,9 +159,6 @@ CGameObject* CInvenUI::Clone_GameObject(void* pArg)
 {
 	CGameObject* pInstance = new CInvenUI(*this);
 
-	INVEN_ICON tIconType = *reinterpret_cast<INVEN_ICON*>(pArg);
-	static_cast<CInvenUI*>(pInstance)->m_eIconType = tIconType;
-
 	if (FAILED(pInstance->Ready_GameObject()))
 		return nullptr;
 
@@ -184,4 +178,7 @@ CInvenUI* CInvenUI::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandLi
 void CInvenUI::Free()
 {
 	CGameObject::Free();
+
+	for (int i = 0; i < 3; ++i)
+		Safe_Release(m_pFont[i]);
 }

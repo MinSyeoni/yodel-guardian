@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "HPBar.h"
 #include "Player.h"
+#include "DirectInput.h"
 
 CHPBar::CHPBar(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -33,32 +34,36 @@ HRESULT CHPBar::LateInit_GameObject()
 {
 	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());
 
+	Init_CharacterHp();
+
+	return S_OK;
+}
+
+void CHPBar::Init_CharacterHp()
+{
 	switch (m_eType)
 	{
 	case CHPBar::PLAYER_HPBAER:
 	{
-		m_pTransCom->m_vScale = _vec3(0.15f, 0.2f, 0.15f);
-		m_pTransCom->m_vPos.x = _float(WINCX / 2.f) / _float(WINCX / 0.5f) - 1.05f;
-		m_pTransCom->m_vPos.y = _float(WINCY / 1.5f) / _float(WINCY / 0.1f) - 0.8f;
-
 		CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 		m_fPreHp = m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
 	}
-		break;
+	break;
 	case CHPBar::COLLEAGUE_HPBAR:
 	{
-		m_pTransCom->m_vScale = _vec3(0.15f, 0.2f, 0.15f);
-		m_pTransCom->m_vPos.x = _float(WINCX / 2.f) / _float(WINCX / 0.5f) - 0.75f;
-		m_pTransCom->m_vPos.y = _float(WINCY / 1.5f) / _float(WINCY / 0.1f) - 0.8f;
-
-		m_fPreHp = 314.f;
+		CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+		m_fPreHp = m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
 	}
-		break;
+	break;
+	case CHPBar::COLLEAGUE2_HPBAR:
+	{
+		CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+		m_fPreHp = m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
+	}
+	break;
 	default:
 		break;
 	}
-
-	return S_OK;
 }
 
 _int CHPBar::Update_GameObject(const _float& fTimeDelta)
@@ -70,6 +75,13 @@ _int CHPBar::Update_GameObject(const _float& fTimeDelta)
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
+	Set_HP_Damage(fTimeDelta);
+
+	return NO_EVENT;
+}
+
+void CHPBar::Set_HP_Damage(const _float& fTimeDelta)
+{
 	switch (m_eType)
 	{
 	case CHPBar::PLAYER_HPBAER:
@@ -77,26 +89,33 @@ _int CHPBar::Update_GameObject(const _float& fTimeDelta)
 		CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 
 		m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
-
-		if (m_fPreHp > m_fCurHp)
-		{
-			m_fPreHp -= 15.f * fTimeDelta;
-
-			if (m_fPreHp <= m_fCurHp)
-				m_fPreHp = m_fCurHp;
-		}
 	}
-		break;
+	break;
 	case CHPBar::COLLEAGUE_HPBAR:
 	{
+		CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 
+		m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
 	}
-		break;
+	break;
+	case CHPBar::COLLEAGUE2_HPBAR:
+	{
+		CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+
+		m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
+	}
+	break;
 	default:
 		break;
 	}
 
-	return NO_EVENT;
+	if (m_fPreHp > m_fCurHp)
+	{
+		m_fPreHp -= 15.f * fTimeDelta;
+
+		if (m_fPreHp <= m_fCurHp)
+			m_fPreHp = m_fCurHp;
+	}
 }
 
 _int CHPBar::LateUpdate_GameObject(const _float& fTimeDelta)
@@ -104,6 +123,13 @@ _int CHPBar::LateUpdate_GameObject(const _float& fTimeDelta)
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
+
+	// hp 줄어드는거 테스트트트트트트
+	if (CDirectInput::Get_Instance()->KEY_PRESSING(DIK_9))
+	{
+		//	if (m_fPreHp > m_fCurHp)
+		m_fPreHp -= 15.f * fTimeDelta;
+	}
 
 	m_matHPWorld._11 = (m_fPreHp * 2 - 314) * 0.01;
 
@@ -135,15 +161,53 @@ HRESULT CHPBar::Add_Component()
 	NULL_CHECK_RETURN(m_pBufferCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Buffer", m_pBufferCom);
 
-	// Shader
-	m_pShaderCom = static_cast<Engine::CShader_UI*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_HPBAR", COMPONENTID::ID_STATIC));
-	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
-	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
+	switch (m_eType)
+	{
+	case CHPBar::PLAYER_HPBAER:
+	{
+		// Shader
+		m_pShaderCom = static_cast<Engine::CShader_UI*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_HPBAR", COMPONENTID::ID_STATIC));
+		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+		m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
 
-	// Texture
-	m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_PlayerHP", COMPONENTID::ID_STATIC));
-	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
-	m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
+		// Texture
+		m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_PlayerHP", COMPONENTID::ID_STATIC));
+		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+		m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
+	}
+		break;
+	case CHPBar::COLLEAGUE_HPBAR:
+	{		
+		// Shader
+		m_pShaderCom = static_cast<Engine::CShader_UI*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_HPBAR1", COMPONENTID::ID_STATIC));
+		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+		m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
+
+		// Texture
+		m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_HP_colleague1", COMPONENTID::ID_STATIC));
+		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+		m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
+	}
+		break;
+	case CHPBar::COLLEAGUE2_HPBAR:
+	{
+		// Shader
+		m_pShaderCom = static_cast<Engine::CShader_UI*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_HPBAR2", COMPONENTID::ID_STATIC));
+		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+		m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
+
+		// Texture
+		m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_HP_colleague2", COMPONENTID::ID_STATIC));
+		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+		m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
+	}
+		break;
+	default:
+		break;
+	}
+
+
+
 
 	// TransCom 
 	m_pTransCom = static_cast<CTransform*>(m_pComponentMgr->Clone_Component(L"Prototype_Transform", COMPONENTID::ID_DYNAMIC));

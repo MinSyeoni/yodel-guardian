@@ -87,14 +87,15 @@ void COptionUI::Show_OtherUI()
 	list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
 	for (auto& pSrc : *pHpBarUIList)
 		dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(!m_bIsShow);
-	list<CGameObject*>* pIconUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"IconUI");
-	for (auto& pSrc : *pIconUIList)
-		dynamic_cast<CIconUI*>(pSrc)->Set_ShowUI(!m_bIsShow);
+
+	CGameObject* pIconUIList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"IconUI");
+	dynamic_cast<CIconUI*>(pIconUIList)->Set_ShowUI(!m_bIsShow);
+
 	CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
 	dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(!m_bIsShow);
-	list<CGameObject*>* pInvenList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"InvenUI");
-	for (auto& pSrc : *pInvenList)
-		dynamic_cast<CInvenUI*>(pSrc)->Set_ShowUI(!m_bIsShow);
+
+	CGameObject* pInvenList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
+	dynamic_cast<CInvenUI*>(pInvenList)->Set_ShowUI(!m_bIsShow);
 }
 
 void COptionUI::Render_GameObject(const _float& fTimeDelta)
