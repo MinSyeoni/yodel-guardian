@@ -71,7 +71,7 @@ void CAim::Render_GameObject(const _float& fTimeDelta)
 	m_pShaderCom->Begin_Shader();
 	m_pBufferCom->Begin_Buffer();
 
-	m_pShaderCom->End_Shader();
+	m_pShaderCom->End_Shader(m_iDrawId);
 	m_pBufferCom->End_Buffer();
 
 	m_pBufferCom->Render_Buffer();

@@ -41,26 +41,30 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
     if (pTranscom != nullptr)
         m_pTransCom = pTranscom;
 
-    if (m_eCurState != CPlayer::RIFLEDRAW)
-        KeyInput();
+
+    KeyInput();
     Rotation(fTimeDelta);
     StatusUpdate(fTimeDelta);
     PlayerDirection(fTimeDelta);
     WeaponChange();
     CheckAim();
-
-
+    ReloadCheck();
+    CheckSniping();
 
     if (m_bIsShoot)
     {
-        m_eCurState = CPlayer::RIFLEATTACK;
+
+        if (m_eEquip == RIFLE)
+            m_eCurState = CPlayer::RIFLEATTACK;
+        else if (m_eEquip == SNIPER)
+            m_eCurState = CPlayer::SNIPERATTACK;
+
     }
 
 
 
     cout << m_pTransCom->m_vPos.x << "-" << m_pTransCom->m_vPos.y << "-" << m_pTransCom->m_vPos.z << endl;
 
-    m_ePreState = m_eCurState;
 
 
     _matrix matBone = XMMatrixInverse(nullptr, *m_matChestOffset);
@@ -94,6 +98,10 @@ _int CPlayerStatus::LateUpdate(const _float& fTimeDelta)
 
     AttackCheck(fTimeDelta);
     DamageByMonster(fTimeDelta);
+
+
+
+    m_ePreState = m_eCurState;
     return S_OK;
 }
 
@@ -114,7 +122,7 @@ void CPlayerStatus::SetMesh(CMesh* pMesh)
 
 void CPlayerStatus::KeyInput()
 {
-    if (m_eCurState == CPlayer::RIFLEDRAW || m_eCurState == CPlayer::RIFLEHOLSTER || m_eCurState == CPlayer::SNIPERDRAW || m_eCurState == CPlayer::SNIPERHOSTER)//무기드는중 리턴 
+    if (m_eCurState == CPlayer::RIFLEDRAW || m_eCurState == CPlayer::RIFLEHOLSTER || m_eCurState == CPlayer::SNIPERDRAW || m_eCurState == CPlayer::SNIPERHOSTER || m_eCurState == CPlayer::SNIPERRELOAD || m_eCurState == CPlayer::SNIPERATTACK)//무기드는중 리턴 
         return;
 
     if (m_pCamera == nullptr)
@@ -143,10 +151,11 @@ void CPlayerStatus::KeyInput()
         }
         else
         {
-
-            m_eCurState = CPlayer::SNIPERATTACK;
-            m_eLegState = CPlayer::SNIPERATTACK;
-
+            if (m_pCamera->Get_ZoomOut())
+            {
+                m_eCurState = CPlayer::SNIPERATTACK;
+                m_eLegState = CPlayer::SNIPERATTACK;
+            }
         }
 
 
@@ -158,6 +167,15 @@ void CPlayerStatus::KeyInput()
         m_eLegState = CPlayer::NONEIDLE;
 
     }
+    if (m_eEquip == SNIPER && KEY_PRESSING(DIKEYBOARD_R))
+    {
+        m_eCurState = CPlayer::SNIPERRELOAD;
+        m_eLegState = CPlayer::SNIPERRELOAD;
+        m_pCamera->Set_ZoomInOut(false);
+    }
+
+
+
 
     if (MOUSE_PRESSING(MOUSEBUTTON::DIM_LB))
     {
@@ -168,10 +186,12 @@ void CPlayerStatus::KeyInput()
         }
         else if (m_eEquip == SNIPER)
         {
-            m_eCurState = CPlayer::SNIPERATTACK;
-            m_bIsShoot = true;
+            if (m_pCamera->Get_ZoomOut())
+            {
+                m_eCurState = CPlayer::SNIPERATTACK;
+                m_bIsShoot = true;
 
-
+            }
         }
 
 
@@ -589,6 +609,32 @@ void CPlayerStatus::AttackCheck(const _float& fTimeDelta)
         }
 
     }
+    if (m_eCurState == CPlayer::SNIPERATTACK)
+    {
+
+
+        if (m_eCurState != m_ePreState)
+        {
+            list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Weapon");
+
+            for (auto& pSrc : *pList)
+            {
+                if (static_cast<CWeapon*>(pSrc)->Get_WeaponType() == CWeapon::SNIPER && static_cast<CWeapon*>(pSrc)->Get_WeaponState() == CWeapon::EQUIP)
+                {
+
+                    static_cast<CWeapon*>(pSrc)->CreateShootEffect();
+                }
+            }
+
+            CDirectSound::Get_Instance()->PlayDirectSoundFile(L"GUNSHOT");
+            ShootingCheck();
+            m_fShootingTime = 0.f;
+        }
+
+    }
+
+
+
 
     if (m_bIsShoot == false)
         m_fShootingTime = 0.f;
@@ -635,9 +681,8 @@ void CPlayerStatus::DamageByMonster(const _float& fTimeDelta)
                 {
                     CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_UI", L"Prototype_DamageBlood", L"Damage", nullptr);
                     m_bIshit = true;
-                    m_uiHp -= 11.f;
-                    if (m_uiHp <= 0.f)
-                        m_uiHp = 0.f;
+                    m_uiHp -= 1;
+
                 }
 
             }
@@ -661,7 +706,50 @@ void CPlayerStatus::CheckAim()
         dynamic_cast<CAim*>(pAim)->SetRender(true);
 
     }
+    else if (m_eEquip == SNIPER)
+    {
+        if (m_pCamera->Get_ZoomOut() == true)
+            dynamic_cast<CAim*>(pAim)->SetRender(true, 1);
+        else
+            dynamic_cast<CAim*>(pAim)->SetRender(false);
+
+
+    }
     else
         dynamic_cast<CAim*>(pAim)->SetRender(false);
 
+}
+
+void CPlayerStatus::ReloadCheck()
+{
+    if (m_eCurState == CPlayer::SNIPERRELOAD)
+    {
+        if (m_pMesh->Set_IsAniFinsh())
+        {
+            m_eCurState = CPlayer::RIFLEIDLE;
+            m_eLegState = CPlayer::RIFLEIDLE;
+
+        }
+
+
+
+
+    }
+
+
+
+
+}
+
+void CPlayerStatus::CheckSniping()
+{
+
+    if (m_eCurState == CPlayer::SNIPERATTACK && m_pMesh->Set_IsAniFinsh())
+    {
+
+        m_eCurState = CPlayer::RIFLEIDLE;
+        m_eLegState = CPlayer::RIFLEIDLE;
+        m_bIsShoot = false;
+
+    }
 }

@@ -94,7 +94,7 @@ _int CSniper::Update_GameObject(const _float& fTimeDelta)
     Engine::CGameObject::Update_GameObject(fTimeDelta);
 
     AniCheck();
-    LightCheck(fTimeDelta);
+    //LightCheck(fTimeDelta);
 
     dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation(m_eCurAniState);
 
@@ -247,24 +247,24 @@ void CSniper::LightCheck(const _float& fTimeDelta)
 void CSniper::CreateShootEffect()
 {
 
-    _matrix matBlend;
+    /* _matrix matBlend;
 
-    matBlend = XMMatrixInverse(nullptr, *m_pFireMatrixOffset);
+     matBlend = XMMatrixInverse(nullptr, *m_pFireMatrixOffset);
 
-    matBlend = matBlend * *m_pFireMatrix;
+     matBlend = matBlend * *m_pFireMatrix;
 
 
 
-    _matrix Rotation = XMMatrixRotationY(XMConvertToRadians(-90.f));
+     _matrix Rotation = XMMatrixRotationY(XMConvertToRadians(-90.f));
 
-    _matrix matShootPos = matBlend * *m_pPlayerEquipMatrix * (Rotation * *m_pPlayerMatrix);;
+     _matrix matShootPos = matBlend * *m_pPlayerEquipMatrix * (Rotation * *m_pPlayerMatrix);;
 
-    _vec3 vPos = _vec3{ matShootPos._41,matShootPos._42,matShootPos._43 };
+     _vec3 vPos = _vec3{ matShootPos._41,matShootPos._42,matShootPos._43 };
 
-    m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Effect_GunFire", L"Effect", &vPos);
+     m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Effect_GunFire", L"Effect", &vPos);
 
-    m_vLightPos = vPos;
-    m_bIsLight = true;
+     m_vLightPos = vPos;
+     m_bIsLight = true;*/
 }
 
 CGameObject* CSniper::Clone_GameObject(void* prg)

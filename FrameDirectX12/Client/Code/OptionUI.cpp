@@ -5,6 +5,8 @@
 #include "GunUI.h"
 #include "InvenUI.h"
 #include "DirectInput.h"
+#include "OnUI.h"
+#include "UI.h"
 
 COptionUI::COptionUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -34,7 +36,7 @@ HRESULT COptionUI::Ready_GameObject()
 
 HRESULT COptionUI::LateInit_GameObject()
 {
-	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());	
+	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());
 
 	m_pTransCom->m_vPos.x = _float(2.f / WINCX * WINCX / 2) - 1.f;
 	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * WINCY / 2) + 1.f;
@@ -88,8 +90,17 @@ void COptionUI::Show_OtherUI()
 	for (auto& pSrc : *pHpBarUIList)
 		dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(!m_bIsShow);
 
+
+	list<CGameObject*>* pOnUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"OnUI");
+	for (auto& pSrc : *pOnUIList)
+		dynamic_cast<COnUI*>(pSrc)->Set_ShowUI(m_bIsShow);
+
 	CGameObject* pIconUIList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"IconUI");
 	dynamic_cast<CIconUI*>(pIconUIList)->Set_ShowUI(!m_bIsShow);
+
+	CGameObject* pQuestUIList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"Quest");
+	dynamic_cast<CUI*>(pQuestUIList)->Set_ShowUI(!m_bIsShow);
+
 
 	CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
 	dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(!m_bIsShow);
@@ -128,7 +139,7 @@ HRESULT COptionUI::Add_Component()
 	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
 
-	// Texture
+	// Texture 
 	m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_OptionUI", COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);

@@ -191,6 +191,7 @@
     <ClInclude Include="..\Code\Normandy.h" />
     <ClInclude Include="..\Code\NpcRifle.h" />
     <ClInclude Include="..\Code\NpcWords.h" />
+    <ClInclude Include="..\Code\OnUI.h" />
     <ClInclude Include="..\Code\OptionUI.h" />
     <ClInclude Include="..\Code\PassageDoor.h" />
     <ClInclude Include="..\Code\Pistol.h" />
@@ -255,6 +256,7 @@
     <ClCompile Include="..\Code\Normandy.cpp" />
     <ClCompile Include="..\Code\NpcRifle.cpp" />
     <ClCompile Include="..\Code\NpcWords.cpp" />
+    <ClCompile Include="..\Code\OnUI.cpp" />
     <ClCompile Include="..\Code\OptionUI.cpp" />
     <ClCompile Include="..\Code\PassageDoor.cpp" />
     <ClCompile Include="..\Code\Pistol.cpp" />

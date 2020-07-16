@@ -25,6 +25,8 @@ public:
 	void DamageByMonster(const _float& fTimeDelta);
 	float Get_Spine() { return m_fSpine; };
 	void CheckAim();
+	void ReloadCheck();
+	void CheckSniping();
 public:
 	CPlayer::STATE m_eCurState = CPlayer::RIFLEIDLE;
 	CPlayer::STATE m_ePreState = CPlayer::RIFLEIDLE;
@@ -53,7 +55,7 @@ public:
 
 	_bool m_bIshit = false;
 	_float m_fhitCool = 0.f;
-	_float m_uiHp = 314;
+	_uint m_uiHp = 10;
 
 
 	_bool m_bIsInit = false;
@@ -61,5 +63,6 @@ public:
 	CDynamicCamera* m_pCamera;
 
 	_bool m_bIsKeyLock = false;
+
 };
 
