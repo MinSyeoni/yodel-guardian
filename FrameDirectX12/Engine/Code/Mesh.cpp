@@ -40,11 +40,11 @@ HRESULT CMesh::Ready_Mesh(const _tchar* pFilePath, const _tchar* pFileName)
     delete[] psz;
 
 
-	m_pScene = m_Importer.ReadFile(szFullPath.c_str(),
-		aiProcess_MakeLeftHanded
-		| aiPostProcessSteps::aiProcess_FlipWindingOrder
-		| aiProcess_FlipUVs);
-	
+    m_pScene = m_Importer.ReadFile(szFullPath.c_str(),
+        aiProcess_MakeLeftHanded
+        | aiPostProcessSteps::aiProcess_FlipWindingOrder
+        | aiProcess_FlipUVs);
+
 
 
     if (m_pScene->mNumMeshes)
@@ -76,6 +76,11 @@ void CMesh::Render_ShadowMesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMat
     m_pMeshComponent->Render_ShadowMesh(pMesh, vecBoneMatrix, blsBone);
 }
 
+void CMesh::Render_LimMesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix, bool blsBone)
+{
+    m_pMeshComponent->Render_LimMesh(pMesh, vecBoneMatrix, blsBone);
+}
+
 void CMesh::Render_Destortion(CShader* pShader)
 {
     m_pMeshComponent->Render_Destortion(pShader);
@@ -95,7 +100,7 @@ void CMesh::Set_AnimationBlend(_int FirstAni, _int SecondAni)
 
 _bool CMesh::Set_IsAniFinsh(float fEndTime)
 {
-      return m_pAnimationComponent->Set_IsFinish(fEndTime);
+    return m_pAnimationComponent->Set_IsFinish(fEndTime);
 }
 
 _bool CMesh::Set_FindAnimation(_float fTime, _int AniKey)

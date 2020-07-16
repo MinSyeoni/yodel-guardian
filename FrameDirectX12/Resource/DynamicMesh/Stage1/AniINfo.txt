@@ -1,0 +1,4 @@
+0~1 close
+2~3 open 
+4~44opening
+45~86 Closing

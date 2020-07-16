@@ -11,7 +11,7 @@
 #include "Scene_Stage.h"
 #include "DynamicCamera.h"
 #include "Font.h"
-
+#include "Astar.h"
 CMainApp::CMainApp()
 	: m_pDeviceClass(CGraphicDevice::Get_Instance())
 	, m_pComponentMgr(CComponentMgr::Get_Instance())

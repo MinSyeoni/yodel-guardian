@@ -24,7 +24,6 @@
 #include "Shader_Effect.h"
 #include "Shader_Dissolve.h"
 #include "Astar.h"
-
 BEGIN(Engine)
 
 class ENGINE_DLL CComponentMgr : public CBase

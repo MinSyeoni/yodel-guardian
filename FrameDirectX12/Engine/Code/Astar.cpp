@@ -68,7 +68,7 @@ void CAstar::Start_Aster(const _vec3& vStartPos, const _vec3& vGoal, _ulong Star
 
 bool CAstar::SearthRoute(int iStartIdx, int iGoalIdx)
 {
-	
+
 	const vector<CCell*>& vecCell = m_vecCell;
 
 	if (!m_OpenLst.empty())

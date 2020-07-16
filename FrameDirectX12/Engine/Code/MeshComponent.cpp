@@ -2,6 +2,7 @@
 #include "GraphicDevice.h"
 #include "Shader_Mesh.h"
 #include "Shader_Shadow.h"
+#include "Shader_LimLIght.h"
 USING(Engine)
 CMeshComponent::CMeshComponent(const aiScene* scene, ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList, _tchar path[MAX_PATH])
     :m_pScene(scene), CComponent(pGraphicDevice, pCommandList)
@@ -519,6 +520,39 @@ void CMeshComponent::Render_ShadowMesh(CShader* pShader, vector<vector<_matrix>>
         m_pCommandList->IASetPrimitiveTopology(m_PrimitiveTopology);
 
         dynamic_cast<CShader_Shadow*>(pShader)->End_ShadowShader(BlsBone);
+
+
+        m_pCommandList->DrawIndexedInstanced(m_vecSubMeshGeometry[i].uiIndexCount,
+            1,
+            0,
+            0,
+            0);
+
+    }
+}
+void CMeshComponent::Render_LimMesh(CShader* pShader, vector<vector<_matrix>> vecBoneMatrix, bool blsBone)
+{
+    for (int i = 0; i < m_entries.size(); i++)
+    {
+        CB_BONE_INFO   tCB_BoneInfo;
+        if (vecBoneMatrix.size() != 0)
+        {
+            if (blsBone == true)
+            {
+                int BoneCount = static_cast<CShader_LimLight*>(pShader)->Get_CBBoneCount();
+
+                for (int j = 0; j < vecBoneMatrix[i].size(); j++)
+                    XMStoreFloat4x4(&tCB_BoneInfo.matbone[j], XMMatrixTranspose(vecBoneMatrix[i][j]));
+                static_cast<CShader_LimLight*>(pShader)->Get_UploadBuffer_BoneInfo()->CopyData(BoneCount, tCB_BoneInfo);
+            }
+        }
+
+        m_pCommandList->IASetVertexBuffers(0, 1, &Get_VertexBufferView(i));
+        m_pCommandList->IASetIndexBuffer(&Get_IndexBufferView(i));
+
+        m_pCommandList->IASetPrimitiveTopology(m_PrimitiveTopology);
+
+        dynamic_cast<CShader_LimLight*>(pShader)->End_LimShader(blsBone);
 
 
         m_pCommandList->DrawIndexedInstanced(m_vecSubMeshGeometry[i].uiIndexCount,

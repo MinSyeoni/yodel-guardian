@@ -47,6 +47,8 @@ _int CAim::Update_GameObject(const _float& fTimeDelta)
 
 	m_pTransCom->m_vPos.x = _float(2.f / WINCX * WINCX/2) - 1.f;
 	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * WINCY/2) + 1.f;
+//	m_pTransCom->m_vPos.x = 0.f;
+//	m_pTransCom->m_vPos.y = 0.f;
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 

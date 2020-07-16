@@ -7,7 +7,7 @@ BEGIN(Engine)
 class ENGINE_DLL CShader_UI : public CShader
 {
 public:
-	enum TYPE { NONE, ALPHA };
+	enum TYPE { NONE, ALPHA, HPBAR, HPBAR1, HPBAR2 };
 
 private:
     explicit CShader_UI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);

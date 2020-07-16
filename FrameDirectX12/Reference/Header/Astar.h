@@ -16,7 +16,7 @@ public:
 	HRESULT Init_AstarCell(vector<CCell*> pCellList);
 
 
-	void Start_Aster(const _vec3& vStartPos, const _vec3& vGoal,_ulong StartIndex, _ulong GoalIndex);
+	void Start_Aster(const _vec3& vStartPos, const _vec3& vGoal, _ulong StartIndex, _ulong GoalIndex);
 
 private:
 	bool SearthRoute(int iStartIdx, int iGoalIdx);

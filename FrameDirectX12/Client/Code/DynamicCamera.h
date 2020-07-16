@@ -11,8 +11,8 @@ private:
 
 public:
 	HRESULT			Ready_GameObjectPrototype(const CAMERA_INFO& tCameraInfo,
-											  const PROJ_INFO& tProjInfo,
-											  const ORTHO_INFO& tOrthoInfo);
+		const PROJ_INFO& tProjInfo,
+		const ORTHO_INFO& tOrthoInfo);
 	virtual HRESULT	Ready_GameObject();
 	virtual HRESULT	LateInit_GameObject();
 	virtual _int	Update_GameObject(const _float& fTimeDelta);
@@ -20,7 +20,7 @@ public:
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 	void MouseInput();
 	_bool Get_ZoomOut() { return m_bIsZoom; };
-	void Set_ZoomInOut(_bool ZoomIn,float Fov =45.f);
+	void Set_ZoomInOut(_bool ZoomIn, float Fov = 45.f);
 private:
 	/*____________________________________________________________________
 	[ Value ]
@@ -36,7 +36,7 @@ private:
 	_float fRigth = 0.f;
 	_float fUp = 0.f;
 	_float fLook = 0.f;
-	
+
 	_bool m_bIsZoom = false;
 
 	_float m_fMaxZoom = 50.f;
@@ -49,12 +49,12 @@ private:
 
 	float m_fFov = 45.f;
 public:
-	virtual CGameObject*	Clone_GameObject(void* pArg);
-	static CDynamicCamera*	Create(ID3D12Device* pGraphicDevice,
-								   ID3D12GraphicsCommandList* pCommandList,
-								   const CAMERA_INFO& tCameraInfo,
-								   const PROJ_INFO& tProjInfo,
-								   const ORTHO_INFO& tOrthoInfo);
+	virtual CGameObject* Clone_GameObject(void* pArg);
+	static CDynamicCamera* Create(ID3D12Device* pGraphicDevice,
+		ID3D12GraphicsCommandList* pCommandList,
+		const CAMERA_INFO& tCameraInfo,
+		const PROJ_INFO& tProjInfo,
+		const ORTHO_INFO& tOrthoInfo);
 private:
 	virtual void			Free();
 };

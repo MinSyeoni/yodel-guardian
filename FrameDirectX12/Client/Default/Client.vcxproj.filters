@@ -82,12 +82,6 @@
     <Filter Include="01.Scene_Stage\00.Player\01.PlayerStatus">
       <UniqueIdentifier>{a66796dc-9b78-40be-a3dd-b617722c6bc1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.UI\02.PlayerHP">
-      <UniqueIdentifier>{e99cac33-ee3e-4971-9466-288c7895bc60}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.UI\03.PlayerUI">
-      <UniqueIdentifier>{5bc3d12b-32ee-47ff-80e1-66ac7d11fb48}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05.Loading">
       <UniqueIdentifier>{b12196e0-3829-4a1c-8527-7392b0c7418d}</UniqueIdentifier>
     </Filter>
@@ -160,14 +154,35 @@
     <Filter Include="01.Scene_Stage\03.Camera\02.TalkingCamera">
       <UniqueIdentifier>{abbfa033-05fe-4a65-8f67-e55a054e5052}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene_Stage\02.Weapon\NewFilter1">
-      <UniqueIdentifier>{0fe6768d-e531-4f63-aa6d-d1f9071010f2}</UniqueIdentifier>
+    <Filter Include="03.UI\04.NpcWords">
+      <UniqueIdentifier>{7cef0d6c-b16d-41b6-880f-5a4d3cf2828e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene_Stage\07.NPC\02.Shapard\00.Weapon">
-      <UniqueIdentifier>{a475381a-ede3-4f57-b79e-9540dc61ec17}</UniqueIdentifier>
+    <Filter Include="02.Scene_All\01.DynamicObject\00.LobbyDoor">
+      <UniqueIdentifier>{eb25b983-03da-4a3b-9078-2c4b3ba83b62}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene_Stage\02.Weapon\04.Sniper">
-      <UniqueIdentifier>{9fb51774-88bd-4f9e-b60e-9020228572bf}</UniqueIdentifier>
+    <Filter Include="03.UI\05.QuestUI">
+      <UniqueIdentifier>{66177720-cdb3-4e75-82b1-ab1a7672ec4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\02.HPBar">
+      <UniqueIdentifier>{e99cac33-ee3e-4971-9466-288c7895bc60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\06.InvenUI">
+      <UniqueIdentifier>{65520a3f-9dfd-40dd-83a7-21791fa53d3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\07.OptionUI">
+      <UniqueIdentifier>{bcdabc72-8273-4931-b7fc-15b3620c9efe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\03.IconUI">
+      <UniqueIdentifier>{5bc3d12b-32ee-47ff-80e1-66ac7d11fb48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_All\01.DynamicObject\01.PassageDoor">
+      <UniqueIdentifier>{e6214335-cf8c-4e6f-96ac-89a229f1f507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\02.Weapon\03.Sniper">
+      <UniqueIdentifier>{7b4b569e-287d-4bfa-afa4-679faeea4cdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\02.Weapon\04.NpcRifle">
+      <UniqueIdentifier>{fb713177-cea7-4578-9c9f-651c25407404}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -258,12 +273,6 @@
     <ClInclude Include="..\Code\PlayerStatus.h">
       <Filter>01.Scene_Stage\00.Player\01.PlayerStatus</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\PlayerHP.h">
-      <Filter>03.UI\02.PlayerHP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\PlayerUI.h">
-      <Filter>03.UI\03.PlayerUI</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\Loading.h">
       <Filter>05.Loading</Filter>
     </ClInclude>
@@ -290,9 +299,6 @@
     </ClInclude>
     <ClInclude Include="..\Code\FlameThrower.h">
       <Filter>01.Scene_Stage\06.Monster\00.FlameThrower</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\UI.h">
-      <Filter>03.UI</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Salone.h">
       <Filter>01.Scene_Stage\07.NPC\00.Salone</Filter>
@@ -331,11 +337,35 @@
       <Filter>01.Scene_Stage\07.NPC\02.Shapard</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\HPKit.h" />
+    <ClInclude Include="..\Code\NpcWords.h">
+      <Filter>03.UI\04.NpcWords</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\LobbyDoor.h">
+      <Filter>02.Scene_All\01.DynamicObject\00.LobbyDoor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\UI.h">
+      <Filter>03.UI\05.QuestUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\IconUI.h">
+      <Filter>03.UI\03.IconUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\HPBar.h">
+      <Filter>03.UI\02.HPBar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\InvenUI.h">
+      <Filter>03.UI\06.InvenUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\OptionUI.h">
+      <Filter>03.UI\07.OptionUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\PassageDoor.h">
+      <Filter>02.Scene_All\01.DynamicObject\01.PassageDoor</Filter>
+    </ClInclude>
     <ClInclude Include="..\Code\NpcRifle.h">
-      <Filter>01.Scene_Stage\07.NPC\02.Shapard\00.Weapon</Filter>
+      <Filter>01.Scene_Stage\02.Weapon\04.NpcRifle</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Sniper.h">
-      <Filter>01.Scene_Stage\02.Weapon\04.Sniper</Filter>
+      <Filter>01.Scene_Stage\02.Weapon\03.Sniper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -396,12 +426,6 @@
     <ClCompile Include="..\Code\PlayerStatus.cpp">
       <Filter>01.Scene_Stage\00.Player\01.PlayerStatus</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\PlayerHP.cpp">
-      <Filter>03.UI\02.PlayerHP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\PlayerUI.cpp">
-      <Filter>03.UI\03.PlayerUI</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Loading.cpp">
       <Filter>05.Loading</Filter>
     </ClCompile>
@@ -428,9 +452,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\FlameThrower.cpp">
       <Filter>01.Scene_Stage\06.Monster\00.FlameThrower</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\UI.cpp">
-      <Filter>03.UI</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Salone.cpp">
       <Filter>01.Scene_Stage\07.NPC\00.Salone</Filter>
@@ -469,11 +490,35 @@
       <Filter>01.Scene_Stage\07.NPC\02.Shapard</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\HPKit.cpp" />
+    <ClCompile Include="..\Code\NpcWords.cpp">
+      <Filter>03.UI\04.NpcWords</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\LobbyDoor.cpp">
+      <Filter>02.Scene_All\01.DynamicObject\00.LobbyDoor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\UI.cpp">
+      <Filter>03.UI\05.QuestUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\IconUI.cpp">
+      <Filter>03.UI\03.IconUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\HPBar.cpp">
+      <Filter>03.UI\02.HPBar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\InvenUI.cpp">
+      <Filter>03.UI\06.InvenUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\OptionUI.cpp">
+      <Filter>03.UI\07.OptionUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PassageDoor.cpp">
+      <Filter>02.Scene_All\01.DynamicObject\01.PassageDoor</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\NpcRifle.cpp">
-      <Filter>01.Scene_Stage\07.NPC\02.Shapard\00.Weapon</Filter>
+      <Filter>01.Scene_Stage\02.Weapon\04.NpcRifle</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Sniper.cpp">
-      <Filter>01.Scene_Stage\02.Weapon\04.Sniper</Filter>
+      <Filter>01.Scene_Stage\02.Weapon\03.Sniper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

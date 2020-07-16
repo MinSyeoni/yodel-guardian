@@ -42,6 +42,11 @@ struct VS_OUTPUT
     float3 vN       : TEXCOORD3;
     float4 vProjPos : TEXCOORD4;
 };
+struct VS_LIMOUTPUT
+{
+    float4 position : SV_POSITION;
+
+};
 VS_OUTPUT VS_MAIN(VS_INPUT Input)
 {
     float4x4 matBone = { 1.0f,0.0f,0.0f,0.0f,0.0f,1.0f,0.0f,0.0f,0.0f,0.0f,1.0f,0.0f,0.0f,0.0f,0.0f,1.0f };
@@ -61,6 +66,8 @@ VS_OUTPUT VS_MAIN(VS_INPUT Input)
     output.vProjPos = output.position;
     return(output);
 }
+
+
 
 struct ps_output
 {
@@ -108,8 +115,35 @@ ps_output PS_MAIN(VS_OUTPUT input) : SV_TARGET
 float4 PS_SKYDOME(VS_OUTPUT input) :SV_TARGET
 {
     float4 vColor;
-    vColor = gTexture.Sample(gsamLinearWrap, input.uv*5.f);
+    vColor = gTexture.Sample(gsamLinearWrap, input.uv * 2.5f);
 
     return vColor;
 
+}
+
+//LIM LIGHT
+
+VS_LIMOUTPUT VS_LIMMAIN(VS_INPUT Input)
+{
+
+    float4x4 matBone = { 1.0f,0.0f,0.0f,0.0f,0.0f,1.0f,0.0f,0.0f,0.0f,0.0f,1.0f,0.0f,0.0f,0.0f,0.0f,1.0f };
+
+    if (Input.BoneWeights[0].x != 0.0f) { matBone = gmatBones[Input.BoneId[0].x] * Input.BoneWeights[0].x;      matBone += gmatBones[Input.BoneId[0].y] * Input.BoneWeights[0].y;      matBone += gmatBones[Input.BoneId[0].z] * Input.BoneWeights[0].z;      matBone += gmatBones[Input.BoneId[1].x] * Input.BoneWeights[1].x; }
+    VS_LIMOUTPUT output;
+    float4 modelpos = mul(float4(Input.position, 1.0f), matBone);
+    output.position = mul(modelpos, matWVP);
+
+    return output;
+}
+
+
+ps_output PS_LIMMAIN(VS_LIMOUTPUT input) :SV_TARGET
+{
+
+     ps_output output;
+
+     output.albedo = float4(1.f, 1.f, 1.f, 1.f);
+     output.Emissive = float4(1.f, 1.f, 1.f, 1.f);
+
+     return output;
 }

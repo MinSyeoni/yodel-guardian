@@ -10,7 +10,7 @@ BEGIN(Engine)
 class CMeshComponent :public CComponent
 {
 public:
-	CMeshComponent(const aiScene* scene,ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList,_tchar path[MAX_PATH]);
+	CMeshComponent(const aiScene* scene, ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList, _tchar path[MAX_PATH]);
 	explicit CMeshComponent(const CMeshComponent& rhs);
 	virtual ~CMeshComponent();
 public:
@@ -21,14 +21,14 @@ public:
 		ID3D12Resource*& pUploadBuffer);
 private:
 	HRESULT InitMesh(int MeshIndex,
-		const aiMesh* paiMesh, vector<VTXMESH>& vecVtx,vector<_uint>& vecIndex);
+		const aiMesh* paiMesh, vector<VTXMESH>& vecVtx, vector<_uint>& vecIndex);
 public:
 	D3D12_VERTEX_BUFFER_VIEW Get_VertexBufferView(_uint iIndex) const;
 	D3D12_INDEX_BUFFER_VIEW  Get_IndexBufferView(_uint iIndex)	const;
 	_vec3 Get_MinPos() { return m_vMinPos; };
 	_vec3 Get_MaxPos() { return m_vMaxPos; };
 
-	void FoundColliderPosition( _vec3 vtxPos);
+	void FoundColliderPosition(_vec3 vtxPos);
 	HRESULT Ready_Mesh();
 
 public:
@@ -37,8 +37,9 @@ public:
 	vector<ComPtr< ID3D12Resource>> Get_SpecularTexture() { return m_vecSpecularResource; };
 	vector<ComPtr< ID3D12Resource>> Get_EmissiveTexture() { return m_vecEmissiveResource; };
 public:
-	void			   Render_Mesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix,_int CBOffset=0 ,_int MeshNum = 0,_bool Draw = true);
-	void               Render_ShadowMesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix,bool blsBone=false);
+	void			   Render_Mesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix, _int CBOffset = 0, _int MeshNum = 0, _bool Draw = true);
+	void               Render_ShadowMesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix, bool blsBone = false);
+	void               Render_LimMesh(CShader* pMesh, vector<vector<_matrix>> vecBoneMatrix, bool blsBone = false);
 	void               Render_Destortion(CShader* pShader);
 private:
 	vector<ID3DBlob*>		m_vecVB_CPU;

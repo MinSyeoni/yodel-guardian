@@ -19,7 +19,7 @@
 #include "Shader_SSAO.h"
 #include "SSAOTarget.h"
 #include "Shader_UI.h"
-
+#include "Shader_LimLIght.h"
 BEGIN(Engine)
 
 class CGameObject;
@@ -36,7 +36,9 @@ public:
 		RENDER_PRIORITY,
 		RENDER_NONALPHA,
 		RENDER_ALPHA,
+		RENDER_LIMLIGHT,
 		RENDER_DESTORTION,
+
 		RENDER_UI,
 		RENDER_FONT,
 		RENDER_END
@@ -62,6 +64,7 @@ private:
 	HRESULT	Render_UI(const _float& fTimeDelta);
 	HRESULT	Render_Font(const _float& fTimeDelta);
 	HRESULT Render_Blend();
+	HRESULT Render_LimLight();
 	HRESULT Render_PostPoressing(const _float& fTimeDelta);
 	HRESULT Render_DownSampleing();
 	HRESULT Render_Bloom();
@@ -74,9 +77,9 @@ private:
 	HRESULT	Ready_ShaderPrototype();
 
 private:
-	ID3D12Device*				m_pGraphicDevice	= nullptr;
-	ID3D12GraphicsCommandList*	m_pCommandList		= nullptr;
-	CComponentMgr*				m_pComponentMgr		= nullptr;
+	ID3D12Device* m_pGraphicDevice = nullptr;
+	ID3D12GraphicsCommandList* m_pCommandList = nullptr;
+	CComponentMgr* m_pComponentMgr = nullptr;
 
 	list<CCollider*>             m_ColliderList;
 	list<CNaviMesh*>            m_NaviList;
@@ -86,7 +89,7 @@ public:
 
 
 private: //랜더타겟관련
-	CTarget*     m_DifferdTarget=nullptr;
+	CTarget* m_DifferdTarget = nullptr;
 	CLightTarget* m_LightTarget = nullptr;
 	CShadowDepthTarget* m_ShadowDepthTarget = nullptr;
 	CDownSampleTarget* m_DownSampleTarget = nullptr;
@@ -98,7 +101,7 @@ private: //랜더타겟관련
 private://블랜딩관련
 	CRcTex* m_pBlendBuffer;
 	CShader_Blend* m_pBlendShader;
-	_bool m_blsBlendInit=false;
+	_bool m_blsBlendInit = false;
 private://그림자관련
 	CShader_Shadow* m_pShadowShader;
 private://다운샘플링관련
@@ -113,10 +116,9 @@ private://SSAO관련
 	CRcTex* m_pSSAOBuffer;
 	CShader_SSAO* m_pSSAOShader;
 	_bool m_bIsSSAOInit = false;
+private://LimLight 관련 
 
-	// UI
-private:
-	CShader_UI*			m_pShderUI;
+	CShader_LimLight* m_pLimShader;
 
 private:
 	CShader_DefaultTex* m_pDebugShader;

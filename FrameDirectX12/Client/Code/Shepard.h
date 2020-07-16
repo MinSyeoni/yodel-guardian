@@ -2,15 +2,10 @@
 #include "Include.h"
 #include "GameObject.h"
 
-
-
-
-
-
 class CShepard : public Engine::CGameObject
 {
-	enum STATE { SEARCH,CHECK, RUNNORTH,IDLE,TURNRIGHT };
-	enum CHAPTER{START,TURNPLAYER,GOTOPLAYER,FIRSTTALK,FIRSTFIGHT,MOVING};
+	enum STATE { SEARCH, CHECK, RUNNORTH, IDLE, TURNRIGHT };
+	enum CHAPTER { START, TURNPLAYER, GOTOPLAYER, FIRSTTALK, FIRSTFIGHT, MOVING };
 private:
 	explicit CShepard(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 	explicit CShepard(const CShepard& rhs);

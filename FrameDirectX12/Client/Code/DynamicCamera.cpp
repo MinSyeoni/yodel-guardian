@@ -89,7 +89,7 @@ _int CDynamicCamera::Update_GameObject(const _float& fTimeDelta)
 
     MouseInput();
 
- 
+
     Engine::CGameObject::Update_GameObject(fTimeDelta);
     Engine::CCamera::Update_GameObject(fTimeDelta);
 
@@ -146,10 +146,10 @@ void CDynamicCamera::MouseInput()
 
 
 
-        m_tCameraInfo.vEye = CameraPos + (CameraLook * (70.f-fSpine)) + CameraRight * m_fZoom - CameraUp * 50.f;
+        m_tCameraInfo.vEye = CameraPos + (CameraLook * (70.f - fSpine)) + CameraRight * m_fZoom - CameraUp * 50.f;
         m_tCameraInfo.vAt = CameraPos + (CameraLook * (70.f + fSpine)) - CameraUp * 50.f;
 
-   
+
 
         if (m_tCameraInfo.vEye.x == 0 && m_tCameraInfo.vEye.z == 0)
             m_tCameraInfo.vEye.x = 3;
@@ -159,7 +159,7 @@ void CDynamicCamera::MouseInput()
     }
 }
 
-void CDynamicCamera::Set_ZoomInOut(_bool ZoomIn,float fov)
+void CDynamicCamera::Set_ZoomInOut(_bool ZoomIn, float fov)
 {
 
 

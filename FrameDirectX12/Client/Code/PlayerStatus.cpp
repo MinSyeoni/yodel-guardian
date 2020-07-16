@@ -114,7 +114,7 @@ void CPlayerStatus::SetMesh(CMesh* pMesh)
 
 void CPlayerStatus::KeyInput()
 {
-    if (m_eCurState == CPlayer::RIFLEDRAW || m_eCurState == CPlayer::RIFLEHOLSTER || m_eCurState == CPlayer:: SNIPERDRAW|| m_eCurState == CPlayer::SNIPERHOSTER)//무기드는중 리턴 
+    if (m_eCurState == CPlayer::RIFLEDRAW || m_eCurState == CPlayer::RIFLEHOLSTER || m_eCurState == CPlayer::SNIPERDRAW || m_eCurState == CPlayer::SNIPERHOSTER)//무기드는중 리턴 
         return;
 
     if (m_pCamera == nullptr)
@@ -184,7 +184,7 @@ void CPlayerStatus::KeyInput()
     if (KEY_PRESSING(DIKEYBOARD_W))
     {
 
-        if (m_eEquip == RIFLE ||m_eEquip == SNIPER )
+        if (m_eEquip == RIFLE || m_eEquip == SNIPER)
         {
             m_pCamera->Set_ZoomInOut(false);
 
@@ -312,7 +312,7 @@ void CPlayerStatus::KeyInput()
 
             _bool IsZoom = m_pCamera->Get_ZoomOut();
             if (IsZoom == false)
-               m_pCamera->Set_ZoomInOut(true,10.f);
+                m_pCamera->Set_ZoomInOut(true, 10.f);
             else
                 m_pCamera->Set_ZoomInOut(false);
 
@@ -347,7 +347,7 @@ void CPlayerStatus::WeaponChange()
         }
 
     }
-    
+
     if (m_eCurState == CPlayer::SNIPERDRAW)
     {
 
@@ -635,8 +635,9 @@ void CPlayerStatus::DamageByMonster(const _float& fTimeDelta)
                 {
                     CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_UI", L"Prototype_DamageBlood", L"Damage", nullptr);
                     m_bIshit = true;
-                    m_uiHp -= 1;
-
+                    m_uiHp -= 11.f;
+                    if (m_uiHp <= 0.f)
+                        m_uiHp = 0.f;
                 }
 
             }

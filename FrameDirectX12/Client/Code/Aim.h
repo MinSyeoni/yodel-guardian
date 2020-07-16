@@ -15,7 +15,6 @@ class CDynamicCamera;
 
 class CAim : public Engine::CGameObject
 {
-
 private:
 	explicit CAim(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 	explicit CAim(const CAim& rhs);

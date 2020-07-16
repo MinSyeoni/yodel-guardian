@@ -230,6 +230,7 @@ call CopyEngine.bat</Command>
     <ClInclude Include="..\Code\Shader_DownSample.h" />
     <ClInclude Include="..\Code\Shader_Effect.h" />
     <ClInclude Include="..\Code\Shader_LightAcc.h" />
+    <ClInclude Include="..\Code\Shader_LimLIght.h" />
     <ClInclude Include="..\Code\Shader_Mesh.h" />
     <ClInclude Include="..\Code\Shader_Shadow.h" />
     <ClInclude Include="..\Code\Shader_SSAO.h" />
@@ -309,6 +310,7 @@ call CopyEngine.bat</Command>
     <ClCompile Include="..\Code\Shader_DownSample.cpp" />
     <ClCompile Include="..\Code\Shader_Effect.cpp" />
     <ClCompile Include="..\Code\Shader_LightAcc.cpp" />
+    <ClCompile Include="..\Code\Shader_LimLIght.cpp" />
     <ClCompile Include="..\Code\Shader_Mesh.cpp" />
     <ClCompile Include="..\Code\Shader_Shadow.cpp" />
     <ClCompile Include="..\Code\Shader_SSAO.cpp" />

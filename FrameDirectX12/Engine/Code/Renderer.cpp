@@ -45,17 +45,25 @@ HRESULT CRenderer::Ready_Renderer(ID3D12Device* pGraphicDevice, ID3D12GraphicsCo
     m_pBlurShader = CShader_Blur::Create(m_pGraphicDevice, m_pCommandList);
     m_pBloomTarget = CBloomTarget::Create(m_pGraphicDevice, m_pCommandList);
 
-	m_pDebugTexture = CTexture::Create(m_pGraphicDevice, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/Debug/Debug%d.dds", 2);
-	m_pDebugShader = CShader_DefaultTex::Create(m_pGraphicDevice, m_pCommandList,CShader_DefaultTex::WIREFRAME);
-	m_pDebugShader->Set_Shader_Texture(m_pDebugTexture->Get_Texture(),100);
+    m_pDebugTexture = CTexture::Create(m_pGraphicDevice, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/Debug/Debug%d.dds", 2);
+    m_pDebugShader = CShader_DefaultTex::Create(m_pGraphicDevice, m_pCommandList, CShader_DefaultTex::WIREFRAME);
+    m_pDebugShader->Set_Shader_Texture(m_pDebugTexture->Get_Texture(), 100);
 
     m_pColorShader = CShader_ColorBuffer::Create(m_pGraphicDevice, m_pCommandList, CShader_ColorBuffer::WIREFRAME);
 
     m_pDestortionTarget = CDistortionTarget::Create(m_pGraphicDevice, m_pCommandList);
 
-	m_pSSAOBuffer = CRcTex::Create(m_pGraphicDevice, m_pCommandList);
-	m_pSSAOShader = CShader_SSAO::Create(m_pGraphicDevice, m_pCommandList);
-	m_pSSAOTarget = CSSAOTarget::Create(m_pGraphicDevice, m_pCommandList);
+    m_pSSAOBuffer = CRcTex::Create(m_pGraphicDevice, m_pCommandList);
+    m_pSSAOShader = CShader_SSAO::Create(m_pGraphicDevice, m_pCommandList);
+    m_pSSAOTarget = CSSAOTarget::Create(m_pGraphicDevice, m_pCommandList);
+
+    //LIM LIGHT
+    m_pLimShader = CShader_LimLight::Create(m_pGraphicDevice, m_pCommandList);
+
+
+
+
+
 
     return S_OK;
 }
@@ -113,22 +121,22 @@ void CRenderer::Render_Renderer(const _float& fTimeDelta)
     Render_UI(fTimeDelta);
 
 
-	if (KEY_DOWN(8))
-		m_blsShowTarget = !m_blsShowTarget;
+    if (KEY_DOWN(8))
+        m_blsShowTarget = !m_blsShowTarget;
     if (KEY_DOWN(9))
         m_bIsDebugRender = !m_bIsDebugRender;
 
-	if (m_blsShowTarget == true)//디퍼드 타켓랜더
-	{
-		m_ShadowDepthTarget->Render_RenderTarget();
-		m_DifferdTarget->Render_RenderTarget();
-		m_LightTarget->Render_RenderTarget();
-		m_DownSampleTarget->Render_RenderTarget();
-		m_pBloomTarget->Render_RenderTarget();
-		m_pDestortionTarget->Render_RenderTarget();
-		m_pSSAOTarget->Render_RenderTarget();
-	}
-	CGraphicDevice::Get_Instance()->End_ResetCmdList();
+    if (m_blsShowTarget == true)//디퍼드 타켓랜더
+    {
+        m_ShadowDepthTarget->Render_RenderTarget();
+        m_DifferdTarget->Render_RenderTarget();
+        m_LightTarget->Render_RenderTarget();
+        m_DownSampleTarget->Render_RenderTarget();
+        m_pBloomTarget->Render_RenderTarget();
+        m_pDestortionTarget->Render_RenderTarget();
+        m_pSSAOTarget->Render_RenderTarget();
+    }
+    CGraphicDevice::Get_Instance()->End_ResetCmdList();
 
 
     CGraphicDevice::Get_Instance()->Render_TextBegin();
@@ -207,6 +215,15 @@ HRESULT CRenderer::Render_NonAlpha(const _float& fTimeDelta)
         pGameObject->Render_GameObject(fTimeDelta);
     }
 
+    m_pLimShader->Begin_Shader();
+    for (auto& pGameObject : m_RenderList[RENDER_LIMLIGHT])
+    {
+
+        pGameObject->Render_LimLight(m_pLimShader);
+    }
+    m_pLimShader->End_Shader();
+
+
     m_DifferdTarget->Release_OnGraphicDev(0);
 
     return S_OK;
@@ -247,22 +264,22 @@ HRESULT CRenderer::Render_Font(const _float& fTimeDelta)
 
 HRESULT CRenderer::Render_Blend()
 {
-	if (!m_blsBlendInit)
-	{
-		vector<ComPtr<ID3D12Resource>> pDiffedTarget = m_DifferdTarget->GetTargetTexture();
-		vector<ComPtr<ID3D12Resource>> pShadeTarget = m_LightTarget->GetTargetTexture();
-		vector<ComPtr<ID3D12Resource>> pBlurTarget = m_pBloomTarget->GetTargetTexture();
-		vector<ComPtr<ID3D12Resource>> pDestortionTarget = m_pDestortionTarget->GetTargetTexture();
-		vector<ComPtr<ID3D12Resource>> pSSAOTarget = m_pSSAOTarget->GetTargetTexture();
-		vector<ComPtr<ID3D12Resource>> pBlendTarget;
-		pBlendTarget.push_back(pDiffedTarget[0]);//albedo
-		pBlendTarget.push_back(pShadeTarget[0]);//Shade
-		pBlendTarget.push_back(pShadeTarget[1]);//Spec
-		pBlendTarget.push_back(pBlurTarget[0]);//Blur
-		pBlendTarget.push_back(pDiffedTarget[4]);//Emi
-		pBlendTarget.push_back(pDestortionTarget[0]);//Destor;
-		pBlendTarget.push_back(pSSAOTarget[0]);
-		m_pBlendShader->Set_Shader_Texture(pBlendTarget);
+    if (!m_blsBlendInit)
+    {
+        vector<ComPtr<ID3D12Resource>> pDiffedTarget = m_DifferdTarget->GetTargetTexture();
+        vector<ComPtr<ID3D12Resource>> pShadeTarget = m_LightTarget->GetTargetTexture();
+        vector<ComPtr<ID3D12Resource>> pBlurTarget = m_pBloomTarget->GetTargetTexture();
+        vector<ComPtr<ID3D12Resource>> pDestortionTarget = m_pDestortionTarget->GetTargetTexture();
+        vector<ComPtr<ID3D12Resource>> pSSAOTarget = m_pSSAOTarget->GetTargetTexture();
+        vector<ComPtr<ID3D12Resource>> pBlendTarget;
+        pBlendTarget.push_back(pDiffedTarget[0]);//albedo
+        pBlendTarget.push_back(pShadeTarget[0]);//Shade
+        pBlendTarget.push_back(pShadeTarget[1]);//Spec
+        pBlendTarget.push_back(pBlurTarget[0]);//Blur
+        pBlendTarget.push_back(pDiffedTarget[4]);//Emi
+        pBlendTarget.push_back(pDestortionTarget[0]);//Destor;
+        pBlendTarget.push_back(pSSAOTarget[0]);
+        m_pBlendShader->Set_Shader_Texture(pBlendTarget);
 
         m_blsBlendInit = true;
     }
@@ -278,14 +295,19 @@ HRESULT CRenderer::Render_Blend()
     return S_OK;
 }
 
+HRESULT CRenderer::Render_LimLight()
+{
+    return S_OK;
+}
+
 HRESULT CRenderer::Render_PostPoressing(const _float& fTimeDelta)
 {
 
-	Render_DownSampleing();//블러 다운샘플링.
-	Render_Bloom();//블룸효과
-	Render_Destortion(fTimeDelta);//왜곡
-	Render_SSAO();
-	return S_OK;
+    Render_DownSampleing();//블러 다운샘플링.
+    Render_Bloom();//블룸효과
+    Render_Destortion(fTimeDelta);//왜곡
+    Render_SSAO();
+    return S_OK;
 }
 
 HRESULT CRenderer::Render_DownSampleing()
@@ -338,32 +360,32 @@ HRESULT CRenderer::Render_Bloom()
     m_pBloomTarget->Release_OnGraphicDev();
 
 
-	return S_OK;
+    return S_OK;
 }
 
 HRESULT CRenderer::Render_SSAO()
 {
-	if (m_bIsSSAOInit == false)
-	{
-		vector<ComPtr<ID3D12Resource>> pTarget = m_DifferdTarget->GetTargetTexture();
-		vector<ComPtr<ID3D12Resource>> pSSAOTarget;
-		pSSAOTarget.push_back(pTarget[1]);
-		pSSAOTarget.push_back(pTarget[2]);
+    if (m_bIsSSAOInit == false)
+    {
+        vector<ComPtr<ID3D12Resource>> pTarget = m_DifferdTarget->GetTargetTexture();
+        vector<ComPtr<ID3D12Resource>> pSSAOTarget;
+        pSSAOTarget.push_back(pTarget[1]);
+        pSSAOTarget.push_back(pTarget[2]);
 
-		m_pSSAOShader->Set_Shader_Texture(pSSAOTarget);
-		m_bIsSSAOInit = true;
-	}
-	m_pSSAOTarget->SetUp_OnGraphicDev();
+        m_pSSAOShader->Set_Shader_Texture(pSSAOTarget);
+        m_bIsSSAOInit = true;
+    }
+    m_pSSAOTarget->SetUp_OnGraphicDev();
 
-	m_pSSAOShader->Begin_Shader();
-	m_pSSAOBuffer->Begin_Buffer();
+    m_pSSAOShader->Begin_Shader();
+    m_pSSAOBuffer->Begin_Buffer();
 
-	m_pSSAOShader->End_Shader();
-	m_pSSAOBuffer->Render_Buffer();
+    m_pSSAOShader->End_Shader();
+    m_pSSAOBuffer->Render_Buffer();
 
 
-	m_pSSAOTarget->Release_OnGraphicDev();
-	return S_OK;
+    m_pSSAOTarget->Release_OnGraphicDev();
+    return S_OK;
 }
 
 HRESULT CRenderer::Render_DebugBuffer()
@@ -373,7 +395,7 @@ HRESULT CRenderer::Render_DebugBuffer()
 
     if (m_bIsDebugRender == true)
     {
-    m_pDebugShader->Begin_Shader();
+        m_pDebugShader->Begin_Shader();
         for (auto& pCol : m_ColliderList)
         {
             pCol->Render_Collider(m_pDebugShader, uiOffset);
@@ -385,7 +407,7 @@ HRESULT CRenderer::Render_DebugBuffer()
 
     if (m_bIsDebugRender == true)
     {
-    m_pColorShader->Begin_Shader();
+        m_pColorShader->Begin_Shader();
         for (auto& pSrc : m_NaviList)
         {
             pSrc->Render_NaviMesh(m_pColorShader);
@@ -423,13 +445,25 @@ HRESULT CRenderer::Ready_ShaderPrototype()
     NULL_CHECK_RETURN(pShader, E_FAIL);
     FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_DefaultTex", ID_STATIC, pShader), E_FAIL);
 
-	pShader = CShader_DefaultTex::Create(m_pGraphicDevice, m_pCommandList,CShader_DefaultTex::ALPHA);
-	NULL_CHECK_RETURN(pShader, E_FAIL);
-	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_DefaultTexAlpha", ID_STATIC, pShader), E_FAIL);
+    pShader = CShader_DefaultTex::Create(m_pGraphicDevice, m_pCommandList, CShader_DefaultTex::ALPHA);
+    NULL_CHECK_RETURN(pShader, E_FAIL);
+    FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_DefaultTexAlpha", ID_STATIC, pShader), E_FAIL);
 
     pShader = CShader_UI::Create(m_pGraphicDevice, m_pCommandList, CShader_UI::ALPHA);
     NULL_CHECK_RETURN(pShader, E_FAIL);
     FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_UI", ID_STATIC, pShader), E_FAIL);
+
+    pShader = CShader_UI::Create(m_pGraphicDevice, m_pCommandList, CShader_UI::HPBAR);
+    NULL_CHECK_RETURN(pShader, E_FAIL);
+    FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_HPBAR", ID_STATIC, pShader), E_FAIL);
+
+    pShader = CShader_UI::Create(m_pGraphicDevice, m_pCommandList, CShader_UI::HPBAR1);
+    NULL_CHECK_RETURN(pShader, E_FAIL);
+    FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_HPBAR1", ID_STATIC, pShader), E_FAIL);
+
+    pShader = CShader_UI::Create(m_pGraphicDevice, m_pCommandList, CShader_UI::HPBAR2);
+    NULL_CHECK_RETURN(pShader, E_FAIL);
+    FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_HPBAR2", ID_STATIC, pShader), E_FAIL);
 
     pShader = CShader_LightAcc::Create(m_pGraphicDevice, m_pCommandList, LIGHTTYPE::D3DLIGHT_DIRECTIONAL);
     NULL_CHECK_RETURN(pShader, E_FAIL);
@@ -454,9 +488,12 @@ HRESULT CRenderer::Ready_ShaderPrototype()
     NULL_CHECK_RETURN(pShader, E_FAIL);
     FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_Effect", ID_STATIC, pShader), E_FAIL);
 
-    pShader = CShader_Effect::Create(DEVICE, m_pCommandList,CShader_Effect::ALPHABLENDTEX);
+    pShader = CShader_Effect::Create(DEVICE, m_pCommandList, CShader_Effect::ALPHABLENDTEX);
     NULL_CHECK_RETURN(pShader, E_FAIL);
     FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_EffectAlphaBlend", ID_STATIC, pShader), E_FAIL);
+
+
+
 
     return S_OK;
 }
@@ -467,13 +504,13 @@ void CRenderer::Free()
 #ifdef _DEBUG
     COUT_STR("Destroy Renderer");
 #endif
-	Safe_Release(m_LightTarget);
-	Safe_Release(m_DifferdTarget);
-	Safe_Release(m_ShadowDepthTarget);
-	Safe_Release(m_DownSampleTarget);
-	Safe_Release(m_pBloomTarget);
-	Safe_Release(m_pDestortionTarget);
-	Safe_Release(m_pSSAOTarget);
+    Safe_Release(m_LightTarget);
+    Safe_Release(m_DifferdTarget);
+    Safe_Release(m_ShadowDepthTarget);
+    Safe_Release(m_DownSampleTarget);
+    Safe_Release(m_pBloomTarget);
+    Safe_Release(m_pDestortionTarget);
+    Safe_Release(m_pSSAOTarget);
     //블랜드
     Safe_Release(m_pBlendBuffer);
     Safe_Release(m_pBlendShader);
@@ -484,20 +521,20 @@ void CRenderer::Free()
     Safe_Release(m_pDownSampleBuffer);
     Safe_Release(m_pDownSampleShader);
 
-	//블룸
-	Safe_Release(m_pBlurBuffer);
-	Safe_Release(m_pBlurShader);
+    //블룸
+    Safe_Release(m_pBlurBuffer);
+    Safe_Release(m_pBlurShader);
 
     //Debug
     Safe_Release(m_pDebugShader);
     Safe_Release(m_pDebugTexture);
     Safe_Release(m_pColorShader);
 
-	Safe_Release(m_pSSAOBuffer);
-	Safe_Release(m_pSSAOTarget);
-	Safe_Release(m_pSSAOShader);
+    Safe_Release(m_pSSAOBuffer);
+    Safe_Release(m_pSSAOTarget);
+    Safe_Release(m_pSSAOShader);
 
-    Safe_Release(m_pShderUI);
+    Safe_Release(m_pLimShader);
 
     CLight_Manager::Get_Instance()->Destroy_Instance();
     Clear_RenderGroup();

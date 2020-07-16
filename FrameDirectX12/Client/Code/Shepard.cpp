@@ -4,9 +4,8 @@
 #include "GraphicDevice.h"
 #include "DynamicCamera.h"
 #include "DirectInput.h"
-#include"Frustom.h"
 #include "PlayerStatus.h"
-
+#include "Frustom.h"
 
 CShepard::CShepard(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -76,16 +75,16 @@ HRESULT CShepard::LateInit_GameObject()
 	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
 
 
-      m_pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+	m_pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 
-	  if (m_pPlayer == nullptr)
-		  return E_FAIL;
+	if (m_pPlayer == nullptr)
+		return E_FAIL;
 
-	  m_pNaviCom->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(0.f,0.f,0.f ), 0, false);
+	//m_pNaviCom->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(0.f, 0.f, 0.f), 0, false);
 
 
 
-	  m_pAstarCom->Init_AstarCell(m_pNaviCom->GetNaviCell());
+	//m_pAstarCom->Init_AstarCell(m_pNaviCom->GetNaviCell());
 
 	return S_OK;
 
@@ -107,8 +106,8 @@ _int CShepard::Update_GameObject(const _float& fTimeDelta)
 
 
 	ChapterCheck(fTimeDelta);
-	if(KEY_PRESSING(DIK_0))
-	MoveByAstar(fTimeDelta);
+	/*if (KEY_PRESSING(DIK_0))
+		MoveByAstar(fTimeDelta);*/
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
 
@@ -164,49 +163,49 @@ void CShepard::TurnToPlayer(const _float& fTimeDelta)
 void CShepard::MoveByAstar(const _float& fTimeDelta)
 {
 
-	CPlayer* pPlayer = static_cast<CPlayer*>(  CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player"));
-	if (pPlayer == nullptr)
-		return;
+	//CPlayer* pPlayer = static_cast<CPlayer*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player"));
+	//if (pPlayer == nullptr)
+	//	return;
 
-	CTransform* pPlayerTranForm = pPlayer->Get_Transform();
+	//CTransform* pPlayerTranForm = pPlayer->Get_Transform();
 
-	CNaviMesh* pPlayerNavi = pPlayer->Get_Status()->m_pNaviMesh;
-	m_pAstarCom->Start_Aster(m_pTransCom->m_vPos,pPlayerTranForm->m_vPos,m_pNaviCom->GetIndex(), pPlayerNavi->GetIndex());
+	//CNaviMesh* pPlayerNavi = pPlayer->Get_Status()->m_pNaviMesh;
+	//m_pAstarCom->Start_Aster(m_pTransCom->m_vPos, pPlayerTranForm->m_vPos, m_pNaviCom->GetIndex(), pPlayerNavi->GetIndex());
 
-	list<Engine::CCell*>& BestLst = m_pAstarCom->GetBestLst();
-
-
-	if (!BestLst.empty())
-	{
-		_vec3 vecDir = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
-		
-		BestLst.pop_front();
-		if (!BestLst.empty())
-		{
-			_vec3 vecDir2 = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
-
-			vecDir = (vecDir + vecDir2) *0.5;
-			BestLst.pop_front();
-			if (!BestLst.empty())
-			{
-				vecDir2 = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
-				vecDir = (vecDir + vecDir2) * 0.5;
-			}
-
-		}
-
-		vecDir.Normalize();
-		_vec3 vMovePos;
-
-		vMovePos = m_pNaviCom->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &vecDir, fTimeDelta * 12.f);
-
-		m_pTransCom->m_vPos = vMovePos;
+	//list<Engine::CCell*>& BestLst = m_pAstarCom->GetBestLst();
 
 
+	//if (!BestLst.empty())
+	//{
+	//	_vec3 vecDir = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
 
-	}
+	//	BestLst.pop_front();
+	//	if (!BestLst.empty())
+	//	{
+	//		_vec3 vecDir2 = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
 
-     
+	//		vecDir = (vecDir + vecDir2) * 0.5;
+	//		BestLst.pop_front();
+	//		if (!BestLst.empty())
+	//		{
+	//			vecDir2 = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
+	//			vecDir = (vecDir + vecDir2) * 0.5;
+	//		}
+
+	//	}
+
+	//	vecDir.Normalize();
+	//	_vec3 vMovePos;
+
+	//	vMovePos = m_pNaviCom->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &vecDir, fTimeDelta * 12.f);
+
+	//	m_pTransCom->m_vPos = vMovePos;
+
+
+
+	//}
+
+
 
 
 
@@ -215,7 +214,7 @@ void CShepard::MoveByAstar(const _float& fTimeDelta)
 void CShepard::ChapterCheck(const _float& fTimeDelta)
 {
 
-	switch (m_eCurChapter)	
+	switch (m_eCurChapter)
 	{
 	case START:
 		m_eCurState = SEARCH;
@@ -235,7 +234,7 @@ void CShepard::ChapterCheck(const _float& fTimeDelta)
 	}
 
 	default:
-		break;	
+		break;
 	}
 
 }

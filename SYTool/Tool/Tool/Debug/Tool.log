@@ -1,4 +1,5 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(453,5): warning MSB8004: Output 디렉터리가 슬래시로 끝나지 않습니다. Output 디렉터리의 적절한 평가를 허용하는 데 필요하므로 이 빌드 인스턴스에서 슬래시를 추가합니다.
+<<<<<<< HEAD
   pch.cpp
 C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dxgitype.h(12,1): warning C4005: 'DXGI_STATUS_OCCLUDED': 매크로 재정의
 C:\Program Files (x86)\Windows Kits\8.1\Include\shared\winerror.h(50092): message : 'DXGI_STATUS_OCCLUDED'의 이전 정의를 참조하십시오.
@@ -154,6 +155,42 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\EffectTab2.cpp(19
   MapTab.cpp
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\MapTab.cpp(1139,24): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\MapTab.cpp(1145,43): warning C4244: '인수': 'const FLOAT'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+=======
+  ActionCamera.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ActionCamera.cpp(16,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ActionCamera.cpp(29,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ActionCamera.cpp(64,29): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  CCameraTab.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(27,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(32,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(72,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(77,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(89,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(94,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(249,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(264,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CCameraTab.cpp(274,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  CameraSort.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CameraSort.cpp(130,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\CameraSort.cpp(136,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  CursorMgr.cpp
+  EffectDefault.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\EffectDefault.cpp(112,41): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\EffectDefault.cpp(113,41): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\EffectDefault.cpp(184,11): warning C4244: '초기화 중': '_float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  EffectTab.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\EffectTab.cpp(388,44): warning C4244: '=': 'float'에서 '_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\EffectTab.cpp(389,46): warning C4244: '=': 'float'에서 '_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  EffectTab2.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\EffectTab2.cpp(101,42): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\EffectTab2.cpp(102,41): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\EffectTab2.cpp(190,42): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\EffectTab2.cpp(191,43): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  MainFrm.cpp
+  MapTab.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\MapTab.cpp(1139,24): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\MapTab.cpp(1145,43): warning C4244: '인수': 'const FLOAT'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+>>>>>>> ba92917e978ad852163e832f9121ca769a5aad13
   Myform.cpp
   NaviTab.cpp
   ObjMgr.cpp
@@ -161,6 +198,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\MapTab.cpp(1145,4
   StaticObject.cpp
   Terrain.cpp
   Tool.cpp
+<<<<<<< HEAD
   ToolCamera.cpp
   ToolCell.cpp
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolCell.cpp(93,42): warning C4244: '=': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -219,3 +257,11 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(276,
   LINK : .\Bin\Tool.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
      ./Bin\Tool.lib 라이브러리 및 ./Bin\Tool.exp 개체를 생성하고 있습니다.
   Tool.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\Tool\./Bin\Tool.exe
+=======
+  코드를 생성하고 있습니다...
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\EffectDefault.cpp(166): warning C4715: 'CToolEffect::SetTexture': 모든 제어 경로에서 값을 반환하지는 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\EffectDefault.cpp(251): warning C4715: 'CToolEffect::SetEffectData': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  LINK : .\Bin\Tool.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
+     ./Bin\Tool.lib 라이브러리 및 ./Bin\Tool.exp 개체를 생성하고 있습니다.
+  Tool.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\./Bin\Tool.exe
+>>>>>>> ba92917e978ad852163e832f9121ca769a5aad13

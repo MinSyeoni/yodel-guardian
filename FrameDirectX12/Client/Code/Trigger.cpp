@@ -5,6 +5,7 @@
 #include "ColliderMgr.h"
 #include "GraphicDevice.h"
 #include "Monster.h"
+#include "LobbyDoor.h"
 
 CTrigger::CTrigger(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	:CGameObject(pGraphicDevice,pCommandList)
@@ -112,6 +113,10 @@ _int CTrigger::LateUpdate_GameObject(const _float & fTimeDelta)
 	case CTrigger::TRIGGER_BOX:
 	{
 		FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCol), -1);
+
+		//CGameObject* pLobbyDoor = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"LobbyDoor");
+		//if (!static_cast<CLobbyDoor*>(pLobbyDoor)->Get_LobbyDoorIsOpen())
+		//	return E_FAIL;
 
 		list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Zombi");
 		if (m_bIsActive)
