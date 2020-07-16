@@ -85,7 +85,29 @@ _int COnUI::LateUpdate_GameObject(const _float& fTimeDelta)
 	else if (!m_bIsDead && CDirectInput::Get_Instance()->KEY_DOWN(DIK_N) && m_bIsShow && !m_bIsOff)
 		m_bIsOff = true;
 
-	//	if (Engine::CDirectInput::Get_Instance()->Mouse_KeyDown(DIM_LB))
+	if (Engine::CDirectInput::Get_Instance()->Mouse_KeyDown(DIM_LB) && !m_bIsDead && m_bIsShow)
+	{
+		for (int i = 0; i < 4; ++i)
+		{
+			if (m_iOnIdx == i)
+			{
+				_float fX = _float(2.f / WINCX * WINCX / 2) - 1.085f;
+				_float fY = _float(-2.f / WINCY * WINCY / 2) + (1.12f - i * 0.14f);
+
+				_float X = (((2.0f * m_pt.x) / WINCX) - 1.0f);
+				_float Y = (((-2.0f * m_pt.y) / WINCY) + 1.0f);
+
+				if ((X >= (fX - 0.1f) &&
+					(X <= (fX + 0.1f))) &&
+					(Y <= (fY + 0.08f) &&
+					(Y >= fY)))
+					if (m_bIsOff)
+						m_bIsOff = false;
+					else
+						m_bIsOff = true;
+			}
+		}
+	}
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
@@ -97,6 +119,7 @@ void COnUI::Render_GameObject(const _float& fTimeDelta)
 	if (!m_bIsShow)
 		return;
 
+	ShowCursor(true);
 	Set_ConstantTable((int)m_bIsOff);
 	m_pShaderCom[(int)m_bIsOff]->Begin_Shader();
 	m_pBufferCom->Begin_Buffer();
