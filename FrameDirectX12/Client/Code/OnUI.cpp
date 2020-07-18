@@ -79,17 +79,61 @@ _int COnUI::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
-	// 임시방편임. 전체 On, Off
+	// 전체 On, Off
 	if (!m_bIsDead && CDirectInput::Get_Instance()->KEY_DOWN(DIK_N) && m_bIsShow && m_bIsOff)
 		m_bIsOff = false;
 	else if (!m_bIsDead && CDirectInput::Get_Instance()->KEY_DOWN(DIK_N) && m_bIsShow && !m_bIsOff)
 		m_bIsOff = true;
 
-	//	if (Engine::CDirectInput::Get_Instance()->Mouse_KeyDown(DIM_LB))
+	Show_Option_OnOff();
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
 	return NO_EVENT;
+}
+
+void COnUI::Show_Option_OnOff()
+{
+	if (Engine::CDirectInput::Get_Instance()->Mouse_KeyDown(DIM_LB) && !m_bIsDead && m_bIsShow)
+	{
+		_float X = (((2.0f * m_pt.x) / WINCX) - 1.0f);
+		_float Y = (((-2.0f * m_pt.y) / WINCY) + 1.0f);
+
+		for (int i = 0; i < 4; ++i)
+		{
+			if (m_iOnIdx == i)
+			{
+				_float fX = _float(2.f / WINCX * WINCX / 2) - 1.085f;
+				_float fY = _float(-2.f / WINCY * WINCY / 2) + (1.12f - i * 0.14f);
+
+				if ((X >= (fX - 0.1f) &&
+					(X <= (fX + 0.06f))) &&
+					(Y <= (fY + 0.08f) &&
+					(Y >= fY)))
+					if (m_bIsOff)
+						m_bIsOff = false;
+					else
+						m_bIsOff = true;
+			}
+		}
+		for (int i = 4; i < 7; ++i)
+		{
+			if (m_iOnIdx == i)
+			{
+				_float fX = _float(2.f / WINCX * WINCX / 2) - 0.62f;
+				_float fY = _float(-2.f / WINCY * WINCY / 2) + (1.12f - (i - 4) * 0.14f);
+
+				if ((X >= (fX - 0.1f) &&
+					(X <= (fX + 0.06f))) &&
+					(Y <= (fY + 0.08f) &&
+					(Y >= fY)))
+					if (m_bIsOff)
+						m_bIsOff = false;
+					else
+						m_bIsOff = true;
+			}
+		}
+	}
 }
 
 void COnUI::Render_GameObject(const _float& fTimeDelta)
@@ -97,6 +141,7 @@ void COnUI::Render_GameObject(const _float& fTimeDelta)
 	if (!m_bIsShow)
 		return;
 
+	ShowCursor(true);
 	Set_ConstantTable((int)m_bIsOff);
 	m_pShaderCom[(int)m_bIsOff]->Begin_Shader();
 	m_pBufferCom->Begin_Buffer();

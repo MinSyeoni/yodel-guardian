@@ -8,6 +8,7 @@
 #include "BackGround.h"
 #include "DynamicCamera.h"
 #include "DirectSound.h"
+
 CScene_Logo::CScene_Logo(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -32,13 +33,10 @@ HRESULT CScene_Logo::Ready_Scene()
 	FAILED_CHECK_RETURN(Ready_LayerGameObject(L"Layer_GameObject"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_LayerUI(L"Layer_UI"), E_FAIL);
 
-
 	m_pFont = static_cast<CFont*>( CObjectMgr::Get_Instance()->Get_NewGameObject(L"Prototype_Font_NetmarbleLight",L"fuck",nullptr));
 	m_pFont->Ready_GameObjectClone(L"Mesh_Loading", _vec2{ 50.f,50.f }, D2D1::ColorF::Red);
 	m_pLoading = CLoading::Create(m_pGraphicDevice,m_pCommandList,CLoading::LOADING_STAGE);
 	NULL_CHECK_RETURN(m_pLoading, E_FAIL);
-
-
 
 	return S_OK;
 }
@@ -51,7 +49,6 @@ _int CScene_Logo::Update_Scene(const _float & fTimeDelta)
 
 _int CScene_Logo::LateUpdate_Scene(const _float & fTimeDelta)
 {
-
 	m_pFont->LateUpdate_GameObject(fTimeDelta);
 	return Engine::CScene::LateUpdate_Scene(fTimeDelta);
 }
@@ -66,9 +63,6 @@ void CScene_Logo::Render_Scene(const _float & fTimeDelta)
 		Engine::CScene* pNewScene = CScene_Stage::Create(m_pGraphicDevice, m_pCommandList);
 		Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
 	}
-
-
-
 }
 
 

@@ -183,7 +183,6 @@ HRESULT CMainApp::SetUp_ComponentPrototype()
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_TerrainTex", ID_STATIC, pComponent), E_FAIL);
 
-
 	//pComponent = Engine::CNaviMesh::Create(m_pGraphicDevice, m_pCommandList);
 	//NULL_CHECK_RETURN(pComponent, E_FAIL);
 	//FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_NaviMesh", ID_STATIC, pComponent), E_FAIL);

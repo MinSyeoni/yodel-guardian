@@ -42,9 +42,6 @@ _int CAim::Update_GameObject(const _float& fTimeDelta)
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
-	GetCursorPos(&m_pt);
-	ScreenToClient(g_hWnd, &m_pt);
-
 	m_pTransCom->m_vPos.x = _float(2.f / WINCX * WINCX/2) - 1.f;
 	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * WINCY/2) + 1.f;
 //	m_pTransCom->m_vPos.x = 0.f;
@@ -58,8 +55,14 @@ _int CAim::Update_GameObject(const _float& fTimeDelta)
 _int CAim::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
-	if(m_bIsRender==true)
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
+
+	if (m_bIsRender == true)
+	{
+		GetCursorPos(&m_pt);
+		ScreenToClient(g_hWnd, &m_pt);
+
+		FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
+	}
 
 	return NO_EVENT;
 }

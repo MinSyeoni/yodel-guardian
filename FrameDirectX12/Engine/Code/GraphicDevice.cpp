@@ -240,7 +240,22 @@ HRESULT CGraphicDevice::Create_GraphicDevice(const _uint& iWidth, const _uint& i
     IDXGIAdapter1* pd3dAdapter = nullptr;
 
     //시영아 여기야여기
+  
+    int iIndex = 0;
+    m_pFactory->EnumAdapters1(0, &pd3dAdapter);
+
+    DXGI_ADAPTER_DESC Desc,Desc2;
+    pd3dAdapter->GetDesc(&Desc);
     m_pFactory->EnumAdapters1(1, &pd3dAdapter);
+    pd3dAdapter->GetDesc(&Desc2);
+
+    if (Desc.DedicatedVideoMemory < Desc2.DedicatedVideoMemory)
+        iIndex = 1;
+
+
+
+
+    m_pFactory->EnumAdapters1(iIndex, &pd3dAdapter);
     HRESULT hResult = D3D12CreateDevice(pd3dAdapter,             // default adapter
         D3D_FEATURE_LEVEL_12_0,
         IID_PPV_ARGS(&m_pGraphicDevice));

@@ -51,9 +51,6 @@ _int COptionUI::Update_GameObject(const _float& fTimeDelta)
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
-	GetCursorPos(&m_pt);
-	ScreenToClient(g_hWnd, &m_pt);
-
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
 	return NO_EVENT;

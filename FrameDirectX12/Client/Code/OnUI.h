@@ -30,8 +30,14 @@ public:
 
 public:
 	void						Set_ShowUI(_bool bIsShow) { m_bIsShow = bIsShow; }
+	_uint						Get_OptionIdx() { return m_iOnIdx; }
+	/*
+	0 - OPTION_SSAO, 1 - OPTION_METALIC, 2 - OPTION_EMISSIVE, 3 - OPTION_DISTORITION,
+	4 - OPTION_SHADOW, 5 - OPTION_RIMLIGHT, 6 - OPTION_TONEMAPPING
+	*/
 	void						Set_IsOptionOff(_bool bIsOn) { m_bIsOff = bIsOn; }
 	void						Set_OnUI_Pos();
+	void						Show_Option_OnOff();
 
 private:
 	virtual HRESULT				Add_Component();
@@ -48,7 +54,7 @@ private:
 
 	POINT						m_pt = {};
 	_bool						m_bIsShow = false;
-	_bool						m_bIsOff = true;
+	_bool						m_bIsOff = false;
 
 	_uint						m_iOnIdx = 0;
 

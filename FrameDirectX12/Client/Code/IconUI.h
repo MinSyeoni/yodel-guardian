@@ -44,7 +44,6 @@ private:
 
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
 
-	POINT						m_pt = {};
 	_bool						m_bIsShow = true;
 
 public:
