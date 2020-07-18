@@ -30,14 +30,15 @@ public:
 	HRESULT						Ready_GameObjectPrototype();
 	virtual HRESULT				Ready_GameObject();
 	virtual HRESULT				LateInit_GameObject();
-	void Init_CharacterHp();
 	virtual _int				Update_GameObject(const _float& fTimeDelta);
-	void Set_HP_Damage(const _float& fTimeDelta);
 	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void				Render_GameObject(const _float& fTimeDelta);
 
+	void						Set_HP_Damage(const _float& fTimeDelta);
+
 private:
 	virtual HRESULT				Add_Component();
+	void						Init_CharacterHp();
 
 private:
 	void						Set_ConstantTable();
