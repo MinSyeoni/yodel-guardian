@@ -40,8 +40,8 @@ float4 PS_MAIN(VS_OUTPUT input) : SV_TARGET
     float4 average2 = { 0.f, 0.f, 0.f, 0.f };
     for (int i = 0; i < 16; i++)
     {
-        average += g_EmissiveTexture.Sample(gsamLinearWrap, input.uv*4.f  + float2(DownSampleOffset[i].x, DownSampleOffset[i].y));    
-        average2 += g_SpecTexture.Sample(gsamLinearWrap, input.uv * 4.f + float2(DownSampleOffset[i].x, DownSampleOffset[i].y));
+        average += g_EmissiveTexture.Sample(gsamLinearWrap, input.uv*8.f  + float2(DownSampleOffset[i].x, DownSampleOffset[i].y));    
+        average2 += g_SpecTexture.Sample(gsamLinearWrap, input.uv * 8.f + float2(DownSampleOffset[i].x, DownSampleOffset[i].y));
     }
     
     average *= (1.0f / 16.f);

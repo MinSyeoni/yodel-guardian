@@ -20,10 +20,11 @@ public:
 	HRESULT Update_Frustom_Manager();
 	HRESULT Ready_Light_Frustom_Manager();
 
+	bool FrustomCulling(_vec3 vMinPos, _vec3 vMaxPos, _matrix matworld);
+
 private:
 	_matrix m_matProj;
 	_matrix m_matView;
-
 
 	_vec3   m_vOriPoint[8];
 	_vec3   m_vPoint[8];

@@ -83,10 +83,15 @@ ps_output PS_MAIN(VS_OUTPUT input) : SV_TARGET
     float3 vLook = normalize(vPosition.xyz - g_vCampos.xyz);
     
 
+
     
     output.spec = pow(saturate(dot(reflection, -vLook)), 3.f) * g_vLightSpecular * vMaterial.r * step(0, vWorldNormal.r + vWorldNormal.g + vWorldNormal.b);
     output.spec.rgb *= 1.5f;
     output.spec.a = 0;
+
+
+
+
 
     return output;
 
@@ -124,9 +129,13 @@ ps_output PS_POINTMAIN(VS_OUTPUT input) : SV_TARGET
     output.shade = g_vLightDiffuse * (vShade + g_vLightAmibient) * fAtt;
     output.shade.a = 1.f;
 
+
+
+
     output.spec = pow(saturate(dot(reflection, -vLook)), 5.f) * g_vLightSpecular * vMaterial.r * fAtt;
     output.spec += output.shade * 0.05f;
     output.spec.a = 0;
+
 
     return output;
 }

@@ -17,8 +17,8 @@ HRESULT CDownSampleTarget::Ready_Target()
 	m_ClearColor[2] = 0.f;
 	m_ClearColor[3] = 0.f;
 
-	m_uiWidth = WINSIZEX/4;
-	m_uiHeight = WINSIZEY/4;
+	m_uiWidth = WINSIZEX/8;
+	m_uiHeight = WINSIZEY/8;
 
 	m_Viewport = { 0.0f,0.0f,(_float)WINSIZEX,(_float)WINSIZEY,0.0f,1.0f };
 	m_ScissorRect = { 0,0, (_long)m_uiWidth,(_long)m_uiHeight };

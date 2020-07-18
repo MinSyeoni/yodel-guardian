@@ -100,15 +100,18 @@ _int CSalone::LateUpdate_GameObject(const _float& fTimeDelta)
 	/*____________________________________________________________________
 	[ Renderer - Add Render Group ]
 	______________________________________________________________________*/
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_LIMLIGHT, this), -1);
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	/*____________________________________________________________________
 	[ Set PipelineState ]
 	______________________________________________________________________*/
 	m_pMeshCom->Set_Animation((int)m_eCurState);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(fTimeDelta * 3000.f);
 
+
+	if (!CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
+		return NO_EVENT; // 여기야 절투체컬링 
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_LIMLIGHT, this), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	return NO_EVENT;
 }
 

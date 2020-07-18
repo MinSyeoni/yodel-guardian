@@ -103,7 +103,7 @@ HRESULT CMeshComponent::Ready_Texture()
 
                 ComPtr<ID3D12Resource> pResource = nullptr;
                 ComPtr<ID3D12Resource> pUpload = nullptr;
-                ThrowIfFailed(CreateDDSTextureFromFile12(m_pGraphicDevice, CGraphicDevice::Get_Instance()->Get_CommandListThread(), strPathName.c_str(), pResource, pUpload));
+                ThrowIfFailed(CreateDDSTextureFromFile12(m_pGraphicDevice, CGraphicDevice::Get_Instance()->Get_CommandListThread(), strPathName.c_str(), pResource, pUpload) );
 
 
                 m_vecResource.push_back(pResource);

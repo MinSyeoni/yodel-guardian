@@ -105,7 +105,7 @@ ps_output PS_MAIN(VS_OUTPUT input) : SV_TARGET
     output.Depth = float4(input.vProjPos.z / input.vProjPos.w, input.vProjPos.w / 500.f, 0.f, 0.f);
 
     output.Emissive = float4(0.f, 0.f, 0.f, 0.f);
-    if (gTexInfo.g > 0)    output.Emissive = gEmisTexture.Sample(gsamLinearWrap, input.uv);
+    if (gTexInfo.g > 0)  output.Emissive = gEmisTexture.Sample(gsamLinearWrap, input.uv);
 
 
     return(output);
@@ -114,11 +114,15 @@ ps_output PS_MAIN(VS_OUTPUT input) : SV_TARGET
 
 float4 PS_SKYDOME(VS_OUTPUT input) :SV_TARGET
 {
-    float4 vColor;
-    vColor = gTexture.Sample(gsamLinearWrap, input.uv * 2.5f);
+    float4 OutColor;
+OutColor = gTexture.Sample(gsamLinearWrap, input.uv*4.f);
 
-    return vColor;
 
+
+
+
+
+return OutColor;
 }
 
 //LIM LIGHT

@@ -1,5 +1,6 @@
 #include "Frustom.h"
 #include "GraphicDevice.h"
+
 USING(Engine)
 
 IMPLEMENT_SINGLETON(CFrustom)
@@ -75,6 +76,7 @@ HRESULT CFrustom::Update_Frustom_Manager()
 		m_vPlane[5].w = matViewProj._44 + matViewProj._42;
 				 
 		m_vPlane[5].Normalize();
+
 
 		Ready_Light_Frustom_Manager();
 
@@ -156,6 +158,68 @@ HRESULT CFrustom::Ready_Light_Frustom_Manager()
 	m_matView=XMMatrixLookAtLH(m_vLightPos.Get_XMVECTOR(),_vec3(m_vLightDir+m_vLightPos).Get_XMVECTOR(),vUp.Get_XMVECTOR() );
 	m_matProj = XMMatrixOrthographicLH(m_fRadius, m_fRadius, 0.02f, m_fRadius*2.f);
 	return S_OK;
+}
+
+bool CFrustom::FrustomCulling(_vec3 vMinPos, _vec3 vMaxPos, _matrix matworld)
+{
+
+	vMaxPos.TransformCoord(vMaxPos, matworld);
+	vMinPos.TransformCoord(vMinPos, matworld);
+
+
+	for (_uint i = 0; i < 6; ++i)
+	{
+		if (XMVectorGetX(XMPlaneDotCoord(m_vPlane[i].Get_XMVECTOR(), _vec4(vMinPos.x, vMinPos.y, vMinPos.z,1.f).Get_XMVECTOR())) >= 0.0f)
+		{
+			continue;
+
+		}
+		if (XMVectorGetX(XMPlaneDotCoord(m_vPlane[i].Get_XMVECTOR(), _vec4(vMaxPos.x, vMinPos.y, vMinPos.z, 1.f).Get_XMVECTOR())) >= 0.0f)
+		{
+			continue;
+
+		}
+		if (XMVectorGetX(XMPlaneDotCoord(m_vPlane[i].Get_XMVECTOR(), _vec4(vMinPos.x, vMaxPos.y, vMinPos.z, 1.f).Get_XMVECTOR())) >= 0.0f)
+		{
+			continue;
+
+		}
+		if (XMVectorGetX(XMPlaneDotCoord(m_vPlane[i].Get_XMVECTOR(), _vec4(vMinPos.x, vMinPos.y, vMaxPos.z, 1.f).Get_XMVECTOR())) >= 0.0f)
+		{
+			continue;
+
+		}
+
+
+		if (XMVectorGetX(XMPlaneDotCoord(m_vPlane[i].Get_XMVECTOR(), _vec4(vMaxPos.x, vMaxPos.y, vMinPos.z, 1.f).Get_XMVECTOR())) >= 0.0f)
+		{
+			continue;
+
+		}
+		if (XMVectorGetX(XMPlaneDotCoord(m_vPlane[i].Get_XMVECTOR(), _vec4(vMaxPos.x, vMinPos.y, vMaxPos.z, 1.f).Get_XMVECTOR())) >= 0.0f)
+		{
+			continue;
+
+		}
+
+		if (XMVectorGetX(XMPlaneDotCoord(m_vPlane[i].Get_XMVECTOR(), _vec4(vMinPos.x, vMaxPos.y, vMaxPos.z, 1.f).Get_XMVECTOR())) >= 0.0f)
+		{
+			continue;
+
+		}
+
+		if (XMVectorGetX(XMPlaneDotCoord(m_vPlane[i].Get_XMVECTOR(), _vec4(vMaxPos.x, vMaxPos.y, vMaxPos.z, 1.f).Get_XMVECTOR())) >= 0.0f)
+		{
+			continue;
+
+		}
+
+
+		return false;
+	}
+
+
+	return true;
 }
 
 void CFrustom::Free(void)

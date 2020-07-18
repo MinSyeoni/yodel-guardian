@@ -167,7 +167,7 @@ void CPlayerStatus::KeyInput()
         m_eLegState = CPlayer::NONEIDLE;
 
     }
-    if (m_eEquip == SNIPER && KEY_PRESSING(DIKEYBOARD_R))
+    if ( KEY_PRESSING(DIKEYBOARD_R))
     {
         m_eCurState = CPlayer::SNIPERRELOAD;
         m_eLegState = CPlayer::SNIPERRELOAD;
@@ -212,6 +212,18 @@ void CPlayerStatus::KeyInput()
                 m_eCurState = CPlayer::RIFLEWALKNORTH;
 
             m_eLegState = CPlayer::RIFLEWALKNORTH;
+            m_fSpeed = 10.f;
+
+            if (KEY_PRESSING(DIKEYBOARD_LSHIFT))
+            {
+                if (!m_bIsShoot)
+                    m_eCurState = CPlayer::RUNNORTH;
+
+                m_eLegState = CPlayer::RUNNORTH;
+                m_fSpeed = 15.f;
+            }
+
+
         }
         else if (m_eEquip == NONE)
         {
@@ -220,8 +232,8 @@ void CPlayerStatus::KeyInput()
                 m_eCurState = CPlayer::NONEWALK;
 
             m_eLegState = CPlayer::NONEWALK;
-        }
         m_fSpeed = 10.f;
+        }
     }
 
 
@@ -293,6 +305,15 @@ void CPlayerStatus::KeyInput()
 
         m_eLegState = CPlayer::RIFLEWALKSOUTH;
         m_fSpeed = 5.f;
+
+        if (KEY_PRESSING(DIKEYBOARD_LSHIFT))
+        {
+            if (!m_bIsShoot)
+                m_eCurState = CPlayer::RUNSOUTH;
+
+            m_eLegState = CPlayer::RUNSOUTH;
+            m_fSpeed = 15.f;
+        }
     }
 
     if (KEY_PRESSING(DIKEYBOARD_A))
@@ -303,6 +324,15 @@ void CPlayerStatus::KeyInput()
 
         m_eLegState = CPlayer::RIFLEWALKWEST;
         m_fSpeed = 5.f;
+
+        if (KEY_PRESSING(DIKEYBOARD_LSHIFT))
+        {
+            if (!m_bIsShoot)
+                m_eCurState = CPlayer::RUNWEST;
+
+            m_eLegState = CPlayer::RUNWEST;
+            m_fSpeed = 15.f;
+        }
     }
 
 
@@ -315,6 +345,15 @@ void CPlayerStatus::KeyInput()
 
         m_eLegState = CPlayer::RIFLEWALKEAST;
         m_fSpeed = 5.f;
+
+        if (KEY_PRESSING(DIKEYBOARD_LSHIFT))
+        {
+            if (!m_bIsShoot)
+                m_eCurState = CPlayer::RUNEAST;
+
+            m_eLegState = CPlayer::RUNEAST;
+            m_fSpeed = 15.f;
+        }
     }
     if (MOUSE_KEYDOWN(MOUSEBUTTON::DIM_RB))
     {
@@ -532,6 +571,26 @@ void CPlayerStatus::StatusUpdate(const _float& fTimeDelta)
         m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed * fTimeDelta);
         break;
 
+    }
+    case CPlayer :: RUNNORTH:
+    {
+        m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed * fTimeDelta);
+        break;
+    }
+    case CPlayer::RUNSOUTH:
+    {
+        m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(m_pTransCom->m_vDir * -1), m_fSpeed * fTimeDelta);
+        break;
+    }
+    case CPlayer::RUNWEST:        
+    {
+        m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(vRight * -1.f), m_fSpeed * fTimeDelta);
+        break;
+    }
+    case CPlayer::RUNEAST:
+    {
+        m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(vRight), m_fSpeed * fTimeDelta);
+        break;
     }
     default:
         break;

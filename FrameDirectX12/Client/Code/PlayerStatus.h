@@ -55,7 +55,7 @@ public:
 
 	_bool m_bIshit = false;
 	_float m_fhitCool = 0.f;
-	_uint m_uiHp = 10;
+	_uint m_uiHp = 314;
 
 
 	_bool m_bIsInit = false;

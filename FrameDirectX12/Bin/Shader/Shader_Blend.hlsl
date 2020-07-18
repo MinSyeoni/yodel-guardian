@@ -53,21 +53,6 @@ float4 PS_MAIN(VS_OUTPUT input) : SV_TARGET
 
 
 
-    float4 Color2 = OutColor;
-    float A = 0.15f;
-    float B = 0.5f;
-    float C = 0.1f;
-    float D = 0.2f;
-    float E = 0.02f;
-    float F = 0.3f;
-    float3 linearWhite = float3(11.2f, 11.2f, 11.2f);
-
-    float3 color = OutColor.rgb;
-
-    color = ((color * (A * color + C * B) + D * E) / (color * (A * color + B) + D * F)) - (E / F);
-    linearWhite = ((linearWhite * (A * linearWhite + C * B) + D * E) / (linearWhite * (A * linearWhite + B) + D * F)) - (E / F);
-
-    OutColor = float4(color / linearWhite, Color2.a);
 
     return OutColor;
 

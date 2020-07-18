@@ -102,7 +102,7 @@ HRESULT CBloomTarget::BuildResource()
 	texDesc.SampleDesc.Quality = 0;
 	texDesc.Layout = D3D12_TEXTURE_LAYOUT_UNKNOWN;
 	texDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
-	texDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	texDesc.Format = DXGI_FORMAT_R16G16B16A16_FLOAT;
 
 
 	D3D12_CLEAR_VALUE optClear;
@@ -110,7 +110,7 @@ HRESULT CBloomTarget::BuildResource()
 	optClear.Color[1] = m_ClearColor[1];
 	optClear.Color[2] = m_ClearColor[2];
 	optClear.Color[3] = m_ClearColor[3];
-	optClear.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	optClear.Format = DXGI_FORMAT_R16G16B16A16_FLOAT;
 
 	ThrowIfFailed(m_pGraphicDev->CreateCommittedResource(
 		&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT),
@@ -128,7 +128,7 @@ HRESULT CBloomTarget::BuildResource()
 	desc.Texture2D.PlaneSlice = 0;
 
 	desc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
-	desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	desc.Format = DXGI_FORMAT_R16G16B16A16_FLOAT;
 
 	m_pGraphicDev->CreateRenderTargetView(m_vecBloomTarget[0].Get(), &desc,
 		CD3DX12_CPU_DESCRIPTOR_HANDLE(m_pRTV_Heap->GetCPUDescriptorHandleForHeapStart()));

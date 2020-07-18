@@ -51,7 +51,7 @@ HRESULT CSkyDome::Ready_GameObject()
 HRESULT CSkyDome::LateInit_GameObject()
 {
 	m_pTransCom->m_vPos = _vec3{ 300.f,0.f,300.f };
-	m_pTransCom->m_vScale = _vec3{ 1.0f,1.0f,1.0f };
+	m_pTransCom->m_vScale = _vec3{ 0.1f,0.1f,0.1f };
 	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
 
 	return S_OK;
@@ -59,7 +59,7 @@ HRESULT CSkyDome::LateInit_GameObject()
 
 _int CSkyDome::Update_GameObject(const _float & fTimeDelta)
 {
-	
+	m_pTransCom->m_vScale = _vec3{ 1.0f,1.0f,1.0f };
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
 	if (m_bIsDead)
