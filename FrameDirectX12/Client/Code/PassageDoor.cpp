@@ -74,6 +74,9 @@ _int CPassageDoor::Update_GameObject(const _float & fTimeDelta)
 
 _int CPassageDoor::LateUpdate_GameObject(const _float & fTimeDelta)
 {
+	if (!CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
+		return NO_EVENT;
+
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCol), -1);
 

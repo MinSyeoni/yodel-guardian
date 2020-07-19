@@ -55,6 +55,8 @@ HRESULT CMonster::Ready_GameObject()
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
 	m_pTransCom->m_vDir = _vec3(-1.f, 0.f, 1.f);
 
+	m_iInitAni = m_tMeshInfo.iMeshID;
+
 	switch (m_eMonName)
 	{
 	case CMonster::NONAME:
@@ -67,8 +69,9 @@ HRESULT CMonster::Ready_GameObject()
 	case CMonster::ZOMBI:
 	{
 		m_pZombi = new CZombi;
+		m_pZombi->Set_InitAni(m_iInitAni);
 		m_pZombi->Set_Transform(m_pTransCom);
-		m_pZombi->Set_NaviMesh(m_pNaviMesh);
+		m_pZombi->Set_NaviMesh(m_pNaviCom);
 	}
 		break;
 	default:
@@ -85,6 +88,9 @@ HRESULT CMonster::LateInit_GameObject()
 #endif
 	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture(), m_pDissolveTex->Get_Texture());
 
+	m_pNaviCom->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(0.f, 0.f, 0.f), 0, false);
+	m_pAstarCom->Init_AstarCell(m_pNaviCom->GetNaviCell());
+
 	switch (m_eMonName)
 	{
 	case CMonster::NONAME:
@@ -92,8 +98,11 @@ HRESULT CMonster::LateInit_GameObject()
 	case CMonster::FLAMETHROWER:
 		m_pFlameThrower->Late_Initialized();
 		break;
-	case CMonster::ZOMBI:
+	case CMonster::ZOMBI:	
+	{
+		m_pZombi->Set_Astar(m_pAstarCom);
 		m_pZombi->Late_Initialized();
+	}
 		break;
 	default:
 		break;
@@ -178,7 +187,11 @@ void CMonster::Update_BoneCollider(CSphereCollider* pSphereCol, string strBoneNa
 
 _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 {
-	if (!m_bIsActive)	return E_FAIL;
+	if (!m_bIsActive)	
+		return E_FAIL;
+
+	if (!CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
+		return NO_EVENT;
 
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCol), -1);
@@ -245,9 +258,15 @@ HRESULT CMonster::Add_Component()
 	NULL_CHECK_RETURN(m_pMeshCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Mesh", m_pMeshCom);
 
-	m_pNaviMesh = static_cast<Engine::CNaviMesh*>(CComponentMgr::Get_Instance()->Clone_Component(L"Mesh_Navi", ID_STATIC));
-	NULL_CHECK_RETURN(m_pNaviMesh, E_FAIL);
-	m_mapComponent[ID_STATIC].emplace(L"Com_NaviMesh", m_pNaviMesh);
+	// 네비메쉬
+	m_pNaviCom = static_cast<Engine::CNaviMesh*>(CComponentMgr::Get_Instance()->Clone_Component(L"Mesh_Navi", ID_STATIC));
+	NULL_CHECK_RETURN(m_pNaviCom, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_NaviMesh", m_pNaviCom);
+
+	// 에이스타
+	m_pAstarCom = static_cast<Engine::CAstar*>(m_pComponentMgr->Clone_Component(L"Prototype_Astar", COMPONENTID::ID_STATIC));
+	NULL_CHECK_RETURN(m_pAstarCom, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_Astar", m_pAstarCom);
 
 	m_pBoxCol = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(100.f, 100.f, 100.f), this));
 	NULL_CHECK_RETURN(m_pBoxCol, E_FAIL);

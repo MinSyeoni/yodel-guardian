@@ -1,96 +1,1261 @@
-﻿  stdafx.cpp
-  ActionCamera.cpp
+﻿  ActionCamera.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\BaziorMgr.h(6,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Layer.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ObjectMgr.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
   Aim.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Layer.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ObjectMgr.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Aim.cpp(89,122): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CRcTex *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Aim.cpp(89,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Aim.cpp(94,130): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CShader_UI *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Aim.cpp(94,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Aim.cpp(99,128): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CTexture *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Aim.cpp(99,15): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Aim.cpp(104,122): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CTransform *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Aim.cpp(104,16): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
   BackGround.cpp
-  CubeObject.cpp
-  DamageBlood.cpp
-  DistortionEffect.cpp
-  DynamicCamera.cpp
-  Dynamic_Object.cpp
-  Effect.cpp
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Effect.cpp(85,22): warning C4805: '==': 연산에 'int' 형식과 'bool' 형식을 함께 사용하는 것은 안전하지 않습니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Effect.cpp(108,20): warning C4805: '==': 연산에 'int' 형식과 'bool' 형식을 함께 사용하는 것은 안전하지 않습니다.
-  EfffectComponent.cpp
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\EfffectComponent.cpp(46,20): warning C4244: '=': 'int'에서 '_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\EfffectComponent.cpp(70,35): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\EfffectComponent.cpp(177,11): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  FlameThrower.cpp
-  GlassObject.cpp
-  GunUI.cpp
-  HPKit.cpp
-  InvenUI.cpp
-  LightObject.cpp
-  Loading.cpp
-  LobbyDoor.cpp
-  MainApp.cpp
-  MapObject.cpp
-  코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Layer.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ObjectMgr.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\BackGround.cpp(119,122): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CRcTex *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\BackGround.cpp(119,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\BackGround.cpp(125,146): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CShader_DefaultTex *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\BackGround.cpp(125,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\BackGround.cpp(130,129): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CTexture *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\BackGround.cpp(130,15): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
   BaziorMgr.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\BaziorMgr.h(6,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\BaziorMgr.cpp(4,1): error C2039: 'Release': 'BaziorMgr'의 멤버가 아닙니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\BaziorMgr.h(5): message : 'BaziorMgr' 선언을 참조하십시오.
+  GlassObject.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Layer.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ObjectMgr.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8,31): error C2011: 'Engine::CColliderMgr': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Frustom.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DirectInput.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\GlassObject.cpp(44,128): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CMesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\GlassObject.cpp(44,15): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\GlassObject.cpp(133,153): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CShader_Destortion *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\GlassObject.cpp(133,24): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\GlassObject.cpp(137,139): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CShader_Mesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\GlassObject.cpp(137,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+  HPKit.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DirectInput.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Layer.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ObjectMgr.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8,31): error C2011: 'Engine::CColliderMgr': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Frustom.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(61,33): error C2039: 'Update_Collider': 'Engine::CBoxCollider'의 멤버가 아닙니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.h(9): message : 'Engine::CBoxCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(62,16): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(62,28): error C3861: 'Get_Instance': 식별자를 찾을 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(62,59): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(62,65): error C2065: 'OBJECT': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(70,2): error C2664: 'HRESULT Engine::CRenderer::Add_ColliderGroup(Engine::CCollider *)': 인수 1을(를) 'Engine::CBoxCollider *'에서 'Engine::CCollider *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(70,2): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(54,10): message : 'Engine::CRenderer::Add_ColliderGroup' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(75,34): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(75,107): error C3861: 'Get_Instance': 식별자를 찾을 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(75,81): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(75,107): error C2065: 'BOX': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(75,100): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(75,107): error C2065: 'PLAYER': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(75,107): error C2530: 'pCol': 참조를 초기화해야 합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(75,107): error C3531: 'pCol': 형식에 'auto'이(가) 포함된 기호에는 이니셜라이저가 있어야 합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(75,18): error C2143: 구문 오류: ';'이(가) ':' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(75,107): error C2143: 구문 오류: ';'이(가) ')' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(77,6): error C2664: 'Engine::_bool Engine::CMathMgr::Collision_OBB(Engine::CCollider *,Engine::CCollider *,_vec3 *)': 인수 1을(를) 'Engine::CBoxCollider *'에서 'Engine::CCollider *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(77,61): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\MathMgr.h(32,8): message : 'Engine::CMathMgr::Collision_OBB' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(110,15): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CMesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(110,15): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(116,134): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CShader_Mesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(116,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(121,142): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(27): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPKit.cpp(121,149): error C2065: 'COL_BOX': 선언되지 않은 식별자입니다.
+  LightObject.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Layer.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ObjectMgr.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8,31): error C2011: 'Engine::CColliderMgr': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Frustom.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightMgr.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LightObject.cpp(42,128): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CMesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LightObject.cpp(42,15): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LightObject.cpp(120,134): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CShader_Mesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LightObject.cpp(120,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+  LobbyDoor.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Layer.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ObjectMgr.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DirectInput.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8,31): error C2011: 'Engine::CColliderMgr': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Frustom.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(61,28): error C2039: 'Update_Collider': 'Engine::CBoxCollider'의 멤버가 아닙니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.h(9): message : 'Engine::CBoxCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(62,16): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(62,28): error C3861: 'Get_Instance': 식별자를 찾을 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(62,59): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(62,65): error C2065: 'OBJECT': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(79,2): error C2664: 'HRESULT Engine::CRenderer::Add_ColliderGroup(Engine::CCollider *)': 인수 1을(를) 'Engine::CBoxCollider *'에서 'Engine::CCollider *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(79,2): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(54,10): message : 'Engine::CRenderer::Add_ColliderGroup' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(93,34): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(93,107): error C3861: 'Get_Instance': 식별자를 찾을 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(93,81): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(93,107): error C2065: 'BOX': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(93,100): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(93,107): error C2065: 'PLAYER': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(93,107): error C2530: 'pCol': 참조를 초기화해야 합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(93,107): error C3531: 'pCol': 형식에 'auto'이(가) 포함된 기호에는 이니셜라이저가 있어야 합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(93,18): error C2143: 구문 오류: ';'이(가) ':' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(93,107): error C2143: 구문 오류: ';'이(가) ')' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(95,6): error C2664: 'Engine::_bool Engine::CMathMgr::Collision_OBB(Engine::CCollider *,Engine::CCollider *,_vec3 *)': 인수 1을(를) 'Engine::CBoxCollider *'에서 'Engine::CCollider *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(95,61): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\MathMgr.h(32,8): message : 'Engine::CMathMgr::Collision_OBB' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(153,134): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CShader_Mesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(153,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(158,128): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CMesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(158,15): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(163,137): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(27): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LobbyDoor.cpp(163,144): error C2065: 'COL_BOX': 선언되지 않은 식별자입니다.
+  MapObject.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Layer.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ObjectMgr.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8,31): error C2011: 'Engine::CColliderMgr': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Frustom.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\MapObject.cpp(99,134): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CShader_Mesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\MapObject.cpp(99,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\MapObject.cpp(104,128): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CMesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\MapObject.cpp(104,15): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
   Monster.cpp
-  Normandy.cpp
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Normandy.cpp(128,15): warning C4101: 'tCB_BoneInfo' :참조되지 않은 지역 변수입니다.
-  NpcRifle.cpp
-  NpcWords.cpp
-  OnUI.cpp
-  OptionUI.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\FlameThrower.h(38,49): error C2039: 'AddRef': 'Engine::CTransform'의 멤버가 아닙니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\FlameThrower.h(8): message : 'Engine::CTransform' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Zombi.h(43,49): error C2039: 'AddRef': 'Engine::CTransform'의 멤버가 아닙니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Zombi.h(10): message : 'Engine::CTransform' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Zombi.h(44,46): error C2039: 'AddRef': 'Engine::CNaviMesh'의 멤버가 아닙니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Zombi.h(13): message : 'Engine::CNaviMesh' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Layer.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ObjectMgr.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DirectInput.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8,31): error C2011: 'Engine::CColliderMgr': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Frustom.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(113,28): error C2039: 'Update_Collider': 'Engine::CBoxCollider'의 멤버가 아닙니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.h(11): message : 'Engine::CBoxCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(114,16): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(114,28): error C3861: 'Get_Instance': 식별자를 찾을 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(114,59): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(114,65): error C2065: 'OBJECT': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(136,73): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(136,79): error C2065: 'COMBAT': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(137,74): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(137,80): error C2065: 'COMBAT': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(138,62): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(138,69): error C2065: 'MONSTER': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(160,99): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(160,112): error C2061: 구문 오류: 식별자 'COLLIDER_TAG'
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(161,1): error C2511: 'void CMonster::Update_BoneCollider(Engine::CSphereCollider *,std::string)': 오버로드된 멤버 함수가 'CMonster'에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.h(18): message : 'CMonster' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(172,29): error C2039: 'Update_Collider': 'Engine::CSphereCollider'의 멤버가 아닙니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.h(12): message : 'Engine::CSphereCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(174,16): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(174,28): error C3861: 'Get_Instance': 식별자를 찾을 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(174,45): error C2065: 'eTag': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(176,23): error C2039: 'Set_IsCol': 'Engine::CSphereCollider'의 멤버가 아닙니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.h(12): message : 'Engine::CSphereCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(184,2): error C2664: 'HRESULT Engine::CRenderer::Add_ColliderGroup(Engine::CCollider *)': 인수 1을(를) 'Engine::CBoxCollider *'에서 'Engine::CCollider *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(184,2): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(54,10): message : 'Engine::CRenderer::Add_ColliderGroup' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(185,2): error C2664: 'HRESULT Engine::CRenderer::Add_ColliderGroup(Engine::CCollider *)': 인수 1을(를) 'Engine::CSphereCollider *'에서 'Engine::CCollider *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(185,2): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(54,10): message : 'Engine::CRenderer::Add_ColliderGroup' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(186,2): error C2664: 'HRESULT Engine::CRenderer::Add_ColliderGroup(Engine::CCollider *)': 인수 1을(를) 'Engine::CSphereCollider *'에서 'Engine::CCollider *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(186,2): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(54,10): message : 'Engine::CRenderer::Add_ColliderGroup' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(187,2): error C2664: 'HRESULT Engine::CRenderer::Add_ColliderGroup(Engine::CCollider *)': 인수 1을(를) 'Engine::CSphereCollider *'에서 'Engine::CCollider *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(187,2): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(54,10): message : 'Engine::CRenderer::Add_ColliderGroup' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(239,142): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CShader_Dissolve *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(239,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(244,128): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CMesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(244,15): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(248,119): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CNaviMesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(248,16): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(252,137): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(27): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(252,144): error C2065: 'COL_BOX': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(256,148): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(27): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(256,158): error C2065: 'COL_SPHERE': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(260,148): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(27): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(260,158): error C2065: 'COL_SPHERE': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(264,148): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(27): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(264,158): error C2065: 'COL_SPHERE': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(269,137): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CTexture *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Monster.cpp(269,19): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
   PassageDoor.cpp
-  Pistol.cpp
-  Player.cpp
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Player.cpp(147,18): warning C4244: 'return': '_uint'에서 '_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Layer.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ObjectMgr.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DirectInput.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8,31): error C2011: 'Engine::CColliderMgr': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Frustom.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(60,28): error C2039: 'Update_Collider': 'Engine::CBoxCollider'의 멤버가 아닙니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.h(9): message : 'Engine::CBoxCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(61,16): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(61,28): error C3861: 'Get_Instance': 식별자를 찾을 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(61,59): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(61,65): error C2065: 'OBJECT': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(78,2): error C2664: 'HRESULT Engine::CRenderer::Add_ColliderGroup(Engine::CCollider *)': 인수 1을(를) 'Engine::CBoxCollider *'에서 'Engine::CCollider *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(78,2): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(54,10): message : 'Engine::CRenderer::Add_ColliderGroup' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(93,34): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(93,107): error C3861: 'Get_Instance': 식별자를 찾을 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(93,81): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(93,107): error C2065: 'BOX': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(93,100): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(93,107): error C2065: 'PLAYER': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(93,107): error C2530: 'pCol': 참조를 초기화해야 합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(93,107): error C3531: 'pCol': 형식에 'auto'이(가) 포함된 기호에는 이니셜라이저가 있어야 합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(93,18): error C2143: 구문 오류: ';'이(가) ':' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(93,107): error C2143: 구문 오류: ';'이(가) ')' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(95,6): error C2664: 'Engine::_bool Engine::CMathMgr::Collision_OBB(Engine::CCollider *,Engine::CCollider *,_vec3 *)': 인수 1을(를) 'Engine::CBoxCollider *'에서 'Engine::CCollider *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(95,61): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\MathMgr.h(32,8): message : 'Engine::CMathMgr::Collision_OBB' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(153,134): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CShader_Mesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(153,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(158,128): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CMesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(158,15): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(163,137): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(27): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PassageDoor.cpp(163,144): error C2065: 'COL_BOX': 선언되지 않은 식별자입니다.
   PlayerArm.cpp
-  HPBar.cpp
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\HPBar.cpp(134,42): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerArm.h(33,50): error C2039: 'AddRef': 'Engine::CTransform'의 멤버가 아닙니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(6): message : 'Engine::CTransform' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DirectInput.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Frustom.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerArm.cpp(150,117): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CMesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerArm.cpp(150,15): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerArm.cpp(156,134): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CShader_Mesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerArm.cpp(156,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
   PlayerLeg.cpp
-  PlayerStatus.cpp
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(170,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(170,10): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(204,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(204,9): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(217,16): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(217,17): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(240,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(240,9): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(248,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(248,9): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(262,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(262,9): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(300,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(300,9): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(309,12): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(309,13): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(319,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(319,9): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(328,12): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(328,13): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(340,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(340,9): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(349,12): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(349,13): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(503,19): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  IconUI.cpp
-  RectObject.cpp
-  Rifle.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerLeg.h(28,50): error C2039: 'AddRef': 'Engine::CTransform'의 멤버가 아닙니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(6): message : 'Engine::CTransform' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Frustom.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DirectInput.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerLeg.cpp(111,134): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CShader_Mesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerLeg.cpp(111,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
   Salone.cpp
-  Scene_Logo.cpp
-  Scene_Menu.cpp
-  코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Layer.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ObjectMgr.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Frustom.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Salone.cpp(40,115): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CMesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Salone.cpp(40,15): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Salone.cpp(147,134): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CShader_Mesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Salone.cpp(147,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
   Scene_Stage.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Layer.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ObjectMgr.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Scene.h(10,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightMgr.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Frustom.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DirectInput.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\FlameThrower.h(38,49): error C2039: 'AddRef': 'Engine::CTransform'의 멤버가 아닙니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\FlameThrower.h(8): message : 'Engine::CTransform' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Zombi.h(43,49): error C2039: 'AddRef': 'Engine::CTransform'의 멤버가 아닙니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Zombi.h(10): message : 'Engine::CTransform' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Zombi.h(44,46): error C2039: 'AddRef': 'Engine::CNaviMesh'의 멤버가 아닙니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Zombi.h(13): message : 'Engine::CNaviMesh' 선언을 참조하십시오.
   Shepard.cpp
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Shepard.cpp(155,49): warning C4244: '인수': 'double'에서 'const Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  SkyDome.cpp
-  Sniper.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Layer.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ObjectMgr.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DirectInput.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Frustom.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Shepard.cpp(43,116): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CMesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Shepard.cpp(43,15): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Shepard.cpp(48,121): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CAstar *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Shepard.cpp(48,16): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Shepard.cpp(52,118): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CNaviMesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Shepard.cpp(52,15): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Shepard.cpp(153,94): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CTransform *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Shepard.cpp(153,15): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Shepard.cpp(155,49): warning C4244: '인수': 'double'에서 'const Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Shepard.cpp(248,134): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CShader_Mesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Shepard.cpp(248,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
   StaticObject.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Layer.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ObjectMgr.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8,31): error C2011: 'Engine::CColliderMgr': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Frustom.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\StaticObject.cpp(41,128): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CMesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\StaticObject.cpp(41,15): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\StaticObject.cpp(52,136): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(27): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\StaticObject.cpp(52,143): error C2065: 'COL_BOX': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\StaticObject.cpp(92,28): error C2039: 'Update_Collider': 'Engine::CBoxCollider'의 멤버가 아닙니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\StaticObject.h(10): message : 'Engine::CBoxCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\StaticObject.cpp(94,16): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\StaticObject.cpp(94,28): error C3861: 'Get_Instance': 식별자를 찾을 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\StaticObject.cpp(94,59): error C2027: 정의되지 않은 형식 'Engine::CColliderMgr'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\ColliderMgr.h(8): message : 'Engine::CColliderMgr' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\StaticObject.cpp(94,65): error C2065: 'OBJECT': 선언되지 않은 식별자입니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\StaticObject.cpp(110,2): error C2664: 'HRESULT Engine::CRenderer::Add_ColliderGroup(Engine::CCollider *)': 인수 1을(를) 'Engine::CBoxCollider *'에서 'Engine::CCollider *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\StaticObject.cpp(110,2): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(54,10): message : 'Engine::CRenderer::Add_ColliderGroup' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\StaticObject.cpp(140,134): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CShader_Mesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\StaticObject.cpp(140,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
   Terrain.cpp
-  TrailEffect.cpp
-  Trigger.cpp
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Trigger.cpp(145,2): warning C4002: 함수 같은 매크로 호출 'NULL_CHECK'에 대해 인수가 너무 많습니다.
-  UI.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Layer.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ObjectMgr.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Frustom.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Terrain.cpp(117,132): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CTerrainTex *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Terrain.cpp(117,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Terrain.cpp(122,140): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CShader_Terrain *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Terrain.cpp(122,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Terrain.cpp(129,139): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CTexture *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Terrain.cpp(129,22): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Terrain.cpp(133,139): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CTexture *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Terrain.cpp(133,21): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
   Weapon.cpp
-  Zombi.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Frustom.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Weapon.cpp(26,134): error C2440: 'static_cast': 'Engine::CComponent *'에서 'Engine::CShader_Mesh *'(으)로 변환할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Weapon.cpp(26,17): message : 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
   Client.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GraphicDevice.h(8,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\MainApp.h(16,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Timer.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TimeMgr.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Frame.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\FrameMgr.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DirectInput.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DirectSound.h(35,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Management.h(10,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7,29): error C2011: 'Engine::CComponent': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Component.h(7): message : 'Engine::CComponent' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Transform.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Info.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6,28): error C2011: 'Engine::CVIBuffer': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\VIBuffer.h(6): message : 'Engine::CVIBuffer' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\RcTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\CubeTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\AnimationControl.h(37,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\MeshComponent.h(11,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Mesh.h(15,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Line.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Cell.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\NaviMesh.h(9,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12,28): error C2011: 'Engine::CCollider': 'class' 형식 재정의
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BoxCollider.h(27,117): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(8,1): error C2504: 'Engine::CCollider': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(15,60): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SphereCollider.h(27,119): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Astar.h(8,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(30,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,96): error C2027: 정의되지 않은 형식 'Engine::CCollider'을(를) 사용했습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Collider.h(12): message : 'Engine::CCollider' 선언을 참조하십시오.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ComponentMgr.h(41,105): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Target.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\LightTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ShadowDepthTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DownSampleTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\BloomTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\DistortionTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\SSAOTarget.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Renderer.h(29,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\GameObject.h(11,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Layer.h(13,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\ObjectMgr.h(9,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\BaziorMgr.h(6,1): error C2504: 'Engine::CBase': 기본 클래스를 정의하지 않았습니다.
   코드를 생성하고 있습니다...
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Weapon.cpp(30): warning C4715: 'CWeapon::AddComponent': 모든 제어 경로에서 값을 반환하지는 않습니다.
-  LINK : ..\Bin\Client.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
-  Client.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Default\../Bin\Client.exe

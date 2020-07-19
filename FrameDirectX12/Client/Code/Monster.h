@@ -11,6 +11,7 @@ namespace Engine
 	class CBoxCollider;
 	class CSphereCollider;
 	class CNaviMesh;
+	class CAstar;
 }
 
 class CDynamicCamera;
@@ -51,8 +52,9 @@ private:
 	Engine::CShader_Dissolve*	m_pShaderCom = nullptr;
 	Engine::CBoxCollider*		m_pBoxCol = nullptr;
 	Engine::CSphereCollider*	m_pShereCol[3] = {};
-	Engine::CNaviMesh*			m_pNaviMesh = nullptr;
+	Engine::CNaviMesh*			m_pNaviCom = nullptr;
 	Engine::CTexture*			m_pDissolveTex = nullptr;
+	Engine::CAstar*				m_pAstarCom = nullptr;
 
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
 
@@ -72,6 +74,7 @@ private:
 
 	_vec3						m_pPlayerPos = _vec3(0.f, 0.f, 0.f);
 	_vec3						m_pMonsterPos = _vec3(0.f, 0.f, 0.f);
+	_uint						m_iInitAni;
 
 protected:
 	float						m_fDissolve = 1.f;

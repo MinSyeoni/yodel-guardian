@@ -70,6 +70,8 @@ HRESULT CScene_Stage::Ready_Scene()
 	COUT_STR("Ready Scene_Stage");
 #endif
 
+	srand((unsigned int)time(0));
+
 	FAILED_CHECK_RETURN(Ready_GameObjectPrototype(), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_LayerCamera(L"Layer_Camera"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_LayerEnvironment(L"Layer_Environment"), E_FAIL);
@@ -390,6 +392,7 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 		if (dwByte == 0)
 			break;
 
+		m_tMeshInfo.iMeshID = rand() % 4;
 		m_tMeshInfo.Pos = tColData.vCenter;
 		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Monster", m_tMeshInfo.MeshTag, &m_tMeshInfo);
 	}
