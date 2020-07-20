@@ -23,6 +23,8 @@ private:
 
 public:
 	_bool					Get_LobbyDoorIsOpen() { return m_bIsOpen; }
+	Engine::CBoxCollider*	Get_DoorCollider() { return m_pBoxCol; }
+	void					Set_IsCardToDoor(_bool bIsCard) { m_bIsCardKey = bIsCard; }
 
 public:
 	HRESULT					Ready_GameObjectPrototype();
@@ -38,6 +40,7 @@ private:
 	void					Set_ConstantTable();
 	void					Set_ShadowTable(CShader_Shadow* pShader);
 	void					PassageDoor_AniState();
+	void					ColiisionTheDoor();
 	void					OpenTheDoor();
 
 private:
@@ -61,6 +64,7 @@ private:
 
 	_bool						m_bIsOpen = false;
 	_bool						m_bIsCollision = false;
+	_bool						m_bIsCardKey = false;
 
 public:
 	virtual CGameObject*		Clone_GameObject(void* prg);

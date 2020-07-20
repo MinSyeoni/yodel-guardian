@@ -169,6 +169,7 @@
     <ClInclude Include="..\Code\ActionCamera.h" />
     <ClInclude Include="..\Code\Aim.h" />
     <ClInclude Include="..\Code\BackGround.h" />
+    <ClInclude Include="..\Code\CardKey.h" />
     <ClInclude Include="..\Code\CubeObject.h" />
     <ClInclude Include="..\Code\DamageBlood.h" />
     <ClInclude Include="..\Code\DistortionEffect.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="..\Code\Dynamic_Object.h" />
     <ClInclude Include="..\Code\Effect.h" />
     <ClInclude Include="..\Code\EfffectComponent.h" />
+    <ClInclude Include="..\Code\EquipUI.h" />
     <ClInclude Include="..\Code\FlameThrower.h" />
     <ClInclude Include="..\Code\GlassObject.h" />
     <ClInclude Include="..\Code\GunUI.h" />
@@ -234,6 +236,7 @@
     <ClCompile Include="..\Code\ActionCamera.cpp" />
     <ClCompile Include="..\Code\Aim.cpp" />
     <ClCompile Include="..\Code\BackGround.cpp" />
+    <ClCompile Include="..\Code\CardKey.cpp" />
     <ClCompile Include="..\Code\CubeObject.cpp" />
     <ClCompile Include="..\Code\DamageBlood.cpp" />
     <ClCompile Include="..\Code\DistortionEffect.cpp" />
@@ -241,6 +244,7 @@
     <ClCompile Include="..\Code\Dynamic_Object.cpp" />
     <ClCompile Include="..\Code\Effect.cpp" />
     <ClCompile Include="..\Code\EfffectComponent.cpp" />
+    <ClCompile Include="..\Code\EquipUI.cpp" />
     <ClCompile Include="..\Code\FlameThrower.cpp" />
     <ClCompile Include="..\Code\GlassObject.cpp" />
     <ClCompile Include="..\Code\GunUI.cpp" />

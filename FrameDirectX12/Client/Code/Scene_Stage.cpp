@@ -32,6 +32,7 @@
 #include "Trigger.h"
 #include "LobbyDoor.h"
 #include "PassageDoor.h"
+#include "CardKey.h"
 
 #include "LightObject.h"
 #include "DamageBlood.h"
@@ -101,12 +102,12 @@ _int CScene_Stage::LateUpdate_Scene(const _float & fTimeDelta)
 		list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
 		for (auto& pSrc : *pHpBarUIList)
 			dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(false);
-		CGameObject* pIconUIList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"IconUI");
-		dynamic_cast<CIconUI*>(pIconUIList)->Set_ShowUI(false);
+		CGameObject* pIconUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"IconUI");
+		dynamic_cast<CIconUI*>(pIconUI)->Set_ShowUI(false);
 		CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
 		dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(false);
-		CGameObject* pInvenList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
-		dynamic_cast<CInvenUI*>(pInvenList)->Set_ShowUI(false);
+		CGameObject* pInvenUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
+		dynamic_cast<CInvenUI*>(pInvenUI)->Set_ShowUI(false);
 	}
 
 	return Engine::CScene::LateUpdate_Scene(fTimeDelta);
@@ -186,6 +187,10 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = CPassageDoor::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_PassageDoor", pGameObject), E_FAIL);
+
+	pGameObject = CCardKey::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_CardKey", pGameObject), E_FAIL);
 
 	////////////////////////////////// UI /////////////////////////////////////////////
 	pGameObject = CUI::Create(m_pGraphicDevice, m_pCommandList);
@@ -349,7 +354,6 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_OptionUI", L"OptionUI", nullptr), E_FAIL);
 
 	//////// ¾ÆÀÌÄÜ //////
-
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_IconUI", L"IconUI", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", nullptr), E_FAIL);
 
@@ -468,6 +472,8 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LobbyDoor", L"LobbyDoor", &m_tMeshInfo);
 		else if (m_tMeshInfo.MeshTag == L"door2.X")
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_PassageDoor", L"PassageDoor", &m_tMeshInfo);
+		else if (m_tMeshInfo.MeshTag == L"card.X")
+			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_CardKey", L"CardKey", &m_tMeshInfo);
 		else
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
 	}

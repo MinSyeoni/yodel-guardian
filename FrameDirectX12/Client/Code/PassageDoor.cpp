@@ -60,16 +60,23 @@ _int CPassageDoor::Update_GameObject(const _float & fTimeDelta)
 	m_pBoxCol->Update_Collider(&m_pTransCom->m_matWorld);
 	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCol);
 
-	// 일단 M누르면 열림 나중에 npc 상호작용 해줘야 함. 
-	if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_M) && !m_bIsOpen && m_bIsCollision)
-		m_eDoorState = PASSAGE_OPEN;
-	else if (!m_bIsCollision && m_bIsOpen)
-		m_eDoorState = PASSAGE_CLOSE;
+	OpenTheDoor();
 
 	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)m_eDoorState);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f * fTimeDelta);
 
 	return NO_EVENT;
+}
+
+void CPassageDoor::OpenTheDoor()
+{
+	if (!m_bIsCardKey)
+		return;
+
+	if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && !m_bIsOpen && m_bIsCollision)
+		m_eDoorState = PASSAGE_OPEN;
+	else if (!m_bIsCollision && m_bIsOpen)
+		m_eDoorState = PASSAGE_CLOSE;
 }
 
 _int CPassageDoor::LateUpdate_GameObject(const _float & fTimeDelta)
@@ -84,12 +91,12 @@ _int CPassageDoor::LateUpdate_GameObject(const _float & fTimeDelta)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 
 	PassageDoor_AniState();
-	OpenTheDoor();
+	ColiisionTheDoor();
 
 	return NO_EVENT;
 }
 
-void CPassageDoor::OpenTheDoor()
+void CPassageDoor::ColiisionTheDoor()
 {
 	// 스1과 통로 연결할 곳
 	_vec3 vShaveDir;
