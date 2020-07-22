@@ -48,6 +48,9 @@ C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(377,
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(379,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(381,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(383,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(385,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(387,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(389,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(393,6): warning C4002: 함수 같은 매크로 호출 'FAILED'에 대해 인수가 너무 많습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\ToolView.cpp(276,66): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
   Tool.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Tool\../Bin\Tool.exe

@@ -382,6 +382,12 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"apollo.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"apollo.x"), E_FAIL))
 		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"passage_top.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"passage_top.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"passage_side.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"passage_side.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"passage_bottom.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"passage_bottom.x"), E_FAIL))
+		return;
 
 	///// 테스트 /////
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"test.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"test.x"), E_FAIL))
