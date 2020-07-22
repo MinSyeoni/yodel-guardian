@@ -5,7 +5,7 @@
 #include "GraphicDevice.h"
 #include "ColliderMgr.h"
 #include "Frustom.h"
-
+#include "InvenUI.h"
 
 CHPKit::CHPKit(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -66,6 +66,9 @@ _int CHPKit::Update_GameObject(const _float & fTimeDelta)
 
 _int CHPKit::LateUpdate_GameObject(const _float & fTimeDelta)
 {
+	if (!CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
+		return NO_EVENT;
+
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCollider), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
@@ -75,12 +78,19 @@ _int CHPKit::LateUpdate_GameObject(const _float & fTimeDelta)
 	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYER))
 	{
 		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir)
-			&& CDirectInput::Get_Instance()->KEY_DOWN(DIK_F))
+			&& CDirectInput::Get_Instance()->KEY_DOWN(DIK_E))
 		{
-			// 여기다 HP 상호작용!!!!!!!!!!!!!!!1
+			// 여기다 HP 상호작용!!!!!!!!!!!!!!!
+
+
+			// 인벤 연동
+			CGameObject* pInvenUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
+			dynamic_cast<CInvenUI*>(pInvenUI)->Set_AddItemNum(0, 1);
+
 			m_bIsDead = true;
 		}
 	}
+
 
 
 	return NO_EVENT;

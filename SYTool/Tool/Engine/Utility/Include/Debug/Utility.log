@@ -1,0 +1,90 @@
+﻿  BoxCollider.cpp
+  Calculator.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(372,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(383,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(393,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(404,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(415,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(425,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(435,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(445,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(456,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(466,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(478,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(487,12): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Calculator.cpp(489,11): warning C4244: 'return': 'float'에서 'Engine::_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Camera.cpp
+  Collider.cpp
+  Component.cpp
+  CSCollider.cpp
+  Frustum.cpp
+  GameObject.cpp
+  Layer.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\Layer.cpp(22,7): warning C4101: 'isEnd' :참조되지 않은 지역 변수입니다.
+  Light.cpp
+  LightMgr.cpp
+  Management.cpp
+  Optimization.cpp
+  ProtoMgr.cpp
+  QuadTree.cpp
+  Renderer.cpp
+  RenderTarget.cpp
+  RenderTargetMgr.cpp
+  Scene.cpp
+  Shader.cpp
+  코드를 생성하고 있습니다...
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ToolCollider.h(29): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
+  컴파일하고 있습니다...
+  SphereCollider.cpp
+  ToolCollider.cpp
+  TrailColor.cpp
+  Transform.cpp
+  코드를 생성하고 있습니다...
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ToolCollider.h(29): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Code\ToolCollider.h(29): warning C4172: 지역 변수 또는 임시의 주소를 반환하고 있습니다.
+  LINK : ..\Bin\Utility.dll을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
+     ../Bin\Utility.lib 라이브러리 및 ../Bin\Utility.exp 개체를 생성하고 있습니다.
+  Utility.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Utility\Include\../Bin\Utility.dll
+  .\Engine\Utility\Code\BoxCollider.h
+  .\Engine\Utility\Code\Calculator.h
+  .\Engine\Utility\Code\Camera.h
+  .\Engine\Utility\Code\Collider.h
+  .\Engine\Utility\Code\Component.h
+  .\Engine\Utility\Code\CSCollider.h
+  .\Engine\Utility\Code\Frustum.h
+  .\Engine\Utility\Code\GameObject.h
+  .\Engine\Utility\Code\Layer.h
+  .\Engine\Utility\Code\Light.h
+  .\Engine\Utility\Code\LightMgr.h
+  .\Engine\Utility\Code\Management.h
+  .\Engine\Utility\Code\Optimization.h
+  .\Engine\Utility\Code\ProtoMgr.h
+  .\Engine\Utility\Code\QuadTree.h
+  .\Engine\Utility\Code\Renderer.h
+  .\Engine\Utility\Code\RenderTarget.h
+  .\Engine\Utility\Code\RenderTargetMgr.h
+  .\Engine\Utility\Code\Scene.h
+  .\Engine\Utility\Code\Shader.h
+  .\Engine\Utility\Code\SphereCollider.h
+  .\Engine\Utility\Code\ToolCollider.h
+  .\Engine\Utility\Code\TrailColor.h
+  .\Engine\Utility\Code\Transform.h
+         24개 파일이 복사되었습니다.
+  지정된 경로를 찾을 수 없습니다.
+          0개 파일이 복사되었습니다.
+          1개 파일이 복사되었습니다.
+  .\Engine\Headers\Engine_Defines.h
+  .\Engine\Headers\Engine_Enum.h
+  .\Engine\Headers\Engine_Function.h
+  .\Engine\Headers\Engine_Macro.h
+  .\Engine\Headers\Engine_Struct.h
+  .\Engine\Headers\Engine_Typedef.h
+  .\Engine\Headers\Export_Function.h
+  .\Engine\Headers\Export_Resources.h
+  .\Engine\Headers\Export_System.h
+  .\Engine\Headers\Export_Utility.h
+         10개 파일이 복사되었습니다.
+  .\Engine\Headers\Export_Resources.inl
+  .\Engine\Headers\Export_System.inl
+  .\Engine\Headers\Export_Utility.inl
+          3개 파일이 복사되었습니다.

@@ -190,17 +190,26 @@
     <Filter Include="01.Scene_Stage\02.Weapon\04.NPCRifle">
       <UniqueIdentifier>{35892646-e06f-4793-bbcd-da2faf298e22}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene_Stage\07.NPC\03.Ken">
-      <UniqueIdentifier>{2f30498e-f1ec-4c29-831e-00a610843b07}</UniqueIdentifier>
+    <Filter Include="02.Scene_All\03.StaticObject\02.Items">
+      <UniqueIdentifier>{0aed30bc-2ea6-4d35-9c65-4cf1fcf567d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene_Stage\07.NPC\04.Direction">
-      <UniqueIdentifier>{9d73abd3-f512-4de6-8293-4cb93851859c}</UniqueIdentifier>
+    <Filter Include="02.Scene_All\03.StaticObject\02.Items\00.HPKit">
+      <UniqueIdentifier>{2f2e5323-a98d-48cb-aa77-6c0e47207e15}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Scene_All\07.HDRObject">
-      <UniqueIdentifier>{a7bc0b9f-84ac-4e62-b417-2f31e9382c60}</UniqueIdentifier>
+    <Filter Include="02.Scene_All\03.StaticObject\02.Items\04.CardKey">
+      <UniqueIdentifier>{06d54ebe-fa46-469e-b877-e65fb8815b68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\07.OptionUI\01.OnOffUI">
+      <UniqueIdentifier>{782e0da7-9a72-4561-aa31-b4ef776aacde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\07.OptionUI\00.OptionBack">
+      <UniqueIdentifier>{326ec8ed-35c8-4898-ba6b-9a04a18e60e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\07.OptionUI\02.EquipUI">
+      <UniqueIdentifier>{94fe059b-f992-4368-808b-50488f589ea8}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Scene_All\06.EffectObject\03.FadeOut">
-      <UniqueIdentifier>{62d105f6-013a-4e39-a9fd-a0316d739d3c}</UniqueIdentifier>
+      <UniqueIdentifier>{15c4cccf-0d9e-40fb-b5bb-2a6f98b5dfc2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -382,6 +391,7 @@
     </ClInclude>
     <ClInclude Include="..\Code\OnUI.h">
       <Filter>03.UI\07.OptionUI\00.On</Filter>
+      <Filter>03.UI\07.OptionUI\01.OnOffUI</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\NpcRifle.h">
       <Filter>01.Scene_Stage\02.Weapon\04.NPCRifle</Filter>
@@ -389,8 +399,17 @@
     <ClInclude Include="..\Code\Sniper.h">
       <Filter>01.Scene_Stage\02.Weapon\03.Sniper</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\HdrObject.h">
-      <Filter>02.Scene_All\07.HDRObject</Filter>
+    <ClInclude Include="..\Code\HPKit.h">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\00.HPKit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\CardKey.h">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\04.CardKey</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\OptionUI.h">
+      <Filter>03.UI\07.OptionUI\00.OptionBack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\EquipUI.h">
+      <Filter>03.UI\07.OptionUI\02.EquipUI</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\FadeOut.h">
       <Filter>02.Scene_All\06.EffectObject\03.FadeOut</Filter>
@@ -548,6 +567,7 @@
     </ClCompile>
     <ClCompile Include="..\Code\OnUI.cpp">
       <Filter>03.UI\07.OptionUI\00.On</Filter>
+      <Filter>03.UI\07.OptionUI\01.OnOffUI</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\NpcRifle.cpp">
       <Filter>01.Scene_Stage\02.Weapon\04.NPCRifle</Filter>
@@ -555,8 +575,17 @@
     <ClCompile Include="..\Code\Sniper.cpp">
       <Filter>01.Scene_Stage\02.Weapon\03.Sniper</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\HdrObject.cpp">
-      <Filter>02.Scene_All\07.HDRObject</Filter>
+    <ClCompile Include="..\Code\HPKit.cpp">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\00.HPKit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CardKey.cpp">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\04.CardKey</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\OptionUI.cpp">
+      <Filter>03.UI\07.OptionUI\00.OptionBack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\EquipUI.cpp">
+      <Filter>03.UI\07.OptionUI\02.EquipUI</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FadeOut.cpp">
       <Filter>02.Scene_All\06.EffectObject\03.FadeOut</Filter>

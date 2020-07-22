@@ -24,6 +24,7 @@ private:
 
 public:
 	void						Set_ShowUI(_bool bIsShow) { m_bIsShow = bIsShow; }
+	void						Set_AddItemNum(_uint iItemIdx, _uint iAddNum) { m_iItemNum[iItemIdx] += iAddNum; }
 
 public:
 	HRESULT						Ready_GameObjectPrototype();
@@ -52,7 +53,7 @@ private:
 	POINT						m_pt = {};
 	_bool						m_bIsShow = true;
 
-	_uint						m_iItemNum[3] = {};
+	_uint						m_iItemNum[3] = {};		// 0 - Kit, 1 - medicine, 2 - bandage 
 
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);

@@ -4,6 +4,7 @@
 #include "Transform.h"
 #include "NaviMesh.h"
 #include "BoxCollider.h"
+#include "Astar.h"
 
 namespace Engine
 {
@@ -11,6 +12,7 @@ namespace Engine
 	class CMesh;
 	class CBoxCollider;
 	class CNaviMesh;
+	class CAstar;
 }
 
 class CZombi
@@ -42,6 +44,7 @@ public:
 	
 	void					Set_Transform(CTransform* pTransform) { m_pTransCom = pTransform; m_pTransCom->AddRef(); }
 	void					Set_NaviMesh(CNaviMesh* pNavimesh) { m_pNaviMesh = pNavimesh; m_pNaviMesh->AddRef(); }
+	void					Set_Astar(CAstar* pAstar) { m_pAstarCom = pAstar; m_pAstarCom->AddRef(); }
 
 public:		// 상호작용 
 	const _bool&			Get_IsDeadZombi() const { return m_bIsZombiState[1]; }
@@ -51,7 +54,11 @@ public:		// 상호작용
 	const _float&			Get_CurHp() { return m_fCurHp; }	
 	void					Set_HitDamage(_float fDamage) { m_fHitDamage = fDamage; }
 	const _float&			Get_AtkDamage() { return m_fAtkDamage; }
+	void					Set_InitAni(_uint iAni) { m_iInitAni = iAni; }
+
 private:
+	void					MoveByAstar(const _float& fTimeDelta);
+	void					Update_ZombiHP();
 	void					Chase_Player(const _float& fTimeDelta);
 	_bool					Check_PlayerRange(_float fRange);
 
@@ -61,6 +68,7 @@ private:
 
 	CTransform*				m_pTransCom = nullptr;
 	CNaviMesh*				m_pNaviMesh = nullptr;
+	CAstar*					m_pAstarCom = nullptr;
 	Engine::CMesh*			m_pMeshCom = nullptr;
 
 private:
@@ -78,6 +86,8 @@ private:
 	_float					m_fSpeed = 0.f;
 	_float					m_fCurHp = 0.f;
 	_float					m_fMaxHp = 0.f;
+
+	_uint					m_iInitAni;
 
 	//여기좀추가햇으
 	_bool m_bIsDeadSound = false;

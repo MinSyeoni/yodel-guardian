@@ -6,6 +6,7 @@
 #include "GraphicDevice.h"
 #include "ColliderMgr.h"
 #include "Frustom.h"
+#include "EquipUI.h"
 
 CPassageDoor::CPassageDoor(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 			:CGameObject(pGraphicDevice,pCommandList)
@@ -60,11 +61,12 @@ _int CPassageDoor::Update_GameObject(const _float & fTimeDelta)
 	m_pBoxCol->Update_Collider(&m_pTransCom->m_matWorld);
 	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCol);
 
-	// 일단 M누르면 열림 나중에 npc 상호작용 해줘야 함. 
-	if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_M) && !m_bIsOpen && m_bIsCollision)
-		m_eDoorState = PASSAGE_OPEN;
-	else if (!m_bIsCollision && m_bIsOpen)
-		m_eDoorState = PASSAGE_CLOSE;
+	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
+	for (auto& pSrc : *pEquipUIList)
+		if (CEquipUI::E_DOOROPEN_P == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
+			m_pGameObject = dynamic_cast<CEquipUI*>(pSrc);
+
+	OpenTheDoor();
 
 	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)m_eDoorState);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f * fTimeDelta);
@@ -72,8 +74,22 @@ _int CPassageDoor::Update_GameObject(const _float & fTimeDelta)
 	return NO_EVENT;
 }
 
+void CPassageDoor::OpenTheDoor()
+{
+	if (!m_bIsCardKey)
+		return;
+
+	if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && !m_bIsOpen && m_bIsCollision)
+		m_eDoorState = PASSAGE_OPEN;
+	else if (!m_bIsCollision && m_bIsOpen)
+		m_eDoorState = PASSAGE_CLOSE;
+}
+
 _int CPassageDoor::LateUpdate_GameObject(const _float & fTimeDelta)
 {
+	if (!CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
+		return NO_EVENT;
+
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCol), -1);
 
@@ -81,12 +97,12 @@ _int CPassageDoor::LateUpdate_GameObject(const _float & fTimeDelta)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 
 	PassageDoor_AniState();
-	OpenTheDoor();
+	ColiisionTheDoor();
 
 	return NO_EVENT;
 }
 
-void CPassageDoor::OpenTheDoor()
+void CPassageDoor::ColiisionTheDoor()
 {
 	// 스1과 통로 연결할 곳
 	_vec3 vShaveDir;
@@ -94,11 +110,14 @@ void CPassageDoor::OpenTheDoor()
 	{
 		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCol, pCol, &vShaveDir))
 		{
-			//	m_pTargetPlayer->Move_Collision(&vShaveDir);
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(!m_bIsOpen);
 			m_bIsCollision = true;
 		}
 		else
+		{
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 			m_bIsCollision = false;
+		}
 	}
 }
 
@@ -118,7 +137,8 @@ void CPassageDoor::PassageDoor_AniState()
 	break;
 	case CPassageDoor::PASSAGE_OPEN:
 	{
-		m_fAniDelay = 4000.f;
+		m_fAniDelay = 4000.f;		
+		dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, PASSAGE_OPEN))
 			m_eDoorState = PASSAGE_ALREADYOPEN;
 	}

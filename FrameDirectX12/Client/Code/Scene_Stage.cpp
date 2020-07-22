@@ -24,6 +24,7 @@
 #include "NpcWords.h"
 #include "OptionUI.h"
 #include "OnUI.h"
+#include "EquipUI.h"
 
 #include "MapObject.h"
 #include "HPKit.h"
@@ -32,6 +33,7 @@
 #include "Trigger.h"
 #include "LobbyDoor.h"
 #include "PassageDoor.h"
+#include "CardKey.h"
 
 #include "LightObject.h"
 #include "DamageBlood.h"
@@ -72,6 +74,8 @@ HRESULT CScene_Stage::Ready_Scene()
 #ifdef _DEBUG
 	COUT_STR("Ready Scene_Stage");
 #endif
+
+	srand((unsigned int)time(0));
 
 	FAILED_CHECK_RETURN(Ready_GameObjectPrototype(), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_LayerCamera(L"Layer_Camera"), E_FAIL);
@@ -143,12 +147,10 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Sniper", pGameObject), E_FAIL);
 
-
 	////////////////////NPC/////////////////////////
 	pGameObject = CSalone::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Salone", pGameObject), E_FAIL);
-
 
 	////////////////////////////////// MAP /////////////////////////////////////////////
 	pGameObject = CMapObject::Create(m_pGraphicDevice, m_pCommandList);
@@ -170,6 +172,10 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = CPassageDoor::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_PassageDoor", pGameObject), E_FAIL);
+
+	pGameObject = CCardKey::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_CardKey", pGameObject), E_FAIL);
 
 	////////////////////////////////// UI /////////////////////////////////////////////
 	pGameObject = CUI::Create(m_pGraphicDevice, m_pCommandList);
@@ -207,6 +213,10 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = COnUI::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_OnUI", pGameObject), E_FAIL);
+
+	pGameObject = CEquipUI::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_EquipUI", pGameObject), E_FAIL);
 
 	pGameObject = CDamageBlood::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -342,7 +352,6 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_OptionUI", L"OptionUI", nullptr), E_FAIL);
 
 	//////// 아이콘 //////
-
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_IconUI", L"IconUI", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", nullptr), E_FAIL);
 
@@ -354,10 +363,12 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 	for (int i = 0; i < 7; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_OnUI", L"OnUI", &(iType = i)), E_FAIL);
 
-
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 
 
+
+	for (int i = 0; i < 5; ++i)
+		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_EquipUI", L"EquipUI", &(iType = i)), E_FAIL);
 
 	return S_OK;
 }
@@ -385,6 +396,8 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 		if (dwByte == 0)
 			break;
 
+	//	m_tMeshInfo.iMeshID = rand() % 4;
+		m_tMeshInfo.iMeshID = 4;		// 달리는 걸로 
 		m_tMeshInfo.Pos = tColData.vCenter;
 		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Monster", m_tMeshInfo.MeshTag, &m_tMeshInfo);
 	}
@@ -460,6 +473,8 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LobbyDoor", L"LobbyDoor", &m_tMeshInfo);
 		else if (m_tMeshInfo.MeshTag == L"door2.X")
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_PassageDoor", L"PassageDoor", &m_tMeshInfo);
+		else if (m_tMeshInfo.MeshTag == L"card.X")
+			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_CardKey", L"CardKey", &m_tMeshInfo);
 		else
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
 	}

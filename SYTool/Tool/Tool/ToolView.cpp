@@ -368,6 +368,26 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"door2.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"door2.x"), E_FAIL))
 		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"card.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"card.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"SquareCliffL.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"SquareCliffL.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"CornerCliffS.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"CornerCliffS.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"CornerCliffL.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"CornerCliffL.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"RoundCliffS.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"RoundCliffS.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"RoundCliffL.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"RoundCliffL.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"apollo.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"apollo.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"passage_top.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"passage_top.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"passage_side.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"passage_side.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"passage_bottom.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"passage_bottom.x"), E_FAIL))
+		return;
 
 	///// 테스트 /////
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"test.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"test.x"), E_FAIL))

@@ -1,4 +1,5 @@
 ﻿  AniCtrl.cpp
+  Buffer_Terrain.cpp
   Cell.cpp
   CubeTex.cpp
   DynamicMesh.cpp
@@ -6,58 +7,18 @@
   Line.cpp
   Mesh.cpp
   NaviMesh.cpp
-..\Code\NaviMesh.cpp(37): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-..\Code\NaviMesh.cpp(327): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   RcCol.cpp
   RcTex.cpp
   Resources.cpp
   ResourcesMgr.cpp
   StaticMesh.cpp
   TerrainTex.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(130,57): warning C4244: '인수': 'unsigned long'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(130,37): warning C4244: '인수': 'unsigned long'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Texture.cpp
   TriCol.cpp
   VIBuffer.cpp
      ../Bin\Resources.lib 라이브러리 및 ../Bin\Resources.exp 개체를 생성하고 있습니다.
-  코드를 생성하고 있습니다.
-c:\users\leeso\downloads\earthfall3\engine\resources\code\navimesh.cpp(245): warning C4715: 'Engine::CNaviMesh::Move_NaviMesh': 모든 제어 경로에서 값을 반환하지는 않습니다.
-  1307 of 1307 functions (100.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  코드를 생성했습니다.
-  Resources.vcxproj -> C:\Users\Leeso\Downloads\Earthfall3\Engine\Resources\Include\../Bin\Resources.dll
-  Resources.vcxproj -> ../Bin\Resources.pdb (Full PDB)
-  .\Engine\Resources\Code\AniCtrl.h
-  .\Engine\Resources\Code\Cell.h
-  .\Engine\Resources\Code\CubeTex.h
-  .\Engine\Resources\Code\DynamicMesh.h
-  .\Engine\Resources\Code\HierarchyLoader.h
-  .\Engine\Resources\Code\Line.h
-  .\Engine\Resources\Code\Mesh.h
-  .\Engine\Resources\Code\NaviMesh.h
-  .\Engine\Resources\Code\RcCol.h
-  .\Engine\Resources\Code\RcTex.h
-  .\Engine\Resources\Code\Resources.h
-  .\Engine\Resources\Code\ResourcesMgr.h
-  .\Engine\Resources\Code\StaticMesh.h
-  .\Engine\Resources\Code\TerrainTex.h
-  .\Engine\Resources\Code\Texture.h
-  .\Engine\Resources\Code\TriCol.h
-  .\Engine\Resources\Code\VIBuffer.h
-         17개 파일이 복사되었습니다.
-          1개 파일이 복사되었습니다.
-          1개 파일이 복사되었습니다.
-  .\Engine\Headers\Engine_Defines.h
-  .\Engine\Headers\Engine_Enum.h
-  .\Engine\Headers\Engine_Function.h
-  .\Engine\Headers\Engine_Macro.h
-  .\Engine\Headers\Engine_Struct.h
-  .\Engine\Headers\Engine_Typedef.h
-  .\Engine\Headers\Export_Function.h
-  .\Engine\Headers\Export_Resources.h
-  .\Engine\Headers\Export_System.h
-  .\Engine\Headers\Export_Utility.h
-         10개 파일이 복사되었습니다.
-  .\Engine\Headers\Export_Resources.inl
-  .\Engine\Headers\Export_System.inl
-  .\Engine\Headers\Export_Utility.inl
-          3개 파일이 복사되었습니다.
+DynamicMesh.obj : error LNK2001: __imp___CrtDbgReport 외부 기호를 확인할 수 없습니다.
+DynamicMesh.obj : error LNK2001: __imp___invalid_parameter 외부 기호를 확인할 수 없습니다.
+..\Bin\Resources.dll : fatal error LNK1120: 2개의 확인할 수 없는 외부 참조입니다.

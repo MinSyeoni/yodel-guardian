@@ -5,6 +5,9 @@
 #include "ObjectMgr.h"
 #include "ColliderMgr.h"
 #include "DirectSound.h"
+#include "Player.h"
+#include "PlayerStatus.h"
+
 CZombi::CZombi()
 {
 	Initialized();
@@ -17,24 +20,24 @@ CZombi::~CZombi()
 
 void CZombi::Initialized()
 {
-	m_eCurState = ZOM_CB_CombatActive_Ceiling;
-	m_ePreState = m_eCurState;
 	m_bIsDeadSound = false;
 	m_fCurHp = m_fMaxHp = 100.f;
 }
 
 HRESULT CZombi::Late_Initialized()
 {
-	//_int iRandAni = rand() % 4;
+	if (m_iInitAni == 0)
+		m_eCurState = ZOM_CB_CombatActive_Ceiling;
+	else if (m_iInitAni == 1)
+		m_eCurState = ZOM_CB_CombatActive;
+	else if (m_iInitAni == 2)
+		m_eCurState = ZOM_DG_GetUpBack;
+	else if (m_iInitAni == 3)
+		m_eCurState = ZOM_DG_GetUpFront;
+	else if (m_iInitAni == 4)
+		m_eCurState = ZOM_EX_Run;
 
-	//if (iRandAni == 0)
-	//	m_eCurState = ZOM_CB_CombatActive_Ceiling;
-	//else if (iRandAni == 1)
-	//	m_eCurState = ZOM_CB_CombatActive;
-	//else if (iRandAni == 2)
-	//	m_eCurState = ZOM_DG_GetUpBack;
-	//else if (iRandAni == 3)
-	//	m_eCurState = ZOM_DG_GetUpFront;
+	m_ePreState = m_eCurState;
 
 	return S_OK;
 }
@@ -50,11 +53,64 @@ _int CZombi::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform, CMes
 		m_fTime = 0.f;
 		m_ePreState = m_eCurState;
 	}
-
+	
 	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+	if (pPlayer == nullptr)
+		return E_FAIL;
+
 	m_vPlayerPos = pPlayer->Get_Transform()->m_vPos;
 
 	// Ã¼·Â 
+	Update_ZombiHP();
+
+	if (m_bIsZombiState[2])	// m_bIsHit
+		m_eCurState = ZOM_EX_IdleOffset;
+
+	return S_OK;
+}
+
+void CZombi::MoveByAstar(const _float& fTimeDelta)
+{
+	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+	if (pPlayer == nullptr)
+		return;
+
+	CTransform* pPlayerTranForm = pPlayer->Get_Transform();
+	CNaviMesh* pPlayerNavi = dynamic_cast<CPlayer*>(pPlayer)->Get_Status()->m_pNaviMesh;
+
+	m_pAstarCom->Start_Aster(m_pTransCom->m_vPos, pPlayerTranForm->m_vPos, m_pNaviMesh->GetIndex(), pPlayerNavi->GetIndex());
+
+	list<Engine::CCell*>& BestLst = m_pAstarCom->GetBestLst();
+
+	if (!BestLst.empty())
+	{
+		_vec3 vecDir = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
+
+		BestLst.pop_front();
+		if (!BestLst.empty())
+		{
+			_vec3 vecDir2 = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
+
+			vecDir = (vecDir + vecDir2) * 0.5;
+			BestLst.pop_front();
+			if (!BestLst.empty())
+			{
+				vecDir2 = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
+				vecDir = (vecDir + vecDir2) * 0.5;
+			}
+		}
+
+		vecDir.Normalize();
+		_vec3 vMovePos;
+
+		vMovePos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &vecDir, fTimeDelta * m_fSpeed);
+
+		m_pTransCom->m_vPos = vMovePos;
+	}
+}
+
+void CZombi::Update_ZombiHP()
+{
 	if (m_fCurHp <= 0.f)
 	{
 		m_fCurHp = 0.f;
@@ -66,11 +122,6 @@ _int CZombi::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform, CMes
 		m_bIsDeadSound = true;
 		CDirectSound::Get_Instance()->PlayDirectSoundFile(L"ZombiDead");
 	}
-
-	if (m_bIsZombiState[2])	// m_bIsHit
-		m_eCurState = ZOM_EX_IdleOffset;
-
-	return S_OK;
 }
 
 void CZombi::Chase_Player(const _float& fTimeDelta)
@@ -111,7 +162,7 @@ void CZombi::Chase_Player(const _float& fTimeDelta)
 	}
 
 	m_pTransCom->m_vDir = m_vChaseDir;
-	m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_vChaseDir, m_fSpeed * fTimeDelta);
+//	m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_vChaseDir, m_fSpeed * fTimeDelta);
 }
 
 _bool CZombi::Check_PlayerRange(_float fRange)
@@ -211,7 +262,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombi::ZOM_EX_Run:
 	{
-		m_fSpeed = 3.5f;
+		m_fSpeed = 4.5f;
 
 		if (Check_PlayerRange(8.f))
 		{
@@ -228,14 +279,16 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		else
 		{
 			Chase_Player(fTimeDelta);
+			MoveByAstar(fTimeDelta);
 		}
 	}
 		break;
 	case CZombi::ZOM_EX_WalkSlow:
 	{
-		m_fSpeed = 1.5f;
+		m_fSpeed = 2.f;
 
-		m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed * fTimeDelta);
+		Chase_Player(fTimeDelta);
+		MoveByAstar(fTimeDelta);
 
 		if (Check_PlayerRange(100.f))
 		{
@@ -305,4 +358,5 @@ void CZombi::Release()
 {
 	Safe_Release(m_pTransCom);
 	Safe_Release(m_pNaviMesh);
+	Safe_Release(m_pAstarCom);
 }
