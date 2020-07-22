@@ -31,7 +31,8 @@ HRESULT CEquipUI::Ready_GameObject()
 HRESULT CEquipUI::LateInit_GameObject()
 {
 	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());
-
+	
+	m_pTransCom->m_vScale = _vec3{ 0.07f, 0.04f, 0.07f };
 	m_pTransCom->m_vPos.x = _float(2.f / WINCX * WINCX / 2) - 1.f;
 	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * WINCY / 2) + 1.f;
 
@@ -56,9 +57,11 @@ _int CEquipUI::LateUpdate_GameObject(const _float& fTimeDelta)
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
+	m_pTransCom->m_vPos.x = (((2.0f * m_vPos.x) / WINCX) * 0.5f) - 0.3f;
+	m_pTransCom->m_vPos.y = (((-2.0f * m_vPos.y) / WINCY) * 0.5f) - 0.2f;
+
 	return NO_EVENT;
 }
-
 
 void CEquipUI::Render_GameObject(const _float& fTimeDelta)
 {
@@ -66,13 +69,10 @@ void CEquipUI::Render_GameObject(const _float& fTimeDelta)
 		return;
 
 	Set_ConstantTable();
-
 	m_pShaderCom->Begin_Shader();
 	m_pBufferCom->Begin_Buffer();
-
 	m_pShaderCom->End_Shader();
 	m_pBufferCom->End_Buffer();
-
 	m_pBufferCom->Render_Buffer();
 }
 
@@ -89,12 +89,35 @@ HRESULT CEquipUI::Add_Component()
 	m_pShaderCom = static_cast<Engine::CShader_UI*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_UI", COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
-
-	// Texture 
-	m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_OptionUI", COMPONENTID::ID_STATIC));
+	
+	// Texture
+	wstring wstrPrototype = L"";
+	switch (m_eEquipType)
+	{
+	case CEquipUI::E_CONVERSATION:
+		wstrPrototype = L"Prototype_Texture_E_Conversation";
+		break;
+	case CEquipUI::E_KEYEQUIP:
+		wstrPrototype = L"Prototype_Texture_E_Equip";
+		break;
+	case CEquipUI::E_HIDING:
+		wstrPrototype = L"Prototype_Texture_E_Hiding";
+		break;
+	case CEquipUI::E_DOOROPEN_L:
+		wstrPrototype = L"Prototype_Texture_E_DoorOpen";
+		break;
+	case CEquipUI::E_DOOROPEN_P:
+		wstrPrototype = L"Prototype_Texture_E_DoorOpen";
+		break;
+	case CEquipUI::EQUIP_END:
+		break;
+	default:
+		break;
+	}
+	m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(wstrPrototype, COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
-
+	
 	// TransCom 
 	m_pTransCom = static_cast<CTransform*>(m_pComponentMgr->Clone_Component(L"Prototype_Transform", COMPONENTID::ID_DYNAMIC));
 	if (nullptr != m_pTransCom) 
@@ -125,7 +148,7 @@ CGameObject* CEquipUI::Clone_GameObject(void* pArg)
 	CGameObject* pInstance = new CEquipUI(*this);
 
 	_uint iEquipIdx = *reinterpret_cast<_uint*>(pArg);
-	static_cast<CEquipUI*>(pInstance)->m_eEquipType = (EQUIP_TYPE)iEquipIdx;
+	static_cast<CEquipUI*>(pInstance)->m_eEquipType = (CEquipUI::EQUIP_TYPE)iEquipIdx;
 
 	if (FAILED(pInstance->Ready_GameObject()))
 		return nullptr;

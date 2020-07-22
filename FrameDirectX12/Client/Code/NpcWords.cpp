@@ -5,6 +5,7 @@
 #include "IconUI.h"
 #include "GunUI.h"
 #include "InvenUI.h"
+#include "EquipUI.h"
 
 CNpcWords::CNpcWords(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -158,14 +159,12 @@ void CNpcWords::Next_ConversationJudje()
 			CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
 			dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(true);
 
-			CGameObject* pInvenList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
-			dynamic_cast<CInvenUI*>(pInvenList)->Set_ShowUI(true);
+			CGameObject* pInvenUI= CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
+			dynamic_cast<CInvenUI*>(pInvenUI)->Set_ShowUI(true);
 
-
-			//list<CGameObject*>* pInvenList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"InvenUI");
-			//for (auto& pSrc : *pInvenList)
-			//	dynamic_cast<CInvenUI*>(pSrc)->Set_ShowUI(true);
-
+			list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
+			for (auto& pSrc : *pEquipUIList)
+				dynamic_cast<CEquipUI*>(pSrc)->Set_ShowUI(false);
 
 			m_eWordsType = TYPE_END;
 			m_bIsShow = false;

@@ -6,6 +6,7 @@
 #include "GraphicDevice.h"
 #include "ColliderMgr.h"
 #include "Frustom.h"
+#include "EquipUI.h"
 
 CPassageDoor::CPassageDoor(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 			:CGameObject(pGraphicDevice,pCommandList)
@@ -60,6 +61,11 @@ _int CPassageDoor::Update_GameObject(const _float & fTimeDelta)
 	m_pBoxCol->Update_Collider(&m_pTransCom->m_matWorld);
 	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCol);
 
+	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
+	for (auto& pSrc : *pEquipUIList)
+		if (CEquipUI::E_DOOROPEN_P == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
+			m_pGameObject = dynamic_cast<CEquipUI*>(pSrc);
+
 	OpenTheDoor();
 
 	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)m_eDoorState);
@@ -104,11 +110,14 @@ void CPassageDoor::ColiisionTheDoor()
 	{
 		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCol, pCol, &vShaveDir))
 		{
-			//	m_pTargetPlayer->Move_Collision(&vShaveDir);
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(!m_bIsOpen);
 			m_bIsCollision = true;
 		}
 		else
+		{
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 			m_bIsCollision = false;
+		}
 	}
 }
 
@@ -128,7 +137,8 @@ void CPassageDoor::PassageDoor_AniState()
 	break;
 	case CPassageDoor::PASSAGE_OPEN:
 	{
-		m_fAniDelay = 4000.f;
+		m_fAniDelay = 4000.f;		
+		dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, PASSAGE_OPEN))
 			m_eDoorState = PASSAGE_ALREADYOPEN;
 	}

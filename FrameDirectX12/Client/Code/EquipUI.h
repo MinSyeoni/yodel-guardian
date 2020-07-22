@@ -16,7 +16,7 @@ class CDynamicCamera;
 class CEquipUI : public Engine::CGameObject
 {
 public:
-	enum EQUIP_TYPE { E_CONVERSATION, E_EQUIP, E_HIDING, E_DOOROPEN, EQUIP_END };
+	enum EQUIP_TYPE { E_CONVERSATION, E_KEYEQUIP, E_HIDING, E_DOOROPEN_L, E_DOOROPEN_P, EQUIP_END };
 
 private:
 	explicit CEquipUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
@@ -33,6 +33,8 @@ public:
 
 public:
 	void						Set_ShowUI(_bool bIsShow) { m_bIsShow = bIsShow; }
+	EQUIP_TYPE&					Get_EquipType() { return m_eEquipType; }
+	void						Set_EquipPos(_float fPosX, _float fPosY) { m_vPos.x = fPosX; m_vPos.y = fPosY; }
 
 private:
 	virtual HRESULT				Add_Component();
@@ -48,6 +50,7 @@ private:
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
 
 	_bool						m_bIsShow = false;
+	_vec3						m_vPos = _vec3{ 0.f,0.f,0.f };
 	EQUIP_TYPE					m_eEquipType = EQUIP_END;
 
 public:

@@ -142,9 +142,6 @@
     <Filter Include="01.Scene_Stage\00.Player\01.PlayerStatus">
       <UniqueIdentifier>{a66796dc-9b78-40be-a3dd-b617722c6bc1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.UI\03.PlayerUI">
-      <UniqueIdentifier>{5bc3d12b-32ee-47ff-80e1-66ac7d11fb48}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05.Loading">
       <UniqueIdentifier>{b12196e0-3829-4a1c-8527-7392b0c7418d}</UniqueIdentifier>
     </Filter>

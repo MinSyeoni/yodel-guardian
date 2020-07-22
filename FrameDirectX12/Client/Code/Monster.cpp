@@ -70,6 +70,8 @@ HRESULT CMonster::Ready_GameObject()
 	{
 		m_pZombi = new CZombi;
 		m_pZombi->Set_InitAni(m_iInitAni);
+		if (m_iInitAni == 4)
+			m_bIsActive = true;
 		m_pZombi->Set_Transform(m_pTransCom);
 		m_pZombi->Set_NaviMesh(m_pNaviCom);
 	}
@@ -235,7 +237,8 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 
 void CMonster::Render_GameObject(const _float & fTimeDelta)
 {
-	if (!m_bIsActive)	return;
+	if (!m_bIsActive)
+		return;
 
 	Set_ConstantTable();
 

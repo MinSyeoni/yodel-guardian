@@ -27,12 +27,12 @@ public:
 	virtual _int				Update_GameObject(const _float& fTimeDelta);
 	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void				Render_GameObject(const _float& fTimeDelta);
-
 	virtual void				SetMeshInfo(MeshInfo tInfo) { m_tMeshInfo = tInfo; }
 
 private:
 	virtual HRESULT				Add_Component();
 	void						PutTheCard_OnTheDoor();
+	void						Coliision_CardAndPlayer();
 
 private:
 	void						Set_ConstantTable();
@@ -47,7 +47,7 @@ private:
 	MeshInfo					m_tMeshInfo;
 	
 	_bool						m_bIsEquip = false;
-
+	CGameObject*				m_pGameObject = nullptr;
 public:
 	virtual CGameObject*		Clone_GameObject(void* prg);
 	static CCardKey*			Create(ID3D12Device* pGraphicDevice,

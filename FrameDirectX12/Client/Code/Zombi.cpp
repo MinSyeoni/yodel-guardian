@@ -34,6 +34,8 @@ HRESULT CZombi::Late_Initialized()
 		m_eCurState = ZOM_DG_GetUpBack;
 	else if (m_iInitAni == 3)
 		m_eCurState = ZOM_DG_GetUpFront;
+	else if (m_iInitAni == 4)
+		m_eCurState = ZOM_EX_Run;
 
 	m_ePreState = m_eCurState;
 

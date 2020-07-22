@@ -24,6 +24,7 @@
 #include "NpcWords.h"
 #include "OptionUI.h"
 #include "OnUI.h"
+#include "EquipUI.h"
 
 #include "MapObject.h"
 #include "HPKit.h"
@@ -108,6 +109,9 @@ _int CScene_Stage::LateUpdate_Scene(const _float & fTimeDelta)
 		dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(false);
 		CGameObject* pInvenUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
 		dynamic_cast<CInvenUI*>(pInvenUI)->Set_ShowUI(false);
+		list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
+		for (auto& pSrc : *pEquipUIList)
+			dynamic_cast<CEquipUI*>(pSrc)->Set_ShowUI(false);
 	}
 
 	return Engine::CScene::LateUpdate_Scene(fTimeDelta);
@@ -160,12 +164,10 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Sniper", pGameObject), E_FAIL);
 
-
 	////////////////////NPC/////////////////////////
 	pGameObject = CSalone::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Salone", pGameObject), E_FAIL);
-
 
 	////////////////////////////////// MAP /////////////////////////////////////////////
 	pGameObject = CMapObject::Create(m_pGraphicDevice, m_pCommandList);
@@ -228,6 +230,10 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = COnUI::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_OnUI", pGameObject), E_FAIL);
+
+	pGameObject = CEquipUI::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_EquipUI", pGameObject), E_FAIL);
 
 	pGameObject = CDamageBlood::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -365,10 +371,12 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 	for (int i = 0; i < 7; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_OnUI", L"OnUI", &(iType = i)), E_FAIL);
 
-
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcBoard", L"NpcBoard", nullptr), E_FAIL);
+
+	for (int i = 0; i < 5; ++i)
+		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_EquipUI", L"EquipUI", &(iType = i)), E_FAIL);
 
 	return S_OK;
 }
@@ -396,7 +404,8 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 		if (dwByte == 0)
 			break;
 
-		m_tMeshInfo.iMeshID = rand() % 4;
+	//	m_tMeshInfo.iMeshID = rand() % 4;
+		m_tMeshInfo.iMeshID = 4;		// 달리는 걸로 
 		m_tMeshInfo.Pos = tColData.vCenter;
 		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Monster", m_tMeshInfo.MeshTag, &m_tMeshInfo);
 	}

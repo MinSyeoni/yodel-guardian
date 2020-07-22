@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "LobbyDoor.h"
-
+#include "EquipUI.h"
 #include "ObjectMgr.h"
 #include "DirectInput.h"
 #include "DynamicCamera.h"
@@ -61,16 +61,25 @@ _int CLobbyDoor::Update_GameObject(const _float & fTimeDelta)
 	m_pBoxCol->Update_Collider(&m_pTransCom->m_matWorld);
 	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCol);
 
-	// 일단 M누르면 열림 나중에 npc 상호작용 해줘야 함. 
-	if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_M) && !m_bIsOpen && m_bIsCollision)
-		m_eDoorState = DOOR_OPEN;
-	else if (!m_bIsCollision && m_bIsOpen)
-		m_eDoorState = DOOR_CLOSE;
+	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
+	for (auto& pSrc : *pEquipUIList)
+		if (CEquipUI::E_DOOROPEN_L == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
+			m_pGameObject = dynamic_cast<CEquipUI*>(pSrc);
+
+	OpenTheDoor();
 
 	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)m_eDoorState);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f * fTimeDelta);
 
 	return NO_EVENT;
+}
+
+void CLobbyDoor::OpenTheDoor()
+{
+	if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && !m_bIsOpen && m_bIsCollision)
+		m_eDoorState = DOOR_OPEN;
+	else if (!m_bIsCollision && m_bIsOpen)
+		m_eDoorState = DOOR_CLOSE;
 }
 
 _int CLobbyDoor::LateUpdate_GameObject(const _float & fTimeDelta)
@@ -85,23 +94,26 @@ _int CLobbyDoor::LateUpdate_GameObject(const _float & fTimeDelta)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 
 	LobbyDoor_AniState();
-	OpenTheDoor();
+	CollisionTheDoor();
 
 	return NO_EVENT;
 }
 
-void CLobbyDoor::OpenTheDoor()
+void CLobbyDoor::CollisionTheDoor()
 {
 	_vec3 vShaveDir;
 	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYER))
 	{
 		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCol, pCol, &vShaveDir))
 		{
-			//	m_pTargetPlayer->Move_Collision(&vShaveDir);
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(!m_bIsOpen);
 			m_bIsCollision = true;
 		}
 		else
+		{
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 			m_bIsCollision = false;
+		}
 	}
 }
 
@@ -122,6 +134,7 @@ void CLobbyDoor::LobbyDoor_AniState()
 	case CLobbyDoor::DOOR_OPEN:
 	{
 		m_fAniDelay = 5000.f;
+		dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, DOOR_OPEN))
 			m_eDoorState = DOOR_ALREADYOPEN;
 	}

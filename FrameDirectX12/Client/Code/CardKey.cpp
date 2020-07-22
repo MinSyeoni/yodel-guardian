@@ -6,6 +6,7 @@
 #include "ColliderMgr.h"
 #include "Frustom.h"
 #include "PassageDoor.h"
+#include "EquipUI.h"
 
 CCardKey::CCardKey(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -61,19 +62,35 @@ _int CCardKey::Update_GameObject(const _float& fTimeDelta)
 	m_pBoxCollider->Update_Collider(&m_pTransCom->m_matWorld);
 	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCollider);
 
-	// 플레이어 키 연동 
-	_vec3 vShaveDir;
-	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYER))
-	{
-		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir)
-			&& CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && !m_bIsEquip)
-			m_bIsEquip = true;
-	}
-
 	// 일단 카드 키를 문에다가 직접 댈 때
+	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
+	for (auto& pSrc : *pEquipUIList)
+		if (CEquipUI::E_KEYEQUIP == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
+			m_pGameObject = dynamic_cast<CEquipUI*>(pSrc);
+
 	PutTheCard_OnTheDoor();
 	
 	return NO_EVENT;
+}
+
+void CCardKey::Coliision_CardAndPlayer()
+{
+	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
+
+	_vec3 vShaveDir;
+	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYER))
+	{
+		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir))
+		{
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_EquipPos(m_pTransCom->m_vPos.x, m_pTransCom->m_vPos.y);
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(true);
+
+			if(CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && !m_bIsEquip)
+				m_bIsEquip = true;
+		}
+		else
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
+	}
 }
 
 void CCardKey::PutTheCard_OnTheDoor()
@@ -83,12 +100,9 @@ void CCardKey::PutTheCard_OnTheDoor()
 	if (nullptr == pPassageDoor)
 		return;
 
-	auto pBoxCol = dynamic_cast<CPassageDoor*>(pPassageDoor)->Get_DoorCollider();
-
-	if (!m_bIsDead && CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && m_bIsEquip)
+	if (!m_bIsDead && m_bIsEquip)
 	{
 		dynamic_cast<CPassageDoor*>(pPassageDoor)->Set_IsCardToDoor(true);
-		m_bIsEquip = false;
 		m_bIsDead = true;
 	}
 }
@@ -102,6 +116,9 @@ _int CCardKey::LateUpdate_GameObject(const _float & fTimeDelta)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCollider), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
+
+	// 플레이어 키 연동 
+	Coliision_CardAndPlayer();
 
 	return NO_EVENT;
 }

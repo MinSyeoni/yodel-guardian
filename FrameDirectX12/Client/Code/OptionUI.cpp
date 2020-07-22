@@ -7,6 +7,7 @@
 #include "DirectInput.h"
 #include "OnUI.h"
 #include "UI.h"
+#include "EquipUI.h"
 
 COptionUI::COptionUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -87,23 +88,25 @@ void COptionUI::Show_OtherUI()
 	for (auto& pSrc : *pHpBarUIList)
 		dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(!m_bIsShow);
 
-
 	list<CGameObject*>* pOnUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"OnUI");
 	for (auto& pSrc : *pOnUIList)
 		dynamic_cast<COnUI*>(pSrc)->Set_ShowUI(m_bIsShow);
 
-	CGameObject* pIconUIList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"IconUI");
-	dynamic_cast<CIconUI*>(pIconUIList)->Set_ShowUI(!m_bIsShow);
+	CGameObject* pIconUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"IconUI");
+	dynamic_cast<CIconUI*>(pIconUI)->Set_ShowUI(!m_bIsShow);
 
-	CGameObject* pQuestUIList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"Quest");
-	dynamic_cast<CUI*>(pQuestUIList)->Set_ShowUI(!m_bIsShow);
-
+	CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"Quest");
+	dynamic_cast<CUI*>(pQuestUI)->Set_ShowUI(!m_bIsShow);
 
 	CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
 	dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(!m_bIsShow);
 
-	CGameObject* pInvenList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
-	dynamic_cast<CInvenUI*>(pInvenList)->Set_ShowUI(!m_bIsShow);
+	CGameObject* pInvenUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
+	dynamic_cast<CInvenUI*>(pInvenUI)->Set_ShowUI(!m_bIsShow);
+
+	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
+	for (auto& pSrc : *pEquipUIList)
+		dynamic_cast<CEquipUI*>(pSrc)->Set_ShowUI(!m_bIsShow);
 }
 
 void COptionUI::Render_GameObject(const _float& fTimeDelta)
