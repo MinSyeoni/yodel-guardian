@@ -167,13 +167,15 @@ HRESULT CRenderer::Render_Destortion(const _float& fTimeDelta)
 HRESULT CRenderer::Render_ShadowDepth()
 {
     m_ShadowDepthTarget->SetUp_OnGraphicDev();
-
-    m_pShadowShader->Begin_Shader();
-    for (auto& pGameObject : m_RenderList[RENDER_SHADOWDEPTH])
+    
+    if (m_bISOption[4])
     {
-        pGameObject->Render_ShadowDepth(m_pShadowShader);
+        m_pShadowShader->Begin_Shader();
+        for (auto& pGameObject : m_RenderList[RENDER_SHADOWDEPTH])
+        {
+            pGameObject->Render_ShadowDepth(m_pShadowShader);
+        }
     }
-
     m_pShadowShader->End_Shader();
     m_ShadowDepthTarget->Release_OnGraphicDev();
     return S_OK;
@@ -216,11 +218,14 @@ HRESULT CRenderer::Render_NonAlpha(const _float& fTimeDelta)
     }
 
     m_pLimShader->Begin_Shader();
-    for (auto& pGameObject : m_RenderList[RENDER_LIMLIGHT])
-    {
+    if(m_bISOption[5])
+        for (auto& pGameObject : m_RenderList[RENDER_LIMLIGHT])
+        {
+            {
 
-        pGameObject->Render_LimLight(m_pLimShader);
-    }
+                pGameObject->Render_LimLight(m_pLimShader);
+            }
+        }
     m_pLimShader->End_Shader();
 
 
@@ -283,6 +288,11 @@ HRESULT CRenderer::Render_Blend()
 
         m_blsBlendInit = true;
     }
+    
+    CB_BLEND_INFO	tCB_BlendInfo;
+    ZeroMemory(&tCB_BlendInfo, sizeof(CB_BLEND_INFO));
+    tCB_BlendInfo.OptionInfo = { (float)m_bISOption[0],(float)m_bISOption[1],(float)m_bISOption[2],(float)m_bISOption[3] };
+    m_pBlendShader->Get_UploadBuffer_BlendInfo()->CopyData(0, tCB_BlendInfo);
 
     m_pBlendShader->Begin_Shader();
     m_pBlendBuffer->Begin_Buffer();
@@ -448,50 +458,6 @@ HRESULT CRenderer::Ready_ShaderPrototype()
     pShader = CShader_DefaultTex::Create(m_pGraphicDevice, m_pCommandList, CShader_DefaultTex::ALPHA);
     NULL_CHECK_RETURN(pShader, E_FAIL);
     FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_DefaultTexAlpha", ID_STATIC, pShader), E_FAIL);
-
-    pShader = CShader_UI::Create(m_pGraphicDevice, m_pCommandList, CShader_UI::ALPHA);
-    NULL_CHECK_RETURN(pShader, E_FAIL);
-    FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_UI", ID_STATIC, pShader), E_FAIL);
-
-    pShader = CShader_UI::Create(m_pGraphicDevice, m_pCommandList, CShader_UI::HPBAR);
-    NULL_CHECK_RETURN(pShader, E_FAIL);
-    FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_HPBAR", ID_STATIC, pShader), E_FAIL);
-
-    pShader = CShader_UI::Create(m_pGraphicDevice, m_pCommandList, CShader_UI::HPBAR1);
-    NULL_CHECK_RETURN(pShader, E_FAIL);
-    FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_HPBAR1", ID_STATIC, pShader), E_FAIL);
-
-    pShader = CShader_UI::Create(m_pGraphicDevice, m_pCommandList, CShader_UI::HPBAR2);
-    NULL_CHECK_RETURN(pShader, E_FAIL);
-    FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_HPBAR2", ID_STATIC, pShader), E_FAIL);
-
-    pShader = CShader_LightAcc::Create(m_pGraphicDevice, m_pCommandList, LIGHTTYPE::D3DLIGHT_DIRECTIONAL);
-    NULL_CHECK_RETURN(pShader, E_FAIL);
-    FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_LightDirect", ID_STATIC, pShader), E_FAIL);
-
-
-    pShader = CShader_LightAcc::Create(m_pGraphicDevice, m_pCommandList, LIGHTTYPE::D3DLIGHT_POINT);
-    NULL_CHECK_RETURN(pShader, E_FAIL);
-    FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_LightPoint", ID_STATIC, pShader), E_FAIL);
-
-    pShader = CShader_Destortion::Create(m_pGraphicDevice, m_pCommandList);
-    NULL_CHECK_RETURN(pShader, E_FAIL);
-    FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_Destortion", ID_STATIC, pShader), E_FAIL);
-
-    pShader = CShader_Terrain::Create(DEVICE, m_pCommandList);
-    NULL_CHECK_RETURN(pShader, E_FAIL);
-
-    FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_Terrain", ID_STATIC, pShader), E_FAIL);
-
-
-    pShader = CShader_Effect::Create(DEVICE, m_pCommandList);
-    NULL_CHECK_RETURN(pShader, E_FAIL);
-    FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_Effect", ID_STATIC, pShader), E_FAIL);
-
-    pShader = CShader_Effect::Create(DEVICE, m_pCommandList, CShader_Effect::ALPHABLENDTEX);
-    NULL_CHECK_RETURN(pShader, E_FAIL);
-    FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_EffectAlphaBlend", ID_STATIC, pShader), E_FAIL);
-
 
 
 

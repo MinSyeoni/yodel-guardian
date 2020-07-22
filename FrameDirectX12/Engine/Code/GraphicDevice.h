@@ -184,7 +184,7 @@ private:
 	public:
 		_matrix GetViewMatrix() { return m_matView; };
 		_matrix GetProjMatrix() { return m_matProj; };
-
+		_matrix GetOrthoMatrix() { return m_matOrtho; };
 		void SetViewMatrix(_matrix matView) { m_matView = matView; }
 		void SetProjMatrix(_matrix matProj) { m_matProj = matProj; }
 
@@ -220,6 +220,7 @@ private:
 private:
 	_matrix m_matView = INIT_MATRIX;
 	_matrix m_matProj = INIT_MATRIX;
+	_matrix m_matOrtho = INIT_MATRIX;
 
 private:
 	virtual void Free();

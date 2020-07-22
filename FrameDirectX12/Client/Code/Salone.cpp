@@ -4,6 +4,8 @@
 #include "GraphicDevice.h"
 #include "DynamicCamera.h"
 #include"Frustom.h"
+#include "FadeOut.h"
+#include "DirectInput.h"
 CSalone::CSalone(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -74,6 +76,18 @@ HRESULT CSalone::LateInit_GameObject()
 
 	CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_Camera", L"prototype_Cam1", L"ActionCame", nullptr);
 
+
+	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+	if (pPlayer == nullptr)
+		return E_FAIL;
+
+	m_pPlayer = static_cast<CPlayer*>(pPlayer);
+
+
+
+
+
+
 	return S_OK;
 
 }
@@ -84,6 +98,8 @@ _int CSalone::Update_GameObject(const _float& fTimeDelta)
 
 	if (m_bIsDead)
 		return DEAD_OBJ;
+	FIRTSTTALKCEHCK();
+
 	/*____________________________________________________________________
 	TransCom - Update WorldMatrix.
 	______________________________________________________________________*/
@@ -110,7 +126,10 @@ _int CSalone::LateUpdate_GameObject(const _float& fTimeDelta)
 	if (!CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
 		return NO_EVENT; // 여기야 절투체컬링 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
+
+	if(m_bIsLimLIght)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_LIMLIGHT, this), -1);
+
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	return NO_EVENT;
 }
@@ -136,6 +155,33 @@ void CSalone::Render_LimLight(CShader_LimLight* pShader)
 	Set_LimTable(pShader);
 	m_pMeshCom->Render_LimMesh(pShader, m_vecMatrix, true);
 	pShader->Set_LimFinish();
+}
+
+void CSalone::FIRTSTTALKCEHCK()
+{
+	if (m_bIsStartTalking == false)
+	{
+		m_bIsLimLIght = false;
+		_vec3 PlayerPos = m_pPlayer->Get_Transform()->m_vPos;
+		_vec3 vDist = PlayerPos - m_pTransCom->m_vPos;
+
+
+		if (vDist.Get_Length() < 30.f && CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
+		{
+			m_bIsLimLIght = true;
+			if (KEY_DOWN(DIK_E))
+			{
+				CFadeOut::FADETYPE eType = CFadeOut::FIRST;
+				m_bIsLimLIght = false;
+				m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_FadeOut", L"FadeOut", &eType);
+				m_bIsStartTalking = true;
+			}
+		}
+	
+	}
+
+
+
 }
 
 HRESULT CSalone::Add_Component()

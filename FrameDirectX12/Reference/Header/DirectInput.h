@@ -26,7 +26,8 @@ public:
 public:
 	HRESULT	Ready_InputDevice(HINSTANCE hInst, HWND hWnd);
 	void	SetUp_InputState();
-
+	
+	void   Show_DIrectMouse(bool bIsShow);
 public:
 	bool Key_Pressing(const byte& byKey);
 	bool Key_Up(const byte& byKey);
@@ -46,6 +47,7 @@ public:
 
 
 private:
+	HWND                    m_hWnd;
 	LPDIRECTINPUT8			m_pInputSDK = nullptr;
 	LPDIRECTINPUTDEVICE8	m_pKeyBoard = nullptr;
 	LPDIRECTINPUTDEVICE8	m_pMouse = nullptr;

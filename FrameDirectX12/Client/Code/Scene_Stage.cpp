@@ -39,6 +39,9 @@
 #include "DistortionEffect.h"
 #include "Shepard.h"
 #include "Sniper.h"
+#include "FadeOut.h"
+
+#include "StaticCamera.h"
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -53,7 +56,7 @@ HRESULT CScene_Stage::Ready_LightInfo()
 {
 	D3DLIGHT tagLight;
 	tagLight.m_eType = LIGHTTYPE::D3DLIGHT_DIRECTIONAL;
-	tagLight.m_vDiffuse = _vec4{ 0.9f,0.9f,0.9f,1.0f };
+	tagLight.m_vDiffuse = _vec4{ 1.0f,1.0f,1.0f,1.0f };
 	tagLight.m_vAmbient = _vec4{ 0.2f,0.2f,0.2f,1.0f };
 	tagLight.m_vSpecular = _vec4{ 0.5f,0.5f,0.5f,1.0f };
 	tagLight.m_vDirection= _vec4{ -1.0f,-1.0f,1.f,1.0f };
@@ -81,6 +84,7 @@ HRESULT CScene_Stage::Ready_Scene()
 
 _int CScene_Stage::Update_Scene(const _float & fTimeDelta)
 {
+	ShowCursor(true);
 	CFrustom::Get_Instance()->Update_Frustom_Manager();
 	return Engine::CScene::Update_Scene(fTimeDelta);
 }
@@ -88,24 +92,6 @@ _int CScene_Stage::Update_Scene(const _float & fTimeDelta)
 _int CScene_Stage::LateUpdate_Scene(const _float & fTimeDelta)
 {
 	// 대화창 enum 값 바꾸는 것. 나중에 NPC 상호작용으로 바꿔주세요.
-	if (KEY_DOWN(DIK_P) && nullptr != CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"NpcBoard"))
-	{
-		CGameObject* pWordsUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"NpcBoard");
-		dynamic_cast<CNpcWords*>(pWordsUI)->Set_CurWordsType(CNpcWords::NPC);
-		dynamic_cast<CNpcWords*>(pWordsUI)->Set_ShowUI(true);
-		dynamic_cast<CNpcWords*>(pWordsUI)->Ready_NpcWords();
-
-		// 대화창 나올 땐 다른 UI 끔
-		list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
-		for (auto& pSrc : *pHpBarUIList)
-			dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(false);
-		CGameObject* pIconUIList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"IconUI");
-		dynamic_cast<CIconUI*>(pIconUIList)->Set_ShowUI(false);
-		CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
-		dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(false);
-		CGameObject* pInvenList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
-		dynamic_cast<CInvenUI*>(pInvenList)->Set_ShowUI(false);
-	}
 
 	return Engine::CScene::LateUpdate_Scene(fTimeDelta);
 }
@@ -249,6 +235,15 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Shepard", pGameObject), E_FAIL);
 
+	pGameObject = CFadeOut::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_FadeOut", pGameObject), E_FAIL);
+	 
+	pGameObject = CStaticCamera::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_StaticCamera", pGameObject), E_FAIL);
+
+
 	return S_OK;
 }
 
@@ -309,13 +304,13 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Terrain", L"Terrain", nullptr), E_FAIL);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player", nullptr), E_FAIL);
-
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Rifle", L"Weapon", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Sniper", L"Weapon", nullptr), E_FAIL);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Salone", L"Salone", nullptr), E_FAIL);//For.Salone
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Shepard", L"Shepard", nullptr), E_FAIL);
 	
+
+
 	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj																		 //Prototype_MapObject
 	Load_StageObject(L"../../Data/StaticObj/mapAddoutside.dat");
 
@@ -362,7 +357,7 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcBoard", L"NpcBoard", nullptr), E_FAIL);
+
 
 	return S_OK;
 }

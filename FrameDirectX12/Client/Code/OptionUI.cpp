@@ -71,13 +71,17 @@ void COptionUI::Show_OptionUI()
 {
 	if (!m_bIsDead && CDirectInput::Get_Instance()->KEY_DOWN(DIK_0) && !m_bIsShow)
 	{
+	
 		m_bIsShow = true;
 		Show_OtherUI();
+		CObjectMgr::Get_Instance()->SetTimeStop(false);
 	}
 	else if (!m_bIsDead && CDirectInput::Get_Instance()->KEY_DOWN(DIK_0) && m_bIsShow)
 	{
-		m_bIsShow = false;
+
+ 		m_bIsShow = false;
 		Show_OtherUI();
+		CObjectMgr::Get_Instance()->SetTimeStop(true);
 	}
 }
 

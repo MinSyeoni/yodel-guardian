@@ -49,6 +49,13 @@ void CWeapon::Render_ShadowDepth(CShader_Shadow * pShader)
 	pShader->Set_ShadowFinish();
 }
 
+void CWeapon::Render_LimLight(CShader_LimLight* pShader)
+{
+	Set_LimTable(pShader);
+	m_pMeshCom->Render_LimMesh(pShader, m_vecBoneMatirx, true);
+	pShader->Set_LimFinish();
+}
+
 void CWeapon::Set_ConstantTable()
 {
 	_matrix matRotY = XMMatrixRotationY(XMConvertToRadians(-90));
@@ -95,6 +102,34 @@ void CWeapon::Set_ShadowTable(CShader_Shadow * pShader)
 
 	_int offset = pShader->Get_CBMeshCount();
 	pShader->Get_UploadBuffer_ShadowInfo()->CopyData(offset, tCB_MatrixInfo);
+}
+
+void CWeapon::Set_LimTable(CShader_LimLight* pShader)
+{
+	_matrix matView = INIT_MATRIX;
+	_matrix matProj = INIT_MATRIX;
+	_matrix matRotY = XMMatrixRotationY(XMConvertToRadians(180));
+
+	CB_MATRIX_INFO	tCB_MatrixInfo;
+
+	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
+	matView = CGraphicDevice::Get_Instance()->GetViewMatrix();
+	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
+
+	_matrix matWorld =m_pTransCom->m_matWorld;
+	matWorld._11 = 0.101f;
+	matWorld._22 = 0.101f;
+	matWorld._33 = 0.101f;
+	_matrix matWVP =  matWorld * matView * matProj;
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose( matWorld));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
+
+
+
+	_int offset = pShader->Get_CBMeshCount();
+	pShader->Get_UploadBuffer_MatrixInfo()->CopyData(offset, tCB_MatrixInfo);
 }
 
 void CWeapon::Free()

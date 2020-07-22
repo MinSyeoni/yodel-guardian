@@ -127,7 +127,11 @@ HRESULT CShader_LightAcc::Create_PipelineState()
 		m_pVS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_LightAcc.hlsl", nullptr, "VS_MAIN", "vs_5_1");
 		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_LightAcc.hlsl", nullptr, "PS_POINTMAIN", "ps_5_1");
 	}
-
+	else if (m_eType == LIGHTTYPE::D3DLIGHT_SPOT)
+	{
+		m_pVS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_LightAcc.hlsl", nullptr, "VS_MAIN", "vs_5_1");
+		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_LightAcc.hlsl", nullptr, "PS_SPOTMAIN", "ps_5_1");
+	}
 
 
 

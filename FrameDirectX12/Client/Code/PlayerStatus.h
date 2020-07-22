@@ -7,17 +7,21 @@ class CPlayerStatus
 public:
 	enum EQUIPTYPE { NONE, RIFLE, SNIPER };
 
-
+	enum CutSceneType{NOSCENE,FIRSTSCENE,SECONDSCENE};
 public:
 	CPlayerStatus();
 	~CPlayerStatus();
 	void LateInit();
+
 	_int UpdateState(const _float& fTimeDelta, CTransform* pTranscom);
 	_int LateUpdate(const _float& fTimeDelta);
 	void SetMesh(CMesh* m_pMesh);
 	void KeyInput();
 	void WeaponChange();
+
+	void CutSceneCheck();
 	void ShootingCheck();
+
 	void StatusUpdate(const _float& fTimeDelta);
 	void Rotation(const _float& fTimeDelta);
 	void PlayerDirection(const _float& fTimeDelta);
@@ -64,5 +68,7 @@ public:
 
 	_bool m_bIsKeyLock = false;
 
+	CutSceneType m_eCurScene = NOSCENE;
+	
 };
 

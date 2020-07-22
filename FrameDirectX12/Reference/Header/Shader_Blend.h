@@ -31,8 +31,8 @@ private:
 	virtual D3D12_BLEND_DESC			Create_BlendState() override;
 	virtual D3D12_DEPTH_STENCIL_DESC	Create_DepthStencilState() override;
 	virtual D3D12_INPUT_LAYOUT_DESC		Create_InputLayout() override;
-private:
-
+public:
+	CUploadBuffer<CB_BLEND_INFO>* Get_UploadBuffer_BlendInfo();
 
 
 public:
@@ -41,6 +41,11 @@ public:
 		ID3D12GraphicsCommandList* pCommandList);
 
 	_bool m_bIsInit = false;
+private:
+	CUploadBuffer<CB_BLEND_INFO>* m_pCB_BlendInfo = nullptr;
+
+	bool m_bIsOption[4] = { true, };
+
 private:
 	virtual void				Free();
 };

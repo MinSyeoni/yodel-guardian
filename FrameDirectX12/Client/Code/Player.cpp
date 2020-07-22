@@ -87,24 +87,6 @@ _int CPlayer::Update_GameObject(const _float& fTimeDelta)
 {
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
-	if (KEY_DOWN(DIK_L))
-	{
-		MeshInfo tData;
-
-		tData.MeshTag = L"DistortDisk";
-		tData.Pos = m_pTransCom->m_vPos;
-		tData.Pos.y += 10.f;
-		tData.Pos.z -= 10.f;
-		tData.Rotation = _vec3{ 90.f,0.f,0.f };
-		tData.Scale = _vec3{ 1.0f,1.0f,1.0f };
-
-
-		CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_Environment", L"Prototype_DistortEffect", L"DistortEffect", &tData);
-
-
-	}
-
-
 
 
 	m_pStatus->UpdateState(fTimeDelta, m_pTransCom);
@@ -114,7 +96,9 @@ _int CPlayer::Update_GameObject(const _float& fTimeDelta)
 	m_pArm->Set_Animation(m_eCurState);
 	m_pArm->Set_LegAnimation(m_eCurLegState);
 
-
+	_vec3 Pos = m_pTransCom->m_vPos;
+	cout << Pos.x << "   -  " << Pos.y << "   -   " << Pos.z << endl;
+	
 	CGameObject::Update_GameObject(fTimeDelta);
 	return NO_EVENT;
 }

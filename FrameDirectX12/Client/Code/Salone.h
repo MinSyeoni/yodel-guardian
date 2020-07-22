@@ -10,10 +10,12 @@ namespace Engine
 }
 
 class CDynamicCamera;
-
+class CPlayer;
 class CSalone : public Engine::CGameObject
 {
 	enum STATE { IDLE, EYEBLINK, RUN, WALK };
+
+	enum CUTSCENESTATE{NONE,FIRST,SECOND};
 
 private:
 	explicit CSalone(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
@@ -29,6 +31,8 @@ public:
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 	virtual void    Render_ShadowDepth(CShader_Shadow* pShader);
 	virtual void    Render_LimLight(CShader_LimLight* pShader);
+
+	void            FIRTSTTALKCEHCK();
 private:
 	void            Set_ShadowTable(CShader_Shadow* pShader);
 	void            Set_LimTable(CShader_LimLight* pShader);
@@ -51,6 +55,12 @@ public:
 		ID3D12GraphicsCommandList* pCommandList);
 private:
 	STATE m_eCurState = EYEBLINK;
+
+	CPlayer* m_pPlayer = nullptr;
+
+	bool m_bIsLimLIght = false;
+	bool m_bIsStartTalking = false;
+	bool m_bIsStartTalking2 = false;
 private:
 	virtual void			Free();
 };

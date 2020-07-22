@@ -27,9 +27,9 @@ CShader_Effect::~CShader_Effect()
 
 HRESULT CShader_Effect::Ready_Shader(TYPE eType)
 {
-	if (eType == ALPHABLENDTEX)
+	if (eType == ALPHABLENDTEX || eType ==FADEOUT)
 		m_bIsAlpha = true;
-
+	m_eType = eType;
 	FAILED_CHECK_RETURN(Create_PipelineState(), E_FAIL);
 
 	return S_OK;
@@ -122,9 +122,18 @@ HRESULT CShader_Effect::Create_ConstantBufferView()
 HRESULT CShader_Effect::Create_PipelineState()
 {
 	vector<D3D12_INPUT_ELEMENT_DESC> vecInputLayout;
+	if (m_eType != FADEOUT)
+	{
+		m_pVS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_Effect.hlsl", nullptr, "VS_MAIN", "vs_5_1");
+		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_Effect.hlsl", nullptr, "PS_MAIN", "ps_5_1");
+	}
+	else
+	{
 
-	m_pVS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_Effect.hlsl", nullptr, "VS_MAIN", "vs_5_1");
-	m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_Effect.hlsl", nullptr, "PS_MAIN", "ps_5_1");
+		m_pVS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_Effect.hlsl", nullptr, "VS_MAIN", "vs_5_1");
+		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_Effect.hlsl", nullptr, "PS_FADEOUTMAIN", "ps_5_1");
+	}
+
 
 	vecInputLayout =
 	{
@@ -186,7 +195,7 @@ D3D12_BLEND_DESC CShader_Effect::Create_BlendState()
 
 	// ºí·»µå ¼³Á¤.
 	ZeroMemory(&BlendDesc, sizeof(D3D12_BLEND_DESC));
-	BlendDesc.AlphaToCoverageEnable = m_bIsAlpha;
+	BlendDesc.AlphaToCoverageEnable = FALSE;
 	BlendDesc.IndependentBlendEnable = FALSE;
 	BlendDesc.RenderTarget[0].BlendEnable = m_bIsAlpha;
 	BlendDesc.RenderTarget[0].LogicOpEnable = FALSE;

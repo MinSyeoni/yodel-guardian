@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "UI.h"
-
+#include "DirectInput.h"
 
 CUI::CUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -38,6 +38,9 @@ HRESULT CUI::LateInit_GameObject()
 
 _int CUI::Update_GameObject(const _float& fTimeDelta)
 {
+	if (KEY_DOWN(DIK_8))
+		m_bIsShow *= -1;
+           
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
 	if (m_bIsDead)
@@ -116,18 +119,26 @@ HRESULT CUI::Add_Component()
 
 void CUI::Set_ConstantTable()
 {
-	_matrix matView = INIT_MATRIX;
-	_matrix matProj = INIT_MATRIX;
-
 	CB_MATRIX_INFO	tCB_MatrixInfo;
 	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
 
-	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
+	_matrix matView = INIT_MATRIX;
+ _matrix matProj = CGraphicDevice::Get_Instance()->GetOrthoMatrix();
+	_matrix matWorld = INIT_MATRIX;
+
+
+
+	matWorld._11 = WINSIZEX / 2;
+	matWorld._22 = WINSIZEY / 2;
+	matWorld._33 = 1.f;
+	matWorld._41 = 0.f;
+	matWorld._42 = 0.f;
+	matWorld._43 = 0.13f;
+	_matrix matWVP = matWorld * matView * matProj;
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
-	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_pTransCom->m_matWorld));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(matWorld));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
-
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
 }
 

@@ -240,7 +240,7 @@ void CTarget::SetUp_ConstateTable(const int offset)
 	
 	matWorld._11 = 80;
 	matWorld._22 = 60;
-	matWorld._33 = 1.f;
+	matWorld._33 = 1.1f;
 	matWorld._41 = (80+160*offset) - WINSIZEX * 0.5f;
 	matWorld._42 = (-60) + WINSIZEY * 0.5f;
 

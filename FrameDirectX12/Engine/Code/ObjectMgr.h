@@ -25,7 +25,7 @@ public:
 	HRESULT			Add_GameObject(wstring wstrLayerTag, wstring wstrPrototypeTag, wstring wstrObjTag, void* pArg);
 
 	CGameObject*	Get_NewGameObject(wstring wstrPrototypeTag, wstring wstrObjTag, void* pArg);
-
+	void SetTimeStop(bool bIsTime) { m_bIsTime = bIsTime; };
 public:
 	_int			Update_ObjectMgr(const _float& fTimeDelta);
 	_int			LateUpdate_ObjectMgr(const _float& fTimeDelta);
@@ -35,11 +35,11 @@ public:
 	HRESULT			Clear_OBJLIST(wstring wstrLayerTag, wstring wstrObjTag);
 	void			Clear_Layer();
 	void			Clear_Prototype();
-
 private:
 	unordered_map<wstring, CLayer*>			m_mapLayer;
 	unordered_map<wstring, CGameObject*>	m_mapObjectPrototype;
 
+	bool            m_bIsTime = true;
 private:
 	virtual void Free();
 };

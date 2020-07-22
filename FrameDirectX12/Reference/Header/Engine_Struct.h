@@ -646,6 +646,12 @@ typedef struct EffectInfo
 }CB_EFFECT_INFO;
 
 
+typedef struct Info
+{
+    XMFLOAT4 OptionInfo;
+
+}CB_BLEND_INFO;
+
 
 typedef struct tagSubmeshGeometry
 {

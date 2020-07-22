@@ -55,3 +55,12 @@ float4 PS_MAIN(VS_TEXTURED_OUTPUT input) : SV_TARGET
 	return(vColor);
 }
 
+float4 PS_FADEOUTMAIN(VS_TEXTURED_OUTPUT input) : SV_TARGET
+{
+	float4 vColor;
+	vColor = float4(0.f, 0.f, 0.f, 0.f);
+	vColor.a = matWorld._11;
+
+	return vColor;
+
+}

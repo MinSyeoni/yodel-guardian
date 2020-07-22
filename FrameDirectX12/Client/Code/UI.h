@@ -5,12 +5,6 @@
 #include "DynamicCamera.h"
 #include "GraphicDevice.h"
 
-namespace Engine
-{
-	class CRcTex;
-	class CShader_ColorBuffer;
-}
-
 class CDynamicCamera;
 
 class CUI : public Engine::CGameObject

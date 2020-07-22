@@ -20,6 +20,9 @@ HRESULT CLight::Ready_Light(D3DLIGHT tagLightInfo)
 	if(tagLightInfo.m_eType==LIGHTTYPE::D3DLIGHT_POINT)
 		m_pShader= dynamic_cast<CShader_LightAcc*>(CComponentMgr::Get_Instance()->Clone_Component(L"Prototype_Shader_LightPoint", ID_STATIC));
 
+	if(tagLightInfo.m_eType == LIGHTTYPE::D3DLIGHT_SPOT)
+		m_pShader = dynamic_cast<CShader_LightAcc*>(CComponentMgr::Get_Instance()->Clone_Component(L"Prototype_Shader_LightSpot", ID_STATIC));
+		
 	m_LightIndex= CLight_Manager::Get_Instance()->Get_LightIndex();
 	m_LightIndex += 1;
 

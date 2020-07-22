@@ -65,6 +65,9 @@ void CShader_Blend::End_Shader()
 
 	tex.Offset(1, CGraphicDevice::Get_Instance()->Get_CBV_SRV_UAV_DescriptorSize());
 	m_pCommandList->SetGraphicsRootDescriptorTable(6, tex);
+
+	D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = m_pCB_BlendInfo->Resource()->GetGPUVirtualAddress();
+	m_pCommandList->SetGraphicsRootConstantBufferView(7, objCBAddress);
 }
 
 void CShader_Blend::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture)
@@ -96,6 +99,8 @@ void CShader_Blend::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTextu
 	}
 	CGraphicDevice::Get_Instance()->Wait_ForGpuComplete();
 	m_bIsInit = true;
+
+	m_pCB_BlendInfo = new CUploadBuffer<CB_BLEND_INFO>(m_pGraphicDevice, 1, true);
 
 	return;
 }
@@ -237,6 +242,11 @@ D3D12_INPUT_LAYOUT_DESC CShader_Blend::Create_InputLayout()
 	return D3D12_INPUT_LAYOUT_DESC();
 }
 
+CUploadBuffer<CB_BLEND_INFO>* CShader_Blend::Get_UploadBuffer_BlendInfo()
+{
+	return m_pCB_BlendInfo;
+}
+
 
 CComponent * CShader_Blend::Clone()
 {
@@ -256,6 +266,7 @@ CShader_Blend * CShader_Blend::Create(ID3D12Device * pGraphicDevice,
 
 void CShader_Blend::Free()
 {
+	Safe_Delete(m_pCB_BlendInfo);
 	CShader::Free();
 
 }

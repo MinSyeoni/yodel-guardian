@@ -7,7 +7,7 @@ BEGIN(Engine)
 class ENGINE_DLL CShader_Effect : public CShader
 {
 public:
-    enum TYPE { NONE, ALPHATESTTEX,ALPHABLENDTEX };
+    enum TYPE { NONE, ALPHATESTTEX,ALPHABLENDTEX,FADEOUT };
 
 private:
     explicit CShader_Effect(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);

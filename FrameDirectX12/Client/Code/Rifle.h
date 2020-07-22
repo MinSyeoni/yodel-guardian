@@ -26,8 +26,10 @@ public:
 	void  FallowPlayer();
 	void  FallowBag();
 	void AniCheck();
+	void DropCheck();
 	void LightCheck(const _float& fTimeDelta);
 	virtual void CreateShootEffect() override;
+	void SpotLightCheck();
 public:
 	virtual CGameObject*	Clone_GameObject(void* prg);
 	static CRifle*		Create(ID3D12Device* pGraphicDevice,
@@ -63,7 +65,15 @@ private:
 	_bool m_bIsLight = false;
 	D3DLIGHT m_tagLight;
 	_vec3 m_vLightPos;
+private:
+	D3DLIGHT m_tagSpotLight;
+	_vec3 m_vSpotLightPos;
+	_bool m_bIsSpotLight = false;
+	_uint m_uiSpotLightIndex;
+	_vec3 m_vLightDir;
 
+
+	_bool m_bIsLimLight=false;
 
 private:
 	virtual void			Free();

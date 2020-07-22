@@ -71,6 +71,8 @@ private:
 	HRESULT Render_SSAO();
 	HRESULT Render_DebugBuffer();
 public:
+	void SetOption(int iIndex, bool bIsOnOff) { m_bISOption[iIndex] = bIsOnOff; };
+public:
 	void	Clear_RenderGroup();
 	CTarget* Get_Target() { return m_DifferdTarget; };
 private:
@@ -129,6 +131,11 @@ private:
 	_bool m_bIsDebugRender;
 private:
 	CDistortionTarget* m_pDestortionTarget;
+
+private:
+	bool m_bISOption[7] = { true, };
+	//0 - OPTION_SSAO, 1 - OPTION_METALIC, 2 - OPTION_EMISSIVE, 3 - OPTION_DISTORITION,
+	//	4 - OPTION_SHADOW, 5 - OPTION_RIMLIGHT, 6 - OPTION_TONEMAPPING, 7 - MOTIONBLUR
 
 private:
 	virtual void		Free();

@@ -37,7 +37,8 @@ HRESULT CDirectInput::Ready_InputDevice(HINSTANCE hInst, HWND hWnd)
 	m_pMouse->SetDataFormat(&c_dfDIMouse);
 	m_pMouse->SetCooperativeLevel(hWnd, DISCL_FOREGROUND | DISCL_EXCLUSIVE);
 	m_pMouse->Acquire();
-
+	m_hWnd = hWnd;
+	
 	return S_OK;
 }
 
@@ -60,6 +61,16 @@ void CDirectInput::SetUp_InputState()
 
 	memcpy(&m_MousePressed, &m_MousePressedTemp, sizeof(DIMOUSESTATE));
 	memcpy(&m_MouseDown, &m_MouseDownTemp, sizeof(DIMOUSESTATE));
+}
+
+void CDirectInput::Show_DIrectMouse(bool bIsShow)
+{
+	if (bIsShow)
+		m_pMouse->SetCooperativeLevel(m_hWnd,DISCL_BACKGROUND | DISCL_EXCLUSIVE);
+	else
+		m_pMouse->SetCooperativeLevel(m_hWnd, DISCL_FOREGROUND | DISCL_EXCLUSIVE);
+
+	m_pMouse->Acquire();
 }
 
 bool CDirectInput::Key_Pressing(const byte & byKey)

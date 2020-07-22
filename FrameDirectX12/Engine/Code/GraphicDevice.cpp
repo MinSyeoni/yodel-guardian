@@ -40,7 +40,7 @@ HRESULT CGraphicDevice::Ready_GraphicDevice(HWND hWnd,
     FAILED_CHECK_RETURN(OnResize(iWidth, iHeight), E_FAIL);
     FAILED_CHECK_RETURN(Create_RootSig(), E_FAIL);
     FAILED_CHECK_RETURN(Create_11On12GraphicDevice(), E_FAIL);
-
+    m_matOrtho = XMMatrixOrthographicLH(WINSIZEX, WINSIZEY, 0, 1);
     return S_OK;
 }
 
@@ -643,7 +643,7 @@ HRESULT CGraphicDevice::Create_BlendRoot()
         1,  // number of descriptors
         6); // register t0
      // Root parameter can be a table, root descriptor or root constants.
-    CD3DX12_ROOT_PARAMETER slotRootParameter[7];
+    CD3DX12_ROOT_PARAMETER slotRootParameter[8];
 
     slotRootParameter[0].InitAsDescriptorTable(1, &texTable[0], D3D12_SHADER_VISIBILITY_PIXEL);
     slotRootParameter[1].InitAsDescriptorTable(1, &texTable[1], D3D12_SHADER_VISIBILITY_PIXEL);
@@ -652,10 +652,11 @@ HRESULT CGraphicDevice::Create_BlendRoot()
     slotRootParameter[4].InitAsDescriptorTable(1, &texTable[4], D3D12_SHADER_VISIBILITY_PIXEL);
     slotRootParameter[5].InitAsDescriptorTable(1, &texTable[5], D3D12_SHADER_VISIBILITY_PIXEL);
     slotRootParameter[6].InitAsDescriptorTable(1, &texTable[6], D3D12_SHADER_VISIBILITY_PIXEL);
+    slotRootParameter[7].InitAsConstantBufferView(0);
 
     auto staticSamplers = GetStaticSamplers();
 
-    CD3DX12_ROOT_SIGNATURE_DESC rootSigDesc(7, slotRootParameter,
+    CD3DX12_ROOT_SIGNATURE_DESC rootSigDesc(8, slotRootParameter,
         (UINT)staticSamplers.size(), staticSamplers.data(),
         D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
 

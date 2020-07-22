@@ -110,18 +110,28 @@ HRESULT CAim::Add_Component()
 
 void CAim::Set_ConstantTable()
 {
-	_matrix matView = INIT_MATRIX;
-	_matrix matProj = INIT_MATRIX;
+
 
 	CB_MATRIX_INFO	tCB_MatrixInfo;
 	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
 
-	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
+	_matrix matView = INIT_MATRIX;
+	_matrix matProj = CGraphicDevice::Get_Instance()->GetOrthoMatrix();
+	_matrix matWorld = INIT_MATRIX;
+
+
+
+	matWorld._11 = WINSIZEX/2;
+	matWorld._22 = WINSIZEY/2;
+	matWorld._33 = 1.0f;
+	matWorld._41 = 0.f;
+	matWorld._42 = 0.f;
+	matWorld._43 = 0.11f;
+	_matrix matWVP = matWorld * matView * matProj;
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
-	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_pTransCom->m_matWorld));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(matWorld));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
-
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
 }
 

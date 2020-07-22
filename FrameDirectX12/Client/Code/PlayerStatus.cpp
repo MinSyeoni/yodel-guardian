@@ -42,15 +42,18 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
         m_pTransCom = pTranscom;
 
 
-    KeyInput();
-    Rotation(fTimeDelta);
-    StatusUpdate(fTimeDelta);
-    PlayerDirection(fTimeDelta);
-    WeaponChange();
-    CheckAim();
-    ReloadCheck();
-    CheckSniping();
 
+    if (!m_bIsKeyLock)
+    {
+        KeyInput();
+        Rotation(fTimeDelta);
+        StatusUpdate(fTimeDelta);
+        PlayerDirection(fTimeDelta);
+        WeaponChange();
+        CheckAim();
+        ReloadCheck();
+        CheckSniping();
+    }
     if (m_bIsShoot)
     {
 
@@ -62,8 +65,8 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
     }
 
 
-
-    cout << m_pTransCom->m_vPos.x << "-" << m_pTransCom->m_vPos.y << "-" << m_pTransCom->m_vPos.z << endl;
+    CutSceneCheck();
+  
 
 
 
@@ -488,6 +491,37 @@ void CPlayerStatus::WeaponChange()
 
     }
 
+
+}
+
+void CPlayerStatus::CutSceneCheck()
+{
+
+    if (m_eCurScene == FIRSTSCENE)
+    {
+
+        m_fSpine = 0.f;
+        m_pTransCom->m_vPos = _vec3(300.f, 0.f, 480.f);
+        m_pTransCom->m_vAngle = _vec3{ 0.f,0.f,0.f };
+        m_bIsKeyLock = true;
+
+
+        if (m_eCurState == CPlayer::HEADSTART)
+        {
+            if (m_pMesh->Set_IsAniFinsh(400.f))
+                m_eCurState = CPlayer::HEADIDLE;
+
+        }
+        if (m_eCurState == CPlayer::HEADEXIT)
+        {
+
+            if (m_pMesh->Set_IsAniFinsh(400.f))
+                m_eCurState = CPlayer::NONEIDLE;
+
+        }
+    }
+    else
+        m_bIsKeyLock = false;
 
 }
 

@@ -12,4 +12,14 @@
 579~618 SniperDraw
 619~653 Sniper Holster
 654~ 700 Sniper Reload
-701~730 Sniper Fire
+701~734 Sniper Fire
+735~768
+769~ 802
+803 ~836
+837~870
+871~934 Head Start 
+935~1085 Head Idle
+1086~1142 Head Exit 
+
+1143~1609 Speaking
+1610~1700 Turn Door 

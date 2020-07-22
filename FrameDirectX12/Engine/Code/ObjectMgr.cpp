@@ -150,10 +150,12 @@ CGameObject * CObjectMgr::Get_NewGameObject(wstring wstrPrototypeTag, wstring ws
 _int CObjectMgr::Update_ObjectMgr(const _float & fTimeDelta)
 {
 	_int	iEnd = 0;
+	_float fTime = fTimeDelta;
+	fTime = m_bIsTime * fTime;
 
 	for (auto& iter : m_mapLayer)
 	{
-		iEnd = iter.second->Update_Layer(fTimeDelta);
+		iEnd = iter.second->Update_Layer(fTime);
 
 		if (iEnd & 0x80000000)
 			return -1;
@@ -165,10 +167,11 @@ _int CObjectMgr::Update_ObjectMgr(const _float & fTimeDelta)
 _int CObjectMgr::LateUpdate_ObjectMgr(const _float & fTimeDelta)
 {
 	_int	iEnd = 0;
-
+	_float fTime = fTimeDelta;
+	fTime = m_bIsTime * fTime;
 	for (auto& iter : m_mapLayer)
 	{
-		iEnd = iter.second->LateUpdate_Layer(fTimeDelta);
+		iEnd = iter.second->LateUpdate_Layer(fTime);
 
 		if (iEnd & 0x80000000)
 			return -1;

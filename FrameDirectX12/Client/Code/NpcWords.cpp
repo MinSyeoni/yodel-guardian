@@ -5,7 +5,8 @@
 #include "IconUI.h"
 #include "GunUI.h"
 #include "InvenUI.h"
-
+#include "Player.h"
+#include "PlayerStatus.h"
 CNpcWords::CNpcWords(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -26,14 +27,44 @@ HRESULT CNpcWords::Ready_GameObjectPrototype()
 	return S_OK;
 }
 
-HRESULT CNpcWords::Ready_GameObject()
+HRESULT CNpcWords::Ready_GameObject(WORDS_TYPE eType)
 {
+	m_eWordsType = eType;
 	if (FAILED(Add_Component()))
 		return E_FAIL;
+
+	Ready_NpcWords();
+	m_bIsShow = true;
 
 	m_pTransCom->m_vScale = _vec3(1.f, 1.f, 1.f);
 	m_pTransCom->m_vPos.x = _float(2.f / WINCX * WINCX / 2) - 1.f;
 	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * WINCY / 2) + 1.f;
+
+
+
+
+
+
+	list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
+	if (pHpBarUIList != nullptr)
+	{
+		for (auto& pSrc : *pHpBarUIList)
+			dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(false);
+	}
+
+
+
+	CGameObject* pIconUIList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"IconUI");
+	if (pIconUIList != nullptr)
+		dynamic_cast<CIconUI*>(pIconUIList)->Set_ShowUI(false);
+
+	CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
+	if(pGunUI!=nullptr)
+		dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(false);
+
+	CGameObject* pInvenList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
+	if(pGunUI!=nullptr)
+		dynamic_cast<CInvenUI*>(pInvenList)->Set_ShowUI(false);
 
 	return S_OK;
 }
@@ -44,11 +75,23 @@ void CNpcWords::Ready_NpcWords()
 	{
 	case CNpcWords::NPC:
 	{
-		wstring wstrWords = L"테스트 입니다. 민수염 수염 민수연어 김희줌줌";
+		wstring wstrWords = L"이제 정신이 드는가?";
 		m_vWords.push_back(wstrWords);
 		m_iWordsCnt++;
 
-		wstrWords = L"마라탕 먹고싶다 꿔바로우랑";
+		wstrWords = L"아...머리야 여기가 도대체 어디죠?";
+		m_vWords.push_back(wstrWords);
+		m_iWordsCnt++;
+
+		wstrWords = L"여기는 화성행성이다. 지금 우리종족은 외계생물에게 공격을받고있다.";
+		m_vWords.push_back(wstrWords);
+		m_iWordsCnt++;
+
+		wstrWords = L"저는 무엇을 해야하나요? 전투할 준비가 전혀 되있지않습니다.";
+		m_vWords.push_back(wstrWords);
+		m_iWordsCnt++;
+
+		wstrWords = L"앞에있는 라이플을 가지고 문밖을나가서 동료를 돕도록해!";
 		m_vWords.push_back(wstrWords);
 		m_iWordsCnt++;
 	}
@@ -67,6 +110,7 @@ HRESULT CNpcWords::LateInit_GameObject()
 {
 	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());	
 	m_pWordsFont->LateInit_GameObject();
+	
 
 	return S_OK;
 }
@@ -110,6 +154,88 @@ void CNpcWords::Show_ConversationWords()
 	m_pWordsFont->Set_Text(strText.c_str());
 }
 
+void CNpcWords::Check_Interaction()
+{
+
+			CGameObject* pPlayer = m_pObjectMgr->Get_GameObject(L"Layer_GameObject", L"Player");
+			if (pPlayer == nullptr)
+				return;
+	switch (m_eWordsType)
+	{
+	case CNpcWords::NPC:
+	{
+
+		if (m_iWordsNum == 1)
+		{
+
+			static_cast<CPlayerStatus*>(static_cast<CPlayer*>(pPlayer)->Get_Status())->m_eCurState = CPlayer::HEADSTART;
+		}
+		else if (m_iWordsNum == 2)
+		{
+
+			static_cast<CPlayerStatus*>(static_cast<CPlayer*>(pPlayer)->Get_Status())->m_eCurState = CPlayer::HEADEXIT;
+		}
+		else if (m_iWordsNum == 3)
+		{
+
+			static_cast<CPlayerStatus*>(static_cast<CPlayer*>(pPlayer)->Get_Status())->m_eCurState = CPlayer::SPEAKING;         
+
+		}
+		else if (m_iWordsNum == 4)
+		{
+
+			static_cast<CPlayerStatus*>(static_cast<CPlayer*>(pPlayer)->Get_Status())->m_eCurState = CPlayer::NONEIDLE;
+		}
+		break;
+
+	}
+
+
+
+	case CNpcWords::ETC:
+		break;
+	case CNpcWords::TYPE_END:
+		break;
+	default:
+		break;
+	}
+
+
+}
+
+void CNpcWords::Start_Interaction()
+{
+}
+
+void CNpcWords::Finish_ConverSation()
+{
+
+
+	switch (m_eWordsType)
+	{
+	case CNpcWords::NPC:
+	{
+		if (nullptr != m_pObjectMgr->Get_GameObject(L"Layer_Camera", L"StaticCamera"))
+			m_pObjectMgr->Get_GameObject(L"Layer_Camera", L"StaticCamera")->Dead_GameObject();
+     
+		m_pObjectMgr->Add_GameObject(L"Layer_Camera", L"Prototype_DynamicCamera", L"DynamicCamera", nullptr);
+	   m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Rifle", L"Weapon", nullptr);
+		CGameObject* pPlayer = m_pObjectMgr->Get_GameObject(L"Layer_GameObject", L"Player");
+		if (pPlayer == nullptr)
+			return;
+		static_cast<CPlayerStatus*>(static_cast<CPlayer*>(pPlayer)->Get_Status())->m_eCurScene = CPlayerStatus::NOSCENE;
+	}
+		break;
+	case CNpcWords::ETC:
+		break;
+	case CNpcWords::TYPE_END:
+		break;
+	default:
+		break;
+	}
+
+}
+
 void CNpcWords::Next_Conversation(const _float& fTimeDelta)
 {
 	if (m_bIsNext == false)
@@ -145,9 +271,9 @@ void CNpcWords::Next_ConversationJudje()
 		m_bIsFinish = false;
 		m_iWordsNum++;
 		m_fAccTime = 0.f;
-
+		Check_Interaction();
 		if (m_iWordsCnt <= m_iWordsNum)
-		{
+		{ 
 			list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
 			for (auto& pSrc : *pHpBarUIList)
 				dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(true);
@@ -166,10 +292,9 @@ void CNpcWords::Next_ConversationJudje()
 			//for (auto& pSrc : *pInvenList)
 			//	dynamic_cast<CInvenUI*>(pSrc)->Set_ShowUI(true);
 
-
+			Finish_ConverSation();
 			m_eWordsType = TYPE_END;
-			m_bIsShow = false;
-		//	m_bIsDead = true;
+			m_bIsDead = true;
 		}
 	}
 }
@@ -208,7 +333,7 @@ HRESULT CNpcWords::Add_Component()
 
 	// Texture
 	m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_NpcTalkBoard", COMPONENTID::ID_STATIC));
-	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+	NULL_CHECK_RETURN(m_pTexture, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
 
 	// TransCom 
@@ -243,8 +368,8 @@ void CNpcWords::Set_ConstantTable()
 CGameObject* CNpcWords::Clone_GameObject(void* pArg)
 {
 	CGameObject* pInstance = new CNpcWords(*this);
-
-	if (FAILED(pInstance->Ready_GameObject()))
+	WORDS_TYPE eType = *reinterpret_cast<WORDS_TYPE*>(pArg);
+	if (FAILED(static_cast<CNpcWords*>(pInstance)->Ready_GameObject(eType)))
 		return nullptr;
 
 	return pInstance;

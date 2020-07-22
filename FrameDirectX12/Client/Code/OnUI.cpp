@@ -38,6 +38,11 @@ HRESULT COnUI::LateInit_GameObject()
 	return S_OK;
 }
 
+void COnUI::CheckRenderer()
+{
+	m_pRenderer->SetOption(m_iOnIdx,!m_bIsOff);
+}
+
 void COnUI::Set_OnUI_Pos()
 {
 	for (int i = 0; i < 4; ++i)
@@ -77,6 +82,7 @@ _int COnUI::Update_GameObject(const _float& fTimeDelta)
 
 _int COnUI::LateUpdate_GameObject(const _float& fTimeDelta)
 {
+	CheckRenderer();
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
 	// 전체 On, Off
@@ -98,7 +104,7 @@ void COnUI::Show_Option_OnOff()
 	{
 		_float X = (((2.0f * m_pt.x) / WINCX) - 1.0f);
 		_float Y = (((-2.0f * m_pt.y) / WINCY) + 1.0f);
-
+		cout << X << "마우스" << Y << endl;
 		for (int i = 0; i < 4; ++i)
 		{
 			if (m_iOnIdx == i)
@@ -141,7 +147,7 @@ void COnUI::Render_GameObject(const _float& fTimeDelta)
 	if (!m_bIsShow)
 		return;
 
-	ShowCursor(true);
+
 	Set_ConstantTable((int)m_bIsOff);
 	m_pShaderCom[(int)m_bIsOff]->Begin_Shader();
 	m_pBufferCom->Begin_Buffer();

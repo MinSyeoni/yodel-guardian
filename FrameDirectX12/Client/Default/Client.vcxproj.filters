@@ -13,68 +13,8 @@
     <Filter Include="97.Mgr">
       <UniqueIdentifier>{27876c48-0016-46b3-87e1-89e8fb599f1a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject">
-      <UniqueIdentifier>{ca6f4b3b-0852-42ed-89f9-fb933331dd10}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\00.Logo">
-      <UniqueIdentifier>{e1830c16-2d13-49f7-8572-3acdd2330b3c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\01.Environment">
-      <UniqueIdentifier>{c032b6d9-f4d5-4740-9507-36a2e633f142}</UniqueIdentifier>
-    </Filter>
     <Filter Include="96.Camera">
       <UniqueIdentifier>{fd951fef-76fb-4e49-bf03-6a0843ab4a01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\03.CubeObject">
-      <UniqueIdentifier>{7af8cf58-650d-4246-acac-5d8f4c1df892}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\02.RectObject">
-      <UniqueIdentifier>{851722c3-688d-47c2-9258-f83785e0772a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\04.Terrain">
-      <UniqueIdentifier>{d57d42e9-c1d5-4ae7-ab26-0bfd6e3d02a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\01.Environment\00.StaticObject">
-      <UniqueIdentifier>{b19a86a4-68df-4d09-bad3-6b3ffcf7d9c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\00.Logo\00.BackGround">
-      <UniqueIdentifier>{95c01a6b-2044-48ee-bb1a-8dfc8e67e3c0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\05.Stage1">
-      <UniqueIdentifier>{e9df7a78-eb23-40d0-b55e-67f6c4606d8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\05.Stage1\00.DynamicObject">
-      <UniqueIdentifier>{69455796-45a0-4f52-bc51-98c8745c8d9d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\99.Player">
-      <UniqueIdentifier>{ef8f117b-7595-4056-ba98-dd6080ebb4a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\99.Player\01.Player ARM">
-      <UniqueIdentifier>{16791c50-7330-46d4-9eec-1991bb11bdfe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\99.Player\04.PlayerStatus">
-      <UniqueIdentifier>{4da12c0d-b904-4737-9ce2-1fba2c11a315}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\01.Environment\01.SkyDome">
-      <UniqueIdentifier>{ce32b8f7-e132-47c2-97b8-e1f8b1dafdde}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\98.Weapon">
-      <UniqueIdentifier>{844640f3-e36f-463f-94c8-5bcf1959892a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\98.Weapon\00.Pistol">
-      <UniqueIdentifier>{67acf475-2210-478f-825f-a67f110c78a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\99.Player\03.Player Leg">
-      <UniqueIdentifier>{d19451d9-3b44-450e-a248-6f9e5a584091}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\01.Environment\02.GrassObject">
-      <UniqueIdentifier>{02143260-ceb1-4cdc-8ee5-13c46089d446}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\98.Weapon\01.Rifle">
-      <UniqueIdentifier>{794dd58e-19b1-4477-a9b2-60252cb98b98}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\05.Stage1\01.NPC">
-      <UniqueIdentifier>{d31de4af-8814-4181-b336-e30b74b5cc4c}</UniqueIdentifier>
     </Filter>
     <Filter Include="99.Default">
       <UniqueIdentifier>{88342214-980b-4823-99f8-e72419361a27}</UniqueIdentifier>
@@ -249,6 +189,18 @@
     </Filter>
     <Filter Include="01.Scene_Stage\02.Weapon\04.NPCRifle">
       <UniqueIdentifier>{35892646-e06f-4793-bbcd-da2faf298e22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\07.NPC\03.Ken">
+      <UniqueIdentifier>{2f30498e-f1ec-4c29-831e-00a610843b07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\07.NPC\04.Direction">
+      <UniqueIdentifier>{9d73abd3-f512-4de6-8293-4cb93851859c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_All\07.HDRObject">
+      <UniqueIdentifier>{a7bc0b9f-84ac-4e62-b417-2f31e9382c60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_All\06.EffectObject\03.FadeOut">
+      <UniqueIdentifier>{62d105f6-013a-4e39-a9fd-a0316d739d3c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -437,6 +389,15 @@
     <ClInclude Include="..\Code\Sniper.h">
       <Filter>01.Scene_Stage\02.Weapon\03.Sniper</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\HdrObject.h">
+      <Filter>02.Scene_All\07.HDRObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\FadeOut.h">
+      <Filter>02.Scene_All\06.EffectObject\03.FadeOut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\StaticCamera.h">
+      <Filter>01.Scene_Stage\03.Camera\02.TalkingCamera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -593,6 +554,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\Sniper.cpp">
       <Filter>01.Scene_Stage\02.Weapon\03.Sniper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\HdrObject.cpp">
+      <Filter>02.Scene_All\07.HDRObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FadeOut.cpp">
+      <Filter>02.Scene_All\06.EffectObject\03.FadeOut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StaticCamera.cpp">
+      <Filter>01.Scene_Stage\03.Camera\02.TalkingCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,12 @@ Texture2D gDestortionTexture : register(t5);
 Texture2D gSSAOTexture : register(t6);
 SamplerState gsamLinearWrap : register(s0);
 
+cbuffer cbOptionInfo : register(b0)
+{
+    float4 OptionList : packoffset(c0); //01.SSAO,02.Spec,03.EMISSIVE,04.Distortion
+};
+
+
 struct VS_INPUT
 {
     float3 position : POSITION;
@@ -27,7 +33,6 @@ VS_OUTPUT VS_MAIN(VS_INPUT Input)
     output.position = float4(Input.position, 1.f);
     output.uv = Input.uv;
 
-    output.position.z = 0.01f;
     return output;
 }
 
@@ -48,9 +53,12 @@ float4 PS_MAIN(VS_OUTPUT input) : SV_TARGET
     float4 vBlurInfo = gBlurTexture.Sample(gsamLinearWrap, DistUV) * 1.5f;
     float4 vEmissiveInfo = gEmissiveTexture.Sample(gsamLinearWrap, DistUV) * 2.f;
     float4 vSSaoInfo = gSSAOTexture.Sample(gsamLinearWrap, DistUV) * 1.5f;
+    if(OptionList.x>0.5)
+    OutColor = (vAlbedoInfo * vShadeInfo *(vSSaoInfo)) +( vSpecInfo* OptionList.y) + vBlurInfo + (vEmissiveInfo* OptionList.z);
+    else
+    OutColor = (vAlbedoInfo * vShadeInfo ) + (vSpecInfo * OptionList.y) + vBlurInfo + (vEmissiveInfo * OptionList.z);
 
-    OutColor = (vAlbedoInfo * vShadeInfo * vSSaoInfo) + vSpecInfo + vBlurInfo + vEmissiveInfo;
-
+   
 
 
 

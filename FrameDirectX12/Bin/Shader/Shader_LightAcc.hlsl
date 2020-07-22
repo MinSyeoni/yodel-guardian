@@ -119,8 +119,14 @@ ps_output PS_POINTMAIN(VS_OUTPUT input) : SV_TARGET
     vPosition = mul(vPosition, g_matViewInv);
     
     float4 vLightDir = vPosition - g_vLightPos;
+
+
+
+
+
+
+
     float fDistance = length(vLightDir);
-    
     float4 vShade = saturate(dot(normalize(vLightDir), vWorldNormal));
     float fAtt = saturate((g_fRange - fDistance) / g_fRange);
     float3 reflection = normalize(reflect(g_vLightDir, vWorldNormal));
@@ -132,10 +138,72 @@ ps_output PS_POINTMAIN(VS_OUTPUT input) : SV_TARGET
 
 
 
-    output.spec = pow(saturate(dot(reflection, -vLook)), 5.f) * g_vLightSpecular * vMaterial.r * fAtt;
+    output.spec = pow(saturate(dot(reflection, -vLook)), 3.f) * g_vLightSpecular * vMaterial.r * fAtt;
     output.spec += output.shade * 0.05f;
     output.spec.a = 0;
 
 
     return output;
+}
+ps_output PS_SPOTMAIN(VS_OUTPUT input) : SV_TARGET
+{
+
+    ps_output output;
+
+    float4 vNormalInfo = gNormaltexture.Sample(gsamLinearWrap, input.uv);
+    float4 vDepthInfo = gDepthtexture.Sample(gsamLinearWrap, input.uv);
+    float4 vMaterial = gSpecTexture.Sample(gsamLinearWrap, input.uv);
+
+    float fViewZ = vDepthInfo.y * 500.f;
+
+    float4 vWorldNormal = float4(vNormalInfo.xyz * 2.f - 1.f, 0.f);
+
+    float4 vPosition;
+    vPosition.x = (input.uv.x * 2.f - 1.f) * fViewZ;
+    vPosition.y = (input.uv.y * -2.f + 1.f) * fViewZ;
+    vPosition.z = vDepthInfo.x * fViewZ;
+    vPosition.w = 1.0f * fViewZ;
+
+    vPosition = mul(vPosition, g_matProjInv);
+    vPosition = mul(vPosition, g_matViewInv);
+
+    float4 vLightDir = vPosition - g_vLightPos;
+    float4 vSpotDir = normalize(g_vLightDir);
+
+    float fAngle = dot(normalize(vLightDir), -vSpotDir);
+
+    float fDistance = length(vLightDir);
+   
+
+
+
+    if (fAngle > 0.6)
+    {
+        float4 vShade = saturate(dot(normalize(vLightDir), vWorldNormal));
+        float fAtt = saturate((g_fRange - fDistance) / g_fRange); 
+        float3 reflection = normalize(reflect(g_vLightDir, vWorldNormal));
+        float3 vLook = normalize(vPosition.xyz - g_vCampos.xyz);
+        float Cutoff = (1.0 - (1.0 - fAngle) * 1.0 / (1.0 - 0.5));
+        output.shade = g_vLightDiffuse * (vShade + g_vLightAmibient) * (fAtt+ fAtt*Cutoff);
+        output.shade.a = 1.f;
+
+
+
+
+        output.spec = pow(saturate(dot(reflection, -vLook)), 3.f) * g_vLightSpecular * vMaterial.r * fAtt;
+        output.spec += output.shade * 0.05f;
+        output.spec.a = 0;
+        output.spec = float4(0.f, 0.f, 0.f, 0.f);
+    }
+    else
+    {
+        output.shade = float4(0.f, 0.f, 0.f, 1.f);
+        output.spec = float4(0.f, 0.f, 0.f, 0.f);
+
+    }
+ 
+
+    return output;
+
+
 }

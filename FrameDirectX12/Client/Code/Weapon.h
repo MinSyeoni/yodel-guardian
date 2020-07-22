@@ -22,6 +22,7 @@ public:
 
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 	virtual void    Render_ShadowDepth(CShader_Shadow* pShader);
+	virtual void    Render_LimLight(CShader_LimLight* pShader);
 
 	void SetWeaponState(WEAPONSTATE eState) { m_eWeaponState = eState; };
 	WEAPONTYPE Get_WeaponType() { return m_eWeaponType; };
@@ -29,7 +30,7 @@ public:
 private:
 	void			Set_ConstantTable();
 	void            Set_ShadowTable(CShader_Shadow* pShader);
-
+	void            Set_LimTable(CShader_LimLight* pShader);
 protected:
 	Engine::CMesh*				m_pMeshCom = nullptr;
 	Engine::CShader_Mesh*       m_pShaderCom = nullptr;

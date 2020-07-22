@@ -147,7 +147,7 @@ HRESULT CShader_UI::Create_PipelineState()
 	PipelineStateDesc.PS = { reinterpret_cast<BYTE*>(m_pPS_ByteCode->GetBufferPointer()), m_pPS_ByteCode->GetBufferSize() };
 	PipelineStateDesc.RasterizerState = Create_RasterizerState();
 	PipelineStateDesc.BlendState = Create_BlendState();
-	PipelineStateDesc.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
+	PipelineStateDesc.DepthStencilState = Create_DepthStencilState();
 	PipelineStateDesc.SampleMask = UINT_MAX;
 	PipelineStateDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 	PipelineStateDesc.NumRenderTargets = 1;

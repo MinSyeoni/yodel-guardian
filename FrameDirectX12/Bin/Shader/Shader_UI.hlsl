@@ -128,5 +128,6 @@ VS_TEXTURED_OUTPUT VS_NNOMAL(VS_NTEXTURED_INPUT Input)
 float4 PS_NNOMAL(VS_NTEXTURED_OUTPUT input) : SV_TARGET
 {
 	float4 cColor = gTexture.Sample(gsamLinearWrap, input.uv);
+
 	return(cColor);
 }

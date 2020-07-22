@@ -176,9 +176,11 @@
     <ClInclude Include="..\Code\Dynamic_Object.h" />
     <ClInclude Include="..\Code\Effect.h" />
     <ClInclude Include="..\Code\EfffectComponent.h" />
+    <ClInclude Include="..\Code\FadeOut.h" />
     <ClInclude Include="..\Code\FlameThrower.h" />
     <ClInclude Include="..\Code\GlassObject.h" />
     <ClInclude Include="..\Code\GunUI.h" />
+    <ClInclude Include="..\Code\HdrObject.h" />
     <ClInclude Include="..\Code\HPKit.h" />
     <ClInclude Include="..\Code\InvenUI.h" />
     <ClInclude Include="..\Code\LightObject.h" />
@@ -210,6 +212,7 @@
     <ClInclude Include="..\Code\Shepard.h" />
     <ClInclude Include="..\Code\SkyDome.h" />
     <ClInclude Include="..\Code\Sniper.h" />
+    <ClInclude Include="..\Code\StaticCamera.h" />
     <ClInclude Include="..\Code\StaticObject.h" />
     <ClInclude Include="..\Code\Terrain.h" />
     <ClInclude Include="..\Code\TrailEffect.h" />
@@ -241,9 +244,11 @@
     <ClCompile Include="..\Code\Dynamic_Object.cpp" />
     <ClCompile Include="..\Code\Effect.cpp" />
     <ClCompile Include="..\Code\EfffectComponent.cpp" />
+    <ClCompile Include="..\Code\FadeOut.cpp" />
     <ClCompile Include="..\Code\FlameThrower.cpp" />
     <ClCompile Include="..\Code\GlassObject.cpp" />
     <ClCompile Include="..\Code\GunUI.cpp" />
+    <ClCompile Include="..\Code\HdrObject.cpp" />
     <ClCompile Include="..\Code\HPKit.cpp" />
     <ClCompile Include="..\Code\InvenUI.cpp" />
     <ClCompile Include="..\Code\LightObject.cpp" />
@@ -275,6 +280,7 @@
     <ClCompile Include="..\Code\Shepard.cpp" />
     <ClCompile Include="..\Code\SkyDome.cpp" />
     <ClCompile Include="..\Code\Sniper.cpp" />
+    <ClCompile Include="..\Code\StaticCamera.cpp" />
     <ClCompile Include="..\Code\StaticObject.cpp" />
     <ClCompile Include="..\Code\Terrain.cpp" />
     <ClCompile Include="..\Code\TrailEffect.cpp" />

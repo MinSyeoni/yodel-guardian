@@ -83,7 +83,58 @@ HRESULT CLoading::Load_Shader()
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_Dissolve", ID_STATIC, pComponent), E_FAIL);
 
-	// Shader_ColorBuffer
+
+
+	pComponent = CShader_UI::Create(DEVICE, m_pCommandList, CShader_UI::ALPHA);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_UI", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = CShader_UI::Create(DEVICE, m_pCommandList, CShader_UI::HPBAR);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_HPBAR", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = CShader_UI::Create(DEVICE, m_pCommandList, CShader_UI::HPBAR1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_HPBAR1", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = CShader_UI::Create(DEVICE, m_pCommandList, CShader_UI::HPBAR2);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_HPBAR2", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = CShader_LightAcc::Create(DEVICE, m_pCommandList, LIGHTTYPE::D3DLIGHT_DIRECTIONAL);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_LightDirect", ID_STATIC, pComponent), E_FAIL);
+
+
+	pComponent = CShader_LightAcc::Create(DEVICE, m_pCommandList, LIGHTTYPE::D3DLIGHT_POINT);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_LightPoint", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = CShader_LightAcc::Create(DEVICE, m_pCommandList, LIGHTTYPE::D3DLIGHT_SPOT);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_LightSpot", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = CShader_Destortion::Create(DEVICE, m_pCommandList);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_Destortion", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = CShader_Terrain::Create(DEVICE, m_pCommandList);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_Terrain", ID_STATIC, pComponent), E_FAIL);
+
+
+	pComponent = CShader_Effect::Create(DEVICE, m_pCommandList);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_Effect", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = CShader_Effect::Create(DEVICE, m_pCommandList, CShader_Effect::ALPHABLENDTEX);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_EffectAlphaBlend", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = CShader_Effect::Create(DEVICE, m_pCommandList, CShader_Effect::FADEOUT);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_FadeOut", ID_STATIC, pComponent), E_FAIL);
 
 
 	return S_OK;
