@@ -1,0 +1,16 @@
+0	BasePose[2]		0~1
+1	CB_WalkDown[2]		2~3
+2	CB_WalkEast[2]		4~5
+3	CB_WalkNorth[2]		6~7
+4	CB_WalkSouth[2]		8~9
+5	CB_WalkUp[2]		10~11
+6	CB_WalkWest[2]		12~13
+7	DG_Front[21]		14~34
+8	DG_Idle[21]		35~55
+9	EX_IdleHover[81]		56~136
+10	EX_IdleHoverTwitch[161]	137~297
+11	EX_IdleNoise[45]		298~342
+12	EX_IdleSway[61]		343~403
+13	FlightPose[2]		404~405
+14	OLD_Idle[481]		406~886
+15	DG_Death[40]		887~926

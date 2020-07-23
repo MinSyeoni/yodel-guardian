@@ -48,6 +48,8 @@ HRESULT CMonster::Ready_GameObject()
 		m_eMonName = FLAMETHROWER;
 	else if (m_tMeshInfo.MeshTag == L"Zombi")
 		m_eMonName = ZOMBI;
+	else if (m_tMeshInfo.MeshTag == L"Dron")
+		m_eMonName = DRON;
 
 	FAILED_CHECK_RETURN(Add_Component(),E_FAIL);
 
@@ -70,12 +72,20 @@ HRESULT CMonster::Ready_GameObject()
 	{
 		m_pZombi = new CZombi;
 		m_pZombi->Set_InitAni(m_iInitAni);
-		if (m_iInitAni == 4)
-			m_bIsActive = true;
 		m_pZombi->Set_Transform(m_pTransCom);
 		m_pZombi->Set_NaviMesh(m_pNaviCom);
 	}
 		break;
+	case CMonster::DRON:
+	{
+		m_pDron = new CDron;
+		m_pDron->Set_InitAni(m_iInitAni);
+		if (m_iInitAni == 0)
+			m_bIsActive = true;
+		m_pDron->Set_Transform(m_pTransCom);
+		m_pDron->Set_NaviMesh(m_pNaviCom);
+	}
+	break;
 	default:
 		break;
 	}
@@ -106,6 +116,12 @@ HRESULT CMonster::LateInit_GameObject()
 		m_pZombi->Late_Initialized();
 	}
 		break;
+	case CMonster::DRON:
+	{
+		m_pDron->Set_Astar(m_pAstarCom);
+		m_pDron->Late_Initialized();
+	}
+	break;
 	default:
 		break;
 	}
@@ -158,6 +174,19 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 		}
 	}
 		break;
+	case CMonster::DRON:
+	{
+		if (m_pDron == nullptr)
+			return E_FAIL;
+
+		// LeftWrist
+		//Update_BoneCollider(m_pShereCol[0], "LeftMiddleFinger", CColliderMgr::COMBAT);
+		//Update_BoneCollider(m_pShereCol[1], "RightMiddleFinger", CColliderMgr::COMBAT);
+		//Update_BoneCollider(m_pShereCol[2], "Chest", CColliderMgr::MONSTER);
+		m_pDron->Update_Dron(fTimeDelta, m_pTransCom, m_pMeshCom);
+		iCurState = m_pDron->Get_CurState();
+	}
+	break;
 	default:
 		break;
 	}
@@ -225,7 +254,23 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 				m_bIsDead = true;	
 		}
 	}
-		break;
+	break;
+	case CMonster::DRON:
+	{		
+		if (m_pDron == nullptr)
+			return E_FAIL;
+		m_pDron->LateUpdate_Dron(fTimeDelta, m_pTransCom, m_pMeshCom);
+
+		if (m_pDron->Get_IsDeadDron())
+		{
+			m_fDissolve -= 1.f * fTimeDelta;
+			m_matDissolve._11 = m_fDissolve;
+
+			if (m_fDissolve <= -0.5f)
+				m_bIsDead = true;
+		}
+	}
+	break;
 	default:
 		break;
 	}
@@ -374,6 +419,7 @@ void CMonster::Free()
 {
 	Safe_Delete(m_pFlameThrower);
 	Safe_Delete(m_pZombi);
+	Safe_Delete(m_pDron);
 
 	CGameObject::Free();
 }

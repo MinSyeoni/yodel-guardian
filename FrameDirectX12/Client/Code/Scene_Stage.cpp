@@ -385,7 +385,8 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 	COLLIDER tColData = {};
 
 	if (wstrFilePath == L"../../Data/Collider/Flame.dat")
-		m_tMeshInfo.MeshTag = L"Flamethrower";
+	//	m_tMeshInfo.MeshTag = L"Flamethrower";
+		m_tMeshInfo.MeshTag = L"Dron";
 	else if (wstrFilePath == L"../../Data/Collider/Zombi.dat")
 		m_tMeshInfo.MeshTag = L"Zombi";
 
@@ -397,7 +398,11 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 			break;
 
 	//	m_tMeshInfo.iMeshID = rand() % 4;
-		m_tMeshInfo.iMeshID = 4;		// 달리는 걸로 
+		if(m_tMeshInfo.MeshTag == L"Zombi")
+			m_tMeshInfo.iMeshID = 4;		// 달리는 걸로 
+		else if(m_tMeshInfo.MeshTag == L"Dron")
+			m_tMeshInfo.iMeshID = 0;
+
 		m_tMeshInfo.Pos = tColData.vCenter;
 		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Monster", m_tMeshInfo.MeshTag, &m_tMeshInfo);
 	}

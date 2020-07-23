@@ -112,9 +112,6 @@
     <Filter Include="01.Scene_Stage\06.Monster\00.FlameThrower">
       <UniqueIdentifier>{95102f00-49ab-42d5-aef4-48bbba25a08f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene_Stage\06.Monster\01.ZombiState">
-      <UniqueIdentifier>{059684e2-a709-4812-a5c6-4e18fdc16645}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01.Scene_Stage\07.NPC">
       <UniqueIdentifier>{ab0e7f12-a9fe-44ac-8492-29e44a448ece}</UniqueIdentifier>
     </Filter>
@@ -181,9 +178,6 @@
     <Filter Include="02.Scene_All\01.DynamicObject\01.PassageDoor">
       <UniqueIdentifier>{e6214335-cf8c-4e6f-96ac-89a229f1f507}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.UI\07.OptionUI\00.On">
-      <UniqueIdentifier>{782e0da7-9a72-4561-aa31-b4ef776aacde}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01.Scene_Stage\02.Weapon\03.Sniper">
       <UniqueIdentifier>{fababfaa-5eab-4e95-99d3-1d4760a7128d}</UniqueIdentifier>
     </Filter>
@@ -210,6 +204,9 @@
     </Filter>
     <Filter Include="02.Scene_All\06.EffectObject\03.FadeOut">
       <UniqueIdentifier>{15c4cccf-0d9e-40fb-b5bb-2a6f98b5dfc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\06.Monster\02.Dron">
+      <UniqueIdentifier>{60d0d92e-c5ea-4772-b83f-b9fab6436f9c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -417,6 +414,9 @@
     <ClInclude Include="..\Code\StaticCamera.h">
       <Filter>01.Scene_Stage\03.Camera\02.TalkingCamera</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Dron.h">
+      <Filter>01.Scene_Stage\06.Monster\02.Dron</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -592,6 +592,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\StaticCamera.cpp">
       <Filter>01.Scene_Stage\03.Camera\02.TalkingCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Dron.cpp">
+      <Filter>01.Scene_Stage\06.Monster\02.Dron</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
