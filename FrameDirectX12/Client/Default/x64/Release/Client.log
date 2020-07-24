@@ -1,3 +1,1 @@
-﻿LINK : warning LNK4044: '/FS' 옵션을 인식할 수 없습니다. 무시됩니다.
-ActionCamera.obj : warning LNK4075: '/EDITANDCONTINUE'이(가) '/OPT:ICF' 사양으로 인해 무시됩니다.
-  Client.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Default\../Release\Client.exe
+﻿  Client.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Default\../Release\Client.exe
