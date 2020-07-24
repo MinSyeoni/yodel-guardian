@@ -110,8 +110,6 @@ HRESULT CAim::Add_Component()
 
 void CAim::Set_ConstantTable()
 {
-
-
 	CB_MATRIX_INFO	tCB_MatrixInfo;
 	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
 

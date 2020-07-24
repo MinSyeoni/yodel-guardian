@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "FlameThrower.h"
 #include "Zombi.h"
+#include "Dron.h"
 
 namespace Engine
 {
@@ -19,7 +20,7 @@ class CDynamicCamera;
 class CMonster : public Engine::CGameObject
 {
 public:
-	enum MONKIND { NONAME, FLAMETHROWER, ZOMBI };
+	enum MONKIND { NONAME, FLAMETHROWER, ZOMBI, DRON };
 
 private:
 	explicit CMonster(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
@@ -58,11 +59,10 @@ private:
 
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
 
-	CFlameThrower*				m_pFlameThrower = nullptr;
-	
-	list<CZombi*>				m_pZombiLst;
+	CFlameThrower*				m_pFlameThrower = nullptr;	
+//	list<CZombi*>				m_pZombiLst;
 	CZombi*						m_pZombi = nullptr;
-
+	CDron*						m_pDron = nullptr;
 private:
 	MONKIND						m_eMonName = NONAME;
 

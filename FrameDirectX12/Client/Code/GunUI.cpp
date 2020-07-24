@@ -52,7 +52,7 @@ _int CGunUI::Update_GameObject(const _float& fTimeDelta)
 
 	m_pTransCom->m_vScale = _vec3(0.25f, 0.2f, 0.21f);
 
-	m_pTransCom->m_vPos.x = _float(WINCX / 2.f) / _float(WINCX / 1.4f) + 0.04f;
+	m_pTransCom->m_vPos.x = _float(WINCX / 2.f) / _float(WINCX / 1.4f) + 0.01f;
 	m_pTransCom->m_vPos.y = _float(WINCY / 1.5f) / _float(WINCY / 0.1f) - 0.85f;
 
 	///// [임시]총알 폰트 설정 ///// 
@@ -65,7 +65,7 @@ _int CGunUI::Update_GameObject(const _float& fTimeDelta)
 
 	strText.assign(strTemp.begin(), strTemp.end());
 
-	m_pBulletFont->Set_Pos(_vec2(WINCX * 0.92f, WINCY * 0.89f));
+	m_pBulletFont->Set_Pos(_vec2(WINCX * 0.9f, WINCY * 0.89f));
 	m_pBulletFont->Set_Text(strText.c_str());
 	////////////////////////
 	
