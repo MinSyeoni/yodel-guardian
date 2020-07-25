@@ -179,7 +179,7 @@ HRESULT CMainApp::SetUp_ComponentPrototype()
 	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_RcTex", ID_STATIC, pComponent), E_FAIL);
 
 	//TerrainTex
-	pComponent = Engine::CTerrainTex::Create(m_pGraphicDevice, m_pCommandList,768,768 ,L"../../Data/Terrain/HeightMapClient/test.dat",1.f);
+	pComponent = Engine::CTerrainTex::Create(m_pGraphicDevice, m_pCommandList,768,768 ,L"../../Data/Terrain/HeightMapClient/1.dat",1.f);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_TerrainTex", ID_STATIC, pComponent), E_FAIL);
 
