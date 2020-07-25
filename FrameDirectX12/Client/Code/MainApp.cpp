@@ -183,10 +183,6 @@ HRESULT CMainApp::SetUp_ComponentPrototype()
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_TerrainTex", ID_STATIC, pComponent), E_FAIL);
 
-	//pComponent = Engine::CNaviMesh::Create(m_pGraphicDevice, m_pCommandList);
-	//NULL_CHECK_RETURN(pComponent, E_FAIL);
-	//FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_NaviMesh", ID_STATIC, pComponent), E_FAIL);
-
 	pComponent = Engine::CBoxCollider::Create(m_pGraphicDevice, m_pCommandList, CCollider::COL_BOX);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_BoxCol", ID_STATIC, pComponent), E_FAIL);
@@ -199,7 +195,6 @@ HRESULT CMainApp::SetUp_ComponentPrototype()
 	pComponent = Engine::CNaviMesh::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Navi", ID_STATIC, pComponent), E_FAIL);
-
 
 	pComponent = Engine::CAstar::Create(m_pGraphicDevice);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);

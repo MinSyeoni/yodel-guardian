@@ -32,8 +32,7 @@ HRESULT CNaviMesh::Ready_NaviMesh()
 	_vec3 vecPointA, vecPointB, vecPointC;
 	_int iOption = 0;
 
-	// 나중에 파일도 받아올 수 있도록 해야함.
-	HANDLE hFile = CreateFile(L"../../../SYTool/Tool/Data/Navi/map1addoutside.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	HANDLE hFile = CreateFile(L"../../Data/Navi/map1addoutside.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	NULL_CHECK_RETURN(hFile, E_FAIL);
 
 	if (INVALID_HANDLE_VALUE == hFile)
@@ -228,8 +227,6 @@ void CNaviMesh::SetConstantTable(CShader_ColorBuffer* pShader)
 
 
 }
-
-
 
 CNaviMesh* CNaviMesh::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 {
