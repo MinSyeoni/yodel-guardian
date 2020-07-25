@@ -334,7 +334,7 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"datapad.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"datapad.x"), E_FAIL))
 		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"desk3.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"desk3.x"), E_FAIL))
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Desk3.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Desk3.x"), E_FAIL))
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"deskLamp.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"deskLamp.x"), E_FAIL))
 		return;
