@@ -402,8 +402,8 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"medikit_vaccine.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"medikit_vaccine.x"), E_FAIL))
 		return;
-	//if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"medikit_bandage.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"medikit_bandage.x"), E_FAIL))
-	//	return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"medikit_bandage.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"medikit_bandage.x"), E_FAIL))
+		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"medikit.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"medikit.x"), E_FAIL))
 		return;
 
