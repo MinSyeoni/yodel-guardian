@@ -208,6 +208,12 @@
     <Filter Include="01.Scene_Stage\06.Monster\02.Dron">
       <UniqueIdentifier>{60d0d92e-c5ea-4772-b83f-b9fab6436f9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Scene_Stage\00.Player\03.PlayerPoint">
+      <UniqueIdentifier>{81327760-a1d2-4f9c-9e3a-642ec73056ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Scene_Rail">
+      <UniqueIdentifier>{e2a1d531-0ff4-4f2d-ba4f-f528a350b17a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -417,6 +423,12 @@
     <ClInclude Include="..\Code\Dron.h">
       <Filter>01.Scene_Stage\06.Monster\02.Dron</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\PlayerPoint.h">
+      <Filter>01.Scene_Stage\00.Player\03.PlayerPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Scene_Rail.h">
+      <Filter>06.Scene_Rail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -595,6 +607,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\Dron.cpp">
       <Filter>01.Scene_Stage\06.Monster\02.Dron</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PlayerPoint.cpp">
+      <Filter>01.Scene_Stage\00.Player\03.PlayerPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_Rail.cpp">
+      <Filter>06.Scene_Rail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

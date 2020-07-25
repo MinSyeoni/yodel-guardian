@@ -54,9 +54,11 @@ HRESULT CDynamicCamera::LateInit_GameObject()
         m_pPlayer = static_cast<CPlayer*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player"));
         m_pPlayerMatrix = &m_pPlayer->Get_Transform()->m_matWorld;
         m_pPlayerArm = static_cast<CPlayerArm*>(m_pPlayer->Get_PlayerArm());
-        m_pPlayerLeg = static_cast<CPlayerLeg*>(m_pPlayer->Get_PlayerLeg());
 
-        m_pmatArmCamera = static_cast<CMesh*>(m_pPlayerArm->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_CameraMatrix();
+
+        m_pmatCamera = static_cast<CMesh*>(m_pPlayerArm->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_CameraMatrix();
+
+        
         //   m_pmatLegCamera= static_cast<CMesh*>(m_pPlayerLeg->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_CameraMatrix();
     }
     return S_OK;
@@ -65,6 +67,38 @@ HRESULT CDynamicCamera::LateInit_GameObject()
 _int CDynamicCamera::Update_GameObject(const _float& fTimeDelta)
 {
 
+    if (m_eShakeType == RIFLE)
+    {
+        m_fCameraShakeX += fTimeDelta * 30.f;
+        m_fCameraShakeY += fTimeDelta * 13.f;
+        m_fRadiusX = 0.015f;
+        m_fRadiusY = 0.02f;
+    }
+    else if (m_eShakeType == SNIPER)
+    {
+
+        m_fCameraShakeY += fTimeDelta * 5.f;
+        m_fCameraShakeX = 0.f;
+        m_fRadiusY = 2.f;
+
+        if (3.14/2 <(m_fCameraShakeY))
+        {
+            m_fCameraShakeX = 0.f;
+            m_fCameraShakeY = 0.f;
+            m_fRadiusX = 0.f;
+            m_fRadiusY = 0.f;
+            m_eShakeType = NONE;
+
+        }
+    }
+    else
+    {
+        m_fCameraShakeX = 0.f;
+        m_fCameraShakeY = 0.f;
+        m_fRadiusX = 0.f;
+        m_fRadiusY = 0.f;
+
+    }
     FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
     /*____________________________________________________________________
@@ -92,7 +126,10 @@ _int CDynamicCamera::Update_GameObject(const _float& fTimeDelta)
 
     Engine::CGameObject::Update_GameObject(fTimeDelta);
     Engine::CCamera::Update_GameObject(fTimeDelta);
-
+    _matrix BoneMatrix = (*m_pmatCamera);
+    _matrix RotY = XMMatrixRotationX(XMConvertToRadians(-90));
+    _matrix CameraMatrix = BoneMatrix * RotY **m_pPlayerMatrix;
+    CameraMatrix = XMMatrixInverse(0, CameraMatrix);
     CGraphicDevice::Get_Instance()->SetViewMatrix(m_tCameraInfo.matView);
     CGraphicDevice::Get_Instance()->SetProjMatrix(m_tProjInfo.matProj);
 
@@ -119,13 +156,13 @@ void CDynamicCamera::MouseInput()
 
 
 
-    if (m_pmatArmCamera != nullptr)
+    if (m_pmatCamera != nullptr)
     {
 
         _matrix RotY = XMMatrixRotationY(XMConvertToRadians(-90));
 
 
-        _matrix BoneMatrix = (*m_pmatArmCamera);
+        _matrix BoneMatrix = (*m_pmatCamera);
         _matrix CameraMatrix = BoneMatrix * *m_pPlayerMatrix;
 
 
@@ -143,12 +180,14 @@ void CDynamicCamera::MouseInput()
 
         _float fSpine = m_pPlayer->Get_SpineAngle();
 
-
-
+        float fCameraShakeX = sin(m_fCameraShakeX)* m_fRadiusX;
+        float fCameraShakeY = cos(m_fCameraShakeY) * m_fRadiusY;
 
         m_tCameraInfo.vEye = CameraPos + (CameraLook * (70.f - fSpine)) + CameraRight * m_fZoom - CameraUp * 50.f;
         m_tCameraInfo.vAt = CameraPos + (CameraLook * (70.f + fSpine)) - CameraUp * 50.f;
 
+        m_tCameraInfo.vAt.x += fCameraShakeX;
+        m_tCameraInfo.vAt.y += fCameraShakeY;
 
 
         if (m_tCameraInfo.vEye.x == 0 && m_tCameraInfo.vEye.z == 0)

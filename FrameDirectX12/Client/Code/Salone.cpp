@@ -5,6 +5,7 @@
 #include "DynamicCamera.h"
 #include"Frustom.h"
 #include "FadeOut.h"
+#include "EquipUI.h"
 #include "DirectInput.h"
 CSalone::CSalone(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -168,6 +169,7 @@ void CSalone::FIRTSTTALKCEHCK()
 
 		if (vDist.Get_Length() < 30.f && CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
 		{
+			ShowEquipUI(true);
 			m_bIsLimLIght = true;
 			if (KEY_DOWN(DIK_E))
 			{
@@ -177,10 +179,33 @@ void CSalone::FIRTSTTALKCEHCK()
 				m_bIsStartTalking = true;
 			}
 		}
+		else
+		{
+		   ShowEquipUI(false);
+		}
 	
+	}
+	else
+	{
+		ShowEquipUI(false);
+
 	}
 
 
+
+
+}
+
+void CSalone::ShowEquipUI(bool bIsRender)
+{
+	CGameObject* pGameObject = nullptr;
+
+	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
+	for (auto& pSrc : *pEquipUIList)
+		if (CEquipUI::E_CONVERSATION == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
+			pGameObject = dynamic_cast<CEquipUI*>(pSrc);
+	
+	dynamic_cast<CEquipUI*>(pGameObject)->Set_ShowUI(bIsRender);
 
 }
 

@@ -35,7 +35,9 @@ HRESULT CShader_Mesh::Ready_Shader(STATETYPE eType)
     if (m_eType == ALPHA)
     {
         m_bIsAlphaBlend = true;
+     
     }
+
     FAILED_CHECK_RETURN(Create_PipelineState(), E_FAIL);
 
     return S_OK;
@@ -300,7 +302,7 @@ D3D12_BLEND_DESC CShader_Mesh::Create_BlendState()
     BlendDesc.RenderTarget[0].BlendEnable = m_bIsAlphaBlend;
     BlendDesc.RenderTarget[0].LogicOpEnable = FALSE;
     BlendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
-    BlendDesc.RenderTarget[0].DestBlend = D3D12_BLEND_DEST_ALPHA;
+    BlendDesc.RenderTarget[0].DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
     BlendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
     BlendDesc.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
     BlendDesc.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;

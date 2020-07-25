@@ -53,6 +53,7 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
         CheckAim();
         ReloadCheck();
         CheckSniping();
+        CameraShakeCheck();
     }
     if (m_bIsShoot)
     {
@@ -102,7 +103,7 @@ _int CPlayerStatus::LateUpdate(const _float& fTimeDelta)
     AttackCheck(fTimeDelta);
     DamageByMonster(fTimeDelta);
 
-
+    CollisionWithObject(fTimeDelta);
 
     m_ePreState = m_eCurState;
     return S_OK;
@@ -185,12 +186,14 @@ void CPlayerStatus::KeyInput()
         if (m_eEquip == RIFLE)
         {
             m_eCurState = CPlayer::RIFLEATTACK;
+            m_pCamera->Set_CameraShakeType(CDynamicCamera::RIFLE);
             m_bIsShoot = true;
         }
         else if (m_eEquip == SNIPER)
         {
             if (m_pCamera->Get_ZoomOut())
             {
+                m_pCamera->Set_CameraShakeType(CDynamicCamera::SNIPER);
                 m_eCurState = CPlayer::SNIPERATTACK;
                 m_bIsShoot = true;
 
@@ -240,21 +243,42 @@ void CPlayerStatus::KeyInput()
     }
 
 
-    if (KEY_PRESSING(DIKEYBOARD_2) && m_eEquip == NONE)
+    if ( WeaponStateCheck(RIFLE)&&   KEY_DOWN(DIKEYBOARD_2) && (m_eEquip == NONE ||m_eEquip == SNIPER))
     {
-        if (!m_bIsShoot)
+        if (!m_bIsShoot && m_eEquip == NONE)
         {
             m_eCurState = CPlayer::RIFLEDRAW;
             m_eLegState = CPlayer::RIFLEDRAW;
+            m_pCamera->Set_ZoomInOut(false);
         }
+        else if (!m_bIsShoot && m_eEquip == SNIPER) 
+        {
+
+            m_eCurState = CPlayer::SNIPERHOSTER;
+            m_eLegState = CPlayer::SNIPERHOSTER;
+            m_bIsSwapingWeapon = true;
+            m_eSwapEquip = RIFLE;
+            m_pCamera->Set_ZoomInOut(false);
+        }
+
+
     }
-    if (KEY_PRESSING(DIKEYBOARD_3) && m_eEquip == NONE)
+    if (WeaponStateCheck(SNIPER)&& KEY_DOWN(DIKEYBOARD_3) && (m_eEquip == NONE || m_eEquip == RIFLE))
     {
-        if (!m_bIsShoot)
+        if (!m_bIsShoot &&m_eEquip == NONE)
         {
 
             m_eCurState = CPlayer::SNIPERDRAW;
             m_eLegState = CPlayer::SNIPERDRAW;
+            m_pCamera->Set_ZoomInOut(false);
+        }
+        else if (!m_bIsShoot && m_eEquip == RIFLE)
+        {
+            m_eCurState = CPlayer::RIFLEHOLSTER;
+            m_eLegState = CPlayer::RIFLEHOLSTER;
+            m_bIsSwapingWeapon = true;
+            m_eSwapEquip = SNIPER;
+            m_pCamera->Set_ZoomInOut(false);
         }
     }
 
@@ -369,15 +393,21 @@ void CPlayerStatus::KeyInput()
                 m_pCamera->Set_ZoomInOut(false);
 
         }
-        else if (m_eEquip == SNIPER)
+        else if (m_eEquip == SNIPER&&!m_bIsShoot)
         {
 
             _bool IsZoom = m_pCamera->Get_ZoomOut();
             if (IsZoom == false)
+            {
+                m_bIsZoom = true;
                 m_pCamera->Set_ZoomInOut(true, 10.f);
+            }
             else
+            {
+                m_bIsZoom = false;
                 m_pCamera->Set_ZoomInOut(false);
 
+            }
         }
     }
 
@@ -463,6 +493,16 @@ void CPlayerStatus::WeaponChange()
             m_eCurState = CPlayer::NONEIDLE;
             m_eLegState = CPlayer::NONEIDLE;
             m_eEquip = NONE;
+            if (m_bIsSwapingWeapon && m_eSwapEquip == SNIPER)
+            {
+                m_eCurState = CPlayer::SNIPERDRAW;
+                m_eLegState = CPlayer::SNIPERDRAW;
+                m_eEquip = NONE;
+                m_bIsSwapingWeapon = false;
+                m_eSwapEquip = NONE;
+            }
+
+
         }
 
     }
@@ -487,9 +527,79 @@ void CPlayerStatus::WeaponChange()
             m_eCurState = CPlayer::NONEIDLE;
             m_eLegState = CPlayer::NONEIDLE;
             m_eEquip = NONE;
+
+            if (m_bIsSwapingWeapon && m_eSwapEquip == RIFLE)
+            {
+                m_eCurState = CPlayer::RIFLEDRAW;
+                m_eLegState = CPlayer::RIFLEDRAW;
+                m_eEquip = NONE;
+                m_bIsSwapingWeapon = false;
+                m_eSwapEquip = NONE;
+
+            }
         }
 
     }
+
+
+}
+
+bool CPlayerStatus::WeaponStateCheck(EQUIPTYPE eType)
+{
+
+    return true;
+    list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Weapon");
+
+    if (pList == nullptr)
+        return FALSE;
+
+    for (auto& pSrc : *pList)
+    {
+        if (CWeapon::BAG == dynamic_cast<CWeapon*>(pSrc)->Get_WeaponState())
+        {
+            if (eType == RIFLE && dynamic_cast<CWeapon*>(pSrc)->Get_WeaponType() == CWeapon::RIFLE)
+            {
+                return true;
+
+            }
+            if (eType == SNIPER && dynamic_cast<CWeapon*>(pSrc)->Get_WeaponType() == CWeapon::SNIPER)
+            {
+
+                return true;
+
+            }
+
+        }
+
+    }
+
+    return false;
+
+}
+
+
+     
+
+
+void CPlayerStatus::CollisionWithObject(const _float& fTimeDelta)
+{
+
+    _vec3 vShaveDir;
+    for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::OBJECT))
+    {
+        if (CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir))
+        {
+            m_pTransCom->m_vPos += vShaveDir;
+            
+            m_pTransCom->m_matWorld._41 += vShaveDir.x;
+            m_pTransCom->m_matWorld._42 += vShaveDir.y;
+            m_pTransCom->m_matWorld._43 += vShaveDir.z;
+        }
+     
+    }
+
+
+
 
 
 }
@@ -844,5 +954,38 @@ void CPlayerStatus::CheckSniping()
         m_eLegState = CPlayer::RIFLEIDLE;
         m_bIsShoot = false;
 
+
+        if (m_bIsZoom)
+            m_pCamera->Set_ZoomInOut(true, 10.f);
     }
+}
+
+void CPlayerStatus::CameraShakeCheck()
+{
+
+    if (m_eCurState == CPlayer::RIFLEATTACK)
+    {
+        m_pCamera->Set_CameraShakeType(CDynamicCamera::RIFLE);
+
+    }
+    else if (m_eCurState == CPlayer::SNIPERATTACK&& m_pCamera->Get_CameraShakeType()==CDynamicCamera::SNIPER)
+    {
+     
+        return;
+
+    }
+    else if (m_eCurState == CPlayer::SNIPERATTACK && m_pCamera->Get_CameraShakeType() == CDynamicCamera::NONE)
+    {
+
+        m_pCamera->Set_ZoomInOut(false);
+    }
+    else
+        m_pCamera->Set_CameraShakeType(CDynamicCamera::NONE);
+
+
+
+}
+
+void CPlayerStatus::WeaponSwap()
+{
 }

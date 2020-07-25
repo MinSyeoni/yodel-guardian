@@ -17,7 +17,7 @@ typedef struct tagMeshTexture
 class ENGINE_DLL CShader_Mesh : public CShader
 {
 public:
-	enum STATETYPE{NONALPHA,SKYDOME,ALPHA};
+	enum STATETYPE{NONALPHA,SKYDOME,ALPHA,ALPHATEST};
 
 
 private:
@@ -60,7 +60,7 @@ private:
 	D3D12_CULL_MODE m_eFileMode = D3D12_CULL_MODE_BACK;
 	bool   m_bIsZwrite = true;
 	_bool   m_bIsAlphaBlend = false;
-
+	bool m_bIsTestEnable = false;
 
 private:
 	virtual void				Free();

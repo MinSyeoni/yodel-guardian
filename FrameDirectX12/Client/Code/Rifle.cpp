@@ -8,6 +8,7 @@
 #include "DirectInput.h"
 #include "Frustom.h"
 #include "DirectInput.h"
+#include "EquipUI.h"
 CRifle::CRifle(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
     :CWeapon(pGraphicDevice, pCommandList)
 {
@@ -254,12 +255,16 @@ void CRifle::DropCheck()
     {
         m_bIsLimLight = true;
 
-
+      //  ShowEquipUI(true);
 
     }
     else
+    {
+
+       // ShowEquipUI(false);
         m_bIsLimLight = false;
 
+    }
 
     if (m_eWeaponState == DROP &&m_bIsLimLight && KEY_DOWN(DIK_E))
     {
@@ -393,6 +398,19 @@ void CRifle::SpotLightCheck()
 
     
 
+}
+
+void CRifle::ShowEquipUI(bool bIsRender)
+{
+
+    CGameObject* pGameObject = nullptr;
+
+    list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
+    for (auto& pSrc : *pEquipUIList)
+        if (CEquipUI::E_KEYEQUIP == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
+            pGameObject = dynamic_cast<CEquipUI*>(pSrc);
+
+    dynamic_cast<CEquipUI*>(pGameObject)->Set_ShowUI(bIsRender);
 }
 
 CGameObject* CRifle::Clone_GameObject(void* prg)

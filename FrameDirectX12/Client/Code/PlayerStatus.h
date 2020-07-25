@@ -18,7 +18,9 @@ public:
 	void SetMesh(CMesh* m_pMesh);
 	void KeyInput();
 	void WeaponChange();
+	bool WeaponStateCheck(EQUIPTYPE eType);
 
+	void CollisionWithObject(const _float& fTimeDelta);//오브젝트와 충돌;
 	void CutSceneCheck();
 	void ShootingCheck();
 
@@ -31,6 +33,10 @@ public:
 	void CheckAim();
 	void ReloadCheck();
 	void CheckSniping();
+
+	void CameraShakeCheck();
+
+	void WeaponSwap();
 public:
 	CPlayer::STATE m_eCurState = CPlayer::RIFLEIDLE;
 	CPlayer::STATE m_ePreState = CPlayer::RIFLEIDLE;
@@ -57,11 +63,15 @@ public:
 	_bool m_bIsShoot = false;//총쏘는중
 	EQUIPTYPE m_eEquip = NONE;
 
+	EQUIPTYPE m_eSwapEquip = NONE;
+	bool      m_bIsSwapingWeapon = false;//무기든상태에서 다른무기로 바꿀때.
+
+
 	_bool m_bIshit = false;
 	_float m_fhitCool = 0.f;
 	_uint m_uiHp = 314;
 
-
+	bool m_bIsZoom = false;
 	_bool m_bIsInit = false;
 	//카메라
 	CDynamicCamera* m_pCamera;

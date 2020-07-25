@@ -30,6 +30,7 @@ public:
 	void LightCheck(const _float& fTimeDelta);
 	virtual void CreateShootEffect() override;
 	void SpotLightCheck();
+	void            ShowEquipUI(bool bIsRender);
 public:
 	virtual CGameObject*	Clone_GameObject(void* prg);
 	static CRifle*		Create(ID3D12Device* pGraphicDevice,

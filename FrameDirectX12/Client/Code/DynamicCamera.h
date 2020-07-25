@@ -4,6 +4,9 @@
 #include "Player.h"
 class CDynamicCamera : public Engine::CCamera
 {
+public:
+	enum SHAKETYPE {NONE,RIFLE,SNIPER};
+
 private:
 	explicit CDynamicCamera(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 	explicit CDynamicCamera(const CDynamicCamera& rhs);
@@ -20,6 +23,13 @@ public:
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 	void MouseInput();
 	_bool Get_ZoomOut() { return m_bIsZoom; };
+	SHAKETYPE Get_CameraShakeType() { return m_eShakeType; };
+	void Set_CameraShakeType(SHAKETYPE  eType) {
+		m_eShakeType = eType;
+	}
+
+
+
 	void Set_ZoomInOut(_bool ZoomIn, float Fov = 45.f);
 private:
 	/*____________________________________________________________________
@@ -28,7 +38,6 @@ private:
 	CPlayer* m_pPlayer = nullptr;
 	_matrix* m_pPlayerMatrix = nullptr;
 	CPlayerArm* m_pPlayerArm = nullptr;
-	CPlayerLeg* m_pPlayerLeg = nullptr;
 
 	_vec3 m_vDir = _vec3{ 0.0f,0.0f,-1.0f };
 
@@ -43,11 +52,14 @@ private:
 	_float m_fMinZoom = 150.f;
 	_float m_fZoom = 150.f;
 
-	_matrix* m_pmatArmCamera = nullptr;
-	_matrix* m_pmatLegCamera = nullptr;
+	_matrix* m_pmatCamera = nullptr;
 
-
+	float m_fCameraShakeX = 0.f;
+	float m_fCameraShakeY = 0.f;
 	float m_fFov = 45.f;
+	float m_fRadiusX = 0.f;
+	float m_fRadiusY = 0.f;
+	SHAKETYPE m_eShakeType = NONE;
 public:
 	virtual CGameObject* Clone_GameObject(void* pArg);
 	static CDynamicCamera* Create(ID3D12Device* pGraphicDevice,

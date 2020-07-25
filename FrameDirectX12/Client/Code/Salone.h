@@ -33,6 +33,8 @@ public:
 	virtual void    Render_LimLight(CShader_LimLight* pShader);
 
 	void            FIRTSTTALKCEHCK();
+	void            ShowEquipUI(bool bIsRender);
+           
 private:
 	void            Set_ShadowTable(CShader_Shadow* pShader);
 	void            Set_LimTable(CShader_LimLight* pShader);
