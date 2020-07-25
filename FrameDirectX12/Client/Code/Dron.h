@@ -18,10 +18,10 @@ namespace Engine
 class CDron
 {
 public:
-	enum DRONSTATE { ZOM_BasePose/*가만히X*/, ZOM_CB_Active/*위에서 천천히 떨어지면서 착지*/, ZOM_CB_CombatActive/*절벽 밑에서 기어올라오기*/, ZOM_CB_CombatActive_Ceiling/*하늘에서 빠르게 착지*/,
-					  ZOM_CB_Idle/*공중부양?X*/, ZOM_CB_IdlePose/*멈춰있음X*/, ZOM_DG_GetUpBack/*누워있다 일어나기*/, ZOM_DG_GetUpFront/*엎드려있다 일어나기*/, ZOM_EX_IdleOffset/*각기춤*/,
-					  ZOM_EX_IdlePose/*멈춰있음X*/, ZOM_EX_Run/*달리기*/, ZOM_EX_WalkSlow/*걷기*/, ZOM_BC_Dead/*죽음, 본 튐*/, ZOM_Base_Pose2/*가만히X*/,
-					  ZOM_LEFT_ATK/*왼쪽 할퀴기*/, ZOM_Base_Pose3/*가만히X*/, ZOM_RIGHT_ATK/*오른쪽 할퀴기*/};
+	enum DRONSTATE { DRON_BasePose, DRON_CB_WalkDown, DRON_CB_WalkEast, DRON_CB_WalkNorth,
+					 DRON_CB_WalkSouth, DRON_CB_WalkUp, DRON_CB_WalkWest, DRON_DG_Front,
+					 DRON_DG_Idle, DRON_EX_IdleHover, DRON_EX_IdleHoverTwitch, DRON_EX_IdleNoise,
+					 DRON_EX_IdleSway, DRON_FlightPose, DRON_OLD_Idle, DRON_DG_Death };
 
 public:
 	CDron();
@@ -47,10 +47,10 @@ public:
 	void					Set_Astar(CAstar* pAstar) { m_pAstarCom = pAstar; m_pAstarCom->AddRef(); }
 
 public:		// 상호작용 
-	const _bool&			Get_IsDeadDron() const { return m_bIsZombiState[1]; }
-	const _bool&			Get_IsHit() const { return m_bIsZombiState[2]; }
-	const _bool&			Get_IsAtkPlayer() const { return m_bIsZombiState[3]; }
-	void					Set_IsHit(_bool bIsHit) { m_bIsZombiState[2] = bIsHit; }
+	const _bool&			Get_IsDeadDron() const { return m_bIsDronState[1]; }
+	const _bool&			Get_IsHit() const { return m_bIsDronState[2]; }
+	const _bool&			Get_IsAtkPlayer() const { return m_bIsDronState[3]; }
+	void					Set_IsHit(_bool bIsHit) { m_bIsDronState[2] = bIsHit; }
 	const _float&			Get_CurHp() { return m_fCurHp; }	
 	void					Set_HitDamage(_float fDamage) { m_fHitDamage = fDamage; }
 	const _float&			Get_AtkDamage() { return m_fAtkDamage; }
@@ -79,7 +79,7 @@ private:
 	_vec3					m_vPlayerPos = _vec3(0.f, 0.f, 0.f);
 	_vec3					m_vChaseDir = _vec3(0.f, 0.f, 0.f);
 
-	_bool					m_bIsZombiState[4] = {false};	// 0=m_bIsTurn, 1=m_bIsDead, 2=m_bIsHit, 3=m_bIsATK;
+	_bool					m_bIsDronState[4] = {false};	// 0=m_bIsTurn, 1=m_bIsDead, 2=m_bIsHit, 3=m_bIsATK;
 
 	_float					m_fHitDamage = 0.f; // 맞을때
 	_float					m_fAtkDamage = 0.f; // 때릴때
