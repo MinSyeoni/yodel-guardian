@@ -32,7 +32,7 @@ HRESULT CNaviMesh::Ready_NaviMesh()
 	_vec3 vecPointA, vecPointB, vecPointC;
 	_int iOption = 0;
 
-	HANDLE hFile = CreateFile(L"../../Data/Navi/map1addoutside.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	HANDLE hFile = CreateFile(L"../../Data/Navi/out.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	NULL_CHECK_RETURN(hFile, E_FAIL);
 
 	if (INVALID_HANDLE_VALUE == hFile)

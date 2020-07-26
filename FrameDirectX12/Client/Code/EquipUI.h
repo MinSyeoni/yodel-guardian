@@ -10,7 +10,7 @@
 class CEquipUI : public Engine::CGameObject
 {
 public:
-	enum EQUIP_TYPE { E_CONVERSATION, E_KEYEQUIP, E_HIDING, E_DOOROPEN_L, E_DOOROPEN_P, EQUIP_END };
+	enum EQUIP_TYPE { E_CONVERSATION, E_KEYEQUIP, E_KITEQUIP, E_HIDING, E_DOOROPEN_L, E_DOOROPEN_P, EQUIP_END };
 
 private:
 	explicit CEquipUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);

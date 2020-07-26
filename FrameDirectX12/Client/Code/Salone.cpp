@@ -99,7 +99,7 @@ _int CSalone::Update_GameObject(const _float& fTimeDelta)
 
 	if (m_bIsDead)
 		return DEAD_OBJ;
-	FIRTSTTALKCEHCK();
+	//FIRTSTTALKCEHCK(); //¿·±Ò ≤®≥ı¿ª∞€!!!
 
 	/*____________________________________________________________________
 	TransCom - Update WorldMatrix.
