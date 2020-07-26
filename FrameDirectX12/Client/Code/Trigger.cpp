@@ -73,13 +73,13 @@ _int CTrigger::Update_GameObject(const _float & fTimeDelta)
 	case CTrigger::TRIGGER_SPHERE:
 	{
 		m_pShereCol->Update_Collider(&m_pTransCom->m_matWorld);
-		CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pShereCol);
+		CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::TRIGGER, m_pShereCol);
 	}
 		break;
 	case CTrigger::TRIGGER_BOX:
 	{
 		m_pBoxCol->Update_Collider(&m_pTransCom->m_matWorld);
-		CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCol);		
+		CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::TRIGGER, m_pBoxCol);
 	
 		_vec3 vShaveDir;
 		for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYER))

@@ -58,8 +58,11 @@ _int CLobbyDoor::Update_GameObject(const _float & fTimeDelta)
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
-	m_pBoxCol->Update_Collider(&m_pTransCom->m_matWorld);
-	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCol);
+	if (!m_bIsOpen)
+	{
+		m_pBoxCol->Update_Collider(&m_pTransCom->m_matWorld);
+		CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCol);
+	}
 
 	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
 	for (auto& pSrc : *pEquipUIList)
