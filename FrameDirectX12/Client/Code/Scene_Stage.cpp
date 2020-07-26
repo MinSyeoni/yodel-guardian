@@ -45,6 +45,8 @@
 
 #include "StaticCamera.h"
 #include "PlayerPoint.h"
+#include "NpcRifle.h"
+#include "Ken.h"
 
 
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
@@ -261,6 +263,16 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_PlayerPoint", pGameObject), E_FAIL);
 
 
+	pGameObject = CNpcRifle::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_NpcRifle",pGameObject),E_FAIL);
+
+
+	pGameObject = CKen::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Ken", pGameObject), E_FAIL);
+
+
 	return S_OK;
 }
 
@@ -325,8 +337,17 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Salone", L"Salone", nullptr), E_FAIL);//For.Salone
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Shepard", L"Shepard", nullptr), E_FAIL);
-	
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Ken", L"Ken", nullptr), E_FAIL);
+
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_PlayerPoint", L"PlayerPoint", nullptr), E_FAIL);
+
+
+
+	CNpcRifle::OWNER eOwner = CNpcRifle::SHEPARD;
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcRifle", L"Weapon", &eOwner), E_FAIL);
+
+	 eOwner = CNpcRifle::KEN;
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcRifle", L"Weapon", &eOwner), E_FAIL);
 
 	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj																		 //Prototype_MapObject
 	Load_StageObject(L"../../Data/StaticObj/mapAddoutside.dat");
