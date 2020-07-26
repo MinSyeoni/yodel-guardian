@@ -42,6 +42,8 @@ HRESULT CBoxCollider::Ready_Collider(CMesh* pMesh, const _vec3& vAddPos, const _
 
     _vec3 vScale = m_vMax - m_vMin;
 
+
+     
     m_matScale = XMMatrixScaling(vScale.x, vScale.y, vScale.z);
 
     m_vAddPos = vAddPos;

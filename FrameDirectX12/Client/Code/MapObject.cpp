@@ -40,6 +40,10 @@ HRESULT CMapObject::Ready_GameObject()
 
 	m_pTransCom->m_vAngle = ToDegree(m_tMeshInfo.Rotation);
 
+	m_pBoxCom = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(300.f, 300.f, 300.f), this));
+	NULL_CHECK_RETURN(m_pBoxCom, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCom);
+
 	return S_OK;
 }
 
@@ -58,26 +62,27 @@ _int CMapObject::Update_GameObject(const _float & fTimeDelta)
 		return DEAD_OBJ;
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
-
+	m_pBoxCom->Update_Collider(&m_pTransCom->m_matWorld);
 	return NO_EVENT;
 }
 
 _int CMapObject::LateUpdate_GameObject(const _float & fTimeDelta)
 {
-	if (m_tMeshInfo.MeshTag == L"apollo.X" || m_tMeshInfo.MeshTag ==L"passage_test.X")
+	if (m_tMeshInfo.MeshTag == L"apollo.X")
 		return NO_EVENT;
 
 	if (!CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
 		return NO_EVENT; // 여기야 절투체컬링 
 
-	NULL_CHECK_RETURN(m_pRenderer, -1);
+	NULL_CHECK_RETURN(m_pRenderer, -1); 
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 
+	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCom), -1);
 	return NO_EVENT;
 }
-
+ 
 void CMapObject::Render_GameObject(const _float & fTimeDelta)
 {
 	Set_ConstantTable();

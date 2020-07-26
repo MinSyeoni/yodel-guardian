@@ -163,8 +163,11 @@ HRESULT CFrustom::Ready_Light_Frustom_Manager()
 bool CFrustom::FrustomCulling(_vec3 vMinPos, _vec3 vMaxPos, _matrix matworld)
 {
 
+
+
 	vMaxPos.TransformCoord(vMaxPos, matworld);
 	vMinPos.TransformCoord(vMinPos, matworld);
+
 
 
 	for (_uint i = 0; i < 6; ++i)

@@ -42,6 +42,7 @@ private:
 
 	MeshInfo					m_tMeshInfo;
 	vector<vector<_matrix>>		m_vecMatrix;
+	Engine::CBoxCollider* m_pBoxCom = nullptr;
 public:
 	virtual CGameObject*	Clone_GameObject(void* prg);
 	static CMapObject*		Create(ID3D12Device* pGraphicDevice,
