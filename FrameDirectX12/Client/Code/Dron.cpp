@@ -52,8 +52,8 @@ _int CDron::Update_Dron(const _float& fTimeDelta, CTransform* pTransform, CMesh*
 	// Ã¼·Â 
 	Update_DronHP();
 
-	if (m_bIsZombiState[2])	// m_bIsHit
-		m_eCurState = ZOM_EX_IdleOffset;
+	if (m_bIsDronState[2])	// m_bIsHit
+		m_eCurState = DRON_EX_IdleSway;
 
 	return S_OK;
 }
@@ -103,8 +103,8 @@ void CDron::Update_DronHP()
 	if (m_fCurHp <= 0.f)
 	{
 		m_fCurHp = 0.f;
-		m_bIsZombiState[2] = false;
-		m_eCurState = ZOM_BC_Dead;
+		m_bIsDronState[2] = false;
+		m_eCurState = DRON_DG_Death;
 	}
 	//if (m_bIsDeadSound == false && m_eCurState == ZOM_BC_Dead)
 	//{
@@ -137,17 +137,17 @@ void CDron::Chase_Player(const _float& fTimeDelta)
 		fAngle = -XMConvertToDegrees(acosf(m_vChaseDir.Dot(vLook)));
 	}
 
-	if ((fAngle > 3.f || fAngle < -3.f) && !m_bIsZombiState[0])
+	if ((fAngle > 3.f || fAngle < -3.f) && !m_bIsDronState[0])
 	{
 		m_pTransCom->m_vAngle.y += ToRadian(fAngle * 180.f * fTimeDelta);
 	}
 	else if ((fAngle <= 3.f && fAngle >= -3.f))
 	{
-		m_bIsZombiState[0] = true;
+		m_bIsDronState[0] = true;
 	}
 	else if ((fAngle > 15.f || fAngle < -15.f))
 	{
-		m_bIsZombiState[0] = false;
+		m_bIsDronState[0] = false;
 	}
 
 	m_pTransCom->m_vDir = m_vChaseDir;
@@ -178,168 +178,86 @@ _int CDron::LateUpdate_Dron(const _float& fTimeDelta, CTransform* pTransform, CM
 
 void CDron::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 {
-	//switch (m_eCurState)
-	//{
-	//case CDron::ZOM_BasePose:
-	//	break;
-	//case CDron::ZOM_CB_Active:
-	//	break;
-	//case CZombi::ZOM_CB_CombatActive:
-	//{
-	//	m_fAniDelay = 12000.f;
-	//	if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_CB_CombatActive))
-	//		m_eCurState = ZOM_EX_IdleOffset;
-	//}
-	//	break;
-	//case CZombi::ZOM_CB_CombatActive_Ceiling:
-	//{
-	//	m_fAniDelay = 9000.f;
-	//	if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_CB_CombatActive_Ceiling))
-	//		m_eCurState = ZOM_EX_IdleOffset;
-	//}
-	//	break;
-	//case CZombi::ZOM_CB_Idle:
-	//	break;
-	//case CZombi::ZOM_CB_IdlePose:
-	//	break;
-	//case CZombi::ZOM_DG_GetUpBack:
-	//{
-	//	m_fAniDelay = 24500.f;
-	//	if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_DG_GetUpBack))
-	//		m_eCurState = ZOM_EX_IdleOffset;
-	//}
-	//	break;
-	//case CZombi::ZOM_DG_GetUpFront:
-	//{
-	//	m_fAniDelay = 24500.f;
-	//	if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_DG_GetUpFront))
-	//		m_eCurState = ZOM_EX_IdleOffset;
-	//}
-	//	break;
-	//case CZombi::ZOM_EX_IdleOffset:
-	//{
-	//	if (m_bIsZombiState[2])	// hit
-	//	{
-	//		m_fSpeed = 15.f;
-	//	
-	//		m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(m_pTransCom->m_vDir * -1), m_fSpeed * fTimeDelta);
-	//		
-	//		m_fAniDelay = 300.f;
-	//		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_IdleOffset))
-	//		{
-	//			m_fCurHp -= m_fHitDamage;
-	//			m_bIsZombiState[2] = false;
-	//		}
-	//	}
-	//	else
-	//	{
-	//		m_fAniDelay = 6000.f;
-	//		if (Check_PlayerRange(100.f))
-	//		{
-	//			if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_IdleOffset))
-	//				m_eCurState = ZOM_EX_Run;
-	//		}
-	//		else
-	//		{
-	//			if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_IdleOffset))
-	//				m_eCurState = ZOM_EX_WalkSlow;
-	//		}
-	//	}
-	//}
-	//	break;
-	//case CZombi::ZOM_EX_IdlePose:
-	//	break;
-	//case CZombi::ZOM_EX_Run:
-	//{
-	//	m_fSpeed = 4.5f;
+	switch (m_eCurState)
+	{
+	case CDron::DRON_BasePose:
+	{
+		m_eCurState = DRON_CB_WalkUp;
+	}
+		break;
+	case CDron::DRON_CB_WalkDown:
+		break;
+	case CDron::DRON_CB_WalkEast:
+		break;
+	case CDron::DRON_CB_WalkNorth:
+		break;
+	case CDron::DRON_CB_WalkSouth:
+		break;
+	case CDron::DRON_CB_WalkUp:
+	{
+		m_fSpeed = 3.5f;
 
-	//	if (Check_PlayerRange(8.f))
-	//	{
-	//		m_fAniDelay = 2000.f;
-	//		int iRandAni = rand() % 2;
-	//		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_Run))
-	//		{
-	//			if(iRandAni == 0)
-	//				m_eCurState = ZOM_LEFT_ATK;
-	//			else if(iRandAni == 1)
-	//				m_eCurState = ZOM_RIGHT_ATK;
-	//		}
-	//	}
-	//	else
-	//	{
-	//		Chase_Player(fTimeDelta);
-	//		MoveByAstar(fTimeDelta);
-	//	}
-	//}
-	//	break;
-	//case CZombi::ZOM_EX_WalkSlow:
-	//{
-	//	m_fSpeed = 2.f;
+		if (Check_PlayerRange(8.f))
+		{
+			m_fAniDelay = 2000.f;
+			int iRandAni = rand() % 2;
+			if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, DRON_CB_WalkUp))
+				m_eCurState = DRON_EX_IdleNoise;			
+		}
+		else
+		{
+			Chase_Player(fTimeDelta);
+			MoveByAstar(fTimeDelta);
+		}
+	}
+	break;
+	case CDron::DRON_CB_WalkWest:
+		break;
+	case CDron::DRON_DG_Front:
+		break;
+	case CDron::DRON_DG_Idle:
+		break;
+	case CDron::DRON_EX_IdleHover:
+		break;
+	case CDron::DRON_EX_IdleHoverTwitch:
+		break;
+	case CDron::DRON_EX_IdleNoise:
+	{
+		m_fAniDelay = 6000.f;
 
-	//	Chase_Player(fTimeDelta);
-	//	MoveByAstar(fTimeDelta);
-
-	//	if (Check_PlayerRange(100.f))
-	//	{
-	//		m_fAniDelay = 2000.f;
-	//		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_WalkSlow))
-	//			m_eCurState = ZOM_EX_Run;
-	//	}
-	//}
-	//	break;
-	//case CZombi::ZOM_BC_Dead:
-	//{
-	//	m_bIsZombiState[2] = false;
-	//	m_fAniDelay = 6500.f;
-	//	if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_BC_Dead))
-	//		m_bIsZombiState[1] = true;	//dead
-	//}
-	//	break;
-	//case CZombi::ZOM_Base_Pose2:
-	//	break;
-	//case CZombi::ZOM_LEFT_ATK:
-	//{
-	//	m_fAniDelay = 6000.f;
-
-	//	Attak_Player(m_pMeshCom, ZOM_LEFT_ATK);
-	//}
-	//	break;
-	//case CZombi::ZOM_Base_Pose3:
-	//	break;
-	//case CZombi::ZOM_RIGHT_ATK:
-	//{
-	//	m_fAniDelay = 6000.f;
-
-	//	Attak_Player(m_pMeshCom, ZOM_RIGHT_ATK);
-	//}
-	//	break;
-	//default:
-	//	break;
-	//}
+		Attak_Player(m_pMeshCom, DRON_EX_IdleNoise);
+	}
+		break;
+	case CDron::DRON_EX_IdleSway:
+		break;
+	case CDron::DRON_FlightPose:
+		break;
+	case CDron::DRON_OLD_Idle:
+		break;
+	case CDron::DRON_DG_Death:
+		break;
+	default:
+		break;
+	}
 }
 
 void CDron::Attak_Player(Engine::CMesh* m_pMeshCom, CDron::DRONSTATE eState)
 {
-	if (!m_bIsZombiState[3])
+	if (!m_bIsDronState[3])
 	{
-		m_bIsZombiState[3] = true;
+		m_bIsDronState[3] = true;
 		m_fAtkDamage = rand() % 15 + 15.f;
 	}
 	
 	if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, eState))
 	{
-		int iRandAni = rand() % 2;
-		m_bIsZombiState[3] = false;
+	//	int iRandAni = rand() % 2;
+		m_bIsDronState[3] = false;
 
 		if (Check_PlayerRange(10.f))
-		{
-			if (iRandAni == 0)
-				m_eCurState = ZOM_LEFT_ATK;
-			else if (iRandAni == 1)
-				m_eCurState = ZOM_RIGHT_ATK;
-		}
+			m_eCurState = DRON_EX_IdleNoise;
 		else
-			m_eCurState = ZOM_EX_Run;
+			m_eCurState = DRON_CB_WalkUp;
 	}
 }
 

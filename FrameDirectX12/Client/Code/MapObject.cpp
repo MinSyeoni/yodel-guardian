@@ -64,6 +64,9 @@ _int CMapObject::Update_GameObject(const _float & fTimeDelta)
 
 _int CMapObject::LateUpdate_GameObject(const _float & fTimeDelta)
 {
+	if (m_tMeshInfo.MeshTag == L"apollo.X" || m_tMeshInfo.MeshTag ==L"passage_test.X")
+		return NO_EVENT;
+
 	if (!CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
 		return NO_EVENT; // 여기야 절투체컬링 
 

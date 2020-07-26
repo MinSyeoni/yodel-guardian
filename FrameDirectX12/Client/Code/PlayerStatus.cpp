@@ -41,7 +41,7 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
     if (pTranscom != nullptr)
         m_pTransCom = pTranscom;
 
-
+    CutSceneCheck();
 
     if (!m_bIsKeyLock)
     {
@@ -66,7 +66,6 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
     }
 
 
-    CutSceneCheck();
   
 
 
@@ -547,7 +546,7 @@ void CPlayerStatus::WeaponChange()
 bool CPlayerStatus::WeaponStateCheck(EQUIPTYPE eType)
 {
 
-    return true;
+
     list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Weapon");
 
     if (pList == nullptr)
@@ -587,14 +586,14 @@ void CPlayerStatus::CollisionWithObject(const _float& fTimeDelta)
     _vec3 vShaveDir;
     for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::OBJECT))
     {
-        if (CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir))
+     /*   if (CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir))
         {
             m_pTransCom->m_vPos += vShaveDir;
             
             m_pTransCom->m_matWorld._41 += vShaveDir.x;
             m_pTransCom->m_matWorld._42 += vShaveDir.y;
             m_pTransCom->m_matWorld._43 += vShaveDir.z;
-        }
+        }*/
      
     }
 
@@ -806,7 +805,7 @@ void CPlayerStatus::AttackCheck(const _float& fTimeDelta)
                 }
             }
 
-            CDirectSound::Get_Instance()->PlayDirectSoundFile(L"GUNSHOT");
+           // CDirectSound::Get_Instance()->PlayDirectSoundFile(L"GUNSHOT");
             ShootingCheck();
             m_fShootingTime = 0.f;
         }
@@ -829,7 +828,7 @@ void CPlayerStatus::AttackCheck(const _float& fTimeDelta)
                 }
             }
 
-            CDirectSound::Get_Instance()->PlayDirectSoundFile(L"GUNSHOT");
+           // CDirectSound::Get_Instance()->PlayDirectSoundFile(L"GUNSHOT");
             ShootingCheck();
             m_fShootingTime = 0.f;
         }
@@ -903,6 +902,7 @@ void CPlayerStatus::CheckAim()
     CGameObject* pAim = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"Aim");
     if (pAim == nullptr)
         return;
+  
 
     if (m_eEquip == RIFLE)
     {

@@ -86,7 +86,7 @@ HRESULT CScene_Logo::Ready_GameObjectPrototype()
 		PROJ_INFO(60.f,							// FovY
 			_float(WINCX) / _float(WINCY),	// Aspect
 			1.f,							// Near
-			500.f),							// Far
+			700.f),							// Far
 		ORTHO_INFO(WINCX,	// Viewport Width
 			WINCY,	// Viewport Height
 			0.f,	// Near
@@ -103,7 +103,7 @@ HRESULT CScene_Logo::Ready_GameObjectPrototype()
 
 
 
-	CDirectSound::Get_Instance()->PlayDirectSoundEffect(L"Bgm");//여기야시영
+	//CDirectSound::Get_Instance()->PlayDirectSoundEffect(L"Bgm");//여기야시영
 	return S_OK;
 }
 

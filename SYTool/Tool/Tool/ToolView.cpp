@@ -334,7 +334,7 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"datapad.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"datapad.x"), E_FAIL))
 		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"desk3.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"desk3.x"), E_FAIL))
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"Desk3.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"Desk3.x"), E_FAIL))
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"deskLamp.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"deskLamp.x"), E_FAIL))
 		return;
@@ -387,6 +387,24 @@ void CToolView::Ready_Buffer_Setting()
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"passage_side.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"passage_side.x"), E_FAIL))
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"passage_bottom.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"passage_bottom.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"passage_test.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"passage_test.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"minibase.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"minibase.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"point_top.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"point_top.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"point_bottom.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"point_bottom.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"antenna.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"antenna.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"medikit_syringe.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"medikit_syringe.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"medikit_vaccine.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"medikit_vaccine.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"medikit_bandage.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"medikit_bandage.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"medikit.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"medikit.x"), E_FAIL))
 		return;
 
 	///// 테스트 /////

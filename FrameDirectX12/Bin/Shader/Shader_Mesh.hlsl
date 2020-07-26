@@ -90,6 +90,7 @@ ps_output PS_MAIN(VS_OUTPUT input) : SV_TARGET
     NomalMap = (NomalMap * 2.f) - 1.f;
 
     output.albedo = gTexture.Sample(gsamLinearWrap, input.uv);
+
     float3 tangentNormal = gNormalTexture.Sample(gsamLinearWrap, input.uv).xyz;
     tangentNormal = normalize(tangentNormal * 2.f - 1.f);
     float3x3 TBN = float3x3(normalize(input.vT), normalize(input.vB), normalize(input.vN));
@@ -102,7 +103,7 @@ ps_output PS_MAIN(VS_OUTPUT input) : SV_TARGET
     output.Specular = fSpec * gTexInfo.r;
 
 
-    output.Depth = float4(input.vProjPos.z / input.vProjPos.w, input.vProjPos.w / 500.f, 0.f, 0.f);
+    output.Depth = float4(input.vProjPos.z / input.vProjPos.w, input.vProjPos.w / 700.f, 0.f, 0.f);
 
     output.Emissive = float4(0.f, 0.f, 0.f, 0.f);
     if (gTexInfo.g > 0)  output.Emissive = gEmisTexture.Sample(gsamLinearWrap, input.uv);

@@ -194,7 +194,7 @@ D3D12_BLEND_DESC CShader_Blend::Create_BlendState()
 
 	// ºí·»µå ¼³Á¤.
 	ZeroMemory(&BlendDesc, sizeof(D3D12_BLEND_DESC));
-	BlendDesc.AlphaToCoverageEnable = FALSE;
+	BlendDesc.AlphaToCoverageEnable = TRUE;
 	BlendDesc.IndependentBlendEnable = FALSE;
 	BlendDesc.RenderTarget[0].BlendEnable = FALSE;
 	BlendDesc.RenderTarget[0].LogicOpEnable = FALSE;

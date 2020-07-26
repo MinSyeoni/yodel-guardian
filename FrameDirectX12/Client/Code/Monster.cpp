@@ -179,10 +179,9 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 		if (m_pDron == nullptr)
 			return E_FAIL;
 
-		// LeftWrist
-		//Update_BoneCollider(m_pShereCol[0], "LeftMiddleFinger", CColliderMgr::COMBAT);
-		//Update_BoneCollider(m_pShereCol[1], "RightMiddleFinger", CColliderMgr::COMBAT);
-		//Update_BoneCollider(m_pShereCol[2], "Chest", CColliderMgr::MONSTER);
+		// Gun, Cables
+		Update_BoneCollider(m_pShereCol[0], "Gun", CColliderMgr::MONSTER);
+
 		m_pDron->Update_Dron(fTimeDelta, m_pTransCom, m_pMeshCom);
 		iCurState = m_pDron->Get_CurState();
 	}

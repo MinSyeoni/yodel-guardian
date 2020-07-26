@@ -62,7 +62,7 @@ ps_output PS_MAIN(VS_OUTPUT input) : SV_TARGET
     float4 vMaterial = gSpecTexture.Sample(gsamLinearWrap, input.uv);
     
     float4 vWorldNormal = vector(vNormalInfo.xyz * 2.f - 1.f, 0.f);
-    float fViewZ = vDepthInfo.y * 500.f;
+    float fViewZ = vDepthInfo.y * 700.f;
     
     float4 vshade = saturate(dot(normalize(-g_vLightDir), vWorldNormal));
     
@@ -105,7 +105,7 @@ ps_output PS_POINTMAIN(VS_OUTPUT input) : SV_TARGET
     float4 vDepthInfo = gDepthtexture.Sample(gsamLinearWrap, input.uv);
     float4 vMaterial = gSpecTexture.Sample(gsamLinearWrap, input.uv);
     
-    float fViewZ = vDepthInfo.y * 500.f;
+    float fViewZ = vDepthInfo.y * 700.f;
     
     float4 vWorldNormal = float4(vNormalInfo.xyz * 2.f - 1.f, 0.f);
     
@@ -154,7 +154,7 @@ ps_output PS_SPOTMAIN(VS_OUTPUT input) : SV_TARGET
     float4 vDepthInfo = gDepthtexture.Sample(gsamLinearWrap, input.uv);
     float4 vMaterial = gSpecTexture.Sample(gsamLinearWrap, input.uv);
 
-    float fViewZ = vDepthInfo.y * 500.f;
+    float fViewZ = vDepthInfo.y * 700.f;
 
     float4 vWorldNormal = float4(vNormalInfo.xyz * 2.f - 1.f, 0.f);
 
