@@ -228,6 +228,8 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[0]), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[1]), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[2]), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 
 	switch (m_eMonName)
 	{
@@ -279,16 +281,17 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 	{
 		if (CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCol, pCol, &vShaveDir))
 		{
-			m_pTransCom->m_vPos += vShaveDir;
+			if (pCol != m_pBoxCol)
+			{
+				m_pTransCom->m_vPos += vShaveDir;
 
-			m_pTransCom->m_matWorld._41 += vShaveDir.x;
-			m_pTransCom->m_matWorld._42 += vShaveDir.y;
-			m_pTransCom->m_matWorld._43 += vShaveDir.z;
+				m_pTransCom->m_matWorld._41 += vShaveDir.x;
+				m_pTransCom->m_matWorld._42 += vShaveDir.y;
+				m_pTransCom->m_matWorld._43 += vShaveDir.z;
+			}
 		}
 	}
 
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	return NO_EVENT;
 }
 

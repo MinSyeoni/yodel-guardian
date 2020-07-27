@@ -328,9 +328,9 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_PlayerPoint", L"PlayerPoint", nullptr), E_FAIL);
 
-	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj																		 //Prototype_MapObject
-	Load_StageObject(L"../../Data/StaticObj/mapAddoutside_1_test.dat");
-
+	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj\mapAddoutside_1_test																	 //Prototype_MapObject
+	Load_StageObject(L"../../Data/StaticObj/SY_Kit_Test.dat");
+	
 	// Monster
 	Load_MonsterPos(L"../../Data/Collider/Flame.dat");
 	Load_MonsterPos(L"../../Data/Collider/Zombi.dat");
@@ -374,7 +374,7 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 
 
 
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < 6; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_EquipUI", L"EquipUI", &(iType = i)), E_FAIL);
 
 
@@ -482,8 +482,11 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 
 		if(m_tMeshInfo.MeshTag ==L"Siren.X" )
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LightObject", L"LightObject", &m_tMeshInfo);//조명처리
-		else if (m_tMeshInfo.MeshTag == L"medCrate.X")
+		else if (m_tMeshInfo.MeshTag == L"medikit.X")
+		{
+			m_tMeshInfo.iMeshID++;
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_ItemObject", L"ItemObject", &m_tMeshInfo);
+		}
 		else if (m_tMeshInfo.MeshTag == L"door1.X")
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LobbyDoor", L"LobbyDoor", &m_tMeshInfo);
 		else if (m_tMeshInfo.MeshTag == L"door2.X")

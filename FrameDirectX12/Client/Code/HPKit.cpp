@@ -6,6 +6,7 @@
 #include "ColliderMgr.h"
 #include "Frustom.h"
 #include "InvenUI.h"
+#include "EquipUI.h"
 
 CHPKit::CHPKit(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -38,6 +39,7 @@ HRESULT CHPKit::Ready_GameObject()
 	m_pTransCom->m_vPos = m_tMeshInfo.Pos;
 	m_pTransCom->m_vScale = m_tMeshInfo.Scale;
 	m_pTransCom->m_vAngle = ToDegree(m_tMeshInfo.Rotation);
+	m_iMeshID = m_tMeshInfo.iMeshID;
 
 	return S_OK;
 }
@@ -61,6 +63,14 @@ _int CHPKit::Update_GameObject(const _float & fTimeDelta)
 	m_pBoxCollider->Update_Collider(&m_pTransCom->m_matWorld);
 	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCollider);
 
+	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
+	for (auto& pSrc : *pEquipUIList)
+		if (CEquipUI::E_KITEQUIP == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
+			m_pGameObject = dynamic_cast<CEquipUI*>(pSrc);
+
+	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)m_eState);
+	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f * fTimeDelta);
+
 	return NO_EVENT;
 }
 
@@ -72,28 +82,74 @@ _int CHPKit::LateUpdate_GameObject(const _float & fTimeDelta)
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCollider), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 
+	HPKit_Ani();
+	Open_TheKit();
+
+	return NO_EVENT;
+}
+
+void CHPKit::HPKit_Ani()
+{
+	switch (m_eState)
+	{
+	case CHPKit::KIT_OPEN:
+	{
+		m_fAniDelay = 2000.f;
+		dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
+		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, KIT_OPEN))
+			m_eState = KIT_CLOSE;
+	}
+	break;
+	case CHPKit::KIT_CLOSE:
+	{
+		m_fAniDelay = 2000.f;
+		dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
+		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, KIT_CLOSE))
+			m_eState = KIT_OPEN;
+	}
+	break;
+	case CHPKit::KIT_IDLE:
+		break;
+	default:
+		break;
+	}
+}
+
+void CHPKit::Open_TheKit()
+{
 	_vec3 vShaveDir;
 	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYER))
 	{
 		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir)
-			&& CDirectInput::Get_Instance()->KEY_DOWN(DIK_E))
+			&& m_tMeshInfo.iMeshID == m_iMeshID)
 		{
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(!m_bIsOpen);
+		//	m_bIsLimLIght = true;
+
+			if (!m_bIsOpen && CDirectInput::Get_Instance()->KEY_DOWN(DIK_E))
+			{
+				m_bIsOpen = true;
+				m_eState = KIT_OPEN;
+			}
+			else if (m_bIsOpen && CDirectInput::Get_Instance()->KEY_DOWN(DIK_E))
+			{
+			//	m_bIsLimLIght = false;
+				m_bIsOpen = false;
+				m_eState = KIT_CLOSE;
+			}
 			// 여기다 HP 상호작용!!!!!!!!!!!!!!!
 
-
 			// 인벤 연동
-			CGameObject* pInvenUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
-			dynamic_cast<CInvenUI*>(pInvenUI)->Set_AddItemNum(0, 1);
-
-			m_bIsDead = true;
+			//CGameObject* pInvenUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
+			//dynamic_cast<CInvenUI*>(pInvenUI)->Set_AddItemNum(0, 1);
+		}
+		else
+		{
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
+		//	m_bIsLimLIght = false;
 		}
 	}
-
-
-
-	return NO_EVENT;
 }
 
 void CHPKit::Render_GameObject(const _float & fTimeDelta)
@@ -102,13 +158,13 @@ void CHPKit::Render_GameObject(const _float & fTimeDelta)
 
 	m_pShaderCom->Begin_Shader();
 
-	m_pMeshCom->Render_Mesh(m_pShaderCom);
+	m_pMeshCom->Render_Mesh(m_pShaderCom, m_vecMatrix);
 }
 
 void CHPKit::Render_ShadowDepth(CShader_Shadow * pShader)
 {
 	Set_ShadowTable(pShader);
-	m_pMeshCom->Render_ShadowMesh(pShader);
+	m_pMeshCom->Render_ShadowMesh(pShader, m_vecMatrix, true);
 	pShader->Set_ShadowFinish();
 }
 
@@ -147,6 +203,7 @@ void CHPKit::Set_ConstantTable()
 	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
 
 	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
+
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_pTransCom->m_matWorld));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
