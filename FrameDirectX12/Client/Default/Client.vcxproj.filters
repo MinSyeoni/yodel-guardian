@@ -214,6 +214,15 @@
     <Filter Include="02.Scene_All\01.DynamicObject\02.HPKit">
       <UniqueIdentifier>{21caf629-06d4-430e-ac4a-ee0cbb938779}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Scene_All\03.StaticObject\02.Items\00.Medi_Bandage">
+      <UniqueIdentifier>{b1954597-6c2e-4211-ac3f-0a149562b0f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_All\03.StaticObject\02.Items\01.Medi_Syringe">
+      <UniqueIdentifier>{1b6dba61-a1b7-4f50-b5ea-e20ed7be5d6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_All\03.StaticObject\02.Items\02.Medi_Medicine">
+      <UniqueIdentifier>{302b447c-c929-4b24-a2b8-8da3ffded4ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -401,9 +410,6 @@
     <ClInclude Include="..\Code\Sniper.h">
       <Filter>01.Scene_Stage\02.Weapon\03.Sniper</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\HPKit.h">
-      <Filter>02.Scene_All\03.StaticObject\02.Items\00.HPKit</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\CardKey.h">
       <Filter>02.Scene_All\03.StaticObject\02.Items\04.CardKey</Filter>
     </ClInclude>
@@ -431,6 +437,7 @@
     <ClInclude Include="..\Code\HPKit.h">
       <Filter>02.Scene_All\01.DynamicObject\02.HPKit</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\HPKit.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -588,9 +595,6 @@
     <ClCompile Include="..\Code\Sniper.cpp">
       <Filter>01.Scene_Stage\02.Weapon\03.Sniper</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\HPKit.cpp">
-      <Filter>02.Scene_All\03.StaticObject\02.Items\00.HPKit</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\OptionUI.cpp">
       <Filter>03.UI\07.OptionUI\00.OptionBack</Filter>
     </ClCompile>
@@ -618,6 +622,7 @@
     <ClCompile Include="..\Code\CardKey.cpp">
       <Filter>02.Scene_All\03.StaticObject\02.Items\04.CardKey</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\HPKit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

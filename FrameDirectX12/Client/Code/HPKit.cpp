@@ -48,6 +48,7 @@ HRESULT CHPKit::LateInit_GameObject()
 {
 	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), 
 									m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
+	m_pCamera = static_cast<CDynamicCamera*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_Camera", L"DynamicCamera"));
 
 	return S_OK;
 }
@@ -63,15 +64,25 @@ _int CHPKit::Update_GameObject(const _float & fTimeDelta)
 	m_pBoxCollider->Update_Collider(&m_pTransCom->m_matWorld);
 	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCollider);
 
-	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
-	for (auto& pSrc : *pEquipUIList)
-		if (CEquipUI::E_KITEQUIP == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
-			m_pGameObject = dynamic_cast<CEquipUI*>(pSrc);
+	Get_EquipUI();
 
 	dynamic_cast<CMesh*>(m_pMeshCom)->Set_Animation((_int)m_eState);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(5000.f * fTimeDelta);
 
 	return NO_EVENT;
+}
+
+void CHPKit::Get_EquipUI()
+{
+	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
+	for (auto& pSrc : *pEquipUIList)
+	{
+		if (CEquipUI::E_KITEQUIP == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
+		{
+			m_pGameObject = dynamic_cast<CEquipUI*>(pSrc);
+			break;
+		}
+	}
 }
 
 _int CHPKit::LateUpdate_GameObject(const _float & fTimeDelta)
@@ -95,21 +106,36 @@ void CHPKit::HPKit_Ani()
 	{
 	case CHPKit::KIT_OPEN:
 	{
-		m_fAniDelay = 2000.f;
+		m_fAniDelay = 1500.f;
 		dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, KIT_OPEN))
-			m_eState = KIT_CLOSE;
+			m_eState = KIT_ALREADYOPEN;
 	}
 	break;
 	case CHPKit::KIT_CLOSE:
 	{
-		m_fAniDelay = 2000.f;
+		m_pCamera->Set_ZoomInOut(false);
+		m_fAniDelay = 1500.f;
 		dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, KIT_CLOSE))
-			m_eState = KIT_OPEN;
+			m_eState = KIT_IDLE;
 	}
 	break;
 	case CHPKit::KIT_IDLE:
+	{
+		m_bIsOpen = false;
+	}
+		break;
+	case CHPKit::KIT_ALREADYOPEN:
+	{
+		m_bIsOpen = true;
+
+		// 카메라 줌
+		m_pCamera->Set_ZoomInOut(true, 10.f);
+
+		// E로 획득 
+
+	}
 		break;
 	default:
 		break;
@@ -121,33 +147,19 @@ void CHPKit::Open_TheKit()
 	_vec3 vShaveDir;
 	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYER))
 	{
-		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir)
-			&& m_tMeshInfo.iMeshID == m_iMeshID)
+		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir))
 		{
-			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(!m_bIsOpen);
-		//	m_bIsLimLIght = true;
-
 			if (!m_bIsOpen && CDirectInput::Get_Instance()->KEY_DOWN(DIK_E))
-			{
-				m_bIsOpen = true;
 				m_eState = KIT_OPEN;
-			}
+			
 			else if (m_bIsOpen && CDirectInput::Get_Instance()->KEY_DOWN(DIK_E))
-			{
-			//	m_bIsLimLIght = false;
-				m_bIsOpen = false;
 				m_eState = KIT_CLOSE;
-			}
+			
 			// 여기다 HP 상호작용!!!!!!!!!!!!!!!
 
 			// 인벤 연동
 			//CGameObject* pInvenUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
 			//dynamic_cast<CInvenUI*>(pInvenUI)->Set_AddItemNum(0, 1);
-		}
-		else
-		{
-			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
-		//	m_bIsLimLIght = false;
 		}
 	}
 }

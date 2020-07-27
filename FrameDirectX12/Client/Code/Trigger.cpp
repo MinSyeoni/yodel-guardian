@@ -45,7 +45,10 @@ HRESULT CTrigger::Ready_GameObject()
 
 	m_pTransCom->m_vPos = m_tColInfo.vCenter;
 	m_pTransCom->m_vScale = m_tColInfo.vScale * 0.1f;
-	m_pTransCom->m_vAngle = m_tColInfo.vRotate;
+	m_pTransCom->m_vAngle = ToDegree(m_tColInfo.vRotate);
+
+	if (m_tColInfo.iColID == 2)
+		m_pTransCom->m_vAngle = _vec3{ 0.f,0.f,0.f };
 
 	return S_OK;
 }
@@ -82,6 +85,7 @@ _int CTrigger::Update_GameObject(const _float & fTimeDelta)
 		CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::TRIGGER, m_pBoxCol);
 	
 		_vec3 vShaveDir;
+
 		for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYER))
 		{
 			if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCol, pCol, &vShaveDir))
@@ -114,16 +118,20 @@ _int CTrigger::LateUpdate_GameObject(const _float & fTimeDelta)
 	{
 		FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCol), -1);
 
-		CGameObject* pLobbyDoor = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"LobbyDoor");
-		if (!static_cast<CLobbyDoor*>(pLobbyDoor)->Get_LobbyDoorIsOpen())
-			return E_FAIL;
-
 		list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Zombi");
 		if (m_bIsActive)
 		{
 			for (auto& pSrc : *pList)
 			{
-				if (static_cast<CMonster*>(pSrc)->Get_MONKIND() == CMonster::ZOMBI)
+				if (m_tColInfo.iColID == 1)
+				{
+					CGameObject* pLobbyDoor = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"LobbyDoor");
+					if (!static_cast<CLobbyDoor*>(pLobbyDoor)->Get_LobbyDoorIsOpen())
+						return E_FAIL;
+				}
+
+				if (static_cast<CMonster*>(pSrc)->Get_MONKIND() == CMonster::ZOMBI &&
+					m_tColInfo.iColID == static_cast<CMonster*>(pSrc)->Get_InitID())
 					static_cast<CMonster*>(pSrc)->Set_IsActiveStart(true);
 			}
 			m_bIsDead = true;
@@ -137,35 +145,6 @@ _int CTrigger::LateUpdate_GameObject(const _float & fTimeDelta)
 	}
 
 	return NO_EVENT;
-}
-
-void CTrigger::Load_MonsterPos(const wstring& wstrFilePath)
-{
-	HANDLE hFile = CreateFile(wstrFilePath.c_str(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
-	NULL_CHECK(hFile, E_FAIL);
-
-	if (INVALID_HANDLE_VALUE == hFile)
-		return;
-
-	DWORD dwByte = 0;
-	COLLIDER tColData = {};
-
-	if (wstrFilePath == L"../../../SYTool/Tool/Data/Collider/Flame.dat")
-		m_tMeshInfo.MeshTag = L"Flamethrower";
-	else if (wstrFilePath == L"../../../SYTool/Tool/Data/Collider/Zombi.dat")
-		m_tMeshInfo.MeshTag = L"Zombi";
-
-	while (true)
-	{
-		ReadFile(hFile, &tColData, sizeof(COLLIDER), &dwByte, nullptr);
-
-		if (dwByte == 0)
-			break;
-
-		m_tMeshInfo.Pos = tColData.vCenter;
-		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Monster", m_tMeshInfo.MeshTag, &m_tMeshInfo);
-	}
-	CloseHandle(hFile);
 }
 
 void CTrigger::Render_GameObject(const _float & fTimeDelta)

@@ -58,6 +58,7 @@ HRESULT CMonster::Ready_GameObject()
 	m_pTransCom->m_vDir = _vec3(-1.f, 0.f, 1.f);
 
 	m_iInitAni = m_tMeshInfo.iMeshID;
+	m_iInitId = m_tMeshInfo.iDrawID;
 
 	switch (m_eMonName)
 	{
@@ -72,6 +73,7 @@ HRESULT CMonster::Ready_GameObject()
 	{
 		m_pZombi = new CZombi;
 		m_pZombi->Set_InitAni(m_iInitAni);
+		m_pZombi->Set_InitDrawID(m_iInitId);
 		m_pZombi->Set_Transform(m_pTransCom);
 		m_pZombi->Set_NaviMesh(m_pNaviCom);
 	}

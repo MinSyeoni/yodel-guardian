@@ -30,7 +30,6 @@ public:
 
 private:
 	void					Set_ConstantTable();
-	void					Load_MonsterPos(const wstring& wstrFilePath);
 
 private:
 	virtual HRESULT			Add_Component();
@@ -40,7 +39,7 @@ private:
 	Engine::CSphereCollider*	m_pShereCol = nullptr;
 	Engine::CShader_Mesh*		m_pShaderCom = nullptr;
 	COLLIDER					m_tColInfo;
-	MeshInfo					m_tMeshInfo;
+
 private:
 	TRIGGER_SHAPE				m_eCurShape = TRIGGER_END;
 

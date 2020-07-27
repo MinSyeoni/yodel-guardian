@@ -332,11 +332,13 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	Load_StageObject(L"../../Data/StaticObj/SY_Kit_Test.dat");
 	
 	// Monster
-	Load_MonsterPos(L"../../Data/Collider/Flame.dat");
+	//Load_MonsterPos(L"../../Data/Collider/Flame.dat");
 	Load_MonsterPos(L"../../Data/Collider/Zombi.dat");
+	Load_MonsterPos(L"../../Data/Collider/Zombi2.dat");
 
 	// Trigger
 	Load_TriggerPos(L"../../Data/Collider/Trigger.dat");
+	Load_TriggerPos(L"../../Data/Collider/Trigger2.dat");
 
 	return S_OK;
 }
@@ -372,13 +374,10 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 
-
-
 	for (int i = 0; i < 6; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_EquipUI", L"EquipUI", &(iType = i)), E_FAIL);
 
 
-	   
 
 	return S_OK;
 }
@@ -394,11 +393,20 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 	DWORD dwByte = 0;
 	COLLIDER tColData = {};
 
-	if (wstrFilePath == L"../../Data/Collider/Flame.dat")
-	//	m_tMeshInfo.MeshTag = L"Flamethrower";
-		m_tMeshInfo.MeshTag = L"Dron";
-	else if (wstrFilePath == L"../../Data/Collider/Zombi.dat")
+	//if (wstrFilePath == L"../../Data/Collider/Flame.dat")
+	////	m_tMeshInfo.MeshTag = L"Flamethrower";
+	//	m_tMeshInfo.MeshTag = L"Dron";
+	if (wstrFilePath == L"../../Data/Collider/Zombi.dat")
+	{
 		m_tMeshInfo.MeshTag = L"Zombi";
+		m_tMeshInfo.iDrawID = 1;
+		m_tMeshInfo.iMeshID = 4;	// 달리는거
+	}
+	else if (wstrFilePath == L"../../Data/Collider/Zombi2.dat")
+	{
+		m_tMeshInfo.iDrawID = 2;
+		m_tMeshInfo.iMeshID = 3;	// 밑에서 올라오기
+	}
 
 	while (true)
 	{
@@ -408,9 +416,7 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 			break;
 
 	//	m_tMeshInfo.iMeshID = rand() % 4;
-		if(m_tMeshInfo.MeshTag == L"Zombi")
-			m_tMeshInfo.iMeshID = 4;		// 달리는 걸로 
-		else if(m_tMeshInfo.MeshTag == L"Dron")
+		if(m_tMeshInfo.MeshTag == L"Dron")
 			m_tMeshInfo.iMeshID = 0;
 
 		m_tMeshInfo.Pos = tColData.vCenter;
@@ -436,6 +442,12 @@ void CScene_Stage::Load_TriggerPos(const wstring& wstrFilePath)
 
 		if (dwByte == 0)
 			break;
+
+		if (wstrFilePath == L"../../Data/Collider/Trigger.dat")
+			tColData.iColID = 1;
+		else if (wstrFilePath == L"../../Data/Collider/Trigger2.dat")
+			tColData.iColID = 2;
+
 
 		if(3 == tColData.iOptionID)
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Trigger", L"Trigger", &tColData);

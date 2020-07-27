@@ -7,6 +7,7 @@ struct MeshInfo
 	_vec3 Scale;
 	_vec3 Rotation;
 	_uint iMeshID;
+	_uint iDrawID;
 };
 
 typedef struct tagMeshData

@@ -55,6 +55,8 @@ public:		// 상호작용
 	void					Set_HitDamage(_float fDamage) { m_fHitDamage = fDamage; }
 	const _float&			Get_AtkDamage() { return m_fAtkDamage; }
 	void					Set_InitAni(_uint iAni) { m_iInitAni = iAni; }
+	void					Set_InitDrawID(_uint iID) { m_iDrawID = iID; }
+	_uint					Get_DrawID() { return m_iDrawID; }
 
 private:
 	void					MoveByAstar(const _float& fTimeDelta);
@@ -88,6 +90,7 @@ private:
 	_float					m_fMaxHp = 0.f;
 
 	_uint					m_iInitAni;
+	_uint					m_iDrawID;
 
 	//여기좀추가햇으
 	_bool m_bIsDeadSound = false;

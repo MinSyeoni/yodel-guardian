@@ -39,7 +39,7 @@ public:
 	virtual void    Render_ShadowDepth(CShader_Shadow* pShader);
 
 	void					Set_IsActiveStart(_bool bIsActive) { m_bIsActive = bIsActive; }
-
+	_uint					Get_InitID() { return m_iInitId; }
 private:
 	void					Set_ConstantTable();
 	void					Set_ShadowTable(CShader_Shadow* pShader);
@@ -75,7 +75,7 @@ private:
 	_vec3						m_pPlayerPos = _vec3(0.f, 0.f, 0.f);
 	_vec3						m_pMonsterPos = _vec3(0.f, 0.f, 0.f);
 	_uint						m_iInitAni;
-
+	_uint						m_iInitId;
 protected:
 	float						m_fDissolve = 1.f;
 	_matrix						m_matDissolve = INIT_MATRIX;

@@ -26,14 +26,14 @@ void CZombi::Initialized()
 
 HRESULT CZombi::Late_Initialized()
 {
-	if (m_iInitAni == 0)
-		m_eCurState = ZOM_CB_CombatActive_Ceiling;
-	else if (m_iInitAni == 1)
-		m_eCurState = ZOM_CB_CombatActive;
-	else if (m_iInitAni == 2)
+	if (m_iInitAni == 0)	
 		m_eCurState = ZOM_DG_GetUpBack;
-	else if (m_iInitAni == 3)
+	else if (m_iInitAni == 1)
 		m_eCurState = ZOM_DG_GetUpFront;
+	else if (m_iInitAni == 2)
+		m_eCurState = ZOM_CB_CombatActive_Ceiling;
+	else if (m_iInitAni == 3)
+		m_eCurState = ZOM_CB_CombatActive;
 	else if (m_iInitAni == 4)
 		m_eCurState = ZOM_EX_Run;
 
@@ -57,7 +57,6 @@ _int CZombi::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform, CMes
 	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 	if (pPlayer == nullptr)
 		return E_FAIL;
-
 	m_vPlayerPos = pPlayer->Get_Transform()->m_vPos;
 
 	// Ã¼·Â 
