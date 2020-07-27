@@ -168,6 +168,7 @@
   <ItemGroup>
     <ClInclude Include="..\Code\ActionCamera.h" />
     <ClInclude Include="..\Code\Aim.h" />
+    <ClInclude Include="..\Code\AttackDamage.h" />
     <ClInclude Include="..\Code\BackGround.h" />
     <ClInclude Include="..\Code\CardKey.h" />
     <ClInclude Include="..\Code\CubeObject.h" />
@@ -192,6 +193,9 @@
     <ClInclude Include="..\Code\MainApp.h" />
     <ClInclude Include="..\Code\MapObject.h" />
     <ClInclude Include="..\Code\BaziorMgr.h" />
+    <ClInclude Include="..\Code\Medi_Bandage.h" />
+    <ClInclude Include="..\Code\Medi_Medicine.h" />
+    <ClInclude Include="..\Code\Medi_Syringe.h" />
     <ClInclude Include="..\Code\Monster.h" />
     <ClInclude Include="..\Code\Normandy.h" />
     <ClInclude Include="..\Code\NpcRifle.h" />
@@ -241,6 +245,7 @@
   <ItemGroup>
     <ClCompile Include="..\Code\ActionCamera.cpp" />
     <ClCompile Include="..\Code\Aim.cpp" />
+    <ClCompile Include="..\Code\AttackDamage.cpp" />
     <ClCompile Include="..\Code\BackGround.cpp" />
     <ClCompile Include="..\Code\CardKey.cpp" />
     <ClCompile Include="..\Code\CubeObject.cpp" />
@@ -265,6 +270,9 @@
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\MapObject.cpp" />
     <ClCompile Include="..\Code\BaziorMgr.cpp" />
+    <ClCompile Include="..\Code\Medi_Bandage.cpp" />
+    <ClCompile Include="..\Code\Medi_Medicine.cpp" />
+    <ClCompile Include="..\Code\Medi_Syringe.cpp" />
     <ClCompile Include="..\Code\Monster.cpp" />
     <ClCompile Include="..\Code\Normandy.cpp" />
     <ClCompile Include="..\Code\NpcRifle.cpp" />

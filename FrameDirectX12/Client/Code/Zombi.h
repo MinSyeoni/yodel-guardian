@@ -74,7 +74,7 @@ private:
 	Engine::CMesh*			m_pMeshCom = nullptr;
 
 private:
-	_float					m_fTime = 0.f;
+//	_float					m_fTime = 0.f;
 	_float					m_fAniTime = 0.f;
 	_float					m_fAniDelay = 0.f;
 
