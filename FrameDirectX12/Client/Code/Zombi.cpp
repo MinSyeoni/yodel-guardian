@@ -103,8 +103,8 @@ void CZombi::MoveByAstar(const _float& fTimeDelta)
 		vecDir.Normalize();
 		_vec3 vMovePos;
 
-		vMovePos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &vecDir, fTimeDelta * m_fSpeed);
-
+		vMovePos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &vecDir, fTimeDelta);
+		cout << vMovePos.x << "--"<<  vMovePos.y <<"--" <<vMovePos.z << endl;
 		m_pTransCom->m_vPos = vMovePos;
 	}
 }

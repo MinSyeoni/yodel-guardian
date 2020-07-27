@@ -5,7 +5,7 @@
 class CDynamicCamera : public Engine::CCamera
 {
 public:
-	enum SHAKETYPE {NONE,RIFLE,SNIPER};
+	enum SHAKETYPE {NONE,RIFLE,RIFLEWALK,RIFLERUN,SNIPER};
 
 private:
 	explicit CDynamicCamera(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);

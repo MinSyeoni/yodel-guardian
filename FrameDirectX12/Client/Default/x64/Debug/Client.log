@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  ActionCamera.cpp
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(11,2): error C2011: 'Engine::CBase': 'class' 형식 재정의
 C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Reference\Header\Base.h(10): message : 'Engine::CBase' 선언을 참조하십시오.
@@ -12,3 +13,6 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Cu
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\TerrainTex.h(7,1): error C2504: 'Engine::CVIBuffer': 기본 클래스를 정의하지 않았습니다.
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Shader.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Reference\Header\Texture.h(7,1): error C2504: 'Engine::CComponent': 기본 클래스를 정의하지 않았습니다.
+=======
+﻿
+>>>>>>> 5b04f0abcadf4db8e2c542dd3f83d702f51a823f

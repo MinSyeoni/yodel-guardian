@@ -274,6 +274,21 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 		break;
 	}
 
+	//_vec3 vShaveDir;
+	//for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::OBJECT))
+	//{
+
+
+	//	if (CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCol, pCol, &vShaveDir))
+	//	{
+	//		m_pTransCom->m_vPos += vShaveDir;
+
+	//		m_pTransCom->m_matWorld._41 += vShaveDir.x;
+	//		m_pTransCom->m_matWorld._42 += vShaveDir.y;
+	//		m_pTransCom->m_matWorld._43 += vShaveDir.z;
+	//	}
+	//}
+
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	return NO_EVENT;
@@ -350,7 +365,7 @@ void CMonster::Set_ConstantTable()
 	matView = CGraphicDevice::Get_Instance()->GetViewMatrix();
 	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
 
-	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
+ 	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
 
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_matDissolve));

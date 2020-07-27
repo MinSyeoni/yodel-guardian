@@ -350,7 +350,7 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcRifle", L"Weapon", &eOwner), E_FAIL);
 
 	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj																		 //Prototype_MapObject
-	Load_StageObject(L"../../Data/StaticObj/mapAddoutside.dat");
+	Load_StageObject(L"../../Data/StaticObj/mapAddoutside_1_test.dat");
 
 	// Monster
 	Load_MonsterPos(L"../../Data/Collider/Flame.dat");
@@ -431,11 +431,17 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 	//	m_tMeshInfo.iMeshID = rand() % 4;
 		if(m_tMeshInfo.MeshTag == L"Zombi")
 			m_tMeshInfo.iMeshID = 4;		// 달리는 걸로 
-		else if(m_tMeshInfo.MeshTag == L"Dron")
+		else if (m_tMeshInfo.MeshTag == L"Dron")
+		{
 			m_tMeshInfo.iMeshID = 0;
-
+			continue;
+		}
 		m_tMeshInfo.Pos = tColData.vCenter;
 		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Monster", m_tMeshInfo.MeshTag, &m_tMeshInfo);
+
+
+		if (m_tMeshInfo.MeshTag == L"Zombi")
+			break;
 	}
 	CloseHandle(hFile);
 }

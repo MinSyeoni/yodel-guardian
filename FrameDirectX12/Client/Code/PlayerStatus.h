@@ -17,6 +17,10 @@ public:
 	_int LateUpdate(const _float& fTimeDelta);
 	void SetMesh(CMesh* m_pMesh);
 	void KeyInput();
+
+	void LegKeyInput();
+
+
 	void WeaponChange();
 	bool WeaponStateCheck(EQUIPTYPE eType);
 
