@@ -574,6 +574,10 @@ HRESULT CLoading::Texture_ForStage(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_MedicineIcon", ID_STATIC, pComponent), E_FAIL);
 
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/Grass_Blade_L.dds", 1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_AttackDamageL", ID_STATIC, pComponent), E_FAIL);
+
 	// e ¹öÆ°
 	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/e1.dds", 1);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);

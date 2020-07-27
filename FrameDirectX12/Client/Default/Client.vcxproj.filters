@@ -223,6 +223,9 @@
     <Filter Include="02.Scene_All\03.StaticObject\02.Items\02.Medi_Medicine">
       <UniqueIdentifier>{302b447c-c929-4b24-a2b8-8da3ffded4ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.UI\08.AttackUI">
+      <UniqueIdentifier>{695470aa-3d2c-4ade-9994-d86f60e50bc2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -438,6 +441,18 @@
       <Filter>02.Scene_All\01.DynamicObject\02.HPKit</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\HPKit.h" />
+    <ClInclude Include="..\Code\Medi_Bandage.h">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\00.Medi_Bandage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Medi_Syringe.h">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\01.Medi_Syringe</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Medi_Medicine.h">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\02.Medi_Medicine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\AttackDamage.h">
+      <Filter>03.UI\08.AttackUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -623,6 +638,18 @@
       <Filter>02.Scene_All\03.StaticObject\02.Items\04.CardKey</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\HPKit.cpp" />
+    <ClCompile Include="..\Code\Medi_Bandage.cpp">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\00.Medi_Bandage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Medi_Syringe.cpp">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\01.Medi_Syringe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Medi_Medicine.cpp">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\02.Medi_Medicine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\AttackDamage.cpp">
+      <Filter>03.UI\08.AttackUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

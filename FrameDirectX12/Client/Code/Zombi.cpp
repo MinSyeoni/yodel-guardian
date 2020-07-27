@@ -44,15 +44,13 @@ HRESULT CZombi::Late_Initialized()
 
 _int CZombi::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform, CMesh* m_pMeshCom)
 {
-	srand((unsigned int)time(0));
+	//m_fTime += fTimeDelta;
 
-	m_fTime += fTimeDelta;
-
-	if (m_ePreState != m_eCurState)
-	{
-		m_fTime = 0.f;
-		m_ePreState = m_eCurState;
-	}
+	//if (m_ePreState != m_eCurState)
+	//{
+	//	m_fTime = 0.f;
+	//	m_ePreState = m_eCurState;
+	//}
 	
 	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 	if (pPlayer == nullptr)
@@ -203,7 +201,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombi::ZOM_CB_CombatActive_Ceiling:
 	{
-		m_fAniDelay = 9000.f;
+		m_fAniDelay = 10000.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_CB_CombatActive_Ceiling))
 			m_eCurState = ZOM_EX_IdleOffset;
 	}
@@ -214,14 +212,14 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombi::ZOM_DG_GetUpBack:
 	{
-		m_fAniDelay = 24500.f;
+		m_fAniDelay = 20000.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_DG_GetUpBack))
 			m_eCurState = ZOM_EX_IdleOffset;
 	}
 	break;
 	case CZombi::ZOM_DG_GetUpFront:
 	{
-		m_fAniDelay = 24500.f;
+		m_fAniDelay = 20000.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_DG_GetUpFront))
 			m_eCurState = ZOM_EX_IdleOffset;
 	}
@@ -333,6 +331,7 @@ void CZombi::Attak_Player(Engine::CMesh* m_pMeshCom, CZombi::ZOMBISTATE eState)
 	if (!m_bIsZombiState[3])
 	{
 		m_bIsZombiState[3] = true;
+	//	CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_UI", L"Prototype_AttackDamageL", L"AttackDamageL", nullptr);
 		m_fAtkDamage = rand() % 15 + 15.f;
 	}
 	

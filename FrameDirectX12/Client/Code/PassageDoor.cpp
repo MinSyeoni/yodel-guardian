@@ -7,6 +7,7 @@
 #include "ColliderMgr.h"
 #include "Frustom.h"
 #include "EquipUI.h"
+#include "FadeOut.h"
 
 CPassageDoor::CPassageDoor(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 			:CGameObject(pGraphicDevice,pCommandList)
@@ -35,8 +36,8 @@ HRESULT CPassageDoor::Ready_GameObject()
 	CGameObject::Ready_GameObject();
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
-	m_pTransCom->m_vPos = _vec3(m_tMeshInfo.Pos.x, m_tMeshInfo.Pos.y + 0.5f, m_tMeshInfo.Pos.z + 1.5f);
-	m_pTransCom->m_vScale = _vec3(0.07f, 0.07f, 0.07f);
+	m_pTransCom->m_vPos = _vec3(m_tMeshInfo.Pos.x, m_tMeshInfo.Pos.y + 0.5f, m_tMeshInfo.Pos.z + 1.8f);
+	m_pTransCom->m_vScale = _vec3(0.075f, 0.075f, 0.075f);
 	m_pTransCom->m_vAngle = _vec3(0.f, 0.f, 0.f);
 
 	return S_OK;
@@ -136,6 +137,10 @@ void CPassageDoor::PassageDoor_AniState()
 	case CPassageDoor::PASSAGE_ALREADYOPEN:
 	{
 		m_bIsOpen = true;
+
+		// 여기서 페이드 아웃 
+	//	CFadeOut::FADETYPE eType = CFadeOut::FADEOUT;
+	//	m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_FadeOut", L"FadeOut", &eType);
 	}
 	break;
 	case CPassageDoor::PASSAGE_OPEN:
