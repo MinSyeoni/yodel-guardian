@@ -131,9 +131,9 @@ void CHPKit::HPKit_Ani()
 		m_bIsOpen = true;
 
 		// Ä«¸Þ¶ó ÁÜ
-		m_pCamera->Set_ZoomInOut(true, 10.f);
 
 		// E·Î È¹µæ 
+		// ¸¶¿ì½º ´ë¼­ E´©¸£¸é È¹µæ
 
 	}
 		break;

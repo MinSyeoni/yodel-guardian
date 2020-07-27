@@ -218,14 +218,14 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_DG_GetUpBack))
 			m_eCurState = ZOM_EX_IdleOffset;
 	}
-		break;
+	break;
 	case CZombi::ZOM_DG_GetUpFront:
 	{
 		m_fAniDelay = 24500.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_DG_GetUpFront))
 			m_eCurState = ZOM_EX_IdleOffset;
 	}
-		break;
+	break;
 	case CZombi::ZOM_EX_IdleOffset:
 	{
 		if (m_bIsZombiState[2])	// hit
@@ -256,7 +256,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 			}
 		}
 	}
-		break;
+	break;
 	case CZombi::ZOM_EX_IdlePose:
 		break;
 	case CZombi::ZOM_EX_Run:

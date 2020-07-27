@@ -335,10 +335,13 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	//Load_MonsterPos(L"../../Data/Collider/Flame.dat");
 	Load_MonsterPos(L"../../Data/Collider/Zombi.dat");
 	Load_MonsterPos(L"../../Data/Collider/Zombi2.dat");
+	Load_MonsterPos(L"../../Data/Collider/Zombi3.dat");
+	Load_MonsterPos(L"../../Data/Collider/Zombi4.dat");
 
 	// Trigger
 	Load_TriggerPos(L"../../Data/Collider/Trigger.dat");
 	Load_TriggerPos(L"../../Data/Collider/Trigger2.dat");
+	Load_TriggerPos(L"../../Data/Collider/Trigger3.dat");
 
 	return S_OK;
 }
@@ -404,8 +407,21 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 	}
 	else if (wstrFilePath == L"../../Data/Collider/Zombi2.dat")
 	{
+		m_tMeshInfo.MeshTag = L"Zombi";
 		m_tMeshInfo.iDrawID = 2;
 		m_tMeshInfo.iMeshID = 3;	// 밑에서 올라오기
+	}
+	else if (wstrFilePath == L"../../Data/Collider/Zombi3.dat")
+	{
+		m_tMeshInfo.MeshTag = L"Zombi";
+		m_tMeshInfo.iDrawID = 3;
+		m_tMeshInfo.iMeshID = 2;	// 위에서 떨어지기
+	}
+	else if (wstrFilePath == L"../../Data/Collider/Zombi4.dat")
+	{
+		m_tMeshInfo.MeshTag = L"Zombi";
+		m_tMeshInfo.iDrawID = 4;
+		m_tMeshInfo.iMeshID = rand() % 2;	// 누워있다가 or 엎드려있다가 일어나기
 	}
 
 	while (true)
@@ -418,6 +434,10 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 	//	m_tMeshInfo.iMeshID = rand() % 4;
 		if(m_tMeshInfo.MeshTag == L"Dron")
 			m_tMeshInfo.iMeshID = 0;
+		else
+		{
+			m_tMeshInfo.Rotation.y = rand() % 360 - 180;
+		}
 
 		m_tMeshInfo.Pos = tColData.vCenter;
 		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Monster", m_tMeshInfo.MeshTag, &m_tMeshInfo);
@@ -447,7 +467,8 @@ void CScene_Stage::Load_TriggerPos(const wstring& wstrFilePath)
 			tColData.iColID = 1;
 		else if (wstrFilePath == L"../../Data/Collider/Trigger2.dat")
 			tColData.iColID = 2;
-
+		else if (wstrFilePath == L"../../Data/Collider/Trigger3.dat")
+			tColData.iColID = 3;
 
 		if(3 == tColData.iOptionID)
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Trigger", L"Trigger", &tColData);

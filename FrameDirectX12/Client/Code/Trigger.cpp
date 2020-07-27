@@ -45,7 +45,7 @@ HRESULT CTrigger::Ready_GameObject()
 
 	m_pTransCom->m_vPos = m_tColInfo.vCenter;
 	m_pTransCom->m_vScale = m_tColInfo.vScale * 0.1f;
-	m_pTransCom->m_vAngle = ToDegree(m_tColInfo.vRotate);
+	m_pTransCom->m_vAngle = m_tColInfo.vRotate;
 
 	if (m_tColInfo.iColID == 2)
 		m_pTransCom->m_vAngle = _vec3{ 0.f,0.f,0.f };

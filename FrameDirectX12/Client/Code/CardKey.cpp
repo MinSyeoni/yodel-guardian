@@ -7,6 +7,7 @@
 #include "Frustom.h"
 #include "EquipUI.h"
 #include "PassageDoor.h"
+#include "Monster.h"
 
 CCardKey::CCardKey(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -157,12 +158,23 @@ void CCardKey::Coliision_CardAndPlayer()
 
 			if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && !m_bIsEquip)
 				m_bIsEquip = true;
-
 		}
 		else
 		{
 			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 		}
+	}
+
+	if (m_bIsEquip)
+	{
+		list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Zombi");
+
+		for (auto& pSrc : *pList)
+		{
+			if (static_cast<CMonster*>(pSrc)->Get_MONKIND() == CMonster::ZOMBI &&
+				4 == static_cast<CMonster*>(pSrc)->Get_InitID())
+				static_cast<CMonster*>(pSrc)->Set_IsActiveStart(true);
+		}		
 	}
 }
 
