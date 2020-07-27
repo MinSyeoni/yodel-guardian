@@ -26,20 +26,21 @@ void CPlayerStatus::LateInit()
 {
     m_pCamera = static_cast<CDynamicCamera*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_Camera", L"DynamicCamera"));
 
+    m_pNaviMesh->SetFirstNavi(m_pTransCom->m_vPos);
 
     m_bIsInit = true;
 }
 
 _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
 {
+
+    if (pTranscom != nullptr)
+        m_pTransCom = pTranscom;
     LateInit();
 
     _matrix matRot;
 
     matRot = XMMatrixRotationY(XMConvertToRadians(-90.f));
-
-    if (pTranscom != nullptr)
-        m_pTransCom = pTranscom;
 
     CutSceneCheck();
 
@@ -561,19 +562,19 @@ bool CPlayerStatus::WeaponStateCheck(EQUIPTYPE eType)
 void CPlayerStatus::CollisionWithObject(const _float& fTimeDelta)
 {
 
-    //_vec3 vShaveDir;
-    //for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::OBJECT))
-    //{
-    //    if (CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir))
-    //    {
-    //        m_pTransCom->m_vPos += vShaveDir;
-    //        
-    //        m_pTransCom->m_matWorld._41 += vShaveDir.x;
-    //        m_pTransCom->m_matWorld._42 += vShaveDir.y;
-    //        m_pTransCom->m_matWorld._43 += vShaveDir.z;
-    //    }
-    // 
-    //}
+    _vec3 vShaveDir;
+    for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::OBJECT))
+    {
+        if (CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir))
+        {
+            m_pTransCom->m_vPos += vShaveDir;
+            
+            m_pTransCom->m_matWorld._41 += vShaveDir.x;
+            m_pTransCom->m_matWorld._42 += vShaveDir.y;
+            m_pTransCom->m_matWorld._43 += vShaveDir.z;
+        }
+     
+    }
 
 
 
@@ -607,8 +608,7 @@ void CPlayerStatus::CutSceneCheck()
 
         }
     }
-    else
-        m_bIsKeyLock = false;
+
 
 }
 

@@ -98,14 +98,13 @@ HRESULT CEquipUI::Add_Component()
 		wstrPrototype = L"Prototype_Texture_E_Conversation";
 		break;
 	case CEquipUI::E_KEYEQUIP:
+	case CEquipUI::E_KITEQUIP:
 		wstrPrototype = L"Prototype_Texture_E_Equip";
 		break;
 	case CEquipUI::E_HIDING:
 		wstrPrototype = L"Prototype_Texture_E_Hiding";
 		break;
 	case CEquipUI::E_DOOROPEN_L:
-		wstrPrototype = L"Prototype_Texture_E_DoorOpen";
-		break;
 	case CEquipUI::E_DOOROPEN_P:
 		wstrPrototype = L"Prototype_Texture_E_DoorOpen";
 		break;

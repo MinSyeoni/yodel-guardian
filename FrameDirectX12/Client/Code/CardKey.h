@@ -43,9 +43,8 @@ private:
 	Engine::CMesh*				m_pMeshCom = nullptr;
 	Engine::CShader_Mesh*       m_pShaderCom = nullptr;
 	Engine::CBoxCollider*		m_pBoxCollider = nullptr;
-	
+
 	MeshInfo					m_tMeshInfo;
-	
 	_bool						m_bIsEquip = false;
 	CGameObject*				m_pGameObject = nullptr;
 public:

@@ -17,11 +17,15 @@ private:
 	virtual ~CCell();
 
 public:
+	_vec3               Get_Pos() { return m_vPos; };
 	_uint               Get_Option() { return m_iOption; };
 	const _vec3*		Get_Point(POINT eType) const { return &m_vPoint[eType]; }
 	CCell*				Get_Neighbor(NEIGHBOR eType) const { return m_pNeighbor[eType]; }
 	const _ulong*		Get_Index(void) { return &m_dwIndex; }
 	void				Set_Neighbor(NEIGHBOR eType, CCell* pNeighbor) { m_pNeighbor[eType] = pNeighbor; }
+	_float              Get_Height(const _vec3* pPos);
+
+
 	CLine* Get_Line(LINE eId)const { return m_pLine[eId]; }
 public:
 	HRESULT				Ready_Cell(const _ulong& dwIndex,

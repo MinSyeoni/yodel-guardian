@@ -15,6 +15,29 @@ CCell::~CCell()
 
 }
 
+_float CCell::Get_Height(const _vec3* pPos)
+{
+
+	XMVECTOR vPlane;
+
+
+	vPlane = XMPlaneFromPoints(m_vPoint[POINT_A].Get_XMVECTOR(), m_vPoint[POINT_B].Get_XMVECTOR(), m_vPoint[POINT_C].Get_XMVECTOR());
+
+	_float fHeight = XMVectorGetY(vPlane);
+
+	if (fHeight == 0.f)
+		return pPos->y;
+
+	float a = XMVectorGetX(vPlane);
+	float b = XMVectorGetY(vPlane);
+	float c = XMVectorGetZ(vPlane);
+	float d = XMVectorGetW(vPlane);
+
+
+
+	return -(( a * pPos->x + c * pPos->z + d)/b);
+}
+
 HRESULT CCell::Ready_Cell(const _ulong & dwIndex, const _vec3 * pPointA, const _vec3 * pPointB, const _vec3 * pPointC)
 {
 	m_dwIndex = dwIndex;
@@ -140,6 +163,7 @@ CCell::COMPARE CCell::Compare(const _vec3* pEndPos, _ulong * pIndex, const _floa
 				if ((vEndPos.x > fMinX) && (vEndPos.x < fMaxX) &&
 					(vEndPos.z > fMinZ) && (vEndPos.z < fMaxZ))
 				{
+	
 					return COMPARE_SLIDING;
 				}
 				else

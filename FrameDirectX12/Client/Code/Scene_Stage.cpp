@@ -47,8 +47,8 @@
 #include "PlayerPoint.h"
 #include "NpcRifle.h"
 #include "Ken.h"
-
-
+#include "Scene_Rail.h"
+#include "Management.h"
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -108,6 +108,15 @@ _int CScene_Stage::LateUpdate_Scene(const _float & fTimeDelta)
 void CScene_Stage::Render_Scene(const _float & fTimeDelta)
 {
 	CScene::Render_Scene(fTimeDelta);
+
+
+	if (KEY_DOWN(DIK_RETURN))
+	{
+		m_pObjectMgr->Clear_Layer();
+
+		Engine::CScene* pNewScene = CScene_Rail::Create(m_pGraphicDevice, m_pCommandList);
+		Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
+	}
 }
 
 HRESULT CScene_Stage::Ready_GameObjectPrototype()
@@ -351,13 +360,20 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj																		 //Prototype_MapObject
 	Load_StageObject(L"../../Data/StaticObj/mapAddoutside_1_test.dat");
-
+	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj\mapAddoutside_1_test																	 //Prototype_MapObject
+	Load_StageObject(L"../../Data/StaticObj/SY_Kit_Test.dat");
+	
 	// Monster
-	Load_MonsterPos(L"../../Data/Collider/Flame.dat");
+	//Load_MonsterPos(L"../../Data/Collider/Flame.dat");
 	Load_MonsterPos(L"../../Data/Collider/Zombi.dat");
+	Load_MonsterPos(L"../../Data/Collider/Zombi2.dat");
+	Load_MonsterPos(L"../../Data/Collider/Zombi3.dat");
+	Load_MonsterPos(L"../../Data/Collider/Zombi4.dat");
 
 	// Trigger
 	Load_TriggerPos(L"../../Data/Collider/Trigger.dat");
+	Load_TriggerPos(L"../../Data/Collider/Trigger2.dat");
+	Load_TriggerPos(L"../../Data/Collider/Trigger3.dat");
 
 	return S_OK;
 }
@@ -393,13 +409,10 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 
-
-
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < 6; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_EquipUI", L"EquipUI", &(iType = i)), E_FAIL);
 
 
-	   
 
 	return S_OK;
 }
@@ -415,11 +428,33 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 	DWORD dwByte = 0;
 	COLLIDER tColData = {};
 
-	if (wstrFilePath == L"../../Data/Collider/Flame.dat")
-	//	m_tMeshInfo.MeshTag = L"Flamethrower";
-		m_tMeshInfo.MeshTag = L"Dron";
-	else if (wstrFilePath == L"../../Data/Collider/Zombi.dat")
+	//if (wstrFilePath == L"../../Data/Collider/Flame.dat")
+	////	m_tMeshInfo.MeshTag = L"Flamethrower";
+	//	m_tMeshInfo.MeshTag = L"Dron";
+	if (wstrFilePath == L"../../Data/Collider/Zombi.dat")
+	{
 		m_tMeshInfo.MeshTag = L"Zombi";
+		m_tMeshInfo.iDrawID = 1;
+		m_tMeshInfo.iMeshID = 4;	// 달리는거
+	}
+	else if (wstrFilePath == L"../../Data/Collider/Zombi2.dat")
+	{
+		m_tMeshInfo.MeshTag = L"Zombi";
+		m_tMeshInfo.iDrawID = 2;
+		m_tMeshInfo.iMeshID = 3;	// 밑에서 올라오기
+	}
+	else if (wstrFilePath == L"../../Data/Collider/Zombi3.dat")
+	{
+		m_tMeshInfo.MeshTag = L"Zombi";
+		m_tMeshInfo.iDrawID = 3;
+		m_tMeshInfo.iMeshID = 2;	// 위에서 떨어지기
+	}
+	else if (wstrFilePath == L"../../Data/Collider/Zombi4.dat")
+	{
+		m_tMeshInfo.MeshTag = L"Zombi";
+		m_tMeshInfo.iDrawID = 4;
+		m_tMeshInfo.iMeshID = rand() % 2;	// 누워있다가 or 엎드려있다가 일어나기
+	}
 
 	while (true)
 	{
@@ -429,19 +464,21 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 			break;
 
 	//	m_tMeshInfo.iMeshID = rand() % 4;
-		if(m_tMeshInfo.MeshTag == L"Zombi")
-			m_tMeshInfo.iMeshID = 4;		// 달리는 걸로 
-		else if (m_tMeshInfo.MeshTag == L"Dron")
-		{
+
+		// 달리는 걸로 
+
+		if(m_tMeshInfo.MeshTag == L"Dron")
 			m_tMeshInfo.iMeshID = 0;
-			continue;
+		else
+		{
+			m_tMeshInfo.Rotation.y = rand() % 360 - 180;
 		}
+
 		m_tMeshInfo.Pos = tColData.vCenter;
 		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Monster", m_tMeshInfo.MeshTag, &m_tMeshInfo);
 
 
-		if (m_tMeshInfo.MeshTag == L"Zombi")
-			break;
+	
 	}
 	CloseHandle(hFile);
 }
@@ -463,6 +500,13 @@ void CScene_Stage::Load_TriggerPos(const wstring& wstrFilePath)
 
 		if (dwByte == 0)
 			break;
+
+		if (wstrFilePath == L"../../Data/Collider/Trigger.dat")
+			tColData.iColID = 1;
+		else if (wstrFilePath == L"../../Data/Collider/Trigger2.dat")
+			tColData.iColID = 2;
+		else if (wstrFilePath == L"../../Data/Collider/Trigger3.dat")
+			tColData.iColID = 3;
 
 		if(3 == tColData.iOptionID)
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Trigger", L"Trigger", &tColData);
@@ -509,8 +553,11 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 
 		if(m_tMeshInfo.MeshTag ==L"Siren.X" )
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LightObject", L"LightObject", &m_tMeshInfo);//조명처리
-		else if (m_tMeshInfo.MeshTag == L"medCrate.X")
+		else if (m_tMeshInfo.MeshTag == L"medikit.X")
+		{
+			m_tMeshInfo.iMeshID++;
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_ItemObject", L"ItemObject", &m_tMeshInfo);
+		}
 		else if (m_tMeshInfo.MeshTag == L"door1.X")
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LobbyDoor", L"LobbyDoor", &m_tMeshInfo);
 		else if (m_tMeshInfo.MeshTag == L"door2.X")

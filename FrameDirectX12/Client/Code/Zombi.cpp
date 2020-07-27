@@ -26,14 +26,14 @@ void CZombi::Initialized()
 
 HRESULT CZombi::Late_Initialized()
 {
-	if (m_iInitAni == 0)
-		m_eCurState = ZOM_CB_CombatActive_Ceiling;
-	else if (m_iInitAni == 1)
-		m_eCurState = ZOM_CB_CombatActive;
-	else if (m_iInitAni == 2)
+	if (m_iInitAni == 0)	
 		m_eCurState = ZOM_DG_GetUpBack;
-	else if (m_iInitAni == 3)
+	else if (m_iInitAni == 1)
 		m_eCurState = ZOM_DG_GetUpFront;
+	else if (m_iInitAni == 2)
+		m_eCurState = ZOM_CB_CombatActive_Ceiling;
+	else if (m_iInitAni == 3)
+		m_eCurState = ZOM_CB_CombatActive;
 	else if (m_iInitAni == 4)
 		m_eCurState = ZOM_EX_Run;
 
@@ -57,7 +57,6 @@ _int CZombi::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform, CMes
 	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 	if (pPlayer == nullptr)
 		return E_FAIL;
-
 	m_vPlayerPos = pPlayer->Get_Transform()->m_vPos;
 
 	// Ã¼·Â 
@@ -103,8 +102,7 @@ void CZombi::MoveByAstar(const _float& fTimeDelta)
 		vecDir.Normalize();
 		_vec3 vMovePos;
 
-		vMovePos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &vecDir, fTimeDelta);
-		cout << vMovePos.x << "--"<<  vMovePos.y <<"--" <<vMovePos.z << endl;
+		vMovePos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &vecDir, fTimeDelta*m_fSpeed);
 		m_pTransCom->m_vPos = vMovePos;
 	}
 }
@@ -219,14 +217,14 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_DG_GetUpBack))
 			m_eCurState = ZOM_EX_IdleOffset;
 	}
-		break;
+	break;
 	case CZombi::ZOM_DG_GetUpFront:
 	{
 		m_fAniDelay = 24500.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_DG_GetUpFront))
 			m_eCurState = ZOM_EX_IdleOffset;
 	}
-		break;
+	break;
 	case CZombi::ZOM_EX_IdleOffset:
 	{
 		if (m_bIsZombiState[2])	// hit
@@ -257,7 +255,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 			}
 		}
 	}
-		break;
+	break;
 	case CZombi::ZOM_EX_IdlePose:
 		break;
 	case CZombi::ZOM_EX_Run:
@@ -342,7 +340,7 @@ void CZombi::Attak_Player(Engine::CMesh* m_pMeshCom, CZombi::ZOMBISTATE eState)
 		int iRandAni = rand() % 2;
 		m_bIsZombiState[3] = false;
 
-		if (Check_PlayerRange(10.f))
+		if (Check_PlayerRange(20.f))
 		{
 			if (iRandAni == 0)
 				m_eCurState = ZOM_LEFT_ATK;

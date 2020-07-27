@@ -127,7 +127,7 @@ ps_output PS_POINTMAIN(VS_OUTPUT input) : SV_TARGET
 
 
     float fDistance = length(vLightDir);
-    float4 vShade = saturate(dot(normalize(vLightDir), vWorldNormal));
+    float4 vShade = saturate(dot(normalize(-vLightDir), vWorldNormal));
     float fAtt = saturate((g_fRange - fDistance) / g_fRange);
     float3 reflection = normalize(reflect(g_vLightDir, vWorldNormal));
     float3 vLook = normalize(vPosition.xyz - g_vCampos.xyz);

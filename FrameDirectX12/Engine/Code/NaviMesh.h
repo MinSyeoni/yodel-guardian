@@ -20,7 +20,7 @@ private:
 public:
 	void		Render_NaviMesh(CShader_ColorBuffer* pShader);
 	void        SetConstantTable(CShader_ColorBuffer* pShader);
-
+	void        SetFirstNavi(_vec3 vPos);
 	_ulong  GetIndex(void) { return m_dwIndex; };
 	CCell* GetCurCell(void) { return m_vecCell[m_dwIndex]; };
 	vector<CCell*> GetNaviCell() { return m_vecCell; };

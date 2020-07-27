@@ -226,6 +226,10 @@ void CNpcWords::Finish_ConverSation()
 		if (pPlayer == nullptr)
 			return;
 		static_cast<CPlayerStatus*>(static_cast<CPlayer*>(pPlayer)->Get_Status())->m_eCurScene = CPlayerStatus::NOSCENE;
+
+		static_cast<CPlayer*>(pPlayer)->KeyLockPlayer(false);
+
+
 	}
 		break;
 	case CNpcWords::ETC:

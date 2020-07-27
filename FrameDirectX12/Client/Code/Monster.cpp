@@ -12,7 +12,7 @@
 CMonster::CMonster(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	:CGameObject(pGraphicDevice,pCommandList)
 {
-}
+} 
 
 CMonster::CMonster(const CMonster& rhs)
 	:CGameObject(rhs),
@@ -56,8 +56,10 @@ HRESULT CMonster::Ready_GameObject()
 	m_pTransCom->m_vPos = m_tMeshInfo.Pos;
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
 	m_pTransCom->m_vDir = _vec3(-1.f, 0.f, 1.f);
+	m_pTransCom->m_vAngle = ToDegree(m_tMeshInfo.Rotation);
 
 	m_iInitAni = m_tMeshInfo.iMeshID;
+	m_iInitId = m_tMeshInfo.iDrawID;
 
 	switch (m_eMonName)
 	{
@@ -72,6 +74,7 @@ HRESULT CMonster::Ready_GameObject()
 	{
 		m_pZombi = new CZombi;
 		m_pZombi->Set_InitAni(m_iInitAni);
+		m_pZombi->Set_InitDrawID(m_iInitId);
 		m_pZombi->Set_Transform(m_pTransCom);
 		m_pZombi->Set_NaviMesh(m_pNaviCom);
 	}
@@ -100,7 +103,8 @@ HRESULT CMonster::LateInit_GameObject()
 #endif
 	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture(), m_pDissolveTex->Get_Texture());
 
-	m_pNaviCom->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(0.f, 0.f, 0.f), 0, false);
+	m_pNaviCom->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(0.f, 0.f, 0.f), 0, false);//이거안해도되~~
+	m_pNaviCom->SetFirstNavi(m_pTransCom->m_vPos);//이걸로해줭
 	m_pAstarCom->Init_AstarCell(m_pNaviCom->GetNaviCell());
 
 	switch (m_eMonName)
@@ -228,6 +232,8 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[0]), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[1]), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[2]), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 
 	switch (m_eMonName)
 	{
@@ -274,23 +280,24 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 		break;
 	}
 
-	//_vec3 vShaveDir;
-	//for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::OBJECT))
-	//{
+
+	_vec3 vShaveDir;
+	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::OBJECT))
+	{
+		if (CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCol, pCol, &vShaveDir))
+		{
+			if (pCol != m_pBoxCol)
+			{
+				m_pTransCom->m_vPos += vShaveDir;
+
+				m_pTransCom->m_matWorld._41 += vShaveDir.x;
+				m_pTransCom->m_matWorld._42 += vShaveDir.y;
+				m_pTransCom->m_matWorld._43 += vShaveDir.z;
+			}
+		}
+	}
 
 
-	//	if (CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCol, pCol, &vShaveDir))
-	//	{
-	//		m_pTransCom->m_vPos += vShaveDir;
-
-	//		m_pTransCom->m_matWorld._41 += vShaveDir.x;
-	//		m_pTransCom->m_matWorld._42 += vShaveDir.y;
-	//		m_pTransCom->m_matWorld._43 += vShaveDir.z;
-	//	}
-	//}
-
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	return NO_EVENT;
 }
 

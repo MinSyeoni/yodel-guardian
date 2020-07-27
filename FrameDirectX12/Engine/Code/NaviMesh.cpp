@@ -32,8 +32,9 @@ HRESULT CNaviMesh::Ready_NaviMesh()
 	_vec3 vecPointA, vecPointB, vecPointC;
 	_int iOption = 0;
 
-	// 나중에 파일도 받아올 수 있도록 해야함.
-	HANDLE hFile = CreateFile(L"../../Data/Navi/map1addoutside.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+
+	HANDLE hFile = CreateFile(L"../../Data/Navi/0727_7.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+
 	NULL_CHECK_RETURN(hFile, E_FAIL);
 
 	if (INVALID_HANDLE_VALUE == hFile)
@@ -108,10 +109,15 @@ _vec3 CNaviMesh::MoveOn_NaviMesh(const _vec3* pTargetPos,
 
 	if (CCell::COMPARE_MOVE == m_vecCell[m_dwIndex]->Compare(&vEndPos, &m_dwIndex, fSpeed, &vTargetPos, &vTargetDir, &vSliding))
 	{
+		if (!bIsJump)
+			vEndPos.y = m_vecCell[m_dwIndex]->Get_Height(&vEndPos);
+
 		return vEndPos;
 	}
 	else if (CCell::COMPARE_SLIDING == m_vecCell[m_dwIndex]->Compare(&vEndPos, &m_dwIndex, fSpeed, &vTargetPos, &vTargetDir, &vSliding))
 	{
+		if (!bIsJump)
+			vEndPos.y = m_vecCell[m_dwIndex]->Get_Height(&vEndPos);
 
 		vEndPos = _vec3(*pTargetPos) + _vec3(vSliding) * fSpeed;
 
@@ -122,13 +128,17 @@ _vec3 CNaviMesh::MoveOn_NaviMesh(const _vec3* pTargetPos,
 		vEndPos = _vec3(*pTargetPos) + vTargetDir * fSpeed;
 		if (CCell::COMPARE_MOVE == m_vecCell[m_dwIndex]->Compare(&vEndPos, &m_dwIndex, fSpeed, &vTargetPos, &vTargetDir, &vSliding))
 		{
+			if (!bIsJump)
+				vEndPos.y = m_vecCell[m_dwIndex]->Get_Height(&vEndPos);
 
 			return vEndPos;
 		}
 		vEndPos = _vec3(*pTargetPos) + vTargetDir * fSpeed;
 		if (CCell::COMPARE_MOVE == m_vecCell[m_dwIndex]->Compare(&vEndPos, &m_dwIndex, fSpeed, &vTargetPos, &vTargetDir, &vSliding))
 		{
-
+			if (!bIsJump)
+				vEndPos.y = m_vecCell[m_dwIndex]->Get_Height(&vEndPos);
+      
 			return vEndPos;
 		}
 		_vec3 vA = *m_vecCell[m_dwIndex]->Get_Point(CCell::POINT_A);
@@ -227,6 +237,44 @@ void CNaviMesh::SetConstantTable(CShader_ColorBuffer* pShader)
 
 
 
+}
+
+void CNaviMesh::SetFirstNavi(_vec3 vPos)
+{
+
+
+	m_dwIndex = 0;
+	_float fMinDist = 100.f;
+
+	for (auto& pCell : m_vecCell)
+	{
+
+		_vec3 vDist = vPos - pCell->Get_Pos();
+
+		_float fDist = vDist.Get_Length();
+		if (fMinDist > fDist)
+		{
+
+			m_dwIndex = pCell->m_dwIndex;
+			fMinDist = fDist;
+
+		}
+
+
+
+
+	}
+
+
+
+
+
+
+	return;
+	
+
+
+	
 }
 
 

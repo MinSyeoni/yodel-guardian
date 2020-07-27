@@ -70,7 +70,7 @@ HRESULT CRifle::Ready_GameObject()
     m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
     m_pTransCom->m_vPos = _vec3(299.f, 9.f, 494.f);
     m_pTransCom->m_vAngle = _vec3(0.f, 0.f, 0.f);
-    m_eWeaponState = DROP;
+    m_eWeaponState = BAG;//юс╫ц
     
     return S_OK;
 }

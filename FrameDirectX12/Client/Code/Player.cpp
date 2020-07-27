@@ -23,6 +23,11 @@ CPlayer::~CPlayer()
 }
 
 
+void CPlayer::KeyLockPlayer(_bool bIsLock)
+{
+	m_pStatus->m_bIsKeyLock = bIsLock;
+}
+
 HRESULT CPlayer::Ready_GameObjectPrototype()
 {
 #ifdef _DEBUG
