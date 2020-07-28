@@ -222,42 +222,30 @@ HRESULT CLoading::Mesh_ForStage(void)
 {
 	Engine::CComponent* pComponent = nullptr;
 
-
-
-
-
-
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/DynamicMesh/Player/", L"Player.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Player", ID_STATIC, pComponent), E_FAIL);
-
 
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Missile/", L"Missile.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Missile", ID_STATIC, pComponent), E_FAIL);
 
-
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Temp/", L"Temp.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Console", ID_STATIC, pComponent), E_FAIL);
-
-
 
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/SkyDome/", L"SkyDome.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_SkyDome", ID_STATIC, pComponent), E_FAIL);
 
-
-
-
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/DynamicMesh/Weapon/Rifle/", L"Rifle.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Rifle", ID_STATIC, pComponent), E_FAIL);
+
 	////////////////NPC///////////////
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/DynamicMesh/Salone/", L"Salone.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Salone", ID_STATIC, pComponent), E_FAIL);
-
 
 	/////////////// ¸Ê ¿ÉÁ§ //////////////////////
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"ammocase.X");
@@ -505,19 +493,14 @@ HRESULT CLoading::Mesh_ForStage(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Ken", ID_STATIC, pComponent), E_FAIL);
 
-
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/DynamicMesh/Weapon/Sniper/", L"Sniper.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Sniper", ID_STATIC, pComponent), E_FAIL);
-
 
 	//MESH_POINT
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/PlayerPoint/", L"point_top.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Point", ID_STATIC, pComponent), E_FAIL);
-
-
-
 
 	return S_OK;
 }
@@ -543,21 +526,33 @@ HRESULT CLoading::Texture_ForStage(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_Aim", ID_STATIC, pComponent), E_FAIL);
 
-	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_background.dds", 1);
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_player_background.dds", 1);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_PlayerIcon", ID_STATIC, pComponent), E_FAIL);
 
-	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_player.dds", 1);
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_player_blue.dds", 1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_PlayerMP", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_player_white.dds", 1);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_PlayerHP", ID_STATIC, pComponent), E_FAIL);
 
-	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_colleague1.dds", 1);
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_colleague1_white.dds", 1);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_HP_colleague1", ID_STATIC, pComponent), E_FAIL);
 
-	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_colleague2.dds", 1);
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_colleague2_white.dds", 1);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_HP_colleague2", ID_STATIC, pComponent), E_FAIL);
+
+	//pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_colleague1_background.dds", 1);
+	//NULL_CHECK_RETURN(pComponent, E_FAIL);
+	//FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_colleague1Icon", ID_STATIC, pComponent), E_FAIL);
+
+	//pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_colleague2_background.dds", 1);
+	//NULL_CHECK_RETURN(pComponent, E_FAIL);
+	//FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_colleague2Icon", ID_STATIC, pComponent), E_FAIL);
 
 	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/assaultRifle.dds", 1);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);

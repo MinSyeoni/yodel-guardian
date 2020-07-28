@@ -56,6 +56,8 @@
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
+	Engine::CComponent* pComponent = Engine::CNaviMesh::Create(m_pGraphicDevice, m_pCommandList, L"../../Data/Navi/0727_7.dat");
+	CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Navi", ID_STATIC, pComponent);
 }
 
 
@@ -138,7 +140,6 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	원형 객체를 생산하는 작업 수행.
 	______________________________________________________________________*/
 	CGameObject* pGameObject = nullptr;
-
 
 	pGameObject = CTerrain::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -386,8 +387,8 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcRifle", L"Weapon", &eOwner), E_FAIL);
 
 	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj																		 //Prototype_MapObject
-	//Load_StageObject(L"../../Data/StaticObj/mapAddoutside_1_test.dat");
-	Load_StageObject(L"../../Data/StaticObj/SY_Kit_Test.dat");
+	Load_StageObject(L"../../Data/StaticObj/mapAddoutside_1_test.dat");
+	//Load_StageObject(L"../../Data/StaticObj/SY_Kit_Test.dat");
 	
 	// Monster
 	Load_MonsterPos(L"../../Data/Collider/Zombi.dat");

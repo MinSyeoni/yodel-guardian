@@ -111,6 +111,11 @@ void CEquipUI::Render_GameObject(const _float& fTimeDelta)
 	m_pBufferCom->Render_Buffer();
 }
 
+void CEquipUI::Set_ShowUI(_bool bIsShow)
+{
+	m_bIsShow = bIsShow;
+}
+
 HRESULT CEquipUI::Add_Component()
 {
 	NULL_CHECK_RETURN(m_pComponentMgr, E_FAIL);
