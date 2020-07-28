@@ -1,14 +1,17 @@
 #include "NaviMesh.h"
 #include "NaviBuffer.h"
 #include "GraphicDevice.h"
-CNaviMesh::CNaviMesh(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
+
+CNaviMesh::CNaviMesh(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList, const wstring& wstrFilePath)
 	:CComponent(pGraphicDevice, pCommandList)
 {
+	m_wstrFilePath = wstrFilePath;
 }
 
 CNaviMesh::CNaviMesh(const CNaviMesh& rhs)
 	: m_vecCell(rhs.m_vecCell)
 	, m_dwIndex(rhs.m_dwIndex)
+	, m_wstrFilePath(rhs.m_wstrFilePath)
 	, m_pNaviBuffer(rhs.m_pNaviBuffer)
 {
 	for (auto iter : m_vecCell)
@@ -21,7 +24,7 @@ CNaviMesh::~CNaviMesh()
 {
 }
 
-HRESULT CNaviMesh::Ready_NaviMesh()
+HRESULT CNaviMesh::Ready_PrototypeNaviMesh()
 {
 	for (auto iter : m_vecCell)
 		Safe_Release(iter);
@@ -32,9 +35,8 @@ HRESULT CNaviMesh::Ready_NaviMesh()
 	_vec3 vecPointA, vecPointB, vecPointC;
 	_int iOption = 0;
 
-
-	HANDLE hFile = CreateFile(L"../../Data/Navi/0727_7.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
-
+	HANDLE hFile = CreateFile(m_wstrFilePath.c_str(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	//L"../../Data/Navi/0727_7.dat"
 	NULL_CHECK_RETURN(hFile, E_FAIL);
 
 	if (INVALID_HANDLE_VALUE == hFile)
@@ -153,15 +155,11 @@ _vec3 CNaviMesh::MoveOn_NaviMesh(const _vec3* pTargetPos,
 		return src;
 
 	}
-
-
-
 }
+
 HRESULT CNaviMesh::Link_Cell(void)
 {
 	for (_ulong i = 0; i < m_vecCell.size(); ++i)
-
-
 	{
 		for (_ulong j = 0; j < m_vecCell.size(); ++j)
 		{
@@ -172,7 +170,6 @@ HRESULT CNaviMesh::Link_Cell(void)
 				true == m_vecCell[j]->Compare_Point(m_vecCell[i]->Get_Point(CCell::POINT_A),
 					m_vecCell[i]->Get_Point(CCell::POINT_B),
 					m_vecCell[i]))
-
 			{
 				m_vecCell[i]->Set_Neighbor(CCell::NEIGHBOR_AB, m_vecCell[j]);
 				continue;
@@ -182,7 +179,6 @@ HRESULT CNaviMesh::Link_Cell(void)
 				true == m_vecCell[j]->Compare_Point(m_vecCell[i]->Get_Point(CCell::POINT_B),
 					m_vecCell[i]->Get_Point(CCell::POINT_C),
 					m_vecCell[i]))
-
 			{
 				m_vecCell[i]->Set_Neighbor(CCell::NEIGHBOR_BC, m_vecCell[j]);
 				continue;
@@ -192,7 +188,6 @@ HRESULT CNaviMesh::Link_Cell(void)
 				true == m_vecCell[j]->Compare_Point(m_vecCell[i]->Get_Point(CCell::POINT_C),
 					m_vecCell[i]->Get_Point(CCell::POINT_A),
 					m_vecCell[i]))
-
 			{
 				m_vecCell[i]->Set_Neighbor(CCell::NEIGHBOR_CA, m_vecCell[j]);
 				continue;
@@ -210,7 +205,6 @@ void CNaviMesh::Render_NaviMesh(CShader_ColorBuffer* pShader)
 	pShader->End_Shader();
 	m_pNaviBuffer->Begin_Buffer();
 	m_pNaviBuffer->Render_Buffer();
-
 }
 
 void CNaviMesh::SetConstantTable(CShader_ColorBuffer* pShader)
@@ -234,15 +228,10 @@ void CNaviMesh::SetConstantTable(CShader_ColorBuffer* pShader)
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
 
 	pShader->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
-
-
-
 }
 
 void CNaviMesh::SetFirstNavi(_vec3 vPos)
 {
-
-
 	m_dwIndex = 0;
 	_float fMinDist = 100.f;
 
@@ -259,31 +248,15 @@ void CNaviMesh::SetFirstNavi(_vec3 vPos)
 			fMinDist = fDist;
 
 		}
-
-
-
-
 	}
-
-
-
-
-
-
-	return;
-	
-
-
-	
+	return;	
 }
 
-
-
-CNaviMesh* CNaviMesh::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
+CNaviMesh* CNaviMesh::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList, const wstring& wstrFilePath)
 {
-	CNaviMesh* pInstance = new CNaviMesh(pGraphicDevice, pCommandList);
+	CNaviMesh* pInstance = new CNaviMesh(pGraphicDevice, pCommandList, wstrFilePath);
 
-	if (FAILED(pInstance->Ready_NaviMesh()))
+	if (FAILED(pInstance->Ready_PrototypeNaviMesh()))
 		Engine::Safe_Release(pInstance);
 
 	return pInstance;

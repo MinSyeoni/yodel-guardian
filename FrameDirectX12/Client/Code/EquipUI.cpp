@@ -33,6 +33,7 @@ HRESULT CEquipUI::LateInit_GameObject()
 	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());
 	
 	m_pTransCom->m_vScale = _vec3{ 0.07f, 0.04f, 0.07f };
+
 	m_pTransCom->m_vPos.x = _float(2.f / WINCX * WINCX / 2) - 1.f;
 	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * WINCY / 2) + 1.f;
 
@@ -57,10 +58,44 @@ _int CEquipUI::LateUpdate_GameObject(const _float& fTimeDelta)
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
-	m_pTransCom->m_vPos.x = (((2.0f * m_vPos.x) / WINCX) * 0.5f) - 0.3f;
-	m_pTransCom->m_vPos.y = (((-2.0f * m_vPos.y) / WINCY) * 0.5f) - 0.2f;
+	Init_TypePos();
 
 	return NO_EVENT;
+}
+
+void CEquipUI::Init_TypePos()
+{
+	switch (m_eEquipType)
+	{
+	case CEquipUI::E_KITEQUIP1:
+	case CEquipUI::E_KITEQUIP2:
+	case CEquipUI::E_KITEQUIP3:
+	{
+		m_pTransCom->m_vPos.x = (((2.0f * m_vPos.x) / WINCX) * 0.5f);
+		m_pTransCom->m_vPos.y = (((-2.0f * m_vPos.y) / WINCY) * 0.5f);
+	}
+	break;
+	case CEquipUI::E_CONVERSATION:
+	case CEquipUI::E_KEYEQUIP:
+	{
+		m_pTransCom->m_vPos.x = (((2.0f * m_vPos.x) / WINCX) * 0.5f) - 0.3f;
+		m_pTransCom->m_vPos.y = (((-2.0f * m_vPos.y) / WINCY) * 0.5f) - 0.2f;
+	}
+	break;
+	case CEquipUI::E_HIDING:
+		break;
+	case CEquipUI::E_DOOROPEN_L:
+	case CEquipUI::E_DOOROPEN_P:
+	{
+		m_pTransCom->m_vPos.x = (((2.0f * m_vPos.x) / WINCX) * 0.5f) - 0.3f;
+		m_pTransCom->m_vPos.y = (((-2.0f * m_vPos.y) / WINCY) * 0.5f) - 0.2f;
+	}
+	break;
+	case CEquipUI::EQUIP_END:
+		break;
+	default:
+		break;
+	}
 }
 
 void CEquipUI::Render_GameObject(const _float& fTimeDelta)
@@ -74,6 +109,11 @@ void CEquipUI::Render_GameObject(const _float& fTimeDelta)
 	m_pShaderCom->End_Shader();
 	m_pBufferCom->End_Buffer();
 	m_pBufferCom->Render_Buffer();
+}
+
+void CEquipUI::Set_ShowUI(_bool bIsShow)
+{
+	m_bIsShow = bIsShow;
 }
 
 HRESULT CEquipUI::Add_Component()
@@ -98,7 +138,9 @@ HRESULT CEquipUI::Add_Component()
 		wstrPrototype = L"Prototype_Texture_E_Conversation";
 		break;
 	case CEquipUI::E_KEYEQUIP:
-	case CEquipUI::E_KITEQUIP:
+	case CEquipUI::E_KITEQUIP1:
+	case CEquipUI::E_KITEQUIP2:
+	case CEquipUI::E_KITEQUIP3:
 		wstrPrototype = L"Prototype_Texture_E_Equip";
 		break;
 	case CEquipUI::E_HIDING:

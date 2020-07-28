@@ -60,14 +60,25 @@ _int CMedi_Medicine::Update_GameObject(const _float& fTimeDelta)
 	m_pBoxCollider->Update_Collider(&m_pTransCom->m_matWorld);
 	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCollider);
 
-	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
-	for (auto& pSrc : *pEquipUIList)
-		if (CEquipUI::E_KITEQUIP == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
-			m_pGameObject = dynamic_cast<CEquipUI*>(pSrc);
-
-	PutTheCard_OnTheDoor();
+	//ReScale_SphereCol();
 
 	return NO_EVENT;
+}
+
+
+void CMedi_Medicine::ReScale_SphereCol()
+{
+	_matrix matTmp = INIT_MATRIX;
+	matTmp._11 = 0.02f;	// SCALE
+	matTmp._22 = 0.02f;
+	matTmp._33 = 0.02f;
+	
+	matTmp._41 = m_pTransCom->m_vPos.x;		// POS
+	matTmp._42 = m_pTransCom->m_vPos.y;
+	matTmp._43 = m_pTransCom->m_vPos.z;	
+
+	m_pShereCol->Update_Collider(&matTmp);
+	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pShereCol);
 }
 
 _int CMedi_Medicine::LateUpdate_GameObject(const _float& fTimeDelta)
@@ -81,16 +92,11 @@ _int CMedi_Medicine::LateUpdate_GameObject(const _float& fTimeDelta)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCollider), -1);
 
-	Coliision_CardAndPlayer();
-
 	return NO_EVENT;
 }
 
 void CMedi_Medicine::Render_GameObject(const _float& fTimeDelta)
 {
-	if (m_bIsEquip)
-		return;
-
 	Set_ConstantTable();
 
 	m_pShaderCom->Begin_Shader();
@@ -120,45 +126,16 @@ HRESULT CMedi_Medicine::Add_Component()
 	m_mapComponent[ID_STATIC].emplace(L"Com_Mesh", m_pMeshCom);
 
 	// Box
-	m_pBoxCollider = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(300.f, 300.f, 300.f), this));
+	m_pBoxCollider = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(100.f, 100.f, 100.f), this));
 	NULL_CHECK_RETURN(m_pBoxCollider, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCollider);
 
+	//Sphere
+	//m_pShereCol = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 20.f, _vec3(1.f, 1.f, 1.f), this));
+	//NULL_CHECK_RETURN(m_pShereCol, E_FAIL);
+	//m_mapComponent[ID_STATIC].emplace(L"Com_SphereCol", m_pShereCol);
+
 	return S_OK;
-}
-
-void CMedi_Medicine::PutTheCard_OnTheDoor()
-{
-	CGameObject* pPassageDoor = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"PassageDoor");
-
-	if (nullptr == pPassageDoor)
-		return;
-
-	if (!m_bIsDead && m_bIsEquip)
-	{
-	
-		m_bIsDead = true;
-	}
-}
-
-void CMedi_Medicine::Coliision_CardAndPlayer()
-{
-	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
-
-	_vec3 vShaveDir;
-	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYER))
-	{
-		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir))
-		{
-		//	dynamic_cast<CEquipUI*>(m_pGameObject)->Set_EquipPos(m_pTransCom->m_vPos.x, m_pTransCom->m_vPos.y);
-			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(true);
-
-			if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && !m_bIsEquip)
-				m_bIsEquip = true;
-		}
-		else
-			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
-	}
 }
 
 void CMedi_Medicine::Set_ConstantTable()

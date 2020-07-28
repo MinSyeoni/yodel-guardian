@@ -191,14 +191,13 @@ HRESULT CMainApp::SetUp_ComponentPrototype()
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_SphereCol", ID_STATIC, pComponent), E_FAIL);
 
-
-	pComponent = Engine::CNaviMesh::Create(m_pGraphicDevice, m_pCommandList);
-	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Navi", ID_STATIC, pComponent), E_FAIL);
-
 	pComponent = Engine::CAstar::Create(m_pGraphicDevice);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Astar", ID_STATIC, pComponent), E_FAIL);
+
+	//pComponent = Engine::CNaviMesh::Create(m_pGraphicDevice, m_pCommandList, L"../../Data/Navi/0727_7.dat");
+	//NULL_CHECK_RETURN(pComponent, E_FAIL);
+	//FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Navi", ID_STATIC, pComponent), E_FAIL);
 
 	return S_OK;
 }

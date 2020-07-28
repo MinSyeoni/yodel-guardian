@@ -16,7 +16,7 @@ class CDynamicCamera;
 class CHPKit : public Engine::CGameObject
 {
 public:
-	enum HPKIT_STATE { KIT_IDLE, KIT_OPEN, KIT_CLOSE, KIT_ALREADYOPEN};
+	enum HPKIT_STATE { KIT_OPEN, KIT_CLOSE, KIT_ALREADYOPEN, KIT_IDLE };
 
 private:
 	explicit CHPKit(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
@@ -29,6 +29,7 @@ public:
 	virtual HRESULT				LateInit_GameObject();
 	virtual _int				Update_GameObject(const _float& fTimeDelta);
 	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
+	void						OpenKit_PlayZoom();
 	virtual void				Render_GameObject(const _float& fTimeDelta);
 	virtual void				SetMeshInfo(MeshInfo tInfo) { m_tMeshInfo = tInfo; }
 
@@ -59,7 +60,7 @@ private:
 	HPKIT_STATE					m_eState = KIT_IDLE;
 	_bool						m_bIsOpen = false;
 	_uint						m_iMeshID = 0;
-
+	_bool						m_bIsZoom = false;
 public:
 	virtual CGameObject*		Clone_GameObject(void* prg);
 	static CHPKit*				Create(ID3D12Device* pGraphicDevice,

@@ -31,18 +31,18 @@ public:
 
 private:
 	virtual HRESULT				Add_Component();
-	void						PutTheCard_OnTheDoor();
-	void						Coliision_CardAndPlayer();
-
-private:
 	void						Set_ConstantTable();
     void						Set_ShadowTable(CShader_Shadow* pShader);
 	void						Render_ShadowDepth(CShader_Shadow* pShader);
 
 private:
+	void						ReScale_SphereCol();
+
+private:
 	Engine::CMesh*				m_pMeshCom = nullptr;
 	Engine::CShader_Mesh*       m_pShaderCom = nullptr;
 	Engine::CBoxCollider*		m_pBoxCollider = nullptr;
+	Engine::CSphereCollider*	m_pShereCol = nullptr;
 
 	MeshInfo					m_tMeshInfo;
 	_bool						m_bIsEquip = false;

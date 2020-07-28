@@ -34,12 +34,13 @@ public:
 	virtual _int			Update_GameObject(const _float& fTimeDelta);
 	virtual _int			LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void			Render_GameObject(const _float& fTimeDelta);
-	CZombi* Get_Zombi() { return m_pZombi; };//이거넣엇어
-	MONKIND    Get_MONKIND() { return m_eMonName; }//이것두넣엇어
-	virtual void    Render_ShadowDepth(CShader_Shadow* pShader);
+	CZombi*					Get_Zombi() { return m_pZombi; };//이거넣엇어
+	MONKIND					Get_MONKIND() { return m_eMonName; }//이것두넣엇어
+	virtual void			Render_ShadowDepth(CShader_Shadow* pShader);
 
 	void					Set_IsActiveStart(_bool bIsActive) { m_bIsActive = bIsActive; }
 	_uint					Get_InitID() { return m_iInitId; }
+
 private:
 	void					Set_ConstantTable();
 	void					Set_ShadowTable(CShader_Shadow* pShader);
@@ -60,7 +61,6 @@ private:
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
 
 	CFlameThrower*				m_pFlameThrower = nullptr;	
-//	list<CZombi*>				m_pZombiLst;
 	CZombi*						m_pZombi = nullptr;
 	CDron*						m_pDron = nullptr;
 private:

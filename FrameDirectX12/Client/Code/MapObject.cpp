@@ -57,12 +57,13 @@ HRESULT CMapObject::LateInit_GameObject()
 _int CMapObject::Update_GameObject(const _float & fTimeDelta)
 {
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
+	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
-	Engine::CGameObject::Update_GameObject(fTimeDelta);
 	m_pBoxCom->Update_Collider(&m_pTransCom->m_matWorld);
+
 	return NO_EVENT;
 }
 
