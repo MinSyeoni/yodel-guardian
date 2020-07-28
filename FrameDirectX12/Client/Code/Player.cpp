@@ -23,6 +23,11 @@ CPlayer::~CPlayer()
 }
 
 
+void CPlayer::KeyLockPlayer(_bool bIsLock)
+{
+	m_pStatus->m_bIsKeyLock = bIsLock;
+}
+
 HRESULT CPlayer::Ready_GameObjectPrototype()
 {
 #ifdef _DEBUG
@@ -97,7 +102,7 @@ _int CPlayer::Update_GameObject(const _float& fTimeDelta)
 	m_pArm->Set_LegAnimation(m_eCurLegState);
 
 	_vec3 Pos = m_pTransCom->m_vPos;
-	cout << Pos.x << "   -  " << Pos.y << "   -   " << Pos.z << endl;
+
 	
 	CGameObject::Update_GameObject(fTimeDelta);
 	return NO_EVENT;

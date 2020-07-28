@@ -71,9 +71,6 @@ _int CMapObject::LateUpdate_GameObject(const _float & fTimeDelta)
 	if (m_tMeshInfo.MeshTag == L"apollo.X")
 		return NO_EVENT;
 
-	if (!CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
-		return NO_EVENT; // 여기야 절투체컬링 
-
 	NULL_CHECK_RETURN(m_pRenderer, -1); 
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);

@@ -20,7 +20,7 @@ HRESULT CNpcRifle::Ready_GameObjectPrototype()
     return S_OK;
 }
 
-HRESULT CNpcRifle::Ready_GameObject()
+HRESULT CNpcRifle::Ready_GameObject(OWNER eOwner)
 {
     CWeapon::AddComponent();
     AddComponent();
@@ -45,6 +45,8 @@ HRESULT CNpcRifle::Ready_GameObject()
     m_uiLightIndex = CLight_Manager::Get_Instance()->Get_LightIndex();
     CLight_Manager::Get_Instance()->Set_LightOnOff(m_uiLightIndex, false);
 
+    m_eOwner = eOwner;
+
     return S_OK;
 }
 
@@ -53,12 +55,16 @@ HRESULT CNpcRifle::LateInit_GameObject()
     m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
     m_pTransCom->m_vScale = _vec3(1.0f, 1.0f, 1.0f);
     m_pTransCom->m_vPos = _vec3(0.f, 0.f, 0.f);
-    CGameObject* pShepard = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Shepard");
+    CGameObject* pOwner = nullptr;
+    if(m_eOwner==SHEPARD)   
+        pOwner=  CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Shepard");
+    else
+        pOwner=CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Ken");
 
 
-    m_pNpcEquipMatrix = static_cast<CMesh*>(pShepard->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_WeaponMatrix();
+    m_pNpcEquipMatrix = static_cast<CMesh*>(pOwner->Get_Component(L"Com_Mesh", COMPONENTID::ID_STATIC))->Get_AnimationComponent()->Get_WeaponMatrix();
 
-    m_pNpcMatrix = &(pShepard->Get_Transform()->m_matWorld);
+    m_pNpcMatrix = &(pOwner->Get_Transform()->m_matWorld);
 
     m_eWeaponType = NpcRifle;
    
@@ -214,7 +220,9 @@ CGameObject* CNpcRifle::Clone_GameObject(void* prg)
 {
     CGameObject* pInstance = new CNpcRifle(*this);
 
-    if (FAILED(dynamic_cast<CNpcRifle*>(pInstance)->Ready_GameObject()))
+    OWNER eOwner = *reinterpret_cast<OWNER*>(prg);
+
+    if (FAILED(dynamic_cast<CNpcRifle*>(pInstance)->Ready_GameObject(eOwner)))
         return nullptr;
 
     return pInstance;

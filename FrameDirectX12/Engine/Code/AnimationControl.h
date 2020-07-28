@@ -102,11 +102,11 @@ private:
 	vector<VECTOR_MATRIX>*   m_vecBoneTransform;               // Mesh의 애니메이션 최종 변환 행렬.
 
 
-    _uint               m_uiCurAniIndex = 0;            // 현재 애니메이션의 Index
-    _uint               m_uiNewAniIndex = 0;            // 새로운 애니메이션이 Index
+    _uint               m_uiCurAniIndex = 999;            // 현재 애니메이션의 Index
+    _uint               m_uiNewAniIndex = 999;            // 새로운 애니메이션이 Index
 
-    _uint               m_uiCurSubAniIndex = 0; //블랜딩할 애니 인덱스
-    _uint               m_uiNewSubAniIndex = 0;//블랜딩할 애니 인덱스
+    _uint               m_uiCurSubAniIndex = 999; //블랜딩할 애니 인덱스
+    _uint               m_uiNewSubAniIndex = 999;//블랜딩할 애니 인덱스
 
     _float              m_fBlendingTime = 1.f; //선형보관 시간
     _float              m_fBlendigTimeSub = 1.f;

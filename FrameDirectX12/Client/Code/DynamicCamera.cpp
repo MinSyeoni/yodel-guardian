@@ -74,6 +74,24 @@ _int CDynamicCamera::Update_GameObject(const _float& fTimeDelta)
         m_fRadiusX = 0.015f;
         m_fRadiusY = 0.02f;
     }
+    else if (m_eShakeType == RIFLERUN)
+    {
+        m_fCameraShakeX += fTimeDelta * 40.f;
+        m_fCameraShakeY += fTimeDelta * 3.f;
+        m_fRadiusX = 0.03f;
+        m_fRadiusY = 0.035f;
+
+
+    }
+    else if (m_eShakeType == RIFLEWALK)
+    {
+        m_fCameraShakeX += fTimeDelta * 35.f;
+        m_fCameraShakeY += fTimeDelta * 18.f;
+        m_fRadiusX = 0.025f;
+        m_fRadiusY = 0.03f;
+
+
+    }
     else if (m_eShakeType == SNIPER)
     {
 

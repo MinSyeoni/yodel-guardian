@@ -28,9 +28,22 @@ CShader_UI::~CShader_UI()
 HRESULT CShader_UI::Ready_Shader(TYPE eType)
 {
 	if (eType != NONE)
+	{
 		m_bIsAlpha = true;
+		m_bIsAlphaBlend = true;
 
+	}
+	 if (eType == ALPHABLEND)
+	{
+
+		m_bIsAlpha = true;
+		m_bIsAlphaBlend = false;
+
+
+	}
 	m_eType = eType;
+
+
 
 	FAILED_CHECK_RETURN(Create_PipelineState(), E_FAIL);
 
@@ -190,7 +203,7 @@ D3D12_BLEND_DESC CShader_UI::Create_BlendState()
 
 	// ºí·»µå ¼³Á¤.
 	ZeroMemory(&BlendDesc, sizeof(D3D12_BLEND_DESC));
-	BlendDesc.AlphaToCoverageEnable = m_bIsAlpha;
+	BlendDesc.AlphaToCoverageEnable = m_bIsAlphaBlend;
 	BlendDesc.IndependentBlendEnable = FALSE;
 	BlendDesc.RenderTarget[0].BlendEnable = m_bIsAlpha;
 	BlendDesc.RenderTarget[0].LogicOpEnable = FALSE;

@@ -64,7 +64,7 @@ _int CPlayerArm::Update_GameObject(const _float & fTimeDelta)
 	}
 
 
-	dynamic_cast<CMesh*>(m_pMeshCom)->Set_AnimationBlend((_int)m_eCurAnimationKey,(_int)m_eCurAnimationKey);
+	dynamic_cast<CMesh*>(m_pMeshCom)->Set_AnimationBlend((_int)m_eCurAnimationKey,(_int)m_eLegAnimation);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransformsBlend(5000.f*fTimeDelta, 5000.f*fTimeDelta,m_fSpineAngle);
 	return NO_EVENT;
 }

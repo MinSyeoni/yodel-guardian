@@ -8,6 +8,7 @@ class CNpcRifle :public CWeapon
 
 public:
 	enum ANISTATE { BASE, COLLAPSE, COLLAPSEBASE, EXPAND };
+	enum OWNER {SHEPARD,KEN};
 private:
 	explicit CNpcRifle(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 	explicit CNpcRifle(const CNpcRifle& rhs);
@@ -16,7 +17,7 @@ private:
 
 public:
 	HRESULT			Ready_GameObjectPrototype();
-	virtual HRESULT	Ready_GameObject();
+	virtual HRESULT	Ready_GameObject(OWNER eOwner);
 	virtual HRESULT	LateInit_GameObject();
 	virtual _int	Update_GameObject(const _float& fTimeDelta);
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
@@ -47,6 +48,7 @@ private:
 	_float m_fUp;
 	_float m_fLook;
 
+	OWNER m_eOwner = SHEPARD;
 	ANISTATE m_eCurAniState = BASE;
 	ANISTATE m_ePreAniState = BASE;
 private:

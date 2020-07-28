@@ -12,7 +12,7 @@
 CMonster::CMonster(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	:CGameObject(pGraphicDevice,pCommandList)
 {
-}
+} 
 
 CMonster::CMonster(const CMonster& rhs)
 	:CGameObject(rhs),
@@ -55,7 +55,7 @@ HRESULT CMonster::Ready_GameObject()
 
 	m_pTransCom->m_vPos = m_tMeshInfo.Pos;
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
-	m_pTransCom->m_vDir = _vec3(-1.f, 0.f, 1.f);
+	//m_pTransCom->m_vDir = _vec3(-1.f, 0.f, 1.f);
 	m_pTransCom->m_vAngle = ToDegree(m_tMeshInfo.Rotation);
 
 	m_iInitAni = m_tMeshInfo.iMeshID;
@@ -103,7 +103,8 @@ HRESULT CMonster::LateInit_GameObject()
 #endif
 	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture(), m_pDissolveTex->Get_Texture());
 
-	m_pNaviCom->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(0.f, 0.f, 0.f), 0, false);
+	m_pNaviCom->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(0.f, 0.f, 0.f), 0, false);//이거안해도되~~
+	m_pNaviCom->SetFirstNavi(m_pTransCom->m_vPos);//이걸로해줭
 	m_pAstarCom->Init_AstarCell(m_pNaviCom->GetNaviCell());
 
 	switch (m_eMonName)
@@ -279,6 +280,7 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 		break;
 	}
 
+
 	_vec3 vShaveDir;
 	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::OBJECT))
 	{
@@ -294,6 +296,7 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 			}
 		}
 	}
+
 
 	return NO_EVENT;
 }
@@ -369,7 +372,7 @@ void CMonster::Set_ConstantTable()
 	matView = CGraphicDevice::Get_Instance()->GetViewMatrix();
 	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
 
-	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
+ 	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
 
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_matDissolve));

@@ -14,7 +14,7 @@
 #include "Pistol.h"
 #include "Rifle.h"
 
-#include "UI.h"	// 나중에 ui로 묶을것
+#include "UI.h"	
 #include "Aim.h"
 #include "HPBar.h"
 #include "IconUI.h"
@@ -25,6 +25,7 @@
 #include "OptionUI.h"
 #include "OnUI.h"
 #include "EquipUI.h"
+#include "AttackDamage.h"
 
 #include "MapObject.h"
 #include "HPKit.h"
@@ -34,6 +35,9 @@
 #include "LobbyDoor.h"
 #include "PassageDoor.h"
 #include "CardKey.h"
+#include "Medi_Syringe.h"
+#include "Medi_Bandage.h"
+#include "Medi_Medicine.h"
 
 #include "LightObject.h"
 #include "DamageBlood.h"
@@ -45,8 +49,10 @@
 
 #include "StaticCamera.h"
 #include "PlayerPoint.h"
-
-
+#include "NpcRifle.h"
+#include "Ken.h"
+#include "Scene_Rail.h"
+#include "Management.h"
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -106,6 +112,15 @@ _int CScene_Stage::LateUpdate_Scene(const _float & fTimeDelta)
 void CScene_Stage::Render_Scene(const _float & fTimeDelta)
 {
 	CScene::Render_Scene(fTimeDelta);
+
+
+	if (KEY_DOWN(DIK_MINUS)) 
+	{
+		m_pObjectMgr->Clear_Layer();
+
+		Engine::CScene* pNewScene = CScene_Rail::Create(m_pGraphicDevice, m_pCommandList);
+		Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
+	}
 }
 
 HRESULT CScene_Stage::Ready_GameObjectPrototype()
@@ -163,6 +178,18 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = CHPKit::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_ItemObject", pGameObject), E_FAIL);
+
+	pGameObject = CMedi_Bandage::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Medi_Bandage", pGameObject), E_FAIL);
+
+	pGameObject = CMedi_Medicine::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Medi_Medicine", pGameObject), E_FAIL);
+
+	pGameObject = CMedi_Syringe::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Medi_Syringe", pGameObject), E_FAIL);
 
 	pGameObject = CMonster::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -225,6 +252,10 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_DamageBlood", pGameObject), E_FAIL);
 
+	pGameObject = CAttackDamage::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_AttackDamageL", pGameObject), E_FAIL);
+
 	////////////////////////// 트리거 /////////////////////////////////////
 	pGameObject = CTrigger::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -259,6 +290,16 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = CPlayerPoint::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_PlayerPoint", pGameObject), E_FAIL);
+
+
+	pGameObject = CNpcRifle::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_NpcRifle",pGameObject),E_FAIL);
+
+
+	pGameObject = CKen::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Ken", pGameObject), E_FAIL);
 
 
 	return S_OK;
@@ -325,9 +366,20 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Salone", L"Salone", nullptr), E_FAIL);//For.Salone
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Shepard", L"Shepard", nullptr), E_FAIL);
-	
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Ken", L"Ken", nullptr), E_FAIL);
+
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_PlayerPoint", L"PlayerPoint", nullptr), E_FAIL);
 
+
+
+	CNpcRifle::OWNER eOwner = CNpcRifle::SHEPARD;
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcRifle", L"Weapon", &eOwner), E_FAIL);
+
+	 eOwner = CNpcRifle::KEN;
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcRifle", L"Weapon", &eOwner), E_FAIL);
+
+	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj																		 //Prototype_MapObject
+	Load_StageObject(L"../../Data/StaticObj/mapAddoutside_1_test.dat");
 	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj\mapAddoutside_1_test																	 //Prototype_MapObject
 	Load_StageObject(L"../../Data/StaticObj/SY_Kit_Test.dat");
 	
@@ -396,6 +448,23 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 	DWORD dwByte = 0;
 	COLLIDER tColData = {};
 
+	while (true)
+	{
+		ReadFile(hFile, &tColData, sizeof(COLLIDER), &dwByte, nullptr);
+
+		if (dwByte == 0)
+			break;
+
+		InitMesh_FromFile(wstrFilePath);
+
+		m_tMeshInfo.Pos = tColData.vCenter;
+		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Monster", m_tMeshInfo.MeshTag, &m_tMeshInfo);
+	}
+	CloseHandle(hFile);
+}
+
+void CScene_Stage::InitMesh_FromFile(const std::wstring& wstrFilePath)
+{
 	//if (wstrFilePath == L"../../Data/Collider/Flame.dat")
 	////	m_tMeshInfo.MeshTag = L"Flamethrower";
 	//	m_tMeshInfo.MeshTag = L"Dron";
@@ -424,14 +493,11 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 		m_tMeshInfo.iMeshID = rand() % 2;	// 누워있다가 or 엎드려있다가 일어나기
 	}
 
-	while (true)
-	{
-		ReadFile(hFile, &tColData, sizeof(COLLIDER), &dwByte, nullptr);
-
-		if (dwByte == 0)
-			break;
-
 	//	m_tMeshInfo.iMeshID = rand() % 4;
+
+
+		// 달리는 걸로 
+
 		if(m_tMeshInfo.MeshTag == L"Dron")
 			m_tMeshInfo.iMeshID = 0;
 		else
@@ -439,10 +505,18 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 			m_tMeshInfo.Rotation.y = rand() % 360 - 180;
 		}
 
-		m_tMeshInfo.Pos = tColData.vCenter;
+	//	m_tMeshInfo.Pos = tColData.vCenter;
 		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Monster", m_tMeshInfo.MeshTag, &m_tMeshInfo);
-	}
-	CloseHandle(hFile);
+
+
+	
+
+	//if (m_tMeshInfo.MeshTag == L"Dron")
+	//	m_tMeshInfo.iMeshID = 0;
+	//else
+	//{
+	//	m_tMeshInfo.Rotation.y = rand() % 360 - 180;
+	//}
 }
 
 void CScene_Stage::Load_TriggerPos(const wstring& wstrFilePath)
@@ -516,10 +590,13 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 		if(m_tMeshInfo.MeshTag ==L"Siren.X" )
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LightObject", L"LightObject", &m_tMeshInfo);//조명처리
 		else if (m_tMeshInfo.MeshTag == L"medikit.X")
-		{
-			m_tMeshInfo.iMeshID++;
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_ItemObject", L"ItemObject", &m_tMeshInfo);
-		}
+		else if (m_tMeshInfo.MeshTag == L"medikit_syringe.X")
+			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Medi_Syringe", L"Medi_Syringe", &m_tMeshInfo);
+		else if (m_tMeshInfo.MeshTag == L"medikit_bandage.X")
+			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Medi_Bandage", L"Medi_Bandage", &m_tMeshInfo);
+		else if (m_tMeshInfo.MeshTag == L"medikit_vaccine.X")
+			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Medi_Medicine", L"Medi_vaccine", &m_tMeshInfo);
 		else if (m_tMeshInfo.MeshTag == L"door1.X")
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LobbyDoor", L"LobbyDoor", &m_tMeshInfo);
 		else if (m_tMeshInfo.MeshTag == L"door2.X")

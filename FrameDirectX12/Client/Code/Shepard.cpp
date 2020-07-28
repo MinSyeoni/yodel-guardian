@@ -221,7 +221,6 @@ void CShepard::ChapterCheck(const _float& fTimeDelta)
 		break;
 	case TURNPLAYER:
 	{
-		m_eCurState = TURNRIGHT;
 		TurnToPlayer(fTimeDelta);
 		break;
 	}

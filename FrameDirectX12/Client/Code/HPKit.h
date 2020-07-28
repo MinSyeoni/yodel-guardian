@@ -42,6 +42,8 @@ private:
 	void						HPKit_Ani();
 	void						Open_TheKit();
 
+	void                        ZoomCamera(bool bIsZoom);
+
 private:
 	Engine::CMesh*				m_pMeshCom = nullptr;
 	Engine::CShader_Mesh*       m_pShaderCom = nullptr;

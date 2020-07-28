@@ -7,7 +7,8 @@
 #include "Frustom.h"
 #include "InvenUI.h"
 #include "EquipUI.h"
-
+#include "StaticCamera.h"
+#include "Player.h"
 CHPKit::CHPKit(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -131,6 +132,9 @@ void CHPKit::HPKit_Ani()
 		m_bIsOpen = true;
 
 		// 카메라 줌
+		if (KEY_DOWN(DIK_X))
+			ZoomCamera(true);
+
 
 		// E로 획득 
 		// 마우스 대서 E누르면 획득
@@ -162,6 +166,54 @@ void CHPKit::Open_TheKit()
 			//dynamic_cast<CInvenUI*>(pInvenUI)->Set_AddItemNum(0, 1);
 		}
 	}
+}
+
+void CHPKit::ZoomCamera(bool bIsZoom)
+{
+	//한번만 호출해줘야되~~
+	//여러번 부르면 여러번생성되
+	if (bIsZoom == true)
+	{
+		StaticCameraInfo tInfo;
+
+		_vec3 vLook , vUp;
+		memcpy(&vLook, &m_pTransCom->m_matWorld._31, sizeof(_vec3));
+
+		memcpy(&vUp, &m_pTransCom->m_matWorld._21, sizeof(_vec3));
+
+		_vec3 vEyePos = m_pTransCom->m_vPos + vLook * -30.f + vUp * 50.f;//이걸로 줌정도 조절해주면되~ 이거는 보는위치
+
+		tInfo.vAtPos = m_pTransCom->m_vPos; // 보는곳 
+		tInfo.vEyePos = vEyePos;
+		m_pObjectMgr->Add_GameObject(L"Layer_Camera", L"Prototype_StaticCamera", L"StaticCamera", &tInfo);
+
+		CGameObject* pPlayer = m_pObjectMgr->Get_GameObject(L"Layer_GameObject", L"Player");
+		if (pPlayer == nullptr)
+			return;
+
+		dynamic_cast<CPlayer*>(pPlayer)->KeyLockPlayer(true);
+
+		m_pObjectMgr->SetTimeStop(true);
+	}
+	else
+	{
+
+		if (nullptr != m_pObjectMgr->Get_GameObject(L"Layer_Camera", L"StaticCamera"))
+			m_pObjectMgr->Get_GameObject(L"Layer_Camera", L"StaticCamera")->Dead_GameObject();
+
+		m_pObjectMgr->Add_GameObject(L"Layer_Camera", L"Prototype_DynamicCamera", L"DynamicCamera", nullptr);
+
+		CGameObject* pPlayer = m_pObjectMgr->Get_GameObject(L"Layer_GameObject", L"Player");
+		if (pPlayer == nullptr)
+			return;
+
+		dynamic_cast<CPlayer*>(pPlayer)->KeyLockPlayer(false);
+
+
+		m_pObjectMgr->SetTimeStop(false);
+	}
+
+
 }
 
 void CHPKit::Render_GameObject(const _float & fTimeDelta)

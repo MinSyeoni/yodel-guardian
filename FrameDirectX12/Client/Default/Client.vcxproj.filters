@@ -187,6 +187,9 @@
     <Filter Include="02.Scene_All\03.StaticObject\02.Items">
       <UniqueIdentifier>{0aed30bc-2ea6-4d35-9c65-4cf1fcf567d6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Scene_All\03.StaticObject\02.Items\00.HPKit">
+      <UniqueIdentifier>{2f2e5323-a98d-48cb-aa77-6c0e47207e15}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Scene_All\03.StaticObject\02.Items\04.CardKey">
       <UniqueIdentifier>{06d54ebe-fa46-469e-b877-e65fb8815b68}</UniqueIdentifier>
     </Filter>
@@ -211,6 +214,8 @@
     <Filter Include="06.Scene_Rail">
       <UniqueIdentifier>{e2a1d531-0ff4-4f2d-ba4f-f528a350b17a}</UniqueIdentifier>
     </Filter>
+
+
     <Filter Include="02.Scene_All\01.DynamicObject\02.HPKit">
       <UniqueIdentifier>{21caf629-06d4-430e-ac4a-ee0cbb938779}</UniqueIdentifier>
     </Filter>
@@ -222,6 +227,9 @@
     </Filter>
     <Filter Include="02.Scene_All\03.StaticObject\02.Items\02.Medi_Medicine">
       <UniqueIdentifier>{302b447c-c929-4b24-a2b8-8da3ffded4ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\08.AttackUI">
+      <UniqueIdentifier>{695470aa-3d2c-4ade-9994-d86f60e50bc2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -375,6 +383,7 @@
     <ClInclude Include="..\Code\Shepard.h">
       <Filter>01.Scene_Stage\07.NPC\02.Shapard</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\HPKit.h" />
     <ClInclude Include="..\Code\NpcWords.h">
       <Filter>03.UI\04.NpcWords</Filter>
     </ClInclude>
@@ -410,6 +419,9 @@
     <ClInclude Include="..\Code\Sniper.h">
       <Filter>01.Scene_Stage\02.Weapon\03.Sniper</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\HPKit.h">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\00.HPKit</Filter>
+    </ClInclude>
     <ClInclude Include="..\Code\CardKey.h">
       <Filter>02.Scene_All\03.StaticObject\02.Items\04.CardKey</Filter>
     </ClInclude>
@@ -434,10 +446,24 @@
     <ClInclude Include="..\Code\Scene_Rail.h">
       <Filter>06.Scene_Rail</Filter>
     </ClInclude>
+
+
     <ClInclude Include="..\Code\HPKit.h">
       <Filter>02.Scene_All\01.DynamicObject\02.HPKit</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\HPKit.h" />
+    <ClInclude Include="..\Code\Medi_Bandage.h">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\00.Medi_Bandage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Medi_Syringe.h">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\01.Medi_Syringe</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Medi_Medicine.h">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\02.Medi_Medicine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\AttackDamage.h">
+      <Filter>03.UI\08.AttackUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -560,6 +586,7 @@
     <ClCompile Include="..\Code\Shepard.cpp">
       <Filter>01.Scene_Stage\07.NPC\02.Shapard</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\HPKit.cpp" />
     <ClCompile Include="..\Code\NpcWords.cpp">
       <Filter>03.UI\04.NpcWords</Filter>
     </ClCompile>
@@ -595,6 +622,12 @@
     <ClCompile Include="..\Code\Sniper.cpp">
       <Filter>01.Scene_Stage\02.Weapon\03.Sniper</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\HPKit.cpp">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\00.HPKit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CardKey.cpp">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\04.CardKey</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\OptionUI.cpp">
       <Filter>03.UI\07.OptionUI\00.OptionBack</Filter>
     </ClCompile>
@@ -616,6 +649,8 @@
     <ClCompile Include="..\Code\Scene_Rail.cpp">
       <Filter>06.Scene_Rail</Filter>
     </ClCompile>
+
+
     <ClCompile Include="..\Code\HPKit.cpp">
       <Filter>02.Scene_All\01.DynamicObject\02.HPKit</Filter>
     </ClCompile>
@@ -623,6 +658,18 @@
       <Filter>02.Scene_All\03.StaticObject\02.Items\04.CardKey</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\HPKit.cpp" />
+    <ClCompile Include="..\Code\Medi_Bandage.cpp">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\00.Medi_Bandage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Medi_Syringe.cpp">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\01.Medi_Syringe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Medi_Medicine.cpp">
+      <Filter>02.Scene_All\03.StaticObject\02.Items\02.Medi_Medicine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\AttackDamage.cpp">
+      <Filter>03.UI\08.AttackUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

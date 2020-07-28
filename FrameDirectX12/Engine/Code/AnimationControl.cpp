@@ -124,7 +124,7 @@ void CAniCtrl::Ready_NodeHierarchy(const aiNode* pNode)
 
 void CAniCtrl::Set_AnimationKey(_int AniKey)
 {
-    if (m_uiNewAniIndex != AniKey)
+    if (m_uiNewAniIndex != AniKey && m_uiCurAniIndex!=999)
     {
         m_uiNewAniIndex = AniKey;
         m_fBlendAnimationTime = m_fAnimationTime;
@@ -132,14 +132,39 @@ void CAniCtrl::Set_AnimationKey(_int AniKey)
 
     }
 
+
+    if (m_uiCurAniIndex == 999)
+    {
+        m_uiNewAniIndex = AniKey;
+        m_uiCurAniIndex = AniKey;
+    }
+
+
+
+
 }
 
 void CAniCtrl::Set_BlendAnimationKey(_int FirstAniKey, _int SecondAniKey)
 {
 
+    if (m_uiNewAniIndex == 999)
+    {
+        m_uiCurAniIndex = FirstAniKey;
+        m_uiNewAniIndex = FirstAniKey;
+
+    }
+    if (m_uiNewSubAniIndex == 999)
+    {
+
+        m_uiCurSubAniIndex = SecondAniKey;
+        m_uiNewSubAniIndex = SecondAniKey;
+
+    }
 
 
-    if (m_uiNewAniIndex != FirstAniKey && m_uiNewAniIndex == m_uiCurAniIndex)
+
+
+    if (m_uiNewAniIndex != FirstAniKey && m_uiNewAniIndex == m_uiCurAniIndex &&m_uiCurAniIndex!=999)
     {
         m_uiNewAniIndex = FirstAniKey;
         m_fBlendAnimationTime = m_fAnimationTime;
@@ -148,7 +173,7 @@ void CAniCtrl::Set_BlendAnimationKey(_int FirstAniKey, _int SecondAniKey)
 
     }
 
-    if (m_uiNewSubAniIndex != SecondAniKey && m_uiNewSubAniIndex == m_uiCurSubAniIndex)
+    if (m_uiNewSubAniIndex != SecondAniKey && m_uiNewSubAniIndex == m_uiCurSubAniIndex && m_uiCurSubAniIndex != 999)
     {
 
         m_uiNewSubAniIndex = SecondAniKey;
@@ -201,6 +226,9 @@ vector<VECTOR_MATRIX> CAniCtrl::Extract_BoneBlendingTransform(_float fAniTimeFir
     /*__________________________________________________________________________________________________________
     - 애니메이션이 계속 반복되도록 fmod 연산을 취함.
     ____________________________________________________________________________________________________________*/
+    if (m_uiCurSubAniIndex == m_uiCurAniIndex)
+        m_fAnimationTime = m_fAnimationTimeSub;
+
     m_fAnimationTime += fAniTimeFirst;
     m_fAnimationTimeSub += fAniTimeSecond;
 
@@ -233,10 +261,18 @@ vector<VECTOR_MATRIX> CAniCtrl::Extract_BoneBlendingTransform(_float fAniTimeFir
     - Read_NodeHierarchy() 함수 호출이 끝나고 나면, 멤버 변수인 m_vecBoneTransform배열에 데이터를 채우고 리턴.
     ____________________________________________________________________________________________________________*/
     _matrix matIdentity = INIT_MATRIX;
-    if (m_uiCurAniIndex == m_uiNewAniIndex)
-        Update_NodeHirearchyBlend(m_fAnimationTime, m_fAnimationTimeSub, m_pScene->mRootNode, matIdentity);
-    else
-        Update_NodeHirearchyBlend(m_fBlendAnimationTime, m_fBlendAnimationTimeSub, m_pScene->mRootNode, matIdentity);
+
+    float fFirstTime = m_fAnimationTime;
+    float fSecondTime = m_fAnimationTimeSub;
+
+    if (m_uiCurAniIndex != m_uiNewAniIndex)
+        fFirstTime = m_fBlendAnimationTime;
+
+    if (m_uiCurSubAniIndex != m_uiNewSubAniIndex)
+        fSecondTime = m_fBlendAnimationTimeSub;
+
+        Update_NodeHirearchyBlend(fFirstTime, fSecondTime, m_pScene->mRootNode, matIdentity);
+
     if (m_fBlendingTime <= 0)
     {
         m_uiCurAniIndex = m_uiNewAniIndex;
@@ -258,7 +294,8 @@ vector<VECTOR_MATRIX> CAniCtrl::Extract_BoneBlendingTransform(_float fAniTimeFir
 vector<VECTOR_MATRIX> CAniCtrl::Extract_BoneTransform(_float fAnimationTime)
 {
 
-
+    if(m_uiCurAniIndex ==999)
+        return vector<VECTOR_MATRIX>();
     /*__________________________________________________________________________________________________________
     [ Extract_BoneTransform ]
     - 특정 시간(fAnimationTime)과 특정 애니메이션 인덱스(uiAnimationIdx)를 넘겨주면
@@ -410,7 +447,7 @@ void CAniCtrl::Update_NodeHirearchyBlend(_float fAnimationTime, _float fAnimatio
     string strNodeName(pNode->mName.data);
     auto            iter_find = m_mapNodeHierarchy.find(strNodeName);
 
-    if (strNodeName == "LowerBack")
+    if (strNodeName == "Chest")
         m_bIsFisrtAni = true;
     if (strNodeName == "Pelvis")
         m_bIsFisrtAni = false;
