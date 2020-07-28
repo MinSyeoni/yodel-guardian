@@ -78,7 +78,7 @@ void CHPKit::Get_EquipUI()
 	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
 	for (auto& pSrc : *pEquipUIList)
 	{
-		if (CEquipUI::E_KITEQUIP == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
+		if ((CEquipUI::EQUIP_TYPE)m_iMeshID == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
 		{
 			m_pGameObject = dynamic_cast<CEquipUI*>(pSrc);
 			break;
@@ -92,13 +92,31 @@ _int CHPKit::LateUpdate_GameObject(const _float & fTimeDelta)
 		return NO_EVENT;
 
 	NULL_CHECK_RETURN(m_pRenderer, -1);
-	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCollider), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCollider), -1);
 
 	HPKit_Ani();
 	Open_TheKit();
 
+	// Ä«¸Þ¶ó ÁÜ
+	OpenKit_PlayZoom();
+
 	return NO_EVENT;
+}
+
+void CHPKit::OpenKit_PlayZoom()
+{
+	if (!m_bIsZoom && m_bIsOpen)
+	{
+		m_bIsZoom = true;
+		ZoomCamera(true);
+	}
+	else if (m_bIsZoom && m_bIsOpen && CDirectInput::Get_Instance()->KEY_DOWN(DIK_E))
+	{
+		m_bIsZoom = false;
+		ZoomCamera(false);
+		m_eState = KIT_CLOSE;
+	}
 }
 
 void CHPKit::HPKit_Ani()
@@ -115,7 +133,6 @@ void CHPKit::HPKit_Ani()
 	break;
 	case CHPKit::KIT_CLOSE:
 	{
-		m_pCamera->Set_ZoomInOut(false);
 		m_fAniDelay = 1500.f;
 		dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, KIT_CLOSE))
@@ -130,15 +147,6 @@ void CHPKit::HPKit_Ani()
 	case CHPKit::KIT_ALREADYOPEN:
 	{
 		m_bIsOpen = true;
-
-		// Ä«¸Þ¶ó ÁÜ
-		if (KEY_DOWN(DIK_X))
-			ZoomCamera(true);
-
-
-		// E·Î È¹µæ 
-		// ¸¶¿ì½º ´ë¼­ E´©¸£¸é È¹µæ
-
 	}
 		break;
 	default:
@@ -152,19 +160,13 @@ void CHPKit::Open_TheKit()
 	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYER))
 	{
 		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir))
-		{
+		{				
 			if (!m_bIsOpen && CDirectInput::Get_Instance()->KEY_DOWN(DIK_E))
-				m_eState = KIT_OPEN;
-			
-			else if (m_bIsOpen && CDirectInput::Get_Instance()->KEY_DOWN(DIK_E))
-				m_eState = KIT_CLOSE;
-			
-			// ¿©±â´Ù HP »óÈ£ÀÛ¿ë!!!!!!!!!!!!!!!
-
-			// ÀÎº¥ ¿¬µ¿
-			//CGameObject* pInvenUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
-			//dynamic_cast<CInvenUI*>(pInvenUI)->Set_AddItemNum(0, 1);
+				m_eState = KIT_OPEN;				
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(!m_bIsOpen);
 		}
+		else
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 	}
 }
 
@@ -212,8 +214,6 @@ void CHPKit::ZoomCamera(bool bIsZoom)
 
 		m_pObjectMgr->SetTimeStop(false);
 	}
-
-
 }
 
 void CHPKit::Render_GameObject(const _float & fTimeDelta)

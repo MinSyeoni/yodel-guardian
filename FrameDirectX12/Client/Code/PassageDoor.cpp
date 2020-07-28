@@ -137,10 +137,6 @@ void CPassageDoor::PassageDoor_AniState()
 	case CPassageDoor::PASSAGE_ALREADYOPEN:
 	{
 		m_bIsOpen = true;
-
-		// 여기서 페이드 아웃 
-	//	CFadeOut::FADETYPE eType = CFadeOut::FADEOUT;
-	//	m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_FadeOut", L"FadeOut", &eType);
 	}
 	break;
 	case CPassageDoor::PASSAGE_OPEN:

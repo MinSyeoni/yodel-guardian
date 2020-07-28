@@ -110,7 +110,7 @@ void COptionUI::Show_OtherUI()
 
 	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
 	for (auto& pSrc : *pEquipUIList)
-		dynamic_cast<CEquipUI*>(pSrc)->Set_ShowUI(!m_bIsShow);
+		dynamic_cast<CEquipUI*>(pSrc)->Set_ShowUI(false);
 }
 
 void COptionUI::Render_GameObject(const _float& fTimeDelta)

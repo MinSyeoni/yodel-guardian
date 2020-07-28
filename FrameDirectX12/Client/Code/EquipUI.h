@@ -10,7 +10,7 @@
 class CEquipUI : public Engine::CGameObject
 {
 public:
-	enum EQUIP_TYPE { E_CONVERSATION, E_KEYEQUIP, E_KITEQUIP, E_HIDING, E_DOOROPEN_L, E_DOOROPEN_P, EQUIP_END };
+	enum EQUIP_TYPE { E_KITEQUIP1, E_KITEQUIP2, E_KITEQUIP3, E_CONVERSATION, E_KEYEQUIP, E_HIDING, E_DOOROPEN_L, E_DOOROPEN_P, EQUIP_END };
 
 private:
 	explicit CEquipUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
@@ -23,6 +23,7 @@ public:
 	virtual HRESULT				LateInit_GameObject();
 	virtual _int				Update_GameObject(const _float& fTimeDelta);
 	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
+	void Init_TypePos();
 	virtual void				Render_GameObject(const _float& fTimeDelta);
 
 public:

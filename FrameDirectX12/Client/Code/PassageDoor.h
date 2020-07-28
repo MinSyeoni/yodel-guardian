@@ -25,6 +25,7 @@ public:
 	_bool					Get_LobbyDoorIsOpen() { return m_bIsOpen; }
 	Engine::CBoxCollider*	Get_DoorCollider() { return m_pBoxCol; }
 	void					Set_IsCardToDoor(_bool bIsCard) { m_bIsCardKey = bIsCard; }
+	_bool					Get_IsOpenTheDoor() { return m_bIsOpen; }
 
 public:
 	HRESULT					Ready_GameObjectPrototype();

@@ -4,6 +4,18 @@
 #include "Scene_Stage.h"
 #include "Management.h"
 
+#include "MapObject.h"
+#include "HPKit.h"
+#include "Monster.h"
+#include "Salone.h"
+#include "Trigger.h"
+#include "LobbyDoor.h"
+#include "PassageDoor.h"
+#include "CardKey.h"
+#include "Medi_Syringe.h"
+#include "Medi_Bandage.h"
+#include "Medi_Medicine.h"
+
 
 CScene_Rail::CScene_Rail(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
@@ -22,8 +34,6 @@ HRESULT CScene_Rail::Ready_Scene()
 #endif
 
 	FAILED_CHECK_RETURN(Ready_GameObjectPrototype(), E_FAIL);
-
-
 	FAILED_CHECK_RETURN(Ready_LayerCamera(L"Layer_Camera"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_LayerEnvironment(L"Layer_Environment"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_LayerGameObject(L"Layer_GameObject"), E_FAIL);
@@ -51,7 +61,6 @@ void CScene_Rail::Render_Scene(const _float& fTimeDelta)
 HRESULT CScene_Rail::Ready_GameObjectPrototype()
 {
 	NULL_CHECK_RETURN(m_pObjectMgr, E_FAIL);
-
 
 	return S_OK;
 }
@@ -109,9 +118,12 @@ HRESULT CScene_Rail::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	m_pObjectMgr->Add_Layer(wstrLayerTag, pLayer);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Terrain", L"Terrain", nullptr), E_FAIL);
-
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Sniper", L"Weapon", nullptr), E_FAIL);
+
+	Load_StageObject(L"../../Data/StaticObj/pass.dat", wstrLayerTag);
+	//Load_MonsterPos(L"../../Data/Collider/Flame.dat", wstrLayerTag);
+	//Load_TriggerPos(L"../../Data/Collider/Flame.dat", wstrLayerTag);
 
 	/*____________________________________________________________________
 	GameObject 积己.
@@ -119,6 +131,136 @@ HRESULT CScene_Rail::Ready_LayerGameObject(wstring wstrLayerTag)
 	______________________________________________________________________*/
 
 	return S_OK;
+}
+
+void CScene_Rail::Load_TriggerPos(const wstring& wstrFilePath, wstring wstrLayerTag)
+{
+	HANDLE hFile = CreateFile(wstrFilePath.c_str(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	NULL_CHECK(hFile);
+
+	if (INVALID_HANDLE_VALUE == hFile)
+		return;
+
+	DWORD dwByte = 0;
+	COLLIDER tColData = {};
+
+	while (true)
+	{
+		ReadFile(hFile, &tColData, sizeof(COLLIDER), &dwByte, nullptr);
+
+		if (dwByte == 0)
+			break;
+
+		if (3 == tColData.iOptionID)
+			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Trigger", L"Trigger", &tColData);
+	}
+	CloseHandle(hFile);
+}
+
+void CScene_Rail::Load_MonsterPos(const wstring& wstrFilePath, wstring wstrLayerTag)
+{
+	HANDLE hFile = CreateFile(wstrFilePath.c_str(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	NULL_CHECK(hFile);
+
+	if (INVALID_HANDLE_VALUE == hFile)
+		return;
+
+	DWORD dwByte = 0;
+	COLLIDER tColData = {};
+
+	while (true)
+	{
+		ReadFile(hFile, &tColData, sizeof(COLLIDER), &dwByte, nullptr);
+
+		if (dwByte == 0)
+			break;
+
+		InitMesh_FromFile(wstrFilePath);
+
+		m_tMeshInfo.Pos = tColData.vCenter;
+		m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Monster", m_tMeshInfo.MeshTag, &m_tMeshInfo);
+	}
+	CloseHandle(hFile);
+}
+
+void CScene_Rail::InitMesh_FromFile(const std::wstring& wstrFilePath)
+{
+	if (wstrFilePath == L"../../Data/Collider/Flame.dat")
+		m_tMeshInfo.MeshTag = L"Flame";
+	else if (wstrFilePath == L"../../Data/Collider/Flame.dat")
+	{
+		m_tMeshInfo.MeshTag == L"Dron";
+		m_tMeshInfo.iMeshID = 0;
+	}
+}
+
+void CScene_Rail::Load_StageObject(const wstring& wstrFilePath, wstring wstrLayerTag)
+{
+	HANDLE hFile = CreateFile(wstrFilePath.c_str(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	NULL_CHECK(hFile);
+
+	if (INVALID_HANDLE_VALUE == hFile)
+		return;
+
+	DWORD dwByte = 0;
+	MESHDATA tObjData = {};
+
+	//DeleteAll_GameObject(wstrLayerTag, L"ItemObject");
+	//DeleteAll_GameObject(wstrLayerTag, L"Medi_Syringe");
+	//DeleteAll_GameObject(wstrLayerTag, L"Medi_Bandage");
+	//DeleteAll_GameObject(wstrLayerTag, L"Medi_vaccine");
+	//DeleteAll_GameObject(wstrLayerTag, L"LobbyDoor");
+	//DeleteAll_GameObject(wstrLayerTag, L"PassageDoor");
+	//DeleteAll_GameObject(wstrLayerTag, L"CardKey");
+	//DeleteAll_GameObject(wstrLayerTag, L"MapObject");
+
+	int			 iTagLength = 0;
+
+	while (true)
+	{
+		ReadFile(hFile, &iTagLength, sizeof(int), &dwByte, nullptr);
+		ReadFile(hFile, &tObjData, sizeof(MESHDATA), &dwByte, nullptr);
+
+		if (dwByte == 0)
+			break;
+
+		m_tMeshInfo.MeshTag = tObjData.m_MeshTag;
+		m_tMeshInfo.Pos = tObjData.vPos;
+		m_tMeshInfo.Rotation = tObjData.vRotate;
+		m_tMeshInfo.Scale = tObjData.vScale;
+
+		if (m_tMeshInfo.MeshTag == L"Siren.X")
+			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_LightObject", L"LightObject", &m_tMeshInfo);//炼疙贸府
+		else if (m_tMeshInfo.MeshTag == L"medikit.X")
+			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_ItemObject", L"ItemObject", &m_tMeshInfo);
+		else if (m_tMeshInfo.MeshTag == L"medikit_syringe.X")
+			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Medi_Syringe", L"Medi_Syringe", &m_tMeshInfo);
+		else if (m_tMeshInfo.MeshTag == L"medikit_bandage.X")
+			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Medi_Bandage", L"Medi_Bandage", &m_tMeshInfo);
+		else if (m_tMeshInfo.MeshTag == L"medikit_vaccine.X")
+			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Medi_Medicine", L"Medi_vaccine", &m_tMeshInfo);
+		else if (m_tMeshInfo.MeshTag == L"door1.X")
+			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_LobbyDoor", L"LobbyDoor", &m_tMeshInfo);
+		else if (m_tMeshInfo.MeshTag == L"door2.X")
+			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_PassageDoor", L"PassageDoor", &m_tMeshInfo);
+		else if (m_tMeshInfo.MeshTag == L"card.X")
+			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_CardKey", L"CardKey", &m_tMeshInfo);
+		else
+			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
+	}
+	CloseHandle(hFile);
+}
+
+void CScene_Rail::DeleteAll_GameObject(wstring& wstrLayerTag, wstring wstrObjTag)
+{
+	list<CGameObject*>* pObjList;
+	if (nullptr != CObjectMgr::Get_Instance()->Get_OBJLIST(wstrLayerTag, wstrObjTag))
+	{
+		pObjList = CObjectMgr::Get_Instance()->Get_OBJLIST(wstrLayerTag, wstrObjTag);
+		for (auto& pSrc : *pObjList)
+			pSrc->Dead_GameObject();
+		pObjList->clear();
+	}
 }
 
 HRESULT CScene_Rail::Ready_LayerUI(wstring wstrLayerTag)

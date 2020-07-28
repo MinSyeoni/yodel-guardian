@@ -113,13 +113,20 @@ void CScene_Stage::Render_Scene(const _float & fTimeDelta)
 {
 	CScene::Render_Scene(fTimeDelta);
 
+	// 씬전환
 
-	if (KEY_DOWN(DIK_MINUS)) 
+	if(nullptr != CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"PassageDoor"));
 	{
-		m_pObjectMgr->Clear_Layer();
+		CGameObject* pPassageDoor = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"PassageDoor");
 
-		Engine::CScene* pNewScene = CScene_Rail::Create(m_pGraphicDevice, m_pCommandList);
-		Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
+		if (dynamic_cast<CPassageDoor*>(pPassageDoor)->Get_IsOpenTheDoor())
+		{
+			// 여기다 페이드 아웃??
+			m_pObjectMgr->Clear_Layer();
+
+			Engine::CScene* pNewScene = CScene_Rail::Create(m_pGraphicDevice, m_pCommandList);
+			Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
+		}
 	}
 }
 
@@ -379,12 +386,10 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcRifle", L"Weapon", &eOwner), E_FAIL);
 
 	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj																		 //Prototype_MapObject
-	Load_StageObject(L"../../Data/StaticObj/mapAddoutside_1_test.dat");
-	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj\mapAddoutside_1_test																	 //Prototype_MapObject
+	//Load_StageObject(L"../../Data/StaticObj/mapAddoutside_1_test.dat");
 	Load_StageObject(L"../../Data/StaticObj/SY_Kit_Test.dat");
 	
 	// Monster
-	//Load_MonsterPos(L"../../Data/Collider/Flame.dat");
 	Load_MonsterPos(L"../../Data/Collider/Zombi.dat");
 	Load_MonsterPos(L"../../Data/Collider/Zombi2.dat");
 	Load_MonsterPos(L"../../Data/Collider/Zombi3.dat");
@@ -429,9 +434,8 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 
-	for (int i = 0; i < 6; ++i)
+	for (int i = 0; i < 8; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_EquipUI", L"EquipUI", &(iType = i)), E_FAIL);
-
 
 
 	return S_OK;
@@ -493,30 +497,7 @@ void CScene_Stage::InitMesh_FromFile(const std::wstring& wstrFilePath)
 		m_tMeshInfo.iMeshID = rand() % 2;	// 누워있다가 or 엎드려있다가 일어나기
 	}
 
-	//	m_tMeshInfo.iMeshID = rand() % 4;
-
-
-		// 달리는 걸로 
-
-		if(m_tMeshInfo.MeshTag == L"Dron")
-			m_tMeshInfo.iMeshID = 0;
-		else
-		{
-			m_tMeshInfo.Rotation.y = rand() % 360 - 180;
-		}
-
-	//	m_tMeshInfo.Pos = tColData.vCenter;
-		m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Monster", m_tMeshInfo.MeshTag, &m_tMeshInfo);
-
-
-	
-
-	//if (m_tMeshInfo.MeshTag == L"Dron")
-	//	m_tMeshInfo.iMeshID = 0;
-	//else
-	//{
-	//	m_tMeshInfo.Rotation.y = rand() % 360 - 180;
-	//}
+	m_tMeshInfo.Rotation.y = rand() % 360 - 180;
 }
 
 void CScene_Stage::Load_TriggerPos(const wstring& wstrFilePath)
@@ -561,17 +542,6 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 	DWORD dwByte = 0;
 	MESHDATA tObjData = {};
 
-	// 나중에 옵젝 로드할 떄 모든 옵젝 삭제하기 위해서 
-	//if (nullptr != Engine::Get_Layer(SCENE_STATIC, LAYER_STATICOBJECT))
-	//{
-	//	m_GameObjLstTemp = Engine::Get_Layer(SCENE_STATIC, LAYER_STATICOBJECT)->Get_list();
-	//	for (auto& pGameObj : m_GameObjLstTemp)
-	//	{
-	//		dynamic_cast<CStaticObj*>(pGameObj)->IsStaticObjDead(true);
-	//	}
-	//	m_GameObjLstTemp.clear();
-	//}
-
 	int			 iTagLength = 0;
 
 	while (true)
@@ -586,11 +556,15 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 		m_tMeshInfo.Pos = tObjData.vPos;
 		m_tMeshInfo.Rotation = tObjData.vRotate;
 		m_tMeshInfo.Scale = tObjData.vScale;
+		m_tMeshInfo.iDrawID = 0;
 
 		if(m_tMeshInfo.MeshTag ==L"Siren.X" )
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_LightObject", L"LightObject", &m_tMeshInfo);//조명처리
 		else if (m_tMeshInfo.MeshTag == L"medikit.X")
+		{
+			m_tMeshInfo.iMeshID++;
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_ItemObject", L"ItemObject", &m_tMeshInfo);
+		}
 		else if (m_tMeshInfo.MeshTag == L"medikit_syringe.X")
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Medi_Syringe", L"Medi_Syringe", &m_tMeshInfo);
 		else if (m_tMeshInfo.MeshTag == L"medikit_bandage.X")
