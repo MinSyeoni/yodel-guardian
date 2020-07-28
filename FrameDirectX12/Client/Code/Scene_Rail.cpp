@@ -3,7 +3,7 @@
 #include "DirectInput.h"
 #include "Scene_Stage.h"
 #include "Management.h"
-
+#include "NaviMesh.h"
 
 CScene_Rail::CScene_Rail(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
@@ -52,6 +52,20 @@ HRESULT CScene_Rail::Ready_GameObjectPrototype()
 {
 	NULL_CHECK_RETURN(m_pObjectMgr, E_FAIL);
 
+
+	return S_OK;
+}
+
+HRESULT CScene_Rail::Ready_ComponentPrototype()
+{
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Delete_Component(L"Mesh_Navi", ID_STATIC), E_FAIL)
+		return E_FAIL;
+	
+	Engine::CComponent* pComponent = nullptr;
+
+	pComponent = Engine::CNaviMesh::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Navi", ID_STATIC, pComponent), E_FAIL);
 
 	return S_OK;
 }

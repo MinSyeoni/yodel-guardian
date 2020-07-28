@@ -16,6 +16,7 @@ public:
 private:
 	HRESULT			Ready_GameObjectPrototype();
 private:
+	HRESULT         Ready_ComponentPrototype(); //시영아 여기서 네비 바꿔주면되~~
 	HRESULT			Ready_LayerCamera(wstring wstrLayerTag);
 	HRESULT			Ready_LayerEnvironment(wstring wstrLayerTag);
 	HRESULT			Ready_LayerGameObject(wstring wstrLayerTag);

@@ -134,7 +134,7 @@ void CHPKit::HPKit_Ani()
 		// Ä«¸Þ¶ó ÁÜ
 		if (KEY_DOWN(DIK_X))
 			ZoomCamera(true);
-
+ 
 
 		// E·Î È¹µæ 
 		// ¸¶¿ì½º ´ë¼­ E´©¸£¸é È¹µæ
@@ -193,7 +193,7 @@ void CHPKit::ZoomCamera(bool bIsZoom)
 
 		dynamic_cast<CPlayer*>(pPlayer)->KeyLockPlayer(true);
 
-		m_pObjectMgr->SetTimeStop(true);
+		m_pObjectMgr->SetTimeStop(false);
 	}
 	else
 	{
@@ -210,7 +210,7 @@ void CHPKit::ZoomCamera(bool bIsZoom)
 		dynamic_cast<CPlayer*>(pPlayer)->KeyLockPlayer(false);
 
 
-		m_pObjectMgr->SetTimeStop(false);
+		m_pObjectMgr->SetTimeStop(true);
 	}
 
 

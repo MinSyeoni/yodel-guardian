@@ -33,6 +33,9 @@ public:
 	_bool	Collision_Spere(CCollider* pDstCollider, CCollider * pSrcCollider, _vec3* vDir);
 	_int    Collision_Ray(CCollider* pDstCollider);
 
+	_bool   Collision_SpereWithMousePoint(CCollider* pDstCollider, HWND hwnd,float* fDist);
+	_bool   Collision_BoxWithMousePoint(CCollider* pDstCollider,HWND hwnd,float* fDist);
+
 	void Transloation_ViewSpace(void);
 	void Translation_LocalSpace();
 public:

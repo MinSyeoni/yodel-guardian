@@ -41,6 +41,8 @@ public:
 	CComponent* Clone_Collider(wstring wstrPrototypeTag, const COMPONENTID& eID, const CCollider::COLLSHAPE& eColShape, const _bool& bIsAttatch,  CMesh* pMesh, const _vec3& vAddPos,
 		const _vec3& vAngle, const _float& fRadius,
 		const _vec3& vScale, CGameObject* pOwner = nullptr);
+
+	HRESULT Delete_Component(wstring wstrPrototypeTag, COMPONENTID eID);
 private:
 	CComponent*	Find_Component(wstring wstrPrototypeTag, const COMPONENTID& eID);
 

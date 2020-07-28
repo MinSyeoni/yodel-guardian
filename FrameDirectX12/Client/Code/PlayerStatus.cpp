@@ -617,14 +617,16 @@ void CPlayerStatus::ShootingCheck()
     CGameObject* pMonster = nullptr;
 
     _uint iMinDist = 999;
-    int iDist = 0;
+    float iDist = 0;
+    bool Collision = false;
     for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::SPHERE, CColliderMgr::MONSTER))
     {
-        iDist = CMathMgr::Get_Instance()->Collision_Ray(pCol);
-        if (iDist < iMinDist)
+         Collision = CMathMgr::Get_Instance()->Collision_SpereWithMousePoint(pCol,g_hWnd,&iDist);
+        if ((iDist < iMinDist) && Collision)
         {
             iMinDist = iDist;
             pMonster = pCol->Get_Owner();
+            pCol->Set_IsCol(false);
         }
 
     }

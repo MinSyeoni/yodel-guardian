@@ -98,6 +98,7 @@ ps_output PS_MAIN(VS_OUTPUT input) : SV_TARGET
 
     float3 WorldNormal = mul(TBN, tangentNormal);
     output.normal = float4(WorldNormal * 0.5 + 0.5, 1.f);
+   
 
     float4 fSpec = float4((SpecMap.r + SpecMap.g) / 2, step(SpecMap.r + 0.05, SpecMap.g - SpecMap.b), 0.f, 0.f);
     output.Specular = fSpec * gTexInfo.r;

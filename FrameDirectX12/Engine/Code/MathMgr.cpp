@@ -274,6 +274,117 @@ _int CMathMgr::Collision_Ray(CCollider* pDstCollider)
 	return 999;
 }
 
+_bool CMathMgr::Collision_SpereWithMousePoint(CCollider* pDstCollider, HWND hwnd, float* fDist)
+{
+
+	POINT ptMouse{};
+
+	GetCursorPos(&ptMouse);
+	ScreenToClient(hwnd, &ptMouse);
+
+	_vec3 vMousePos;
+
+
+	vMousePos.x = ptMouse.x / (WINSIZEX * 0.5f) - 1.f;
+	vMousePos.y = ptMouse.y / -(WINSIZEY * 0.5f) + 1.f;
+	vMousePos.z = 0.f;
+
+
+	_matrix matProj, matView;
+
+	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
+	matView = CGraphicDevice::Get_Instance()->GetViewMatrix();
+
+	matProj = XMMatrixInverse(nullptr, matProj);
+
+	vMousePos.TransformCoord(vMousePos, matProj);
+
+	_vec3 vRayDir, vRayPos;
+
+	vRayPos = _vec3(0.f, 0.f, 0.f);
+	vRayDir = vMousePos - vRayPos;
+
+	matView = XMMatrixInverse(nullptr, matView);
+	vRayDir.TransformNormal(vRayDir, matView);
+	vRayPos.TransformCoord(vRayPos, matView);
+
+	BoundingSphere sphere;
+	sphere.Center = pDstCollider->Get_WorldPos();
+	sphere.Radius = pDstCollider->Get_Radius();
+
+	vRayDir.Normalize();
+
+	bool Collision = sphere.Intersects(vRayPos.Get_XMVECTOR(), vRayDir.Get_XMVECTOR(), *fDist);
+
+	*fDist -= sphere.Radius;
+
+	return Collision;
+}
+_bool CMathMgr::Collision_BoxWithMousePoint(CCollider* pDstCollider, HWND hwnd, float* fDist)
+{
+
+
+	POINT ptMouse{};
+
+	GetCursorPos(&ptMouse);
+	ScreenToClient(hwnd, &ptMouse);
+
+	_vec3 vMousePos;
+
+
+	vMousePos.x = ptMouse.x / (WINSIZEX * 0.5f) - 1.f;
+	vMousePos.y = ptMouse.y / -(WINSIZEY * 0.5f) + 1.f;
+	vMousePos.z = 0.f;
+
+
+	_matrix matProj, matView;
+
+	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
+	matView = CGraphicDevice::Get_Instance()->GetViewMatrix();
+
+	matProj = XMMatrixInverse(nullptr, matProj);
+
+	vMousePos.TransformCoord(vMousePos, matProj);
+
+	_vec3 vRayDir, vRayPos;
+
+	vRayPos = _vec3(0.f, 0.f, 0.f);
+	vRayDir = vMousePos - vRayPos;
+
+	matView = XMMatrixInverse(nullptr, matView);
+	vRayDir.TransformNormal(vRayDir, matView);
+	vRayPos.TransformCoord(vRayPos, matView);
+
+
+	vRayDir.Normalize();
+
+	_matrix matWorld;
+
+	matWorld = pDstCollider->Get_WorldMat();
+
+	matWorld = XMMatrixInverse(nullptr, matWorld);
+	vRayDir.TransformNormal(vRayDir, matWorld);
+	vRayPos.TransformCoord(vRayPos, matWorld);
+
+
+
+	vRayDir.Normalize();
+
+	BoundingBox Box;
+
+	_vec3 vMin, vMax;
+	vMin = *pDstCollider->Get_Min();
+	vMax = *pDstCollider->Get_Max();
+
+	Box.CreateFromPoints(Box,vMin.Get_XMVECTOR(), vMax.Get_XMVECTOR());
+
+
+	return Box.Intersects(vRayPos.Get_XMVECTOR(), vRayDir.Get_XMVECTOR(), *fDist);
+
+
+
+}
+
 void CMathMgr::Set_Point(OBB * pObb, const _vec3 * pMin, const _vec3 * pMax)
 {
 }

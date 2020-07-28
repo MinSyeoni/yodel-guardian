@@ -63,6 +63,19 @@ CComponent * CComponentMgr::Clone_Collider(wstring wstrPrototypeTag, const COMPO
 	return pClone;
 }
 
+HRESULT CComponentMgr::Delete_Component(wstring wstrPrototypeTag, COMPONENTID eID)
+{
+
+	auto iter_find = m_mapComponent[eID].find(wstrPrototypeTag);
+
+	if (iter_find == m_mapComponent[eID].end())
+		return E_FAIL;
+
+	m_mapComponent[eID].erase(iter_find);
+
+	return S_OK;
+}
+
 CComponent * CComponentMgr::Find_Component(wstring wstrPrototypeTag, const COMPONENTID & eID)
 {
 	auto iter_find = m_mapComponent[eID].find(wstrPrototypeTag);

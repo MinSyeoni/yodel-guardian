@@ -42,7 +42,7 @@ _int CDamageBlood::Update_GameObject(const _float& fTimeDelta)
 
 	if (m_bIsDead)
 		return DEAD_OBJ;
-	m_pTransCom->m_vPos.x = _float(2.f / WINCX * 900) - 1.f;
+	m_pTransCom->m_vPos.x = _float(2.f / WINCX * 800) - 1.f;
 	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * 450) + 1.f;
 
 	m_fAccTime += fTimeDelta;
