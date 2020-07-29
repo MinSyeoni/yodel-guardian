@@ -89,9 +89,11 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_L
   VlLine.cpp
      ../Release\Engine.lib 라이브러리 및 ../Release\Engine.exp 개체를 생성하고 있습니다.
   코드를 생성하고 있습니다.
-  208 of 5769 functions ( 3.6%) were compiled, the rest were copied from previous compilation.
-    4 functions were new in current compilation
-    53 functions had inline decision re-evaluated but remain unchanged
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMesh.cpp(158): warning C4715: 'Engine::CNaviMesh::MoveOn_NaviMesh': 모든 제어 경로에서 값을 반환하지는 않습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\AnimationControl.cpp(770): warning C4715: 'Engine::CAniCtrl::Find_BoneOffset': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  5728 of 5769 functions (99.3%) were compiled, the rest were copied from previous compilation.
+    11 functions were new in current compilation
+    3 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   Engine.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Default\../Release\Engine.dll
   '//'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는

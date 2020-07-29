@@ -76,12 +76,15 @@ _int CHPKit::Update_GameObject(const _float & fTimeDelta)
 void CHPKit::Get_EquipUI()
 {
 	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
-	for (auto& pSrc : *pEquipUIList)
+	if (pEquipUIList != nullptr)
 	{
-		if ((CEquipUI::EQUIP_TYPE)m_iMeshID == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
+		for (auto& pSrc : *pEquipUIList)
 		{
-			m_pGameObject = dynamic_cast<CEquipUI*>(pSrc);
-			break;
+			if ((CEquipUI::EQUIP_TYPE)m_iMeshID == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
+			{
+				m_pGameObject = dynamic_cast<CEquipUI*>(pSrc);
+				break;
+			}
 		}
 	}
 }
@@ -106,9 +109,10 @@ _int CHPKit::LateUpdate_GameObject(const _float & fTimeDelta)
 
 void CHPKit::OpenKit_PlayZoom()
 {
-	if (!m_bIsZoom && m_bIsOpen)
+	if (!m_bIsZoom && m_bIsOpen && !m_bIsZoomAlready)
 	{
 		m_bIsZoom = true;
+		m_bIsZoomAlready = true;
 		ZoomCamera(true);
 	}
 	else if (m_bIsZoom && m_bIsOpen && CDirectInput::Get_Instance()->KEY_DOWN(DIK_E))
@@ -142,12 +146,12 @@ void CHPKit::HPKit_Ani()
 	case CHPKit::KIT_IDLE:
 	{
 		m_bIsOpen = false;
+		m_bIsZoomAlready = false;
 	}
 		break;
 	case CHPKit::KIT_ALREADYOPEN:
 	{
 		m_bIsOpen = true;
-
 	}
 		break;
 	default:
@@ -196,7 +200,7 @@ void CHPKit::ZoomCamera(bool bIsZoom)
 
 		dynamic_cast<CPlayer*>(pPlayer)->KeyLockPlayer(true);
 
-		m_pObjectMgr->SetTimeStop(false);
+	//	m_pObjectMgr->SetTimeStop(false);
 	}
 	else
 	{
@@ -213,7 +217,7 @@ void CHPKit::ZoomCamera(bool bIsZoom)
 		dynamic_cast<CPlayer*>(pPlayer)->KeyLockPlayer(false);
 
 
-		m_pObjectMgr->SetTimeStop(true);
+	//	m_pObjectMgr->SetTimeStop(true);
 	}
 }
 

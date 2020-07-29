@@ -4,6 +4,7 @@
 #include "GraphicDevice.h"
 #include "LightMgr.h"
 #include "DirectInput.h"
+
 USING(Engine)
 IMPLEMENT_SINGLETON(CRenderer)
 

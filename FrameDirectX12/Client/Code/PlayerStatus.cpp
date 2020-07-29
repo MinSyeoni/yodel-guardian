@@ -619,19 +619,19 @@ void CPlayerStatus::ShootingCheck()
     _uint iMinDist = 999;
     float iDist = 0;
     bool Collision = false;
-    for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::SPHERE, CColliderMgr::MONSTER))
+    for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::OBJECT))
     {
-         Collision = CMathMgr::Get_Instance()->Collision_SpereWithMousePoint(pCol,g_hWnd,&iDist);
+         Collision = CMathMgr::Get_Instance()->Collision_BoxWithMousePoint(pCol,g_hWnd,&iDist);
         if ((iDist < iMinDist) && Collision)
         {
             iMinDist = iDist;
             pMonster = pCol->Get_Owner();
-            pCol->Set_IsCol(false);
+            pCol->Set_IsCol(true);
         }
 
     }
 
-    if (pMonster == nullptr)
+  /*  if (pMonster == nullptr)
         return;
     else
     {
@@ -649,7 +649,7 @@ void CPlayerStatus::ShootingCheck()
         }
 
 
-    }
+    }*/
 
 
 

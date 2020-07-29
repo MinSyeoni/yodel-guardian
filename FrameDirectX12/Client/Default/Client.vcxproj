@@ -197,6 +197,7 @@
     <ClInclude Include="..\Code\Medi_Medicine.h" />
     <ClInclude Include="..\Code\Medi_Syringe.h" />
     <ClInclude Include="..\Code\Monster.h" />
+    <ClInclude Include="..\Code\MPBar.h" />
     <ClInclude Include="..\Code\Normandy.h" />
     <ClInclude Include="..\Code\NpcRifle.h" />
     <ClInclude Include="..\Code\NpcWords.h" />
@@ -274,6 +275,7 @@
     <ClCompile Include="..\Code\Medi_Medicine.cpp" />
     <ClCompile Include="..\Code\Medi_Syringe.cpp" />
     <ClCompile Include="..\Code\Monster.cpp" />
+    <ClCompile Include="..\Code\MPBar.cpp" />
     <ClCompile Include="..\Code\Normandy.cpp" />
     <ClCompile Include="..\Code\NpcRifle.cpp" />
     <ClCompile Include="..\Code\NpcWords.cpp" />

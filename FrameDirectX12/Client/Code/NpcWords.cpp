@@ -46,6 +46,15 @@ HRESULT CNpcWords::Ready_GameObject(WORDS_TYPE eType)
 
 
 
+	Init_OthersUI();
+
+	return S_OK;
+}
+
+void CNpcWords::Init_OthersUI()
+{
+	if (nullptr == CObjectMgr::Get_Instance()->Get_Layer(L"Layer_UI"))
+		return;
 
 	list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
 	if (pHpBarUIList != nullptr)
@@ -54,21 +63,20 @@ HRESULT CNpcWords::Ready_GameObject(WORDS_TYPE eType)
 			dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(false);
 	}
 
-
-
-	CGameObject* pIconUIList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"IconUI");
+	list<CGameObject*>* pIconUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"IconUI");
 	if (pIconUIList != nullptr)
-		dynamic_cast<CIconUI*>(pIconUIList)->Set_ShowUI(false);
+	{
+		for (auto& pSrc : *pIconUIList)
+			dynamic_cast<CIconUI*>(pSrc)->Set_ShowUI(false);
+	}
 
 	CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
-	if(pGunUI!=nullptr)
+	if (pGunUI != nullptr)
 		dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(false);
 
 	CGameObject* pInvenList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
-	if(pGunUI!=nullptr)
+	if (pInvenList != nullptr)
 		dynamic_cast<CInvenUI*>(pInvenList)->Set_ShowUI(false);
-
-	return S_OK;
 }
 
 void CNpcWords::Ready_NpcWords()
@@ -281,23 +289,35 @@ void CNpcWords::Next_ConversationJudje()
 		if (m_iWordsCnt <= m_iWordsNum)
 		{ 
 			list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
-			for (auto& pSrc : *pHpBarUIList)
-				dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(true);
+			if (pHpBarUIList != nullptr)
+			{
+				for (auto& pSrc : *pHpBarUIList)
+					dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(true);
+			}
 
-			CGameObject* pIconUIList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"IconUI");
-			dynamic_cast<CIconUI*>(pIconUIList)->Set_ShowUI(true);
+			list<CGameObject*>* pIconUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"IconUI");
+			if (pIconUIList != nullptr)
+			{
+				for (auto& pSrc : *pIconUIList)
+					dynamic_cast<CIconUI*>(pSrc)->Set_ShowUI(true);
+			}
 
 			CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
-			dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(true);
+			if (pGunUI != nullptr)
+				dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(true);
 
 			CGameObject* pInvenUI= CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
-			dynamic_cast<CInvenUI*>(pInvenUI)->Set_ShowUI(true);
+			if (pInvenUI != nullptr)
+				dynamic_cast<CInvenUI*>(pInvenUI)->Set_ShowUI(true);
 
 			Finish_ConverSation();
 
 			list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
-			for (auto& pSrc : *pEquipUIList)
-				dynamic_cast<CEquipUI*>(pSrc)->Set_ShowUI(false);
+			if (pEquipUIList != nullptr)
+			{
+				for (auto& pSrc : *pEquipUIList)
+					dynamic_cast<CEquipUI*>(pSrc)->Set_ShowUI(false);
+			}
 
 			m_eWordsType = TYPE_END;
 			m_bIsDead = true;

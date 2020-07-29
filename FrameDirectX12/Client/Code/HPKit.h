@@ -61,6 +61,8 @@ private:
 	_bool						m_bIsOpen = false;
 	_uint						m_iMeshID = 0;
 	_bool						m_bIsZoom = false;
+	_bool						m_bIsZoomAlready = false;
+
 public:
 	virtual CGameObject*		Clone_GameObject(void* prg);
 	static CHPKit*				Create(ID3D12Device* pGraphicDevice,

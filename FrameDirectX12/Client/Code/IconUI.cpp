@@ -30,7 +30,8 @@ HRESULT CIconUI::Ready_GameObject()
 
 HRESULT CIconUI::LateInit_GameObject()
 {
-	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());	
+	for(int i = 0; i < 3; ++i)
+		m_pShaderCom[i]->Set_Shader_Texture(m_pTexture[i]->Get_Texture());	
 
 	m_pTransCom->m_vPos.x = _float(2.f / WINCX * WINCX / 2) - 1.f;
 	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * WINCY / 2) + 1.f;
@@ -64,14 +65,11 @@ void CIconUI::Render_GameObject(const _float& fTimeDelta)
 	if (!m_bIsShow)
 		return;
 
-	Set_ConstantTable();
-
-	m_pShaderCom->Begin_Shader();
+	Set_ConstantTable(m_iIconIdx);
+	m_pShaderCom[m_iIconIdx]->Begin_Shader();
 	m_pBufferCom->Begin_Buffer();
-
-	m_pShaderCom->End_Shader();
+	m_pShaderCom[m_iIconIdx]->End_Shader();
 	m_pBufferCom->End_Buffer();
-
 	m_pBufferCom->Render_Buffer();
 }
 
@@ -85,23 +83,35 @@ HRESULT CIconUI::Add_Component()
 	m_mapComponent[ID_STATIC].emplace(L"Com_Buffer", m_pBufferCom);
 
 	// Shader
-	m_pShaderCom = static_cast<Engine::CShader_UI*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_UI", COMPONENTID::ID_STATIC));
-	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
-	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
-
+	for (int i = 0; i < 3; ++i)
+	{
+		m_pShaderCom[i] = static_cast<Engine::CShader_UI*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_UI", COMPONENTID::ID_STATIC));
+		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+		m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom[i]);
+	}
 	// TransCom 
 	m_pTransCom = static_cast<CTransform*>(m_pComponentMgr->Clone_Component(L"Prototype_Transform", COMPONENTID::ID_DYNAMIC));
 	if (nullptr != m_pTransCom)
 		m_mapComponent[ID_DYNAMIC].emplace(L"Com_Transform", m_pTransCom);
 
-	m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_PlayerIcon", COMPONENTID::ID_STATIC));
-	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
-	m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
+	// ≈ÿΩ∫√≥
+	for (int i = 0; i < 3; ++i)
+	{
+		wstring wstrTemp = L"Prototype_Texture_PlayerIcon";
+		if(i == 1)
+			wstrTemp = L"Prototype_Texture_colleague1Icon";
+		else if(i == 2)
+			wstrTemp = L"Prototype_Texture_colleague2Icon";
+
+		m_pTexture[i] = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(wstrTemp, COMPONENTID::ID_STATIC));
+		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+		m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture[i]);
+	}
 
 	return S_OK;
 }
 
-void CIconUI::Set_ConstantTable()
+void CIconUI::Set_ConstantTable(_uint iIdx)
 {
 	_matrix matView = INIT_MATRIX;
 	_matrix matProj = INIT_MATRIX;
@@ -115,12 +125,15 @@ void CIconUI::Set_ConstantTable()
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
 
-	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
+	m_pShaderCom[iIdx]->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
 }
 
 CGameObject* CIconUI::Clone_GameObject(void* pArg)
 {
 	CGameObject* pInstance = new CIconUI(*this);
+
+	_uint iIdx = *reinterpret_cast<_uint*>(pArg);
+	static_cast<CIconUI*>(pInstance)->m_iIconIdx = iIdx;
 
 	if (FAILED(pInstance->Ready_GameObject()))
 		return nullptr;
