@@ -451,6 +451,13 @@ HRESULT CRenderer::Ready_ShaderPrototype()
     NULL_CHECK_RETURN(pShader, E_FAIL);
     FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_Default", ID_STATIC, pShader), E_FAIL);
 
+    pShader = CShader_UI::Create(DEVICE, m_pCommandList, CShader_UI::ALPHA);
+    NULL_CHECK_RETURN(pShader, E_FAIL);
+    FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_UI", ID_STATIC, pShader), E_FAIL);
+
+    pShader = CShader_UI::Create(DEVICE, m_pCommandList, CShader_UI::ALPHABLEND);
+    NULL_CHECK_RETURN(pShader, E_FAIL);
+    FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_UIAlphaBlend", ID_STATIC, pShader), E_FAIL);
 
     pShader = CShader_DefaultTex::Create(m_pGraphicDevice, m_pCommandList);
     NULL_CHECK_RETURN(pShader, E_FAIL);
@@ -460,7 +467,9 @@ HRESULT CRenderer::Ready_ShaderPrototype()
     NULL_CHECK_RETURN(pShader, E_FAIL);
     FAILED_CHECK_RETURN(m_pComponentMgr->Add_ComponentPrototype(L"Prototype_Shader_DefaultTexAlpha", ID_STATIC, pShader), E_FAIL);
 
-
+    pShader = CShader_UI::Create(DEVICE, m_pCommandList, CShader_UI::MPBAR);
+    NULL_CHECK_RETURN(pShader, E_FAIL);
+    FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_MPBAR", ID_STATIC, pShader), E_FAIL);
 
     return S_OK;
 }

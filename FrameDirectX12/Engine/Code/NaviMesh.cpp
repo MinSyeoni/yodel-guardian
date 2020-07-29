@@ -118,8 +118,6 @@ _vec3 CNaviMesh::MoveOn_NaviMesh(const _vec3* pTargetPos,
 	}
 	else if (CCell::COMPARE_SLIDING == m_vecCell[m_dwIndex]->Compare(&vEndPos, &m_dwIndex, fSpeed, &vTargetPos, &vTargetDir, &vSliding))
 	{
-		if (!bIsJump)
-			vEndPos.y = m_vecCell[m_dwIndex]->Get_Height(&vEndPos);
 
 		vEndPos = _vec3(*pTargetPos) + _vec3(vSliding) * fSpeed;
 

@@ -116,15 +116,16 @@ float4 PS_HPBAR2(VS_TEXTURED_OUTPUT input) : SV_TARGET
 
 float4 PS_MPBAR(VS_TEXTURED_OUTPUT input) : SV_TARGET
 {
-	float fAlpha = 1.f;
-	float fAngle = 0.f;
-	//float fMp = matWorld._11;
-
-	//if(input.uv.x < fMp)
-	//	fAlpha = 0.f;
-
 	float4 cColor = gTexture.Sample(gsamLinearWrap, input.uv);
-	cColor.a *= fAlpha;
+
+	float fUvX = matWorld._41; // 가로 얼마나 표현할지
+	float fUvY = matWorld._42;// 세로 얼마나 표현할지 
+
+	if (input.uv.x > fUvX) cColor.a = 0.f;
+
+	if (input.uv.y < fUvY)cColor.a = 0.f;
+
+
 
 	return(cColor);
 }

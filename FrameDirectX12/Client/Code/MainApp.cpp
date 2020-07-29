@@ -60,6 +60,15 @@ HRESULT CMainApp::SetUp_Font()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Font_NetmarbleLight", pGameObject);
 
+
+	pGameObject = CFont::Create_Prototype(m_pGraphicDevice, m_pCommandList,
+		L"netmarble Light",	// Font Type
+		40.f,					// Font Size
+		D2D1::ColorF::White);	// Font Color
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Font_Loading", pGameObject);
+
+
 	m_pFont_FPS = static_cast<CFont*>(CObjectMgr::Get_Instance()->Get_NewGameObject(L"Prototype_Font_NetmarbleLight", L"fuck", nullptr));
 	FAILED_CHECK_RETURN(m_pFont_FPS->Ready_GameObjectClone(L"", _vec2(1400.f, 850.f), D2D1::ColorF::SpringGreen), E_FAIL);
 	return S_OK;
@@ -236,7 +245,7 @@ HRESULT CMainApp::SetUp_Resource()
 
 	Engine::CComponent* pComponent = nullptr;
 
-	pComponent = Engine::CTexture::Create(m_pGraphicDevice, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/Logo/Logo%d.dds", 1);
+	pComponent = Engine::CTexture::Create(m_pGraphicDevice, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/Logo/Logo%d.dds", 5);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_Logo", ID_STATIC, pComponent), E_FAIL);
 

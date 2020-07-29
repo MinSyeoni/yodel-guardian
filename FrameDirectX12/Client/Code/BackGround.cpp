@@ -87,7 +87,7 @@ _int CBackGround::LateUpdate_GameObject(const _float & fTimeDelta)
 	/*____________________________________________________________________
 	[ Renderer - Add Render Group ]
 	______________________________________________________________________*/
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);	
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
 	/*____________________________________________________________________
 	[ Set PipelineState ]
@@ -102,6 +102,7 @@ void CBackGround::Render_GameObject(const _float & fTimeDelta)
 	Set_ConstantTable();
 	// 세이더 - 버퍼 - 세이더 - 버퍼 순서 중요 
 
+
 	m_pShaderCom->Begin_Shader();
 	m_pBufferCom->Begin_Buffer();
 
@@ -109,6 +110,7 @@ void CBackGround::Render_GameObject(const _float & fTimeDelta)
 	m_pBufferCom->End_Buffer();
 
 	m_pBufferCom->Render_Buffer();
+
 }
 
 HRESULT CBackGround::Add_Component()
@@ -122,7 +124,7 @@ HRESULT CBackGround::Add_Component()
 
 
 	// Shader
-	m_pShaderCom = static_cast<Engine::CShader_DefaultTex*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_DefaultTex", COMPONENTID::ID_STATIC));
+	m_pShaderCom = static_cast<Engine::CShader_UI*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_UI", COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
 
@@ -136,22 +138,26 @@ HRESULT CBackGround::Add_Component()
 
 void CBackGround::Set_ConstantTable()
 {
-	_matrix matView = INIT_MATRIX;
-	_matrix matProj = INIT_MATRIX;
-
 	CB_MATRIX_INFO	tCB_MatrixInfo;
 	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
 
-	
+	_matrix matView = INIT_MATRIX;
+	_matrix matProj = CGraphicDevice::Get_Instance()->GetOrthoMatrix();
+	_matrix matWorld = INIT_MATRIX;
 
-	_matrix matWVP = INIT_MATRIX * matView * matProj;
+
+
+	matWorld._11 = WINSIZEX/2 ;
+	matWorld._22 = WINSIZEY/2;
+	matWorld._33 = 1.0f;
+	matWorld._41 = 0.f;
+	matWorld._42 = 0.f;
+	matWorld._43 = 0.11f;
+	_matrix matWVP = matWorld * matView * matProj;
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
-	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(INIT_MATRIX));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(matWorld));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
-
-
-	// CTarget::SetUp_ConstateTable 이건 직교 투영. 참고 
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
 }
 

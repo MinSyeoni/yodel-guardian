@@ -235,6 +235,12 @@
     <Filter Include="03.UI\02.HPMPBar\01.MPBar">
       <UniqueIdentifier>{9c02bb57-893c-4122-9dda-8ce784fc214f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00.Scene_Logo\00.BackGround\01.LoadingBar">
+      <UniqueIdentifier>{8c251fa4-0a80-42fc-8954-7acb0538a0b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Scene_Logo\00.BackGround\00.LoadingTexture">
+      <UniqueIdentifier>{89372a43-0a25-4e52-8bed-afe106463413}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -470,6 +476,12 @@
     <ClInclude Include="..\Code\MPBar.h">
       <Filter>03.UI\02.HPMPBar\01.MPBar</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\LoadingTexture.h">
+      <Filter>00.Scene_Logo\00.BackGround\00.LoadingTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\LoadingBar.h">
+      <Filter>00.Scene_Logo\00.BackGround\01.LoadingBar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -677,6 +689,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\MPBar.cpp">
       <Filter>03.UI\02.HPMPBar\01.MPBar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\LoadingTexture.cpp">
+      <Filter>00.Scene_Logo\00.BackGround\00.LoadingTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\LoadingBar.cpp">
+      <Filter>00.Scene_Logo\00.BackGround\01.LoadingBar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,8 @@
 #include "BackGround.h"
 #include "DynamicCamera.h"
 #include "DirectSound.h"
-
+#include "LoadingTexture.h"
+#include "LoadingBar.h"
 CScene_Logo::CScene_Logo(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -33,8 +34,8 @@ HRESULT CScene_Logo::Ready_Scene()
 	FAILED_CHECK_RETURN(Ready_LayerGameObject(L"Layer_GameObject"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_LayerUI(L"Layer_UI"), E_FAIL);
 
-	m_pFont = static_cast<CFont*>( CObjectMgr::Get_Instance()->Get_NewGameObject(L"Prototype_Font_NetmarbleLight",L"fuck",nullptr));
-	m_pFont->Ready_GameObjectClone(L"Mesh_Loading", _vec2{ 50.f,50.f }, D2D1::ColorF::Red);
+	m_pFont = static_cast<CFont*>( CObjectMgr::Get_Instance()->Get_NewGameObject(L"Prototype_Font_Loading",L"fuck",nullptr));
+	m_pFont->Ready_GameObjectClone(L"Mesh_Loading", _vec2{ WINSIZEX*0.42f,WINSIZEY*0.73f }, D2D1::ColorF::Red);
 	m_pLoading = CLoading::Create(m_pGraphicDevice,m_pCommandList,CLoading::LOADING_STAGE);
 	NULL_CHECK_RETURN(m_pLoading, E_FAIL);
 
@@ -76,6 +77,18 @@ HRESULT CScene_Logo::Ready_GameObjectPrototype()
 
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_BackGround", pGameObject), E_FAIL);
+
+
+	pGameObject = CLoadingTexture::Create(m_pGraphicDevice, m_pCommandList);
+
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_LoadingTexture", pGameObject), E_FAIL);
+
+
+	pGameObject = CLoadingBar::Create(m_pGraphicDevice, m_pCommandList);
+
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_LoadingBar", pGameObject), E_FAIL);
 
 
 	// Prototype - DynamicCamera
@@ -147,8 +160,8 @@ HRESULT CScene_Logo::Ready_LayerUI(wstring wstrLayerTag)
 
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_BackGround", L"BackGround", nullptr), E_FAIL);
-
-
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_LoadingTexture", L"LoadingTexture", nullptr), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_LoadingBar", L"LoadingBar", nullptr), E_FAIL);
 	return S_OK;
 }
 

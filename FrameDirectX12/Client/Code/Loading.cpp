@@ -7,6 +7,7 @@
 #include "GraphicDevice.h"
 #include "ActionCamera.h"
 #include "Effect.h"
+#include "LoadingBar.h"
 
 CLoading::CLoading(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	:m_pGraphicDev(pGraphicDevice)
@@ -35,31 +36,39 @@ _uint CLoading::Loading_ForStage(void)
 {
 	CFont* pFont = static_cast<CScene_Logo*>( CManagement::Get_Instance()->Get_CurScene())->Get_Font();
 	pFont->Set_Text(L"Mesh_Loading");
-	pFont->Set_Color(D2D1::ColorF::Red);
+	pFont->Set_Color(D2D1::ColorF::DarkGray);
 	Mesh_ForStage();
 
 	pFont->Set_Text(L"Effect_Loading");
-	pFont->Set_Color(D2D1::ColorF::Green);
+	pFont->Set_Color(D2D1::ColorF::DarkGray);
 	Load_Effect();
 
 
+	static_cast<CLoadingBar*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"LoadingBar"))->SetGauge(0.7f);
 	pFont->Set_Text(L"Texture_Loading");
-	pFont->Set_Color(D2D1::ColorF::Red);
+	pFont->Set_Color(D2D1::ColorF::DarkGray);
 	Texture_ForStage();
 
+
+	static_cast<CLoadingBar*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"LoadingBar"))->SetGauge(0.8f);
 	pFont->Set_Text(L"Shader_Loading");
-	pFont->Set_Color(D2D1::ColorF::Red);
+	pFont->Set_Color(D2D1::ColorF::DarkGray);
 	Load_Shader();
 
 	pFont->Set_Text(L"Camera_Loading");
-	pFont->Set_Color(D2D1::ColorF::Blue);
+	pFont->Set_Color(D2D1::ColorF::DarkGray);
 	Load_Camera();
 
 
 
+	static_cast<CLoadingBar*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"LoadingBar"))->SetGauge(1.0f);
 	pFont->Set_Text(L"Loading_Finish");
-	pFont->Set_Color(D2D1::ColorF::Red);
+	pFont->Set_Color(D2D1::ColorF::DarkRed);
+	
 	m_bFinish = true;
+
+
+
 	return S_OK;
 }
 
@@ -85,9 +94,6 @@ HRESULT CLoading::Load_Shader()
 
 
 
-	pComponent = CShader_UI::Create(DEVICE, m_pCommandList, CShader_UI::ALPHA);
-	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_UI", ID_STATIC, pComponent), E_FAIL);
 
 	pComponent = CShader_UI::Create(DEVICE, m_pCommandList, CShader_UI::HPBAR);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
@@ -101,13 +107,9 @@ HRESULT CLoading::Load_Shader()
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_HPBAR2", ID_STATIC, pComponent), E_FAIL);
 
-	pComponent = CShader_UI::Create(DEVICE, m_pCommandList, CShader_UI::MPBAR);
-	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_MPBAR", ID_STATIC, pComponent), E_FAIL);
 
-	pComponent = CShader_UI::Create(DEVICE, m_pCommandList, CShader_UI::ALPHABLEND);
-	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_UIAlphaBlend", ID_STATIC, pComponent), E_FAIL);
+
+
 
 	pComponent = CShader_LightAcc::Create(DEVICE, m_pCommandList, LIGHTTYPE::D3DLIGHT_DIRECTIONAL);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
@@ -230,6 +232,8 @@ HRESULT CLoading::Mesh_ForStage(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Player", ID_STATIC, pComponent), E_FAIL);
 
+	static_cast<CLoadingBar*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"LoadingBar"))->SetGauge(0.3f);
+
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Missile/", L"Missile.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Missile", ID_STATIC, pComponent), E_FAIL);
@@ -237,6 +241,9 @@ HRESULT CLoading::Mesh_ForStage(void)
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Temp/", L"Temp.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Console", ID_STATIC, pComponent), E_FAIL);
+
+
+
 
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/SkyDome/", L"SkyDome.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
@@ -246,10 +253,16 @@ HRESULT CLoading::Mesh_ForStage(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Rifle", ID_STATIC, pComponent), E_FAIL);
 
+
+
+
 	////////////////NPC///////////////
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/DynamicMesh/Salone/", L"Salone.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Salone", ID_STATIC, pComponent), E_FAIL);
+
+
+	static_cast<CLoadingBar*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"LoadingBar"))->SetGauge(0.32f);
 
 	/////////////// ¸Ê ¿ÉÁ§ //////////////////////
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"ammocase.X");
@@ -263,6 +276,9 @@ HRESULT CLoading::Mesh_ForStage(void)
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"board.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Board.X", ID_STATIC, pComponent), E_FAIL);
+
+
+	static_cast<CLoadingBar*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"LoadingBar"))->SetGauge(0.4f);
 
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"book1.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
@@ -320,6 +336,8 @@ HRESULT CLoading::Mesh_ForStage(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Computer2.X", ID_STATIC, pComponent), E_FAIL);
 
+	static_cast<CLoadingBar*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"LoadingBar"))->SetGauge(0.43f);
+	
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"containerBlue.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"containerBlue.X", ID_STATIC, pComponent), E_FAIL);
@@ -396,6 +414,11 @@ HRESULT CLoading::Mesh_ForStage(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"apollo.X", ID_STATIC, pComponent), E_FAIL);
 
+
+	static_cast<CLoadingBar*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"LoadingBar"))->SetGauge(0.47f);
+
+
+
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"passage_top.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"passage_top.X", ID_STATIC, pComponent), E_FAIL);
@@ -435,6 +458,11 @@ HRESULT CLoading::Mesh_ForStage(void)
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"medikit.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"medikit.X", ID_STATIC, pComponent), E_FAIL);
+
+
+	static_cast<CLoadingBar*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"LoadingBar"))->SetGauge(0.52f);
+
+
 
 	// Àýº®
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"RoundCliffL.X");
@@ -482,7 +510,7 @@ HRESULT CLoading::Mesh_ForStage(void)
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/DynamicMesh/Monster/Stage2/Dron/", L"Dron.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Dron", ID_STATIC, pComponent), E_FAIL);
-
+	static_cast<CLoadingBar*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"LoadingBar"))->SetGauge(0.58f);
 	//¿Ö°î¿ë
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/DistortDisk/", L"DistortDisk.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
@@ -505,6 +533,9 @@ HRESULT CLoading::Mesh_ForStage(void)
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/PlayerPoint/", L"point_top.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Point", ID_STATIC, pComponent), E_FAIL);
+
+
+	static_cast<CLoadingBar*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"LoadingBar"))->SetGauge(0.65);
 
 	return S_OK;
 }

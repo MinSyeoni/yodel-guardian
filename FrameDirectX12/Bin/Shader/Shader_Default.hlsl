@@ -49,23 +49,6 @@ float4 PS_MAIN(VS_TEXTURED_OUTPUT input) : SV_TARGET
 {
 	float4 cColor = gTexture.Sample(gsamLinearWrap, input.uv);
 
-
-	float4 Color2 = cColor;
-	float A = 0.15f;
-	float B = 0.5f;
-	float C = 0.1f;
-	float D = 0.2f;
-	float E = 0.02f;
-	float F = 0.3f;
-	float3 linearWhite = float3(11.2f, 11.2f, 11.2f);
-
-	float3 color = cColor.rgb * 5.f;
-
-	color = ((color * (A * color + C * B) + D * E) / (color * (A * color + B) + D * F)) - (E / F);
-	linearWhite = ((linearWhite * (A * linearWhite + C * B) + D * E) / (linearWhite * (A * linearWhite + B) + D * F)) - (E / F);
-
-	cColor = float4(color / linearWhite, Color2.a);
-	cColor = pow(cColor, 1 / 2.2);
 		
 
 	return(cColor);
@@ -84,24 +67,6 @@ VS_TEXTURED_OUTPUT VS_NNOMAL(VS_NTEXTURED_INPUT Input)
 float4 PS_NNOMAL(VS_NTEXTURED_OUTPUT input) : SV_TARGET
 {
 	float4 cColor = gTexture.Sample(gsamLinearWrap, input.uv);
-
-
-	float4 Color2 = cColor;
-	float A = 0.15f;
-	float B = 0.5f;
-	float C = 0.1f;
-	float D = 0.2f;
-	float E = 0.02f;
-	float F = 0.3f;
-	float3 linearWhite = float3(11.2f, 11.2f, 11.2f);
-
-	float3 color = cColor.rgb*2.f;
-
-	color = ((color * (A * color + C * B) + D * E) / (color * (A * color + B) + D * F)) - (E / F);
-	linearWhite = ((linearWhite * (A * linearWhite + C * B) + D * E) / (linearWhite * (A * linearWhite + B) + D * F)) - (E / F);
-
-	cColor = float4(color / linearWhite, Color2.a);
-	cColor = pow(cColor, 1 / 2.2);
 
 
 	return(cColor);

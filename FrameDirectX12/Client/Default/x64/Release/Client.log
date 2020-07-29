@@ -1,5 +1,0 @@
-﻿  Scene_Rail.cpp
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Scene_Rail.cpp(197,23): warning C4834: 'nodiscard' 특성이 포함된 함수의 반환 값을 버리는 중
-LINK : warning LNK4044: '/FS' 옵션을 인식할 수 없습니다. 무시됩니다.
-ActionCamera.obj : warning LNK4075: '/EDITANDCONTINUE'이(가) '/OPT:ICF' 사양으로 인해 무시됩니다.
-  Client.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Default\../Release\Client.exe
