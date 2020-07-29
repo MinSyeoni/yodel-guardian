@@ -1,5 +1,4 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppClean.targets(76,5): warning : 'c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\engine.tlog\cl.read.1.tlog' 파일은 다른 프로세스에서 사용 중이므로 프로세스에서 액세스할 수 없습니다.
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Blend.cso
+﻿  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Blend.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Blur.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_ColorBuffer.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Default.cso
@@ -8,10 +7,10 @@
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_DownSample.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Effect.cso
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(82,12-69): warning X3206: implicit truncation of vector type
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_LightAcc.cso
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(132,12-69): warning X3206: implicit truncation of vector type
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(184,16-73): warning X3206: implicit truncation of vector type
   
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_LightAcc.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_Mesh.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_ShadowDepth.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Release\Shader_SSAO.cso
@@ -90,10 +89,10 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_L
   VlLine.cpp
      ../Release\Engine.lib 라이브러리 및 ../Release\Engine.exp 개체를 생성하고 있습니다.
   코드를 생성하고 있습니다.
-  Previous IPDB not found, fall back to full compilation.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMesh.cpp(158): warning C4715: 'Engine::CNaviMesh::MoveOn_NaviMesh': 모든 제어 경로에서 값을 반환하지는 않습니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\AnimationControl.cpp(770): warning C4715: 'Engine::CAniCtrl::Find_BoneOffset': 모든 제어 경로에서 값을 반환하지는 않습니다.
-  All 5769 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMesh.cpp(156): warning C4715: 'Engine::CNaviMesh::MoveOn_NaviMesh': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  1 of 5769 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    8 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   Engine.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Default\../Release\Engine.dll
   '//'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는

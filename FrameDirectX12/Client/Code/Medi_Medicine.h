@@ -30,6 +30,7 @@ public:
 	virtual void				SetMeshInfo(MeshInfo tInfo) { m_tMeshInfo = tInfo; }
 
 private:
+	void						Check_ItemAndMouse();
 	virtual HRESULT				Add_Component();
 	void						Set_ConstantTable();
     void						Set_ShadowTable(CShader_Shadow* pShader);
@@ -46,6 +47,8 @@ private:
 
 	MeshInfo					m_tMeshInfo;
 	_bool						m_bIsEquip = false;
+	_bool						m_bIsClick = false;
+
 	CGameObject*				m_pGameObject = nullptr;
 public:
 	virtual CGameObject*		Clone_GameObject(void* prg);

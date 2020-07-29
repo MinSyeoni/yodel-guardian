@@ -399,8 +399,8 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcRifle", L"Weapon", &eOwner), E_FAIL);
 
 	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj																		 //Prototype_MapObject
-	//Load_StageObject(L"../../Data/StaticObj/mapAddoutside_1_test.dat");
-	Load_StageObject(L"../../Data/StaticObj/SY_Kit_Test.dat");
+	Load_StageObject(L"../../Data/StaticObj/mapAddoutside_1_test.dat");
+	//Load_StageObject(L"../../Data/StaticObj/SY_Kit_Test.dat");
 	
 	// Monster
 	Load_MonsterPos(L"../../Data/Collider/Zombi.dat");
