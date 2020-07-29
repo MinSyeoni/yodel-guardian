@@ -17,6 +17,7 @@
 #include "UI.h"	
 #include "Aim.h"
 #include "HPBar.h"
+#include "MPBar.h"
 #include "IconUI.h"
 #include "InvenUI.h"
 #include "GunUI.h"
@@ -53,6 +54,7 @@
 #include "Ken.h"
 #include "Scene_Rail.h"
 #include "Management.h"
+
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -242,6 +244,10 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_HPBarUI", pGameObject), E_FAIL);
 
+	pGameObject = CMPBar::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_MPBarUI", pGameObject), E_FAIL);
+
 	pGameObject = CGunUI::Create(m_pGraphicDevice, m_pCommandList, L"Prototype_Texture_Rifle");
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_RifleUI", pGameObject), E_FAIL);
@@ -393,8 +399,8 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcRifle", L"Weapon", &eOwner), E_FAIL);
 
 	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj																		 //Prototype_MapObject
-	Load_StageObject(L"../../Data/StaticObj/mapAddoutside_1_test.dat");
-	//Load_StageObject(L"../../Data/StaticObj/SY_Kit_Test.dat");
+	//Load_StageObject(L"../../Data/StaticObj/mapAddoutside_1_test.dat");
+	Load_StageObject(L"../../Data/StaticObj/SY_Kit_Test.dat");
 	
 	// Monster
 	Load_MonsterPos(L"../../Data/Collider/Zombi.dat");
@@ -426,15 +432,17 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Aim", L"Aim", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_OptionUI", L"OptionUI", nullptr), E_FAIL);
-
-	//////// 아이콘 //////
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_IconUI", L"IconUI", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", nullptr), E_FAIL);
 
 	_uint iType = 0;
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MPBarUI", L"MPBarUI", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &iType), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &(iType = 1)), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &(iType = 2)), E_FAIL);
+
+	//////// 아이콘 //////
+	for (int i = 0; i < 3; ++i)
+		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_IconUI", L"IconUI", &(iType = i)), E_FAIL);
 
 	for (int i = 0; i < 7; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_OnUI", L"OnUI", &(iType = i)), E_FAIL);

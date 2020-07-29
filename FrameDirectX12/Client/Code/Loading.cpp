@@ -101,6 +101,10 @@ HRESULT CLoading::Load_Shader()
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_HPBAR2", ID_STATIC, pComponent), E_FAIL);
 
+	pComponent = CShader_UI::Create(DEVICE, m_pCommandList, CShader_UI::MPBAR);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_MPBAR", ID_STATIC, pComponent), E_FAIL);
+
 	pComponent = CShader_UI::Create(DEVICE, m_pCommandList, CShader_UI::ALPHABLEND);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_UIAlphaBlend", ID_STATIC, pComponent), E_FAIL);
@@ -546,13 +550,13 @@ HRESULT CLoading::Texture_ForStage(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_HP_colleague2", ID_STATIC, pComponent), E_FAIL);
 
-	//pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_colleague1_background.dds", 1);
-	//NULL_CHECK_RETURN(pComponent, E_FAIL);
-	//FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_colleague1Icon", ID_STATIC, pComponent), E_FAIL);
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_colleague1_background.dds", 1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_colleague1Icon", ID_STATIC, pComponent), E_FAIL);
 
-	//pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_colleague2_background.dds", 1);
-	//NULL_CHECK_RETURN(pComponent, E_FAIL);
-	//FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_colleague2Icon", ID_STATIC, pComponent), E_FAIL);
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_colleague2_background.dds", 1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_colleague2Icon", ID_STATIC, pComponent), E_FAIL);
 
 	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/assaultRifle.dds", 1);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);

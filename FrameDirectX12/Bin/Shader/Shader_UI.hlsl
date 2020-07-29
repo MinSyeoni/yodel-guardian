@@ -51,9 +51,8 @@ float4 PS_MAIN(VS_TEXTURED_OUTPUT input) : SV_TARGET
 float4 PS_HPBAR(VS_TEXTURED_OUTPUT input) : SV_TARGET
 {
 	float fAlpha = 1.f;
-	float2 fTemp = input.uv - float2(0.08f, 0.83f);
+	float2 fTemp = input.uv - float2(0.08f, 0.86f);
 	float fAngle = 0.f;
-
 	float fHp = matWorld._11;
 
 	fTemp = normalize(fTemp);
@@ -74,15 +73,14 @@ float4 PS_HPBAR(VS_TEXTURED_OUTPUT input) : SV_TARGET
 float4 PS_HPBAR1(VS_TEXTURED_OUTPUT input) : SV_TARGET
 {
 	float fAlpha = 1.f;
-	float2 fTemp = input.uv - float2(0.18f, 0.86f);
+	float2 fTemp = input.uv - float2(0.165f, 0.89f);
 	float fAngle = 0.f;
-
 	float fHp = matWorld._11;
 
 	fTemp = normalize(fTemp);
 	float fRad = acos(dot(fTemp, float2(0.f, 1.f)));
 
-	if (input.uv.x <= 0.18f)
+	if (input.uv.x <= 0.165f)
 		fRad *= -1.f;
 
 	if (fRad >= fHp)
@@ -97,19 +95,33 @@ float4 PS_HPBAR1(VS_TEXTURED_OUTPUT input) : SV_TARGET
 float4 PS_HPBAR2(VS_TEXTURED_OUTPUT input) : SV_TARGET
 {
 	float fAlpha = 1.f;
-	float2 fTemp = input.uv - float2(0.265f, 0.86f);
+	float2 fTemp = input.uv - float2(0.235f, 0.89f);
 	float fAngle = 0.f;
-
 	float fHp = matWorld._11;
 
 	fTemp = normalize(fTemp);
 	float fRad = acos(dot(fTemp, float2(0.f, 1.f)));
 
-	if (input.uv.x <= 0.265f)
+	if (input.uv.x <= 0.235f)
 		fRad *= -1.f;
 
 	if (fRad >= fHp)
 		fAlpha = 0.f;
+
+	float4 cColor = gTexture.Sample(gsamLinearWrap, input.uv);
+	cColor.a *= fAlpha;
+
+	return(cColor);
+}
+
+float4 PS_MPBAR(VS_TEXTURED_OUTPUT input) : SV_TARGET
+{
+	float fAlpha = 1.f;
+	float fAngle = 0.f;
+	//float fMp = matWorld._11;
+
+	//if(input.uv.x < fMp)
+	//	fAlpha = 0.f;
 
 	float4 cColor = gTexture.Sample(gsamLinearWrap, input.uv);
 	cColor.a *= fAlpha;

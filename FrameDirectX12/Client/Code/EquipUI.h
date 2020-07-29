@@ -5,12 +5,10 @@
 #include "DynamicCamera.h"
 #include "GraphicDevice.h"
 
-
-
 class CEquipUI : public Engine::CGameObject
 {
 public:
-	enum EQUIP_TYPE { E_KITEQUIP1, E_KITEQUIP2, E_KITEQUIP3, E_CONVERSATION, E_KEYEQUIP, E_HIDING, E_DOOROPEN_L, E_DOOROPEN_P, EQUIP_END };
+	enum EQUIP_TYPE { E_KITEQUIP1, E_KITEQUIP2, E_KITEQUIP3, E_CONVERSATION, E_KEYEQUIP, E_HIDING, E_DOOROPEN_L, E_DOOROPEN_P };
 
 private:
 	explicit CEquipUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
@@ -46,7 +44,7 @@ private:
 
 	_bool						m_bIsShow = false;
 	_vec3						m_vPos = _vec3{ 0.f,0.f,0.f };
-	EQUIP_TYPE					m_eEquipType = EQUIP_END;
+	EQUIP_TYPE					m_eEquipType;
 
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);

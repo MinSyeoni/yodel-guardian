@@ -8,6 +8,9 @@
 CScene_Rail::CScene_Rail(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
+	CComponentMgr::Get_Instance()->Delete_Component(L"Mesh_Navi", ID_STATIC);
+	Engine::CComponent* pComponent = Engine::CNaviMesh::Create(m_pGraphicDevice, m_pCommandList, L"../../Data/Navi/pass.dat");
+	CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Navi", ID_STATIC, pComponent);
 }
 
 
@@ -60,7 +63,7 @@ HRESULT CScene_Rail::Ready_ComponentPrototype()
 	
 	Engine::CComponent* pComponent = nullptr;
 
-	pComponent = Engine::CNaviMesh::Create(m_pGraphicDevice, m_pCommandList,L".. / .. / Data / Navi / pass.dat");
+	pComponent = Engine::CNaviMesh::Create(m_pGraphicDevice, m_pCommandList, L"../../Data/Navi/pass.dat");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Navi", ID_STATIC, pComponent), E_FAIL);
 
@@ -319,5 +322,7 @@ CScene_Rail* CScene_Rail::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCom
 
 void CScene_Rail::Free()
 {
+//	CFrustom::Get_Instance()->Destroy_Instance();
+
 	Engine::CScene::Free();
 }
