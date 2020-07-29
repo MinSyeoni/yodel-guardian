@@ -35,17 +35,17 @@ private:
 	virtual HRESULT				Add_Component();
 
 private:
-	void						Set_ConstantTable();
+	void						Set_ConstantTable(_uint iIdx);
 
 private:
 	Engine::CRcTex*				m_pBufferCom = nullptr;
-	Engine::CShader_UI*			m_pShaderCom = nullptr;
-	Engine::CTexture*			m_pTexture = nullptr;
+	Engine::CShader_UI*			m_pShaderCom[3] = { nullptr, };
+	Engine::CTexture*			m_pTexture[3] = { nullptr, };
 
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
 
 	_bool						m_bIsShow = true;
-
+	_uint						m_iIconIdx = 0;
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);
 	static  CIconUI*			Create(ID3D12Device* pGraphicDevice,

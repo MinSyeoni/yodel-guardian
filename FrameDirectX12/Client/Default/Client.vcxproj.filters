@@ -163,9 +163,6 @@
     <Filter Include="03.UI\05.QuestUI">
       <UniqueIdentifier>{66177720-cdb3-4e75-82b1-ab1a7672ec4c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.UI\02.HPBar">
-      <UniqueIdentifier>{e99cac33-ee3e-4971-9466-288c7895bc60}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.UI\06.InvenUI">
       <UniqueIdentifier>{65520a3f-9dfd-40dd-83a7-21791fa53d3d}</UniqueIdentifier>
     </Filter>
@@ -214,8 +211,6 @@
     <Filter Include="06.Scene_Rail">
       <UniqueIdentifier>{e2a1d531-0ff4-4f2d-ba4f-f528a350b17a}</UniqueIdentifier>
     </Filter>
-
-
     <Filter Include="02.Scene_All\01.DynamicObject\02.HPKit">
       <UniqueIdentifier>{21caf629-06d4-430e-ac4a-ee0cbb938779}</UniqueIdentifier>
     </Filter>
@@ -230,6 +225,15 @@
     </Filter>
     <Filter Include="03.UI\08.AttackUI">
       <UniqueIdentifier>{695470aa-3d2c-4ade-9994-d86f60e50bc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\02.HPMPBar">
+      <UniqueIdentifier>{e99cac33-ee3e-4971-9466-288c7895bc60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\02.HPMPBar\00.HPBar">
+      <UniqueIdentifier>{b2ed0264-3b3f-44cc-9d14-5eaf1d19a84e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\02.HPMPBar\01.MPBar">
+      <UniqueIdentifier>{9c02bb57-893c-4122-9dda-8ce784fc214f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -397,9 +401,6 @@
       <Filter>03.UI\03.PlayerUI</Filter>
       <Filter>03.UI\03.IconUI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\HPBar.h">
-      <Filter>03.UI\02.HPBar</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\InvenUI.h">
       <Filter>03.UI\06.InvenUI</Filter>
     </ClInclude>
@@ -446,8 +447,6 @@
     <ClInclude Include="..\Code\Scene_Rail.h">
       <Filter>06.Scene_Rail</Filter>
     </ClInclude>
-
-
     <ClInclude Include="..\Code\HPKit.h">
       <Filter>02.Scene_All\01.DynamicObject\02.HPKit</Filter>
     </ClInclude>
@@ -463,6 +462,13 @@
     </ClInclude>
     <ClInclude Include="..\Code\AttackDamage.h">
       <Filter>03.UI\08.AttackUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Ken.h" />
+    <ClInclude Include="..\Code\HPBar.h">
+      <Filter>03.UI\02.HPMPBar\00.HPBar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\MPBar.h">
+      <Filter>03.UI\02.HPMPBar\01.MPBar</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -600,9 +606,6 @@
       <Filter>03.UI\03.PlayerUI</Filter>
       <Filter>03.UI\03.IconUI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\HPBar.cpp">
-      <Filter>03.UI\02.HPBar</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\InvenUI.cpp">
       <Filter>03.UI\06.InvenUI</Filter>
     </ClCompile>
@@ -649,8 +652,6 @@
     <ClCompile Include="..\Code\Scene_Rail.cpp">
       <Filter>06.Scene_Rail</Filter>
     </ClCompile>
-
-
     <ClCompile Include="..\Code\HPKit.cpp">
       <Filter>02.Scene_All\01.DynamicObject\02.HPKit</Filter>
     </ClCompile>
@@ -669,6 +670,13 @@
     </ClCompile>
     <ClCompile Include="..\Code\AttackDamage.cpp">
       <Filter>03.UI\08.AttackUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ken.cpp" />
+    <ClCompile Include="..\Code\HPBar.cpp">
+      <Filter>03.UI\02.HPMPBar\00.HPBar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MPBar.cpp">
+      <Filter>03.UI\02.HPMPBar\01.MPBar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

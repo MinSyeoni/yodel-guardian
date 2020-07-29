@@ -31,19 +31,13 @@ HRESULT CShader_UI::Ready_Shader(TYPE eType)
 	{
 		m_bIsAlpha = true;
 		m_bIsAlphaBlend = true;
-
 	}
-	 if (eType == ALPHABLEND)
+	if (eType == ALPHABLEND)
 	{
-
 		m_bIsAlpha = true;
 		m_bIsAlphaBlend = false;
-
-
 	}
 	m_eType = eType;
-
-
 
 	FAILED_CHECK_RETURN(Create_PipelineState(), E_FAIL);
 
@@ -142,6 +136,8 @@ HRESULT CShader_UI::Create_PipelineState()
 		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_UI.hlsl", nullptr, "PS_HPBAR1", "ps_5_1");
 	else if (m_eType == HPBAR2)
 		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_UI.hlsl", nullptr, "PS_HPBAR2", "ps_5_1");
+	else if (m_eType == MPBAR)
+		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_UI.hlsl", nullptr, "PS_MPBAR", "ps_5_1");
 	else
 		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_UI.hlsl", nullptr, "PS_NNOMAL", "ps_5_1");
 

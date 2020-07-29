@@ -89,28 +89,44 @@ void COptionUI::Show_OptionUI()
 void COptionUI::Show_OtherUI()
 {
 	list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
-	for (auto& pSrc : *pHpBarUIList)
-		dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(!m_bIsShow);
+	if (pHpBarUIList != nullptr)
+	{
+		for (auto& pSrc : *pHpBarUIList)
+			dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(!m_bIsShow);
+	}
 
 	list<CGameObject*>* pOnUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"OnUI");
-	for (auto& pSrc : *pOnUIList)
-		dynamic_cast<COnUI*>(pSrc)->Set_ShowUI(m_bIsShow);
+	if (pOnUIList != nullptr)
+	{
+		for (auto& pSrc : *pOnUIList)
+			dynamic_cast<COnUI*>(pSrc)->Set_ShowUI(m_bIsShow);
+	}
 
-	CGameObject* pIconUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"IconUI");
-	dynamic_cast<CIconUI*>(pIconUI)->Set_ShowUI(!m_bIsShow);
+	list<CGameObject*>* pIconUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"IconUI");
+	if (pIconUIList != nullptr)
+	{
+		for (auto& pSrc : *pIconUIList)
+			dynamic_cast<CIconUI*>(pSrc)->Set_ShowUI(!m_bIsShow);
+	}
 
 	CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"Quest");
-	dynamic_cast<CUI*>(pQuestUI)->Set_ShowUI(!m_bIsShow);
+	if (pQuestUI != nullptr)
+		dynamic_cast<CUI*>(pQuestUI)->Set_ShowUI(!m_bIsShow);
 
 	CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
-	dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(!m_bIsShow);
+	if (pGunUI != nullptr)
+		dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(!m_bIsShow);
 
 	CGameObject* pInvenUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
-	dynamic_cast<CInvenUI*>(pInvenUI)->Set_ShowUI(!m_bIsShow);
+	if (pInvenUI != nullptr)
+		dynamic_cast<CInvenUI*>(pInvenUI)->Set_ShowUI(!m_bIsShow);
 
 	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
-	for (auto& pSrc : *pEquipUIList)
-		dynamic_cast<CEquipUI*>(pSrc)->Set_ShowUI(false);
+	if (pEquipUIList != nullptr)
+	{
+		for (auto& pSrc : *pEquipUIList)
+			dynamic_cast<CEquipUI*>(pSrc)->Set_ShowUI(false);
+	}
 }
 
 void COptionUI::Render_GameObject(const _float& fTimeDelta)

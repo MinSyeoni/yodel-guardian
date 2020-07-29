@@ -71,8 +71,8 @@ void CEquipUI::Init_TypePos()
 	case CEquipUI::E_KITEQUIP2:
 	case CEquipUI::E_KITEQUIP3:
 	{
-		m_pTransCom->m_vPos.x = (((2.0f * m_vPos.x) / WINCX) * 0.5f);
-		m_pTransCom->m_vPos.y = (((-2.0f * m_vPos.y) / WINCY) * 0.5f);
+		m_pTransCom->m_vPos.x = (((2.0f * m_vPos.x) / WINCX) * 0.5f) - 0.1f;
+		m_pTransCom->m_vPos.y = (((-2.0f * m_vPos.y) / WINCY) * 0.5f) - 0.1f;
 	}
 	break;
 	case CEquipUI::E_CONVERSATION:
@@ -91,8 +91,6 @@ void CEquipUI::Init_TypePos()
 		m_pTransCom->m_vPos.y = (((-2.0f * m_vPos.y) / WINCY) * 0.5f) - 0.2f;
 	}
 	break;
-	case CEquipUI::EQUIP_END:
-		break;
 	default:
 		break;
 	}
@@ -149,8 +147,6 @@ HRESULT CEquipUI::Add_Component()
 	case CEquipUI::E_DOOROPEN_L:
 	case CEquipUI::E_DOOROPEN_P:
 		wstrPrototype = L"Prototype_Texture_E_DoorOpen";
-		break;
-	case CEquipUI::EQUIP_END:
 		break;
 	default:
 		break;
