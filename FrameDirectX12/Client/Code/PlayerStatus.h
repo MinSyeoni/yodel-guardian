@@ -73,7 +73,7 @@ public:
 
 	_bool m_bIshit = false;
 	_float m_fhitCool = 0.f;
-	_uint m_uiHp = 314;
+	_uint m_uiHp = 200;
 
 	bool m_bIsZoom = false;
 	_bool m_bIsInit = false;

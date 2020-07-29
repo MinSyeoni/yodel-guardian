@@ -5,7 +5,8 @@
 #include "GraphicDevice.h"
 #include "ColliderMgr.h"
 #include "Frustom.h"
-#include "EquipUI.h"
+#include "HPKit.h"
+#include "InvenUI.h"
 
 CMedi_Medicine::CMedi_Medicine(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -92,7 +93,56 @@ _int CMedi_Medicine::LateUpdate_GameObject(const _float& fTimeDelta)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCollider), -1);
 
+	Check_ItemAndMouse();
+
 	return NO_EVENT;
+}
+
+void CMedi_Medicine::Check_ItemAndMouse()
+{
+	_uint iMinDist = 999;
+	float iDist = 0;
+	bool Collision = false;
+
+	list<CGameObject*>* pKitList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"ItemObject");
+	if (pKitList != nullptr)
+	{
+		for (auto& pSrc : *pKitList)
+		{
+			if (!dynamic_cast<CHPKit*>(pSrc)->Get_IsOpenAndZoom())
+				continue;
+
+			for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::OBJECT))
+			{
+				if (pCol != m_pBoxCollider)
+					continue;
+
+				Collision = CMathMgr::Get_Instance()->Collision_BoxWithMousePoint(pCol, g_hWnd, &iDist);
+				if ((iDist < iMinDist) && Collision)
+				{
+					iMinDist = iDist;
+					pCol->Set_IsCol(true);
+					m_bIsClick = true;
+					break;
+				}
+				else
+				{
+					pCol->Set_IsCol(false);
+					m_bIsClick = false;
+				}
+			}
+		}
+	}
+
+	if (m_bIsClick && MOUSE_KEYDOWN(MOUSEBUTTON::DIM_LB))
+	{
+		CGameObject* pInvenUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
+		if (pInvenUI != nullptr)
+			dynamic_cast<CInvenUI*>(pInvenUI)->Set_AddItemNum(1, 1);
+
+		m_bIsClick = false;
+		m_bIsDead = true;
+	}
 }
 
 void CMedi_Medicine::Render_GameObject(const _float& fTimeDelta)

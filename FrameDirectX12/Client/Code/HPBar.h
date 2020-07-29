@@ -35,6 +35,9 @@ public:
 	virtual void				Render_GameObject(const _float& fTimeDelta);
 
 	void						Set_HP_Damage(const _float& fTimeDelta);
+	void						Set_CurHpType(_uint iType) { m_iHPType = iType; }
+	_uint						Get_CurHpType() { return m_iHPType; }
+	HPBAR_TYPE					Get_CurHpState() { return m_eType; }
 
 private:
 	virtual HRESULT				Add_Component();
@@ -51,6 +54,7 @@ private:
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
 
 	_bool						m_bIsShow = true;
+	_uint						m_iHPType = 0;	// 0 - 피 깎임, 1 - 피 회복
 
 	_float						m_fCurHp = 0.f;
 	_float						m_fPreHp = 0.f;

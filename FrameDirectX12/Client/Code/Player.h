@@ -41,7 +41,7 @@ public:
 
 	/////////// HHHHHHHHPPPPPPPPP
 	_float			Get_CurHP();
-
+	void			Set_CurHP(_uint iHP);
 private:
 	virtual HRESULT Add_Component();
 private:

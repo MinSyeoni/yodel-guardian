@@ -5,10 +5,10 @@
 #include "GraphicDevice.h"
 #include "ColliderMgr.h"
 #include "Frustom.h"
-#include "InvenUI.h"
 #include "EquipUI.h"
 #include "StaticCamera.h"
 #include "Player.h"
+
 CHPKit::CHPKit(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -82,7 +82,7 @@ void CHPKit::Get_EquipUI()
 		{
 			if ((CEquipUI::EQUIP_TYPE)m_iMeshID == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
 			{
-				m_pGameObject = dynamic_cast<CEquipUI*>(pSrc);
+				m_pGameObject = dynamic_cast<CEquipUI*>(pSrc);			
 				break;
 			}
 		}
@@ -130,7 +130,8 @@ void CHPKit::HPKit_Ani()
 	case CHPKit::KIT_OPEN:
 	{
 		m_fAniDelay = 1500.f;
-		dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
+	//	if(m_pGameObject != nullptr)
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, KIT_OPEN))
 			m_eState = KIT_ALREADYOPEN;
 	}
@@ -138,7 +139,8 @@ void CHPKit::HPKit_Ani()
 	case CHPKit::KIT_CLOSE:
 	{
 		m_fAniDelay = 1500.f;
-		dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
+	//	if(m_pGameObject != nullptr)
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, KIT_CLOSE))
 			m_eState = KIT_IDLE;
 	}
@@ -165,13 +167,15 @@ void CHPKit::Open_TheKit()
 	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYER))
 	{
 		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir))
-		{				
-			if (!m_bIsOpen && CDirectInput::Get_Instance()->KEY_DOWN(DIK_E))
-				m_eState = KIT_OPEN;				
+		{
+		//	if (m_pGameObject != nullptr)
 			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(!m_bIsOpen);
+			if (!m_bIsOpen && CDirectInput::Get_Instance()->KEY_DOWN(DIK_E))
+				m_eState = KIT_OPEN;		
 		}
 		else
-			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
+		//	if(m_pGameObject != nullptr)
+				dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 	}
 }
 

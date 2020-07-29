@@ -87,21 +87,18 @@ void CHPBar::Set_HP_Damage(const _float& fTimeDelta)
 	case CHPBar::PLAYER_HPBAER:
 	{
 		CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-
 		m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
 	}
 	break;
 	case CHPBar::COLLEAGUE_HPBAR:
 	{
 		CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-
 		m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
 	}
 	break;
 	case CHPBar::COLLEAGUE2_HPBAR:
 	{
 		CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-
 		m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
 	}
 	break;
@@ -109,12 +106,25 @@ void CHPBar::Set_HP_Damage(const _float& fTimeDelta)
 		break;
 	}
 
-	if (m_fPreHp > m_fCurHp)
+	if (m_iHPType == 0)
 	{
-		m_fPreHp -= 15.f * fTimeDelta;
+		if (m_fPreHp > m_fCurHp)
+		{
+			m_fPreHp -= 15.f * fTimeDelta;
 
-		if (m_fPreHp <= m_fCurHp)
-			m_fPreHp = m_fCurHp;
+			if (m_fPreHp <= m_fCurHp)
+				m_fPreHp = m_fCurHp;
+		}
+	}
+	else if (m_iHPType == 1)
+	{
+		if (m_fPreHp < m_fCurHp)
+		{
+			m_fPreHp += 15.f * fTimeDelta;
+
+			if (m_fPreHp >= m_fCurHp)
+				m_fPreHp = m_fCurHp;
+		}
 	}
 }
 
@@ -125,11 +135,11 @@ _int CHPBar::LateUpdate_GameObject(const _float& fTimeDelta)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
 	// hp 줄어드는거 테스트트트트트트
-	if (CDirectInput::Get_Instance()->KEY_PRESSING(DIK_9))
-	{
-		//	if (m_fPreHp > m_fCurHp)
-		m_fPreHp -= 15.f * fTimeDelta;
-	}
+	//if (CDirectInput::Get_Instance()->KEY_PRESSING(DIK_9))
+	//{
+	//	//	if (m_fPreHp > m_fCurHp)
+	//	m_fPreHp -= 15.f * fTimeDelta;
+	//}
 
 	m_matHPWorld._11 = (m_fPreHp * 2 - 314) * 0.01;
 

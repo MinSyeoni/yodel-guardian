@@ -109,12 +109,14 @@ void CLobbyDoor::CollisionTheDoor()
 	{
 		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCol, pCol, &vShaveDir))
 		{
-			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(!m_bIsOpen);
+			if(dynamic_cast<CEquipUI*>(m_pGameObject) != nullptr)
+				dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(!m_bIsOpen);
 			m_bIsCollision = true;
 		}
 		else
 		{
-			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
+			if(dynamic_cast<CEquipUI*>(m_pGameObject) != nullptr)
+				dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 			m_bIsCollision = false;
 		}
 	}
@@ -137,7 +139,8 @@ void CLobbyDoor::LobbyDoor_AniState()
 	case CLobbyDoor::DOOR_OPEN:
 	{
 		m_fAniDelay = 5000.f;
-		dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
+		if(dynamic_cast<CEquipUI*>(m_pGameObject) != nullptr)
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, DOOR_OPEN))
 			m_eDoorState = DOOR_ALREADYOPEN;
 	}

@@ -29,11 +29,14 @@ public:
 	virtual HRESULT				LateInit_GameObject();
 	virtual _int				Update_GameObject(const _float& fTimeDelta);
 	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
-	void						OpenKit_PlayZoom();
 	virtual void				Render_GameObject(const _float& fTimeDelta);
 	virtual void				SetMeshInfo(MeshInfo tInfo) { m_tMeshInfo = tInfo; }
 
+public:
+	_bool						Get_IsOpenAndZoom() { return m_bIsZoomAlready; }
+
 private:
+	void						OpenKit_PlayZoom();
 	void						Get_EquipUI();
 	virtual HRESULT				Add_Component();
 	void						Set_ConstantTable();

@@ -5,7 +5,8 @@
 #include "GraphicDevice.h"
 #include "ColliderMgr.h"
 #include "Frustom.h"
-#include "EquipUI.h"
+#include "HPKit.h"
+#include "InvenUI.h"
 
 CMedi_Bandage::CMedi_Bandage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -60,6 +61,18 @@ _int CMedi_Bandage::Update_GameObject(const _float& fTimeDelta)
 	m_pBoxCollider->Update_Collider(&m_pTransCom->m_matWorld);
 	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCollider);
 
+	//if (pEquipUIList != nullptr)
+	//{
+	//	for (auto& pSrc : *pEquipUIList)
+	//	{
+	//		if ((CEquipUI::EQUIP_TYPE)m_iMeshID == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
+	//		{
+	//			m_pGameObject = dynamic_cast<CEquipUI*>(pSrc);
+	//			break;
+	//		}
+	//	}
+	//}
+
 	//ReScale_SphereCol();
 
 	return NO_EVENT;
@@ -83,7 +96,7 @@ void CMedi_Bandage::ReScale_SphereCol()
 _int CMedi_Bandage::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 	if (!CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
-		return NO_EVENT; 
+		return NO_EVENT;
 
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
@@ -92,8 +105,56 @@ _int CMedi_Bandage::LateUpdate_GameObject(const _float& fTimeDelta)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCollider), -1);
 	//FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol), -1);
 
+	Check_ItemAndMouse();
 
 	return NO_EVENT;
+}
+
+void CMedi_Bandage::Check_ItemAndMouse()
+{
+	_uint iMinDist = 999;
+	float iDist = 0;
+	bool Collision = false;
+
+	list<CGameObject*>* pKitList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"ItemObject");
+	if (pKitList != nullptr)
+	{
+		for (auto& pSrc : *pKitList)
+		{
+			if (!dynamic_cast<CHPKit*>(pSrc)->Get_IsOpenAndZoom())
+				continue;
+
+			for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::OBJECT))
+			{
+				if (pCol != m_pBoxCollider)
+					continue;
+
+				Collision = CMathMgr::Get_Instance()->Collision_BoxWithMousePoint(pCol, g_hWnd, &iDist);
+				if ((iDist < iMinDist) && Collision)
+				{
+					iMinDist = iDist;
+					pCol->Set_IsCol(true);
+					m_bIsClick = true;
+					break;
+				}
+				else
+				{
+					pCol->Set_IsCol(false);
+					m_bIsClick = false;
+				}
+			}
+		}
+	}
+
+	if (m_bIsClick && MOUSE_KEYDOWN(MOUSEBUTTON::DIM_LB))
+	{
+		CGameObject* pInvenUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
+		if (pInvenUI != nullptr)
+			dynamic_cast<CInvenUI*>(pInvenUI)->Set_AddItemNum(0, 1);
+
+		m_bIsClick = false;
+		m_bIsDead = true;
+	}
 }
 
 void CMedi_Bandage::Render_GameObject(const _float& fTimeDelta)

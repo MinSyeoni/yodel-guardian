@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "InvenUI.h"
 #include "Font.h"
+#include "HPBar.h"
 
 CInvenUI::CInvenUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -85,7 +86,36 @@ _int CInvenUI::LateUpdate_GameObject(const _float& fTimeDelta)
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
+	Use_ItemBandage();
+
 	return NO_EVENT;
+}
+
+void CInvenUI::Use_ItemBandage()
+{
+	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+	_float fCurHP = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
+
+	if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_9))
+	{
+		if (m_iItemNum[0] > 0)		// บุด๋
+		{
+			m_iItemNum[0]--;
+
+			list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
+			if (pHpBarUIList != nullptr && fCurHP < 314)
+			{
+				for (auto& pSrc : *pHpBarUIList)
+				{
+					if (CHPBar::PLAYER_HPBAER == dynamic_cast<CHPBar*>(pSrc)->Get_CurHpState())
+					{
+						dynamic_cast<CPlayer*>(pPlayer)->Set_CurHP(30);
+						dynamic_cast<CHPBar*>(pSrc)->Set_CurHpType(1);
+					}
+				}
+			}
+		}
+	}
 }
 
 void CInvenUI::Render_GameObject(const _float& fTimeDelta)

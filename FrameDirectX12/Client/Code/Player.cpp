@@ -136,6 +136,12 @@ _float CPlayer::Get_CurHP()
 	return m_pStatus->m_uiHp;
 }
 
+void CPlayer::Set_CurHP(_uint iHP)
+{
+	if(m_pStatus->m_uiHp < 314)
+		m_pStatus->m_uiHp += iHP;
+}
+
 HRESULT CPlayer::Add_Component()
 {
 	return S_OK;

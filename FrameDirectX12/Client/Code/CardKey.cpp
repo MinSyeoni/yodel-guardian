@@ -154,14 +154,16 @@ void CCardKey::Coliision_CardAndPlayer()
 		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir))
 		{
 		//	dynamic_cast<CEquipUI*>(m_pGameObject)->Set_EquipPos(m_pTransCom->m_vPos.x, m_pTransCom->m_vPos.y);
-			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(true);
+			if (dynamic_cast<CEquipUI*>(m_pGameObject) != nullptr)
+				dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(true);
 
 			if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && !m_bIsEquip)
 				m_bIsEquip = true;
 		}
 		else
 		{
-			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
+			if (dynamic_cast<CEquipUI*>(m_pGameObject) != nullptr)
+				dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 		}
 	}
 

@@ -32,6 +32,7 @@ public:
 	virtual HRESULT				LateInit_GameObject();
 	virtual _int				Update_GameObject(const _float& fTimeDelta);
 	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
+	void Use_ItemBandage();
 	virtual void				Render_GameObject(const _float& fTimeDelta);
 
 private:
@@ -53,7 +54,7 @@ private:
 	POINT						m_pt = {};
 	_bool						m_bIsShow = true;
 
-	_uint						m_iItemNum[3] = {};		// 0 - Kit, 1 - medicine, 2 - bandage 
+	_uint						m_iItemNum[3] = {};		// 0 - bandage, 1 - medicine, 2 - syringe 
 
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);
