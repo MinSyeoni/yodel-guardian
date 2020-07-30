@@ -1,0 +1,102 @@
+ScalarParameterValues[4] =
+{
+    ScalarParameterValues[0] =
+    {
+        ParameterName = Material_Tile
+        ParameterValue = 1
+        ParameterInfo = 
+    }
+    ScalarParameterValues[1] =
+    {
+        ParameterName = Detail_Normal_Tile
+        ParameterValue = 10
+        ParameterInfo = 
+    }
+    ScalarParameterValues[2] =
+    {
+        ParameterName = SSS_Width
+        ParameterValue = 1
+        ParameterInfo = 
+    }
+    ScalarParameterValues[3] =
+    {
+        ParameterName = Specular_Power
+        ParameterValue = 10
+        ParameterInfo = 
+    }
+}
+TextureParameterValues[2] =
+{
+    TextureParameterValues[0] =
+    {
+        ParameterName = Base_Normal
+        ParameterValue = Texture2D'BioT_Collector_Int.Cavewall01_NORM'
+        ParameterInfo = 
+    }
+    TextureParameterValues[1] =
+    {
+        ParameterName = Diffuse
+        ParameterValue = Texture2D'BioT_Collector_Int.Cavewall01_DIFF'
+        ParameterInfo = 
+    }
+}
+VectorParameterValues[4] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = SSS_Color
+        ParameterValue =
+        {
+            R = 0.2
+            G = 0.1
+            B = 0.05
+            A = 0
+        }
+        ParameterInfo = 
+    }
+    VectorParameterValues[1] =
+    {
+        ParameterName = Specular_Color_Intensity
+        ParameterValue =
+        {
+            R = 0.7593
+            G = 0.729919
+            B = 0.505433
+            A = 1
+        }
+        ParameterInfo = 
+    }
+    VectorParameterValues[2] =
+    {
+        ParameterName = Diffuse_Tint
+        ParameterValue =
+        {
+            R = 0.751895
+            G = 0.751895
+            B = 0.751895
+            A = 1
+        }
+        ParameterInfo = 
+    }
+    VectorParameterValues[3] =
+    {
+        ParameterName = Fresnel_Color_Intensity
+        ParameterValue =
+        {
+            R = 0.089194
+            G = 0.089194
+            B = 0.089194
+            A = 1
+        }
+        ParameterInfo = 
+    }
+}
+Parent = Material3'BioT_LevelMaster.Materials.Opaque_MM'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

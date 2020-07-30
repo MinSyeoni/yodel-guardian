@@ -30,13 +30,20 @@ C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Efffect
 C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Ken.cpp(155,49): warning C4244: '인수': 'double'에서 'const Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   LightObject.cpp
   Loading.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Loading.cpp(538,114): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+  LoadingBar.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\LoadingBar.cpp(76,32): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  LoadingTexture.cpp
   LobbyDoor.cpp
   MainApp.cpp
   MapObject.cpp
   BaziorMgr.cpp
   Medi_Bandage.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Medi_Bandage.cpp(135,17): warning C4244: '=': 'float'에서 '_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Medi_Medicine.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Medi_Medicine.cpp(123,17): warning C4244: '=': 'float'에서 '_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Medi_Syringe.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Medi_Syringe.cpp(123,17): warning C4244: '=': 'float'에서 '_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Monster.cpp
   MPBar.cpp
 C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\MPBar.cpp(89,42): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -47,14 +54,14 @@ C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Normand
   OnUI.cpp
   OptionUI.cpp
   PassageDoor.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
   Pistol.cpp
   Player.cpp
 C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Player.cpp(136,18): warning C4244: 'return': '_uint'에서 '_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
   PlayerArm.cpp
   HPBar.cpp
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPBar.cpp(134,42): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\HPBar.cpp(144,42): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   PlayerLeg.cpp
   PlayerPoint.cpp
   PlayerStatus.cpp
@@ -102,10 +109,10 @@ C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\Shepard
   Sniper.cpp
   StaticCamera.cpp
   StaticObject.cpp
-  Terrain.cpp
-  TrailEffect.cpp
   코드를 생성하고 있습니다...
   컴파일하고 있습니다...
+  Terrain.cpp
+  TrailEffect.cpp
   Trigger.cpp
   UI.cpp
 C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\UI.cpp(42,18): warning C4804: '*=': 연산에 'bool' 형식을 사용하는 것은 안전하지 않습니다.

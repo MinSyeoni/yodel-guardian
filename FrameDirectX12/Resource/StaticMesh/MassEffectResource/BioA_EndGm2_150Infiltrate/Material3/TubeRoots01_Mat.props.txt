@@ -1,0 +1,17 @@
+TwoSided = false
+bDisableDepthTest = false
+bIsMasked = false
+ReferencedTextures[2] =
+{
+    ReferencedTextures[0] = Texture2D'BioT_Collector_MtL.Materials.TubeRoots01_NormOLD_TubeGlass01_NormTubeGlass01_Diff'
+    ReferencedTextures[1] = Texture2D'BioT_Collector_MtL.Materials.TubeRoots01_DiffOLD_TubeGlass01_NormTubeGlass01_Diff'
+}
+BlendMode = BLEND_Translucent (2)
+OpacityMaskClipValue = 0.333
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

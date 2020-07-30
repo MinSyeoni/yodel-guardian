@@ -1,0 +1,18 @@
+TwoSided = false
+bDisableDepthTest = false
+bIsMasked = false
+ReferencedTextures[3] =
+{
+    ReferencedTextures[0] = Texture2D'BioVFX_Z_TEXTURES.Fractals.Smoke_Fractal'
+    ReferencedTextures[1] = Texture2D'BioApl_Uti_Col_Pod01.Pod_Collector_Glass_Stack'
+    ReferencedTextures[2] = Texture2D'BioApl_Uti_Col_Pod01.Pod_Collector_Glass_Diff'
+}
+BlendMode = BLEND_Opaque (0)
+OpacityMaskClipValue = 0.333
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

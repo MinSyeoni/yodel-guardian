@@ -1,0 +1,66 @@
+ScalarParameterValues[1] =
+{
+    ScalarParameterValues[0] =
+    {
+        ParameterName = Mask_Offset
+        ParameterValue = 0
+        ParameterInfo = 
+    }
+}
+TextureParameterValues[2] =
+{
+    TextureParameterValues[0] =
+    {
+        ParameterName = Scratch_Set
+        ParameterValue = None
+        ParameterInfo = 
+    }
+    TextureParameterValues[1] =
+    {
+        ParameterName = TextGUI_Sheet
+        ParameterValue = Texture2D'BioT_LevelMaster.TextureSamples.MM_FontMaster_01'
+        ParameterInfo = 
+    }
+}
+VectorParameterValues[4] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = Specular_Color_Intensity
+        ParameterValue = { R=1, G=1, B=1, A=1 }
+        ParameterInfo = 
+    }
+    VectorParameterValues[1] =
+    {
+        ParameterName = Base_Color
+        ParameterValue =
+        {
+            R = 1.5
+            G = 1.5
+            B = 1.5
+            A = 1
+        }
+        ParameterInfo = 
+    }
+    VectorParameterValues[2] =
+    {
+        ParameterName = Scratch_Highlight_Color
+        ParameterValue = { R=1, G=1, B=1, A=1 }
+        ParameterInfo = 
+    }
+    VectorParameterValues[3] =
+    {
+        ParameterName = Scratch_Shadow_Color
+        ParameterValue = { R=1, G=1, B=1, A=1 }
+        ParameterInfo = 
+    }
+}
+Parent = Material3'BioT_LevelMaster.Materials.GUI_Lit_MM'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

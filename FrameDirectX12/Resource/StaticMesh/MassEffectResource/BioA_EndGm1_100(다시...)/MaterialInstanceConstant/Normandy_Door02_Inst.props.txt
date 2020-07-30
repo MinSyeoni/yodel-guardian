@@ -1,0 +1,108 @@
+ScalarParameterValues[2] =
+{
+    ScalarParameterValues[0] =
+    {
+        ParameterName = Detail_Normal_Tile
+        ParameterValue = 30
+        ParameterInfo = 
+    }
+    ScalarParameterValues[1] =
+    {
+        ParameterName = Specular_Power
+        ParameterValue = 30
+        ParameterInfo = 
+    }
+}
+TextureParameterValues[4] =
+{
+    TextureParameterValues[0] =
+    {
+        ParameterName = Base_Normal
+        ParameterValue = Texture2D'BioApl_Dor_Normandy_Door02.Normandy_Door02_Norm'
+        ParameterInfo = 
+    }
+    TextureParameterValues[1] =
+    {
+        ParameterName = Detail_Normal
+        ParameterValue = Texture2D'Dor_Normandy_Door02_Trash.DeleteMe.Door_DNORM'
+        ParameterInfo = 
+    }
+    TextureParameterValues[2] =
+    {
+        ParameterName = Diffuse
+        ParameterValue = Texture2D'BioApl_Dor_Normandy_Door02.Normandy_Door02_Diff'
+        ParameterInfo = 
+    }
+    TextureParameterValues[3] =
+    {
+        ParameterName = CubeMap_Set
+        ParameterValue = TextureCube3'BioT_LevelMaster.TextureSamples.MM_CUBEMAP_SET_A'
+        ParameterInfo = 
+    }
+}
+VectorParameterValues[5] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = Specular_Color_Intensity
+        ParameterValue = { R=10, G=11, B=10, A=1 }
+        ParameterInfo = 
+    }
+    VectorParameterValues[1] =
+    {
+        ParameterName = Emissive_Color_Intensity
+        ParameterValue =
+        {
+            R = 3
+            G = 0.8
+            B = 0.1
+            A = 1
+        }
+        ParameterInfo = 
+    }
+    VectorParameterValues[2] =
+    {
+        ParameterName = Diffuse_Tint
+        ParameterValue =
+        {
+            R = 0.851252
+            G = 0.867136
+            B = 0.899385
+            A = 1
+        }
+        ParameterInfo = 
+    }
+    VectorParameterValues[3] =
+    {
+        ParameterName = Cubemap_Chooser
+        ParameterValue =
+        {
+            R = 0
+            G = 0.1
+            B = 0.2
+            A = 0
+        }
+        ParameterInfo = 
+    }
+    VectorParameterValues[4] =
+    {
+        ParameterName = Cubemap_Color_Intensity
+        ParameterValue =
+        {
+            R = 0.592438
+            G = 0.598942
+            B = 0.481952
+            A = 1
+        }
+        ParameterInfo = 
+    }
+}
+Parent = MaterialInstanceConstant'BioT_Normandy_Int.Materials.Wall02'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

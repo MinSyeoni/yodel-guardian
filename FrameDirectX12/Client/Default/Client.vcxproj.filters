@@ -473,14 +473,14 @@
     <ClInclude Include="..\Code\HPBar.h">
       <Filter>03.UI\02.HPMPBar\00.HPBar</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\MPBar.h">
-      <Filter>03.UI\02.HPMPBar\01.MPBar</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\LoadingTexture.h">
       <Filter>00.Scene_Logo\00.BackGround\00.LoadingTexture</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\LoadingBar.h">
       <Filter>00.Scene_Logo\00.BackGround\01.LoadingBar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\MPBar.h">
+      <Filter>03.UI\02.HPMPBar\01.MPBar</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -687,14 +687,14 @@
     <ClCompile Include="..\Code\HPBar.cpp">
       <Filter>03.UI\02.HPMPBar\00.HPBar</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\MPBar.cpp">
-      <Filter>03.UI\02.HPMPBar\01.MPBar</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\LoadingTexture.cpp">
       <Filter>00.Scene_Logo\00.BackGround\00.LoadingTexture</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\LoadingBar.cpp">
       <Filter>00.Scene_Logo\00.BackGround\01.LoadingBar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MPBar.cpp">
+      <Filter>03.UI\02.HPMPBar\01.MPBar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

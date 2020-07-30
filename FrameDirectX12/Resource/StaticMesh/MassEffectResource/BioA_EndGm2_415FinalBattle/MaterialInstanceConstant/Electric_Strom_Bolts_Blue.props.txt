@@ -1,0 +1,26 @@
+ScalarParameterValues[0] = {}
+TextureParameterValues[0] = {}
+VectorParameterValues[1] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = Lighting_Color
+        ParameterValue =
+        {
+            R = 20
+            G = 20
+            B = 100
+            A = 1
+        }
+        ParameterInfo = 
+    }
+}
+Parent = Material3'BioVFX_Env_RprGta.Materials.Electric_Storm_Bolts'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

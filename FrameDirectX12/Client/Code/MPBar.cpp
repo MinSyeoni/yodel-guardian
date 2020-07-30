@@ -33,16 +33,13 @@ HRESULT CMPBar::LateInit_GameObject()
 {
 	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());
 
-	Init_CharacterHp();
+	m_pTransCom->m_vPos.x = _float(2.f / WINCX * WINCX / 2) - 1.f;
+	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * WINCY / 2) + 1.f;
+	m_pTransCom->m_vPos.z = 0.4f;
+
+	m_fPreMp = m_fCurMp = 100.f;
 
 	return S_OK;
-}
-
-void CMPBar::Init_CharacterHp()
-{
-	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-	m_fPreMp = m_fCurMp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
-
 }
 
 _int CMPBar::Update_GameObject(const _float& fTimeDelta)
@@ -54,23 +51,28 @@ _int CMPBar::Update_GameObject(const _float& fTimeDelta)
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
-	Set_HP_Damage(fTimeDelta);
+	if (m_iMPType == 0)
+	{
+		if (m_fPreMp > m_fCurMp)
+		{
+			m_fPreMp -= 15.f * fTimeDelta;
+
+			if (m_fPreMp <= m_fCurMp)
+				m_fPreMp = m_fCurMp;
+		}
+	}
+	else if (m_iMPType == 1)
+	{
+		if (m_fPreMp < m_fCurMp)
+		{
+			m_fPreMp += 15.f * fTimeDelta;
+
+			if (m_fPreMp >= m_fCurMp)
+				m_fPreMp = m_fCurMp;
+		}
+	}
 
 	return NO_EVENT;
-}
-
-void CMPBar::Set_HP_Damage(const _float& fTimeDelta)
-{
-	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-	m_fCurMp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
-
-	if (m_fPreMp > m_fCurMp)
-	{
-		m_fPreMp -= 15.f * fTimeDelta;
-
-		if (m_fPreMp <= m_fCurMp)
-			m_fPreMp = m_fCurMp;
-	}
 }
 
 _int CMPBar::LateUpdate_GameObject(const _float& fTimeDelta)
@@ -79,21 +81,22 @@ _int CMPBar::LateUpdate_GameObject(const _float& fTimeDelta)
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
-	// 줄어드는거 테스트트트트트트
+	// hp 줄어드는거 테스트트트트트트
 	if (CDirectInput::Get_Instance()->KEY_PRESSING(DIK_9))
 	{
-		//	if (m_fPreHp > m_fCurHp)
-		m_fPreMp -= 15.f * fTimeDelta;
+	//	if (m_fPreMp > m_fCurMp)
+			m_fPreMp -= 15.f * fTimeDelta;
 	}
 
-	m_matMPWorld._11 = (m_fPreMp * 2 - 314) * 0.01;
+	m_matMPWorld._41 = m_fPreMp * 0.0028;
 
 	return NO_EVENT;
 }
 
+
 void CMPBar::Render_GameObject(const _float& fTimeDelta)
 {
-	if (!m_bIsShow || m_fPreMp <= 0.f)
+	if (!m_bIsShow)
 		return;
 
 	Set_ConstantTable();
@@ -121,14 +124,14 @@ HRESULT CMPBar::Add_Component()
 	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
 
-	// Texture
+	// Texture 
 	m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_PlayerMP", COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
 
 	// TransCom 
 	m_pTransCom = static_cast<CTransform*>(m_pComponentMgr->Clone_Component(L"Prototype_Transform", COMPONENTID::ID_DYNAMIC));
-	if (nullptr != m_pTransCom)
+	if (nullptr != m_pTransCom) 
 		m_mapComponent[ID_DYNAMIC].emplace(L"Com_Transform", m_pTransCom);
 
 	return S_OK;
@@ -143,7 +146,6 @@ void CMPBar::Set_ConstantTable()
 	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
 
 	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
-
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_matMPWorld));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
