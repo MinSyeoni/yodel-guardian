@@ -8,6 +8,7 @@
 #include "OnUI.h"
 #include "UI.h"
 #include "EquipUI.h"
+#include "MousePoint.h"
 
 COptionUI::COptionUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -127,6 +128,10 @@ void COptionUI::Show_OtherUI()
 		for (auto& pSrc : *pEquipUIList)
 			dynamic_cast<CEquipUI*>(pSrc)->Set_ShowUI(false);
 	}
+
+	CGameObject* pMousePoint = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"MouseUI");
+	if (pMousePoint != nullptr)
+		dynamic_cast<CMousePoint*>(pMousePoint)->Set_ShowUI(m_bIsShow);
 }
 
 void COptionUI::Render_GameObject(const _float& fTimeDelta)
