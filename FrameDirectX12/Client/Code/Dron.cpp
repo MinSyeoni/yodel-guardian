@@ -26,6 +26,7 @@ void CDron::Initialized()
 
 HRESULT CDron::Late_Initialized()
 {
+	m_eCurState = DRON_EX_IdleHoverTwitch;
 	m_ePreState = m_eCurState;
 
 	return S_OK;
@@ -52,6 +53,8 @@ _int CDron::Update_Dron(const _float& fTimeDelta, CTransform* pTransform, CMesh*
 	// 체력 
 	Update_DronHP();
 
+	//m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &vecDir, fTimeDelta * m_fSpeed);
+
 	if (m_bIsDronState[2])	// m_bIsHit
 		m_eCurState = DRON_EX_IdleSway;
 
@@ -60,42 +63,42 @@ _int CDron::Update_Dron(const _float& fTimeDelta, CTransform* pTransform, CMesh*
 
 void CDron::MoveByAstar(const _float& fTimeDelta)
 {
-	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-	if (pPlayer == nullptr)
-		return;
+	//CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+	//if (pPlayer == nullptr)
+	//	return;
 
-	CTransform* pPlayerTranForm = pPlayer->Get_Transform();
-	CNaviMesh* pPlayerNavi = dynamic_cast<CPlayer*>(pPlayer)->Get_Status()->m_pNaviMesh;
+	//CTransform* pPlayerTranForm = pPlayer->Get_Transform();
+	//CNaviMesh* pPlayerNavi = dynamic_cast<CPlayer*>(pPlayer)->Get_Status()->m_pNaviMesh;
 
-	m_pAstarCom->Start_Aster(m_pTransCom->m_vPos, pPlayerTranForm->m_vPos, m_pNaviMesh->GetIndex(), pPlayerNavi->GetIndex());
+	//m_pAstarCom->Start_Aster(m_pTransCom->m_vPos, pPlayerTranForm->m_vPos, m_pNaviMesh->GetIndex(), pPlayerNavi->GetIndex());
 
-	list<Engine::CCell*>& BestLst = m_pAstarCom->GetBestLst();
+	//list<Engine::CCell*>& BestLst = m_pAstarCom->GetBestLst();
 
-	if (!BestLst.empty())
-	{
-		_vec3 vecDir = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
+	//if (!BestLst.empty())
+	//{
+	//	_vec3 vecDir = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
 
-		BestLst.pop_front();
-		if (!BestLst.empty())
-		{
-			_vec3 vecDir2 = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
+	//	BestLst.pop_front();
+	//	if (!BestLst.empty())
+	//	{
+	//		_vec3 vecDir2 = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
 
-			vecDir = (vecDir + vecDir2) * 0.5;
-			BestLst.pop_front();
-			if (!BestLst.empty())
-			{
-				vecDir2 = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
-				vecDir = (vecDir + vecDir2) * 0.5;
-			}
-		}
+	//		vecDir = (vecDir + vecDir2) * 0.5;
+	//		BestLst.pop_front();
+	//		if (!BestLst.empty())
+	//		{
+	//			vecDir2 = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
+	//			vecDir = (vecDir + vecDir2) * 0.5;
+	//		}
+	//	}
 
-		vecDir.Normalize();
-		_vec3 vMovePos;
+	//	vecDir.Normalize();
+	//	_vec3 vMovePos;
 
-		vMovePos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &vecDir, fTimeDelta * m_fSpeed);
+	//	vMovePos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &vecDir, fTimeDelta * m_fSpeed);
 
-		m_pTransCom->m_vPos = vMovePos;
-	}
+	//	m_pTransCom->m_vPos = vMovePos;
+	//}
 }
 
 void CDron::Update_DronHP()
@@ -207,7 +210,7 @@ void CDron::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		else
 		{
 			Chase_Player(fTimeDelta);
-			MoveByAstar(fTimeDelta);
+		//	MoveByAstar(fTimeDelta);
 		}
 	}
 	break;
@@ -219,12 +222,22 @@ void CDron::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CDron::DRON_EX_IdleHover:
 		break;
-	case CDron::DRON_EX_IdleHoverTwitch:
+	case CDron::DRON_EX_IdleHoverTwitch:	// 정찰
+	{
+		if (Check_PlayerRange(8.f))
+		{
+			m_fAniDelay = 4000.f;
+
+			if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, DRON_EX_IdleHoverTwitch))
+				m_eCurState = DRON_EX_IdleNoise;
+		}
+		else
+			Chase_Player(fTimeDelta);
+	}
 		break;
-	case CDron::DRON_EX_IdleNoise:
+	case CDron::DRON_EX_IdleNoise:		// 공격
 	{
 		m_fAniDelay = 6000.f;
-
 		Attak_Player(m_pMeshCom, DRON_EX_IdleNoise);
 	}
 		break;
@@ -254,10 +267,8 @@ void CDron::Attak_Player(Engine::CMesh* m_pMeshCom, CDron::DRONSTATE eState)
 	//	int iRandAni = rand() % 2;
 		m_bIsDronState[3] = false;
 
-		if (Check_PlayerRange(10.f))
+		if (Check_PlayerRange(8.f))
 			m_eCurState = DRON_EX_IdleNoise;
-		else
-			m_eCurState = DRON_CB_WalkUp;
 	}
 }
 
@@ -265,5 +276,5 @@ void CDron::Release()
 {
 	Safe_Release(m_pTransCom);
 	Safe_Release(m_pNaviMesh);
-	Safe_Release(m_pAstarCom);
+//	Safe_Release(m_pAstarCom);
 }

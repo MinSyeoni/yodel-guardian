@@ -34,6 +34,7 @@ private:
 
 private:
 	void						Set_ConstantTable();
+	void						Show_OtherUI(_bool bIsShow);
 
 private:
 	Engine::CRcTex* m_pBufferCom = nullptr;

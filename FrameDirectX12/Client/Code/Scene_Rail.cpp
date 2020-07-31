@@ -5,6 +5,10 @@
 #include "Management.h"
 #include "NaviMesh.h"
 
+#include "Monster.h"
+#include "FlameThrower.h"
+#include "Dron.h"
+
 CScene_Rail::CScene_Rail(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -127,7 +131,8 @@ HRESULT CScene_Rail::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Sniper", L"Weapon", nullptr), E_FAIL);
 
 	Load_StageObject(L"../../Data/StaticObj/pass.dat", wstrLayerTag);
-	//Load_MonsterPos(L"../../Data/Collider/Flame.dat", wstrLayerTag);
+	Load_MonsterPos(L"../../Data/Collider/Flame.dat", wstrLayerTag);
+	Load_MonsterPos(L"../../Data/Collider/Dron.dat", wstrLayerTag);
 	//Load_TriggerPos(L"../../Data/Collider/Flame.dat", wstrLayerTag);
 
 	/*____________________________________________________________________
@@ -173,6 +178,8 @@ void CScene_Rail::Load_MonsterPos(const wstring& wstrFilePath, wstring wstrLayer
 	DWORD dwByte = 0;
 	COLLIDER tColData = {};
 
+	m_tMeshInfo.MeshTag = L"";
+
 	while (true)
 	{
 		ReadFile(hFile, &tColData, sizeof(COLLIDER), &dwByte, nullptr);
@@ -191,12 +198,11 @@ void CScene_Rail::Load_MonsterPos(const wstring& wstrFilePath, wstring wstrLayer
 void CScene_Rail::InitMesh_FromFile(const std::wstring& wstrFilePath)
 {
 	if (wstrFilePath == L"../../Data/Collider/Flame.dat")
-		m_tMeshInfo.MeshTag = L"Flame";
-	else if (wstrFilePath == L"../../Data/Collider/Flame.dat")
-	{
-		m_tMeshInfo.MeshTag == L"Dron";
-		m_tMeshInfo.iMeshID = 0;
-	}
+		m_tMeshInfo.MeshTag = L"Flamethrower";
+	else if (wstrFilePath == L"../../Data/Collider/Dron.dat")
+		m_tMeshInfo.MeshTag = L"Dron";
+
+	m_tMeshInfo.Rotation = _vec3{ 0.f, 45.f, 0.f };
 }
 
 void CScene_Rail::Load_StageObject(const wstring& wstrFilePath, wstring wstrLayerTag)
@@ -280,32 +286,31 @@ HRESULT CScene_Rail::Ready_LayerUI(wstring wstrLayerTag)
 
 	m_pObjectMgr->Add_Layer(wstrLayerTag, pLayer);
 
-
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_UI", L"Quest", nullptr), E_FAIL);
-
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Aim", L"Aim", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_OptionUI", L"OptionUI", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", nullptr), E_FAIL);
 
 	_uint iType = 0;
+	for (int i = 0; i < 3; ++i)
+		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &(iType = i)), E_FAIL);
+
 	//////// 아이콘 //////
 	for (int i = 0; i < 3; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_IconUI", L"IconUI", &(iType = i)), E_FAIL);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &(iType = 0)), E_FAIL);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &(iType = 1)), E_FAIL);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &(iType = 2)), E_FAIL);
 
 	for (int i = 0; i < 7; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_OnUI", L"OnUI", &(iType = i)), E_FAIL);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 
-	for (int i = 0; i < 6; ++i)
+	for (int i = 0; i < 8; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_EquipUI", L"EquipUI", &(iType = i)), E_FAIL);
-	/*____________________________________________________________________
-	GameObject 생성.
-	m_pObjectMgr->Add_GameObject(wstrLayerTag, wstrObjTag);
-	______________________________________________________________________*/
+
+	for (int i = 0; i < 10; ++i)
+		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_QuestUI", L"QuestUI", &(iType = i)), E_FAIL);
+
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MPBarUI", L"MPBarUI", nullptr), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MouseUI", L"MouseUI", nullptr), E_FAIL);
 
 	return S_OK;
 }

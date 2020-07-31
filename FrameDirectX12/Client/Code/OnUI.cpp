@@ -147,7 +147,6 @@ void COnUI::Render_GameObject(const _float& fTimeDelta)
 	if (!m_bIsShow)
 		return;
 
-
 	Set_ConstantTable((int)m_bIsOff);
 	m_pShaderCom[(int)m_bIsOff]->Begin_Shader();
 	m_pBufferCom->Begin_Buffer();

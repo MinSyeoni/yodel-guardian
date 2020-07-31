@@ -230,7 +230,7 @@
     <ClInclude Include="..\Code\Terrain.h" />
     <ClInclude Include="..\Code\TrailEffect.h" />
     <ClInclude Include="..\Code\Trigger.h" />
-    <ClInclude Include="..\Code\UI.h" />
+    <ClInclude Include="..\Code\QuestUI.h" />
     <ClInclude Include="..\Code\Weapon.h" />
     <ClInclude Include="..\Code\Zombi.h" />
     <ClInclude Include="..\Header\Const.h" />
@@ -311,7 +311,7 @@
     <ClCompile Include="..\Code\Terrain.cpp" />
     <ClCompile Include="..\Code\TrailEffect.cpp" />
     <ClCompile Include="..\Code\Trigger.cpp" />
-    <ClCompile Include="..\Code\UI.cpp" />
+    <ClCompile Include="..\Code\QuestUI.cpp" />
     <ClCompile Include="..\Code\Weapon.cpp" />
     <ClCompile Include="..\Code\Zombi.cpp" />
     <ClCompile Include="Client.cpp" />

@@ -6,7 +6,7 @@
 #include "InvenUI.h"
 #include "DirectInput.h"
 #include "OnUI.h"
-#include "UI.h"
+#include "QuestUI.h"
 #include "EquipUI.h"
 #include "MousePoint.h"
 
@@ -110,9 +110,12 @@ void COptionUI::Show_OtherUI()
 			dynamic_cast<CIconUI*>(pSrc)->Set_ShowUI(!m_bIsShow);
 	}
 
-	CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"Quest");
-	if (pQuestUI != nullptr)
-		dynamic_cast<CUI*>(pQuestUI)->Set_ShowUI(!m_bIsShow);
+	list<CGameObject*>* pQuestUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"QuestUI");
+	if (pQuestUIList != nullptr)
+	{
+		for (auto& pSrc : *pQuestUIList)
+			dynamic_cast<CQuestUI*>(pSrc)->Set_ShowUI(!m_bIsShow);
+	}
 
 	CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
 	if (pGunUI != nullptr)

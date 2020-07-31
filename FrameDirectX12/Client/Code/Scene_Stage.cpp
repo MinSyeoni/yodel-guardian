@@ -14,7 +14,7 @@
 #include "Pistol.h"
 #include "Rifle.h"
 
-#include "UI.h"	
+#include "QuestUI.h"	
 #include "Aim.h"
 #include "HPBar.h"
 #include "MPBar.h"
@@ -225,9 +225,9 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_CardKey", pGameObject), E_FAIL);
 
 	////////////////////////////////// UI /////////////////////////////////////////////
-	pGameObject = CUI::Create(m_pGraphicDevice, m_pCommandList);
+	pGameObject = CQuestUI::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_UI", pGameObject), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_QuestUI", pGameObject), E_FAIL);
 
 	pGameObject = CAim::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -433,7 +433,6 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 
 	m_pObjectMgr->Add_Layer(wstrLayerTag, pLayer);
 
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_UI", L"Quest", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Aim", L"Aim", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_OptionUI", L"OptionUI", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", nullptr), E_FAIL);
@@ -453,6 +452,9 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 
 	for (int i = 0; i < 8; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_EquipUI", L"EquipUI", &(iType = i)), E_FAIL);
+
+	for(int i =0; i < 10 ; ++i)
+		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_QuestUI", L"QuestUI", &(iType = i)), E_FAIL);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MPBarUI", L"MPBarUI", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MouseUI", L"MouseUI", nullptr), E_FAIL);
@@ -488,9 +490,6 @@ void CScene_Stage::Load_MonsterPos(const wstring& wstrFilePath)
 
 void CScene_Stage::InitMesh_FromFile(const std::wstring& wstrFilePath)
 {
-	//if (wstrFilePath == L"../../Data/Collider/Flame.dat")
-	////	m_tMeshInfo.MeshTag = L"Flamethrower";
-	//	m_tMeshInfo.MeshTag = L"Dron";
 	if (wstrFilePath == L"../../Data/Collider/Zombi.dat")
 	{
 		m_tMeshInfo.MeshTag = L"Zombi";
