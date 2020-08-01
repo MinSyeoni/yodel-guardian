@@ -406,6 +406,22 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"medikit.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"medikit.x"), E_FAIL))
 		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"box0_1.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"box0_1.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"box0_2.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"box0_2.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"box0_3.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"box0_3.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"box0_4.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"box0_4.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"box0_5.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"box0_5.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"box0_6.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"box0_6.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"box0_7.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"box0_7.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"box0_8.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"box0_8.x"), E_FAIL))
+		return;
 
 	///// 테스트 /////
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"test.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"test.x"), E_FAIL))

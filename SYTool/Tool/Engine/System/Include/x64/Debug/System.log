@@ -1,1 +1,20 @@
-﻿D:\Visual Studio\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Platform.targets(67,5): error MSB8020: v142에 대한 빌드 도구(플랫폼 도구 집합 = 'v142')를 찾을 수 없습니다. v142 빌드 도구를 사용하여 빌드하려면 v142 빌드 도구를 설치하십시오.  [프로젝트] 메뉴를 선택하거나 솔루션을 마우스 오른쪽 단추로 클릭한 다음 "솔루션 대상 변경"을 선택하여 현재 Visual Studio 도구로 업그레이드할 수도 있습니다.
+﻿  Font.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\System\Code\Font.cpp(31,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\System\Code\Font.cpp(31,2): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\System\Code\Font.cpp(32,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\System\Code\Font.cpp(32,2): error C2059: 구문 오류: '상수'
+  FontMgr.cpp
+  Frame.cpp
+  FrameMgr.cpp
+  GraphicDev.cpp
+  InputDev.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\System\Code\InputDev.cpp(24,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\System\Code\InputDev.cpp(24,1): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\System\Code\InputDev.cpp(27,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\System\Code\InputDev.cpp(27,2): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\System\Code\InputDev.cpp(40,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\System\Code\InputDev.cpp(40,2): error C2059: 구문 오류: '상수'
+  KeyMgr.cpp
+  Timer.cpp
+  TimerMgr.cpp
+  코드를 생성하고 있습니다...
