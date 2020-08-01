@@ -41,13 +41,15 @@ public:
 	void					Set_IsActiveStart(_bool bIsActive) { m_bIsActive = bIsActive; }
 	_uint					Get_InitID() { return m_iInitId; }
 
+
+
 private:
 	void					Set_ConstantTable();
 	void					Set_ShadowTable(CShader_Shadow* pShader);
 	void					Update_BoneCollider(CSphereCollider* pSphereCol, string strBoneName, CColliderMgr::COLLIDER_TAG eTag);
 
 private:
-	virtual HRESULT			Add_Component();
+	virtual HRESULT				Add_Component();
 
 private:
 	Engine::CMesh*				m_pMeshCom = nullptr;

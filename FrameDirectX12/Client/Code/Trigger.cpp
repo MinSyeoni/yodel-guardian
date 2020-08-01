@@ -46,8 +46,9 @@ HRESULT CTrigger::Ready_GameObject()
 	m_pTransCom->m_vPos = m_tColInfo.vCenter;
 	m_pTransCom->m_vScale = m_tColInfo.vScale * 0.1f;
 	m_pTransCom->m_vAngle = m_tColInfo.vRotate;
+	m_iColID = m_tColInfo.iColID;
 
-	if (m_tColInfo.iColID == 2)
+	if (m_eCurShape == CTrigger::TRIGGER_BOX && m_tColInfo.iColID == 2)
 		m_pTransCom->m_vAngle = _vec3{ 0.f,0.f,0.f };
 
 	return S_OK;
@@ -112,7 +113,9 @@ _int CTrigger::LateUpdate_GameObject(const _float & fTimeDelta)
 	switch (m_eCurShape)
 	{
 	case CTrigger::TRIGGER_SPHERE:
+	{
 		FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol), -1);
+	}
 		break;
 	case CTrigger::TRIGGER_BOX:
 	{
@@ -174,7 +177,6 @@ HRESULT CTrigger::Add_Component()
 	}
 		break;
 	case CTrigger::TRIGGER_END:
-
 		break;
 	default:
 		break;

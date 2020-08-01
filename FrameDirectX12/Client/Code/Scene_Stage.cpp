@@ -28,6 +28,8 @@
 #include "EquipUI.h"
 #include "AttackDamage.h"
 #include "MousePoint.h"
+#include "CardTagUI.h"
+#include "TagBack.h"
 
 #include "MapObject.h"
 #include "HPKit.h"
@@ -281,6 +283,14 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_AttackDamageL", pGameObject), E_FAIL);
 
+	//pGameObject = CTagBack::Create(m_pGraphicDevice, m_pCommandList);
+	//NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	//FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_TagBack", pGameObject), E_FAIL);
+
+	pGameObject = CCardTagUI::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_CardTag", pGameObject), E_FAIL);
+
 	////////////////////////// Æ®¸®°Å /////////////////////////////////////
 	pGameObject = CTrigger::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -450,7 +460,7 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 
-	for (int i = 0; i < 8; ++i)
+	for (int i = 0; i < 7; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_EquipUI", L"EquipUI", &(iType = i)), E_FAIL);
 
 	for(int i =0; i < 10 ; ++i)
@@ -458,6 +468,8 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MPBarUI", L"MPBarUI", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MouseUI", L"MouseUI", nullptr), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_CardTag", L"CardTag", nullptr), E_FAIL);
+//	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_TagBack", L"TagBack", nullptr), E_FAIL);
 
 	return S_OK;
 }

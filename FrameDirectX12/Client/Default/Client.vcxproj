@@ -171,6 +171,7 @@
     <ClInclude Include="..\Code\AttackDamage.h" />
     <ClInclude Include="..\Code\BackGround.h" />
     <ClInclude Include="..\Code\CardKey.h" />
+    <ClInclude Include="..\Code\CardTagUI.h" />
     <ClInclude Include="..\Code\CubeObject.h" />
     <ClInclude Include="..\Code\DamageBlood.h" />
     <ClInclude Include="..\Code\DistortionEffect.h" />
@@ -227,6 +228,7 @@
     <ClInclude Include="..\Code\Sniper.h" />
     <ClInclude Include="..\Code\StaticCamera.h" />
     <ClInclude Include="..\Code\StaticObject.h" />
+    <ClInclude Include="..\Code\TagBack.h" />
     <ClInclude Include="..\Code\Terrain.h" />
     <ClInclude Include="..\Code\TrailEffect.h" />
     <ClInclude Include="..\Code\Trigger.h" />
@@ -252,6 +254,7 @@
     <ClCompile Include="..\Code\AttackDamage.cpp" />
     <ClCompile Include="..\Code\BackGround.cpp" />
     <ClCompile Include="..\Code\CardKey.cpp" />
+    <ClCompile Include="..\Code\CardTagUI.cpp" />
     <ClCompile Include="..\Code\CubeObject.cpp" />
     <ClCompile Include="..\Code\DamageBlood.cpp" />
     <ClCompile Include="..\Code\DistortionEffect.cpp" />
@@ -308,6 +311,7 @@
     <ClCompile Include="..\Code\Sniper.cpp" />
     <ClCompile Include="..\Code\StaticCamera.cpp" />
     <ClCompile Include="..\Code\StaticObject.cpp" />
+    <ClCompile Include="..\Code\TagBack.cpp" />
     <ClCompile Include="..\Code\Terrain.cpp" />
     <ClCompile Include="..\Code\TrailEffect.cpp" />
     <ClCompile Include="..\Code\Trigger.cpp" />

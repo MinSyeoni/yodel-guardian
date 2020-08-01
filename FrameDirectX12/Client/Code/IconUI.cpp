@@ -107,7 +107,7 @@ HRESULT CIconUI::Add_Component()
 			wstrTemp = L"Prototype_Texture_colleague2Icon";
 
 		m_pTexture[i] = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(wstrTemp, COMPONENTID::ID_STATIC));
-		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+		NULL_CHECK_RETURN(m_pTexture[i], E_FAIL);
 		m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture[i]);
 	}
 

@@ -241,6 +241,15 @@
     <Filter Include="03.UI\09.MousePoint">
       <UniqueIdentifier>{5bc3d12b-32ee-47ff-80e1-66ac7d11fb48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.UI\10.CardTagUI">
+      <UniqueIdentifier>{96b94b99-bac1-4fe8-8d3c-b932f4f0c762}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\10.CardTagUI\00.TagBack">
+      <UniqueIdentifier>{5820cf51-240b-49ee-a605-0e896475dcfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\10.CardTagUI\01.CardTagUI">
+      <UniqueIdentifier>{b2debe9b-1266-4949-9c99-6dd2a84f8e7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -485,6 +494,12 @@
     <ClInclude Include="..\Code\QuestUI.h">
       <Filter>03.UI\05.QuestUI</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\CardTagUI.h">
+      <Filter>03.UI\10.CardTagUI\01.CardTagUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\TagBack.h">
+      <Filter>03.UI\10.CardTagUI\00.TagBack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -701,6 +716,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\QuestUI.cpp">
       <Filter>03.UI\05.QuestUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CardTagUI.cpp">
+      <Filter>03.UI\10.CardTagUI\01.CardTagUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TagBack.cpp">
+      <Filter>03.UI\10.CardTagUI\00.TagBack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

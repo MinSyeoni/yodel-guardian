@@ -13,7 +13,7 @@ CScene_Rail::CScene_Rail(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
 	CComponentMgr::Get_Instance()->Delete_Component(L"Mesh_Navi", ID_STATIC);
-	Engine::CComponent* pComponent = Engine::CNaviMesh::Create(m_pGraphicDevice, m_pCommandList, L"../../Data/Navi/pass.dat");
+	Engine::CComponent* pComponent = Engine::CNaviMesh::Create(m_pGraphicDevice, m_pCommandList, L"../../Data/Navi/passage.dat");
 	CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Navi", ID_STATIC, pComponent);
 }
 
@@ -130,10 +130,14 @@ HRESULT CScene_Rail::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Sniper", L"Weapon", nullptr), E_FAIL);
 
-	Load_StageObject(L"../../Data/StaticObj/pass.dat", wstrLayerTag);
-	Load_MonsterPos(L"../../Data/Collider/Flame.dat", wstrLayerTag);
-	Load_MonsterPos(L"../../Data/Collider/Dron.dat", wstrLayerTag);
-	//Load_TriggerPos(L"../../Data/Collider/Flame.dat", wstrLayerTag);
+	Load_StageObject(L"../../Data/StaticObj/passage.dat", wstrLayerTag);
+//	Load_MonsterPos(L"../../Data/Collider/Flame.dat", wstrLayerTag);
+	Load_MonsterPos(L"../../Data/Collider/DronStart.dat", wstrLayerTag);
+	Load_MonsterPos(L"../../Data/Collider/DronStart2.dat", wstrLayerTag);
+	Load_MonsterPos(L"../../Data/Collider/DronStart3.dat", wstrLayerTag);
+	Load_TriggerPos(L"../../Data/Collider/DronEnd.dat", wstrLayerTag);
+	Load_TriggerPos(L"../../Data/Collider/DronEnd2.dat", wstrLayerTag);
+	Load_TriggerPos(L"../../Data/Collider/DronEnd3.dat", wstrLayerTag);
 
 	/*____________________________________________________________________
 	GameObject »ý¼º.
@@ -160,6 +164,13 @@ void CScene_Rail::Load_TriggerPos(const wstring& wstrFilePath, wstring wstrLayer
 
 		if (dwByte == 0)
 			break;
+
+		if (wstrFilePath == L"../../Data/Collider/DronEnd.dat")
+			tColData.iColID = 1;
+		else if (wstrFilePath == L"../../Data/Collider/DronEnd2.dat")
+			tColData.iColID = 2;
+		else if (wstrFilePath == L"../../Data/Collider/DronEnd3.dat")
+			tColData.iColID = 3;
 
 		if (3 == tColData.iOptionID)
 			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Trigger", L"Trigger", &tColData);
@@ -199,10 +210,24 @@ void CScene_Rail::InitMesh_FromFile(const std::wstring& wstrFilePath)
 {
 	if (wstrFilePath == L"../../Data/Collider/Flame.dat")
 		m_tMeshInfo.MeshTag = L"Flamethrower";
-	else if (wstrFilePath == L"../../Data/Collider/Dron.dat")
+	else if (wstrFilePath == L"../../Data/Collider/DronStart.dat")
+	{
 		m_tMeshInfo.MeshTag = L"Dron";
-
-	m_tMeshInfo.Rotation = _vec3{ 0.f, 45.f, 0.f };
+		m_tMeshInfo.iDrawID = 1;
+		m_tMeshInfo.Rotation = _vec3{ 0.f, -100.f, 0.f };
+	}
+	else if (wstrFilePath == L"../../Data/Collider/DronStart2.dat")
+	{
+		m_tMeshInfo.MeshTag = L"Dron";
+		m_tMeshInfo.iDrawID = 2;
+		m_tMeshInfo.Rotation = _vec3{ 0.f, 100.f, 0.f };
+	}
+	else if (wstrFilePath == L"../../Data/Collider/DronStart3.dat")
+	{
+		m_tMeshInfo.MeshTag = L"Dron";
+		m_tMeshInfo.iDrawID = 3;
+		m_tMeshInfo.Rotation = _vec3{ 0.f, 80.f, 0.f };
+	}
 }
 
 void CScene_Rail::Load_StageObject(const wstring& wstrFilePath, wstring wstrLayerTag)
@@ -303,7 +328,7 @@ HRESULT CScene_Rail::Ready_LayerUI(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 
-	for (int i = 0; i < 8; ++i)
+	for (int i = 0; i < 7; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_EquipUI", L"EquipUI", &(iType = i)), E_FAIL);
 
 	for (int i = 0; i < 10; ++i)

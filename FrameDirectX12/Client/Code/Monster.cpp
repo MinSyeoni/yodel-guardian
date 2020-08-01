@@ -82,6 +82,7 @@ HRESULT CMonster::Ready_GameObject()
 	{
 		m_pDron = new CDron;
 		m_pDron->Set_Transform(m_pTransCom);
+		m_pDron->Set_InitDrawID(m_iInitId);
 		m_pDron->Set_NaviMesh(m_pNaviCom);
 		m_bIsActive = true;
 	}
@@ -118,7 +119,10 @@ HRESULT CMonster::LateInit_GameObject()
 	}
 		break;
 	case CMonster::DRON:
+	{	
+		m_pDron->Set_Astar(m_pAstarCom);
 		m_pDron->Late_Initialized();
+	}
 		break;
 	default:
 		break;
@@ -250,6 +254,7 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 	{
 		if (m_pZombi == nullptr)
 			return E_FAIL;
+
 		m_pZombi->LateUpdate_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
 
 		if (m_pZombi->Get_IsDeadZombi())
@@ -267,6 +272,17 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 		if (m_pDron == nullptr)
 			return E_FAIL;
 		m_pDron->LateUpdate_Dron(fTimeDelta, m_pTransCom, m_pMeshCom);
+
+		_vec3 vShaveDir;
+		for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::SPHERE, CColliderMgr::TRIGGER))
+		{
+			if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_Spere(m_pShereCol[0], pCol, &vShaveDir)
+				&& !m_pDron->Get_IsTurn())
+			{
+				m_pDron->Set_IsTurn(true);
+				m_pDron->Set_Direction(m_pDron->Get_Direction() * -1.f);
+			}
+		}
 
 		if (m_pDron->Get_IsDeadDron())
 		{

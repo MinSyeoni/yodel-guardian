@@ -22,8 +22,6 @@ c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\attackdamage.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\aim.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\actioncamera.obj
-c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\player.obj
-c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\pistol.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\passagedoor.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\optionui.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\onui.obj
@@ -39,11 +37,11 @@ c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\mapobject.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\mainapp.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\lobbydoor.obj
+c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\loadingtexture.obj
+c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\loadingbar.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\loading.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\lightobject.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\ken.obj
-c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\traileffect.obj
-c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\terrain.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\staticobject.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\staticcamera.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\sniper.obj
@@ -62,11 +60,15 @@ c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\playerleg.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\hpbar.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\playerarm.obj
+c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\player.obj
+c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\pistol.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\client.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\zombi.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\weapon.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\ui.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\trigger.obj
+c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\traileffect.obj
+c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\terrain.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\bin\client.ilk
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\bin\client.exe
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\bin\client.pdb
@@ -78,5 +80,6 @@ c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\client.tlog\link.command.1.tlog
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\client.tlog\link.read.1.tlog
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\client.tlog\link.write.1.tlog
+c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\client.tlog\rc.command.1.tlog
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\client.tlog\rc.read.1.tlog
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\debug\client.tlog\rc.write.1.tlog

@@ -30,9 +30,12 @@ public:
 
 private:
 	void					Set_ConstantTable();
-
-private:
 	virtual HRESULT			Add_Component();
+
+public:
+	_uint					Get_ColID() { return m_iColID; }
+	TRIGGER_SHAPE&			Get_ColType() { return m_eCurShape; }
+	_vec3					Get_ColPos() { return m_pTransCom->m_vPos; }
 
 private:
 	Engine::CBoxCollider*		m_pBoxCol = nullptr;
@@ -41,15 +44,15 @@ private:
 	COLLIDER					m_tColInfo;
 
 private:
-	TRIGGER_SHAPE				m_eCurShape = TRIGGER_END;
+	TRIGGER_SHAPE				m_eCurShape;
 
 public:
 	virtual CGameObject*	Clone_GameObject(void* prg);
 	static	CTrigger*		Create(ID3D12Device* pGraphicDevice,ID3D12GraphicsCommandList* pCommandList);
 
 private:
-	virtual void			Free();
-
+	virtual void				Free();
+	_uint						m_iColID = 0;
 	_bool						m_bIsActive = false;
 };
 

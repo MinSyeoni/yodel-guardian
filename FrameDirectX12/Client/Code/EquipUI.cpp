@@ -69,7 +69,6 @@ void CEquipUI::Init_TypePos()
 	{
 	case CEquipUI::E_KITEQUIP1:
 	case CEquipUI::E_KITEQUIP2:
-	case CEquipUI::E_KITEQUIP3:
 	{
 		m_pTransCom->m_vPos.x = (((2.0f * m_vPos.x) / WINCX) * 0.5f) - 0.1f;
 		m_pTransCom->m_vPos.y = (((-2.0f * m_vPos.y) / WINCY) * 0.5f) - 0.1f;
@@ -139,7 +138,6 @@ HRESULT CEquipUI::Add_Component()
 	case CEquipUI::E_KEYEQUIP:
 	case CEquipUI::E_KITEQUIP1:
 	case CEquipUI::E_KITEQUIP2:
-	case CEquipUI::E_KITEQUIP3:
 		wstrPrototype = L"Prototype_Texture_E_Equip";
 		break;
 	case CEquipUI::E_HIDING:

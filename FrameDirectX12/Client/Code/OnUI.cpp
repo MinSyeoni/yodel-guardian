@@ -170,17 +170,17 @@ HRESULT COnUI::Add_Component()
 	{
 		wstrComponent += i;
 		m_pShaderCom[i] = static_cast<Engine::CShader_UI*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_UI", COMPONENTID::ID_STATIC));
-		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+		NULL_CHECK_RETURN(m_pShaderCom[i], E_FAIL);
 		m_mapComponent[ID_STATIC].emplace(wstrComponent, m_pShaderCom[i]);
 	}
 
 	// Texture 
 	m_pTexture[0] = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_OnUI", COMPONENTID::ID_STATIC));
-	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+	NULL_CHECK_RETURN(m_pTexture[0], E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Texture1", m_pTexture[0]);
 
 	m_pTexture[1] = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_OffUI", COMPONENTID::ID_STATIC));
-	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+	NULL_CHECK_RETURN(m_pTexture[1], E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Texture2", m_pTexture[1]);
 
 	// TransCom 

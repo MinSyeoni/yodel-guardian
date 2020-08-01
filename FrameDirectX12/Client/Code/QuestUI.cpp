@@ -107,12 +107,12 @@ HRESULT CQuestUI::Add_Component()
 		wstrText.assign(strTemp.begin(), strTemp.end());
 
 		m_pShaderCom[i] = static_cast<Engine::CShader_UI*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_UI", COMPONENTID::ID_STATIC));
-		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+		NULL_CHECK_RETURN(m_pShaderCom[i], E_FAIL);
 		m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom[i]);
 
 		// Texture
 		m_pTexture[i] = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(wstrText.c_str(), COMPONENTID::ID_STATIC));
-		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+		NULL_CHECK_RETURN(m_pTexture[i], E_FAIL);
 		m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture[i]);
 	}
 
