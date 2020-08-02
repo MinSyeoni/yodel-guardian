@@ -516,7 +516,10 @@ HRESULT CGraphicDevice::Create_MeshRoot()
         1,  // number of descriptors
         3); // register t3
      // Root parameter can be a table, root descriptor or root constants.
-    CD3DX12_ROOT_PARAMETER slotRootParameter[7];
+
+     // Root parameter can be a table, root descriptor or root constants.
+
+    CD3DX12_ROOT_PARAMETER slotRootParameter[8];
 
     slotRootParameter[0].InitAsDescriptorTable(1, &texTable[0], D3D12_SHADER_VISIBILITY_PIXEL);
     slotRootParameter[1].InitAsDescriptorTable(1, &texTable[1], D3D12_SHADER_VISIBILITY_PIXEL);

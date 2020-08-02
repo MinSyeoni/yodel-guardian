@@ -36,8 +36,10 @@ public:
 	_bool   Collision_SpereWithMousePoint(CCollider* pDstCollider, HWND hwnd,float* fDist);
 	_bool   Collision_BoxWithMousePoint(CCollider* pDstCollider,HWND hwnd,float* fDist);
 
-	void Transloation_ViewSpace(void);
-	void Translation_LocalSpace();
+	_bool   Collision_BoXWithCamera(CCollider* pDstCollider, float* fDist);
+	_bool   Collision_SphereWithCamera(CCollider* pDstCollider, float* fDist);
+
+
 public:
 	void	Set_Point(OBB* pObb, const _vec3* pMin, const _vec3* pMax);
 	void	Set_Axis(OBB* pObb);

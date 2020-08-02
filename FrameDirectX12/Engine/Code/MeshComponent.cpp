@@ -36,6 +36,7 @@ CMeshComponent::CMeshComponent(const CMeshComponent& rhs)
     , m_vecEmissiveUpload(rhs.m_vecEmissiveUpload)
     , m_vMaxPos(rhs.m_vMaxPos)
     , m_vMinPos(rhs.m_vMinPos)
+    ,m_iSubSetCount(rhs.m_iSubSetCount)
 {
     for (int i = 0; i < m_entries.size(); i++)
     {
@@ -391,7 +392,7 @@ HRESULT CMeshComponent::Ready_Mesh()
     {
 
         m_entries.resize(m_pScene->mNumMeshes);
-
+        m_iSubSetCount = m_pScene->mNumMeshes;
         for (size_t i = 0; i < m_entries.size(); i++) {
 
             _int numVertices = 0;
@@ -460,6 +461,8 @@ HRESULT CMeshComponent::Ready_Mesh()
         Engine::CGraphicDevice::Get_Instance()->End_ResetCmdListThread();
         return S_OK;
     }
+
+
     return S_OK;
 }
 

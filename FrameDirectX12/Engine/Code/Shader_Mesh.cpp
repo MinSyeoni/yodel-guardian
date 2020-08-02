@@ -35,7 +35,7 @@ HRESULT CShader_Mesh::Ready_Shader(STATETYPE eType)
     if (m_eType == ALPHA)
     {
         m_bIsAlphaBlend = true;
-     
+
     }
 
     FAILED_CHECK_RETURN(Create_PipelineState(), E_FAIL);
@@ -97,7 +97,7 @@ void CShader_Mesh::End_Shader(_uint Texnum, _int boneIndex)
     m_pCommandList->SetGraphicsRootConstantBufferView(6, m_pCB_TextureInfo->Resource()->GetGPUVirtualAddress() + (m_pCB_TextureInfo->Get_ElementSize() * TexCount));
 }
 
-void CShader_Mesh::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture, vector< ComPtr<ID3D12Resource>> pNormalTexture, vector< ComPtr<ID3D12Resource>> pSpecularTexture, vector< ComPtr<ID3D12Resource>> pEmissiveTexture)
+void CShader_Mesh::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture, vector< ComPtr<ID3D12Resource>> pNormalTexture, vector< ComPtr<ID3D12Resource>> pSpecularTexture, vector< ComPtr<ID3D12Resource>> pEmissiveTexture, _int iMeshCount)
 {
 
 
@@ -184,7 +184,7 @@ void CShader_Mesh::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTextur
 
     m_pCB_BoneInfo = new CUploadBuffer<CB_BONE_INFO>(DEVICE, 10, true);
 
-    m_pCB_TextureInfo = new CUploadBuffer<CB_TEXTURE_INFO>(DEVICE, 15, true);
+    m_pCB_TextureInfo = new CUploadBuffer<CB_TEXTURE_INFO>(DEVICE, iMeshCount, true);
 
     CGraphicDevice::Get_Instance()->End_ResetCmdList();
 }
@@ -252,7 +252,7 @@ HRESULT CShader_Mesh::Create_PipelineState()
     PipelineStateDesc.SampleMask = UINT_MAX;
     PipelineStateDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
     PipelineStateDesc.NumRenderTargets = 5;
-    PipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM ;
+    PipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
     PipelineStateDesc.RTVFormats[1] = DXGI_FORMAT_R8G8B8A8_UNORM;
     PipelineStateDesc.RTVFormats[2] = DXGI_FORMAT_R32G32B32A32_FLOAT;
     PipelineStateDesc.RTVFormats[3] = DXGI_FORMAT_R8G8B8A8_UNORM;

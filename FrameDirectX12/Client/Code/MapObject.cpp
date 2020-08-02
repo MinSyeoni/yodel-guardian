@@ -49,7 +49,7 @@ HRESULT CMapObject::Ready_GameObject()
 
 HRESULT CMapObject::LateInit_GameObject()
 {
-	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
+	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture(),m_pMeshCom->Get_MeshComponent()->Get_SubSetCount());
 
 	return S_OK;
 }
@@ -62,22 +62,37 @@ _int CMapObject::Update_GameObject(const _float & fTimeDelta)
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
+	if(!m_bIsBigObject)
 	m_pBoxCom->Update_Collider(&m_pTransCom->m_matWorld);
+
+	if (!m_bIsBigObject)
+	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::BULLETDECAL, m_pBoxCom);
 
 	return NO_EVENT;
 }
 
 _int CMapObject::LateUpdate_GameObject(const _float & fTimeDelta)
 {
-	if (m_tMeshInfo.MeshTag == L"apollo.X")
-		return NO_EVENT;
+
+
 
 	NULL_CHECK_RETURN(m_pRenderer, -1); 
 
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
+	if (m_bIsDrawShadow)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 
-//	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCom), -1);
+	if(m_bIsDrawShadow)
+	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCom), -1);
+
+	
+
+	/*if (!CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
+		return NO_EVENT;*/
+
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
+
+
+
 	return NO_EVENT;
 }
  
@@ -102,9 +117,25 @@ HRESULT CMapObject::Add_Component()
 	NULL_CHECK_RETURN(m_pComponentMgr, E_FAIL);
 
 	// Shader
-	m_pShaderCom = static_cast<Engine::CShader_Mesh*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_Mesh", COMPONENTID::ID_STATIC));
-	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
-	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
+	if (m_tMeshInfo.MeshTag == L"map1.X" || m_tMeshInfo.MeshTag == L"map1_roof.X" || m_tMeshInfo.MeshTag == L"passage_test.X")
+		m_bIsBigObject = true;
+
+
+
+	//if (m_tMeshInfo.MeshTag == L"map1.X" || m_tMeshInfo.MeshTag == L"map1_roof.X" || m_tMeshInfo.MeshTag == L"passage_test.X")
+	//{
+	//	m_pShaderCom = static_cast<Engine::CShader_Mesh*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_MeshShadow", COMPONENTID::ID_STATIC));
+	//	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+	//	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
+	//	m_bIsDrawShadow = false;
+	//}
+	//else
+	//{
+		m_pShaderCom = static_cast<Engine::CShader_Mesh*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_Mesh", COMPONENTID::ID_STATIC));
+		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+		m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
+	//}
+
 
 	// Buffer
 	m_pMeshCom = static_cast<Engine::CMesh*>(m_pComponentMgr->Clone_Component(m_tMeshInfo.MeshTag.c_str(), COMPONENTID::ID_STATIC));
@@ -131,6 +162,19 @@ void CMapObject::Set_ConstantTable()
 	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
+
+	if (!m_bIsDrawShadow)
+	{
+
+		_matrix matLightView = CFrustom::Get_Instance()->Get_LightView();
+		_matrix matLightProj = CFrustom::Get_Instance()->Get_LightProj();
+
+		_matrix matLightWVP = m_pTransCom->m_matWorld* matLightView * matLightProj;
+		XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matLightWVP));
+
+
+	}
+
 
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
 }

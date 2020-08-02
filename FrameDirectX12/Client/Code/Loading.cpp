@@ -147,6 +147,12 @@ HRESULT CLoading::Load_Shader()
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_FadeOut", ID_STATIC, pComponent), E_FAIL);
 
 
+
+	//pComponent = CShader_Mesh::Create(DEVICE, m_pCommandList, CShader_Mesh::SHADOW);
+	//NULL_CHECK_RETURN(pComponent, E_FAIL);
+	//FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_MeshShadow", ID_STATIC, pComponent), E_FAIL);
+
+
 	return S_OK;
 }
 
@@ -535,7 +541,7 @@ HRESULT CLoading::Mesh_ForStage(void)
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Point", ID_STATIC, pComponent), E_FAIL);
 
 
-	static_cast<CLoadingBar*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"LoadingBar"))->SetGauge(0.65);
+	static_cast<CLoadingBar*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"LoadingBar"))->SetGauge(0.65f);
 
 	return S_OK;
 }

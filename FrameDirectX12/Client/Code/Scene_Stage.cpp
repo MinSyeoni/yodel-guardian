@@ -393,10 +393,10 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 
 	CNpcRifle::OWNER eOwner = CNpcRifle::SHEPARD;
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcRifle", L"Weapon", &eOwner), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcRifle", L"NpcWeapon", &eOwner), E_FAIL);
 
 	 eOwner = CNpcRifle::KEN;
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcRifle", L"Weapon", &eOwner), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcRifle", L"NpcWeapon", &eOwner), E_FAIL);
 
 	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj																		 //Prototype_MapObject
 	Load_StageObject(L"../../Data/StaticObj/mapAddoutside_1_test.dat");

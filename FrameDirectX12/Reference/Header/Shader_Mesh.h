@@ -31,7 +31,7 @@ public:
 	virtual void	End_Shader(_uint Texnum = 0,_int boneIndex = 0);
 
 public:
-	void Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture, vector< ComPtr<ID3D12Resource>> pVecNormalTexture, vector< ComPtr<ID3D12Resource>> pVecSpecularTexture, vector< ComPtr<ID3D12Resource>> pEmissiveTexture);;
+	void Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTexture, vector< ComPtr<ID3D12Resource>> pVecNormalTexture, vector< ComPtr<ID3D12Resource>> pVecSpecularTexture, vector< ComPtr<ID3D12Resource>> pEmissiveTexture,_int iMeshCount = 15);
 
 private:
 	// CShader을(를) 통해 상속됨

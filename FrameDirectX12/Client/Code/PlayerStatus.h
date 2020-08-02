@@ -53,6 +53,7 @@ public:
 	CTransform* m_pTransCom;
 	CMesh* m_pMesh;
 	CBoxCollider* m_pBoxCollider;
+	CBoxCollider* m_pBoxCOlliderForView;
 	CSphereCollider* m_pSphereCollider;
 
 	CNaviMesh* m_pNaviMesh;

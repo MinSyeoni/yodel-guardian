@@ -20,6 +20,7 @@ CPlayerStatus::~CPlayerStatus()
     Safe_Release(m_pSphereCollider);
     Safe_Release(m_pMesh);
     Safe_Release(m_pNaviMesh);
+    Safe_Release(m_pBoxCOlliderForView);
 }
 
 void CPlayerStatus::LateInit()
@@ -70,14 +71,17 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
 
   
 
-
+    cout << m_pTransCom->m_vPos.x << " - " << m_pTransCom->m_vPos.y << "- " << m_pTransCom->m_vPos.z << endl;
 
     _matrix matBone = XMMatrixInverse(nullptr, *m_matChestOffset);
     matBone = matBone * *m_matChest;
 
     m_pBoxCollider->Update_Collider(&m_pTransCom->m_matWorld);
+    m_pBoxCOlliderForView->Update_Collider(&m_pTransCom->m_matWorld);
     m_pSphereCollider->Update_Collider(&(matBone * m_pTransCom->m_matWorld));
     CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::PLAYER, m_pBoxCollider);
+
+    CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::PLAYER, m_pBoxCOlliderForView);
     return NO_EVENT;
 }
 
@@ -87,6 +91,7 @@ _int CPlayerStatus::LateUpdate(const _float& fTimeDelta)
 
     CRenderer::Get_Instance()->Add_ColliderGroup(m_pSphereCollider);
     CRenderer::Get_Instance()->Add_ColliderGroup(m_pBoxCollider);
+    CRenderer::Get_Instance()->Add_ColliderGroup(m_pBoxCOlliderForView);
     CRenderer::Get_Instance()->Add_NaviGroup(m_pNaviMesh);
     _vec3 vShaveDir;
 
@@ -116,6 +121,9 @@ void CPlayerStatus::SetMesh(CMesh* pMesh)
     m_pMesh->AddRef();
 
     m_pBoxCollider = static_cast<Engine::CBoxCollider*>(CComponentMgr::Get_Instance()->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, false, nullptr, _vec3(0.f, 6.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(100.f, 150.f, 100.f), nullptr));
+    m_pBoxCOlliderForView = static_cast<Engine::CBoxCollider*>(CComponentMgr::Get_Instance()->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, false, nullptr, _vec3(0.f, 10.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(60.f, 70.f, 60.f), nullptr));
+
+
     m_pSphereCollider = static_cast<Engine::CSphereCollider*>(CComponentMgr::Get_Instance()->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, nullptr, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 30.f/*여기반지름*/, _vec3(1.f, 1.f, 1.f), nullptr));
 
 
@@ -616,25 +624,44 @@ void CPlayerStatus::ShootingCheck()
 {
     CGameObject* pMonster = nullptr;
 
-    _uint iMinDist = 999;
-    float iDist = 0;
+    float fMinDistToMonster = 999.f;
+    float fDist = 0;
     bool Collision = false;
-    for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::OBJECT))
+    for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::SPHERE, CColliderMgr::MONSTER))
     {
-         Collision = CMathMgr::Get_Instance()->Collision_BoxWithMousePoint(pCol,g_hWnd,&iDist);
-        if ((iDist < iMinDist) && Collision)
+         Collision = CMathMgr::Get_Instance()->Collision_SphereWithCamera(pCol,&fDist);
+        if ((fDist < fMinDistToMonster) && Collision)
         {
-            iMinDist = iDist;
+            fMinDistToMonster = fDist;
             pMonster = pCol->Get_Owner();
-            pCol->Set_IsCol(true);
+          
         }
 
     }
 
-  /*  if (pMonster == nullptr)
-        return;
-    else
+
+    CGameObject* pObject = nullptr;
+    float fMinDistToObject = 999.f;
+
+    fDist = 0.f;
+    for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::BULLETDECAL))
     {
+        Collision = CMathMgr::Get_Instance()->Collision_BoXWithCamera(pCol, &fDist);
+        if ((fDist < fMinDistToObject) && Collision)
+        {
+            fMinDistToObject = fDist;
+            pObject = pCol->Get_Owner();
+
+        }
+
+    }
+
+    if (pMonster == nullptr)
+        return;
+
+    if (fMinDistToObject < fMinDistToMonster)
+        return;
+   
         CMonster::MONKIND  eMonKind = CMonster::NONAME;
         eMonKind = dynamic_cast<CMonster*>(pMonster)->Get_MONKIND();
 
@@ -644,16 +671,13 @@ void CPlayerStatus::ShootingCheck()
             pZombi->Set_HitDamage(30);
             pZombi->Set_IsHit(true);
 
-
-
         }
 
-
-    }*/
-
+    }
 
 
-}
+
+
 
 
 

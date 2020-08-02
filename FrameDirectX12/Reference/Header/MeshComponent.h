@@ -30,7 +30,7 @@ public:
 
 	void FoundColliderPosition(_vec3 vtxPos);
 	HRESULT Ready_Mesh();
-
+	int Get_SubSetCount() { return m_iSubSetCount; };
 public:
 	vector< ComPtr<ID3D12Resource>> Get_Texture() { return m_vecResource; };
 	vector< ComPtr<ID3D12Resource>> Get_NormalTexture() { return m_vecNormalResource; };
@@ -55,7 +55,7 @@ private:
 	vector<_uint>			m_uiVB_ByteSize;
 	vector<_uint>			m_uiIB_ByteSize;
 	DXGI_FORMAT		        m_IndexFormat = DXGI_FORMAT_R32_UINT;
-
+	int                     m_iSubSetCount = 0;
 	vector<SUBMESH_GEOMETRY> m_vecSubMeshGeometry;
 	D3D12_PRIMITIVE_TOPOLOGY m_PrimitiveTopology = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 

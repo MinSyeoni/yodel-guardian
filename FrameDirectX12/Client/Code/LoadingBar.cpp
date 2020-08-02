@@ -73,7 +73,7 @@ _int CLoadingBar::Update_GameObject(const _float& fTimeDelta)
 
 	if (m_fNewGaugeBar > m_fGaugeBar)
 	{
-		m_fGaugeBar += fTimeDelta*0.5;
+		m_fGaugeBar += fTimeDelta*0.5f;
 	}
 
 	if (m_fGaugeBar >= 1.0f)

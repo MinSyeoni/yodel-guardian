@@ -103,9 +103,13 @@ HRESULT CFrustom::Ready_Light_Frustom_Manager()
 	for (int i = 0; i < 8; i++)
 	{
 		m_vPoint[i].TransformCoord(m_vOriPoint[i], matViewProjInv);
+		
+	}
+	for (int i = 4; i < 8; i++)
+	{
+		m_vPoint[i] *= 0.5f;
 
 	}
-
 	_vec3 vCamDir;
 	_vec3 vCamPos;
 
@@ -163,8 +167,7 @@ HRESULT CFrustom::Ready_Light_Frustom_Manager()
 bool CFrustom::FrustomCulling(_vec3 vMinPos, _vec3 vMaxPos, _matrix matworld)
 {
 
-
-
+	
 	vMaxPos.TransformCoord(vMaxPos, matworld);
 	vMinPos.TransformCoord(vMinPos, matworld);
 

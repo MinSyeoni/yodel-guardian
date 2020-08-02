@@ -25,7 +25,7 @@ public:
 	_ulong						GetIndex(void) { return m_dwIndex; };
 	CCell*						GetCurCell(void) { return m_vecCell[m_dwIndex]; };
 	_vec3						MoveOn_NaviMesh(const _vec3* pTargetPos, const _vec3* pTargetDir, const _float& fSpeed = 0.f, _bool bIsJump = false);
-
+	_uint                        FoundIndex(_vec3 vPos);
 	vector<CCell*>				 GetNaviCell() { return m_vecCell; };
 private:
 	vector<CCell*>				 m_vecCell;

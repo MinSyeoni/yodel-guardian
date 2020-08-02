@@ -155,6 +155,28 @@ _vec3 CNaviMesh::MoveOn_NaviMesh(const _vec3* pTargetPos,
 	}
 }
 
+_uint CNaviMesh::FoundIndex(_vec3 vPos)
+{
+  _uint	dwIndex = 0;
+	_float fMinDist = 100.f;
+
+	for (auto& pCell : m_vecCell)
+	{
+
+		_vec3 vDist = vPos - pCell->Get_Pos();
+
+		_float fDist = vDist.Get_Length();
+		if (fMinDist > fDist)
+		{
+
+			dwIndex = pCell->m_dwIndex;
+			fMinDist = fDist;
+
+		}
+	}
+	return dwIndex;
+}
+
 HRESULT CNaviMesh::Link_Cell(void)
 {
 	for (_ulong i = 0; i < m_vecCell.size(); ++i)

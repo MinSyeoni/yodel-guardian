@@ -27,6 +27,8 @@ public:
 	void AniCheck();
 	void LightCheck(const _float& fTimeDelta);
 	virtual void CreateShootEffect() override;
+
+	OWNER Get_Owner() { return m_eOwner; };
 public:
 	virtual CGameObject* Clone_GameObject(void* prg);
 	static CNpcRifle* Create(ID3D12Device* pGraphicDevice,

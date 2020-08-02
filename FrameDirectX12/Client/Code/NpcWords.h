@@ -19,7 +19,7 @@ class CDynamicCamera;
 class CNpcWords : public Engine::CGameObject
 {
 public:
-	enum WORDS_TYPE { NPC, ETC, TYPE_END };
+	enum WORDS_TYPE { NPC, SHEPARD,ETC, TYPE_END };
 
 private:
 	explicit CNpcWords(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);

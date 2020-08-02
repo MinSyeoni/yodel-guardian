@@ -111,7 +111,7 @@ void CEquipUI::Render_GameObject(const _float& fTimeDelta)
 
 void CEquipUI::Set_ShowUI(_bool bIsShow)
 {
-	m_bIsShow = bIsShow;
+//	m_bIsShow = bIsShow;
 }
 
 HRESULT CEquipUI::Add_Component()

@@ -8,7 +8,7 @@
 #include "Player.h"
 #include "PlayerStatus.h"
 #include "EquipUI.h"
-
+#include "Shepard.h"
 CNpcWords::CNpcWords(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -104,8 +104,16 @@ void CNpcWords::Ready_NpcWords()
 		wstrWords = L"앞에있는 라이플을 가지고 문밖을나가서 동료를 돕도록해!";
 		m_vWords.push_back(wstrWords);
 		m_iWordsCnt++;
-	}
 	break;
+	}
+	case CNpcWords::SHEPARD:
+	{
+		wstring wstrWords = L"왜 이제서야 왔어 지금좀비가 달려오고있어  빨리싸울태세를 갖춰!! ";
+		m_vWords.push_back(wstrWords);
+		m_iWordsCnt++;
+	}
+
+
 	case CNpcWords::ETC:
 	{
 
@@ -133,7 +141,9 @@ _int CNpcWords::Update_GameObject(const _float& fTimeDelta)
 		return E_FAIL;
 
 	m_fAccTime += fTimeDelta * 8.f;
-	
+
+
+
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
@@ -228,7 +238,7 @@ void CNpcWords::Finish_ConverSation()
 		if (nullptr != m_pObjectMgr->Get_GameObject(L"Layer_Camera", L"StaticCamera"))
 			m_pObjectMgr->Get_GameObject(L"Layer_Camera", L"StaticCamera")->Dead_GameObject();
      
-		m_pObjectMgr->Add_GameObject(L"Layer_Camera", L"Prototype_DynamicCamera", L"DynamicCamera", nullptr);
+	   m_pObjectMgr->Add_GameObject(L"Layer_Camera", L"Prototype_DynamicCamera", L"DynamicCamera", nullptr);
 	   m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Rifle", L"Weapon", nullptr);
 		CGameObject* pPlayer = m_pObjectMgr->Get_GameObject(L"Layer_GameObject", L"Player");
 		if (pPlayer == nullptr)
@@ -237,9 +247,31 @@ void CNpcWords::Finish_ConverSation()
 
 		static_cast<CPlayer*>(pPlayer)->KeyLockPlayer(false);
 
+		CObjectMgr::Get_Instance()->SetTimeStop(true);
 
-	}
 		break;
+	}
+	case CNpcWords::SHEPARD:
+	{
+		if (nullptr != m_pObjectMgr->Get_GameObject(L"Layer_Camera", L"StaticCamera"))
+			m_pObjectMgr->Get_GameObject(L"Layer_Camera", L"StaticCamera")->Dead_GameObject();
+
+		m_pObjectMgr->Add_GameObject(L"Layer_Camera", L"Prototype_DynamicCamera", L"DynamicCamera", nullptr);
+
+
+		CGameObject* pPlayer = m_pObjectMgr->Get_GameObject(L"Layer_GameObject", L"Player");
+		if (pPlayer == nullptr)
+			return;
+		static_cast<CPlayer*>(pPlayer)->KeyLockPlayer(false);
+		CObjectMgr::Get_Instance()->SetTimeStop(true);
+
+
+		CGameObject* pShapard = m_pObjectMgr->Get_GameObject(L"Layer_GameObject", L"Shepard");
+		dynamic_cast<CShepard*>(pShapard)->SetChapter(CShepard::ATTACK);
+
+
+		break;
+	}
 	case CNpcWords::ETC:
 		break;
 	case CNpcWords::TYPE_END:
@@ -280,6 +312,14 @@ _int CNpcWords::LateUpdate_GameObject(const _float& fTimeDelta)
 
 void CNpcWords::Next_ConversationJudje()
 {
+	if (m_bIsFinish == true && m_eWordsType==SHEPARD)
+	{
+		CObjectMgr::Get_Instance()->SetTimeStop(false);
+
+	}
+
+
+
 	if (m_bIsFinish == true && CDirectInput::Get_Instance()->KEY_DOWN(DIK_SPACE))
 	{
 		m_bIsFinish = false;

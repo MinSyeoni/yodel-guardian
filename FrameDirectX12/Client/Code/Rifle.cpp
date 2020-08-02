@@ -34,7 +34,7 @@ HRESULT CRifle::Ready_GameObject()
 
   
    m_tagLight.m_eType = LIGHTTYPE::D3DLIGHT_POINT;
-   m_tagLight.m_vDiffuse = _vec4{ 0.6f,0.6f,0.0f,1.0f };
+   m_tagLight.m_vDiffuse = _vec4{ 0.6f,0.6f,0.6f,1.0f };
    m_tagLight.m_vAmbient = _vec4{ 0.4f,0.4f,0.4f,1.0f };
    m_tagLight.m_vSpecular = _vec4{ 0.4f,0.4f,0.4f,1.0f };
    m_tagLight.m_vDirection = _vec4{ 1.0f,1.0f,-1.f,1.0f };
@@ -307,7 +307,7 @@ void CRifle::LightCheck(const _float& fTimeDelta)
     }
     m_fLightAccTime += fTimeDelta;
 
-    if (m_fLightAccTime > 0.12)
+    if (m_fLightAccTime > 0.1)
     {
         m_fLightAccTime = 0.f;
         m_bIsLight = false;

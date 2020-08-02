@@ -385,6 +385,100 @@ _bool CMathMgr::Collision_BoxWithMousePoint(CCollider* pDstCollider, HWND hwnd, 
 
 }
 
+_bool CMathMgr::Collision_BoXWithCamera(CCollider* pDstCollider, float* fDist)
+{
+	_matrix matView;
+
+	_vec3 vRayPos, vRayDir;
+
+	matView = Engine::CGraphicDevice::Get_Instance()->GetViewMatrix();
+
+	matView = XMMatrixInverse(nullptr, matView);
+	vRayPos = _vec3{ matView._41,matView._42,matView._43 };
+	vRayDir = _vec3{ matView._31,matView._32,matView._33 };
+
+	vRayDir.Normalize();
+
+	_matrix matWorld;
+
+	matWorld = pDstCollider->Get_WorldMat();
+
+	matWorld = XMMatrixInverse(nullptr, matWorld);
+	vRayDir.TransformNormal(vRayDir, matWorld);
+	vRayPos.TransformCoord(vRayPos, matWorld);
+
+
+
+	vRayDir.Normalize();
+
+	BoundingBox Box;
+
+	_vec3 vMin, vMax;
+	vMin = *pDstCollider->Get_Min();
+	vMax = *pDstCollider->Get_Max();
+
+	Box.CreateFromPoints(Box, vMin.Get_XMVECTOR(), vMax.Get_XMVECTOR());
+
+
+	return Box.Intersects(vRayPos.Get_XMVECTOR(), vRayDir.Get_XMVECTOR(), *fDist);
+
+}
+
+_bool CMathMgr::Collision_SphereWithCamera(CCollider* pDstCollider, float* fDist)
+{
+	_matrix matView;
+
+	_vec3 vRayPos, vRayDir;
+
+	matView = Engine::CGraphicDevice::Get_Instance()->GetViewMatrix();
+
+	matView = XMMatrixInverse(nullptr, matView);
+	vRayPos = _vec3{ matView._41,matView._42,matView._43 };
+	vRayDir = _vec3{ matView._31,matView._32,matView._33 };
+
+	vRayDir.Normalize();
+
+
+	BoundingSphere sphere;
+	sphere.Center = pDstCollider->Get_WorldPos();
+	sphere.Radius = pDstCollider->Get_Radius();
+
+	vRayDir.Normalize();
+
+	bool Collision = sphere.Intersects(vRayPos.Get_XMVECTOR(), vRayDir.Get_XMVECTOR(), *fDist);
+
+	*fDist -= sphere.Radius;
+
+	return Collision;
+
+
+}
+
+_bool CMathMgr::Collision_PlayerViewPoint(_vec3 vRayPos, _vec3 vRayDir, CCollider* pDstCollider, float* fDist)
+{
+	
+
+	_matrix matWorld = pDstCollider->Get_WorldMat();
+
+	matWorld = XMMatrixInverse(nullptr, matWorld);
+	vRayDir.TransformNormal(vRayDir, matWorld);
+	vRayPos.TransformCoord(vRayPos, matWorld);
+
+
+
+	vRayDir.Normalize();
+
+	BoundingBox Box;
+
+	_vec3 vMin, vMax;
+	vMin = *pDstCollider->Get_Min();
+	vMax = *pDstCollider->Get_Max();
+
+	Box.CreateFromPoints(Box, vMin.Get_XMVECTOR(), vMax.Get_XMVECTOR());
+
+	return Box.Intersects(vRayPos.Get_XMVECTOR(), vRayDir.Get_XMVECTOR(), *fDist);
+}
+
 void CMathMgr::Set_Point(OBB * pObb, const _vec3 * pMin, const _vec3 * pMax)
 {
 }
