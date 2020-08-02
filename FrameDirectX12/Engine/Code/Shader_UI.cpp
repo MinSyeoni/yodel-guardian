@@ -138,9 +138,11 @@ HRESULT CShader_UI::Create_PipelineState()
 		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_UI.hlsl", nullptr, "PS_HPBAR2", "ps_5_1");
 	else if (m_eType == MPBAR)
 		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_UI.hlsl", nullptr, "PS_MPBAR", "ps_5_1");
+	else if (m_eType == CARDTAG)
+		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_UI.hlsl", nullptr, "PS_CARDTAG", "ps_5_1");
 	else
 		m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_UI.hlsl", nullptr, "PS_NNOMAL", "ps_5_1");
-
+	
 	vecInputLayout =
 	{
 	   { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },

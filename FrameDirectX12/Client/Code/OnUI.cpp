@@ -164,14 +164,17 @@ HRESULT COnUI::Add_Component()
 	NULL_CHECK_RETURN(m_pBufferCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Buffer", m_pBufferCom);
 
-	wstring wstrComponent = L"Com_Shader";
 	// Shader
 	for (int i = 0; i < 2; ++i)
 	{
-		wstrComponent += i;
+		wstring wstrComponent = L"";
+		string strTemp2 = "";
+		strTemp2 = "Com_Shader" + to_string(i);
+		wstrComponent.assign(strTemp2.begin(), strTemp2.end());
+
 		m_pShaderCom[i] = static_cast<Engine::CShader_UI*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_UI", COMPONENTID::ID_STATIC));
 		NULL_CHECK_RETURN(m_pShaderCom[i], E_FAIL);
-		m_mapComponent[ID_STATIC].emplace(wstrComponent, m_pShaderCom[i]);
+		m_mapComponent[ID_STATIC].emplace(wstrComponent.c_str(), m_pShaderCom[i]);
 	}
 
 	// Texture 

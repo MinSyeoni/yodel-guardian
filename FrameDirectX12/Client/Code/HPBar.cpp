@@ -182,7 +182,7 @@ HRESULT CHPBar::Add_Component()
 
 		// Texture
 		m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_PlayerHP", COMPONENTID::ID_STATIC));
-		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+		NULL_CHECK_RETURN(m_pTexture, E_FAIL);
 		m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
 	}
 		break;
@@ -195,7 +195,7 @@ HRESULT CHPBar::Add_Component()
 
 		// Texture
 		m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_HP_colleague1", COMPONENTID::ID_STATIC));
-		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+		NULL_CHECK_RETURN(m_pTexture, E_FAIL);
 		m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
 	}
 		break;
@@ -208,16 +208,13 @@ HRESULT CHPBar::Add_Component()
 
 		// Texture
 		m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_HP_colleague2", COMPONENTID::ID_STATIC));
-		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL); 
+		NULL_CHECK_RETURN(m_pTexture, E_FAIL);
 		m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture); 
 	}
 		break;
 	default:
 		break;
 	}
-
-
-
 
 	// TransCom 
 	m_pTransCom = static_cast<CTransform*>(m_pComponentMgr->Clone_Component(L"Prototype_Transform", COMPONENTID::ID_DYNAMIC));

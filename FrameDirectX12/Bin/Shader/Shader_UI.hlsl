@@ -128,6 +128,18 @@ float4 PS_MPBAR(VS_TEXTURED_OUTPUT input) : SV_TARGET
 	return(cColor);
 }
 
+float4 PS_CARDTAG(VS_TEXTURED_OUTPUT input) : SV_TARGET
+{
+	float4 cColor = gTexture.Sample(gsamLinearWrap, input.uv);
+
+	float fuvT = matWorld._32;
+
+	if (input.uv.y < fuvT)
+		cColor.a = 0.f;
+
+	return(cColor);
+}
+
 VS_TEXTURED_OUTPUT VS_NNOMAL(VS_NTEXTURED_INPUT Input)
 {
 	VS_NTEXTURED_OUTPUT output;
