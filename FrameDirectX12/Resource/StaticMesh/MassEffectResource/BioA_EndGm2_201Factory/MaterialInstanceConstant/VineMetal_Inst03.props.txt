@@ -1,0 +1,108 @@
+ScalarParameterValues[4] =
+{
+    ScalarParameterValues[0] =
+    {
+        ParameterName = Material_Tile
+        ParameterValue = 1
+        ParameterInfo = 
+    }
+    ScalarParameterValues[1] =
+    {
+        ParameterName = Bump_Offset_Intensity
+        ParameterValue = 0.8
+        ParameterInfo = 
+    }
+    ScalarParameterValues[2] =
+    {
+        ParameterName = SSS_Width
+        ParameterValue = 1
+        ParameterInfo = 
+    }
+    ScalarParameterValues[3] =
+    {
+        ParameterName = Specular_Power
+        ParameterValue = 30
+        ParameterInfo = 
+    }
+}
+TextureParameterValues[3] =
+{
+    TextureParameterValues[0] =
+    {
+        ParameterName = Base_Normal
+        ParameterValue = Texture2D'BioT_Collector_MtL.VineMetal_Norm'
+        ParameterInfo = 
+    }
+    TextureParameterValues[1] =
+    {
+        ParameterName = Diffuse
+        ParameterValue = Texture2D'BioT_Collector_MtL.VineMetal_Diff'
+        ParameterInfo = 
+    }
+    TextureParameterValues[2] =
+    {
+        ParameterName = CubeMap_Set
+        ParameterValue = TextureCube3'BioT_LevelMaster.MM_CUBEMAP_SET_C'
+        ParameterInfo = 
+    }
+}
+VectorParameterValues[5] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = SSS_Color
+        ParameterValue =
+        {
+            R = 0.476177
+            G = 0.383775
+            B = 0.006585
+            A = 1
+        }
+        ParameterInfo = 
+    }
+    VectorParameterValues[1] =
+    {
+        ParameterName = Specular_Color_Intensity
+        ParameterValue = { R=4, G=4, B=4, A=1 }
+        ParameterInfo = 
+    }
+    VectorParameterValues[2] =
+    {
+        ParameterName = Diffuse_Tint
+        ParameterValue =
+        {
+            R = 0.659224
+            G = 0.659224
+            B = 0.659224
+            A = 1
+        }
+        ParameterInfo = 
+    }
+    VectorParameterValues[3] =
+    {
+        ParameterName = Cubemap_Chooser
+        ParameterValue = { R=0.7, G=0, B=0, A=1 }
+        ParameterInfo = 
+    }
+    VectorParameterValues[4] =
+    {
+        ParameterName = Cubemap_Color_Intensity
+        ParameterValue =
+        {
+            R = 0.151058
+            G = 0.098689
+            B = 0.084642
+            A = 1
+        }
+        ParameterInfo = 
+    }
+}
+Parent = Material3'BioT_LevelMaster.Materials.Opaque_MM'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

@@ -8,6 +8,7 @@
 #include "EquipUI.h"
 #include "StaticCamera.h"
 #include "Player.h"
+#include "MousePoint.h"
 
 CHPKit::CHPKit(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -109,14 +110,19 @@ _int CHPKit::LateUpdate_GameObject(const _float & fTimeDelta)
 
 void CHPKit::OpenKit_PlayZoom()
 {
+	CGameObject* pMousePoint = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"MouseUI");
 	if (!m_bIsZoom && m_bIsOpen && !m_bIsZoomAlready)
 	{
+		if (pMousePoint != nullptr)
+			dynamic_cast<CMousePoint*>(pMousePoint)->Set_ShowUI(true);
 		m_bIsZoom = true;
 		m_bIsZoomAlready = true;
 		ZoomCamera(true);
 	}
 	else if (m_bIsZoom && m_bIsOpen && CDirectInput::Get_Instance()->KEY_DOWN(DIK_E))
 	{
+		if (pMousePoint != nullptr)
+			dynamic_cast<CMousePoint*>(pMousePoint)->Set_ShowUI(false);
 		m_bIsZoom = false;
 		ZoomCamera(false);
 		m_eState = KIT_CLOSE;

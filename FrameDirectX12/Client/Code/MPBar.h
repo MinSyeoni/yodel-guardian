@@ -21,9 +21,6 @@ private:
 	virtual ~CMPBar();
 
 public:
-	void						Set_ShowUI(_bool bIsShow) { m_bIsShow = bIsShow; }
-
-public:
 	HRESULT						Ready_GameObjectPrototype();
 	virtual HRESULT				Ready_GameObject();
 	virtual HRESULT				LateInit_GameObject();
@@ -31,11 +28,12 @@ public:
 	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void				Render_GameObject(const _float& fTimeDelta);
 
-	void						Set_HP_Damage(const _float& fTimeDelta);
+public:
+	void						Set_ShowUI(_bool bIsShow) { m_bIsShow = bIsShow; }
+	void						Set_CurMpType(_uint iType) { m_iMPType = iType; }
 
 private:
 	virtual HRESULT				Add_Component();
-	void						Init_CharacterHp();
 
 private:
 	void						Set_ConstantTable();
@@ -48,14 +46,15 @@ private:
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
 
 	_bool						m_bIsShow = true;
+	_matrix						m_matMPWorld = INIT_MATRIX;
 
+	_uint						m_iMPType = 0;	// 0 - 기력 깎임, 1 - 가력 회복
 	_float						m_fCurMp = 0.f;
 	_float						m_fPreMp = 0.f;
-	_matrix						m_matMPWorld = INIT_MATRIX;
 
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);
-	static  CMPBar*				Create(ID3D12Device* pGraphicDevice,
+	static CMPBar*				Create(ID3D12Device* pGraphicDevice,
 										ID3D12GraphicsCommandList* pCommandList);
 private:
 	virtual void				Free();

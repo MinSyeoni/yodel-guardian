@@ -1,0 +1,21 @@
+TwoSided = false
+bDisableDepthTest = false
+bIsMasked = false
+ReferencedTextures[6] =
+{
+    ReferencedTextures[0] = Texture2D'BioApl_Uti_Col_Pod01.Pod_Collector_Glass_Normal'
+    ReferencedTextures[1] = Texture2D'BioVFX_Z_TEXTURES.Fractals.Smoke_Fractal'
+    ReferencedTextures[2] = Texture2D'BioApl_Uti_Col_Pod01.Pod_Collector_Glass_Stack'
+    ReferencedTextures[3] = Texture2D'BioVFX_Z_TEXTURES.Distortion.fx_Distort_02'
+    ReferencedTextures[4] = Texture2D'BioApl_Uti_Col_Pod01.Pod_Collector_Glass_Diff'
+    ReferencedTextures[5] = TextureCube3'BioVFX_Z_TEXTURES.Cube_Maps.Glitter_Cube_Map'
+}
+BlendMode = BLEND_Opaque (0)
+OpacityMaskClipValue = 0.333
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

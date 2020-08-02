@@ -1,0 +1,16 @@
+TwoSided = false
+bDisableDepthTest = false
+bIsMasked = true
+ReferencedTextures[1] =
+{
+    ReferencedTextures[0] = Texture2D'BioT_LevelMaster.TextureSamples.MM_FontMaster_01'
+}
+BlendMode = BLEND_Masked (1)
+OpacityMaskClipValue = 0.333
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

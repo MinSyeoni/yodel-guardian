@@ -54,9 +54,16 @@ public:		// 상호작용
 	const _float&			Get_CurHp() { return m_fCurHp; }	
 	void					Set_HitDamage(_float fDamage) { m_fHitDamage = fDamage; }
 	const _float&			Get_AtkDamage() { return m_fAtkDamage; }
-	void					Set_InitAni(_uint iAni) { m_iInitAni = iAni; }
+	void					Set_InitDrawID(_uint iID) { m_iDrawID = iID; }
 
-private:
+	void					Set_IsTurn(_bool bIsTurn) { m_bIsTurn = bIsTurn; }
+	_bool					Get_IsTurn() { return m_bIsTurn; }
+	void					Set_Direction(_vec3 vDir) { m_pTransCom->m_vDir = vDir; }
+	_vec3					Get_Direction() { return m_pTransCom->m_vDir; }
+
+private:	
+	void					Update_DronPos();
+	void					Dron_OnTriggerTest();
 	void					MoveByAstar(const _float& fTimeDelta);
 	void					Update_DronHP();
 	void					Chase_Player(const _float& fTimeDelta);
@@ -72,12 +79,15 @@ private:
 	Engine::CMesh*			m_pMeshCom = nullptr;
 
 private:
+	_bool					m_bIsTurn = false;
+
 	_float					m_fTime = 0.f;
 	_float					m_fAniTime = 0.f;
 	_float					m_fAniDelay = 0.f;
 
 	_vec3					m_vPlayerPos = _vec3(0.f, 0.f, 0.f);
 	_vec3					m_vChaseDir = _vec3(0.f, 0.f, 0.f);
+	_vec3					m_vInitPos = _vec3(0.f, 0.f, 0.f);
 
 	_bool					m_bIsDronState[4] = {false};	// 0=m_bIsTurn, 1=m_bIsDead, 2=m_bIsHit, 3=m_bIsATK;
 
@@ -86,8 +96,8 @@ private:
 	_float					m_fSpeed = 0.f;
 	_float					m_fCurHp = 0.f;
 	_float					m_fMaxHp = 0.f;
-
-	_uint					m_iInitAni;
+				
+	_uint					m_iDrawID;
 
 	//여기좀추가햇으
 	_bool m_bIsDeadSound = false;

@@ -141,16 +141,15 @@ _int CShepard::LateUpdate_GameObject(const _float& fTimeDelta)
 	/*____________________________________________________________________
 	[ Renderer - Add Render Group ]
 	______________________________________________________________________*/
-	if (m_bIsFinish)
-		return NO_EVENT;
+	m_pMeshCom->Set_AnimationBlend((int)m_eCurState, (int)m_eLegState);
+	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransformsBlend(fTimeDelta * 3000.f, fTimeDelta * 3000.f);
+	
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	/*____________________________________________________________________
 	[ Set PipelineState ]
 	______________________________________________________________________*/
-	m_pMeshCom->Set_AnimationBlend((int)m_eCurState, (int)m_eLegState);
-	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransformsBlend(fTimeDelta * 3000.f, fTimeDelta * 3000.f);
 
 	return NO_EVENT;
 }

@@ -1,0 +1,64 @@
+ScalarParameterValues[6] =
+{
+    ScalarParameterValues[0] =
+    {
+        ParameterName = Density
+        ParameterValue = 0
+        ParameterInfo = 
+    }
+    ScalarParameterValues[1] =
+    {
+        ParameterName = PanningSpeed
+        ParameterValue = 0.2
+        ParameterInfo = 
+    }
+    ScalarParameterValues[2] =
+    {
+        ParameterName = TextureContrast
+        ParameterValue = 0.5
+        ParameterInfo = 
+    }
+    ScalarParameterValues[3] =
+    {
+        ParameterName = Distance
+        ParameterValue = 10
+        ParameterInfo = 
+    }
+    ScalarParameterValues[4] =
+    {
+        ParameterName = Opacity
+        ParameterValue = 1
+        ParameterInfo = 
+    }
+    ScalarParameterValues[5] =
+    {
+        ParameterName = FarFadeDistance
+        ParameterValue = 60
+        ParameterInfo = 
+    }
+}
+TextureParameterValues[0] = {}
+VectorParameterValues[1] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = Color (A is luminosity)
+        ParameterValue =
+        {
+            R = 0.673049
+            G = 0.147998
+            B = 0.037029
+            A = 2
+        }
+        ParameterInfo = 
+    }
+}
+Parent = Material3'BioT_Volumetric.LAG_MM_Volumetric'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

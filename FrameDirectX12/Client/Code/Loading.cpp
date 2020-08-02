@@ -109,8 +109,6 @@ HRESULT CLoading::Load_Shader()
 
 
 
-
-
 	pComponent = CShader_LightAcc::Create(DEVICE, m_pCommandList, LIGHTTYPE::D3DLIGHT_DIRECTIONAL);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_LightDirect", ID_STATIC, pComponent), E_FAIL);
@@ -516,6 +514,7 @@ HRESULT CLoading::Mesh_ForStage(void)
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/DynamicMesh/Monster/Stage2/Dron/", L"Dron.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Dron", ID_STATIC, pComponent), E_FAIL);
+
 	static_cast<CLoadingBar*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"LoadingBar"))->SetGauge(0.58f);
 	//왜곡용
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/DistortDisk/", L"DistortDisk.X");
@@ -559,9 +558,30 @@ HRESULT CLoading::Texture_ForStage(void)
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_TerrainN", ID_STATIC, pComponent), E_FAIL);
 
 	// UI 이미지 넣을 것. 
-	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/mission%d.dds", 1);
-	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_UI", ID_STATIC, pComponent), E_FAIL);
+	//wstring strText = L"";
+	//string strTemp = "";
+
+	//strTemp = to_string(m_iCurBullet);	
+	//strTemp += "	";
+	//strTemp += to_string(m_iMaxBullet);
+
+	//strText.assign(strTemp.begin(), strTemp.end());
+	for (int i = 0; i < 10; ++i)
+	{
+		wstring wstrText = L"";
+		string strTemp = "";
+		wstring wstrProto = L"";
+		string strTempP = "";
+
+		strTemp = "../../Resource/Texture/UI/mission" + to_string(i) + ".dds";
+		wstrText.assign(strTemp.begin(), strTemp.end());
+		strTempP = "Prototype_Texture_QuestUI_" + to_string(i);
+		wstrProto.assign(strTempP.begin(), strTempP.end());
+
+		pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, wstrText.c_str(), 1);
+		NULL_CHECK_RETURN(pComponent, E_FAIL);
+		FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(wstrProto.c_str(), ID_STATIC, pComponent), E_FAIL);
+	}
 
 	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/aim%d.dds", 2);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
@@ -571,13 +591,13 @@ HRESULT CLoading::Texture_ForStage(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_PlayerIcon", ID_STATIC, pComponent), E_FAIL);
 
-	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_player_blue.dds", 1);
-	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_PlayerMP", ID_STATIC, pComponent), E_FAIL);
-
 	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_player_white.dds", 1);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_PlayerHP", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_player_blue.dds", 1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_PlayerMP", ID_STATIC, pComponent), E_FAIL);
 
 	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/blood_colleague1_white.dds", 1);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
@@ -623,6 +643,18 @@ HRESULT CLoading::Texture_ForStage(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_AttackDamageL", ID_STATIC, pComponent), E_FAIL);
 
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/card_back_red.dds", 1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_TagBack_Red", ID_STATIC, pComponent), E_FAIL);
+
+	//pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/card_background.dds", 1);
+	//NULL_CHECK_RETURN(pComponent, E_FAIL);
+	//FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_TagBack_Clear", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/card_green.dds", 1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_CardTag", ID_STATIC, pComponent), E_FAIL);
+
 	// e 버튼
 	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/e1.dds", 1);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
@@ -640,6 +672,9 @@ HRESULT CLoading::Texture_ForStage(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_E_DoorOpen", ID_STATIC, pComponent), E_FAIL);
 
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/mousepoint.dds", 1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_MousePoint", ID_STATIC, pComponent), E_FAIL);
 
 	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/DamageBlood/blood%d.dds", 3);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);

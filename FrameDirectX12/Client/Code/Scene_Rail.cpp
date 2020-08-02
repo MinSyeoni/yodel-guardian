@@ -5,11 +5,15 @@
 #include "Management.h"
 #include "NaviMesh.h"
 
+#include "Monster.h"
+#include "FlameThrower.h"
+#include "Dron.h"
+
 CScene_Rail::CScene_Rail(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
 	CComponentMgr::Get_Instance()->Delete_Component(L"Mesh_Navi", ID_STATIC);
-	Engine::CComponent* pComponent = Engine::CNaviMesh::Create(m_pGraphicDevice, m_pCommandList, L"../../Data/Navi/pass.dat");
+	Engine::CComponent* pComponent = Engine::CNaviMesh::Create(m_pGraphicDevice, m_pCommandList, L"../../Data/Navi/passage.dat");
 	CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Navi", ID_STATIC, pComponent);
 }
 
@@ -126,9 +130,14 @@ HRESULT CScene_Rail::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Sniper", L"Weapon", nullptr), E_FAIL);
 
-	Load_StageObject(L"../../Data/StaticObj/pass.dat", wstrLayerTag);
-	//Load_MonsterPos(L"../../Data/Collider/Flame.dat", wstrLayerTag);
-	//Load_TriggerPos(L"../../Data/Collider/Flame.dat", wstrLayerTag);
+	Load_StageObject(L"../../Data/StaticObj/passage.dat", wstrLayerTag);
+//	Load_MonsterPos(L"../../Data/Collider/Flame.dat", wstrLayerTag);
+	Load_MonsterPos(L"../../Data/Collider/DronStart.dat", wstrLayerTag);
+	Load_MonsterPos(L"../../Data/Collider/DronStart2.dat", wstrLayerTag);
+	Load_MonsterPos(L"../../Data/Collider/DronStart3.dat", wstrLayerTag);
+	Load_TriggerPos(L"../../Data/Collider/DronEnd.dat", wstrLayerTag);
+	Load_TriggerPos(L"../../Data/Collider/DronEnd2.dat", wstrLayerTag);
+	Load_TriggerPos(L"../../Data/Collider/DronEnd3.dat", wstrLayerTag);
 
 	/*____________________________________________________________________
 	GameObject 积己.
@@ -156,6 +165,13 @@ void CScene_Rail::Load_TriggerPos(const wstring& wstrFilePath, wstring wstrLayer
 		if (dwByte == 0)
 			break;
 
+		if (wstrFilePath == L"../../Data/Collider/DronEnd.dat")
+			tColData.iColID = 1;
+		else if (wstrFilePath == L"../../Data/Collider/DronEnd2.dat")
+			tColData.iColID = 2;
+		else if (wstrFilePath == L"../../Data/Collider/DronEnd3.dat")
+			tColData.iColID = 3;
+
 		if (3 == tColData.iOptionID)
 			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Trigger", L"Trigger", &tColData);
 	}
@@ -172,6 +188,8 @@ void CScene_Rail::Load_MonsterPos(const wstring& wstrFilePath, wstring wstrLayer
 
 	DWORD dwByte = 0;
 	COLLIDER tColData = {};
+
+	m_tMeshInfo.MeshTag = L"";
 
 	while (true)
 	{
@@ -191,11 +209,24 @@ void CScene_Rail::Load_MonsterPos(const wstring& wstrFilePath, wstring wstrLayer
 void CScene_Rail::InitMesh_FromFile(const std::wstring& wstrFilePath)
 {
 	if (wstrFilePath == L"../../Data/Collider/Flame.dat")
-		m_tMeshInfo.MeshTag = L"Flame";
-	else if (wstrFilePath == L"../../Data/Collider/Flame.dat")
+		m_tMeshInfo.MeshTag = L"Flamethrower";
+	else if (wstrFilePath == L"../../Data/Collider/DronStart.dat")
 	{
-		m_tMeshInfo.MeshTag == L"Dron";
-		m_tMeshInfo.iMeshID = 0;
+		m_tMeshInfo.MeshTag = L"Dron";
+		m_tMeshInfo.iDrawID = 1;
+		m_tMeshInfo.Rotation = _vec3{ 0.f, -100.f, 0.f };
+	}
+	else if (wstrFilePath == L"../../Data/Collider/DronStart2.dat")
+	{
+		m_tMeshInfo.MeshTag = L"Dron";
+		m_tMeshInfo.iDrawID = 2;
+		m_tMeshInfo.Rotation = _vec3{ 0.f, 100.f, 0.f };
+	}
+	else if (wstrFilePath == L"../../Data/Collider/DronStart3.dat")
+	{
+		m_tMeshInfo.MeshTag = L"Dron";
+		m_tMeshInfo.iDrawID = 3;
+		m_tMeshInfo.Rotation = _vec3{ 0.f, 80.f, 0.f };
 	}
 }
 
@@ -280,32 +311,31 @@ HRESULT CScene_Rail::Ready_LayerUI(wstring wstrLayerTag)
 
 	m_pObjectMgr->Add_Layer(wstrLayerTag, pLayer);
 
-
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_UI", L"Quest", nullptr), E_FAIL);
-
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Aim", L"Aim", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_OptionUI", L"OptionUI", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", nullptr), E_FAIL);
 
 	_uint iType = 0;
+	for (int i = 0; i < 3; ++i)
+		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &(iType = i)), E_FAIL);
+
 	//////// 酒捞能 //////
 	for (int i = 0; i < 3; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_IconUI", L"IconUI", &(iType = i)), E_FAIL);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &iType), E_FAIL);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &(iType = 1)), E_FAIL);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &(iType = 2)), E_FAIL);
 
 	for (int i = 0; i < 7; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_OnUI", L"OnUI", &(iType = i)), E_FAIL);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 
-	for (int i = 0; i < 6; ++i)
+	for (int i = 0; i < 7; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_EquipUI", L"EquipUI", &(iType = i)), E_FAIL);
-	/*____________________________________________________________________
-	GameObject 积己.
-	m_pObjectMgr->Add_GameObject(wstrLayerTag, wstrObjTag);
-	______________________________________________________________________*/
+
+	for (int i = 0; i < 10; ++i)
+		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_QuestUI", L"QuestUI", &(iType = i)), E_FAIL);
+
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MPBarUI", L"MPBarUI", nullptr), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MouseUI", L"MouseUI", nullptr), E_FAIL);
 
 	return S_OK;
 }

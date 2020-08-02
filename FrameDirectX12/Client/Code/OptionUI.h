@@ -29,6 +29,7 @@ public:
 	virtual void				Render_GameObject(const _float& fTimeDelta);
 
 public:
+	_bool						Get_ShowUI() { return m_bIsShow; }
 	void						Set_ShowUI(_bool bIsShow) { m_bIsShow = bIsShow; }
 	void						Show_OptionUI();
 

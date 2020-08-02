@@ -1,0 +1,84 @@
+ScalarParameterValues[3] =
+{
+    ScalarParameterValues[0] =
+    {
+        ParameterName = Material_Tile
+        ParameterValue = 2
+        ParameterInfo = 
+    }
+    ScalarParameterValues[1] =
+    {
+        ParameterName = Specular_Power
+        ParameterValue = 2
+        ParameterInfo = 
+    }
+    ScalarParameterValues[2] =
+    {
+        ParameterName = Specular_Contrast_Black
+        ParameterValue = 0.5
+        ParameterInfo = 
+    }
+}
+TextureParameterValues[2] =
+{
+    TextureParameterValues[0] =
+    {
+        ParameterName = Base_Normal
+        ParameterValue = Texture2D'BioT_Normandy_Int.Wall02_Norm'
+        ParameterInfo = 
+    }
+    TextureParameterValues[1] =
+    {
+        ParameterName = Diffuse
+        ParameterValue = Texture2D'BioT_Normandy_Int.NOR10_WALL06_DIFF'
+        ParameterInfo = 
+    }
+}
+VectorParameterValues[4] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = Specular_Color_Intensity
+        ParameterValue = { R=20, G=20, B=20, A=1 }
+        ParameterInfo = 
+    }
+    VectorParameterValues[1] =
+    {
+        ParameterName = Diffuse_Tint
+        ParameterValue =
+        {
+            R = 0.785973
+            G = 0.973049
+            B = 0.945555
+            A = 1
+        }
+        ParameterInfo = 
+    }
+    VectorParameterValues[2] =
+    {
+        ParameterName = Cubemap_Chooser
+        ParameterValue = { R=0, G=0, B=1, A=1 }
+        ParameterInfo = 
+    }
+    VectorParameterValues[3] =
+    {
+        ParameterName = Cubemap_Color_Intensity
+        ParameterValue =
+        {
+            R = 0.05
+            G = 0.05
+            B = 0.05
+            A = 1
+        }
+        ParameterInfo = 
+    }
+}
+Parent = Material3'BioT_LevelMaster.Materials.Opaque_MM'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

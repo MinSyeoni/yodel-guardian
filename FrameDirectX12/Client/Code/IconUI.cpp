@@ -35,6 +35,7 @@ HRESULT CIconUI::LateInit_GameObject()
 
 	m_pTransCom->m_vPos.x = _float(2.f / WINCX * WINCX / 2) - 1.f;
 	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * WINCY / 2) + 1.f;
+	m_pTransCom->m_vPos.z = 0.02f;
 
 	return S_OK;
 }
@@ -95,16 +96,18 @@ HRESULT CIconUI::Add_Component()
 		m_mapComponent[ID_DYNAMIC].emplace(L"Com_Transform", m_pTransCom);
 
 	// ≈ÿΩ∫√≥
+	wstring wstrTemp = L"";
 	for (int i = 0; i < 3; ++i)
 	{
-		wstring wstrTemp = L"Prototype_Texture_PlayerIcon";
-		if(i == 1)
+		if (i == 0)
+			wstrTemp = L"Prototype_Texture_PlayerIcon";
+		else if(i == 1)
 			wstrTemp = L"Prototype_Texture_colleague1Icon";
 		else if(i == 2)
 			wstrTemp = L"Prototype_Texture_colleague2Icon";
 
 		m_pTexture[i] = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(wstrTemp, COMPONENTID::ID_STATIC));
-		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+		NULL_CHECK_RETURN(m_pTexture[i], E_FAIL);
 		m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture[i]);
 	}
 

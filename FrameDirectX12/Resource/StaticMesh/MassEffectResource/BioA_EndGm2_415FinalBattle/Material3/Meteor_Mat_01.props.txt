@@ -1,0 +1,18 @@
+TwoSided = false
+bDisableDepthTest = false
+bIsMasked = false
+ReferencedTextures[3] =
+{
+    ReferencedTextures[0] = Texture2D'BioVFX_Env_BlackHole.Textures.Meteor_Norm_tex'
+    ReferencedTextures[1] = Texture2D'BioVFX_Env_BlackHole.Textures.Meteor_Diff_tex'
+    ReferencedTextures[2] = TextureCube3'BioVFX_Z_TEXTURES.Cube_Maps.CubeMap_ICE'
+}
+BlendMode = BLEND_Opaque (0)
+OpacityMaskClipValue = 0.333
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

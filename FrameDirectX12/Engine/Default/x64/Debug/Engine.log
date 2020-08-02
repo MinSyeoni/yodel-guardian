@@ -101,6 +101,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
           1개 파일이 복사되었습니다.
           1개 파일이 복사되었습니다.
   .\Engine\Code\AnimationControl.h
+  다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다.
   .\Engine\Code\Astar.h
   .\Engine\Code\Base.h
   .\Engine\Code\BloomTarget.h
@@ -111,6 +112,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   .\Engine\Code\ColliderMgr.h
   .\Engine\Code\Component.h
   .\Engine\Code\ComponentMgr.h
+  다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다.
   .\Engine\Code\CubeTex.h
   .\Engine\Code\DDSTextureLoader.h
   .\Engine\Code\DirectInput.h
@@ -123,6 +125,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   .\Engine\Code\Frustom.h
   .\Engine\Code\GameObject.h
   .\Engine\Code\GraphicDevice.h
+  다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다.
   .\Engine\Code\Info.h
   .\Engine\Code\Layer.h
   .\Engine\Code\Light.h
@@ -132,6 +135,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   .\Engine\Code\Management.h
   .\Engine\Code\MathMgr.h
   .\Engine\Code\Mesh.h
+  다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다.
   .\Engine\Code\MeshComponent.h
   .\Engine\Code\NaviBuffer.h
   .\Engine\Code\NaviMesh.h
@@ -171,7 +175,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   .\Engine\Code\Transform.h
   .\Engine\Code\VIBuffer.h
   .\Engine\Code\VlLine.h
-         71개 파일이 복사되었습니다.
+         67개 파일이 복사되었습니다.
   .\Engine\Header\Engine_Const.h
   .\Engine\Header\Engine_Enum.h
   .\Engine\Header\Engine_Function.h

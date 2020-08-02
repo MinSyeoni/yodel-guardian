@@ -81,7 +81,7 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
     m_pSphereCollider->Update_Collider(&(matBone * m_pTransCom->m_matWorld));
     CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::PLAYER, m_pBoxCollider);
 
-    CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::PLAYER, m_pBoxCOlliderForView);
+ //   CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::PLAYER, m_pBoxCOlliderForView);
     return NO_EVENT;
 }
 

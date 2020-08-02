@@ -1,0 +1,20 @@
+ScalarParameterValues[0] = {}
+TextureParameterValues[1] =
+{
+    TextureParameterValues[0] =
+    {
+        ParameterName = flare1
+        ParameterValue = Texture2D'EffectsLensFlares.StretchedFlare_06'
+        ParameterInfo = 
+    }
+}
+VectorParameterValues[0] = {}
+Parent = Material3'EffectsLensFlares.Materials.ME_Flare_mat_MASTER'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

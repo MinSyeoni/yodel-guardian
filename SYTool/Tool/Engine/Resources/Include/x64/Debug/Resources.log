@@ -1,4 +1,20 @@
-﻿  Cell.cpp
+﻿  AniCtrl.cpp
+  Buffer_Terrain.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Buffer_Terrain.cpp(54,41): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Buffer_Terrain.cpp(79,55): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Buffer_Terrain.cpp(80,59): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Buffer_Terrain.cpp(81,43): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Buffer_Terrain.cpp(92,55): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Buffer_Terrain.cpp(93,43): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Buffer_Terrain.cpp(94,39): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Buffer_Terrain.cpp(163,41): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Buffer_Terrain.cpp(187,55): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Buffer_Terrain.cpp(188,59): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Buffer_Terrain.cpp(189,43): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Buffer_Terrain.cpp(200,55): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Buffer_Terrain.cpp(201,43): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Buffer_Terrain.cpp(202,39): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Cell.cpp
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Cell.cpp(41,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Cell.cpp(41,2): error C2059: 구문 오류: '상수'
   CubeTex.cpp
@@ -7,6 +23,11 @@ C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\
   DynamicMesh.cpp
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\DynamicMesh.cpp(47,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\DynamicMesh.cpp(47,1): error C2059: 구문 오류: '상수'
+  HierarchyLoader.cpp
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\HierarchyLoader.cpp(88,79): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\HierarchyLoader.cpp(196,36): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Line.cpp
+  Mesh.cpp
   NaviMesh.cpp
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\NaviMesh.cpp(36,28): warning C4267: '인수': 'size_t'에서 'const Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\NaviMesh.cpp(44,28): warning C4267: '인수': 'size_t'에서 'const Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -21,25 +42,24 @@ C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\RcTex.cpp(32,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\RcTex.cpp(32,2): error C2059: 구문 오류: '상수'
   Resources.cpp
+  ResourcesMgr.cpp
   StaticMesh.cpp
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\StaticMesh.cpp(58,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\StaticMesh.cpp(58,1): error C2059: 구문 오류: '상수'
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\StaticMesh.cpp(120,11): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\StaticMesh.cpp(207,35): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   TerrainTex.cpp
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(277,34): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(279,57): warning C4244: '인수': 'size_t'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(279,37): warning C4244: '인수': 'size_t'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(281,49): warning C4244: '인수': 'size_t'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(281,29): warning C4244: '인수': 'size_t'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(299,48): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(300,52): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(301,43): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(312,48): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(313,43): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(314,39): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(448,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(448,2): error C2059: 구문 오류: '상수'
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(284,34): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(286,57): warning C4244: '인수': 'size_t'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(286,37): warning C4244: '인수': 'size_t'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(306,48): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(307,52): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(308,43): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(319,48): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(320,43): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(321,39): warning C4267: '=': 'size_t'에서 'Engine::_ulong'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(455,2): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.
+C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\TerrainTex.cpp(455,2): error C2059: 구문 오류: '상수'
   Texture.cpp
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Texture.cpp(14,48): warning C4267: '초기화 중': 'size_t'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\user\Documents\GitHub\yodel-guardian\SYTool\Tool\Engine\Resources\Code\Texture.cpp(49,1): error C4235: 비표준 확장이 사용됨: 이 아키텍처에서는 '__asm' 키워드를 사용할 수 없습니다.

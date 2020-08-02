@@ -1,0 +1,72 @@
+ScalarParameterValues[3] =
+{
+    ScalarParameterValues[0] =
+    {
+        ParameterName = Material_Tile
+        ParameterValue = 1
+        ParameterInfo = 
+    }
+    ScalarParameterValues[1] =
+    {
+        ParameterName = SSS_Width
+        ParameterValue = 1
+        ParameterInfo = 
+    }
+    ScalarParameterValues[2] =
+    {
+        ParameterName = Specular_Power
+        ParameterValue = 10
+        ParameterInfo = 
+    }
+}
+TextureParameterValues[2] =
+{
+    TextureParameterValues[0] =
+    {
+        ParameterName = Base_Normal
+        ParameterValue = Texture2D'BioT_Collector_Int.Sack_Norm'
+        ParameterInfo = 
+    }
+    TextureParameterValues[1] =
+    {
+        ParameterName = Diffuse
+        ParameterValue = Texture2D'BioT_Collector_Int.Sack_Diff'
+        ParameterInfo = 
+    }
+}
+VectorParameterValues[2] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = SSS_Color
+        ParameterValue =
+        {
+            R = 0.45908
+            G = 0.21952
+            B = 0.044553
+            A = 1
+        }
+        ParameterInfo = 
+    }
+    VectorParameterValues[1] =
+    {
+        ParameterName = Emissive_Color_Intensity
+        ParameterValue =
+        {
+            R = 0.15
+            G = 0.051
+            B = 0.015
+            A = 1
+        }
+        ParameterInfo = 
+    }
+}
+Parent = Material3'BioT_LevelMaster.Materials.Opaque_MM'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

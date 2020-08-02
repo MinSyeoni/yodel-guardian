@@ -1,6 +1,12 @@
 #include "stdafx.h"
 #include "Aim.h"
-
+#include "OptionUI.h"
+#include "HPBar.h"
+#include "IconUI.h"
+#include "GunUI.h"
+#include "InvenUI.h"
+#include "DirectInput.h"
+#include "QuestUI.h"
 
 CAim::CAim(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -56,15 +62,57 @@ _int CAim::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
+	CGameObject* pOptionUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"OptionUI");
+	if (pOptionUI != nullptr)
+	{
+		if(!dynamic_cast<COptionUI*>(pOptionUI)->Get_ShowUI())
+			Show_OtherUI(true);
+	}
+
 	if (m_bIsRender == true)
 	{
 		GetCursorPos(&m_pt);
 		ScreenToClient(g_hWnd, &m_pt);
+		if(m_iDrawId == 1)
+			Show_OtherUI(false);
 
 		FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 	}
 
 	return NO_EVENT;
+}
+
+void CAim::Show_OtherUI(_bool bIsShow)
+{
+	list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
+	if (pHpBarUIList != nullptr)
+	{
+		for (auto& pSrc : *pHpBarUIList)
+			dynamic_cast<CHPBar*>(pSrc)->Set_ShowUI(bIsShow);
+	}
+
+	list<CGameObject*>* pIconUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"IconUI");
+	if (pIconUIList != nullptr)
+	{
+		for (auto& pSrc : *pIconUIList)
+			dynamic_cast<CIconUI*>(pSrc)->Set_ShowUI(bIsShow);
+	}
+
+	list<CGameObject*>* pQuestUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"QuestUI");
+	if (pQuestUIList != nullptr)
+	{
+		for (auto& pSrc : *pQuestUIList)
+			dynamic_cast<CQuestUI*>(pSrc)->Set_ShowUI(bIsShow);
+	}
+
+	CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
+	if (pGunUI != nullptr)
+		dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(bIsShow);
+
+	CGameObject* pInvenUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
+	if (pInvenUI != nullptr)
+		dynamic_cast<CInvenUI*>(pInvenUI)->Set_ShowUI(bIsShow);
+
 }
 
 void CAim::Render_GameObject(const _float& fTimeDelta)

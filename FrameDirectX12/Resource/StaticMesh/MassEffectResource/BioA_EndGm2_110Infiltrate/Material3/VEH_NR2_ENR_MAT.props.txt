@@ -1,0 +1,23 @@
+TwoSided = false
+bDisableDepthTest = false
+bIsMasked = false
+ReferencedTextures[8] =
+{
+    ReferencedTextures[0] = Texture2D'BIOG_NR2.Textures_Cine.NR2_Engines_Norm'
+    ReferencedTextures[1] = Texture2D'BIOG_NR2.Textures_Cine.NR2_Engines_Spec'
+    ReferencedTextures[2] = Texture2D'BIOG_NR2.Textures_Cine.NR2_Engines_DiffR'
+    ReferencedTextures[3] = Texture2D'BIOG_NOR.Nor_Front_Engine_06'
+    ReferencedTextures[4] = None
+    ReferencedTextures[5] = Texture2D'BioVFX_Z_TEXTURES.Distortion.fx_Distort_02b'
+    ReferencedTextures[6] = Texture2D'BioVFX_Z_TEXTURES.Textures.stringy_02'
+    ReferencedTextures[7] = Texture2D'BioVFX_Z_TEXTURES.Distortion.fx_Distort'
+}
+BlendMode = BLEND_Opaque (0)
+OpacityMaskClipValue = 0.333
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

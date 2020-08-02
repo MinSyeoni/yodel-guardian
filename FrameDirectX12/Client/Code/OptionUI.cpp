@@ -6,8 +6,9 @@
 #include "InvenUI.h"
 #include "DirectInput.h"
 #include "OnUI.h"
-#include "UI.h"
+#include "QuestUI.h"
 #include "EquipUI.h"
+#include "MousePoint.h"
 
 COptionUI::COptionUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -109,9 +110,12 @@ void COptionUI::Show_OtherUI()
 			dynamic_cast<CIconUI*>(pSrc)->Set_ShowUI(!m_bIsShow);
 	}
 
-	CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"Quest");
-	if (pQuestUI != nullptr)
-		dynamic_cast<CUI*>(pQuestUI)->Set_ShowUI(!m_bIsShow);
+	list<CGameObject*>* pQuestUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"QuestUI");
+	if (pQuestUIList != nullptr)
+	{
+		for (auto& pSrc : *pQuestUIList)
+			dynamic_cast<CQuestUI*>(pSrc)->Set_ShowUI(!m_bIsShow);
+	}
 
 	CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
 	if (pGunUI != nullptr)
@@ -127,6 +131,10 @@ void COptionUI::Show_OtherUI()
 		for (auto& pSrc : *pEquipUIList)
 			dynamic_cast<CEquipUI*>(pSrc)->Set_ShowUI(false);
 	}
+
+	CGameObject* pMousePoint = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"MouseUI");
+	if (pMousePoint != nullptr)
+		dynamic_cast<CMousePoint*>(pMousePoint)->Set_ShowUI(m_bIsShow);
 }
 
 void COptionUI::Render_GameObject(const _float& fTimeDelta)

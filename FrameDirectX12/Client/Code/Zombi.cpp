@@ -260,7 +260,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	{
 		m_fSpeed = 4.5f;
 
-		if (Check_PlayerRange(8.f))
+		if (Check_PlayerRange(12.f))
 		{
 			m_fAniDelay = 2000.f;
 			int iRandAni = rand() % 2;
@@ -339,7 +339,7 @@ void CZombi::Attak_Player(Engine::CMesh* m_pMeshCom, CZombi::ZOMBISTATE eState)
 		int iRandAni = rand() % 2;
 		m_bIsZombiState[3] = false;
 
-		if (Check_PlayerRange(20.f))
+		if (Check_PlayerRange(12.f))
 		{
 			if (iRandAni == 0)
 				m_eCurState = ZOM_LEFT_ATK;

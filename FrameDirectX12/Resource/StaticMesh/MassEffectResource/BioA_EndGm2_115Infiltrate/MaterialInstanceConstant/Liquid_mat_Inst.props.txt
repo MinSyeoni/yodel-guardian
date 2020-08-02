@@ -1,0 +1,40 @@
+ScalarParameterValues[2] =
+{
+    ScalarParameterValues[0] =
+    {
+        ParameterName = Reflection_Strength
+        ParameterValue = 200
+        ParameterInfo = 
+    }
+    ScalarParameterValues[1] =
+    {
+        ParameterName = Alpha
+        ParameterValue = 0.05
+        ParameterInfo = 
+    }
+}
+TextureParameterValues[0] = {}
+VectorParameterValues[1] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = Reflection_Tint
+        ParameterValue =
+        {
+            R = 2
+            G = 0.8
+            B = 0.3
+            A = 1
+        }
+        ParameterInfo = 
+    }
+}
+Parent = Material3'BioVFX_Z_MATERIALS.Liquid_Master_mat'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

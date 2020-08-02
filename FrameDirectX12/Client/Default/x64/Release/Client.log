@@ -1,38 +1,10 @@
-﻿  Dron.cpp
-  FadeOut.cpp
-  Ken.cpp
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Ken.cpp(179,49): warning C4244: '인수': 'double'에서 'const Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  NpcRifle.cpp
   NpcWords.cpp
-  Player.cpp
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Player.cpp(136,18): warning C4244: 'return': '_uint'에서 '_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  PlayerStatus.cpp
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(173,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(173,10): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(210,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(210,38): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(230,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(230,36): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(251,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(251,9): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(316,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(316,9): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(326,16): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(326,17): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(345,13): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(345,14): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(352,12): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(352,13): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(359,13): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(359,14): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(366,12): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(366,13): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(373,13): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(373,14): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(380,12): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(380,13): warning C4309: '인수': 상수 값이 잘립니다.
+  Scene_Stage.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Scene_Stage.cpp(125,96): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Scene_Stage.cpp(530,40): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Shepard.cpp
-C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Shepard.cpp(178,49): warning C4244: '인수': 'double'에서 'const Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Zombi.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Shepard.cpp(177,49): warning C4244: '인수': 'double'에서 'const Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다...
 LINK : warning LNK4044: '/FS' 옵션을 인식할 수 없습니다. 무시됩니다.
 ActionCamera.obj : warning LNK4075: '/EDITANDCONTINUE'이(가) '/OPT:ICF' 사양으로 인해 무시됩니다.

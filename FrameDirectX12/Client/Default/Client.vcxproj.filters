@@ -100,6 +100,9 @@
     <Filter Include="02.Scene_All\05.RectObject">
       <UniqueIdentifier>{ac3817b5-9267-43b3-854b-f82508c1fd87}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Scene_All\03.StaticObject\00.Map">
+      <UniqueIdentifier>{e4248776-55b2-4aec-ab3c-16fe3f0cfb80}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Scene_All\03.StaticObject\01.MapObject">
       <UniqueIdentifier>{022f3627-9f5b-4127-89b8-fa62a5174368}</UniqueIdentifier>
     </Filter>
@@ -238,14 +241,19 @@
     <Filter Include="00.Scene_Logo\00.BackGround\00.LoadingTexture">
       <UniqueIdentifier>{89372a43-0a25-4e52-8bed-afe106463413}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene_Stage\07.NPC\03.Ken">
-      <UniqueIdentifier>{c4dba46c-cc87-4ec9-a762-bc39bda25171}</UniqueIdentifier>
+
+
+    <Filter Include="03.UI\09.MousePoint">
+      <UniqueIdentifier>{5bc3d12b-32ee-47ff-80e1-66ac7d11fb48}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Scene_All\06.EffectObject\04.DamageBlood">
-      <UniqueIdentifier>{96c4a159-ba90-4451-846b-5f8435826651}</UniqueIdentifier>
+    <Filter Include="03.UI\10.CardTagUI">
+      <UniqueIdentifier>{96b94b99-bac1-4fe8-8d3c-b932f4f0c762}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Scene_All\07.LightObject">
-      <UniqueIdentifier>{52544369-16a8-4bda-843e-c5da9d6bec05}</UniqueIdentifier>
+    <Filter Include="03.UI\10.CardTagUI\00.TagBack">
+      <UniqueIdentifier>{5820cf51-240b-49ee-a605-0e896475dcfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\10.CardTagUI\01.CardTagUI">
+      <UniqueIdentifier>{b2debe9b-1266-4949-9c99-6dd2a84f8e7c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -376,9 +384,11 @@
       <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
       <Filter>01.Scene_Stage\06.Monster\01.Zombi</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\LightObject.h" />
     <ClInclude Include="..\Code\Trigger.h">
       <Filter>01.Scene_Stage\08.Trigger</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\DamageBlood.h" />
     <ClInclude Include="..\Code\Normandy.h">
       <Filter>01.Scene_Stage\07.NPC\01.Normandy</Filter>
     </ClInclude>
@@ -397,6 +407,7 @@
     <ClInclude Include="..\Code\Shepard.h">
       <Filter>01.Scene_Stage\07.NPC\02.Shapard</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\HPKit.h" />
     <ClInclude Include="..\Code\NpcWords.h">
       <Filter>03.UI\04.NpcWords</Filter>
     </ClInclude>
@@ -472,6 +483,7 @@
     <ClInclude Include="..\Code\AttackDamage.h">
       <Filter>03.UI\08.AttackUI</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Ken.h" />
     <ClInclude Include="..\Code\HPBar.h">
       <Filter>03.UI\02.HPMPBar\00.HPBar</Filter>
     </ClInclude>
@@ -484,17 +496,22 @@
     <ClInclude Include="..\Code\LoadingBar.h">
       <Filter>00.Scene_Logo\00.BackGround\01.LoadingBar</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\HPKit.h">
-      <Filter>02.Scene_All\03.StaticObject\02.Items\00.HPKit</Filter>
+
+
+    <ClInclude Include="..\Code\MPBar.h">
+      <Filter>03.UI\02.HPMPBar\01.MPBar</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Ken.h">
-      <Filter>01.Scene_Stage\07.NPC\03.Ken</Filter>
+    <ClInclude Include="..\Code\MousePoint.h">
+      <Filter>03.UI\09.MousePoint</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\DamageBlood.h">
-      <Filter>02.Scene_All\06.EffectObject\04.DamageBlood</Filter>
+    <ClInclude Include="..\Code\QuestUI.h">
+      <Filter>03.UI\05.QuestUI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\LightObject.h">
-      <Filter>02.Scene_All\07.LightObject</Filter>
+    <ClInclude Include="..\Code\CardTagUI.h">
+      <Filter>03.UI\10.CardTagUI\01.CardTagUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\TagBack.h">
+      <Filter>03.UI\10.CardTagUI\00.TagBack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -595,9 +612,11 @@
       <Filter>01.Scene_Stage\06.Monster\01.ZombiState</Filter>
       <Filter>01.Scene_Stage\06.Monster\01.Zombi</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\LightObject.cpp" />
     <ClCompile Include="..\Code\Trigger.cpp">
       <Filter>01.Scene_Stage\08.Trigger</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\DamageBlood.cpp" />
     <ClCompile Include="..\Code\Normandy.cpp">
       <Filter>01.Scene_Stage\07.NPC\01.Normandy</Filter>
     </ClCompile>
@@ -616,6 +635,7 @@
     <ClCompile Include="..\Code\Shepard.cpp">
       <Filter>01.Scene_Stage\07.NPC\02.Shapard</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\HPKit.cpp" />
     <ClCompile Include="..\Code\NpcWords.cpp">
       <Filter>03.UI\04.NpcWords</Filter>
     </ClCompile>
@@ -694,6 +714,7 @@
     <ClCompile Include="..\Code\AttackDamage.cpp">
       <Filter>03.UI\08.AttackUI</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Ken.cpp" />
     <ClCompile Include="..\Code\HPBar.cpp">
       <Filter>03.UI\02.HPMPBar\00.HPBar</Filter>
     </ClCompile>
@@ -706,17 +727,22 @@
     <ClCompile Include="..\Code\LoadingBar.cpp">
       <Filter>00.Scene_Logo\00.BackGround\01.LoadingBar</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\HPKit.cpp">
-      <Filter>02.Scene_All\03.StaticObject\02.Items\00.HPKit</Filter>
+
+
+    <ClCompile Include="..\Code\MPBar.cpp">
+      <Filter>03.UI\02.HPMPBar\01.MPBar</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Ken.cpp">
-      <Filter>01.Scene_Stage\07.NPC\03.Ken</Filter>
+    <ClCompile Include="..\Code\MousePoint.cpp">
+      <Filter>03.UI\09.MousePoint</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\DamageBlood.cpp">
-      <Filter>02.Scene_All\06.EffectObject\04.DamageBlood</Filter>
+    <ClCompile Include="..\Code\QuestUI.cpp">
+      <Filter>03.UI\05.QuestUI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\LightObject.cpp">
-      <Filter>02.Scene_All\07.LightObject</Filter>
+    <ClCompile Include="..\Code\CardTagUI.cpp">
+      <Filter>03.UI\10.CardTagUI\01.CardTagUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TagBack.cpp">
+      <Filter>03.UI\10.CardTagUI\00.TagBack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

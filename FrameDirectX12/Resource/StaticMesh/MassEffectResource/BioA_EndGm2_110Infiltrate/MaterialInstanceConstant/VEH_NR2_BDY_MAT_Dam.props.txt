@@ -1,0 +1,40 @@
+ScalarParameterValues[1] =
+{
+    ScalarParameterValues[0] =
+    {
+        ParameterName = Specular_Control
+        ParameterValue = 0.25
+        ParameterInfo = 
+    }
+}
+TextureParameterValues[3] =
+{
+    TextureParameterValues[0] =
+    {
+        ParameterName = Diff_Map
+        ParameterValue = Texture2D'BIOG_NR2.Damaged.NR2_Body_Diff_2048_dam'
+        ParameterInfo = 
+    }
+    TextureParameterValues[1] =
+    {
+        ParameterName = Spec
+        ParameterValue = Texture2D'BIOG_NR2.Damaged.NR2_Body_Spec_2048_dam'
+        ParameterInfo = 
+    }
+    TextureParameterValues[2] =
+    {
+        ParameterName = Normal
+        ParameterValue = Texture2D'BIOG_NR2.Damaged.NR2_Body_Norm_2048_dam'
+        ParameterInfo = 
+    }
+}
+VectorParameterValues[0] = {}
+Parent = Material3'BIOG_NR2.Materials_Cine.VEH_NR2_BDY_MAT'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

@@ -1,0 +1,10 @@
+FacePosX = Texture2D'BioT_LevelMaster.MM_CUBEMAP_SET_C.CubemapFace0'
+FaceNegX = Texture2D'BioT_LevelMaster.MM_CUBEMAP_SET_C.CubemapFace1'
+FacePosY = Texture2D'BioT_LevelMaster.MM_CUBEMAP_SET_C.CubemapFace2'
+FaceNegY = Texture2D'BioT_LevelMaster.MM_CUBEMAP_SET_C.CubemapFace3'
+FacePosZ = Texture2D'BioT_LevelMaster.MM_CUBEMAP_SET_C.CubemapFace4'
+FaceNegZ = Texture2D'BioT_LevelMaster.MM_CUBEMAP_SET_C.CubemapFace5'
+UnpackMin[4] = { 0, 0, 0, 0 }
+UnpackMax[4] = { 1, 1, 1, 1 }
+CompressionSettings = TC_Default (0)
+Source = 

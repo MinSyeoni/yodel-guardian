@@ -167,17 +167,17 @@ void CSalone::FIRTSTTALKCEHCK()
 		_vec3 vDist = PlayerPos - m_pTransCom->m_vPos;
 
 
-		if (vDist.Get_Length() < 30.f && CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
+		if (vDist.Get_Length() < 30.f)
 		{
 			ShowEquipUI(true);
 			m_bIsLimLIght = true;
-			if (KEY_DOWN(DIK_E))
+	/*		if (KEY_DOWN(DIK_E))
 			{
 				CFadeOut::FADETYPE eType = CFadeOut::FIRST;
 				m_bIsLimLIght = false;
 				m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_FadeOut", L"FadeOut", &eType);
 				m_bIsStartTalking = true;
-			}
+			}*/
 		}
 		else
 		{

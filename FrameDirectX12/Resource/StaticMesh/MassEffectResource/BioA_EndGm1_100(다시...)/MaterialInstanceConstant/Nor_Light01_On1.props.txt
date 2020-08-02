@@ -1,0 +1,34 @@
+ScalarParameterValues[1] =
+{
+    ScalarParameterValues[0] =
+    {
+        ParameterName = Emissive_Multiplier
+        ParameterValue = 1.25
+        ParameterInfo = 
+    }
+}
+TextureParameterValues[0] = {}
+VectorParameterValues[1] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = Emissive_color
+        ParameterValue =
+        {
+            R = 0.982826
+            G = 0.965815
+            B = 0.932277
+            A = 1
+        }
+        ParameterInfo = 
+    }
+}
+Parent = Material3'BioT_Normandy_Int.NOR_LIGHT01_MM'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

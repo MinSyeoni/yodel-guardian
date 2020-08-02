@@ -1,0 +1,66 @@
+ScalarParameterValues[1] =
+{
+    ScalarParameterValues[0] =
+    {
+        ParameterName = Spec_Pwr
+        ParameterValue = 20
+        ParameterInfo = 
+    }
+}
+TextureParameterValues[3] =
+{
+    TextureParameterValues[0] =
+    {
+        ParameterName = Normal
+        ParameterValue = Texture2D'BioT_Collector_MtL.MetalPanel01_Norm'
+        ParameterInfo = 
+    }
+    TextureParameterValues[1] =
+    {
+        ParameterName = Diffuse
+        ParameterValue = Texture2D'BioT_Collector_MtL.Col_Tube_Diff'
+        ParameterInfo = 
+    }
+    TextureParameterValues[2] =
+    {
+        ParameterName = CubeMap
+        ParameterValue = TextureCube3'BioT_LevelMaster.CollectorCubemapTST'
+        ParameterInfo = 
+    }
+}
+VectorParameterValues[3] =
+{
+    VectorParameterValues[0] =
+    {
+        ParameterName = Spec_Color_Intensity
+        ParameterValue = { R=3, G=3, B=3, A=1 }
+        ParameterInfo = 
+    }
+    VectorParameterValues[1] =
+    {
+        ParameterName = Cubemap_Color_Intensity
+        ParameterValue = { R=5, G=3, B=2, A=1 }
+        ParameterInfo = 
+    }
+    VectorParameterValues[2] =
+    {
+        ParameterName = Diff_Tint_Color
+        ParameterValue =
+        {
+            R = 0.659224
+            G = 0.659224
+            B = 0.659224
+            A = 1
+        }
+        ParameterInfo = 
+    }
+}
+Parent = MaterialInstanceConstant'BioT_LevelMaster.Collector_MetalPanel_INST01'
+BasePropertyOverrides = 
+FlattenedTexture = None
+MobileBaseTexture = None
+MobileNormalTexture = None
+bUseMobileSpecular = false
+MobileSpecularPower = 16
+MobileSpecularMask = MSM_Constant (0)
+MobileMaskTexture = None

@@ -125,8 +125,6 @@ float4 PS_MPBAR(VS_TEXTURED_OUTPUT input) : SV_TARGET
 
 	if (input.uv.y < fUvY)cColor.a = 0.f;
 
-
-
 	return(cColor);
 }
 

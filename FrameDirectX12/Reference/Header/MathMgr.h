@@ -38,7 +38,7 @@ public:
 
 	_bool   Collision_BoXWithCamera(CCollider* pDstCollider, float* fDist);
 	_bool   Collision_SphereWithCamera(CCollider* pDstCollider, float* fDist);
-
+	_bool   Collision_PlayerViewPoint(_vec3 vRayPos,_vec3 vRayDir,CCollider* pDstCollider, float* fDist);
 
 public:
 	void	Set_Point(OBB* pObb, const _vec3* pMin, const _vec3* pMax);

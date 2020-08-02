@@ -170,8 +170,8 @@ HRESULT CTarget::BuildResource()
 			optClear.Color[1] = m_EmissiveClear[1];
 			optClear.Color[2] = m_EmissiveClear[2];
 			optClear.Color[3] = m_EmissiveClear[3];
-			optClear.Format = DXGI_FORMAT_R16G16B16A16_FLOAT;
-			texDesc.Format = DXGI_FORMAT_R16G16B16A16_FLOAT;
+			optClear.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+			texDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 		}
 
 		ThrowIfFailed(m_pGraphicDev->CreateCommittedResource(
@@ -198,7 +198,7 @@ HRESULT CTarget::BuildResource()
 		if(i==2)
 			desc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
 		else if(i==4)
-			desc.Format = DXGI_FORMAT_R16G16B16A16_FLOAT;
+			desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 		else
 			desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 
