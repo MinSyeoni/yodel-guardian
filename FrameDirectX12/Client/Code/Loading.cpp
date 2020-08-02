@@ -107,6 +107,9 @@ HRESULT CLoading::Load_Shader()
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_HPBAR2", ID_STATIC, pComponent), E_FAIL);
 
+	pComponent = CShader_UI::Create(DEVICE, m_pCommandList, CShader_UI::CARDTAG);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_CARDTAG", ID_STATIC, pComponent), E_FAIL);
 
 
 	pComponent = CShader_LightAcc::Create(DEVICE, m_pCommandList, LIGHTTYPE::D3DLIGHT_DIRECTIONAL);

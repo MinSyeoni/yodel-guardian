@@ -9,6 +9,8 @@
 #include "PassageDoor.h"
 #include "Monster.h"
 
+#include "CardTagUI.h"
+
 CCardKey::CCardKey(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -132,14 +134,12 @@ HRESULT CCardKey::Add_Component()
 
 void CCardKey::PutTheCard_OnTheDoor()
 {
-	CGameObject* pPassageDoor = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"PassageDoor");
-
-	if (nullptr == pPassageDoor)
+	CGameObject* pCardTagUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"CardTag");
+	if (nullptr == pCardTagUI)
 		return;
-
 	if (!m_bIsDead && m_bIsEquip)
 	{
-		dynamic_cast<CPassageDoor*>(pPassageDoor)->Set_IsCardToDoor(true);
+		dynamic_cast<CCardTagUI*>(pCardTagUI)->Set_IsTagOn(true);
 		m_bIsDead = true;
 	}
 }

@@ -98,7 +98,7 @@ HRESULT CMousePoint::Add_Component()
 
 	// Texture 
 	m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(L"Prototype_Texture_MousePoint", COMPONENTID::ID_STATIC));
-	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+	NULL_CHECK_RETURN(m_pTexture, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
 
 	// TransCom 

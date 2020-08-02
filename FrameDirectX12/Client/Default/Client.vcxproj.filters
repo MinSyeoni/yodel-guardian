@@ -82,9 +82,6 @@
     <Filter Include="01.Scene_Stage\00.Player\01.PlayerStatus">
       <UniqueIdentifier>{a66796dc-9b78-40be-a3dd-b617722c6bc1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.UI\03.PlayerUI">
-      <UniqueIdentifier>{5bc3d12b-32ee-47ff-80e1-66ac7d11fb48}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05.Loading">
       <UniqueIdentifier>{b12196e0-3829-4a1c-8527-7392b0c7418d}</UniqueIdentifier>
     </Filter>
@@ -159,9 +156,6 @@
     </Filter>
     <Filter Include="02.Scene_All\01.DynamicObject\00.LobbyDoor">
       <UniqueIdentifier>{eb25b983-03da-4a3b-9078-2c4b3ba83b62}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03.UI\05.QuestUI">
-      <UniqueIdentifier>{66177720-cdb3-4e75-82b1-ab1a7672ec4c}</UniqueIdentifier>
     </Filter>
     <Filter Include="03.UI\06.InvenUI">
       <UniqueIdentifier>{65520a3f-9dfd-40dd-83a7-21791fa53d3d}</UniqueIdentifier>
@@ -241,8 +235,6 @@
     <Filter Include="00.Scene_Logo\00.BackGround\00.LoadingTexture">
       <UniqueIdentifier>{89372a43-0a25-4e52-8bed-afe106463413}</UniqueIdentifier>
     </Filter>
-
-
     <Filter Include="03.UI\09.MousePoint">
       <UniqueIdentifier>{5bc3d12b-32ee-47ff-80e1-66ac7d11fb48}</UniqueIdentifier>
     </Filter>
@@ -254,6 +246,9 @@
     </Filter>
     <Filter Include="03.UI\10.CardTagUI\01.CardTagUI">
       <UniqueIdentifier>{b2debe9b-1266-4949-9c99-6dd2a84f8e7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\05.QuestUI">
+      <UniqueIdentifier>{66177720-cdb3-4e75-82b1-ab1a7672ec4c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -414,9 +409,6 @@
     <ClInclude Include="..\Code\LobbyDoor.h">
       <Filter>02.Scene_All\01.DynamicObject\00.LobbyDoor</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\UI.h">
-      <Filter>03.UI\05.QuestUI</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\IconUI.h">
       <Filter>03.UI\03.PlayerUI</Filter>
       <Filter>03.UI\03.IconUI</Filter>
@@ -496,8 +488,6 @@
     <ClInclude Include="..\Code\LoadingBar.h">
       <Filter>00.Scene_Logo\00.BackGround\01.LoadingBar</Filter>
     </ClInclude>
-
-
     <ClInclude Include="..\Code\MPBar.h">
       <Filter>03.UI\02.HPMPBar\01.MPBar</Filter>
     </ClInclude>
@@ -642,9 +632,6 @@
     <ClCompile Include="..\Code\LobbyDoor.cpp">
       <Filter>02.Scene_All\01.DynamicObject\00.LobbyDoor</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\UI.cpp">
-      <Filter>03.UI\05.QuestUI</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\IconUI.cpp">
       <Filter>03.UI\03.PlayerUI</Filter>
       <Filter>03.UI\03.IconUI</Filter>
@@ -727,8 +714,6 @@
     <ClCompile Include="..\Code\LoadingBar.cpp">
       <Filter>00.Scene_Logo\00.BackGround\01.LoadingBar</Filter>
     </ClCompile>
-
-
     <ClCompile Include="..\Code\MPBar.cpp">
       <Filter>03.UI\02.HPMPBar\01.MPBar</Filter>
     </ClCompile>

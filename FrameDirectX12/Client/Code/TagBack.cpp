@@ -1,9 +1,7 @@
 #include "stdafx.h"
 #include "TagBack.h"
-#include "ObjectMgr.h"
-#include "DynamicCamera.h"
-#include "GraphicDevice.h"
-
+#include "Player.h"
+#include "DirectInput.h"
 
 CTagBack::CTagBack(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -13,7 +11,6 @@ CTagBack::CTagBack(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCom
 CTagBack::CTagBack(const CTagBack& rhs)
 	: Engine::CGameObject(rhs)
 {
-
 }
 
 CTagBack::~CTagBack()
@@ -22,28 +19,28 @@ CTagBack::~CTagBack()
 
 HRESULT CTagBack::Ready_GameObjectPrototype()
 {
-
-
 	return S_OK;
 }
 
-HRESULT CTagBack::Ready_GameObject()	// 복사본을 레디할 때 
+HRESULT CTagBack::Ready_GameObject()
 {
 	Add_Component();
-
 
 	return S_OK;
 }
 
 HRESULT CTagBack::LateInit_GameObject()
 {
-	for(int i = 0; i < 2; ++i)
-		m_pShaderCom[i]->Set_Shader_Texture(m_pTexture[i]->Get_Texture());	
+	for(int i = 0; i< 2; ++i)
+		m_pShaderCom[i]->Set_Shader_Texture(m_pTexture[i]->Get_Texture());
+
+	m_pTransCom->m_vPos = _vec3(300.f, 20.f, 500.1f);
+	m_pTransCom->m_vScale = _vec3(10.f, 8.f, 10.f);
 
 	return S_OK;
 }
 
-_int CTagBack::Update_GameObject(const _float & fTimeDelta)
+_int CTagBack::Update_GameObject(const _float& fTimeDelta)
 {
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
@@ -52,17 +49,38 @@ _int CTagBack::Update_GameObject(const _float & fTimeDelta)
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
+//	BillBoard();
 
 	return NO_EVENT;
 }
 
-_int CTagBack::LateUpdate_GameObject(const _float & fTimeDelta)
+_int CTagBack::LateUpdate_GameObject(const _float& fTimeDelta)
 {
-	//NULL_CHECK_RETURN(m_pRenderer, -1);
-	//FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
+	NULL_CHECK_RETURN(m_pRenderer, -1);
 
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
+
+	_matrix matTmp = INIT_MATRIX;
+	matTmp = m_pTransCom->m_matWorld;
 
 	return NO_EVENT;
+}
+
+void CTagBack::BillBoard()
+{
+	_matrix matBill, matView;
+
+	matBill = CGraphicDevice::Get_Instance()->GetViewMatrix();
+	matView = matBill;
+	ZeroMemory(&matBill.m[3][0], sizeof(_vec3));
+
+	matBill._11 = matView._11;
+	matBill._13 = matView._13;
+	matBill._31 = matView._31;
+	matBill._33 = matView._33;
+
+	matBill = XMMatrixInverse(nullptr, matBill);
+	m_pTransCom->m_matWorld = matBill * m_pTransCom->m_matWorld;
 }
 
 void CTagBack::Render_GameObject(const _float& fTimeDelta)
@@ -87,23 +105,38 @@ HRESULT CTagBack::Add_Component()
 	NULL_CHECK_RETURN(m_pBufferCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Buffer", m_pBufferCom);
 
+	wstring wstrText = L"";
 	for (int i = 0; i < 2; ++i)
 	{
-		// Shader
+		if (i == 0)
+			wstrText = L"Prototype_Texture_TagBack_Red";
+		else
+			wstrText = L"Prototype_Texture_TagBack_Clear";
+
+		wstring wstrText2 = L"";
+		string strTemp2 = "";
+		strTemp2 = "Com_Shader" + to_string(i);
+		wstrText2.assign(strTemp2.begin(), strTemp2.end());
+
+		// shader
 		m_pShaderCom[i] = static_cast<Engine::CShader_UI*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_UI", COMPONENTID::ID_STATIC));
 		NULL_CHECK_RETURN(m_pShaderCom[i], E_FAIL);
-		m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom[i]);
+		m_mapComponent[ID_STATIC].emplace(wstrText2.c_str(), m_pShaderCom[i]);
+
+		wstrText2 = L"";
+		strTemp2 = "Com_Texture" + to_string(i);
+		wstrText2.assign(strTemp2.begin(), strTemp2.end());
 
 		// Texture
-		wstring wstrTmp = L"";
-		if (i == 0)
-			wstrTmp = L"Prototype_Texture_TagBack_Red";
-		else if(i == 1)
-			wstrTmp = L"Prototype_Texture_TagBack_Clear";
-		m_pTexture[i] = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(wstrTmp.c_str(), COMPONENTID::ID_STATIC));
+		m_pTexture[i] = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(wstrText.c_str(), COMPONENTID::ID_STATIC));
 		NULL_CHECK_RETURN(m_pTexture[i], E_FAIL);
-		m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture[i]);
+		m_mapComponent[ID_STATIC].emplace(wstrText2.c_str(), m_pTexture[i]);
 	}
+
+	// TransCom 
+	m_pTransCom = static_cast<CTransform*>(m_pComponentMgr->Clone_Component(L"Prototype_Transform", COMPONENTID::ID_DYNAMIC));
+	if (nullptr != m_pTransCom)
+		m_mapComponent[ID_DYNAMIC].emplace(L"Com_Transform", m_pTransCom);
 
 	return S_OK;
 }
@@ -116,6 +149,9 @@ void CTagBack::Set_ConstantTable(_uint iIdx)
 	CB_MATRIX_INFO	tCB_MatrixInfo;
 	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
 
+	matView = CGraphicDevice::Get_Instance()->GetViewMatrix();
+	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
+
 	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_pTransCom->m_matWorld));
@@ -125,7 +161,7 @@ void CTagBack::Set_ConstantTable(_uint iIdx)
 	m_pShaderCom[iIdx]->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
 }
 
-CGameObject * CTagBack::Clone_GameObject(void* pArg)
+CGameObject* CTagBack::Clone_GameObject(void* pArg)
 {
 	CGameObject* pInstance = new CTagBack(*this);
 
@@ -135,8 +171,7 @@ CGameObject * CTagBack::Clone_GameObject(void* pArg)
 	return pInstance;
 }
 
-CTagBack* CTagBack::Create(ID3D12Device * pGraphicDevice,
-	ID3D12GraphicsCommandList * pCommandList)
+CTagBack* CTagBack::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 {
 	CTagBack* pInstance = new CTagBack(pGraphicDevice, pCommandList);
 
