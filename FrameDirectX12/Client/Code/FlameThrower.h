@@ -7,6 +7,7 @@ namespace Engine
 {
 	class CTransform;
 	class CMesh;
+	class CSphereCollider;
 	class CBoxCollider;
 }
 
@@ -45,11 +46,13 @@ private:
 	void					Fire_Attak();
 
 private:
-	FLAMESTATE				m_eCurState;
-	FLAMESTATE				m_ePreState;
+	FLAMESTATE						m_eCurState;
+	FLAMESTATE						m_ePreState;
 
-	CTransform*				m_pTransCom = nullptr;
-	CMesh*					m_pMeshCom = nullptr;
+	CTransform*						m_pTransCom = nullptr;
+	CMesh*							m_pMeshCom = nullptr;
+
+	Engine::CSphereCollider*		m_pSphereCol = nullptr;
 
 private:
 	_float					m_fTime = 0.f;

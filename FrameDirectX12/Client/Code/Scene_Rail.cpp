@@ -131,7 +131,8 @@ HRESULT CScene_Rail::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Sniper", L"Weapon", nullptr), E_FAIL);
 
 	Load_StageObject(L"../../Data/StaticObj/passage.dat", wstrLayerTag);
-//	Load_MonsterPos(L"../../Data/Collider/Flame.dat", wstrLayerTag);
+	Load_MonsterPos(L"../../Data/Collider/Flame.dat", wstrLayerTag);
+
 	Load_MonsterPos(L"../../Data/Collider/DronStart.dat", wstrLayerTag);
 	Load_MonsterPos(L"../../Data/Collider/DronStart2.dat", wstrLayerTag);
 	Load_MonsterPos(L"../../Data/Collider/DronStart3.dat", wstrLayerTag);

@@ -19,6 +19,7 @@ void CFlameThrower::Initialized()
 {
 	m_eCurState = CB_Idle;
 	m_ePreState = m_eCurState;
+
 }
 
 HRESULT CFlameThrower::Late_Initialized()
