@@ -36,7 +36,6 @@ public:
 public:
 	HRESULT						Ready_GameObjectPrototype();
 	virtual HRESULT				Ready_GameObject(WORDS_TYPE eType);
-	void Init_OthersUI();
 	virtual HRESULT				LateInit_GameObject();
 	virtual _int				Update_GameObject(const _float& fTimeDelta);
 	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
@@ -44,15 +43,18 @@ public:
 	
 private:
 	virtual HRESULT				Add_Component();
+	void						Set_ConstantTable();
 
 private:
-	void						Set_ConstantTable();
+	void						Init_OthersUI();
 	void						Next_Conversation(const _float& fTimeDelta);
 	void						Next_ConversationJudje();
+	void						Reset_OthersUI(_bool bIsReset);
 	void						Show_ConversationWords();
 	void                        Check_Interaction();
 	void                        Start_Interaction();
 	void                        Finish_ConverSation();
+
 private:
 	Engine::CRcTex*				m_pBufferCom = nullptr;
 	Engine::CShader_UI*			m_pShaderCom = nullptr;

@@ -428,9 +428,6 @@
     <ClInclude Include="..\Code\Sniper.h">
       <Filter>01.Scene_Stage\02.Weapon\03.Sniper</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\HPKit.h">
-      <Filter>02.Scene_All\03.StaticObject\02.Items\00.HPKit</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\CardKey.h">
       <Filter>02.Scene_All\03.StaticObject\02.Items\04.CardKey</Filter>
     </ClInclude>
@@ -501,6 +498,10 @@
     </ClInclude>
     <ClInclude Include="..\Code\HPKit.h">
       <Filter>02.Scene_All\01.DynamicObject\02.HPKit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\HPKit.h" />
+    <ClInclude Include="..\Code\CardReader.h">
+      <Filter>02.Scene_All\03.StaticObject\03.CardReader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -653,9 +654,6 @@
     <ClCompile Include="..\Code\Sniper.cpp">
       <Filter>01.Scene_Stage\02.Weapon\03.Sniper</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\HPKit.cpp">
-      <Filter>02.Scene_All\03.StaticObject\02.Items\00.HPKit</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\CardKey.cpp">
       <Filter>02.Scene_All\03.StaticObject\02.Items\04.CardKey</Filter>
     </ClCompile>
@@ -729,6 +727,10 @@
     </ClCompile>
     <ClCompile Include="..\Code\HPKit.cpp">
       <Filter>02.Scene_All\01.DynamicObject\02.HPKit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\HPKit.cpp" />
+    <ClCompile Include="..\Code\CardReader.cpp">
+      <Filter>02.Scene_All\03.StaticObject\03.CardReader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

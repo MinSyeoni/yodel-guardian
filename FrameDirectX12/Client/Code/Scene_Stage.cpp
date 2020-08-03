@@ -42,6 +42,7 @@
 #include "Medi_Syringe.h"
 #include "Medi_Bandage.h"
 #include "Medi_Medicine.h"
+#include "CardReader.h"
 
 #include "LightObject.h"
 #include "DamageBlood.h"
@@ -111,8 +112,6 @@ _int CScene_Stage::Update_Scene(const _float & fTimeDelta)
 
 _int CScene_Stage::LateUpdate_Scene(const _float & fTimeDelta)
 {
-	// 대화창 enum 값 바꾸는 것. 나중에 NPC 상호작용으로 바꿔주세요.
-
 	return Engine::CScene::LateUpdate_Scene(fTimeDelta);
 }
 
@@ -121,14 +120,12 @@ void CScene_Stage::Render_Scene(const _float & fTimeDelta)
 	CScene::Render_Scene(fTimeDelta);
 
 	// 씬전환
-
 	if(nullptr != CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"PassageDoor"));
 	{
 		CGameObject* pPassageDoor = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"PassageDoor");
 
 		if (dynamic_cast<CPassageDoor*>(pPassageDoor)->Get_IsOpenTheDoor())
 		{
-			// 여기다 페이드 아웃??
 			m_pObjectMgr->Clear_Layer();
 
 			Engine::CScene* pNewScene = CScene_Rail::Create(m_pGraphicDevice, m_pCommandList);
@@ -225,6 +222,11 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	pGameObject = CCardKey::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_CardKey", pGameObject), E_FAIL);
+
+	pGameObject = CCardReader::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_CardReader", pGameObject), E_FAIL);
+
 
 	////////////////////////////////// UI /////////////////////////////////////////////
 	pGameObject = CQuestUI::Create(m_pGraphicDevice, m_pCommandList);
@@ -414,7 +416,7 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_NpcRifle", L"NpcWeapon", &eOwner), E_FAIL);
 
 	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj																		 //Prototype_MapObject
-	Load_StageObject(L"../../Data/StaticObj/mapAddoutside_1_test.dat");
+	Load_StageObject(L"../../Data/StaticObj/SY_S1_TEST.dat");
 	//Load_StageObject(L"../../Data/StaticObj/SY_Kit_Test.dat");
 	
 	// Monster
@@ -460,7 +462,7 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 
-	for (int i = 0; i < 7; ++i)
+	for (int i = 0; i < 8; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_EquipUI", L"EquipUI", &(iType = i)), E_FAIL);
 
 	for(int i =0; i < 10 ; ++i)
@@ -607,6 +609,9 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_PassageDoor", L"PassageDoor", &m_tMeshInfo);
 		else if (m_tMeshInfo.MeshTag == L"card.X")
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_CardKey", L"CardKey", &m_tMeshInfo);
+		else if (m_tMeshInfo.MeshTag == L"cardreader.X")
+			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_CardReader", L"CardReader", &m_tMeshInfo);
+
 		else
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
 	}

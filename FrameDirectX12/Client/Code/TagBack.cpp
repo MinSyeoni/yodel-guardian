@@ -34,8 +34,9 @@ HRESULT CTagBack::LateInit_GameObject()
 	for(int i = 0; i< 2; ++i)
 		m_pShaderCom[i]->Set_Shader_Texture(m_pTexture[i]->Get_Texture());
 
-	m_pTransCom->m_vPos = _vec3(300.f, 20.f, 500.1f);
-	m_pTransCom->m_vScale = _vec3(10.f, 8.f, 10.f);
+	m_pTransCom->m_vPos = _vec3(261.9, 18.f, 500.f);
+	m_pTransCom->m_vAngle = _vec3(0.f, -90.f, 0.f);
+	m_pTransCom->m_vScale = _vec3(8.f, 6.f, 8.f);
 
 	return S_OK;
 }

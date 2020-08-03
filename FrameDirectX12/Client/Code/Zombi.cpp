@@ -281,7 +281,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombi::ZOM_EX_WalkSlow:
 	{
-		m_fSpeed = 2.f;
+		m_fSpeed = 3.5f;
 
 		Chase_Player(fTimeDelta);
 		MoveByAstar(fTimeDelta);

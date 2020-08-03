@@ -22,10 +22,13 @@ private:
 	virtual ~CPassageDoor();
 
 public:
-	_bool					Get_LobbyDoorIsOpen() { return m_bIsOpen; }
 	Engine::CBoxCollider*	Get_DoorCollider() { return m_pBoxCol; }
+	_bool					Get_LobbyDoorIsOpen() { return m_bIsOpen; }
 	void					Set_IsCardToDoor(_bool bIsCard) { m_bIsCardKey = bIsCard; }
 	_bool					Get_IsOpenTheDoor() { return m_bIsOpen; }
+
+	void					Set_IsReaderOnDoor(_bool bIsOnDoor) { m_bIsReaderOn = bIsOnDoor; }
+	_bool					Get_IsReaderOnDoor() { return m_bIsReaderOn; }
 
 public:
 	HRESULT					Ready_GameObjectPrototype();
@@ -65,7 +68,7 @@ private:
 	_bool						m_bIsOpen = false;
 	_bool						m_bIsCollision = false;
 	_bool						m_bIsCardKey = false;
-
+	_bool						m_bIsReaderOn = false;
 	CGameObject*				m_pGameObject = nullptr;
 
 public:

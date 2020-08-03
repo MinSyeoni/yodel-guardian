@@ -25,9 +25,8 @@ public:
 	virtual HRESULT				Ready_GameObject();
 	virtual HRESULT				LateInit_GameObject();
 	virtual _int				Update_GameObject(const _float& fTimeDelta);
-	void DoorAndTag_Interaction();
 	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
-	void CardTagOn_Clear(const _float& fTimeDelta);
+	void TagReaderAndZoom(const _float& fTimeDelta);
 	virtual void				Render_GameObject(const _float& fTimeDelta);
 
 public:
@@ -38,10 +37,13 @@ public:
 
 private:
 	virtual HRESULT				Add_Component();
+	void						Set_ConstantTable();
 
 private:
-	void						Set_ConstantTable();
+	void						ZoomCamera(bool bIsZoom);
+	void						DoorAndTag_Interaction();
 	void						BillBoard();
+	void						CardTagOn_Clear(const _float& fTimeDelta);
 
 private:
 	Engine::CRcTex*				m_pBufferCom = nullptr;
@@ -54,9 +56,12 @@ private:
 //	_matrix						m_matTagWorld;
 
 	_float						m_fCurTag = 0.f;
+	_float						m_fTagDelay = 0.f;
 
 	_bool						m_bIsTagOn = false;
 	_bool						m_bIsClear = false;
+	_bool						m_bIsZoom = false;
+	_bool						m_bIsAlreadyZoom = false;
 
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);

@@ -4,6 +4,7 @@
 #include "DirectInput.h"
 #include "PassageDoor.h"
 #include "TagBack.h"
+#include "StaticCamera.h"
 
 CCardTagUI::CCardTagUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -35,8 +36,9 @@ HRESULT CCardTagUI::LateInit_GameObject()
 {
 	m_pShaderCom->Set_Shader_Texture(m_pTexture->Get_Texture());
 
-	m_pTransCom->m_vPos = _vec3(300.f, 20.f, 500.f);
-	m_pTransCom->m_vScale = _vec3(10.f, 8.f, 10.f);
+	m_pTransCom->m_vPos = _vec3(262, 18.f, 500.f);
+	m_pTransCom->m_vAngle = _vec3(0.f, -90.f, 0.f);
+	m_pTransCom->m_vScale = _vec3(8.f, 6.f, 8.f);
 
 	m_fCurTag = 100.f;
 
@@ -59,23 +61,63 @@ _int CCardTagUI::Update_GameObject(const _float& fTimeDelta)
 	return NO_EVENT;
 }
 
+void CCardTagUI::ZoomCamera(bool bIsZoom)
+{
+	if (bIsZoom == true)
+	{
+		StaticCameraInfo tInfo;
+
+		_vec3 vLook, vUp;
+		memcpy(&vLook, &m_pTransCom->m_matWorld._31, sizeof(_vec3));
+		memcpy(&vUp, &m_pTransCom->m_matWorld._21, sizeof(_vec3));
+
+		_vec3 vPosTmp = m_pTransCom->m_vPos;
+		vPosTmp.z = 500.f;
+		vPosTmp.y = 15.f;
+		_vec3 vEyePos = vPosTmp + vLook * - 2.f + vUp * -0.2f;//이걸로 줌정도 조절해주면되~ 이거는 보는위치
+		tInfo.vAtPos = vPosTmp; // 보는곳 
+		tInfo.vEyePos = vEyePos;
+		m_pObjectMgr->Add_GameObject(L"Layer_Camera", L"Prototype_StaticCamera", L"StaticCamera", &tInfo);
+
+		CGameObject* pPlayer = m_pObjectMgr->Get_GameObject(L"Layer_GameObject", L"Player");
+		if (pPlayer == nullptr)
+			return;
+		dynamic_cast<CPlayer*>(pPlayer)->KeyLockPlayer(true);
+	}
+	else
+	{
+		if (nullptr != m_pObjectMgr->Get_GameObject(L"Layer_Camera", L"StaticCamera"))
+			m_pObjectMgr->Get_GameObject(L"Layer_Camera", L"StaticCamera")->Dead_GameObject();
+
+		m_pObjectMgr->Add_GameObject(L"Layer_Camera", L"Prototype_DynamicCamera", L"DynamicCamera", nullptr);
+
+		CGameObject* pPlayer = m_pObjectMgr->Get_GameObject(L"Layer_GameObject", L"Player");
+		if (pPlayer == nullptr)
+			return;
+		dynamic_cast<CPlayer*>(pPlayer)->KeyLockPlayer(false);
+	}
+}
+
 void CCardTagUI::DoorAndTag_Interaction()
 {
 	CGameObject* pPassageDoor = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"PassageDoor");
 	CGameObject* pTagBack = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"TagBack");
 
-	if (m_bIsTagOn && nullptr != pTagBack)
+	if (m_bIsTagOn && nullptr != pTagBack && !m_bIsZoom && !m_bIsClear)
 	{
 		m_bIsShow = true;
 		dynamic_cast<CTagBack*>(pTagBack)->Set_ShowUI(true);
+		ZoomCamera(true);
+		m_bIsZoom = true;
 	}
 
 	if (nullptr != pPassageDoor)
 	{
-		if (m_bIsTagOn && m_bIsClear)
+		if (m_bIsClear && m_bIsZoom)
 		{
 			dynamic_cast<CTagBack*>(pTagBack)->Set_CurCardTag(CTagBack::TAG_CLEAR);
 			dynamic_cast<CPassageDoor*>(pPassageDoor)->Set_IsCardToDoor(true);
+			dynamic_cast<CPassageDoor*>(pPassageDoor)->Set_IsReaderOnDoor(true);
 		}
 	}
 }
@@ -90,12 +132,32 @@ _int CCardTagUI::LateUpdate_GameObject(const _float& fTimeDelta)
 
 	m_pTransCom->m_matWorld._32 = m_fCurTag * 0.01;
 
+	TagReaderAndZoom(fTimeDelta);
+
 	return NO_EVENT;
+}
+
+void CCardTagUI::TagReaderAndZoom(const _float& fTimeDelta)
+{
+	CGameObject* pTagBack = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"TagBack");
+	if (m_bIsZoom && m_bIsClear && m_bIsAlreadyZoom)
+	{
+		m_fTagDelay += fTimeDelta;
+
+		if (m_fTagDelay >= 1.f)
+		{
+			m_fTagDelay = 0.f;
+			m_bIsZoom = false;
+			ZoomCamera(false);
+			m_bIsShow = false;
+			dynamic_cast<CTagBack*>(pTagBack)->Set_ShowUI(false);
+		}
+	}
 }
 
 void CCardTagUI::CardTagOn_Clear(const _float& fTimeDelta)
 {
-	if (m_bIsTagOn && !m_bIsClear)
+	if (m_bIsTagOn && !m_bIsClear &&!m_bIsAlreadyZoom)
 	{
 		if (m_fCurTag > 0)
 			m_fCurTag -= 15.f * fTimeDelta;
@@ -103,6 +165,8 @@ void CCardTagUI::CardTagOn_Clear(const _float& fTimeDelta)
 		{
 			m_fCurTag = 0.f;
 			m_bIsClear = true;
+			m_bIsTagOn = false;
+			m_bIsAlreadyZoom = true;
 		}
 	}
 }
@@ -113,13 +177,10 @@ void CCardTagUI::Render_GameObject(const _float& fTimeDelta)
 		return;
 
 	Set_ConstantTable();
-
 	m_pShaderCom->Begin_Shader();
 	m_pBufferCom->Begin_Buffer();
-
 	m_pShaderCom->End_Shader();
 	m_pBufferCom->End_Buffer();
-
 	m_pBufferCom->Render_Buffer();
 }
 

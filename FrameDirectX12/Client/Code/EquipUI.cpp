@@ -90,6 +90,13 @@ void CEquipUI::Init_TypePos()
 		m_pTransCom->m_vPos.y = (((-2.0f * m_vPos.y) / WINCY) * 0.5f) - 0.2f;
 	}
 	break;
+	case CEquipUI::E_CARDREADER:
+	{
+		m_pTransCom->m_vScale = _vec3(0.1f, 0.08f, 0.1f);
+		m_pTransCom->m_vPos.x = (((2.0f * m_vPos.x) / WINCX) * 0.5f) - 0.3f;
+		m_pTransCom->m_vPos.y = (((-2.0f * m_vPos.y) / WINCY) * 0.5f) - 0.2f;
+	}
+	break;
 	default:
 		break;
 	}
@@ -148,6 +155,9 @@ HRESULT CEquipUI::Add_Component()
 	case CEquipUI::E_DOOROPEN_L:
 	case CEquipUI::E_DOOROPEN_P:
 		wstrPrototype = L"Prototype_Texture_E_DoorOpen";
+		break;
+	case CEquipUI::E_CARDREADER:
+		wstrPrototype = L"Prototype_Texture_E_CardReader";
 		break;
 	default:
 		break;

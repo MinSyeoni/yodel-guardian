@@ -1,7 +1,6 @@
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\client.pch
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\stdafx.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\vc142.pdb
-c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\hpkit.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\gunui.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\glassobject.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\flamethrower.obj
@@ -16,12 +15,12 @@ c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\damageblood.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\cubeobject.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\cardtagui.obj
+c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\cardreader.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\cardkey.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\background.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\attackdamage.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\aim.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\actioncamera.obj
-c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\onui.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\npcwords.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\npcrifle.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\normandy.obj
@@ -41,7 +40,7 @@ c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\lightobject.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\ken.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\invenui.obj
-c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\sniper.obj
+c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\hpkit.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\skydome.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\shepard.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\scene_stage.obj
@@ -61,6 +60,7 @@ c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\pistol.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\passagedoor.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\optionui.obj
+c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\onui.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\client.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\zombi.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\weapon.obj
@@ -71,6 +71,7 @@ c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\tagback.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\staticobject.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\staticcamera.obj
+c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\sniper.obj
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\release\client.exe
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\release\client.pdb
 c:\users\user\documents\github\yodel-guardian\framedirectx12\client\default\x64\release\client.res
