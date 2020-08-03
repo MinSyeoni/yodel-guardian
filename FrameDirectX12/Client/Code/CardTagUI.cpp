@@ -52,8 +52,15 @@ _int CCardTagUI::Update_GameObject(const _float& fTimeDelta)
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
-
 //	BillBoard();
+
+	DoorAndTag_Interaction();
+
+	return NO_EVENT;
+}
+
+void CCardTagUI::DoorAndTag_Interaction()
+{
 	CGameObject* pPassageDoor = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"PassageDoor");
 	CGameObject* pTagBack = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"TagBack");
 
@@ -71,9 +78,6 @@ _int CCardTagUI::Update_GameObject(const _float& fTimeDelta)
 			dynamic_cast<CPassageDoor*>(pPassageDoor)->Set_IsCardToDoor(true);
 		}
 	}
-
-
-	return NO_EVENT;
 }
 
 _int CCardTagUI::LateUpdate_GameObject(const _float& fTimeDelta)
@@ -82,15 +86,15 @@ _int CCardTagUI::LateUpdate_GameObject(const _float& fTimeDelta)
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
-	// hp 줄어드는거 테스트트트트트트
-	//if (CDirectInput::Get_Instance()->KEY_PRESSING(DIK_9))
-	//{
-	//	if (m_fCurTag > 0)
-	//		m_fCurTag -= 15.f * fTimeDelta;
-	//	else
-	//		m_fCurTag = 0.f;
-	//}
+	CardTagOn_Clear(fTimeDelta);
 
+	m_pTransCom->m_matWorld._32 = m_fCurTag * 0.01;
+
+	return NO_EVENT;
+}
+
+void CCardTagUI::CardTagOn_Clear(const _float& fTimeDelta)
+{
 	if (m_bIsTagOn && !m_bIsClear)
 	{
 		if (m_fCurTag > 0)
@@ -101,12 +105,7 @@ _int CCardTagUI::LateUpdate_GameObject(const _float& fTimeDelta)
 			m_bIsClear = true;
 		}
 	}
-
-	m_pTransCom->m_matWorld._32 = m_fCurTag * 0.01;
-
-	return NO_EVENT;
 }
-
 
 void CCardTagUI::Render_GameObject(const _float& fTimeDelta)
 {

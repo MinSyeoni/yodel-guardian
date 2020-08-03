@@ -25,7 +25,9 @@ public:
 	virtual HRESULT				Ready_GameObject();
 	virtual HRESULT				LateInit_GameObject();
 	virtual _int				Update_GameObject(const _float& fTimeDelta);
+	void DoorAndTag_Interaction();
 	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
+	void CardTagOn_Clear(const _float& fTimeDelta);
 	virtual void				Render_GameObject(const _float& fTimeDelta);
 
 public:

@@ -81,8 +81,8 @@ _int CMapObject::LateUpdate_GameObject(const _float & fTimeDelta)
 	if (m_bIsDrawShadow)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 
-	if(m_bIsDrawShadow)
-	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCom), -1);
+//	if(m_bIsDrawShadow)
+//		FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCom), -1);
 
 	
 

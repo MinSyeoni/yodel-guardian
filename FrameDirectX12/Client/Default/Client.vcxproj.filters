@@ -97,9 +97,6 @@
     <Filter Include="02.Scene_All\05.RectObject">
       <UniqueIdentifier>{ac3817b5-9267-43b3-854b-f82508c1fd87}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Scene_All\03.StaticObject\00.Map">
-      <UniqueIdentifier>{e4248776-55b2-4aec-ab3c-16fe3f0cfb80}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Scene_All\03.StaticObject\01.MapObject">
       <UniqueIdentifier>{022f3627-9f5b-4127-89b8-fa62a5174368}</UniqueIdentifier>
     </Filter>
@@ -178,9 +175,6 @@
     <Filter Include="02.Scene_All\03.StaticObject\02.Items">
       <UniqueIdentifier>{0aed30bc-2ea6-4d35-9c65-4cf1fcf567d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Scene_All\03.StaticObject\02.Items\00.HPKit">
-      <UniqueIdentifier>{2f2e5323-a98d-48cb-aa77-6c0e47207e15}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Scene_All\03.StaticObject\02.Items\04.CardKey">
       <UniqueIdentifier>{06d54ebe-fa46-469e-b877-e65fb8815b68}</UniqueIdentifier>
     </Filter>
@@ -249,6 +243,9 @@
     </Filter>
     <Filter Include="03.UI\05.QuestUI">
       <UniqueIdentifier>{66177720-cdb3-4e75-82b1-ab1a7672ec4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_All\03.StaticObject\03.CardReader">
+      <UniqueIdentifier>{9e1340a1-cbc7-48ed-97d0-479324be5473}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -402,7 +399,6 @@
     <ClInclude Include="..\Code\Shepard.h">
       <Filter>01.Scene_Stage\07.NPC\02.Shapard</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\HPKit.h" />
     <ClInclude Include="..\Code\NpcWords.h">
       <Filter>03.UI\04.NpcWords</Filter>
     </ClInclude>
@@ -502,6 +498,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\TagBack.h">
       <Filter>03.UI\10.CardTagUI\00.TagBack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\HPKit.h">
+      <Filter>02.Scene_All\01.DynamicObject\02.HPKit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -625,7 +624,6 @@
     <ClCompile Include="..\Code\Shepard.cpp">
       <Filter>01.Scene_Stage\07.NPC\02.Shapard</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\HPKit.cpp" />
     <ClCompile Include="..\Code\NpcWords.cpp">
       <Filter>03.UI\04.NpcWords</Filter>
     </ClCompile>
@@ -728,6 +726,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\TagBack.cpp">
       <Filter>03.UI\10.CardTagUI\00.TagBack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\HPKit.cpp">
+      <Filter>02.Scene_All\01.DynamicObject\02.HPKit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
