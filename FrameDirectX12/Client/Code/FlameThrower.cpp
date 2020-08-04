@@ -133,6 +133,7 @@ void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	case CFlameThrower::CB_Idle: // °¡¸¸È÷ 
 	{
 		m_fAniTime += fTimeDelta;
+		m_bIsHit = false;
 
 		int iRandAni = rand() % 2;
 

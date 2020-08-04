@@ -191,6 +191,7 @@ void CScene_Rail::Load_MonsterPos(const wstring& wstrFilePath, wstring wstrLayer
 	COLLIDER tColData = {};
 
 	m_tMeshInfo.MeshTag = L"";
+	m_tMeshInfo.iDrawID = 0;
 
 	while (true)
 	{
@@ -210,7 +211,10 @@ void CScene_Rail::Load_MonsterPos(const wstring& wstrFilePath, wstring wstrLayer
 void CScene_Rail::InitMesh_FromFile(const std::wstring& wstrFilePath)
 {
 	if (wstrFilePath == L"../../Data/Collider/Flame.dat")
+	{
+		m_tMeshInfo.iDrawID++;
 		m_tMeshInfo.MeshTag = L"Flamethrower";
+	}
 	else if (wstrFilePath == L"../../Data/Collider/DronStart.dat")
 	{
 		m_tMeshInfo.MeshTag = L"Dron";
