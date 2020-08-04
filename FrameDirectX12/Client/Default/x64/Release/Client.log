@@ -1,4 +1,5 @@
-﻿  Scene_Rail.cpp
+﻿  Scene_Boss.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Reapear.h(39,16): warning C4244: '초기화 중': 'float'에서 '_int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 LINK : warning LNK4044: '/FS' 옵션을 인식할 수 없습니다. 무시됩니다.
 ActionCamera.obj : warning LNK4075: '/EDITANDCONTINUE'이(가) '/OPT:ICF' 사양으로 인해 무시됩니다.
   Client.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Default\../Release\Client.exe

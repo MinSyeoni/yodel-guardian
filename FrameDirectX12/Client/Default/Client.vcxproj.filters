@@ -241,8 +241,6 @@
     <Filter Include="00.Scene_Logo\00.BackGround\00.LoadingTexture">
       <UniqueIdentifier>{89372a43-0a25-4e52-8bed-afe106463413}</UniqueIdentifier>
     </Filter>
-
-
     <Filter Include="03.UI\09.MousePoint">
       <UniqueIdentifier>{5bc3d12b-32ee-47ff-80e1-66ac7d11fb48}</UniqueIdentifier>
     </Filter>
@@ -255,8 +253,6 @@
     <Filter Include="03.UI\10.CardTagUI\01.CardTagUI">
       <UniqueIdentifier>{b2debe9b-1266-4949-9c99-6dd2a84f8e7c}</UniqueIdentifier>
     </Filter>
-
-
     <Filter Include="03.UI\05.QuestUI">
       <UniqueIdentifier>{66177720-cdb3-4e75-82b1-ab1a7672ec4c}</UniqueIdentifier>
     </Filter>
@@ -265,6 +261,15 @@
     </Filter>
     <Filter Include="01.Scene_Stage\06.Monster\02.Dron\00.DronBullet">
       <UniqueIdentifier>{c4a06599-aeef-4586-9c91-c76786063514}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene_Stage\07.NPC\03.Ken">
+      <UniqueIdentifier>{1ec3c964-8995-4c10-963b-71197fa40fb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07.Scene_Boss">
+      <UniqueIdentifier>{0c517e59-d32d-4e9a-a364-d8494d8e1fdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07.Scene_Boss\00.Reapear">
+      <UniqueIdentifier>{a49622e5-ea8a-4c5b-94d1-df1d726effc4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -425,9 +430,6 @@
     <ClInclude Include="..\Code\LobbyDoor.h">
       <Filter>02.Scene_All\01.DynamicObject\00.LobbyDoor</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\UI.h">
-      <Filter>03.UI\05.QuestUI</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\IconUI.h">
       <Filter>03.UI\03.PlayerUI</Filter>
       <Filter>03.UI\03.IconUI</Filter>
@@ -494,7 +496,6 @@
     <ClInclude Include="..\Code\AttackDamage.h">
       <Filter>03.UI\08.AttackUI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Ken.h" />
     <ClInclude Include="..\Code\HPBar.h">
       <Filter>03.UI\02.HPMPBar\00.HPBar</Filter>
     </ClInclude>
@@ -507,8 +508,6 @@
     <ClInclude Include="..\Code\LoadingBar.h">
       <Filter>00.Scene_Logo\00.BackGround\01.LoadingBar</Filter>
     </ClInclude>
-
-
     <ClInclude Include="..\Code\MPBar.h">
       <Filter>03.UI\02.HPMPBar\01.MPBar</Filter>
     </ClInclude>
@@ -524,8 +523,6 @@
     <ClInclude Include="..\Code\TagBack.h">
       <Filter>03.UI\10.CardTagUI\00.TagBack</Filter>
     </ClInclude>
-
-
     <ClInclude Include="..\Code\HPKit.h">
       <Filter>02.Scene_All\01.DynamicObject\02.HPKit</Filter>
     </ClInclude>
@@ -535,6 +532,15 @@
     </ClInclude>
     <ClInclude Include="..\Code\DronBullet.h">
       <Filter>01.Scene_Stage\06.Monster\02.Dron\00.DronBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Ken.h">
+      <Filter>01.Scene_Stage\07.NPC\03.Ken</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Scene_Boss.h">
+      <Filter>07.Scene_Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Reapear.h">
+      <Filter>07.Scene_Boss\00.Reapear</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -665,9 +671,6 @@
     <ClCompile Include="..\Code\LobbyDoor.cpp">
       <Filter>02.Scene_All\01.DynamicObject\00.LobbyDoor</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\UI.cpp">
-      <Filter>03.UI\05.QuestUI</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\IconUI.cpp">
       <Filter>03.UI\03.PlayerUI</Filter>
       <Filter>03.UI\03.IconUI</Filter>
@@ -737,7 +740,6 @@
     <ClCompile Include="..\Code\AttackDamage.cpp">
       <Filter>03.UI\08.AttackUI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Ken.cpp" />
     <ClCompile Include="..\Code\HPBar.cpp">
       <Filter>03.UI\02.HPMPBar\00.HPBar</Filter>
     </ClCompile>
@@ -750,8 +752,6 @@
     <ClCompile Include="..\Code\LoadingBar.cpp">
       <Filter>00.Scene_Logo\00.BackGround\01.LoadingBar</Filter>
     </ClCompile>
-
-
     <ClCompile Include="..\Code\MPBar.cpp">
       <Filter>03.UI\02.HPMPBar\01.MPBar</Filter>
     </ClCompile>
@@ -767,8 +767,6 @@
     <ClCompile Include="..\Code\TagBack.cpp">
       <Filter>03.UI\10.CardTagUI\00.TagBack</Filter>
     </ClCompile>
-
-
     <ClCompile Include="..\Code\HPKit.cpp">
       <Filter>02.Scene_All\01.DynamicObject\02.HPKit</Filter>
     </ClCompile>
@@ -778,6 +776,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\DronBullet.cpp">
       <Filter>01.Scene_Stage\06.Monster\02.Dron\00.DronBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ken.cpp">
+      <Filter>01.Scene_Stage\07.NPC\03.Ken</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_Boss.cpp">
+      <Filter>07.Scene_Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Reapear.cpp">
+      <Filter>07.Scene_Boss\00.Reapear</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
