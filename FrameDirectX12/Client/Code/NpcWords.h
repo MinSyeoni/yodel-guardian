@@ -28,6 +28,7 @@ private:
 
 public:
 	void						Set_ShowUI(_bool bIsShow) { m_bIsShow = bIsShow; }
+	_bool						Get_ShowUI() { return m_bIsShow; }
 
 public:
 	void						Set_CurWordsType(WORDS_TYPE eType) { m_eWordsType = eType; }

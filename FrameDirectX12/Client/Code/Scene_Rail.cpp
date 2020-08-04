@@ -10,7 +10,6 @@
 #include "Dron.h"
 #include "DronBullet.h"
 
-
 #include "LightMgr.h"
 #include "FadeOut.h"
 #include "Weapon.h"
@@ -273,15 +272,6 @@ void CScene_Rail::Load_StageObject(const wstring& wstrFilePath, wstring wstrLaye
 	DWORD dwByte = 0;
 	MESHDATA tObjData = {};
 
-	//DeleteAll_GameObject(wstrLayerTag, L"ItemObject");
-	//DeleteAll_GameObject(wstrLayerTag, L"Medi_Syringe");
-	//DeleteAll_GameObject(wstrLayerTag, L"Medi_Bandage");
-	//DeleteAll_GameObject(wstrLayerTag, L"Medi_vaccine");
-	//DeleteAll_GameObject(wstrLayerTag, L"LobbyDoor");
-	//DeleteAll_GameObject(wstrLayerTag, L"PassageDoor");
-	//DeleteAll_GameObject(wstrLayerTag, L"CardKey");
-	//DeleteAll_GameObject(wstrLayerTag, L"MapObject");
-
 	int			 iTagLength = 0;
 
 	while (true)
@@ -307,12 +297,6 @@ void CScene_Rail::Load_StageObject(const wstring& wstrFilePath, wstring wstrLaye
 			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Medi_Bandage", L"Medi_Bandage", &m_tMeshInfo);
 		else if (m_tMeshInfo.MeshTag == L"medikit_vaccine.X")
 			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Medi_Medicine", L"Medi_vaccine", &m_tMeshInfo);
-		else if (m_tMeshInfo.MeshTag == L"door1.X")
-			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_LobbyDoor", L"LobbyDoor", &m_tMeshInfo);
-		else if (m_tMeshInfo.MeshTag == L"door2.X")
-			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_PassageDoor", L"PassageDoor", &m_tMeshInfo);
-		else if (m_tMeshInfo.MeshTag == L"card.X")
-			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_CardKey", L"CardKey", &m_tMeshInfo);
 		else
 			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
 	}

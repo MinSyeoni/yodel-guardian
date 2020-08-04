@@ -106,7 +106,8 @@ HRESULT CScene_Stage::Ready_Scene()
 
 _int CScene_Stage::Update_Scene(const _float & fTimeDelta)
 {
-	
+	ShowCursor(false);
+
 	CFrustom::Get_Instance()->Update_Frustom_Manager();
 	return Engine::CScene::Update_Scene(fTimeDelta);
 }
@@ -135,13 +136,11 @@ void CScene_Stage::Render_Scene(const _float & fTimeDelta)
 	}
 	if (m_bIsChange)
 	{
-
 		m_pObjectMgr->Clear_Layer();
 
 		Engine::CScene* pNewScene = CScene_Rail::Create(m_pGraphicDevice, m_pCommandList);
 		Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
 	}
-
 
 	if (KEY_DOWN(DIK_MINUS))//½º°×¿ë
 	{
@@ -447,8 +446,7 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 
 	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj																		 //Prototype_MapObject
-	Load_StageObject(L"../../Data/StaticObj/SY_S1_TEST.dat");
-	//Load_StageObject(L"../../Data/StaticObj/SY_Kit_Test.dat");
+	Load_StageObject(L"../../Data/StaticObj/mapAddoutside_1_test.dat");
 	
 	// Monster
 	Load_MonsterPos(L"../../Data/Collider/Zombi.dat");

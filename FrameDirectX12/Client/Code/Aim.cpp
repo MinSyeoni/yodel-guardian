@@ -8,6 +8,7 @@
 #include "DirectInput.h"
 #include "QuestUI.h"
 #include "MPBar.h"
+#include "NpcWords.h"
 
 CAim::CAim(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -63,10 +64,11 @@ _int CAim::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
+	CGameObject* pNPCUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"NpcBoard");
 	CGameObject* pOptionUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"OptionUI");
-	if (pOptionUI != nullptr)
+	if (pOptionUI != nullptr && pNPCUI != nullptr)
 	{
-		if(!dynamic_cast<COptionUI*>(pOptionUI)->Get_ShowUI())
+		if(!dynamic_cast<COptionUI*>(pOptionUI)->Get_ShowUI() && !dynamic_cast<CNpcWords*>(pNPCUI)->Get_ShowUI())
 			Show_OtherUI(true);
 	}
 
@@ -74,8 +76,10 @@ _int CAim::LateUpdate_GameObject(const _float& fTimeDelta)
 	{
 		GetCursorPos(&m_pt);
 		ScreenToClient(g_hWnd, &m_pt);
-		if(m_iDrawId == 1)
+		if (m_iDrawId == 1)
+		{
 			Show_OtherUI(false);
+		}
 
 		FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 	}
