@@ -1,28 +1,4 @@
-﻿  PlayerStatus.cpp
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(179,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(179,10): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(216,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(216,38): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(236,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(236,36): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(257,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(257,9): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(322,8): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(322,9): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(332,16): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(332,17): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(351,13): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(351,14): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(358,12): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(358,13): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(365,13): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(365,14): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(372,12): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(372,13): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(379,13): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(379,14): warning C4309: '인수': 상수 값이 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(386,12): warning C4305: '인수': 'unsigned int'에서 'const byte'(으)로 잘립니다.
-C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Code\PlayerStatus.cpp(386,13): warning C4309: '인수': 상수 값이 잘립니다.
+﻿  EquipUI.cpp
 LINK : warning LNK4044: '/FS' 옵션을 인식할 수 없습니다. 무시됩니다.
 ActionCamera.obj : warning LNK4075: '/EDITANDCONTINUE'이(가) '/OPT:ICF' 사양으로 인해 무시됩니다.
   Client.vcxproj -> C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Client\Default\../Release\Client.exe
