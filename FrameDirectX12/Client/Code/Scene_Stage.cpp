@@ -57,6 +57,7 @@
 #include "Ken.h"
 #include "Scene_Rail.h"
 #include "Management.h"
+#include "Scene_Boss.h"
 
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
@@ -139,6 +140,12 @@ void CScene_Stage::Render_Scene(const _float & fTimeDelta)
 	{
 		m_pObjectMgr->Clear_Layer();
 		Engine::CScene* pNewScene = CScene_Rail::Create(m_pGraphicDevice, m_pCommandList);
+		Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
+	}
+	if (KEY_DOWN(DIK_PGDN))//½º°×¿ë
+	{
+		m_pObjectMgr->Clear_Layer();
+		Engine::CScene* pNewScene = CScene_Boss::Create(m_pGraphicDevice, m_pCommandList);
 		Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
 	}
 }
@@ -403,7 +410,7 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Shepard", L"Shepard", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Ken", L"Ken", nullptr), E_FAIL);
 
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_PlayerPoint", L"PlayerPoint", nullptr), E_FAIL);
+	//FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_PlayerPoint", L"PlayerPoint", nullptr), E_FAIL);
 
 
 

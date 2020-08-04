@@ -1,1 +1,30 @@
-﻿  Client.vcxproj -> C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Default\../Bin\Client.exe
+﻿  ActionCamera.cpp
+  Aim.cpp
+  AttackDamage.cpp
+  BackGround.cpp
+  CardKey.cpp
+  CardTagUI.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\CardTagUI.cpp(77,27): warning C4305: '=': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\CardTagUI.cpp(78,32): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CubeObject.cpp
+  DamageBlood.cpp
+  Dron.cpp
+  DynamicCamera.cpp
+  Dynamic_Object.cpp
+  Effect.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Effect.cpp(85,22): warning C4805: '==': 연산에 'int' 형식과 'bool' 형식을 함께 사용하는 것은 안전하지 않습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Effect.cpp(108,20): warning C4805: '==': 연산에 'int' 형식과 'bool' 형식을 함께 사용하는 것은 안전하지 않습니다.
+  EfffectComponent.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\EfffectComponent.cpp(46,20): warning C4244: '=': 'int'에서 '_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\EfffectComponent.cpp(70,35): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\EfffectComponent.cpp(177,11): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  EquipUI.cpp
+  InvenUI.cpp
+  Ken.cpp
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\Ken.cpp(179,49): warning C4244: '인수': 'double'에서 'const Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  LoadingTexture.cpp
+  LobbyDoor.cpp
+  MainApp.cpp
+  MapObject.cpp
+  코드를 생성하고 있습니다...
+C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Code\MainApp.cpp : fatal error C1090: PDB API를 호출하지 못했습니다. 오류 코드 '3': C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Client\Default\x64\Debug\vc142.pdb

@@ -42,6 +42,7 @@ HRESULT CMesh::Ready_Mesh(const _tchar* pFilePath, const _tchar* pFileName)
 
     m_pScene = m_Importer.ReadFile(szFullPath.c_str(),
         aiProcess_MakeLeftHanded
+        |aiProcess_GenSmoothNormals
         | aiPostProcessSteps::aiProcess_FlipWindingOrder
         | aiProcess_FlipUVs);
 

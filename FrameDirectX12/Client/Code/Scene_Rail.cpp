@@ -8,6 +8,7 @@
 #include "Monster.h"
 #include "FlameThrower.h"
 #include "Dron.h"
+#include "LightMgr.h"
 
 CScene_Rail::CScene_Rail(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
@@ -27,7 +28,7 @@ HRESULT CScene_Rail::Ready_Scene()
 #ifdef _DEBUG
 	COUT_STR("Ready Scene_Rail");
 #endif
-
+	FAILED_CHECK_RETURN(Ready_Light(), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_GameObjectPrototype(), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_LayerCamera(L"Layer_Camera"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_LayerEnvironment(L"Layer_Environment"), E_FAIL);
@@ -126,7 +127,6 @@ HRESULT CScene_Rail::Ready_LayerGameObject(wstring wstrLayerTag)
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
 
 	m_pObjectMgr->Add_Layer(wstrLayerTag, pLayer);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Terrain", L"Terrain", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Sniper", L"Weapon", nullptr), E_FAIL);
 
@@ -336,6 +336,23 @@ HRESULT CScene_Rail::Ready_LayerUI(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MPBarUI", L"MPBarUI", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MouseUI", L"MouseUI", nullptr), E_FAIL);
+
+	return S_OK;
+}
+
+HRESULT CScene_Rail::Ready_Light()
+{
+	CLight_Manager::Get_Instance()->ClearLigth();
+
+	D3DLIGHT tagLight;
+	tagLight.m_eType = LIGHTTYPE::D3DLIGHT_DIRECTIONAL;
+	tagLight.m_vDiffuse = _vec4{ 0.3f,0.3f,0.3f,1.0f };
+	tagLight.m_vAmbient = _vec4{ 0.2f,0.2f,0.2f,1.0f };
+	tagLight.m_vSpecular = _vec4{ 0.5f,0.5f,0.5f,1.0f };
+	tagLight.m_vDirection = _vec4{ -1.0f,-1.0f,1.f,1.0f };
+	if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &tagLight)))
+		return E_FAIL;
+
 
 	return S_OK;
 }

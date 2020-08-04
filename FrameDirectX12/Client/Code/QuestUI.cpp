@@ -38,9 +38,15 @@ HRESULT CQuestUI::LateInit_GameObject()
 
 _int CQuestUI::Update_GameObject(const _float& fTimeDelta)
 {
-	if (KEY_DOWN(DIK_8))
-		m_bIsShow *= -1;
-           
+	if (KEY_DOWN(DIK_7))//юс╫ц
+	{
+		if (m_bIsShow)
+			m_bIsShow = false;
+		else
+			m_bIsShow = true;
+
+	}
+
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
 	if (m_bIsDead)
@@ -48,7 +54,6 @@ _int CQuestUI::Update_GameObject(const _float& fTimeDelta)
 
 	m_pTransCom->m_vPos.x = _float(2.f / WINCX * WINCX/2) - 1.f;
 	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * WINCY/2) + 1.f;
-
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 

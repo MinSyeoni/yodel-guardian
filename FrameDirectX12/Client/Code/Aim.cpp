@@ -172,7 +172,7 @@ void CAim::Set_ConstantTable()
 	matWorld._33 = 1.0f;
 	matWorld._41 = 0.f;
 	matWorld._42 = 0.f;
-	matWorld._43 = 0.11f;
+	matWorld._43 = 0.01f;
 	_matrix matWVP = matWorld * matView * matProj;
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(matWorld));

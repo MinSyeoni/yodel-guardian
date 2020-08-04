@@ -37,9 +37,9 @@ public:
 	void CheckAim();
 	void ReloadCheck();
 	void CheckSniping();
-
+	void CoverCheck();
 	void CameraShakeCheck();
-
+	void CoverPositionCheck();
 	void WeaponSwap();
 public:
 	CPlayer::STATE m_eCurState = CPlayer::RIFLEIDLE;
@@ -84,6 +84,10 @@ public:
 	_bool m_bIsKeyLock = false;
 
 	CutSceneType m_eCurScene = NOSCENE;
-	
+
+
+	_bool m_bIsCover = false;
+	_vec3 m_vCoverPoint;
+	_float m_fCoverAngleY;
 };
 

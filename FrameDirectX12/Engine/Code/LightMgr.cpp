@@ -48,6 +48,16 @@ HRESULT CLight_Manager::Set_LightOnOff(const _uint & iIndex, _bool blsLight)
 	return (*iter)->LightOnoff(blsLight);
 }
 
+void CLight_Manager::ClearLigth()
+{
+	for (auto& pSrc : m_LightList)
+	{
+		Safe_Release(pSrc);
+	}
+	m_LightList.clear();
+
+}
+
 HRESULT CLight_Manager::Add_Light(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList, const D3DLIGHT* pLightInfo)
 {
 	if (nullptr == pLightInfo)

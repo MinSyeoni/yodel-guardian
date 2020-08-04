@@ -21,6 +21,7 @@ private:
 	HRESULT			Ready_LayerEnvironment(wstring wstrLayerTag);
 	HRESULT			Ready_LayerGameObject(wstring wstrLayerTag);
 	HRESULT			Ready_LayerUI(wstring wstrLayerTag);
+	HRESULT         Ready_Light();
 
 private:
 	void			Load_StageObject(const wstring& wstrFilePath, wstring wstrLayerTag);
