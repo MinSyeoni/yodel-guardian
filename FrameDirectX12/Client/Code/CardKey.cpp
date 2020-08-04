@@ -10,7 +10,7 @@
 #include "Monster.h"
 
 #include "CardTagUI.h"
-
+#include "DirectInput.h"
 CCardKey::CCardKey(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -146,6 +146,10 @@ void CCardKey::PutTheCard_OnTheDoor()
 
 void CCardKey::Coliision_CardAndPlayer()
 {
+	if(KEY_DOWN(DIKEYBOARD_4))
+		m_bIsEquip=true;
+
+
 	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
 
 	_vec3 vShaveDir;
