@@ -3,6 +3,7 @@
 #include "BaziorMgr.h"
 #include "GraphicDevice.h"
 #include "ObjectMgr.h"
+#include "Player.h"
 CActionCamera::CActionCamera(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	:CCamera(pGraphicDevice,pCommandList)
 {
@@ -45,6 +46,21 @@ HRESULT CActionCamera::Ready_GameObject()
 			0.f,	// Near
 			1.f);
 
+	CGameObject* pGameObject = m_pObjectMgr->Get_GameObject(L"Layer_Camera", L"DynamicCamera");
+	if (pGameObject != nullptr)
+		pGameObject->Dead_GameObject();
+ //   
+	
+	 pGameObject = m_pObjectMgr->Get_GameObject(L"Layer_GameObject", L"Player");
+	if (pGameObject != nullptr)
+	{
+
+		dynamic_cast<CPlayer*>(pGameObject)->KeyLockPlayer(true);
+
+	}
+
+
+
 	return NO_EVENT;
 }
 
@@ -61,9 +77,19 @@ _int CActionCamera::Update_GameObject(const _float& fTimeDelta)
 	m_tCameraInfo.vAt = CheckBazior(m_vecAt);
 	m_tCameraInfo.vUp = _vec3(0.f, 1.f, 0.f);
 
-	if (m_fAccTime > 0.0f)
+	if (m_fAccTime > 1.f)
 	{
     	m_pObjectMgr->Add_GameObject(L"Layer_Camera", L"Prototype_DynamicCamera", L"DynamicCamera", nullptr);
+
+		CGameObject* pGameObject = m_pObjectMgr->Get_GameObject(L"Layer_GameObject", L"Player");
+		if (pGameObject != nullptr)
+		{
+
+			dynamic_cast<CPlayer*>(pGameObject)->KeyLockPlayer(false);
+
+		}
+
+
 		return DEADOBJ;
 	}
 

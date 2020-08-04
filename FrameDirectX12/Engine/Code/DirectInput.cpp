@@ -35,11 +35,12 @@ HRESULT CDirectInput::Ready_InputDevice(HINSTANCE hInst, HWND hWnd)
 
 	FAILED_CHECK_RETURN(m_pInputSDK->CreateDevice(GUID_SysMouse, &m_pMouse, nullptr), E_FAIL);
 	m_pMouse->SetDataFormat(&c_dfDIMouse);
-	m_pMouse->SetCooperativeLevel(hWnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
+	m_pMouse->SetCooperativeLevel(hWnd, DISCL_BACKGROUND | DISCL_EXCLUSIVE);
 	m_pMouse->Acquire();
 	m_hWnd = hWnd;
 	
 	return S_OK;
+
 }
 
 void CDirectInput::SetUp_InputState()

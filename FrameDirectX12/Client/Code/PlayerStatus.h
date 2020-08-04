@@ -41,6 +41,7 @@ public:
 	void CameraShakeCheck();
 	void CoverPositionCheck();
 	void WeaponSwap();
+	void MpCheck(const _float& fTimeDelta);
 public:
 	CPlayer::STATE m_eCurState = CPlayer::RIFLEIDLE;
 	CPlayer::STATE m_ePreState = CPlayer::RIFLEIDLE;
@@ -75,6 +76,7 @@ public:
 	_bool m_bIshit = false;
 	_float m_fhitCool = 0.f;
 	_uint m_uiHp = 200;
+	_float m_fMp = 100.f;
 
 	bool m_bIsZoom = false;
 	_bool m_bIsInit = false;
@@ -89,5 +91,6 @@ public:
 	_bool m_bIsCover = false;
 	_vec3 m_vCoverPoint;
 	_float m_fCoverAngleY;
+
 };
 

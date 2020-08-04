@@ -17,7 +17,7 @@ private:
 
 public:
 	HRESULT			Ready_GameObjectPrototype();
-	virtual HRESULT	Ready_GameObject();
+	virtual HRESULT	Ready_GameObject(WEAPONSTATE eState);
 	virtual HRESULT	LateInit_GameObject();
 	virtual _int	Update_GameObject(const _float& fTimeDelta);
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
@@ -26,6 +26,7 @@ public:
 	void  FallowPlayer();
 	void  FallowBag();
 	void AniCheck();
+	void DropCheck();
 	void LightCheck(const _float& fTimeDelta);
 	virtual void CreateShootEffect() override;
 public:
@@ -62,7 +63,7 @@ private:
 	D3DLIGHT m_tagLight;
 	_vec3 m_vLightPos;
 
-
+	bool m_bIsLimLight = false;
 private:
 	virtual void			Free();
 

@@ -69,13 +69,6 @@ HRESULT CSalone::LateInit_GameObject()
 
 
 
-	CDynamicCamera* pCamera = static_cast<CDynamicCamera*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_Camera", L"DynamicCamera"));
-	if (pCamera == nullptr)
-		return DEADOBJ;
-	pCamera->Dead_GameObject();
-
-
-	CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_Camera", L"prototype_Cam1", L"ActionCame", nullptr);
 
 
 	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");

@@ -69,6 +69,14 @@ HRESULT CMainApp::SetUp_Font()
 	m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Font_Loading", pGameObject);
 
 
+	pGameObject = CFont::Create_Prototype(m_pGraphicDevice, m_pCommandList,
+		L"netmarble Light",	// Font Type
+		25.f,					// Font Size
+		D2D1::ColorF::White);	// Font Color
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Font_NPC", pGameObject);
+
+
 	m_pFont_FPS = static_cast<CFont*>(CObjectMgr::Get_Instance()->Get_NewGameObject(L"Prototype_Font_NetmarbleLight", L"fuck", nullptr));
 	FAILED_CHECK_RETURN(m_pFont_FPS->Ready_GameObjectClone(L"", _vec2(1400.f, 850.f), D2D1::ColorF::SpringGreen), E_FAIL);
 	return S_OK;
@@ -90,8 +98,6 @@ _int CMainApp::Update_MainApp(const _float & fTimeDelta)
 
 	if (m_fTime >= 1.0f)
 	{
-
-
 		m_fTime = 0.0f;
 		m_uiFPS = 0;
 	}

@@ -157,7 +157,11 @@ void CCardKey::Coliision_CardAndPlayer()
 				dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(true);
 
 			if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && !m_bIsEquip)
+			{
 				m_bIsEquip = true;
+				m_pObjectMgr->Add_GameObject(L"Layer_Camera", L"CameraZombi", L"ActionCamera", nullptr);//카메라 추가햇어
+
+			}
 		}
 		else
 		{

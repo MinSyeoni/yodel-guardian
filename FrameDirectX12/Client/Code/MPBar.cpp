@@ -2,7 +2,7 @@
 #include "MPBar.h"
 #include "Player.h"
 #include "DirectInput.h"
-
+#include "Player.h"
 CMPBar::CMPBar(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -50,6 +50,11 @@ _int CMPBar::Update_GameObject(const _float& fTimeDelta)
 		return DEAD_OBJ;
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
+
+	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+	if (pPlayer != nullptr)
+		m_fCurMp = static_cast<CPlayer*>(pPlayer)->Get_CurMp();
+
 
 	if (m_iMPType == 0)
 	{

@@ -22,7 +22,7 @@ public:
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 	virtual void    Render_ShadowDepth(CShader_Shadow* pShader);
 
-
+	void CheckPlayer();
 	void MonsterCheck(const _float& fTimeDelta);
 	void ChapterCheck(const _float& fTimeDelta);
 	void TurnToPlayer(const _float& fTimeDelta);
@@ -84,6 +84,9 @@ private:
 	_bool  m_bIsReload = false;
 	_bool m_bIsFinish = false;
 	
+
+	_bool m_bIsStartConver = false;//플레이어 시야에 들어왓늕ㅣ 
+	_bool m_bIsTalk = false;//플레이어와 대화시작
 private:
 	virtual void			Free();
 };

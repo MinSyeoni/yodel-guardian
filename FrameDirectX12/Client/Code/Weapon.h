@@ -27,6 +27,9 @@ public:
 	void SetWeaponState(WEAPONSTATE eState) { m_eWeaponState = eState; };
 	WEAPONTYPE Get_WeaponType() { return m_eWeaponType; };
 	WEAPONSTATE Get_WeaponState(){return m_eWeaponState;};
+
+	_int      Get_WeaponBulletCount() { return m_iCurBullet; };
+	_int      Get_weaponMaxBulletCount() { return m_iMaxBullet; };
 private:
 	void			Set_ConstantTable();
 	void            Set_ShadowTable(CShader_Shadow* pShader);
@@ -42,8 +45,8 @@ protected:
 
 	WEAPONTYPE m_eWeaponType = RIFLE;
 
-	_float m_iCurBullet;
-	_float m_iMaxBullet;
+	_int m_iCurBullet;
+	_int m_iMaxBullet;
 
 
 protected:

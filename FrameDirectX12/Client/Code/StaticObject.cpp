@@ -66,8 +66,7 @@ HRESULT CStaticObject::LateInit_GameObject()
 	/*____________________________________________________________________
 	Get GameObject - DynamicCamera
 	______________________________________________________________________*/
-	m_pDynamicCamera = static_cast<CDynamicCamera*>(m_pObjectMgr->Get_GameObject(L"Layer_Camera", L"DynamicCamera"));
-	NULL_CHECK_RETURN(m_pDynamicCamera, E_FAIL);
+	
 
 #ifdef _DEBUG
 	COUT_STR("Success Get DynamicCamera");

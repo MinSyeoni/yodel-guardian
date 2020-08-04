@@ -4,6 +4,8 @@
 #include "PlayerArm.h"
 #include "ObjectMgr.h"
 #include "LightMgr.h"
+#include "Frustom.h"
+#include "DirectInput.h"
 CSniper::CSniper(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
     :CWeapon(pGraphicDevice, pCommandList)
 {
@@ -21,7 +23,7 @@ HRESULT CSniper::Ready_GameObjectPrototype()
     return S_OK;
 }
 
-HRESULT CSniper::Ready_GameObject()
+HRESULT CSniper::Ready_GameObject(WEAPONSTATE eState)
 {
     CWeapon::AddComponent();
     AddComponent();
@@ -46,6 +48,12 @@ HRESULT CSniper::Ready_GameObject()
     m_uiLightIndex = CLight_Manager::Get_Instance()->Get_LightIndex();
     CLight_Manager::Get_Instance()->Set_LightOnOff(m_uiLightIndex, false);
 
+    
+
+    m_eWeaponState = eState;
+    m_iCurBullet = 5.f;
+    m_iMaxBullet = 50.f;
+
     return S_OK;
 }
 
@@ -53,7 +61,7 @@ HRESULT CSniper::LateInit_GameObject()
 {
     m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
     m_pTransCom->m_vScale = _vec3(1.0f, 1.0f, 1.0f);
-    m_pTransCom->m_vPos = _vec3(0.f, 0.f, 0.f);
+    m_pTransCom->m_vPos = _vec3(609.f, 78.f, 454.f);
     CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 
     if (pPlayer != nullptr)
@@ -85,6 +93,12 @@ HRESULT CSniper::LateInit_GameObject()
 
 _int CSniper::Update_GameObject(const _float& fTimeDelta)
 {
+    if (m_eWeaponState == DROP)
+        m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
+    else
+        m_pTransCom->m_vScale = _vec3(1.0f, 1.0f, 1.0f);
+
+
     FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
 
@@ -92,7 +106,7 @@ _int CSniper::Update_GameObject(const _float& fTimeDelta)
         return DEAD_OBJ;
 
     Engine::CGameObject::Update_GameObject(fTimeDelta);
-
+    DropCheck();
     AniCheck();
     //LightCheck(fTimeDelta);
 
@@ -110,6 +124,9 @@ _int CSniper::LateUpdate_GameObject(const _float& fTimeDelta)
 
     FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
     FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
+
+    if (m_bIsLimLight)
+        FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_LIMLIGHT, this), -1);
 
     if (m_eWeaponState == EQUIP)
         FallowPlayer();
@@ -217,6 +234,50 @@ void CSniper::AniCheck()
 
 }
 
+void CSniper::DropCheck()
+{
+    if (m_eWeaponState == DROP && CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
+    {
+        m_bIsLimLight = true;
+
+        //  ShowEquipUI(true);
+
+    }
+    else
+    {
+
+        // ShowEquipUI(false);
+        m_bIsLimLight = false;
+
+    }
+
+    if (m_eWeaponState == DROP && m_bIsLimLight && KEY_DOWN(DIK_E))
+    {
+
+        CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+
+        _vec3 vPlayerPos = pPlayer->Get_Transform()->m_vPos;
+
+        _vec3 vDist = vPlayerPos - m_pTransCom->m_vPos;
+
+        float fDist = vDist.Get_Length();
+
+        if (fDist < 15.f)
+        {
+
+            m_eCurAniState = COLLAPSEBASE;
+            m_eWeaponState = BAG;
+            m_pTransCom->m_vPos = _vec3(0.f, 0.f, 0.f);
+            m_pTransCom->m_vAngle = _vec3(0.f, 0.f, 0.f);
+            m_pTransCom->m_vScale = _vec3(1.f, 1.f, 1.f);
+            m_bIsLimLight = false;
+        }
+
+
+    }
+
+}
+
 void CSniper::LightCheck(const _float& fTimeDelta)
 {
     if (!m_bIsLight)
@@ -246,6 +307,8 @@ void CSniper::LightCheck(const _float& fTimeDelta)
 
 void CSniper::CreateShootEffect()
 {
+    m_iCurBullet-- ;
+
 
     /* _matrix matBlend;
 
@@ -270,8 +333,9 @@ void CSniper::CreateShootEffect()
 CGameObject* CSniper::Clone_GameObject(void* prg)
 {
     CGameObject* pInstance = new CSniper(*this);
+    WEAPONSTATE eState = *reinterpret_cast<WEAPONSTATE*>(prg);
 
-    if (FAILED(dynamic_cast<CSniper*>(pInstance)->Ready_GameObject()))
+    if (FAILED(dynamic_cast<CSniper*>(pInstance)->Ready_GameObject(eState)))
         return nullptr;
 
     return pInstance;

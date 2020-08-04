@@ -117,8 +117,15 @@ _int CShepard::Update_GameObject(const _float& fTimeDelta)
 	/*____________________________________________________________________
 	TransCom - Update WorldMatrix.
 	______________________________________________________________________*/
-	if (KEY_DOWN(DIK_L))
+	if (m_bIsStartConver && !m_bIsTalk)
+	{
 		m_eCurChapter = TURNPLAYER;
+		m_bIsTalk = true;
+	}
+	if (!m_bIsStartConver)
+	{
+		CheckPlayer();
+	}
 
 
 	ChapterCheck(fTimeDelta);
@@ -501,6 +508,19 @@ void CShepard::ShootingCheck(const _float& fTimeDelta,CMonster* pTarget)
 
 	}
 
+
+
+}
+
+void CShepard::CheckPlayer()
+{
+
+	_vec3 vPos = static_cast<CTransform*>(m_pPlayer->Get_Component(L"Com_Transform", ID_DYNAMIC))->m_vPos;
+
+	_float fDist = _vec3(m_pTransCom->m_vPos - vPos).Get_Length();
+
+	if (fDist < 45.f)
+		m_bIsStartConver = true;
 
 
 }

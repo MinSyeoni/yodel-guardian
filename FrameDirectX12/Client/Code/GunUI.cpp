@@ -2,7 +2,7 @@
 #include "GunUI.h"
 #include "Font.h"
 #include "DirectInput.h"
-
+#include "Weapon.h"
 CGunUI::CGunUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -49,7 +49,7 @@ _int CGunUI::Update_GameObject(const _float& fTimeDelta)
 
 	if (m_bIsDead)
 		return DEAD_OBJ;
-
+	WeaponBulletCheck();
 	m_pTransCom->m_vScale = _vec3(0.25f, 0.2f, 0.21f);
 
 	m_pTransCom->m_vPos.x = _float(WINCX / 2.f) / _float(WINCX / 1.4f) + 0.01f;
@@ -69,10 +69,12 @@ _int CGunUI::Update_GameObject(const _float& fTimeDelta)
 	m_pBulletFont->Set_Text(strText.c_str());
 	////////////////////////
 	
-	if (m_bIsShow)
+	if (m_bIsShow && m_eState != NONE)
 		m_pBulletFont->Update_GameObject(fTimeDelta);
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
+
+
 
 	return NO_EVENT;
 }
@@ -81,18 +83,10 @@ _int CGunUI::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
-	if (m_bIsShow)
+	if (m_bIsShow && m_eState != NONE)
 		m_pBulletFont->LateUpdate_GameObject(fTimeDelta);
 
-	////// <юс╫ц> //////
-	if (Engine::CDirectInput::Get_Instance()->Mouse_KeyDown(DIM_LB))
-	{
-		if(m_iCurBullet > 0)
-			m_iCurBullet -= 1;
-		else
-			m_iCurBullet = 0;
-	}
-
+	if(m_bIsShow && m_eState!=NONE)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
 
@@ -101,18 +95,48 @@ _int CGunUI::LateUpdate_GameObject(const _float& fTimeDelta)
 
 void CGunUI::Render_GameObject(const _float& fTimeDelta)
 {
-	if (!m_bIsShow)
-		return;
+
 
 	Set_ConstantTable();
 
 	m_pShaderCom->Begin_Shader();
 	m_pBufferCom->Begin_Buffer();
 
-	m_pShaderCom->End_Shader();
+	m_pShaderCom->End_Shader((int)m_eState);
 	m_pBufferCom->End_Buffer();
 
 	m_pBufferCom->Render_Buffer();
+}
+
+void CGunUI::WeaponBulletCheck()
+{
+
+	m_eState = NONE;
+
+	list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Weapon");
+
+	if (pList == nullptr)
+		return;
+
+	for (auto& pSrc : *pList)
+	{
+		if (CWeapon::EQUIP == dynamic_cast<CWeapon*>(pSrc)->Get_WeaponState())
+		{
+			if (dynamic_cast<CWeapon*>(pSrc)->Get_WeaponType() == CWeapon::SNIPER)
+			{
+				m_eState = SNIPER;
+				m_iCurBullet = dynamic_cast<CWeapon*>(pSrc)->Get_WeaponBulletCount();
+				m_iMaxBullet = dynamic_cast<CWeapon*>(pSrc)->Get_weaponMaxBulletCount();
+			}
+			else if (dynamic_cast<CWeapon*>(pSrc)->Get_WeaponType() == CWeapon::RIFLE)
+			{
+				m_eState = RIFLE;
+				m_iCurBullet = dynamic_cast<CWeapon*>(pSrc)->Get_WeaponBulletCount();
+				m_iMaxBullet = dynamic_cast<CWeapon*>(pSrc)->Get_weaponMaxBulletCount();
+			}
+		}
+
+	}
 }
 
 HRESULT CGunUI::Add_Component()

@@ -115,6 +115,8 @@ void CNpcWords::Ready_NpcWords()
 	default:
 		break;
 	}
+
+	Reset_OthersUI(false);
 }
 
 HRESULT CNpcWords::LateInit_GameObject()
@@ -139,8 +141,11 @@ _int CNpcWords::Update_GameObject(const _float& fTimeDelta)
 
 
 	if (m_bIsDead)
-		return DEAD_OBJ;
+	{
 
+		Reset_OthersUI(true);
+		return DEAD_OBJ;
+	}
 	Next_Conversation(fTimeDelta);
 	Show_ConversationWords();	
 
@@ -408,7 +413,7 @@ HRESULT CNpcWords::Add_Component()
 		m_mapComponent[ID_DYNAMIC].emplace(L"Com_Transform", m_pTransCom);
 
 	// Font
-	m_pWordsFont = static_cast<CFont*>(CObjectMgr::Get_Instance()->Get_NewGameObject(L"Prototype_Font_NetmarbleLight", L"fuck", nullptr));
+	m_pWordsFont = static_cast<CFont*>(CObjectMgr::Get_Instance()->Get_NewGameObject(L"Prototype_Font_NPC", L"fuck", nullptr));
 	m_pWordsFont->Ready_GameObjectClone(L"", _vec2{ 0.f, 0.f }, D2D1::ColorF::White);
 
 	return S_OK;

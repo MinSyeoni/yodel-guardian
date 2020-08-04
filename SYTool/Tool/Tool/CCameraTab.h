@@ -51,4 +51,5 @@ public:
 	afx_msg void OnBnClickedDeleteButton();
 	afx_msg void OnBnClickedSaveCamera();
 	afx_msg void OnBnClickedButton14();
+	afx_msg void OnEnChangeCameraY();
 };

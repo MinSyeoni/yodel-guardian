@@ -170,7 +170,7 @@ HRESULT CLoading::Load_Effect()
 
 HRESULT CLoading::Load_Camera()
 {
-	wstring fileName = L"../../../SYTool/Tool/Data/Camera/CameraData.dat";
+	wstring fileName = L"../../Data/Camera/CameraData.dat";
 	HANDLE hFile = CreateFile(fileName.c_str(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	NULL_CHECK_RETURN(hFile, E_FAIL);
 
@@ -597,8 +597,13 @@ HRESULT CLoading::Mesh_ForStage(void)
 
 
 
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"passage_box1.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"passage_box1.X", ID_STATIC, pComponent), E_FAIL);
 
-
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"passage_box2.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"passage_box2.X", ID_STATIC, pComponent), E_FAIL);
 
 
 
@@ -681,7 +686,7 @@ HRESULT CLoading::Texture_ForStage(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_colleague2Icon", ID_STATIC, pComponent), E_FAIL);
 
-	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/assaultRifle.dds", 1);
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/assaultRifle%d.dds", 2);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_Rifle", ID_STATIC, pComponent), E_FAIL);
 

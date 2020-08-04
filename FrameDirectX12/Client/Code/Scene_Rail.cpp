@@ -131,10 +131,14 @@ HRESULT CScene_Rail::Ready_LayerGameObject(wstring wstrLayerTag)
 
 	_vec3 vPos = _vec3(370.f, 0.f, 300.f);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player", &vPos), E_FAIL);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Sniper", L"Weapon", nullptr), E_FAIL);
+
+	
 
 	CWeapon::WEAPONSTATE eState = CWeapon::BAG;
 	m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Rifle", L"Weapon", &eState);
+
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Sniper", L"Weapon", &eState), E_FAIL);
+
 
 	CFadeOut::FADETYPE eType = CFadeOut::FADEIN;
 	m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_FadeOut", L"FadeOut", &eType);

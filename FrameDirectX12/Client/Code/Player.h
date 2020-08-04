@@ -39,7 +39,7 @@ public:
 	CPlayerLeg* Get_PlayerLeg() { return m_pLeg; };//´Ù¸®
 	CPlayerStatus* Get_Status() { return m_pStatus; };
 
-
+	_float         Get_CurMp();
 	/////////// HHHHHHHHPPPPPPPPP
 	_float			Get_CurHP();
 	void			Set_CurHP(_uint iHP);

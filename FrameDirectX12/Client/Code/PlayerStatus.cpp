@@ -26,17 +26,17 @@ CPlayerStatus::~CPlayerStatus()
 void CPlayerStatus::LateInit()
 {
     m_pCamera = static_cast<CDynamicCamera*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_Camera", L"DynamicCamera"));
-
-    m_pNaviMesh->SetFirstNavi(m_pTransCom->m_vPos);
-
     m_bIsInit = true;
 }
 
 _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
 {
 
-    if (pTranscom != nullptr)
+    if (m_pTransCom == nullptr)
+    {
         m_pTransCom = pTranscom;
+        m_pNaviMesh->SetFirstNavi(m_pTransCom->m_vPos);
+    }
     LateInit();
 
     _matrix matRot;
@@ -57,6 +57,7 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
         ReloadCheck();
         CheckSniping();
         CameraShakeCheck();
+        MpCheck(fTimeDelta);
     }
     else
     {
@@ -378,7 +379,7 @@ void CPlayerStatus::LegKeyInput()
             m_pCamera->Set_ZoomInOut(false);
 
             m_eLegState = CPlayer::RIFLEWALKNORTH;
-            m_fSpeed = 10.f;
+            m_fSpeed = 5.f;
 
             if (KEY_PRESSING(DIKEYBOARD_LSHIFT))
             {
@@ -651,7 +652,6 @@ void CPlayerStatus::WeaponChange()
 
 bool CPlayerStatus::WeaponStateCheck(EQUIPTYPE eType)
 {
-
     return true;
     list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Weapon");
 
@@ -1168,4 +1168,18 @@ void CPlayerStatus::CoverPositionCheck()
 
 void CPlayerStatus::WeaponSwap()
 {
+}
+
+void CPlayerStatus::MpCheck(const _float& fTimeDelta)
+{
+    if (m_fSpeed == 15.f)
+        m_fMp -= fTimeDelta * 10.f;
+    else
+        m_fMp += fTimeDelta * 10.f;
+    if (m_fMp > 100.f)
+        m_fMp = 100.f;
+
+        if (m_fMp < 0.f)
+            m_fMp = 0.f;
+
 }

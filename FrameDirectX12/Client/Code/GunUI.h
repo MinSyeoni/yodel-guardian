@@ -17,6 +17,9 @@ class CDynamicCamera;
 
 class CGunUI : public Engine::CGameObject
 {
+public:
+	enum STATE{RIFLE,SNIPER,NONE};
+
 private:
 	explicit CGunUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 	explicit CGunUI(const CGunUI& rhs);
@@ -33,6 +36,8 @@ public:
 	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void				Render_GameObject(const _float& fTimeDelta);
 
+
+	void                        WeaponBulletCheck();
 private:
 	virtual HRESULT				Add_Component();
 
@@ -54,7 +59,7 @@ private:
 
 	Engine::CFont*				m_pBulletFont = nullptr;
 	_bool						m_bIsShow = true;
-
+	STATE                       m_eState = NONE;
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);
 	static  CGunUI*				Create(ID3D12Device* pGraphicDevice,

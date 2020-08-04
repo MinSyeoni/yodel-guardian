@@ -133,6 +133,12 @@ void CPlayer::Render_GameObject(const _float& fTimeDelta)
 {
 }
 
+_float CPlayer::Get_CurMp()
+{
+
+	return m_pStatus->m_fMp;
+}
+
 _float CPlayer::Get_CurHP()
 {
 	return m_pStatus->m_uiHp;
