@@ -50,7 +50,7 @@ HRESULT CPlayer::Ready_GameObjectPrototype()
 	return S_OK;
 }
 
-HRESULT CPlayer::Ready_GameObject()
+HRESULT CPlayer::Ready_GameObject(_vec3 vPos)
 {
 	NULL_CHECK_RETURN(m_pComponentMgr, E_FAIL);
 	CGameObject::Ready_GameObject();
@@ -71,8 +71,8 @@ HRESULT CPlayer::Ready_GameObject()
 	m_pStatus->SetMesh(static_cast<CMesh*>(m_pArm->Get_Component(L"Com_Mesh", ID_STATIC)));
 
 
-	m_pTransCom->m_vPos = _vec3(316.f, 34.f, 216.f);
-	//m_pTransCom->m_vPos = _vec3(300.f, 0.f, 480.f);
+
+	m_pTransCom->m_vPos = vPos;
 
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
 	m_pTransCom->m_vDir = _vec3(0.f, 0.0f, 1.f);
@@ -153,9 +153,11 @@ HRESULT CPlayer::Add_Component()
 CGameObject* CPlayer::Clone_GameObject(void* prg)
 {
 
+	_vec3 vPos = *reinterpret_cast<_vec3*>(prg);
+
 	CGameObject* pInstance = new CPlayer(*this);
 
-	if (FAILED(pInstance->Ready_GameObject()))
+	if (FAILED(static_cast<CPlayer*>(pInstance)->Ready_GameObject(vPos)))
 		return nullptr;
 
 	return pInstance;

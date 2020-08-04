@@ -151,7 +151,14 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 	{
 		if (m_pFlameThrower == nullptr)
 			return E_FAIL;
-		
+
+		_matrix matTemp = INIT_MATRIX;
+		matTemp = m_pTransCom->m_matWorld;
+		matTemp._43 = m_pTransCom->m_vPos.z + 1.f;
+
+		m_pSphereCollider->Update_Collider(&matTemp);
+		CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::COMBAT, m_pSphereCollider);
+
 		m_pFlameThrower->Update_FlameThrower(fTimeDelta, m_pTransCom, m_pMeshCom);
 		iCurState = m_pFlameThrower->Get_CurState();
 	}
@@ -233,6 +240,7 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCol), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pSphereCollider), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[0]), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[1]), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[2]), -1);
@@ -352,6 +360,11 @@ HRESULT CMonster::Add_Component()
 	m_pAstarCom = static_cast<Engine::CAstar*>(m_pComponentMgr->Clone_Component(L"Prototype_Astar", COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pAstarCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Astar", m_pAstarCom);
+
+	// 콜라이더
+	m_pSphereCollider = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 20.f, _vec3(1.f, 1.f, 1.f), this));
+	NULL_CHECK_RETURN(m_pSphereCollider, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_SphereCol", m_pSphereCollider);
 
 	m_pBoxCol = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(100.f, 100.f, 100.f), this));
 	NULL_CHECK_RETURN(m_pBoxCol, E_FAIL);

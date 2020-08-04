@@ -26,7 +26,7 @@ HRESULT CRifle::Ready_GameObjectPrototype()
     return S_OK;
 }
 
-HRESULT CRifle::Ready_GameObject()
+HRESULT CRifle::Ready_GameObject(WEAPONSTATE eState)
 {
     CWeapon::AddComponent();
     AddComponent();
@@ -70,8 +70,9 @@ HRESULT CRifle::Ready_GameObject()
     m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
     m_pTransCom->m_vPos = _vec3(299.f, 9.f, 494.f);
     m_pTransCom->m_vAngle = _vec3(0.f, 0.f, 0.f);
-    m_eWeaponState = BAG;//юс╫ц
     
+    m_eWeaponState = eState;
+
     return S_OK;
 }
 
@@ -415,9 +416,11 @@ void CRifle::ShowEquipUI(bool bIsRender)
 
 CGameObject* CRifle::Clone_GameObject(void* prg)
 {
+   
+    WEAPONSTATE eState = *reinterpret_cast<WEAPONSTATE*>(prg);
     CGameObject* pInstance = new CRifle(*this);
 
-    if (FAILED(dynamic_cast<CRifle*>(pInstance)->Ready_GameObject()))
+    if (FAILED(dynamic_cast<CRifle*>(pInstance)->Ready_GameObject(eState)))
         return nullptr;
 
     return pInstance;
@@ -425,6 +428,8 @@ CGameObject* CRifle::Clone_GameObject(void* prg)
 
 CRifle* CRifle::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 {
+    
+
     CRifle* pInstance = new CRifle(pGraphicDevice, pCommandList);
 
     if (FAILED(pInstance->Ready_GameObjectPrototype()))

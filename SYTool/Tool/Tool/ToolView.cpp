@@ -422,6 +422,14 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"box0_8.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"box0_8.x"), E_FAIL))
 		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"cardreader.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"cardreader.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"passage_box1.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"passage_box1.x"), E_FAIL))
+		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"passage_box2.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"passage_box2.x"), E_FAIL))
+		return;
+	//if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"reaper_ground.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"reaper_ground.x"), E_FAIL))
+	//	return;
 
 	///// 테스트 /////
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"test.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"test.x"), E_FAIL))

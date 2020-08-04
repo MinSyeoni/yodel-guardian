@@ -25,7 +25,7 @@ private:
 public:
 	void            KeyLockPlayer(_bool bIsLock);
 	HRESULT			Ready_GameObjectPrototype();
-	virtual HRESULT	Ready_GameObject();
+	virtual HRESULT	Ready_GameObject(_vec3 vPos);
 	virtual HRESULT	LateInit_GameObject();
 
 	virtual _int	Update_GameObject(const _float& fTimeDelta);

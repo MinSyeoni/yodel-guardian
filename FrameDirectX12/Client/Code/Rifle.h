@@ -17,7 +17,7 @@ private:
 
 public:
 	HRESULT			Ready_GameObjectPrototype();
-	virtual HRESULT	Ready_GameObject();
+	virtual HRESULT	Ready_GameObject(WEAPONSTATE eState);
 	virtual HRESULT	LateInit_GameObject();
 	virtual _int	Update_GameObject(const _float& fTimeDelta);
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);

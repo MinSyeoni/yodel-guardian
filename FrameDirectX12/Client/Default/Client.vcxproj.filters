@@ -241,6 +241,8 @@
     <Filter Include="00.Scene_Logo\00.BackGround\00.LoadingTexture">
       <UniqueIdentifier>{89372a43-0a25-4e52-8bed-afe106463413}</UniqueIdentifier>
     </Filter>
+
+
     <Filter Include="03.UI\09.MousePoint">
       <UniqueIdentifier>{5bc3d12b-32ee-47ff-80e1-66ac7d11fb48}</UniqueIdentifier>
     </Filter>
@@ -253,11 +255,13 @@
     <Filter Include="03.UI\10.CardTagUI\01.CardTagUI">
       <UniqueIdentifier>{b2debe9b-1266-4949-9c99-6dd2a84f8e7c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene_Stage\06.Monster\03.Reapear">
-      <UniqueIdentifier>{59199d46-5c27-4087-9eee-ebb1dde6fd5e}</UniqueIdentifier>
+
+
+    <Filter Include="03.UI\05.QuestUI">
+      <UniqueIdentifier>{66177720-cdb3-4e75-82b1-ab1a7672ec4c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="07.Scene_Boss">
-      <UniqueIdentifier>{2033d479-a0f5-4270-8807-36f813e91d95}</UniqueIdentifier>
+    <Filter Include="02.Scene_All\03.StaticObject\03.CardReader">
+      <UniqueIdentifier>{9e1340a1-cbc7-48ed-97d0-479324be5473}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -418,6 +422,9 @@
     <ClInclude Include="..\Code\LobbyDoor.h">
       <Filter>02.Scene_All\01.DynamicObject\00.LobbyDoor</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\UI.h">
+      <Filter>03.UI\05.QuestUI</Filter>
+    </ClInclude>
     <ClInclude Include="..\Code\IconUI.h">
       <Filter>03.UI\03.PlayerUI</Filter>
       <Filter>03.UI\03.IconUI</Filter>
@@ -497,6 +504,8 @@
     <ClInclude Include="..\Code\LoadingBar.h">
       <Filter>00.Scene_Logo\00.BackGround\01.LoadingBar</Filter>
     </ClInclude>
+
+
     <ClInclude Include="..\Code\MPBar.h">
       <Filter>03.UI\02.HPMPBar\01.MPBar</Filter>
     </ClInclude>
@@ -512,11 +521,14 @@
     <ClInclude Include="..\Code\TagBack.h">
       <Filter>03.UI\10.CardTagUI\00.TagBack</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Scene_Boss.h">
-      <Filter>07.Scene_Boss</Filter>
+
+
+    <ClInclude Include="..\Code\HPKit.h">
+      <Filter>02.Scene_All\01.DynamicObject\02.HPKit</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Reapear.h">
-      <Filter>01.Scene_Stage\06.Monster\03.Reapear</Filter>
+    <ClInclude Include="..\Code\HPKit.h" />
+    <ClInclude Include="..\Code\CardReader.h">
+      <Filter>02.Scene_All\03.StaticObject\03.CardReader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -647,6 +659,9 @@
     <ClCompile Include="..\Code\LobbyDoor.cpp">
       <Filter>02.Scene_All\01.DynamicObject\00.LobbyDoor</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\UI.cpp">
+      <Filter>03.UI\05.QuestUI</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\IconUI.cpp">
       <Filter>03.UI\03.PlayerUI</Filter>
       <Filter>03.UI\03.IconUI</Filter>
@@ -729,6 +744,8 @@
     <ClCompile Include="..\Code\LoadingBar.cpp">
       <Filter>00.Scene_Logo\00.BackGround\01.LoadingBar</Filter>
     </ClCompile>
+
+
     <ClCompile Include="..\Code\MPBar.cpp">
       <Filter>03.UI\02.HPMPBar\01.MPBar</Filter>
     </ClCompile>
@@ -744,11 +761,14 @@
     <ClCompile Include="..\Code\TagBack.cpp">
       <Filter>03.UI\10.CardTagUI\00.TagBack</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Scene_Boss.cpp">
-      <Filter>07.Scene_Boss</Filter>
+
+
+    <ClCompile Include="..\Code\HPKit.cpp">
+      <Filter>02.Scene_All\01.DynamicObject\02.HPKit</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Reapear.cpp">
-      <Filter>01.Scene_Stage\06.Monster\03.Reapear</Filter>
+    <ClCompile Include="..\Code\HPKit.cpp" />
+    <ClCompile Include="..\Code\CardReader.cpp">
+      <Filter>02.Scene_All\03.StaticObject\03.CardReader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -90,6 +90,13 @@ void CEquipUI::Init_TypePos()
 		m_pTransCom->m_vPos.y = (((-2.0f * m_vPos.y) / WINCY) * 0.5f) - 0.2f;
 	}
 	break;
+	case CEquipUI::E_CARDREADER:
+	{
+		m_pTransCom->m_vScale = _vec3(0.1f, 0.08f, 0.1f);
+		m_pTransCom->m_vPos.x = (((2.0f * m_vPos.x) / WINCX) * 0.5f) - 0.3f;
+		m_pTransCom->m_vPos.y = (((-2.0f * m_vPos.y) / WINCY) * 0.5f) - 0.2f;
+	}
+	break;
 	default:
 		break;
 	}
@@ -149,11 +156,14 @@ HRESULT CEquipUI::Add_Component()
 	case CEquipUI::E_DOOROPEN_P:
 		wstrPrototype = L"Prototype_Texture_E_DoorOpen";
 		break;
+	case CEquipUI::E_CARDREADER:
+		wstrPrototype = L"Prototype_Texture_E_CardReader";
+		break;
 	default:
 		break;
 	}
 	m_pTexture = static_cast<Engine::CTexture*>(m_pComponentMgr->Clone_Component(wstrPrototype, COMPONENTID::ID_STATIC));
-	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+	NULL_CHECK_RETURN(m_pTexture, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Texture", m_pTexture);
 	
 	// TransCom 

@@ -28,8 +28,6 @@ public:
 		m_eShakeType = eType;
 	}
 
-
-
 	void Set_ZoomInOut(_bool ZoomIn, float Fov = 45.f);
 private:
 	/*____________________________________________________________________

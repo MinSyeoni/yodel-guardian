@@ -142,7 +142,9 @@ HRESULT CScene_Boss::Ready_LayerGameObject(wstring wstrLayerTag)
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
 
 	m_pObjectMgr->Add_Layer(wstrLayerTag, pLayer);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player", nullptr), E_FAIL);
+
+	_vec3 vPos = _vec3(316.f, 34.f, 216.f);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player", &vPos), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Sniper", L"Weapon", nullptr), E_FAIL);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Reapear", L"Reapear", nullptr), E_FAIL);

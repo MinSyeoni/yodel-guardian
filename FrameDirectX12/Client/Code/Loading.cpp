@@ -107,6 +107,9 @@ HRESULT CLoading::Load_Shader()
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_HPBAR2", ID_STATIC, pComponent), E_FAIL);
 
+	pComponent = CShader_UI::Create(DEVICE, m_pCommandList, CShader_UI::CARDTAG);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_CARDTAG", ID_STATIC, pComponent), E_FAIL);
 
 
 	pComponent = CShader_LightAcc::Create(DEVICE, m_pCommandList, LIGHTTYPE::D3DLIGHT_DIRECTIONAL);
@@ -288,9 +291,9 @@ HRESULT CLoading::Mesh_ForStage(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Book1.X", ID_STATIC, pComponent), E_FAIL);
 
-	//pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"Book2.X");
-	//NULL_CHECK_RETURN(pComponent, E_FAIL);
-	//FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Book2.X", ID_STATIC, pComponent), E_FAIL);
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"cardreader.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"cardreader.X", ID_STATIC, pComponent), E_FAIL);
 
 	//pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"book3.X");
 	//NULL_CHECK_RETURN(pComponent, E_FAIL);
@@ -464,6 +467,7 @@ HRESULT CLoading::Mesh_ForStage(void)
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"medikit.X", ID_STATIC, pComponent), E_FAIL);
 
 
+
 	static_cast<CLoadingBar*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"LoadingBar"))->SetGauge(0.52f);
 
 
@@ -547,6 +551,59 @@ HRESULT CLoading::Mesh_ForStage(void)
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/DynamicMesh/Monster/Reapear/", L"Reapear.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Reapear", ID_STATIC, pComponent), E_FAIL);
+
+
+
+
+
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"box0_1.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"box0_1.X", ID_STATIC, pComponent), E_FAIL);
+
+
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"box0_2.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"box0_2.X", ID_STATIC, pComponent), E_FAIL);
+
+
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"box0_3.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"box0_3.X", ID_STATIC, pComponent), E_FAIL);
+
+
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"box0_4.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"box0_4.X", ID_STATIC, pComponent), E_FAIL);
+
+
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"box0_5.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"box0_5.X", ID_STATIC, pComponent), E_FAIL);
+
+
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"box0_6.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"box0_6.X", ID_STATIC, pComponent), E_FAIL);
+
+
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"box0_7.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"box0_7.X", ID_STATIC, pComponent), E_FAIL);
+
+
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage1_2/", L"box0_8.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"box0_8.X", ID_STATIC, pComponent), E_FAIL);
+
+
+
+
+
+
+
+
+
+
 
 
 	static_cast<CLoadingBar*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"LoadingBar"))->SetGauge(0.65f);
@@ -680,6 +737,10 @@ HRESULT CLoading::Texture_ForStage(void)
 	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/e4.dds", 1);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_E_DoorOpen", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/e5.dds", 1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_E_CardReader", ID_STATIC, pComponent), E_FAIL);
 
 	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/mousepoint.dds", 1);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);

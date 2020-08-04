@@ -14,7 +14,7 @@ public:
 	virtual _int	Update_Scene(const _float& fTimeDelta);
 	virtual _int	LateUpdate_Scene(const _float& fTimeDelta);
 	virtual void	Render_Scene(const _float& fTimeDelta);
-
+	void           SceneChange();
 private:
 	HRESULT			Ready_GameObjectPrototype();
 	HRESULT			Ready_LayerEnvironment(wstring wstrLayerTag);
@@ -29,7 +29,9 @@ private:
 	void			Load_StageObject(const wstring& wstrFilePath);
 
 	MeshInfo		m_tMeshInfo;
+	bool            m_bIsChangeScene = false;
 
+	bool            m_bIsChange = false;
 public:
 	static CScene_Stage*	Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 private:

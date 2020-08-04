@@ -29,32 +29,33 @@ private:
 	virtual ~CMonster();
 
 public:
-	HRESULT					Ready_GameObjectPrototype();
-	virtual HRESULT			Ready_GameObject();
-	virtual HRESULT			LateInit_GameObject();
-	virtual _int			Update_GameObject(const _float& fTimeDelta);
-	virtual _int			LateUpdate_GameObject(const _float& fTimeDelta);
-	virtual void			Render_GameObject(const _float& fTimeDelta);
-	CZombi* Get_Zombi() { return m_pZombi; };//이거넣엇어
-	MONKIND					Get_MONKIND() { return m_eMonName; }//이것두넣엇어
-	virtual void			Render_ShadowDepth(CShader_Shadow* pShader);
+	HRESULT						Ready_GameObjectPrototype();
+	virtual HRESULT				Ready_GameObject();
+	virtual HRESULT				LateInit_GameObject();
+	virtual _int				Update_GameObject(const _float& fTimeDelta);
+	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
+	virtual void				Render_GameObject(const _float& fTimeDelta);
+	virtual void				Render_ShadowDepth(CShader_Shadow* pShader);
 
-	void					Set_IsActiveStart(_bool bIsActive) { m_bIsActive = bIsActive; }
-	_uint					Get_InitID() { return m_iInitId; }
-	_bool                  Get_BisActive() { return m_bIsActive; };
+	void						Set_IsActiveStart(_bool bIsActive) { m_bIsActive = bIsActive; }
+	_uint						Get_InitID() { return m_iInitId; }
+	_bool						Get_BisActive() { return m_bIsActive; };
 
 private:
-	void					Set_ConstantTable();
-	void					Set_ShadowTable(CShader_Shadow* pShader);
-	void					Update_BoneCollider(CSphereCollider* pSphereCol, string strBoneName, CColliderMgr::COLLIDER_TAG eTag);
-
-private:
+	void						Set_ConstantTable();
+	void						Set_ShadowTable(CShader_Shadow* pShader);
+	void						Update_BoneCollider(CSphereCollider* pSphereCol, string strBoneName, CColliderMgr::COLLIDER_TAG eTag);
 	virtual HRESULT				Add_Component();
+
+public:
+	CZombi*						Get_Zombi() { return m_pZombi; };
+	MONKIND						Get_MONKIND() { return m_eMonName; }
 
 private:
 	Engine::CMesh*				m_pMeshCom = nullptr;
 	Engine::CShader_Dissolve*	m_pShaderCom = nullptr;
 	Engine::CBoxCollider*		m_pBoxCol = nullptr;
+	Engine::CSphereCollider*	m_pSphereCollider = nullptr;
 	Engine::CSphereCollider*	m_pShereCol[3] = {};
 	Engine::CNaviMesh*			m_pNaviCom = nullptr;
 	Engine::CTexture*			m_pDissolveTex = nullptr;

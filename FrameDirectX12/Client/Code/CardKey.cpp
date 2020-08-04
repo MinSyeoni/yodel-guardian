@@ -9,6 +9,8 @@
 #include "PassageDoor.h"
 #include "Monster.h"
 
+#include "CardTagUI.h"
+
 CCardKey::CCardKey(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -68,7 +70,7 @@ _int CCardKey::Update_GameObject(const _float& fTimeDelta)
 		if (CEquipUI::E_KEYEQUIP == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
 			m_pGameObject = dynamic_cast<CEquipUI*>(pSrc);
 
-	PutTheCard_OnTheDoor();
+//	PutTheCard_OnTheDoor();
 
 	return NO_EVENT;
 }
@@ -91,7 +93,7 @@ _int CCardKey::LateUpdate_GameObject(const _float& fTimeDelta)
 
 void CCardKey::Render_GameObject(const _float& fTimeDelta)
 {
-	if (m_bIsEquip)
+	if (m_bIsEquip || m_bIsDead)
 		return;
 
 	Set_ConstantTable();
@@ -132,14 +134,12 @@ HRESULT CCardKey::Add_Component()
 
 void CCardKey::PutTheCard_OnTheDoor()
 {
-	CGameObject* pPassageDoor = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"PassageDoor");
-
-	if (nullptr == pPassageDoor)
+	CGameObject* pCardTagUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"CardTag");
+	if (nullptr == pCardTagUI)
 		return;
-
 	if (!m_bIsDead && m_bIsEquip)
 	{
-		dynamic_cast<CPassageDoor*>(pPassageDoor)->Set_IsCardToDoor(true);
+		dynamic_cast<CCardTagUI*>(pCardTagUI)->Set_IsTagOn(true);
 		m_bIsDead = true;
 	}
 }
@@ -153,7 +153,6 @@ void CCardKey::Coliision_CardAndPlayer()
 	{
 		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir))
 		{
-		//	dynamic_cast<CEquipUI*>(m_pGameObject)->Set_EquipPos(m_pTransCom->m_vPos.x, m_pTransCom->m_vPos.y);
 			if (dynamic_cast<CEquipUI*>(m_pGameObject) != nullptr)
 				dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(true);
 
@@ -170,13 +169,14 @@ void CCardKey::Coliision_CardAndPlayer()
 	if (m_bIsEquip)
 	{
 		list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Zombi");
-
 		for (auto& pSrc : *pList)
 		{
 			if (static_cast<CMonster*>(pSrc)->Get_MONKIND() == CMonster::ZOMBI &&
 				4 == static_cast<CMonster*>(pSrc)->Get_InitID())
 				static_cast<CMonster*>(pSrc)->Set_IsActiveStart(true);
 		}		
+
+		m_bIsDead = true;
 	}
 }
 

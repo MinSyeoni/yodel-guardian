@@ -1,2 +1,6 @@
 PlatformToolSet=v142:VCToolArchitecture=Native32Bit:VCToolsVersion=14.25.28610:TargetPlatformVersion=10.0.18362.0:
+<<<<<<< HEAD:SYTool/Tool/Engine/Resources/Include/Debug/Resources.tlog/Resources.lastbuildstate
 Debug|Win32|C:\Users\Huijun\Desktop\Exomas\yodel-guardian\SYTool\Tool\|
+=======
+Release|x64|C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\|
+>>>>>>> 253e174914a0adc46e3be95dba5dc18d78f6eacf:FrameDirectX12/Client/Default/x64/Release/Client.tlog/Client.lastbuildstate

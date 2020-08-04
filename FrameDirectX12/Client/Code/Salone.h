@@ -51,6 +51,7 @@ private:
 
 
 	vector<vector<_matrix>> m_vecMatrix;
+
 public:
 	virtual CGameObject* Clone_GameObject(void* prg);
 	static CSalone* Create(ID3D12Device* pGraphicDevice,

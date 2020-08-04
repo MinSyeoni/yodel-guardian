@@ -58,6 +58,21 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
         CheckSniping();
         CameraShakeCheck();
     }
+    else
+    {
+        if (m_eEquip == NONE)
+        {
+            m_eCurState = CPlayer::NONEIDLE;
+            m_eLegState = CPlayer::NONEIDLE;
+        }
+        else 
+        {
+            m_eCurState = CPlayer::RIFLEIDLE;
+            m_eLegState = CPlayer::RIFLEIDLE;
+        }
+
+
+    }
     if (m_bIsShoot)
     {
 

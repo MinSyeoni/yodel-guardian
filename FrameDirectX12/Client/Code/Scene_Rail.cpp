@@ -9,7 +9,8 @@
 #include "FlameThrower.h"
 #include "Dron.h"
 #include "LightMgr.h"
-
+#include "FadeOut.h"
+#include "Weapon.h"
 CScene_Rail::CScene_Rail(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -127,11 +128,21 @@ HRESULT CScene_Rail::Ready_LayerGameObject(wstring wstrLayerTag)
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
 
 	m_pObjectMgr->Add_Layer(wstrLayerTag, pLayer);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player", nullptr), E_FAIL);
+
+	_vec3 vPos = _vec3(370.f, 0.f, 300.f);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player", &vPos), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Sniper", L"Weapon", nullptr), E_FAIL);
 
-	Load_StageObject(L"../../Data/StaticObj/passage.dat", wstrLayerTag);
-//	Load_MonsterPos(L"../../Data/Collider/Flame.dat", wstrLayerTag);
+	CWeapon::WEAPONSTATE eState = CWeapon::BAG;
+	m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Rifle", L"Weapon", &eState);
+
+	CFadeOut::FADETYPE eType = CFadeOut::FADEIN;
+	m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_FadeOut", L"FadeOut", &eType);
+
+
+	Load_StageObject(L"../../Data/StaticObj/passage2.dat", wstrLayerTag);
+	Load_MonsterPos(L"../../Data/Collider/Flame.dat", wstrLayerTag);
+
 	Load_MonsterPos(L"../../Data/Collider/DronStart.dat", wstrLayerTag);
 	Load_MonsterPos(L"../../Data/Collider/DronStart2.dat", wstrLayerTag);
 	Load_MonsterPos(L"../../Data/Collider/DronStart3.dat", wstrLayerTag);

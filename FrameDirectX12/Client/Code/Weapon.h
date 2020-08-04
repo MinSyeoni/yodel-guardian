@@ -38,7 +38,7 @@ protected:
 protected:
 	vector<vector<_matrix>> m_vecBoneMatirx;   
 
-	WEAPONSTATE m_eWeaponState = BAG;
+	WEAPONSTATE m_eWeaponState = DROP;
 
 	WEAPONTYPE m_eWeaponType = RIFLE;
 

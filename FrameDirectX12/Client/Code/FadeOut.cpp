@@ -7,7 +7,8 @@
 #include "StaticCamera.h"
 #include "NpcWords.h"
 #include "PlayerStatus.h"
-
+#include "Management.h"
+#include "Scene_Stage.h"
 CFadeOut::CFadeOut(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -41,6 +42,10 @@ HRESULT CFadeOut::Ready_GameObject(FADETYPE tType)	// 복사본을 레디할 때
 	Add_Component();
 
 	m_eType = tType;
+	if (m_eType == FADEIN)
+		m_fTime = 1.f;
+	if (m_eType == FADEOUTTOSCENERAIL)
+		m_fTime = 0.f;
 
 	return S_OK;
 }
@@ -61,28 +66,61 @@ _int CFadeOut::Update_GameObject(const _float& fTimeDelta)
 		return DEAD_OBJ;
 
 	//m_pTransCom->m_vAngle.y += 90.f * fTimeDelta;
-	if (!m_bIsReturn)
-		m_fTime += fTimeDelta;
-	else
-		m_fTime -= fTimeDelta;
 
-	if (!m_bIsReturn)
+	if (m_eType == FADEOUTIN)
 	{
-		if (m_fTime > 1.f)
-		{ 
+		if (!m_bIsReturn)
+			m_fTime += fTimeDelta;
+		else
+			m_fTime -= fTimeDelta;
 
-			CheckFadeIn();
-			m_bIsReturn = true;
+		if (!m_bIsReturn)
+		{
+			if (m_fTime > 1.f)
+			{
+
+				CheckFadeIn();
+				m_bIsReturn = true;
+
+			}
+		}
+
+		if (m_bIsReturn && m_fTime < 0)
+		{
+			CheckFadeOut();
+			return DEAD_OBJ;
 
 		}
-	}
 
-	if (m_bIsReturn && m_fTime < 0)
+	}
+	else if (m_eType == FADEIN)
 	{
-		CheckFadeOut();
-		return DEAD_OBJ;
+
+		m_fTime -= fTimeDelta*0.3f;
+
+
+		if (m_fTime < 0.f)
+			return DEAD_OBJ;
+
 
 	}
+	else if (m_eType == FADEOUTTOSCENERAIL)
+	{
+
+		m_fTime += fTimeDelta;
+		if (m_fTime > 1.0f)
+		{
+			m_fTime = 1.f;
+
+			static_cast<CScene_Stage*>(CManagement::Get_Instance()->Get_CurScene())->SceneChange();
+		}
+
+
+
+
+	}
+
+
 	/*____________________________________________________________________
 	TransCom - Update WorldMatrix.
 	______________________________________________________________________*/

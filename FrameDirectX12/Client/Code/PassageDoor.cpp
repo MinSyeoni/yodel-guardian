@@ -83,9 +83,9 @@ void CPassageDoor::OpenTheDoor()
 	if (!m_bIsCardKey)
 		return;
 
-	if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && !m_bIsOpen && m_bIsCollision)
+	if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && m_bIsReaderOn && !m_bIsOpen && m_bIsCollision)
 		m_eDoorState = PASSAGE_OPEN;
-	else if (!m_bIsCollision && m_bIsOpen)
+	else if(m_bIsOpen && !m_bIsCollision)
 		m_eDoorState = PASSAGE_CLOSE;
 }
 
@@ -114,7 +114,8 @@ void CPassageDoor::ColiisionTheDoor()
 	{
 		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCol, pCol, &vShaveDir))
 		{
-			if (dynamic_cast<CEquipUI*>(m_pGameObject) != nullptr)
+			if (dynamic_cast<CEquipUI*>(m_pGameObject) != nullptr 
+				&& m_bIsReaderOn)
 				dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(!m_bIsOpen);
 			m_bIsCollision = true;
 		}
