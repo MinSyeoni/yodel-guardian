@@ -154,7 +154,6 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 
 		_matrix matTemp = INIT_MATRIX;
 		matTemp = m_pTransCom->m_matWorld;
-
 		if (m_iInitId == 2)
 		{
 			// ÀÓ½Ã ÁÂÇ¥
@@ -203,7 +202,7 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 	{
 		if (m_pDron == nullptr)
 			return E_FAIL;
-
+	
 		// Gun, Cables
 		Update_BoneCollider(m_pShereCol[0], "Gun", CColliderMgr::MONSTER);
 		m_pDron->Update_Dron(fTimeDelta, m_pTransCom, m_pMeshCom);
@@ -297,7 +296,6 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 		if (m_pDron == nullptr)
 			return E_FAIL;
 		m_pDron->LateUpdate_Dron(fTimeDelta, m_pTransCom, m_pMeshCom);
-
 		_vec3 vShaveDir;
 		for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::SPHERE, CColliderMgr::TRIGGER))
 		{

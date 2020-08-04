@@ -61,6 +61,8 @@ public:		// 상호작용
 	void					Set_Direction(_vec3 vDir) { m_pTransCom->m_vDir = vDir; }
 	_vec3					Get_Direction() { return m_pTransCom->m_vDir; }
 
+	_bool					Get_IsDronShoot() { return m_bIsShoot; }
+
 private:	
 	void					Update_DronPos();
 	void					Dron_OnTriggerTest();
@@ -98,6 +100,8 @@ private:
 	_float					m_fMaxHp = 0.f;
 				
 	_uint					m_iDrawID;
+
+	_bool					m_bIsShoot = false;
 
 	//여기좀추가햇으
 	_bool m_bIsDeadSound = false;

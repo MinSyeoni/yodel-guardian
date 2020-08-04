@@ -8,6 +8,7 @@
 #include "Monster.h"
 #include "FlameThrower.h"
 #include "Dron.h"
+#include "DronBullet.h"
 
 CScene_Rail::CScene_Rail(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
@@ -56,6 +57,12 @@ void CScene_Rail::Render_Scene(const _float& fTimeDelta)
 HRESULT CScene_Rail::Ready_GameObjectPrototype()
 {
 	NULL_CHECK_RETURN(m_pObjectMgr, E_FAIL);
+
+	CGameObject* pGameObject = nullptr;
+
+	pGameObject = CDronBullet::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_DronBullet", pGameObject), E_FAIL);
 
 	return S_OK;
 }

@@ -9,6 +9,9 @@
 #include "PlayerStatus.h"
 #include "Trigger.h"
 
+// CObjectMgr::Get_Instance()->
+// 	m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_DronBullet", L"DronBullet", &m_tMeshInfo);
+
 CDron::CDron()
 {
 	Initialized();
@@ -67,8 +70,6 @@ _int CDron::Update_Dron(const _float& fTimeDelta, CTransform* pTransform, CMesh*
 
 	Update_DronPos();
 	Dron_OnTriggerTest();
-
-	m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed * fTimeDelta, true);
 
 	return S_OK;
 }
@@ -275,19 +276,19 @@ void CDron::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CDron::DRON_EX_IdleHoverTwitch:	// 정찰
 	{
-		m_fAniDelay = 4000.f;
+		m_fAniDelay = 6000.f;
 		m_fSpeed = 10.f;
+		m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed * fTimeDelta, true);
 
-		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, DRON_EX_IdleHoverTwitch))
-		{
-			m_eCurState = DRON_EX_IdleHoverTwitch;
-		}
+		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, DRON_EX_IdleHoverTwitch))		
+			m_eCurState = DRON_EX_IdleNoise;
 	}
 		break;
 	case CDron::DRON_EX_IdleNoise:		// 공격
 	{
 		m_fAniDelay = 6000.f;
-	//	Attak_Player(m_pMeshCom, DRON_EX_IdleNoise);
+
+		Attak_Player(m_pMeshCom, DRON_EX_IdleNoise);
 	}
 		break;
 	case CDron::DRON_EX_IdleSway:
@@ -311,19 +312,23 @@ void CDron::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 
 void CDron::Attak_Player(Engine::CMesh* m_pMeshCom, CDron::DRONSTATE eState)
 {
-	if (!m_bIsDronState[3])
+	if (!m_bIsDronState[3] && !m_bIsShoot)
 	{
 		m_bIsDronState[3] = true;
+		m_bIsShoot = true;
 		m_fAtkDamage = rand() % 15 + 15.f;
+
+		// 공격 시 검사
+		MeshInfo tMeshInfo;
+		tMeshInfo.Pos = m_pTransCom->m_vPos;
+		CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_GameObject", L"Prototype_DronBullet", L"DronBullet", &tMeshInfo);
 	}
-	
+
 	if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, eState))
 	{
-	//	int iRandAni = rand() % 2;
 		m_bIsDronState[3] = false;
-
-		if (Check_PlayerRange(8.f))
-			m_eCurState = DRON_EX_IdleNoise;
+		m_bIsShoot = false;	
+		m_eCurState = DRON_EX_IdleHoverTwitch;
 	}
 }
 

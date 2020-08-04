@@ -611,7 +611,6 @@ void CScene_Stage::Load_StageObject(const wstring& wstrFilePath)
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_CardKey", L"CardKey", &m_tMeshInfo);
 		else if (m_tMeshInfo.MeshTag == L"cardreader.X")
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_CardReader", L"CardReader", &m_tMeshInfo);
-
 		else
 			m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
 	}
