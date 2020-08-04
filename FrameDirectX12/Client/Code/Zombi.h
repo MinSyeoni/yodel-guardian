@@ -57,12 +57,13 @@ public:		// 상호작용
 	void					Set_InitAni(_uint iAni) { m_iInitAni = iAni; }
 	void					Set_InitDrawID(_uint iID) { m_iDrawID = iID; }
 	_uint					Get_DrawID() { return m_iDrawID; }
+	void					Set_AstarID(_uint iAstarID) { m_iAstarID = iAstarID; }
 
 private:
 	void					MoveByAstar(const _float& fTimeDelta);
 	void					Update_ZombiHP();
-	void					Chase_Player(const _float& fTimeDelta);
-	_bool					Check_PlayerRange(_float fRange);
+	void					Chase_Character(_vec3 vPos, const _float& fTimeDelta);
+	_bool					Check_CharacterRange(_float fRange);
 
 private:
 	ZOMBISTATE				m_eCurState;
@@ -79,6 +80,9 @@ private:
 	_float					m_fAniDelay = 0.f;
 
 	_vec3					m_vPlayerPos = _vec3(0.f, 0.f, 0.f);
+	_vec3					m_vShepardPos = _vec3(0.f, 0.f, 0.f);
+	_vec3					m_vKenPos = _vec3(0.f, 0.f, 0.f);
+
 	_vec3					m_vChaseDir = _vec3(0.f, 0.f, 0.f);
 
 	_bool					m_bIsZombiState[4] = {false};	// 0=m_bIsTurn, 1=m_bIsDead, 2=m_bIsHit, 3=m_bIsATK;
@@ -91,6 +95,7 @@ private:
 
 	_uint					m_iInitAni;
 	_uint					m_iDrawID;
+	_uint					m_iAstarID;
 
 	//여기좀추가햇으
 	_bool m_bIsDeadSound = false;

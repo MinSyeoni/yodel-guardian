@@ -22,7 +22,7 @@ public:
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 	virtual void    Render_ShadowDepth(CShader_Shadow* pShader);
 
-
+	Engine::CNaviMesh* Get_KenNavi() { return m_pNaviCom; }	// Ãß°¡ÇÔ
 	void MonsterCheck(const _float& fTimeDelta);
 	void ChapterCheck(const _float& fTimeDelta);
 	void TurnToPlayer(const _float& fTimeDelta);

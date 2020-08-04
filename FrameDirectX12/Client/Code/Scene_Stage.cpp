@@ -557,7 +557,7 @@ void CScene_Stage::InitMesh_FromFile(const std::wstring& wstrFilePath)
 		m_tMeshInfo.iDrawID = 4;
 		m_tMeshInfo.iMeshID = rand() % 2;	// 누워있다가 or 엎드려있다가 일어나기
 	}
-
+	m_tMeshInfo.iAstarID = rand() % 5;
 	m_tMeshInfo.Rotation.y = rand() % 360 - 180;
 }
 

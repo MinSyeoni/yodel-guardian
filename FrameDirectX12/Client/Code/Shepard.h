@@ -35,6 +35,9 @@ public:
 	void MoveDirectionCheck(const _float& fTimeDelta,_vec3 vTargetPos);
 	void ReloadCheck();
 	void ShootingCheck(const _float& fTimeDelta,CMonster* pMonster);
+
+	Engine::CNaviMesh* Get_ShepardNavi() { return m_pNaviCom; }	// Ãß°¡ÇÔ
+
 private:
 	void            Set_ShadowTable(CShader_Shadow* pShader);
 private:

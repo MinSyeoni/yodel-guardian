@@ -59,6 +59,7 @@ HRESULT CMonster::Ready_GameObject()
 
 	m_iInitAni = m_tMeshInfo.iMeshID;
 	m_iInitId = m_tMeshInfo.iDrawID;
+	m_iAstarID = m_tMeshInfo.iAstarID;
 
 	switch (m_eMonName)
 	{
@@ -72,6 +73,7 @@ HRESULT CMonster::Ready_GameObject()
 	case CMonster::ZOMBI:
 	{
 		m_pZombi = new CZombi;
+		m_pZombi->Set_AstarID(m_iAstarID);
 		m_pZombi->Set_InitAni(m_iInitAni);
 		m_pZombi->Set_InitDrawID(m_iInitId);
 		m_pZombi->Set_Transform(m_pTransCom);
@@ -157,15 +159,15 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 		if (m_iInitId == 2)
 		{
 			// 임시 좌표
-			matTemp._41 = 546.f;
+			matTemp._41 = 286.f;
 			matTemp._42 = 15.f;
-			matTemp._43 = 433.f;
+			matTemp._43 = 305.f;
 		}
 		else if (m_iInitId == 1)
 		{
-			matTemp._41 = 540.f;
+			matTemp._41 = 326.f;
 			matTemp._42 = 15.f;
-			matTemp._43 = 475.f;
+			matTemp._43 = 297.f;
 		}
 
 		if (m_pFlameThrower->IsPlayer_HitFireDemage())
@@ -377,7 +379,7 @@ HRESULT CMonster::Add_Component()
 	m_mapComponent[ID_STATIC].emplace(L"Com_Astar", m_pAstarCom);
 
 	// 콜라이더
-	m_pSphereCollider = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 150.f, _vec3(1.f, 1.f, 1.f), this));
+	m_pSphereCollider = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 200.f, _vec3(1.f, 1.f, 1.f), this));
 	NULL_CHECK_RETURN(m_pSphereCollider, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_SphereCol", m_pSphereCollider);
 

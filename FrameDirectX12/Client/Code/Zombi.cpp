@@ -8,6 +8,9 @@
 #include "Player.h"
 #include "PlayerStatus.h"
 
+#include "Shepard.h"
+#include "Ken.h"
+
 CZombi::CZombi()
 {
 	Initialized();
@@ -44,18 +47,20 @@ HRESULT CZombi::Late_Initialized()
 
 _int CZombi::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform, CMesh* m_pMeshCom)
 {
-	//m_fTime += fTimeDelta;
-
-	//if (m_ePreState != m_eCurState)
-	//{
-	//	m_fTime = 0.f;
-	//	m_ePreState = m_eCurState;
-	//}
-	
 	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 	if (pPlayer == nullptr)
 		return E_FAIL;
 	m_vPlayerPos = pPlayer->Get_Transform()->m_vPos;
+
+	//CGameObject* pShepard = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Shepard");
+	//if (pShepard == nullptr)
+	//	return E_FAIL;
+	//m_vShepardPos = pShepard->Get_Transform()->m_vPos;
+
+	//CGameObject* pKen = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Ken");
+	//if (pKen == nullptr)
+	//	return E_FAIL;
+	//m_vKenPos = pKen->Get_Transform()->m_vPos;
 
 	// Ã¼·Â 
 	Update_ZombiHP();
@@ -68,15 +73,35 @@ _int CZombi::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform, CMes
 
 void CZombi::MoveByAstar(const _float& fTimeDelta)
 {
-	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-	if (pPlayer == nullptr)
-		return;
+	//if (m_iAstarID == 0)
+	//{
+	//	CGameObject* pNPC1 = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Shepard");
+	//	if (pNPC1 == nullptr)
+	//		return;
+	//	CTransform* pNPC1TranForm = pNPC1->Get_Transform();
+	//	CNaviMesh* pNPC1Navi = dynamic_cast<CShepard*>(pNPC1)->Get_ShepardNavi();
+	//	m_pAstarCom->Start_Aster(m_pTransCom->m_vPos, pNPC1TranForm->m_vPos, m_pNaviMesh->GetIndex(), pNPC1Navi->GetIndex());
+	//}
+	//else if (m_iAstarID == 1)
+	//{
+	//	CGameObject* pNPC2 = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Ken");
+	//	if (pNPC2 == nullptr)
+	//		return;
+	//	CTransform* pNPC2TranForm = pNPC2->Get_Transform();
+	//	CNaviMesh* pNPC2Navi = dynamic_cast<CKen*>(pNPC2)->Get_KenNavi();
+	//	m_pAstarCom->Start_Aster(m_pTransCom->m_vPos, pNPC2TranForm->m_vPos, m_pNaviMesh->GetIndex(), pNPC2Navi->GetIndex());
+	//}
+	//else
+	//{
+		CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+		if (pPlayer == nullptr)
+			return;
+		CTransform* pPlayerTranForm = pPlayer->Get_Transform();
+		CNaviMesh* pPlayerNavi = dynamic_cast<CPlayer*>(pPlayer)->Get_Status()->m_pNaviMesh;
+		m_pAstarCom->Start_Aster(m_pTransCom->m_vPos, pPlayerTranForm->m_vPos, m_pNaviMesh->GetIndex(), pPlayerNavi->GetIndex());
+	//}
 
-	CTransform* pPlayerTranForm = pPlayer->Get_Transform();
-	CNaviMesh* pPlayerNavi = dynamic_cast<CPlayer*>(pPlayer)->Get_Status()->m_pNaviMesh;
-
-	m_pAstarCom->Start_Aster(m_pTransCom->m_vPos, pPlayerTranForm->m_vPos, m_pNaviMesh->GetIndex(), pPlayerNavi->GetIndex());
-
+	//
 	list<Engine::CCell*>& BestLst = m_pAstarCom->GetBestLst();
 
 	if (!BestLst.empty())
@@ -120,9 +145,9 @@ void CZombi::Update_ZombiHP()
 	}
 }
 
-void CZombi::Chase_Player(const _float& fTimeDelta)
+void CZombi::Chase_Character(_vec3 vPos, const _float& fTimeDelta)
 {
-	m_vChaseDir = (m_vPlayerPos - m_pTransCom->m_vPos);
+	m_vChaseDir = (vPos - m_pTransCom->m_vPos);
 
 	_float fAngle;
 	_vec3  vLook, vRight;
@@ -161,11 +186,19 @@ void CZombi::Chase_Player(const _float& fTimeDelta)
 //	m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_vChaseDir, m_fSpeed * fTimeDelta);
 }
 
-_bool CZombi::Check_PlayerRange(_float fRange)
+_bool CZombi::Check_CharacterRange(_float fRange)
 {
 	_bool bIsRange = false;
+	//m_vShepardPos
+	_vec3 vChaseDir = _vec3(0.f, 0.f, 0.f);
 
-	_vec3 vChaseDir = (m_vPlayerPos - m_pTransCom->m_vPos);
+	if(m_iAstarID == 0)
+		vChaseDir = (m_vShepardPos - m_pTransCom->m_vPos);
+	else if(m_iAstarID == 1)
+		vChaseDir = (m_vKenPos - m_pTransCom->m_vPos);
+	else
+		vChaseDir = (m_vPlayerPos - m_pTransCom->m_vPos);
+
 	_float fChaseRange = vChaseDir.Get_Length();
 
 	if (fChaseRange <= fRange)
@@ -241,7 +274,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		else
 		{
 			m_fAniDelay = 6000.f;
-			if (Check_PlayerRange(100.f))
+			if (Check_CharacterRange(100.f))
 			{
 				if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_IdleOffset))
 					m_eCurState = ZOM_EX_Run;
@@ -260,7 +293,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	{
 		m_fSpeed = 7.f;
 
-		if (Check_PlayerRange(12.f))
+		if (Check_CharacterRange(12.f))
 		{
 			m_fAniDelay = 2000.f;
 			int iRandAni = rand() % 2;
@@ -274,7 +307,13 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		}
 		else
 		{
-			Chase_Player(fTimeDelta);
+			//if(m_iAstarID == 0)
+			//	Chase_Character(m_vShepardPos, fTimeDelta);
+			//else if (m_iAstarID == 1)
+			//	Chase_Character(m_vKenPos, fTimeDelta);
+			//else
+				Chase_Character(m_vPlayerPos, fTimeDelta);
+
 			MoveByAstar(fTimeDelta);
 		}
 	}
@@ -283,10 +322,16 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	{
 		m_fSpeed = 7.f;
 
-		Chase_Player(fTimeDelta);
+		//if (m_iAstarID == 0)
+		//	Chase_Character(m_vShepardPos, fTimeDelta);
+		//else if (m_iAstarID == 1)
+		//	Chase_Character(m_vKenPos, fTimeDelta);
+		//else
+			Chase_Character(m_vPlayerPos, fTimeDelta);
+
 		MoveByAstar(fTimeDelta);
 
-		if (Check_PlayerRange(100.f))
+		if (Check_CharacterRange(100.f))
 		{
 			m_fAniDelay = 2000.f;
 			if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_WalkSlow))
@@ -339,7 +384,7 @@ void CZombi::Attak_Player(Engine::CMesh* m_pMeshCom, CZombi::ZOMBISTATE eState)
 		int iRandAni = rand() % 2;
 		m_bIsZombiState[3] = false;
 
-		if (Check_PlayerRange(12.f))
+		if (Check_CharacterRange( 12.f))
 		{
 			if (iRandAni == 0)
 				m_eCurState = ZOM_LEFT_ATK;

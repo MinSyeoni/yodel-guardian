@@ -135,7 +135,7 @@ void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		m_fAniTime += fTimeDelta;
 		m_bIsHit = false;
 
-		int iRandAni = rand() % 2;
+		int iRandAni = rand() % 4;
 
 		if (iRandAni == 0)
 		{
@@ -145,9 +145,9 @@ void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 				m_eCurState = CB_Twitch;
 			}
 		}
-		else if (iRandAni == 1)
+		else
 		{
-			if (m_fAniTime >= 2.5f)
+			if (m_fAniTime >= 2.f)
 			{
 				m_fAniTime = 0.f;
 				m_eCurState = CB_FireLoop;
