@@ -177,6 +177,7 @@
     <ClInclude Include="..\Code\DamageBlood.h" />
     <ClInclude Include="..\Code\DistortionEffect.h" />
     <ClInclude Include="..\Code\Dron.h" />
+    <ClInclude Include="..\Code\DronBullet.h" />
     <ClInclude Include="..\Code\DynamicCamera.h" />
     <ClInclude Include="..\Code\Dynamic_Object.h" />
     <ClInclude Include="..\Code\Effect.h" />
@@ -263,6 +264,7 @@
     <ClCompile Include="..\Code\DamageBlood.cpp" />
     <ClCompile Include="..\Code\DistortionEffect.cpp" />
     <ClCompile Include="..\Code\Dron.cpp" />
+    <ClCompile Include="..\Code\DronBullet.cpp" />
     <ClCompile Include="..\Code\DynamicCamera.cpp" />
     <ClCompile Include="..\Code\Dynamic_Object.cpp" />
     <ClCompile Include="..\Code\Effect.cpp" />

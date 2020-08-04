@@ -92,7 +92,7 @@ void CEquipUI::Init_TypePos()
 	break;
 	case CEquipUI::E_CARDREADER:
 	{
-		m_pTransCom->m_vScale = _vec3(0.1f, 0.08f, 0.1f);
+		m_pTransCom->m_vScale = _vec3(0.08f, 0.06f, 0.08f);
 		m_pTransCom->m_vPos.x = (((2.0f * m_vPos.x) / WINCX) * 0.5f) - 0.3f;
 		m_pTransCom->m_vPos.y = (((-2.0f * m_vPos.y) / WINCY) * 0.5f) - 0.2f;
 	}

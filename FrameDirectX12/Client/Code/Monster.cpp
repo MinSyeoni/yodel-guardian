@@ -154,10 +154,25 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 
 		_matrix matTemp = INIT_MATRIX;
 		matTemp = m_pTransCom->m_matWorld;
-		matTemp._43 = m_pTransCom->m_vPos.z + 1.f;
+		if (m_iInitId == 2)
+		{
+			// 임시 좌표
+			matTemp._41 = 546.f;
+			matTemp._42 = 15.f;
+			matTemp._43 = 433.f;
+		}
+		else if (m_iInitId == 1)
+		{
+			matTemp._41 = 540.f;
+			matTemp._42 = 15.f;
+			matTemp._43 = 475.f;
+		}
 
-		m_pSphereCollider->Update_Collider(&matTemp);
-		CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::COMBAT, m_pSphereCollider);
+		if (m_pFlameThrower->IsPlayer_HitFireDemage())
+		{
+			m_pSphereCollider->Update_Collider(&matTemp);
+			CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::COMBAT, m_pSphereCollider);
+		}
 
 		m_pFlameThrower->Update_FlameThrower(fTimeDelta, m_pTransCom, m_pMeshCom);
 		iCurState = m_pFlameThrower->Get_CurState();
@@ -187,7 +202,7 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 	{
 		if (m_pDron == nullptr)
 			return E_FAIL;
-
+	
 		// Gun, Cables
 		Update_BoneCollider(m_pShereCol[0], "Gun", CColliderMgr::MONSTER);
 		m_pDron->Update_Dron(fTimeDelta, m_pTransCom, m_pMeshCom);
@@ -240,7 +255,6 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCol), -1);
-	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pSphereCollider), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[0]), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[1]), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol[2]), -1);
@@ -255,6 +269,8 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 	{
 		if (m_pFlameThrower == nullptr)
 			return E_FAIL;
+		if (m_pFlameThrower->IsPlayer_HitFireDemage())
+			FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pSphereCollider), -1);
 		m_pFlameThrower->LateUpdate_FlameThrower(fTimeDelta, m_pTransCom, m_pMeshCom);
 	}
 	break;
@@ -280,7 +296,6 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 		if (m_pDron == nullptr)
 			return E_FAIL;
 		m_pDron->LateUpdate_Dron(fTimeDelta, m_pTransCom, m_pMeshCom);
-
 		_vec3 vShaveDir;
 		for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::SPHERE, CColliderMgr::TRIGGER))
 		{
@@ -362,7 +377,7 @@ HRESULT CMonster::Add_Component()
 	m_mapComponent[ID_STATIC].emplace(L"Com_Astar", m_pAstarCom);
 
 	// 콜라이더
-	m_pSphereCollider = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 20.f, _vec3(1.f, 1.f, 1.f), this));
+	m_pSphereCollider = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 150.f, _vec3(1.f, 1.f, 1.f), this));
 	NULL_CHECK_RETURN(m_pSphereCollider, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_SphereCol", m_pSphereCollider);
 

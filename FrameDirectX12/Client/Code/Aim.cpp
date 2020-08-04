@@ -7,6 +7,7 @@
 #include "InvenUI.h"
 #include "DirectInput.h"
 #include "QuestUI.h"
+#include "MPBar.h"
 
 CAim::CAim(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -113,6 +114,9 @@ void CAim::Show_OtherUI(_bool bIsShow)
 	if (pInvenUI != nullptr)
 		dynamic_cast<CInvenUI*>(pInvenUI)->Set_ShowUI(bIsShow);
 
+	CGameObject* pMPBarUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"MPBarUI");
+	if (pMPBarUI != nullptr)
+		dynamic_cast<CMPBar*>(pMPBarUI)->Set_ShowUI(bIsShow);
 }
 
 void CAim::Render_GameObject(const _float& fTimeDelta)

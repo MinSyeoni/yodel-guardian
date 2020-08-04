@@ -144,7 +144,7 @@ void CCardTagUI::TagReaderAndZoom(const _float& fTimeDelta)
 	{
 		m_fTagDelay += fTimeDelta;
 
-		if (m_fTagDelay >= 1.f)
+		if (m_fTagDelay >= 2.f)
 		{
 			m_fTagDelay = 0.f;
 			m_bIsZoom = false;

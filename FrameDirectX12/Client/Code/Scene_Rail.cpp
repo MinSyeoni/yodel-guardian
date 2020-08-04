@@ -8,9 +8,14 @@
 #include "Monster.h"
 #include "FlameThrower.h"
 #include "Dron.h"
+#include "DronBullet.h"
+
 #include "LightMgr.h"
 #include "FadeOut.h"
 #include "Weapon.h"
+
+#include "DronBullet.h"
+
 CScene_Rail::CScene_Rail(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -58,6 +63,12 @@ void CScene_Rail::Render_Scene(const _float& fTimeDelta)
 HRESULT CScene_Rail::Ready_GameObjectPrototype()
 {
 	NULL_CHECK_RETURN(m_pObjectMgr, E_FAIL);
+
+	CGameObject* pGameObject = nullptr;
+
+	pGameObject = CDronBullet::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_DronBullet", pGameObject), E_FAIL);
 
 	return S_OK;
 }
@@ -205,6 +216,7 @@ void CScene_Rail::Load_MonsterPos(const wstring& wstrFilePath, wstring wstrLayer
 	COLLIDER tColData = {};
 
 	m_tMeshInfo.MeshTag = L"";
+	m_tMeshInfo.iDrawID = 0;
 
 	while (true)
 	{
@@ -224,7 +236,10 @@ void CScene_Rail::Load_MonsterPos(const wstring& wstrFilePath, wstring wstrLayer
 void CScene_Rail::InitMesh_FromFile(const std::wstring& wstrFilePath)
 {
 	if (wstrFilePath == L"../../Data/Collider/Flame.dat")
+	{
+		m_tMeshInfo.iDrawID++;
 		m_tMeshInfo.MeshTag = L"Flamethrower";
+	}
 	else if (wstrFilePath == L"../../Data/Collider/DronStart.dat")
 	{
 		m_tMeshInfo.MeshTag = L"Dron";
@@ -384,7 +399,5 @@ CScene_Rail* CScene_Rail::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCom
 
 void CScene_Rail::Free()
 {
-//	CFrustom::Get_Instance()->Destroy_Instance();
-
 	Engine::CScene::Free();
 }

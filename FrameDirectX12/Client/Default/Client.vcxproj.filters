@@ -263,6 +263,9 @@
     <Filter Include="02.Scene_All\03.StaticObject\03.CardReader">
       <UniqueIdentifier>{9e1340a1-cbc7-48ed-97d0-479324be5473}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Scene_Stage\06.Monster\02.Dron\00.DronBullet">
+      <UniqueIdentifier>{c4a06599-aeef-4586-9c91-c76786063514}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -530,6 +533,9 @@
     <ClInclude Include="..\Code\CardReader.h">
       <Filter>02.Scene_All\03.StaticObject\03.CardReader</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\DronBullet.h">
+      <Filter>01.Scene_Stage\06.Monster\02.Dron\00.DronBullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -769,6 +775,9 @@
     <ClCompile Include="..\Code\HPKit.cpp" />
     <ClCompile Include="..\Code\CardReader.cpp">
       <Filter>02.Scene_All\03.StaticObject\03.CardReader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DronBullet.cpp">
+      <Filter>01.Scene_Stage\06.Monster\02.Dron\00.DronBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
