@@ -18,7 +18,7 @@ class CDynamicCamera;
 class CGunUI : public Engine::CGameObject
 {
 public:
-	enum STATE{RIFLE,SNIPER,NONE};
+	enum STATE{ RIFLE, SNIPER, NONE};
 
 private:
 	explicit CGunUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);

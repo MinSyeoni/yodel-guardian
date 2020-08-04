@@ -74,8 +74,8 @@ void CCardTagUI::ZoomCamera(bool bIsZoom)
 		_vec3 vPosTmp = m_pTransCom->m_vPos;
 		vPosTmp.z = 500.f;
 		vPosTmp.y = 15.f;
-		_vec3 vEyePos = vPosTmp + vLook * - 2.f + vUp * -0.2f;//이걸로 줌정도 조절해주면되~ 이거는 보는위치
-		tInfo.vAtPos = vPosTmp; // 보는곳 
+		_vec3 vEyePos = vPosTmp + vLook * - 2.f + vUp * -0.2f;
+		tInfo.vAtPos = vPosTmp; 
 		tInfo.vEyePos = vEyePos;
 		m_pObjectMgr->Add_GameObject(L"Layer_Camera", L"Prototype_StaticCamera", L"StaticCamera", &tInfo);
 

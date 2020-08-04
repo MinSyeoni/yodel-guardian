@@ -8,9 +8,9 @@
 #include "EquipUI.h"
 #include "PassageDoor.h"
 #include "Monster.h"
-
-#include "CardTagUI.h"
+#include "CardReader.h"
 #include "DirectInput.h"
+
 CCardKey::CCardKey(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -41,7 +41,6 @@ HRESULT CCardKey::Ready_GameObject()
 
 	m_pTransCom->m_vPos = m_tMeshInfo.Pos;
 	m_pTransCom->m_vScale = m_tMeshInfo.Scale;
-
 	m_pTransCom->m_vAngle = ToDegree(m_tMeshInfo.Rotation);
 
 	return S_OK;
@@ -50,6 +49,8 @@ HRESULT CCardKey::Ready_GameObject()
 HRESULT CCardKey::LateInit_GameObject()
 {
 	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
+
+	m_pTransCom->m_vPos.y += 3.f;
 
 	return S_OK;
 }
@@ -70,7 +71,7 @@ _int CCardKey::Update_GameObject(const _float& fTimeDelta)
 		if (CEquipUI::E_KEYEQUIP == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
 			m_pGameObject = dynamic_cast<CEquipUI*>(pSrc);
 
-//	PutTheCard_OnTheDoor();
+	//PutTheCard_OnTheDoor();
 
 	return NO_EVENT;
 }
@@ -134,14 +135,14 @@ HRESULT CCardKey::Add_Component()
 
 void CCardKey::PutTheCard_OnTheDoor()
 {
-	CGameObject* pCardTagUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"CardTag");
-	if (nullptr == pCardTagUI)
-		return;
-	if (!m_bIsDead && m_bIsEquip)
-	{
-		dynamic_cast<CCardTagUI*>(pCardTagUI)->Set_IsTagOn(true);
-		m_bIsDead = true;
-	}
+	//CGameObject* pCardTagUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"CardTag");
+	//if (nullptr == pCardTagUI)
+	//	return;
+	//if (!m_bIsDead && m_bIsEquip)
+	//{
+	//	dynamic_cast<CCardTagUI*>(pCardTagUI)->Set_IsTagOn(true);
+	//	m_bIsDead = true;
+	//}
 }
 
 void CCardKey::Coliision_CardAndPlayer()
@@ -149,6 +150,9 @@ void CCardKey::Coliision_CardAndPlayer()
 	if(KEY_DOWN(DIKEYBOARD_4))
 		m_bIsEquip=true;
 
+	CGameObject* pCardReader = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"CardReader");
+	if (nullptr == pCardReader)
+		return;
 
 	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
 
@@ -174,7 +178,7 @@ void CCardKey::Coliision_CardAndPlayer()
 		}
 	}
 
-	if (m_bIsEquip)
+	if (!m_bIsDead && m_bIsEquip)
 	{
 		list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Zombi");
 		for (auto& pSrc : *pList)
@@ -183,7 +187,7 @@ void CCardKey::Coliision_CardAndPlayer()
 				4 == static_cast<CMonster*>(pSrc)->Get_InitID())
 				static_cast<CMonster*>(pSrc)->Set_IsActiveStart(true);
 		}		
-
+		dynamic_cast<CCardReader*>(pCardReader)->Set_CardKeyEquip(true);
 		m_bIsDead = true;
 	}
 }

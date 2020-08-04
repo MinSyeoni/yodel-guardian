@@ -164,13 +164,13 @@ void CSalone::FIRTSTTALKCEHCK()
 		{
 			ShowEquipUI(true);
 			m_bIsLimLIght = true;
-	/*		if (KEY_DOWN(DIK_E))
+			if (KEY_DOWN(DIK_E))
 			{
 				CFadeOut::FADETYPE eType = CFadeOut::FIRST;
 				m_bIsLimLIght = false;
 				m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_FadeOut", L"FadeOut", &eType);
 				m_bIsStartTalking = true;
-			}*/
+			}
 		}
 		else
 		{
@@ -195,7 +195,7 @@ void CSalone::ShowEquipUI(bool bIsRender)
 
 	list<CGameObject*>* pEquipUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"EquipUI");
 	for (auto& pSrc : *pEquipUIList)
-		if (CEquipUI::E_CONVERSATION == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
+		if (CEquipUI::E_CONVERSATION_SALONE == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
 			pGameObject = dynamic_cast<CEquipUI*>(pSrc);
 	
 	dynamic_cast<CEquipUI*>(pGameObject)->Set_ShowUI(bIsRender);

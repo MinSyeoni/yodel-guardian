@@ -258,7 +258,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombi::ZOM_EX_Run:
 	{
-		m_fSpeed = 4.5f;
+		m_fSpeed = 7.f;
 
 		if (Check_PlayerRange(12.f))
 		{
@@ -281,7 +281,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombi::ZOM_EX_WalkSlow:
 	{
-		m_fSpeed = 3.5f;
+		m_fSpeed = 7.f;
 
 		Chase_Player(fTimeDelta);
 		MoveByAstar(fTimeDelta);

@@ -74,7 +74,8 @@ void CEquipUI::Init_TypePos()
 		m_pTransCom->m_vPos.y = (((-2.0f * m_vPos.y) / WINCY) * 0.5f) - 0.1f;
 	}
 	break;
-	case CEquipUI::E_CONVERSATION:
+	case CEquipUI::E_CONVERSATION_SALONE:
+	case CEquipUI::E_CONVERSATION_SHEPARD:
 	case CEquipUI::E_KEYEQUIP:
 	{
 		m_pTransCom->m_vPos.x = (((2.0f * m_vPos.x) / WINCX) * 0.5f) - 0.3f;
@@ -140,7 +141,8 @@ HRESULT CEquipUI::Add_Component()
 	wstring wstrPrototype = L"";
 	switch (m_eEquipType)
 	{
-	case CEquipUI::E_CONVERSATION:
+	case CEquipUI::E_CONVERSATION_SALONE:
+	case CEquipUI::E_CONVERSATION_SHEPARD:
 		wstrPrototype = L"Prototype_Texture_E_Conversation";
 		break;
 	case CEquipUI::E_KEYEQUIP:

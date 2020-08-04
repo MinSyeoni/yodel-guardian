@@ -52,8 +52,6 @@ _int CAim::Update_GameObject(const _float& fTimeDelta)
 
 	m_pTransCom->m_vPos.x = _float(2.f / WINCX * WINCX/2) - 1.f;
 	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * WINCY/2) + 1.f;
-//	m_pTransCom->m_vPos.x = 0.f;
-//	m_pTransCom->m_vPos.y = 0.f;
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
@@ -68,8 +66,14 @@ _int CAim::LateUpdate_GameObject(const _float& fTimeDelta)
 	CGameObject* pOptionUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"OptionUI");
 	if (pOptionUI != nullptr && pNPCUI != nullptr)
 	{
-		if(!dynamic_cast<COptionUI*>(pOptionUI)->Get_ShowUI() && !dynamic_cast<CNpcWords*>(pNPCUI)->Get_ShowUI())
+		if (!dynamic_cast<COptionUI*>(pOptionUI)->Get_ShowUI() && !dynamic_cast<CNpcWords*>(pNPCUI)->Get_ShowUI())
 			Show_OtherUI(true);
+	}
+	if (pNPCUI == nullptr)	// º¸½º¿ë
+	{
+		if (pOptionUI != nullptr)
+			if (!dynamic_cast<COptionUI*>(pOptionUI)->Get_ShowUI())
+				Show_OtherUI(true);
 	}
 
 	if (m_bIsRender == true)

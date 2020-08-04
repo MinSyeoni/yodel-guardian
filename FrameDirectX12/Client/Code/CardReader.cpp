@@ -7,7 +7,9 @@
 #include "Frustom.h"
 #include "EquipUI.h"
 #include "CardTagUI.h"
+#include "CardKey.h"
 #include "CardReader.h"
+#include "PlayerStatus.h"
 
 CCardReader::CCardReader(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -67,11 +69,15 @@ _int CCardReader::Update_GameObject(const _float& fTimeDelta)
 		if (CEquipUI::E_CARDREADER == dynamic_cast<CEquipUI*>(pSrc)->Get_EquipType())
 			m_pGameObject = dynamic_cast<CEquipUI*>(pSrc);
 
-	if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && !m_bIsReaderOn && m_bIsCollision)
+	if (!m_bIsReaderOn && m_bIsCollision && m_bIsEquipCard)
 	{
-		m_bIsReaderOn = true;
-		if (dynamic_cast<CEquipUI*>(m_pGameObject) != nullptr)
-			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
+		if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_E))
+		{
+			m_bIsReaderOn = true;
+			if (dynamic_cast<CEquipUI*>(m_pGameObject) != nullptr)
+				dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
+			m_bIsEquipCard = false;
+		}
 	}
 
 	return NO_EVENT;
