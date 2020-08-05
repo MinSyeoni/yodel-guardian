@@ -36,6 +36,7 @@ public:
 	_uint					Get_ColID() { return m_iColID; }
 	TRIGGER_SHAPE&			Get_ColType() { return m_eCurShape; }
 	_vec3					Get_ColPos() { return m_pTransCom->m_vPos; }
+	_bool					Get_IsGoBoss() { return m_bIsGoBoss; }
 
 private:
 	Engine::CBoxCollider*		m_pBoxCol = nullptr;
@@ -54,5 +55,6 @@ private:
 	virtual void				Free();
 	_uint						m_iColID = 0;
 	_bool						m_bIsActive = false;
+	_bool						m_bIsGoBoss = false;
 };
 
