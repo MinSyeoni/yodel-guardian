@@ -4,7 +4,7 @@
 #include "DynamicCamera.h"
 #include "GraphicDevice.h"
 #include "DirectInput.h"
-
+#include "LightMgr.h"
 CReapear::CReapear(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -49,6 +49,53 @@ HRESULT CReapear::Ready_GameObject()
 	m_ePreAniState = STATICPOS;
 
 	m_fTime = 0.f;
+
+	m_tagSpotLightEye.m_eType = LIGHTTYPE::D3DLIGHT_POINT;
+	m_tagSpotLightEye.m_vDiffuse = _vec4{ 1.5f,0.0f,0.0f,1.0f };
+	m_tagSpotLightEye.m_vAmbient = _vec4{ 1.5f,0.0f,0.0f,1.0f };
+	m_tagSpotLightEye.m_vSpecular = _vec4{ 1.5f,0.0f,0.0f,1.0f };
+	m_tagSpotLightEye.m_vDirection = _vec4{ 1.0f,1.0f,-1.f,1.0f };
+	m_tagSpotLightEye.m_vPosition = _vec4{ 300.f,10.f,300.f,0.f };
+	m_tagSpotLightEye.m_fRange = 50.f;
+
+	if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &m_tagSpotLightEye)))
+		return E_FAIL;
+
+	m_uiSpotLightLeftEyeIndex = CLight_Manager::Get_Instance()->Get_LightIndex();
+	CLight_Manager::Get_Instance()->Set_LightOnOff(m_uiSpotLightLeftEyeIndex, true);
+
+	if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &m_tagSpotLightEye)))
+		return E_FAIL;
+
+	m_uiSpotLightRightEyeIndex = CLight_Manager::Get_Instance()->Get_LightIndex();
+	CLight_Manager::Get_Instance()->Set_LightOnOff(m_uiSpotLightRightEyeIndex, true);
+
+
+	m_tagSpotLightBody.m_eType = LIGHTTYPE::D3DLIGHT_POINT;
+	m_tagSpotLightBody.m_vDiffuse = _vec4{ 1.5f,0.0f,0.0f,1.0f };
+	m_tagSpotLightBody.m_vAmbient = _vec4{ 1.5f,0.0f,0.0f,1.0f };
+	m_tagSpotLightBody.m_vSpecular = _vec4{ 1.5f,0.0f,0.0f,1.0f };
+	m_tagSpotLightBody.m_vDirection = _vec4{ 1.0f,1.0f,-1.f,1.0f };
+	m_tagSpotLightBody.m_vPosition = _vec4{ 300.f,10.f,300.f,0.f };
+	m_tagSpotLightBody.m_fRange = 70.f;
+
+	if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &m_tagSpotLightBody)))
+		return E_FAIL;
+
+	m_uiSpotLightBodyIndex = CLight_Manager::Get_Instance()->Get_LightIndex();
+	CLight_Manager::Get_Instance()->Set_LightOnOff(m_uiSpotLightBodyIndex, true);
+
+
+
+	m_pRightEyeBone = m_pMeshCom->Find_BoneMatrix("eyeRight");
+	m_pRightEyeOffset = m_pMeshCom->Find_BoneOffset("eyeRight");
+
+	m_pLeftEyeBone = m_pMeshCom->Find_BoneMatrix("eyeLeft");
+	m_pLeftEyeOffset = m_pMeshCom->Find_BoneOffset("eyeLeft");
+
+	m_pBodyBone = m_pMeshCom->Get_AnimationComponent()->Get_ChestdiscMatrix();
+	
+
 	return S_OK;
 }
 
@@ -74,6 +121,9 @@ HRESULT CReapear::LateInit_GameObject()
 _int CReapear::Update_GameObject(const _float& fTimeDelta)
 {
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
+
+	UpdateLight(fTimeDelta);
+
 
 	if (m_bIsDead)
 		return DEAD_OBJ;
@@ -101,7 +151,7 @@ _int CReapear::LateUpdate_GameObject(const _float& fTimeDelta)
 	[ Renderer - Add Render Group ]
 	______________________________________________________________________*/
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
-
+	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_LIMLIGHT, this), -1);
 	/*____________________________________________________________________
 	[ Set PipelineState ]
 	______________________________________________________________________*/
@@ -117,6 +167,14 @@ void CReapear::Render_GameObject(const _float& fTimeDelta)
 	m_pShaderCom->Begin_Shader();
 
 	m_pMeshCom->Render_Mesh(m_pShaderCom, m_vecMatrix);
+}
+
+void CReapear::Render_LimLight(CShader_LimLight* pShader)
+{
+
+	Set_LimTable(pShader);
+	m_pMeshCom->Render_LimMesh(pShader, m_vecMatrix, true);
+	pShader->Set_LimFinish();
 }
 
 HRESULT CReapear::Add_Component()
@@ -159,6 +217,87 @@ void CReapear::Set_ConstantTable()
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(m_fTime * 3000.f);
 
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
+}
+
+void CReapear::Set_LimTable(CShader_LimLight* pShader)
+{
+
+	_matrix matView = INIT_MATRIX;
+	_matrix matProj = INIT_MATRIX;
+
+	CB_MATRIX_INFO	tCB_MatrixInfo;
+
+	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
+
+	matView = CGraphicDevice::Get_Instance()->GetViewMatrix();
+	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
+
+	_matrix matWorld = m_pTransCom->m_matWorld;
+	matWorld._11 = 0.1005f;
+	matWorld._22 = 0.1005f;
+	matWorld._33 = 0.1005f;
+	_matrix matWVP =  matWorld * matView * matProj;
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose( matWorld));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matView, XMMatrixTranspose(matView));
+	XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matProj));
+
+
+
+	_int offset = pShader->Get_CBMeshCount();
+	pShader->Get_UploadBuffer_MatrixInfo()->CopyData(offset, tCB_MatrixInfo);
+}
+
+void CReapear::UpdateLight(const _float& fTimeDelta)
+{
+	_matrix matBlend;
+
+
+	_vec4 vLeftEyePos;
+	matBlend = XMMatrixInverse(nullptr, *m_pLeftEyeOffset);
+
+	_matrix matLeftEye = matBlend * *m_pLeftEyeBone * m_pTransCom->m_matWorld;
+	memcpy(&vLeftEyePos, &matLeftEye._41, sizeof(_vec3));
+
+	vLeftEyePos.w = 1.f;
+
+	m_tagSpotLightEye.m_vPosition = vLeftEyePos;
+
+	CLight_Manager::Get_Instance()->Set_LightInfo(m_uiSpotLightLeftEyeIndex, m_tagSpotLightEye);
+
+
+
+
+
+	_vec4 vRightEyePos;
+	matBlend = XMMatrixInverse(nullptr, *m_pRightEyeOffset);
+
+	_matrix matRightEye = matBlend * *m_pRightEyeBone * m_pTransCom->m_matWorld;
+	memcpy(&vRightEyePos, &matRightEye._41, sizeof(_vec3));
+
+	vRightEyePos.w = 1.f;
+
+	m_tagSpotLightEye.m_vPosition = vRightEyePos;
+
+	CLight_Manager::Get_Instance()->Set_LightInfo(m_uiSpotLightRightEyeIndex, m_tagSpotLightEye);
+
+
+
+	_vec4 vBodyPos;
+
+
+	_matrix matBody = *m_pBodyBone * m_pTransCom->m_matWorld;
+	memcpy(&vBodyPos, &matBody._41, sizeof(_vec3));
+
+	vBodyPos.w = 1.f;
+
+	m_tagSpotLightBody.m_vPosition = vBodyPos;
+
+	CLight_Manager::Get_Instance()->Set_LightInfo(m_uiSpotLightBodyIndex, m_tagSpotLightBody);
+
+
+
+
 }
 
 CGameObject* CReapear::Clone_GameObject(void* prg)

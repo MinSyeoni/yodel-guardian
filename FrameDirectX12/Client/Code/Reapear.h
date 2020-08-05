@@ -15,17 +15,24 @@ private:
 	virtual ~CReapear();
 
 public:
+
 	HRESULT			Ready_GameObjectPrototype();
 	virtual HRESULT	Ready_GameObject();
 	virtual HRESULT	LateInit_GameObject();
 	virtual _int	Update_GameObject(const _float& fTimeDelta);
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void	Render_GameObject(const _float& fTimeDelta);
+	virtual void    Render_LimLight(CShader_LimLight* pShader);
 private:
 	virtual HRESULT Add_Component();
 private:
 	void			Set_ConstantTable();
+	void            Set_LimTable(CShader_LimLight* pShader);
 private:
+	void            UpdateLight(const _float& fTimeDelta);
+
+
+
 	/*____________________________________________________________________
 	[ Component ]
 	______________________________________________________________________*/
@@ -40,6 +47,27 @@ private:
 	
 	ANISTATE m_eCurAniState;
 	ANISTATE m_ePreAniState;
+
+private:
+
+	_matrix* m_pLeftEyeBone = nullptr;
+	_matrix* m_pRightEyeBone = nullptr;
+
+	_matrix* m_pLeftEyeOffset = nullptr;
+	_matrix* m_pRightEyeOffset = nullptr;
+
+	_matrix* m_pBodyBone = nullptr;
+	_matrix* m_pBodyOffset = nullptr;
+
+
+	D3DLIGHT m_tagSpotLightEye;
+	D3DLIGHT m_tagSpotLightBody;
+
+	_uint m_uiSpotLightLeftEyeIndex = 0;
+	_uint m_uiSpotLightRightEyeIndex = 0;
+
+	_uint m_uiSpotLightBodyIndex = 0;
+
 
 public:
 	virtual CGameObject* Clone_GameObject(void* prg);

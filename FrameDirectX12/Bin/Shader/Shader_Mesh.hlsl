@@ -127,6 +127,7 @@ ps_output PS_MAIN(VS_OUTPUT input) : SV_TARGET
     output.albedo.a = 1.f;
     float3 tangentNormal = gNormalTexture.Sample(gsamLinearWrap, input.uv).xyz;
     tangentNormal = normalize(tangentNormal * 2.f - 1.f);
+    tangentNormal = tangentNormal;
     float3x3 TBN = float3x3(normalize(input.vT), normalize(input.vB), normalize(input.vN));
     TBN = transpose(TBN);
 
@@ -168,7 +169,7 @@ ps_output PS_SHADOWMAIN(VS_SHADOWOUTPUT input) : SV_TARGET
     float3 WorldNormal = mul(TBN, tangentNormal);
     output.normal = float4(WorldNormal * 0.5 + 0.5, 1.f);
 
-
+    output.normal = output.normal;
     float4 fSpec = float4((SpecMap.r + SpecMap.g) / 2, step(SpecMap.r + 0.05, SpecMap.g - SpecMap.b), 0.f, 0.f);
     output.Specular = fSpec * gTexInfo.r;
 

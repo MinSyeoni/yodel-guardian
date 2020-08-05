@@ -62,6 +62,7 @@ public:
     _matrix* Get_RootFrame() { return &m_matRootFinal; };
     _matrix* Get_WeaponMatrix() { return &m_matWeapon; };
     _matrix* Get_CameraMatrix() { return &m_matCamera; };
+    _matrix* Get_ChestdiscMatrix() { return &m_matchestdisc; };
 private:
     void               Update_NodeHierarchy(_float fAnimationTime,
         const aiNode* pNode,
@@ -126,6 +127,8 @@ private:
 	_matrix            m_matRootFinal =INIT_MATRIX;
 	_matrix            m_matWeapon= INIT_MATRIX;
 	_matrix            m_matCamera= INIT_MATRIX;
+    _matrix            m_matchestdisc = INIT_MATRIX;
+
 	_float  m_fAngle = 0.f;
 
 private:
