@@ -79,6 +79,7 @@ private:
 	_vec3						m_pMonsterPos = _vec3(0.f, 0.f, 0.f);
 	_uint						m_iInitAni;
 	_uint						m_iInitId;
+	_uint						m_iAstarID;
 protected:
 	float						m_fDissolve = 1.f;
 	_matrix						m_matDissolve = INIT_MATRIX;

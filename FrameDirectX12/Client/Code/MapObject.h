@@ -46,6 +46,8 @@ private:
 
 	bool                  m_bIsDrawShadow = true;
 	bool                  m_bIsBigObject = false;
+
+	bool                  m_bIsColliderObject = false;
 public:
 	virtual CGameObject*	Clone_GameObject(void* prg);
 	static CMapObject*		Create(ID3D12Device* pGraphicDevice,

@@ -35,6 +35,11 @@ public:
 	void MoveDirectionCheck(const _float& fTimeDelta,_vec3 vTargetPos);
 	void ReloadCheck();
 	void ShootingCheck(const _float& fTimeDelta,CMonster* pMonster);
+
+	void CollisionWithObject();
+
+	Engine::CNaviMesh* Get_ShepardNavi() { return m_pNaviCom; }	// Ãß°¡ÇÔ
+
 private:
 	void            Set_ShadowTable(CShader_Shadow* pShader);
 private:
@@ -51,8 +56,11 @@ private:
 	Engine::CNaviMesh* m_pNaviCom = nullptr;
 
 
-
+	CBoxCollider* m_pBoxCollider = nullptr;
 	vector<vector<_matrix>> m_vecMatrix;
+
+	_matrix* m_matChestOffset;
+	_matrix* m_matChest;
 
 public:
 	virtual CGameObject* Clone_GameObject(void* prg);

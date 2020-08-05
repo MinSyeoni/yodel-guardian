@@ -10,13 +10,12 @@
 #include "Dron.h"
 #include "DronBullet.h"
 
-
 #include "LightMgr.h"
 #include "FadeOut.h"
 #include "Weapon.h"
 
 #include "DronBullet.h"
-
+#include "Scene_Boss.h"
 
 CScene_Rail::CScene_Rail(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
@@ -60,6 +59,15 @@ void CScene_Rail::Render_Scene(const _float& fTimeDelta)
 {
 
 	CScene::Render_Scene(fTimeDelta);
+
+
+	if (KEY_DOWN(DIK_PGDN))//½º°×¿ë
+	{
+		m_pObjectMgr->Clear_Layer();
+		Engine::CScene* pNewScene = CScene_Boss::Create(m_pGraphicDevice, m_pCommandList);
+		Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
+	}
+
 }
 
 HRESULT CScene_Rail::Ready_GameObjectPrototype()
@@ -273,15 +281,6 @@ void CScene_Rail::Load_StageObject(const wstring& wstrFilePath, wstring wstrLaye
 	DWORD dwByte = 0;
 	MESHDATA tObjData = {};
 
-	//DeleteAll_GameObject(wstrLayerTag, L"ItemObject");
-	//DeleteAll_GameObject(wstrLayerTag, L"Medi_Syringe");
-	//DeleteAll_GameObject(wstrLayerTag, L"Medi_Bandage");
-	//DeleteAll_GameObject(wstrLayerTag, L"Medi_vaccine");
-	//DeleteAll_GameObject(wstrLayerTag, L"LobbyDoor");
-	//DeleteAll_GameObject(wstrLayerTag, L"PassageDoor");
-	//DeleteAll_GameObject(wstrLayerTag, L"CardKey");
-	//DeleteAll_GameObject(wstrLayerTag, L"MapObject");
-
 	int			 iTagLength = 0;
 
 	while (true)
@@ -307,12 +306,6 @@ void CScene_Rail::Load_StageObject(const wstring& wstrFilePath, wstring wstrLaye
 			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Medi_Bandage", L"Medi_Bandage", &m_tMeshInfo);
 		else if (m_tMeshInfo.MeshTag == L"medikit_vaccine.X")
 			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Medi_Medicine", L"Medi_vaccine", &m_tMeshInfo);
-		else if (m_tMeshInfo.MeshTag == L"door1.X")
-			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_LobbyDoor", L"LobbyDoor", &m_tMeshInfo);
-		else if (m_tMeshInfo.MeshTag == L"door2.X")
-			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_PassageDoor", L"PassageDoor", &m_tMeshInfo);
-		else if (m_tMeshInfo.MeshTag == L"card.X")
-			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_CardKey", L"CardKey", &m_tMeshInfo);
 		else
 			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
 	}
@@ -360,7 +353,7 @@ HRESULT CScene_Rail::Ready_LayerUI(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 
-	for (int i = 0; i < 7; ++i)
+	for (int i = 0; i < 9; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_EquipUI", L"EquipUI", &(iType = i)), E_FAIL);
 
 	for (int i = 0; i < 10; ++i)

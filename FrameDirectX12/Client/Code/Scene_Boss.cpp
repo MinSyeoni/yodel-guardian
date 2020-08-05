@@ -54,23 +54,19 @@ void CScene_Boss::Render_Scene(const _float& fTimeDelta)
 {
 
 	CScene::Render_Scene(fTimeDelta);
+
+
+
 }
 
 HRESULT CScene_Boss::Ready_GameObjectPrototype()
 {
-
-
-
-
 	NULL_CHECK_RETURN(m_pObjectMgr, E_FAIL);
 	CGameObject* pGameObject = nullptr;
 
 	pGameObject = CReapear::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Reapear", pGameObject), E_FAIL);
-
-
-
 
 	return S_OK;
 }
@@ -146,8 +142,6 @@ HRESULT CScene_Boss::Ready_LayerGameObject(wstring wstrLayerTag)
 	_vec3 vPos = _vec3(316.f, 34.f, 216.f);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Player", L"Player", &vPos), E_FAIL);
 
-
-
 	CWeapon::WEAPONSTATE eState = CWeapon::BAG;
 	m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Rifle", L"Weapon", &eState);
 
@@ -181,13 +175,6 @@ void CScene_Boss::Load_TriggerPos(const wstring& wstrFilePath, wstring wstrLayer
 		if (dwByte == 0)
 			break;
 
-		if (wstrFilePath == L"../../Data/Collider/DronEnd.dat")
-			tColData.iColID = 1;
-		else if (wstrFilePath == L"../../Data/Collider/DronEnd2.dat")
-			tColData.iColID = 2;
-		else if (wstrFilePath == L"../../Data/Collider/DronEnd3.dat")
-			tColData.iColID = 3;
-
 		if (3 == tColData.iOptionID)
 			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Trigger", L"Trigger", &tColData);
 	}
@@ -214,7 +201,7 @@ void CScene_Boss::Load_MonsterPos(const wstring& wstrFilePath, wstring wstrLayer
 		if (dwByte == 0)
 			break;
 
-		InitMesh_FromFile(wstrFilePath);
+		//InitMesh_FromFile(wstrFilePath);
 
 		m_tMeshInfo.Pos = tColData.vCenter;
 		m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Monster", m_tMeshInfo.MeshTag, &m_tMeshInfo);
@@ -224,26 +211,7 @@ void CScene_Boss::Load_MonsterPos(const wstring& wstrFilePath, wstring wstrLayer
 
 void CScene_Boss::InitMesh_FromFile(const std::wstring& wstrFilePath)
 {
-	if (wstrFilePath == L"../../Data/Collider/Flame.dat")
-		m_tMeshInfo.MeshTag = L"Flamethrower";
-	else if (wstrFilePath == L"../../Data/Collider/DronStart.dat")
-	{
-		m_tMeshInfo.MeshTag = L"Dron";
-		m_tMeshInfo.iDrawID = 1;
-		m_tMeshInfo.Rotation = _vec3{ 0.f, -100.f, 0.f };
-	}
-	else if (wstrFilePath == L"../../Data/Collider/DronStart2.dat")
-	{
-		m_tMeshInfo.MeshTag = L"Dron";
-		m_tMeshInfo.iDrawID = 2;
-		m_tMeshInfo.Rotation = _vec3{ 0.f, 100.f, 0.f };
-	}
-	else if (wstrFilePath == L"../../Data/Collider/DronStart3.dat")
-	{
-		m_tMeshInfo.MeshTag = L"Dron";
-		m_tMeshInfo.iDrawID = 3;
-		m_tMeshInfo.Rotation = _vec3{ 0.f, 80.f, 0.f };
-	}
+
 }
 
 void CScene_Boss::Load_StageObject(const wstring& wstrFilePath, wstring wstrLayerTag)
@@ -256,15 +224,6 @@ void CScene_Boss::Load_StageObject(const wstring& wstrFilePath, wstring wstrLaye
 
 	DWORD dwByte = 0;
 	MESHDATA tObjData = {};
-
-	//DeleteAll_GameObject(wstrLayerTag, L"ItemObject");
-	//DeleteAll_GameObject(wstrLayerTag, L"Medi_Syringe");
-	//DeleteAll_GameObject(wstrLayerTag, L"Medi_Bandage");
-	//DeleteAll_GameObject(wstrLayerTag, L"Medi_vaccine");
-	//DeleteAll_GameObject(wstrLayerTag, L"LobbyDoor");
-	//DeleteAll_GameObject(wstrLayerTag, L"PassageDoor");
-	//DeleteAll_GameObject(wstrLayerTag, L"CardKey");
-	//DeleteAll_GameObject(wstrLayerTag, L"MapObject");
 
 	int			 iTagLength = 0;
 
@@ -281,9 +240,7 @@ void CScene_Boss::Load_StageObject(const wstring& wstrFilePath, wstring wstrLaye
 		m_tMeshInfo.Rotation = tObjData.vRotate;
 		m_tMeshInfo.Scale = tObjData.vScale;
 
-		if (m_tMeshInfo.MeshTag == L"Siren.X")
-			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_LightObject", L"LightObject", &m_tMeshInfo);//조명처리
-		else if (m_tMeshInfo.MeshTag == L"medikit.X")
+		if (m_tMeshInfo.MeshTag == L"medikit.X")
 			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_ItemObject", L"ItemObject", &m_tMeshInfo);
 		else if (m_tMeshInfo.MeshTag == L"medikit_syringe.X")
 			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Medi_Syringe", L"Medi_Syringe", &m_tMeshInfo);
@@ -291,12 +248,6 @@ void CScene_Boss::Load_StageObject(const wstring& wstrFilePath, wstring wstrLaye
 			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Medi_Bandage", L"Medi_Bandage", &m_tMeshInfo);
 		else if (m_tMeshInfo.MeshTag == L"medikit_vaccine.X")
 			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Medi_Medicine", L"Medi_vaccine", &m_tMeshInfo);
-		else if (m_tMeshInfo.MeshTag == L"door1.X")
-			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_LobbyDoor", L"LobbyDoor", &m_tMeshInfo);
-		else if (m_tMeshInfo.MeshTag == L"door2.X")
-			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_PassageDoor", L"PassageDoor", &m_tMeshInfo);
-		else if (m_tMeshInfo.MeshTag == L"card.X")
-			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_CardKey", L"CardKey", &m_tMeshInfo);
 		else
 			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MapObject", L"MapObject", &m_tMeshInfo);
 	}
@@ -344,7 +295,7 @@ HRESULT CScene_Boss::Ready_LayerUI(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 
-	for (int i = 0; i < 7; ++i)
+	for (int i = 0; i < 9; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_EquipUI", L"EquipUI", &(iType = i)), E_FAIL);
 
 	for (int i = 0; i < 10; ++i)
@@ -366,9 +317,9 @@ HRESULT CScene_Boss::Ready_Light()
 	tagLight.m_vAmbient = _vec4{ 0.3f,0.3f,0.3f,1.0f };
 	tagLight.m_vSpecular = _vec4{ 0.5f,0.5f,0.5f,1.0f };
 	tagLight.m_vDirection = _vec4{ 1.0f,-1.0f,1.f,1.0f };
+
 	if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &tagLight)))
 		return E_FAIL;
-
 
 	return S_OK;
 }

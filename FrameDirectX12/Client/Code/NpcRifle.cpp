@@ -102,6 +102,9 @@ _int CNpcRifle::Update_GameObject(const _float& fTimeDelta)
 
 _int CNpcRifle::LateUpdate_GameObject(const _float& fTimeDelta)
 {
+    if (m_bIsFinish)
+        return NO_EVENT;
+
     NULL_CHECK_RETURN(m_pRenderer, -1);
 
     FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);

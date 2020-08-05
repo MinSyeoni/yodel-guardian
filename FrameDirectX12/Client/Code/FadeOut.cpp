@@ -67,7 +67,7 @@ _int CFadeOut::Update_GameObject(const _float& fTimeDelta)
 
 	//m_pTransCom->m_vAngle.y += 90.f * fTimeDelta;
 
-	if (m_eType == FADEOUTIN)
+	if (m_eType == FIRST)
 	{
 		if (!m_bIsReturn)
 			m_fTime += fTimeDelta;

@@ -106,7 +106,8 @@ HRESULT CScene_Stage::Ready_Scene()
 
 _int CScene_Stage::Update_Scene(const _float & fTimeDelta)
 {
-	
+	ShowCursor(false);
+
 	CFrustom::Get_Instance()->Update_Frustom_Manager();
 	return Engine::CScene::Update_Scene(fTimeDelta);
 }
@@ -135,13 +136,11 @@ void CScene_Stage::Render_Scene(const _float & fTimeDelta)
 	}
 	if (m_bIsChange)
 	{
-
 		m_pObjectMgr->Clear_Layer();
 
 		Engine::CScene* pNewScene = CScene_Rail::Create(m_pGraphicDevice, m_pCommandList);
 		Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
 	}
-
 
 	if (KEY_DOWN(DIK_MINUS))//스겜용
 	{
@@ -447,8 +446,7 @@ HRESULT CScene_Stage::Ready_LayerGameObject(wstring wstrLayerTag)
 
 
 	//C:\Users\user\Documents\GitHub\yodel-guardian\FrameDirectX12\Data\StaticObj																		 //Prototype_MapObject
-	Load_StageObject(L"../../Data/StaticObj/SY_S1_TEST.dat");
-	//Load_StageObject(L"../../Data/StaticObj/SY_Kit_Test.dat");
+	Load_StageObject(L"../../Data/StaticObj/mapAddoutside_1_test.dat");
 	
 	// Monster
 	Load_MonsterPos(L"../../Data/Collider/Zombi.dat");
@@ -493,7 +491,7 @@ HRESULT CScene_Stage::Ready_LayerUI(wstring wstrLayerTag)
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_RifleUI", L"GunUI", nullptr), E_FAIL);
 
-	for (int i = 0; i < 8; ++i)
+	for (int i = 0; i < 9; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_EquipUI", L"EquipUI", &(iType = i)), E_FAIL);
 
 	for(int i =0; i < 10 ; ++i)
@@ -559,7 +557,7 @@ void CScene_Stage::InitMesh_FromFile(const std::wstring& wstrFilePath)
 		m_tMeshInfo.iDrawID = 4;
 		m_tMeshInfo.iMeshID = rand() % 2;	// 누워있다가 or 엎드려있다가 일어나기
 	}
-
+	m_tMeshInfo.iAstarID = rand() % 5;
 	m_tMeshInfo.Rotation.y = rand() % 360 - 180;
 }
 

@@ -22,7 +22,7 @@ public:
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 	virtual void    Render_ShadowDepth(CShader_Shadow* pShader);
 
-
+	Engine::CNaviMesh* Get_KenNavi() { return m_pNaviCom; }	// Ãß°¡ÇÔ
 	void MonsterCheck(const _float& fTimeDelta);
 	void ChapterCheck(const _float& fTimeDelta);
 	void TurnToPlayer(const _float& fTimeDelta);
@@ -35,6 +35,8 @@ public:
 	void MoveDirectionCheck(const _float& fTimeDelta, _vec3 vTargetPos);
 	void ReloadCheck();
 	void ShootingCheck(const _float& fTimeDelta, CMonster* pMonster);
+
+	void CollisionWithObject();
 private:
 	void            Set_ShadowTable(CShader_Shadow* pShader);
 private:
@@ -51,7 +53,7 @@ private:
 	Engine::CNaviMesh* m_pNaviCom = nullptr;
 
 
-
+	CBoxCollider* m_pBoxCollider = nullptr;
 	vector<vector<_matrix>> m_vecMatrix;
 
 public:

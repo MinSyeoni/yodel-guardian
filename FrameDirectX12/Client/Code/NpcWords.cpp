@@ -10,6 +10,8 @@
 #include "EquipUI.h"
 #include "Shepard.h"
 #include "Weapon.h"
+#include "MPBar.h"
+
 CNpcWords::CNpcWords(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -63,6 +65,10 @@ void CNpcWords::Init_OthersUI()
 		for (auto& pSrc : *pIconUIList)
 			dynamic_cast<CIconUI*>(pSrc)->Set_ShowUI(false);
 	}
+
+	CGameObject* pMPBarUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"MPBarUI");
+	if (pMPBarUI != nullptr)
+		dynamic_cast<CMPBar*>(pMPBarUI)->Set_ShowUI(false);
 
 	CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
 	if (pGunUI != nullptr)
@@ -138,11 +144,10 @@ _int CNpcWords::Update_GameObject(const _float& fTimeDelta)
 
 	m_fAccTime += fTimeDelta * 8.f;
 
-
+	Reset_OthersUI(false);
 
 	if (m_bIsDead)
 	{
-
 		Reset_OthersUI(true);
 		return DEAD_OBJ;
 	}
@@ -175,10 +180,9 @@ void CNpcWords::Show_ConversationWords()
 
 void CNpcWords::Check_Interaction()
 {
-
-			CGameObject* pPlayer = m_pObjectMgr->Get_GameObject(L"Layer_GameObject", L"Player");
-			if (pPlayer == nullptr)
-				return;
+	CGameObject* pPlayer = m_pObjectMgr->Get_GameObject(L"Layer_GameObject", L"Player");
+	if (pPlayer == nullptr)
+		return;
 	switch (m_eWordsType)
 	{
 	case CNpcWords::NPC:
@@ -353,6 +357,10 @@ void CNpcWords::Reset_OthersUI(_bool bIsReset)
 		for (auto& pSrc : *pIconUIList)
 			dynamic_cast<CIconUI*>(pSrc)->Set_ShowUI(bIsReset);
 	}
+
+	CGameObject* pMPBarUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"MPBarUI");
+	if (pMPBarUI != nullptr)
+		dynamic_cast<CMPBar*>(pMPBarUI)->Set_ShowUI(bIsReset);
 
 	CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
 	if (pGunUI != nullptr)

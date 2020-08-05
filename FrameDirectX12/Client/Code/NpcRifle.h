@@ -27,7 +27,7 @@ public:
 	void AniCheck();
 	void LightCheck(const _float& fTimeDelta);
 	virtual void CreateShootEffect() override;
-
+	void SetFinish() { m_bIsFinish = true; }
 	OWNER Get_Owner() { return m_eOwner; };
 public:
 	virtual CGameObject* Clone_GameObject(void* prg);
@@ -53,6 +53,8 @@ private:
 	OWNER m_eOwner = SHEPARD;
 	ANISTATE m_eCurAniState = BASE;
 	ANISTATE m_ePreAniState = BASE;
+
+	_bool  m_bIsFinish = false;
 private:
 	_float m_fLightAccTime = 0.f;
 	_uint m_uiLightIndex;

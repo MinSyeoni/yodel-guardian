@@ -56,6 +56,12 @@ HRESULT CKen::Ready_GameObject()
 	m_pNaviCom = static_cast<Engine::CNaviMesh*>(CComponentMgr::Get_Instance()->Clone_Component(L"Mesh_Navi", ID_STATIC));
 	NULL_CHECK_RETURN(m_pNaviCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Navi", m_pNaviCom);
+
+
+	m_pBoxCollider = static_cast<Engine::CBoxCollider*>(CComponentMgr::Get_Instance()->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, false, nullptr, _vec3(0.f, 6.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(100.f, 150.f, 100.f), nullptr));
+	NULL_CHECK_RETURN(m_pBoxCollider, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCollider", m_pBoxCollider);
+
 	//여기야시영
 
 #ifdef _DEBUG
@@ -129,9 +135,13 @@ _int CKen::Update_GameObject(const _float& fTimeDelta)
 
 	ReloadCheck();
 
+
+
+
+	m_pBoxCollider->Update_Collider(&m_pTransCom->m_matWorld);
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
-
+	//CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCollider);
 	return NO_EVENT;
 }
 
@@ -139,7 +149,10 @@ _int CKen::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
-	/*____________________________________________________________________
+
+	CollisionWithObject();
+	/*______________________
+	______________________________________________
 	[ Renderer - Add Render Group ]
 	______________________________________________________________________*/
 	if (m_bIsFinish)
@@ -458,6 +471,26 @@ void CKen::ShootingCheck(const _float& fTimeDelta, CMonster* pTarget)
 
 
 
+}
+
+void CKen::CollisionWithObject()
+{
+	_vec3 vShaveDir;
+	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::NPC))
+	{
+		if (pCol == m_pBoxCollider)
+			continue;
+
+		if (CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir))
+		{
+			m_pTransCom->m_vPos += vShaveDir;
+
+			m_pTransCom->m_matWorld._41 += vShaveDir.x;
+			m_pTransCom->m_matWorld._42 += vShaveDir.y;
+			m_pTransCom->m_matWorld._43 += vShaveDir.z;
+		}
+
+	}
 }
 
 void CKen::MonsterCheck(const _float& fTimeDelta)

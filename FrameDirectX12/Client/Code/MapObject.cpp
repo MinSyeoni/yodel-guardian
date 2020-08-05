@@ -44,6 +44,12 @@ HRESULT CMapObject::Ready_GameObject()
 	NULL_CHECK_RETURN(m_pBoxCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCom);
 
+
+	m_bIsColliderObject = false;
+
+	if(m_tMeshInfo.MeshTag ==L"box0_1.X"|| m_tMeshInfo.MeshTag == L"box0_2.X"|| m_tMeshInfo.MeshTag == L"box0_3.X"|| m_tMeshInfo.MeshTag == L"box0_4.X"|| m_tMeshInfo.MeshTag == L"box0_5.X"|| m_tMeshInfo.MeshTag == L"box0_6.X"|| m_tMeshInfo.MeshTag == L"box0_7.X"|| m_tMeshInfo.MeshTag == L"box0_8.X")
+		m_bIsColliderObject = true;
+
 	return S_OK;
 }
 
@@ -78,7 +84,7 @@ _int CMapObject::LateUpdate_GameObject(const _float & fTimeDelta)
 
 	NULL_CHECK_RETURN(m_pRenderer, -1); 
 
-	if (m_bIsDrawShadow)
+	if (m_bIsDrawShadow &&!m_bIsColliderObject )
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 
 //	if(m_bIsDrawShadow)
@@ -88,7 +94,7 @@ _int CMapObject::LateUpdate_GameObject(const _float & fTimeDelta)
 
 	if (!CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
 		return NO_EVENT;
-
+	if(!m_bIsColliderObject)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 
 

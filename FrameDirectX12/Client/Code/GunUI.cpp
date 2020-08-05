@@ -87,16 +87,13 @@ _int CGunUI::LateUpdate_GameObject(const _float& fTimeDelta)
 		m_pBulletFont->LateUpdate_GameObject(fTimeDelta);
 
 	if(m_bIsShow && m_eState!=NONE)
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
-
+		FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
 	return NO_EVENT;
 }
 
 void CGunUI::Render_GameObject(const _float& fTimeDelta)
 {
-
-
 	Set_ConstantTable();
 
 	m_pShaderCom->Begin_Shader();
@@ -110,7 +107,6 @@ void CGunUI::Render_GameObject(const _float& fTimeDelta)
 
 void CGunUI::WeaponBulletCheck()
 {
-
 	m_eState = NONE;
 
 	list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Weapon");

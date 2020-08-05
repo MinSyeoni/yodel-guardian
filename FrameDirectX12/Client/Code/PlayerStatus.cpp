@@ -89,9 +89,6 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
 
 
   
-
-    cout << m_pTransCom->m_vPos.x << " - " << m_pTransCom->m_vPos.y << "- " << m_pTransCom->m_vPos.z << endl;
-
     _matrix matBone = XMMatrixInverse(nullptr, *m_matChestOffset);
     matBone = matBone * *m_matChest;
 
@@ -355,7 +352,7 @@ void CPlayerStatus::KeyInput()
             if (IsZoom == false)
             {
                 m_bIsZoom = true;
-                m_pCamera->Set_ZoomInOut(true, 10.f);
+                m_pCamera->Set_ZoomInOut(true, 30.f);
             }
             else
             {
@@ -1047,12 +1044,12 @@ void CPlayerStatus::CheckAim()
         if (m_pCamera->Get_ZoomOut() == true)
             dynamic_cast<CAim*>(pAim)->SetRender(true, 1);
         else
-            dynamic_cast<CAim*>(pAim)->SetRender(false);
+            dynamic_cast<CAim*>(pAim)->SetRender(false,2);
 
 
     }
     else
-        dynamic_cast<CAim*>(pAim)->SetRender(false);
+        dynamic_cast<CAim*>(pAim)->SetRender(false,2);
 
 }
 
@@ -1094,7 +1091,7 @@ void CPlayerStatus::CheckSniping()
 
 
         if (m_bIsZoom)
-            m_pCamera->Set_ZoomInOut(true, 10.f);
+            m_pCamera->Set_ZoomInOut(true, 30.f);
     }
     if (m_eCurState == CPlayer::COVER_ATTACKSNIPER && m_pMesh->Set_FindAnimation(2200.f,(int)CPlayer::COVER_ATTACKSNIPER))
     {

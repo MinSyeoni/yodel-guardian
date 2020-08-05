@@ -22,6 +22,7 @@ private:
 public:
 	void					Set_CardReaderOn(_bool bIsOn) { m_bIsReaderOn = bIsOn; }
 	_bool					Get_CardReaderOn() { return m_bIsReaderOn; }
+	void					Set_CardKeyEquip(_bool bIsEquip) { m_bIsEquipCard = bIsEquip; }
 
 public:
 	HRESULT					Ready_GameObjectPrototype();
@@ -51,6 +52,7 @@ private:
 	CGameObject*				m_pGameObject = nullptr;
 	_bool						m_bIsReaderOn = false;
 	_bool						m_bIsCollision = false;
+	_bool						m_bIsEquipCard = false;
 
 public:
 	virtual CGameObject*		Clone_GameObject(void* prg);

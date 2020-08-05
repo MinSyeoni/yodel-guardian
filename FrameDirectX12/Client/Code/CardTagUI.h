@@ -26,10 +26,10 @@ public:
 	virtual HRESULT				LateInit_GameObject();
 	virtual _int				Update_GameObject(const _float& fTimeDelta);
 	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
-	void TagReaderAndZoom(const _float& fTimeDelta);
 	virtual void				Render_GameObject(const _float& fTimeDelta);
 
 public:
+	void						TagReaderAndZoom(const _float& fTimeDelta);
 	void						Set_ShowUI(_bool bIsShow) { m_bIsShow = bIsShow; }
 	void						Set_IsTagOn(_bool bIsTagOn) { m_bIsTagOn = bIsTagOn; }
 	_bool						Get_IsTagOn() { return m_bIsTagOn; }
