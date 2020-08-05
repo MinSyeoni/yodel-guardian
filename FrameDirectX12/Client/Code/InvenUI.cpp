@@ -2,6 +2,9 @@
 #include "InvenUI.h"
 #include "Font.h"
 #include "HPBar.h"
+#include "MPBar.h"
+#include "Shepard.h"
+#include "Ken.h"
 
 CInvenUI::CInvenUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -93,26 +96,87 @@ _int CInvenUI::LateUpdate_GameObject(const _float& fTimeDelta)
 
 void CInvenUI::Use_ItemBandage()
 {
-	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-	_float fCurHP = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
-
-	if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_9))
+	if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_F1))
 	{
 		if (m_iItemNum[0] > 0)		// 붕대
 		{
+			list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
+			CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+			_float fCurHP = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
+
 			m_iItemNum[0]--;
 
-			list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
 			if (pHpBarUIList != nullptr && fCurHP < 314)
 			{
 				for (auto& pSrc : *pHpBarUIList)
 				{
 					if (CHPBar::PLAYER_HPBAER == dynamic_cast<CHPBar*>(pSrc)->Get_CurHpState())
 					{
-						dynamic_cast<CPlayer*>(pPlayer)->Set_CurHP(30);
+						dynamic_cast<CPlayer*>(pPlayer)->Set_CurHP(60);
 						dynamic_cast<CHPBar*>(pSrc)->Set_CurHpType(1);
 					}
 				}
+			}
+		}
+	}
+	else if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_F2))
+	{
+		if (m_iItemNum[1] > 0)		// 약, 동료 체력 회복
+		{
+			CGameObject* pShepard = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Shepard");
+			_float fCurShepardHP = dynamic_cast<CShepard*>(pShepard)->Get_ShepardCurHP();
+			CGameObject* pKen = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Ken");
+			_float fCurKenHP = dynamic_cast<CKen*>(pKen)->Get_KenCurHP();
+
+			list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
+			if (pHpBarUIList != nullptr && (fCurShepardHP < 314 || fCurKenHP < 314))
+			{
+				for (auto& pSrc : *pHpBarUIList)
+				{
+					if (CHPBar::COLLEAGUE_HPBAR == dynamic_cast<CHPBar*>(pSrc)->Get_CurHpState()
+						|| CHPBar::COLLEAGUE2_HPBAR == dynamic_cast<CHPBar*>(pSrc)->Get_CurHpState())
+					{
+						dynamic_cast<CKen*>(pKen)->Set_KenCurHP(30);
+						dynamic_cast<CShepard*>(pShepard)->Set_ShepardCurHP(30);
+						dynamic_cast<CHPBar*>(pSrc)->Set_CurHpType(1);
+					}
+				}
+			}
+			m_iItemNum[1]--;
+		}
+	}
+	else if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_F3))
+	{
+		if (m_iItemNum[2] > 0)		// 주사기, 기력
+		{		
+			m_iItemNum[2]--;
+
+			CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+			_float fCurMP = dynamic_cast<CPlayer*>(pPlayer)->Get_CurMp();
+
+			list<CGameObject*>* pMpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"MPBarUI");
+			if (pMpBarUIList != nullptr && fCurMP < 300)
+			{
+				for (auto& pSrc : *pMpBarUIList)
+				{
+					dynamic_cast<CPlayer*>(pPlayer)->Set_CurMP(300);
+					dynamic_cast<CMPBar*>(pSrc)->Set_CurMpType(1);
+				}
+			}
+		}
+	}
+	else if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_F4))	// 기력 치트키. 주사기 없어도 기력 회복
+	{
+		CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+		_float fCurMP = dynamic_cast<CPlayer*>(pPlayer)->Get_CurMp();
+
+		list<CGameObject*>* pMpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"MPBarUI");
+		if (pMpBarUIList != nullptr && fCurMP < 300)
+		{
+			for (auto& pSrc : *pMpBarUIList)
+			{
+				dynamic_cast<CPlayer*>(pPlayer)->Set_CurMP(300);
+				dynamic_cast<CMPBar*>(pSrc)->Set_CurMpType(1);
 			}
 		}
 	}

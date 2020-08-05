@@ -44,7 +44,7 @@ public:
 	
 	void					Set_Transform(CTransform* pTransform) { m_pTransCom = pTransform; m_pTransCom->AddRef(); }
 	void					Set_NaviMesh(CNaviMesh* pNavimesh) { m_pNaviMesh = pNavimesh; m_pNaviMesh->AddRef(); }
-	void					Set_Astar(CAstar* pAstar) { m_pAstarCom = pAstar; m_pAstarCom->AddRef(); }
+//	void					Set_Astar(CAstar* pAstar) { m_pAstarCom = pAstar; m_pAstarCom->AddRef(); }
 
 public:		// 상호작용 
 	const _bool&			Get_IsDeadDron() const { return m_bIsDronState[1]; }
@@ -77,7 +77,7 @@ private:
 
 	CTransform*				m_pTransCom = nullptr;
 	CNaviMesh*				m_pNaviMesh = nullptr;
-	CAstar*					m_pAstarCom = nullptr;
+//	CAstar*					m_pAstarCom = nullptr;
 	Engine::CMesh*			m_pMeshCom = nullptr;
 
 private:

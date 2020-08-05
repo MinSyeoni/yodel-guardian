@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "HPBar.h"
 #include "Player.h"
+#include "Shepard.h"
+#include "Ken.h"
 #include "DirectInput.h"
 
 CHPBar::CHPBar(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
@@ -51,14 +53,14 @@ void CHPBar::Init_CharacterHp()
 	break;
 	case CHPBar::COLLEAGUE_HPBAR:
 	{
-		CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-		m_fPreHp = m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
+		CGameObject* pShepard = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Shepard");
+		m_fPreHp = m_fCurHp = dynamic_cast<CShepard*>(pShepard)->Get_ShepardCurHP();
 	}
 	break;
 	case CHPBar::COLLEAGUE2_HPBAR:
-	{
-		CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-		m_fPreHp = m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
+	{		
+		CGameObject* pKen = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Ken");
+		m_fPreHp = m_fCurHp = dynamic_cast<CKen*>(pKen)->Get_KenCurHP();
 	}
 	break;
 	default:
@@ -92,14 +94,14 @@ void CHPBar::Set_HP_Damage(const _float& fTimeDelta)
 	break;
 	case CHPBar::COLLEAGUE_HPBAR:
 	{
-		CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-		m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
+		CGameObject* pShepard = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Shepard");
+		m_fCurHp = dynamic_cast<CShepard*>(pShepard)->Get_ShepardCurHP();
 	}
 	break;
 	case CHPBar::COLLEAGUE2_HPBAR:
 	{
-		CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-		m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
+		CGameObject* pKen = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Ken");
+		m_fCurHp = dynamic_cast<CKen*>(pKen)->Get_KenCurHP();
 	}
 	break;
 	default:
@@ -120,7 +122,7 @@ void CHPBar::Set_HP_Damage(const _float& fTimeDelta)
 	{
 		if (m_fPreHp < m_fCurHp)
 		{
-			m_fPreHp += 15.f * fTimeDelta;
+			m_fPreHp += 25.f * fTimeDelta;
 
 			if (m_fPreHp >= m_fCurHp)
 				m_fPreHp = m_fCurHp;

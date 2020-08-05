@@ -145,6 +145,12 @@ _int CKen::Update_GameObject(const _float& fTimeDelta)
 	return NO_EVENT;
 }
 
+void CKen::Set_KenCurHP(_uint iHP)
+{
+	if (m_iCurHP < 314)
+		m_iCurHP += iHP;
+}
+
 _int CKen::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);

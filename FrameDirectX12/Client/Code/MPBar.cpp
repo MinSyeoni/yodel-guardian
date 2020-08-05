@@ -35,9 +35,10 @@ HRESULT CMPBar::LateInit_GameObject()
 
 	m_pTransCom->m_vPos.x = _float(2.f / WINCX * WINCX / 2) - 1.f;
 	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * WINCY / 2) + 1.f;
-	m_pTransCom->m_vPos.z = 0.01f;
+	m_pTransCom->m_vPos.z = 0.01f; 
 
-	m_fPreMp = m_fCurMp = 100.f;
+	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+	m_fPreMp = m_fCurMp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurMp();
 
 	return S_OK;
 }
@@ -51,12 +52,14 @@ _int CMPBar::Update_GameObject(const _float& fTimeDelta)
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
+	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+	m_fCurMp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurMp();
 
 	if (m_iMPType == 0)
 	{
 		if (m_fPreMp > m_fCurMp)
 		{
-			m_fPreMp -= 15.f * fTimeDelta;
+			m_fPreMp -= 25.f * fTimeDelta;
 
 			if (m_fPreMp <= m_fCurMp)
 				m_fPreMp = m_fCurMp;
@@ -66,7 +69,7 @@ _int CMPBar::Update_GameObject(const _float& fTimeDelta)
 	{
 		if (m_fPreMp < m_fCurMp)
 		{
-			m_fPreMp += 15.f * fTimeDelta;
+			m_fPreMp += 60.f * fTimeDelta;
 
 			if (m_fPreMp >= m_fCurMp)
 				m_fPreMp = m_fCurMp;
@@ -82,14 +85,7 @@ _int CMPBar::LateUpdate_GameObject(const _float& fTimeDelta)
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
-	// hp 줄어드는거 테스트트트트트트
-	if (CDirectInput::Get_Instance()->KEY_PRESSING(DIK_9))
-	{
-	//	if (m_fPreMp > m_fCurMp)
-			m_fPreMp -= 15.f * fTimeDelta;
-	}
-
-	m_matMPWorld._41 = m_fPreMp * 0.0028;
+	m_matMPWorld._41 = m_fPreMp * (0.0028 / 3);
 
 	return NO_EVENT;
 }

@@ -37,6 +37,10 @@ public:
 	void ShootingCheck(const _float& fTimeDelta, CMonster* pMonster);
 
 	void CollisionWithObject();
+
+	_float			Get_KenCurHP() { return m_iCurHP; }	// ui 때문에 추가함 나중에 피격할때 플레이어처럼 깎아줘야함
+	void			Set_KenCurHP(_uint iHP);			// UI 때문에 추가함
+
 private:
 	void            Set_ShadowTable(CShader_Shadow* pShader);
 private:
@@ -73,6 +77,7 @@ private:
 	_vec3 m_vMove3Pos;
 	_vec3 m_vMove4Pos;
 
+	_uint				m_iCurHP = 314;	// hpbar 때문에 추가함
 
 	_uint m_uiMove1NaviIndex;
 	_uint m_uiMove2NaviIndex;

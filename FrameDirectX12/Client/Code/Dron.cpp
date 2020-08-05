@@ -10,9 +10,6 @@
 #include "PlayerStatus.h"
 #include "Trigger.h"
 
-// CObjectMgr::Get_Instance()->
-// 	m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_DronBullet", L"DronBullet", &m_tMeshInfo);
-
 CDron::CDron()
 {
 	Initialized();

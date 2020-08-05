@@ -10,6 +10,9 @@
 #include "Monster.h"
 #include "Aim.h"
 #include "DirectSound.h"
+#include "HPBar.h"
+#include "MPBar.h"
+
 CPlayerStatus::CPlayerStatus()
 {
 }
@@ -56,8 +59,7 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
         CheckAim();
         ReloadCheck();
         CheckSniping();
-        CameraShakeCheck();
-        MpCheck(fTimeDelta);
+        HPMpCheck(fTimeDelta);
     }
     else
     {
@@ -379,8 +381,10 @@ void CPlayerStatus::LegKeyInput()
             m_eLegState = CPlayer::RIFLEWALKNORTH;
             m_fSpeed = 5.f;
 
-            if (KEY_PRESSING(DIKEYBOARD_LSHIFT))
+            if (KEY_PRESSING(DIKEYBOARD_LSHIFT) && m_uiMp > 0)
             {
+                // 기력 추가함 
+                m_uiMp -= 1;
 
                 m_eLegState = CPlayer::RUNNORTH;
                 m_fSpeed = 15.f;
@@ -409,9 +413,9 @@ void CPlayerStatus::LegKeyInput()
         m_eLegState = CPlayer::RIFLEWALKSOUTH;
         m_fSpeed = 5.f;
 
-        if (KEY_PRESSING(DIKEYBOARD_LSHIFT))
+        if (KEY_PRESSING(DIKEYBOARD_LSHIFT) && m_uiMp > 0)
         {
-
+            m_uiMp -= 1;
             m_eLegState = CPlayer::RUNSOUTH;
             m_fSpeed = 15.f;
         }
@@ -426,9 +430,9 @@ void CPlayerStatus::LegKeyInput()
         m_eLegState = CPlayer::RIFLEWALKWEST;
         m_fSpeed = 5.f;
 
-        if (KEY_PRESSING(DIKEYBOARD_LSHIFT))
+        if (KEY_PRESSING(DIKEYBOARD_LSHIFT) && m_uiMp > 0)
         {
-
+            m_uiMp -= 1;
             m_eLegState = CPlayer::RUNWEST;
             m_fSpeed = 15.f;
         }
@@ -443,9 +447,9 @@ void CPlayerStatus::LegKeyInput()
         m_eLegState = CPlayer::RIFLEWALKEAST;
         m_fSpeed = 5.f;
 
-        if (KEY_PRESSING(DIKEYBOARD_LSHIFT))
+        if (KEY_PRESSING(DIKEYBOARD_LSHIFT) && m_uiMp > 0)
         {
-
+            m_uiMp -= 1;
             m_eLegState = CPlayer::RUNEAST;
             m_fSpeed = 15.f;
         }
@@ -1168,16 +1172,20 @@ void CPlayerStatus::WeaponSwap()
 {
 }
 
-void CPlayerStatus::MpCheck(const _float& fTimeDelta)
+void CPlayerStatus::HPMpCheck(const _float& fTimeDelta) // BAR 체크 약간 수정
 {
-    if (m_fSpeed == 15.f)
-        m_fMp -= fTimeDelta * 10.f;
-    else
-        m_fMp += fTimeDelta * 10.f;
-    if (m_fMp > 100.f)
-        m_fMp = 100.f;
+    list<CGameObject*>* pHpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"HPBarUI");
+    list<CGameObject*>* pMpBarUIList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_UI", L"MPBarUI");
+    if (pHpBarUIList != nullptr && m_bIshit)
+    {
+        for (auto& pSrc : *pHpBarUIList)
+            if (CHPBar::PLAYER_HPBAER == dynamic_cast<CHPBar*>(pSrc)->Get_CurHpState())
+                dynamic_cast<CHPBar*>(pSrc)->Set_CurHpType(0);
+    }
 
-        if (m_fMp < 0.f)
-            m_fMp = 0.f;
-
+    if (pMpBarUIList != nullptr && KEY_PRESSING(DIKEYBOARD_LSHIFT))
+    {
+        for (auto& pSrc : *pMpBarUIList)
+            dynamic_cast<CMPBar*>(pSrc)->Set_CurMpType(0);
+    }
 }
