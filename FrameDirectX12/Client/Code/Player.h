@@ -39,10 +39,13 @@ public:
 	CPlayerLeg* Get_PlayerLeg() { return m_pLeg; };//다리
 	CPlayerStatus* Get_Status() { return m_pStatus; };
 
-	_float         Get_CurMp();
-	/////////// HHHHHHHHPPPPPPPPP
+	_float          Get_CurMp();
+	void			Set_CurMP(_uint iMP);
+	/////////// MP 추가함
 	_float			Get_CurHP();
 	void			Set_CurHP(_uint iHP);
+	// 피격 추가함
+	void			Set_FlameDamage(_uint iHP);
 private:
 	virtual HRESULT Add_Component();
 private:

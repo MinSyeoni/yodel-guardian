@@ -122,7 +122,7 @@ HRESULT CMonster::LateInit_GameObject()
 		break;
 	case CMonster::DRON:
 	{	
-		m_pDron->Set_Astar(m_pAstarCom);
+	//	m_pDron->Set_Astar(m_pAstarCom);
 		m_pDron->Late_Initialized();
 	}
 		break;
@@ -162,12 +162,28 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 			matTemp._41 = 286.f;
 			matTemp._42 = 15.f;
 			matTemp._43 = 305.f;
+			m_pTransCom->m_vAngle = _vec3(0.f, -90.f, 0.f);
 		}
 		else if (m_iInitId == 1)
 		{
 			matTemp._41 = 326.f;
 			matTemp._42 = 15.f;
 			matTemp._43 = 297.f;
+			m_pTransCom->m_vAngle = _vec3(0.f, 90.f, 0.f);
+		}
+		else if (m_iInitId == 3)
+		{
+			matTemp._41 = 238.f;
+			matTemp._42 = 15.f;
+			matTemp._43 = 335.f;
+			m_pTransCom->m_vAngle = _vec3(0.f, 0.f, 0.f);
+		}
+		else if (m_iInitId == 4)
+		{
+			matTemp._41 = 238.f;
+			matTemp._42 = 15.f;
+			matTemp._43 = 367.f;
+			m_pTransCom->m_vAngle = _vec3(0.f, 180.f, 0.f);
 		}
 
 		if (m_pFlameThrower->IsPlayer_HitFireDemage())
@@ -271,8 +287,23 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 	{
 		if (m_pFlameThrower == nullptr)
 			return E_FAIL;
+
 		if (m_pFlameThrower->IsPlayer_HitFireDemage())
+		{
 			FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pSphereCollider), -1);
+			_vec3 vShaveDir;
+			for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::SPHERE, CColliderMgr::PLAYER))
+			{
+				if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_Spere(pCol, m_pSphereCollider, &vShaveDir))
+				{
+					CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+					if (pPlayer == nullptr)
+						return E_FAIL;
+					dynamic_cast<CPlayer*>(pPlayer)->Set_FlameDamage(1);
+				}
+			}
+		}
+		
 		m_pFlameThrower->LateUpdate_FlameThrower(fTimeDelta, m_pTransCom, m_pMeshCom);
 	}
 	break;

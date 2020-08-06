@@ -39,6 +39,8 @@ public:
 	void CollisionWithObject();
 
 	Engine::CNaviMesh* Get_ShepardNavi() { return m_pNaviCom; }	// 추가함
+	_float			Get_ShepardCurHP() { return m_iCurHP; }	// ui 때문에 추가함 나중에 피격할때 플레이어처럼 깎아줘야함
+	void			Set_ShepardCurHP(_uint iHP);
 
 private:
 	void            Set_ShadowTable(CShader_Shadow* pShader);
@@ -85,7 +87,7 @@ private:
 	_uint m_uiMove3NaviIndex;
 	_uint m_uiMove4NaviIndex;
 
-
+	_uint				m_iCurHP = 314;	// hpbar 때문에 추가함
 	_int    m_fRifleBulletCount = 7;
 
 	_float m_fDelayTime = 0.f;

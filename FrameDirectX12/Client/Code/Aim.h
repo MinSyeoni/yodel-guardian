@@ -27,6 +27,7 @@ public:
 	virtual HRESULT				LateInit_GameObject();
 	virtual _int				Update_GameObject(const _float& fTimeDelta);
 	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
+	void ReShow_OtherUI(Engine::CGameObject* pOptionUI, Engine::CGameObject* pNPCUI);
 	virtual void				Render_GameObject(const _float& fTimeDelta);
 	void SetRender(_bool bIsRender, int iDrawId = 0) { m_bIsRender = bIsRender; m_iDrawId = iDrawId; };
 private:

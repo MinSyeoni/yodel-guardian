@@ -17,6 +17,8 @@
 #include "DronBullet.h"
 #include "Scene_Boss.h"
 
+#include "Trigger.h"
+
 CScene_Rail::CScene_Rail(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -57,9 +59,24 @@ _int CScene_Rail::LateUpdate_Scene(const _float& fTimeDelta)
 
 void CScene_Rail::Render_Scene(const _float& fTimeDelta)
 {
-
 	CScene::Render_Scene(fTimeDelta);
 
+	// 트리거 밟으면 보스 스테이지로 
+	list<CGameObject*>* pTriggerList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Trigger");
+	if (pTriggerList != nullptr)
+	{
+		for (auto& pSrc : *pTriggerList)
+		{
+			if (CTrigger::TRIGGER_BOX == dynamic_cast<CTrigger*>(pSrc)->Get_ColType()
+				&& dynamic_cast<CTrigger*>(pSrc)->Get_IsGoBoss())
+			{
+				m_pObjectMgr->Clear_Layer();
+				Engine::CScene* pNewScene = CScene_Boss::Create(m_pGraphicDevice, m_pCommandList);
+				Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
+				break;
+			}
+		}
+	}
 
 	if (KEY_DOWN(DIK_PGDN))//스겜용
 	{
@@ -175,6 +192,8 @@ HRESULT CScene_Rail::Ready_LayerGameObject(wstring wstrLayerTag)
 	Load_TriggerPos(L"../../Data/Collider/DronEnd2.dat", wstrLayerTag);
 	Load_TriggerPos(L"../../Data/Collider/DronEnd3.dat", wstrLayerTag);
 
+	Load_TriggerPos(L"../../Data/Collider/NextBossStage.dat", wstrLayerTag);
+
 	/*____________________________________________________________________
 	GameObject 생성.
 	m_pObjectMgr->Add_GameObject(wstrLayerTag, wstrObjTag);
@@ -207,9 +226,10 @@ void CScene_Rail::Load_TriggerPos(const wstring& wstrFilePath, wstring wstrLayer
 			tColData.iColID = 2;
 		else if (wstrFilePath == L"../../Data/Collider/DronEnd3.dat")
 			tColData.iColID = 3;
+		else if (wstrFilePath == L"../../Data/Collider/NextBossStage.dat")
+			tColData.iColID = 10;
 
-		if (3 == tColData.iOptionID)
-			m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Trigger", L"Trigger", &tColData);
+		m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Trigger", L"Trigger", &tColData);
 	}
 	CloseHandle(hFile);
 }
@@ -341,12 +361,8 @@ HRESULT CScene_Rail::Ready_LayerUI(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_InvenUI", L"InvenUI", nullptr), E_FAIL);
 
 	_uint iType = 0;
-	for (int i = 0; i < 3; ++i)
-		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &(iType = i)), E_FAIL);
-
-	//////// 아이콘 //////
-	for (int i = 0; i < 3; ++i)
-		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_IconUI", L"IconUI", &(iType = i)), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_HPBarUI", L"HPBarUI", &(iType = 0)), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_IconUI", L"IconUI", &(iType = 0)), E_FAIL);
 
 	for (int i = 0; i < 7; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_OnUI", L"OnUI", &(iType = i)), E_FAIL);

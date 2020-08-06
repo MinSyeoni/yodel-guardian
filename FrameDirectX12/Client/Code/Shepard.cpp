@@ -682,6 +682,13 @@ void CShepard::Set_ConstantTable()
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
 
 }
+
+void CShepard::Set_ShepardCurHP(_uint iHP)
+{
+	if (m_iCurHP < 314)
+		m_iCurHP += iHP;
+}
+
 void CShepard::Set_ShadowTable(CShader_Shadow* pShader)
 {
 	_matrix matRotY = XMMatrixRotationY(XMConvertToRadians(-90));

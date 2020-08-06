@@ -8,6 +8,7 @@
 #include "Monster.h"
 #include "LobbyDoor.h"
 
+
 CTrigger::CTrigger(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	:CGameObject(pGraphicDevice,pCommandList)
 {
@@ -87,11 +88,11 @@ _int CTrigger::Update_GameObject(const _float & fTimeDelta)
 		CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::TRIGGER, m_pBoxCol);
 	
 		_vec3 vShaveDir;
-
 		for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYER))
 		{
 			if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCol, pCol, &vShaveDir))
 			{
+				//if (m_tColInfo.iColID == 1)
 				//	CDirectSound::Get_Instance()->PlayDirectSoundFile(L"Siren");
 				m_bIsActive = true;
 			}
@@ -122,9 +123,9 @@ _int CTrigger::LateUpdate_GameObject(const _float & fTimeDelta)
 	{
 		FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCol), -1);
 
-		list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Zombi");
-		if (m_bIsActive)
+		if (m_bIsActive && m_tColInfo.iColID != 10)
 		{
+			list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Zombi");
 			for (auto& pSrc : *pList)
 			{
 				if (m_tColInfo.iColID == 1)
@@ -138,6 +139,11 @@ _int CTrigger::LateUpdate_GameObject(const _float & fTimeDelta)
 					m_tColInfo.iColID == static_cast<CMonster*>(pSrc)->Get_InitID())
 					static_cast<CMonster*>(pSrc)->Set_IsActiveStart(true);
 			}
+			m_bIsDead = true;
+		}
+		else if (m_bIsActive && m_tColInfo.iColID == 10 && !m_bIsGoBoss)
+		{
+			m_bIsGoBoss = true;
 			m_bIsDead = true;
 		}
 	}

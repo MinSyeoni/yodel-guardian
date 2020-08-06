@@ -135,8 +135,15 @@ void CPlayer::Render_GameObject(const _float& fTimeDelta)
 
 _float CPlayer::Get_CurMp()
 {
+	return m_pStatus->m_uiMp;
+}
 
-	return m_pStatus->m_fMp;
+void CPlayer::Set_CurMP(_uint iMP)
+{
+	if (m_pStatus->m_uiMp < 300)	// 약간 수정
+		m_pStatus->m_uiMp += iMP;
+	else
+		m_pStatus->m_uiMp = 300;
 }
 
 _float CPlayer::Get_CurHP()
@@ -144,10 +151,20 @@ _float CPlayer::Get_CurHP()
 	return m_pStatus->m_uiHp;
 }
 
-void CPlayer::Set_CurHP(_uint iHP)
+void CPlayer::Set_CurHP(_uint iHP)	// 약간 수정
 {
-	if(m_pStatus->m_uiHp < 314)
+	if (m_pStatus->m_uiHp < 314)
 		m_pStatus->m_uiHp += iHP;
+	else
+		m_pStatus->m_uiHp = 314;
+}
+
+void CPlayer::Set_FlameDamage(_uint iHP)
+{
+	if (m_pStatus->m_uiHp > 0)
+		m_pStatus->m_uiHp -= iHP;
+	else
+		m_pStatus->m_uiHp = 0;
 }
 
 HRESULT CPlayer::Add_Component()
