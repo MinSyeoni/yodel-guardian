@@ -396,6 +396,8 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"point_bottom.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"point_bottom.x"), E_FAIL))
 		return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"passage_point.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"passage_point.x"), E_FAIL))
+		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"antenna.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"antenna.x"), E_FAIL))
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"medikit_syringe.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"medikit_syringe.x"), E_FAIL))
@@ -428,14 +430,13 @@ void CToolView::Ready_Buffer_Setting()
 		return;
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"passage_box2.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"passage_box2.x"), E_FAIL))
 		return;
-	//if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"reaper_ground.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"reaper_ground.x"), E_FAIL))
-	//	return;
+	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"reaper_ground.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"reaper_ground.x"), E_FAIL))
+		return;
 
 	///// 테스트 /////
 	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"test.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"test.x"), E_FAIL))
 		return;
-	if (FAILED(Engine::Ready_Mesh(m_pDevice, RESOURCE_STAGE, L"reaper_ground.X", Engine::TYPE_STATIC, L"../Resources/StaticMesh/", L"reaper_ground.x"), E_FAIL))
-		return;
+
 	//if (FAILED(Engine::Ready_Mesh(m_pDevice,
 	//	RESOURCE_STAGE,
 	//	L"Mesh_Navigation",
