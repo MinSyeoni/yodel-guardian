@@ -291,7 +291,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombi::ZOM_EX_Run:
 	{
-		m_fSpeed = 7.f;
+		m_fSpeed = 5.f;
 
 		if (Check_CharacterRange(12.f))
 		{
@@ -320,7 +320,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombi::ZOM_EX_WalkSlow:
 	{
-		m_fSpeed = 7.f;
+		m_fSpeed = 5.f;
 
 		if (m_iAstarID == 0)
 			Chase_Character(m_vShepardPos, fTimeDelta);

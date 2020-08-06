@@ -33,7 +33,7 @@ public:
 public:
 	void						Set_CurWordsType(WORDS_TYPE eType) { m_eWordsType = eType; }
 	void						Ready_NpcWords();
-
+	WORDS_TYPE					Get_CurWordsType() { return m_eWordsType; }		// type get함수 추가함
 public:
 	HRESULT						Ready_GameObjectPrototype();
 	virtual HRESULT				Ready_GameObject(WORDS_TYPE eType);

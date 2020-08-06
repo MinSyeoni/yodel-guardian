@@ -64,9 +64,36 @@ _int CAim::LateUpdate_GameObject(const _float& fTimeDelta)
 
 	CGameObject* pNPCUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"NpcBoard");
 	CGameObject* pOptionUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"OptionUI");
+	///ReShow_OtherUI(pOptionUI, pNPCUI);
+
+	if (m_bIsRender == true)
+	{
+		GetCursorPos(&m_pt);
+		ScreenToClient(g_hWnd, &m_pt);
+		if (m_iDrawId == 1)
+		{
+			Show_OtherUI(false);
+		}
+		//else
+		//{
+		//	ReShow_OtherUI(pOptionUI, pNPCUI);
+		//}
+
+		if (m_iDrawId != 2)
+			FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
+	}
+	else
+		ReShow_OtherUI(pOptionUI, pNPCUI);
+
+	return NO_EVENT;
+}
+
+void CAim::ReShow_OtherUI(Engine::CGameObject* pOptionUI, Engine::CGameObject* pNPCUI)
+{
 	if (pOptionUI != nullptr && pNPCUI != nullptr)
 	{
-		if (!dynamic_cast<COptionUI*>(pOptionUI)->Get_ShowUI() && !dynamic_cast<CNpcWords*>(pNPCUI)->Get_ShowUI())
+		if (!dynamic_cast<COptionUI*>(pOptionUI)->Get_ShowUI() && 
+			CNpcWords::TYPE_END == dynamic_cast<CNpcWords*>(pNPCUI)->Get_CurWordsType())
 			Show_OtherUI(true);
 	}
 	if (pNPCUI == nullptr)	// º¸½º¿ë
@@ -75,22 +102,6 @@ _int CAim::LateUpdate_GameObject(const _float& fTimeDelta)
 			if (!dynamic_cast<COptionUI*>(pOptionUI)->Get_ShowUI())
 				Show_OtherUI(true);
 	}
-
-	if (m_bIsRender==true)
-	{
-		GetCursorPos(&m_pt);
-		ScreenToClient(g_hWnd, &m_pt);
-		if (m_iDrawId == 1)
-		{
-			Show_OtherUI(false);
-		}
-		else
-			Show_OtherUI(true);
-		if(m_iDrawId!=2)
-		FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
-	}
-
-	return NO_EVENT;
 }
 
 void CAim::Show_OtherUI(_bool bIsShow)
