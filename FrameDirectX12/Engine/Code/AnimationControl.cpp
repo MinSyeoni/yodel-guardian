@@ -122,8 +122,17 @@ void CAniCtrl::Ready_NodeHierarchy(const aiNode* pNode)
 
 }
 
-void CAniCtrl::Set_AnimationKey(_int AniKey)
+void CAniCtrl::Set_AnimationKey(_int AniKey,_bool bIsBlend)
 {
+    if (!bIsBlend && m_uiNewAniIndex !=AniKey)
+    {
+        m_uiNewAniIndex = AniKey;
+        m_uiCurAniIndex = AniKey;
+        m_fAnimationTime = 0.f;
+
+    }
+
+
     if (m_uiNewAniIndex != AniKey && m_uiCurAniIndex!=999)
     {
         m_uiNewAniIndex = AniKey;
@@ -381,6 +390,25 @@ void CAniCtrl::Update_NodeHierarchy(_float fAnimationTime,
         _matrix matGlobalTransform = matNodeTransform * matParentTransform;
 
         m_matchestdisc = matGlobalTransform * Convert_AiToMat4(m_pScene->mRootNode->mTransformation);
+    }
+    if (strNodeName == "mouthdisc")
+    {
+        const aiVector3D& vScale = Calc_InterPolatedValue_From_Key(fAnimationTime, pNodeAnimation->mNumScalingKeys, pNodeAnimation->mScalingKeys, pNewNodeAnimation->mNumScalingKeys, pNewNodeAnimation->mScalingKeys);
+
+        // Rotation
+        const aiQuaternion& vRotate = Calc_InterPolatedValue_From_Key(fAnimationTime, pNodeAnimation->mNumRotationKeys, pNodeAnimation->mRotationKeys, pNewNodeAnimation->mNumRotationKeys, pNewNodeAnimation->mRotationKeys);
+
+        // Trans
+        const aiVector3D& vTrans = Calc_InterPolatedValue_From_Key(fAnimationTime, pNodeAnimation->mNumPositionKeys, pNodeAnimation->mPositionKeys, pNewNodeAnimation->mNumPositionKeys, pNewNodeAnimation->mPositionKeys);
+
+        // Scale * Rotation * Trans
+        _matrix   matScale = XMMatrixScaling(vScale.x, vScale.y, vScale.z);
+        _matrix   matRotate = Convert_AiToMat3(vRotate.GetMatrix());
+        _matrix   matTrans = XMMatrixTranslation(vTrans.x, vTrans.y, vTrans.z);
+
+        _matrix matGlobalTransform = matNodeTransform * matParentTransform;
+
+        m_matmouthdisc = matGlobalTransform * Convert_AiToMat4(m_pScene->mRootNode->mTransformation);
     }
 
 

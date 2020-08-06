@@ -28,7 +28,7 @@ public:
 	void               Render_Destortion(CShader* pMesh);
 
 
-	void Set_Animation(_int Animation);
+	void Set_Animation(_int Animation,_bool bIsBlend = true);
 	void Set_AnimationBlend(_int FirstAni, _int SecondAni);
 
 	_bool Set_IsAniFinsh(float fEndTime = 200.f);

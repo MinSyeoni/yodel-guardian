@@ -23,8 +23,18 @@ public:
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 	virtual void    Render_LimLight(CShader_LimLight* pShader);
+	void AnimationCheck(const _float& fTimeDelta);
+	void AttackCheck(const _float& fTimeDelta);
+	void DieCheck(const _float& fTimeDelta);
+
+	void SetLeftLock() { m_bIsLeftLock = false; };
+	void SetRightLock() { m_bIsRightLock = false; };
 private:
 	virtual HRESULT Add_Component();
+public:
+	void           SetDamage(int iDamage);
+	void           CreateBlast();
+
 private:
 	void			Set_ConstantTable();
 	void            Set_LimTable(CShader_LimLight* pShader);
@@ -43,11 +53,16 @@ private:
 
 	float m_fTime = 0.f;
 	vector<vector<_matrix>> m_vecMatrix;
-	_int  m_iHp = 30.f;
+	_int  m_iHp = 50.f;
 	
 	ANISTATE m_eCurAniState;
 	ANISTATE m_ePreAniState;
 
+	_bool     m_bIsLockReapaer = true;
+	_bool     m_bIsBattleStart = false;
+	_float    m_fAttackTime = 0.f;
+
+	int     m_iAttackCount = 0;
 private:
 
 	_matrix* m_pLeftEyeBone = nullptr;
@@ -68,6 +83,10 @@ private:
 
 	_uint m_uiSpotLightBodyIndex = 0;
 
+	CSphereCollider* m_pSphereCollider = nullptr;
+
+	_bool  m_bIsLeftLock = true;
+	_bool  m_bIsRightLock = true;
 
 public:
 	virtual CGameObject* Clone_GameObject(void* prg);

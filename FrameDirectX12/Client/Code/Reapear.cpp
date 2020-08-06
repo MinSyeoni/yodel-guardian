@@ -41,6 +41,14 @@ HRESULT CReapear::Ready_GameObject()
 	m_pMeshCom = static_cast<Engine::CMesh*>(m_pComponentMgr->Clone_Component(L"Mesh_Reapear", COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pMeshCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Mesh", m_pMeshCom);
+
+
+	m_pSphereCollider = static_cast<Engine::CSphereCollider*>(CComponentMgr::Get_Instance()->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, nullptr, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 500.f/*여기반지름*/, _vec3(1.f, 1.f, 1.f), this));
+
+	NULL_CHECK_RETURN(m_pSphereCollider, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_Collider", m_pSphereCollider);
+
+
 #ifdef _DEBUG
 	COUT_STR("Success Static - Clone Mesh");
 #endif
@@ -110,7 +118,9 @@ HRESULT CReapear::LateInit_GameObject()
 	m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
 
 
-	m_pTransCom->m_vPos = _vec3(300.f, -800.f, 700.f);
+	m_pTransCom->m_vPos = _vec3(300.f, -800.f, 700.f);//이거는 고정상태
+	//m_pTransCom->m_vPos = _vec3(300.f, -500.f, 300.f);//이거는 고정상태
+
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
 
 	m_pTransCom->m_vAngle = _vec3(0.f, 0.f, 0.f);
@@ -121,15 +131,32 @@ HRESULT CReapear::LateInit_GameObject()
 _int CReapear::Update_GameObject(const _float& fTimeDelta)
 {
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
+	
+	if (!m_bIsLeftLock && !m_bIsRightLock)
+	{
+		m_bIsLockReapaer = false;
+	}
+	if (!m_bIsLockReapaer&& !m_bIsBattleStart)
+	{
+		m_pTransCom->m_vPos.y -= fTimeDelta * 300.f;
+		if (m_pTransCom->m_vPos.y < -1650.f)
+		{
+			m_bIsBattleStart = true;
+			m_eCurAniState = ENTRANCE;
+			m_pTransCom->m_vPos = _vec3(300.f, -450.f, 250.f);
+		}
+	}
 
 	UpdateLight(fTimeDelta);
-
+	DieCheck(fTimeDelta);
+	AttackCheck(fTimeDelta);
+	AnimationCheck(fTimeDelta);
 
 	if (m_bIsDead)
 		return DEAD_OBJ;
-	cout << m_pTransCom->m_vPos.y << endl;
-	if (KEY_PRESSING(DIK_X))
-		m_pTransCom->m_vPos.y += fTimeDelta * 10.f;
+	//cout << m_pTransCom->m_vPos.y << endl;
+	//if (KEY_PRESSING(DIK_X))
+	//	m_pTransCom->m_vPos.y += fTimeDelta * 10.f;
 
 
 	/*____________________________________________________________________
@@ -137,15 +164,25 @@ _int CReapear::Update_GameObject(const _float& fTimeDelta)
 	______________________________________________________________________*/
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
+	_matrix matBone = *m_pBodyBone;
+
+
+	m_pSphereCollider->Update_Collider(&(matBone * m_pTransCom->m_matWorld));
+	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::BOSS, m_pSphereCollider);
+
 	m_fTime += fTimeDelta;
+
+	m_ePreAniState = m_eCurAniState;
 	return NO_EVENT;
 }
 
 _int CReapear::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1);
-
-	m_pMeshCom->Set_Animation((int)m_eCurAniState);
+	if(m_eCurAniState==ENTRANCE)
+	m_pMeshCom->Set_Animation((int)m_eCurAniState,false);
+	else
+		m_pMeshCom->Set_Animation((int)m_eCurAniState, true);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(fTimeDelta * 3000.f);
 	/*____________________________________________________________________
 	[ Renderer - Add Render Group ]
@@ -155,7 +192,7 @@ _int CReapear::LateUpdate_GameObject(const _float& fTimeDelta)
 	/*____________________________________________________________________
 	[ Set PipelineState ]
 	______________________________________________________________________*/
-
+	CRenderer::Get_Instance()->Add_ColliderGroup(m_pSphereCollider);
 
 	return NO_EVENT;
 }
@@ -177,6 +214,124 @@ void CReapear::Render_LimLight(CShader_LimLight* pShader)
 	pShader->Set_LimFinish();
 }
 
+void CReapear::AnimationCheck(const _float& fTimeDelta)
+{
+
+	switch (m_eCurAniState)
+	{
+	case CReapear::ADOVEPLATFORM:
+		break;
+	case CReapear::FOREATTACK:
+	{
+		if (m_eCurAniState == m_ePreAniState && m_pMeshCom->Set_IsAniFinsh())
+			m_eCurAniState = IDLEINTIMIDATE;
+		break;
+
+	}
+	case CReapear::LEFTATTACK:
+	{
+		if (m_eCurAniState == m_ePreAniState && m_pMeshCom->Set_IsAniFinsh())
+			m_eCurAniState = IDLEINTIMIDATE;
+		break;
+
+	}
+	case CReapear::RIGHTATTACK:
+	{
+		if (m_eCurAniState == m_ePreAniState && m_pMeshCom->Set_IsAniFinsh())
+			m_eCurAniState = IDLEINTIMIDATE;
+		break;
+
+	}
+	case CReapear::BELOWPLAT:
+		break;
+	case CReapear::ENTRANCE:
+	{if (m_eCurAniState == m_ePreAniState && m_pMeshCom->Set_IsAniFinsh())
+		m_eCurAniState = IDLEINTIMIDATE;
+	break;
+	}
+	case CReapear::EXIT:
+	{
+		if (m_eCurAniState == m_ePreAniState && m_pMeshCom->Set_IsAniFinsh())
+		{
+			m_bIsDead = true;
+
+		}
+	
+		break;
+	}
+	case CReapear::IDLEINTIMIDATE:
+	{
+		if (m_eCurAniState == m_ePreAniState && m_pMeshCom->Set_IsAniFinsh())
+			m_eCurAniState = IDLERESLE;
+		break;
+
+	}
+	case CReapear::IDLERESLE:
+	{
+		break;
+	}
+	case CReapear::STATICPOS:
+		break;
+	case CReapear::STATICATTACK:
+		break;
+	case CReapear::STTATICDAMEGE:
+	{
+	if ( m_eCurAniState==m_ePreAniState &&m_pMeshCom->Set_IsAniFinsh())
+		m_eCurAniState=STATICPOS;
+     	break;
+	}
+		
+	default:
+		break;
+	}
+
+
+
+}
+
+void CReapear::AttackCheck(const _float& fTimeDelta)
+{
+	if (m_eCurAniState == IDLERESLE)
+	{
+		m_fAttackTime += fTimeDelta;
+
+	}
+	if (m_fAttackTime > 3.f)
+	{
+		
+
+		if (m_iAttackCount == 0)
+			m_eCurAniState = FOREATTACK;
+		else if (m_iAttackCount == 1)
+			m_eCurAniState = LEFTATTACK;
+		else if (m_iAttackCount == 2)
+			m_eCurAniState = RIGHTATTACK;
+		CreateBlast();
+		m_fAttackTime = 0.f;
+
+		m_iAttackCount++;
+		if (m_iAttackCount >2)
+			m_iAttackCount = 0;
+	}
+
+}
+
+void CReapear::DieCheck(const _float& fTimeDelta)
+{
+
+	if (m_eCurAniState != FOREATTACK && m_eCurAniState!=EXIT)
+	{
+		if (m_iHp < 0)
+		{
+			m_eCurAniState = EXIT;
+
+		}
+
+
+	}
+}
+
+
 HRESULT CReapear::Add_Component()
 {
 	NULL_CHECK_RETURN(m_pComponentMgr, E_FAIL);
@@ -191,6 +346,27 @@ HRESULT CReapear::Add_Component()
 #endif
 
 	return S_OK;
+}
+
+void CReapear::SetDamage(int iDamage)
+{
+	if (m_bIsLockReapaer)
+		m_eCurAniState = STTATICDAMEGE;
+	else
+	{
+		m_iHp -= iDamage;
+
+	}
+
+
+}
+
+void CReapear::CreateBlast()
+{
+	CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_GameObject", L"Prototype_Blast",L"Blast",nullptr);
+
+
+
 }
 
 void CReapear::Set_ConstantTable()
@@ -213,9 +389,6 @@ void CReapear::Set_ConstantTable()
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
 
 
-
-	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransforms(m_fTime * 3000.f);
-
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
 }
 
@@ -233,9 +406,9 @@ void CReapear::Set_LimTable(CShader_LimLight* pShader)
 	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
 
 	_matrix matWorld = m_pTransCom->m_matWorld;
-	matWorld._11 = 0.1005f;
-	matWorld._22 = 0.1005f;
-	matWorld._33 = 0.1005f;
+	matWorld._11 = 0.10025f;
+	matWorld._22 = 0.10025f;
+	matWorld._33 = 0.10025f;
 	_matrix matWVP =  matWorld * matView * matProj;
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose( matWorld));

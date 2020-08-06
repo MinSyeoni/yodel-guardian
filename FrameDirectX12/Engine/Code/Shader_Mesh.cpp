@@ -32,7 +32,7 @@ HRESULT CShader_Mesh::Ready_Shader(STATETYPE eType)
     {
         m_bIsZwrite = false;
     }
-    if (m_eType == ALPHA)
+    if (m_eType == ALPHA || m_eType == UVANI)
     {
         m_bIsAlphaBlend = true;
 
@@ -220,6 +220,12 @@ HRESULT CShader_Mesh::Create_PipelineState()
     {
         m_pVS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_Mesh.hlsl", nullptr, "VS_MAIN", "vs_5_1");
         m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_Mesh.hlsl", nullptr, "PS_SKYDOME", "ps_5_1");
+
+    }
+    else if (m_eType == UVANI)
+    {
+        m_pVS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_Mesh.hlsl", nullptr, "VS_MAIN", "vs_5_1");
+        m_pPS_ByteCode = Compile_Shader(L"../../Bin/Shader/Shader_Mesh.hlsl", nullptr, "PS_UVMAIN", "ps_5_1");
 
     }
     else

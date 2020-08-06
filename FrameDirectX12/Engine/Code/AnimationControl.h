@@ -50,7 +50,7 @@ public:
     HRESULT               Ready_AniCtrl();
     void               Ready_NodeHierarchy(const aiNode* pNode);
 
-    void               Set_AnimationKey(_int AniKey);
+    void               Set_AnimationKey(_int AniKey,_bool bIsBlend);
     void               Set_BlendAnimationKey(_int FirstAniKey, _int SecondAniKey);
 public:
     _bool  Set_IsFinish(float fTime);
@@ -63,6 +63,7 @@ public:
     _matrix* Get_WeaponMatrix() { return &m_matWeapon; };
     _matrix* Get_CameraMatrix() { return &m_matCamera; };
     _matrix* Get_ChestdiscMatrix() { return &m_matchestdisc; };
+    _matrix* Get_mouthdiscMatrix() { return &m_matmouthdisc; };
 private:
     void               Update_NodeHierarchy(_float fAnimationTime,
         const aiNode* pNode,
@@ -124,11 +125,11 @@ private:
     unordered_map<string, HIERARCHY_INFO*>   m_mapNodeHierarchy;   // Node Hierarchy Á¤º¸.
 
 
-	_matrix            m_matRootFinal =INIT_MATRIX;
-	_matrix            m_matWeapon= INIT_MATRIX;
-	_matrix            m_matCamera= INIT_MATRIX;
-    _matrix            m_matchestdisc = INIT_MATRIX;
-
+	_matrix            m_matRootFinal;
+	_matrix            m_matWeapon;
+	_matrix            m_matCamera;
+    _matrix            m_matchestdisc;
+    _matrix            m_matmouthdisc;
 	_float  m_fAngle = 0.f;
 
 private:

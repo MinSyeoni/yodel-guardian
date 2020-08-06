@@ -10,6 +10,8 @@
 #include "Monster.h"
 #include "Aim.h"
 #include "DirectSound.h"
+#include "Reapear.h"
+#include "ReapearTube.h"
 CPlayerStatus::CPlayerStatus()
 {
 }
@@ -739,11 +741,14 @@ void CPlayerStatus::CutSceneCheck()
 
 void CPlayerStatus::ShootingCheck()
 {
+    ShootingBossCheck();
     CGameObject* pMonster = nullptr;
 
-    float fMinDistToMonster = 999.f;
+    float fMinDistToMonster = 99999.f;
     float fDist = 0;
     bool Collision = false;
+
+    bool bIsBossCollision = false;
     for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::SPHERE, CColliderMgr::MONSTER))
     {
          Collision = CMathMgr::Get_Instance()->Collision_SphereWithCamera(pCol,&fDist);
@@ -755,9 +760,22 @@ void CPlayerStatus::ShootingCheck()
         }
 
     }
+    for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::SPHERE, CColliderMgr::BOSS))
+    {
+
+        Collision = CMathMgr::Get_Instance()->Collision_SphereWithCamera(pCol, &fDist);
+        if ((fDist < fMinDistToMonster) && Collision)
+        {
+            fMinDistToMonster = fDist;
+            pMonster = pCol->Get_Owner();
+            bIsBossCollision = true;
+
+        }
+
+    }
 
 
-    CGameObject* pObject = nullptr;
+  /*  CGameObject* pObject = nullptr;
     float fMinDistToObject = 999.f;
 
     fDist = 0.f;
@@ -771,14 +789,15 @@ void CPlayerStatus::ShootingCheck()
 
         }
 
-    }
+    }*/
 
     if (pMonster == nullptr)
         return;
 
-    if (fMinDistToObject < fMinDistToMonster)
-        return;
-   
+ /*   if (fMinDistToObject < fMinDistToMonster)
+        return;*/
+    if (!bIsBossCollision)
+    {
         CMonster::MONKIND  eMonKind = CMonster::NONAME;
         eMonKind = dynamic_cast<CMonster*>(pMonster)->Get_MONKIND();
 
@@ -789,8 +808,45 @@ void CPlayerStatus::ShootingCheck()
             pZombi->Set_IsHit(true);
 
         }
+    }
+    else
+    {
+        int iDamage = 5.f;
+        if (m_eEquip == SNIPER)
+            iDamage = 20.f;
+        static_cast<CReapear*>(pMonster)->SetDamage(iDamage);
+    }
+
+
 
     }
+
+void CPlayerStatus::ShootingBossCheck()
+{
+    float fDist= 999 ;
+
+    _bool Collision;
+    CGameObject* pGameObject = nullptr;
+    for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::BOSS))
+    {
+        Collision = CMathMgr::Get_Instance()->Collision_BoXWithCamera(pCol, &fDist);
+        if (Collision)
+        {
+       
+            pGameObject = pCol->Get_Owner();
+
+        }
+
+    }
+    if (pGameObject == nullptr)
+        return;
+
+
+    static_cast<CReapearTube*>(pGameObject)->SetDamage();
+
+
+
+}
 
 
 

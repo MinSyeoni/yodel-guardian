@@ -87,10 +87,10 @@ void CMesh::Render_Destortion(CShader* pShader)
     m_pMeshComponent->Render_Destortion(pShader);
 }
 
-void CMesh::Set_Animation(_int Animation)
+void CMesh::Set_Animation(_int Animation,_bool bISAnimation)
 {
     if (m_pAnimationComponent != nullptr)
-        m_pAnimationComponent->Set_AnimationKey(Animation);
+        m_pAnimationComponent->Set_AnimationKey(Animation,bISAnimation);
 }
 
 void CMesh::Set_AnimationBlend(_int FirstAni, _int SecondAni)

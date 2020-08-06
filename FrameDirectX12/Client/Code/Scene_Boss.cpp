@@ -11,7 +11,9 @@
 #include "LightMgr.h"
 #include "Reapear.h"
 #include "Weapon.h"
-
+#include "ReapeorBullet.h"
+#include "Blast.h"
+#include "ReapearTube.h"
 CScene_Boss::CScene_Boss(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -67,6 +69,18 @@ HRESULT CScene_Boss::Ready_GameObjectPrototype()
 	pGameObject = CReapear::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Reapear", pGameObject), E_FAIL);
+
+	pGameObject = CBlast::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Blast", pGameObject), E_FAIL);
+
+	pGameObject = CReapeorBullet::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Meteor", pGameObject), E_FAIL);
+
+	pGameObject = CReapearTube::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Tube", pGameObject), E_FAIL);
 
 	return S_OK;
 }
@@ -148,7 +162,10 @@ HRESULT CScene_Boss::Ready_LayerGameObject(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Sniper", L"Weapon", &eState), E_FAIL);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Reapear", L"Reapear", nullptr), E_FAIL);
-
+	int iType = 0;
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Tube", L"Tube", &iType), E_FAIL);
+	iType = 1;
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_Tube", L"Tube", &iType), E_FAIL);
 	/*____________________________________________________________________
 	GameObject »ý¼º.
 	m_pObjectMgr->Add_GameObject(wstrLayerTag, wstrObjTag);

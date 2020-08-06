@@ -183,16 +183,31 @@ ps_output PS_SHADOWMAIN(VS_SHADOWOUTPUT input) : SV_TARGET
     return(output);
 };
 
+float4 PS_UVMAIN(VS_OUTPUT input) : SV_TARGET
+{
 
+    float4 OutColor;
+    float2 uv = input.uv;
+    uv.x += matWorld._11;
+    uv.y += matWorld._12;
+
+    float4 vColor; 
+    vColor = float4(matWorld._21, matWorld._22, matWorld._23, matWorld._24);
+
+
+    OutColor = gTexture.Sample(gsamLinearWrap, uv);
+    
+    OutColor.a = OutColor.r;
+
+    OutColor *= vColor;
+
+
+    return(OutColor);
+};
 float4 PS_SKYDOME(VS_OUTPUT input) :SV_TARGET
 {
     float4 OutColor;
 OutColor = gTexture.Sample(gsamLinearWrap, input.uv*4.f);
-
-
-
-
-
 
 return OutColor;
 }

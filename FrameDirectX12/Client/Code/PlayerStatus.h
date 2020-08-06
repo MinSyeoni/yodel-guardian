@@ -27,7 +27,7 @@ public:
 	void CollisionWithObject(const _float& fTimeDelta);//오브젝트와 충돌;
 	void CutSceneCheck();
 	void ShootingCheck();
-
+	void ShootingBossCheck();
 	void StatusUpdate(const _float& fTimeDelta);
 	void Rotation(const _float& fTimeDelta);
 	void PlayerDirection(const _float& fTimeDelta);

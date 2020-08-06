@@ -17,7 +17,7 @@ typedef struct tagMeshTexture
 class ENGINE_DLL CShader_Mesh : public CShader
 {
 public:
-	enum STATETYPE{NONALPHA,SKYDOME,ALPHA,ALPHATEST};
+	enum STATETYPE{NONALPHA,SKYDOME,ALPHA,ALPHATEST,UVANI};
 
 
 private:

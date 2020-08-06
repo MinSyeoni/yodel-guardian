@@ -271,6 +271,21 @@
     <Filter Include="07.Scene_Boss\00.Reapear">
       <UniqueIdentifier>{a49622e5-ea8a-4c5b-94d1-df1d726effc4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="07.Scene_Boss\01.ReapearTube">
+      <UniqueIdentifier>{1fc58dbd-1303-4e7c-81bb-d36c28e19abd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_All\07.MeshEffect">
+      <UniqueIdentifier>{5b123576-373f-4f8d-a086-dc9f61c45daa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_All\07.MeshEffect\00.Blast">
+      <UniqueIdentifier>{dd596af9-7a3e-4d03-8de9-d131883e7f1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene_All\07.MeshEffect\01.Meteor">
+      <UniqueIdentifier>{92d93f78-88ca-477f-afb6-fbbeaf6c7a45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07.Scene_Boss\01.ReapearBullet">
+      <UniqueIdentifier>{f82705ca-50ad-4a0c-b786-be9e0893fb19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -542,6 +557,15 @@
     <ClInclude Include="..\Code\Reapear.h">
       <Filter>07.Scene_Boss\00.Reapear</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Blast.h">
+      <Filter>02.Scene_All\07.MeshEffect\00.Blast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\ReapeorBullet.h">
+      <Filter>07.Scene_Boss\01.ReapearBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\ReapearTube.h">
+      <Filter>07.Scene_Boss\01.ReapearTube</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -785,6 +809,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\Reapear.cpp">
       <Filter>07.Scene_Boss\00.Reapear</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Blast.cpp">
+      <Filter>02.Scene_All\07.MeshEffect\00.Blast</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ReapeorBullet.cpp">
+      <Filter>07.Scene_Boss\01.ReapearBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ReapearTube.cpp">
+      <Filter>07.Scene_Boss\01.ReapearTube</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

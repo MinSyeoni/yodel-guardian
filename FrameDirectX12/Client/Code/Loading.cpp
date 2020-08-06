@@ -88,6 +88,11 @@ HRESULT CLoading::Load_Shader()
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_SkyDome", ID_STATIC, pComponent), E_FAIL);
 
+	pComponent = CShader_Mesh::Create(DEVICE, m_pCommandList, CShader_Mesh::UVANI);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_UvAni", ID_STATIC, pComponent), E_FAIL);
+
+
 	pComponent = CShader_Dissolve::Create(DEVICE, m_pCommandList);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_Dissolve", ID_STATIC, pComponent), E_FAIL);
@@ -502,6 +507,10 @@ HRESULT CLoading::Mesh_ForStage(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"reaper_ground.X", ID_STATIC, pComponent), E_FAIL);
 
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage3/", L"Meteor.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Meteor", ID_STATIC, pComponent), E_FAIL);
+
 	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/DynamicMesh/Stage1/", L"door2.X");
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"door2.X", ID_STATIC, pComponent), E_FAIL);
@@ -606,10 +615,14 @@ HRESULT CLoading::Mesh_ForStage(void)
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"passage_box2.X", ID_STATIC, pComponent), E_FAIL);
 
 
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/MeshEffect/", L"Blast.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Blast", ID_STATIC, pComponent), E_FAIL);
 
 
-
-
+	pComponent = Engine::CMesh::Create(m_pGraphicDev, m_pCommandList, L"../../Resource/StaticMesh/Stage3/", L"Fluid.X");
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Mesh_Fluid", ID_STATIC, pComponent), E_FAIL);
 
 	static_cast<CLoadingBar*>(CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"LoadingBar"))->SetGauge(0.65f);
 

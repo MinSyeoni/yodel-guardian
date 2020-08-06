@@ -170,6 +170,7 @@
     <ClInclude Include="..\Code\Aim.h" />
     <ClInclude Include="..\Code\AttackDamage.h" />
     <ClInclude Include="..\Code\BackGround.h" />
+    <ClInclude Include="..\Code\Blast.h" />
     <ClInclude Include="..\Code\CardKey.h" />
     <ClInclude Include="..\Code\CardReader.h" />
     <ClInclude Include="..\Code\CardTagUI.h" />
@@ -219,6 +220,8 @@
     <ClInclude Include="..\Code\PlayerStatus.h" />
     <ClInclude Include="..\Code\IconUI.h" />
     <ClInclude Include="..\Code\Reapear.h" />
+    <ClInclude Include="..\Code\ReapearTube.h" />
+    <ClInclude Include="..\Code\ReapeorBullet.h" />
     <ClInclude Include="..\Code\RectObject.h" />
     <ClInclude Include="..\Code\Rifle.h" />
     <ClInclude Include="..\Code\Salone.h" />
@@ -257,6 +260,7 @@
     <ClCompile Include="..\Code\Aim.cpp" />
     <ClCompile Include="..\Code\AttackDamage.cpp" />
     <ClCompile Include="..\Code\BackGround.cpp" />
+    <ClCompile Include="..\Code\Blast.cpp" />
     <ClCompile Include="..\Code\CardKey.cpp" />
     <ClCompile Include="..\Code\CardReader.cpp" />
     <ClCompile Include="..\Code\CardTagUI.cpp" />
@@ -306,6 +310,8 @@
     <ClCompile Include="..\Code\PlayerStatus.cpp" />
     <ClCompile Include="..\Code\IconUI.cpp" />
     <ClCompile Include="..\Code\Reapear.cpp" />
+    <ClCompile Include="..\Code\ReapearTube.cpp" />
+    <ClCompile Include="..\Code\ReapeorBullet.cpp" />
     <ClCompile Include="..\Code\RectObject.cpp" />
     <ClCompile Include="..\Code\Rifle.cpp" />
     <ClCompile Include="..\Code\Salone.cpp" />
