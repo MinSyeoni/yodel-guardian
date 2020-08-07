@@ -171,6 +171,8 @@
     <ClInclude Include="..\Code\AttackDamage.h" />
     <ClInclude Include="..\Code\BackGround.h" />
     <ClInclude Include="..\Code\Blast.h" />
+    <ClInclude Include="..\Code\BossBack.h" />
+    <ClInclude Include="..\Code\BossHPBar.h" />
     <ClInclude Include="..\Code\CardKey.h" />
     <ClInclude Include="..\Code\CardReader.h" />
     <ClInclude Include="..\Code\CardTagUI.h" />
@@ -261,6 +263,8 @@
     <ClCompile Include="..\Code\AttackDamage.cpp" />
     <ClCompile Include="..\Code\BackGround.cpp" />
     <ClCompile Include="..\Code\Blast.cpp" />
+    <ClCompile Include="..\Code\BossBack.cpp" />
+    <ClCompile Include="..\Code\BossHPBar.cpp" />
     <ClCompile Include="..\Code\CardKey.cpp" />
     <ClCompile Include="..\Code\CardReader.cpp" />
     <ClCompile Include="..\Code\CardTagUI.cpp" />
