@@ -38,7 +38,8 @@ HRESULT CBossHPBar::LateInit_GameObject()
 	m_pTransCom->m_vPos.z = 0.01f; 
 
 	CGameObject* pReapear = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Reapear");
-	m_fPreHp = m_fCurHp = dynamic_cast<CReapear*>(pReapear)->Get_CurBossHP();
+	if(pReapear != nullptr)
+		m_fPreHp = m_fCurHp = dynamic_cast<CReapear*>(pReapear)->Get_CurBossHP();
 
 	return S_OK;
 }
@@ -53,7 +54,8 @@ _int CBossHPBar::Update_GameObject(const _float& fTimeDelta)
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
 	CGameObject* pReapear = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Reapear");
-	m_fCurHp = dynamic_cast<CReapear*>(pReapear)->Get_CurBossHP();
+	if (pReapear != nullptr)
+		m_fCurHp = dynamic_cast<CReapear*>(pReapear)->Get_CurBossHP();
 
 	if (m_fPreHp > m_fCurHp)
 	{
