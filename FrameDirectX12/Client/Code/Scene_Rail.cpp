@@ -18,6 +18,7 @@
 #include "Scene_Boss.h"
 
 #include "Trigger.h"
+#include "QuestUI.h"
 
 CScene_Rail::CScene_Rail(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
@@ -43,6 +44,14 @@ HRESULT CScene_Rail::Ready_Scene()
 	FAILED_CHECK_RETURN(Ready_LayerEnvironment(L"Layer_Environment"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_LayerGameObject(L"Layer_GameObject"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_LayerUI(L"Layer_UI"), E_FAIL);
+
+	// ¾öÆóÇÏ´Â ¹Ì¼ÇÀ¸·Î ¹Ù²Þ.
+	list<CGameObject*>* pQuestUIList = m_pObjectMgr->Get_OBJLIST(L"Layer_UI", L"QuestUI");
+	if (pQuestUIList != nullptr)
+	{
+		for (auto& pSrc : *pQuestUIList)
+			dynamic_cast<CQuestUI*>(pSrc)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE6);
+	}
 
 	return S_OK;
 }
@@ -372,7 +381,7 @@ HRESULT CScene_Rail::Ready_LayerUI(wstring wstrLayerTag)
 	for (int i = 0; i < 9; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_EquipUI", L"EquipUI", &(iType = i)), E_FAIL);
 
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < 9; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_QuestUI", L"QuestUI", &(iType = i)), E_FAIL);
 
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MPBarUI", L"MPBarUI", nullptr), E_FAIL);

@@ -13,6 +13,7 @@ public:
 	virtual _int	Update_Scene(const _float& fTimeDelta);
 	virtual _int	LateUpdate_Scene(const _float& fTimeDelta);
 	virtual void	Render_Scene(const _float& fTimeDelta);
+
 private:
 	HRESULT			Ready_GameObjectPrototype();
 private:
