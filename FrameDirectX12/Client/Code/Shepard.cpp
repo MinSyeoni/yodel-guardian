@@ -11,6 +11,7 @@
 #include "Zombi.h"
 #include "Monster.h"
 #include "NpcRifle.h"
+#include "QuestUI.h"
 CShepard::CShepard(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -241,8 +242,16 @@ void CShepard::GotoPlayer(const _float& fTimeDelta)
 
 		CNpcWords::WORDS_TYPE eType = CNpcWords::SHEPARD;
 		m_pObjectMgr->Add_GameObject(L"Layer_UI", L"Prototype_NpcBoard", L"NpcBoard", &eType);
-
-
+		// 퀘스트 다음걸로 넘기려고 추가했음
+		// 카드키 줍기전이나 npc 대화할 때 넣어주고 type만 바꿔주면 됨
+		list<CGameObject*>* pQuestUIList = m_pObjectMgr->Get_OBJLIST(L"Layer_UI", L"QuestUI");
+		if (pQuestUIList != nullptr)
+		{
+			for (auto& pSrc : *pQuestUIList)
+			{
+				dynamic_cast<CQuestUI*>(pSrc)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE1);
+			}
+		}
 	}
 
 	else
