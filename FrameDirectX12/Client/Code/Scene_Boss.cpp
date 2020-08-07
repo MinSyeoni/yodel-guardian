@@ -14,10 +14,6 @@
 #include "ReapeorBullet.h"
 #include "Blast.h"
 #include "ReapearTube.h"
-
-#include "BossHPBar.h"
-#include "BossBack.h"
-
 CScene_Boss::CScene_Boss(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -69,14 +65,6 @@ HRESULT CScene_Boss::Ready_GameObjectPrototype()
 {
 	NULL_CHECK_RETURN(m_pObjectMgr, E_FAIL);
 	CGameObject* pGameObject = nullptr;
-
-	pGameObject = CBossBack::Create(m_pGraphicDevice, m_pCommandList);
-	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_BossBack", pGameObject), E_FAIL);
-
-	pGameObject = CBossHPBar::Create(m_pGraphicDevice, m_pCommandList);
-	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_BossHPBar", pGameObject), E_FAIL);
 
 	pGameObject = CReapear::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -183,7 +171,6 @@ HRESULT CScene_Boss::Ready_LayerGameObject(wstring wstrLayerTag)
 	m_pObjectMgr->Add_GameObject(wstrLayerTag, wstrObjTag);
 	______________________________________________________________________*/
 	Load_StageObject(L"../../Data/StaticObj/Bossmap.dat", wstrLayerTag);
-
 	return S_OK;
 }
 
@@ -324,11 +311,12 @@ HRESULT CScene_Boss::Ready_LayerUI(wstring wstrLayerTag)
 	for (int i = 0; i < 9; ++i)
 		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_EquipUI", L"EquipUI", &(iType = i)), E_FAIL);
 
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_BossBack", L"BossBack", nullptr), E_FAIL);
-	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_BossHPBar", L"BossHPBar", nullptr), E_FAIL);
+	for (int i = 0; i < 10; ++i)
+		FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_QuestUI", L"QuestUI", &(iType = i)), E_FAIL);
+
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MPBarUI", L"MPBarUI", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MouseUI", L"MouseUI", nullptr), E_FAIL);
-	
+
 	return S_OK;
 }
 

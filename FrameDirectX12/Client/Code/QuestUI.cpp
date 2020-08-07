@@ -30,7 +30,7 @@ HRESULT CQuestUI::Ready_GameObject()
 
 HRESULT CQuestUI::LateInit_GameObject()
 {
-	for(int i = 0; i < 9; ++i)
+	for(int i = 0; i < 10; ++i)
 		m_pShaderCom[i]->Set_Shader_Texture(m_pTexture[i]->Get_Texture());	
 
 	return S_OK;
@@ -38,6 +38,15 @@ HRESULT CQuestUI::LateInit_GameObject()
 
 _int CQuestUI::Update_GameObject(const _float& fTimeDelta)
 {
+	if (KEY_DOWN(DIK_7))//임시
+	{
+		if (m_bIsShow)
+			m_bIsShow = false;
+		else
+			m_bIsShow = true;
+
+	}
+
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
 	if (m_bIsDead)
@@ -57,6 +66,16 @@ _int CQuestUI::LateUpdate_GameObject(const _float& fTimeDelta)
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
+	/////// 퀘스트 창 넘어가기 테스트 ///////
+	if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_N))
+	{
+		if (m_iTest < 9)
+			m_iTest++;
+		else
+			m_iTest--;
+
+		m_eQuestType = (QUEST_TYPE)m_iTest;
+	}
 
 	return NO_EVENT;
 }
@@ -67,6 +86,7 @@ void CQuestUI::Render_GameObject(const _float& fTimeDelta)
 		return;
 
 	Set_ConstantTable((_uint)m_eQuestType);
+
 	m_pShaderCom[(_uint)m_eQuestType]->Begin_Shader();
 	m_pBufferCom->Begin_Buffer();
 	m_pShaderCom[(_uint)m_eQuestType]->End_Shader();
@@ -84,7 +104,7 @@ HRESULT CQuestUI::Add_Component()
 	m_mapComponent[ID_STATIC].emplace(L"Com_Buffer", m_pBufferCom);
 
 	// Shader
-	for (int i = 0; i < 9; ++i)
+	for (int i = 0; i < 10; ++i)
 	{
 		wstring wstrText = L"";
 		string strTemp = "";
