@@ -194,7 +194,6 @@ call CopyEngine.bat</Command>
     <ClInclude Include="..\Code\CubeTex.h" />
     <ClInclude Include="..\Code\DDSTextureLoader.h" />
     <ClInclude Include="..\Code\DirectInput.h" />
-    <ClInclude Include="..\Code\DirectSound.h" />
     <ClInclude Include="..\Code\DistortionTarget.h" />
     <ClInclude Include="..\Code\DownSampleTarget.h" />
     <ClInclude Include="..\Code\Font.h" />
@@ -274,7 +273,6 @@ call CopyEngine.bat</Command>
     <ClCompile Include="..\Code\CubeTex.cpp" />
     <ClCompile Include="..\Code\DDSTextureLoader.cpp" />
     <ClCompile Include="..\Code\DirectInput.cpp" />
-    <ClCompile Include="..\Code\DirectSound.cpp" />
     <ClCompile Include="..\Code\DistortionTarget.cpp" />
     <ClCompile Include="..\Code\DownSampleTarget.cpp" />
     <ClCompile Include="..\Code\Font.cpp" />

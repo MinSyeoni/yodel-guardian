@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "MainApp.h"
 #include "DirectInput.h"
-#include "DirectSound.h"
 #include "ComponentMgr.h"
 #include "ObjectMgr.h"
 #include "Management.h"
@@ -11,6 +10,7 @@
 #include "Scene_Stage.h"
 #include "DynamicCamera.h"
 #include "Font.h"
+#include "SoundMgr.h"
 #include "Astar.h"
 CMainApp::CMainApp()
 	: m_pDeviceClass(CGraphicDevice::Get_Instance())
@@ -102,6 +102,8 @@ _int CMainApp::Update_MainApp(const _float & fTimeDelta)
 		m_uiFPS = 0;
 	}
 
+	//CSoundMgr::Get_Instance()->Update_SoundDev();
+
 
 	return m_pManagement->Update_Management(fTimeDelta);
 }
@@ -156,15 +158,17 @@ HRESULT CMainApp::SetUp_DefaultSetting(CGraphicDevice::WINMODE eMode, const _uin
 		return E_FAIL;
 	}
 
+
+
+
 	/*____________________________________________________________________
 	DirectSound ÃÊ±âÈ­.
-	______________________________________________________________________*/
-	//if (FAILED(Engine::CDirectSound::Get_Instance()->Ready_DirectSound(g_hWnd)))
-	//{
-	//	CDirectSound::Get_Instance()->Destroy_Instance();
-	//	return E_FAIL;
-	//}
-	//Engine::CDirectSound::Get_Instance()->LoadDirectSoundFile(L"Logo_BGM");
+	___________________
+	___________________________________________________*/
+	CSoundMgr::Get_Instance()->Ready_SoundDev();
+	CSoundMgr::Get_Instance()->LoadSoundFile("Bgm.wav");
+	CSoundMgr::Get_Instance()->LoadSoundFile("ZombiDead.wav");
+
 
 	return S_OK;
 }
@@ -251,7 +255,7 @@ HRESULT CMainApp::SetUp_Resource()
 
 	Engine::CComponent* pComponent = nullptr;
 
-	pComponent = Engine::CTexture::Create(m_pGraphicDevice, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/Logo/Logo%d.dds", 5);
+	pComponent = Engine::CTexture::Create(m_pGraphicDevice, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/Logo/Logo%d.dds", 6);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_Logo", ID_STATIC, pComponent), E_FAIL);
 

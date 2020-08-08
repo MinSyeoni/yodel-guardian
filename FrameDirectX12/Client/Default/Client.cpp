@@ -7,8 +7,6 @@
 #include "GraphicDevice.h"
 #include "TimeMgr.h"
 #include "FrameMgr.h"
-#include "DirectInput.h"
-#include "DirectSound.h"
 #include "Management.h"
 #include "ObjectMgr.h"
 #include "ComponentMgr.h"
@@ -56,11 +54,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MSG msg;
 	msg.message = WM_NULL;
 
-	if (FAILED(Engine::CDirectSound::Get_Instance()->Ready_DirectSound(g_hWnd)))
-	{
-		Engine::CDirectSound::Get_Instance()->Destroy_Instance();
-		return FALSE;
-	}
 	/*____________________________________________________________________
 	MainApp 생성.
 	______________________________________________________________________*/
@@ -302,19 +295,6 @@ _ulong Release_Singleton()
 		MSG_BOX(L"CMathMgr Release Failed");
 		return dwRefCnt;
 	}
-
-	if (dwRefCnt = Engine::CDirectInput::Get_Instance()->Destroy_Instance())
-	{
-		MSG_BOX(L"CDirectInput Release Failed");
-		return dwRefCnt;
-	}
-
-	if (dwRefCnt = Engine::CDirectSound::Get_Instance()->Destroy_Instance())
-	{
-		MSG_BOX(L"CDirectSound Release Failed");
-		return dwRefCnt;
-	}
-
 	if (dwRefCnt = CManagement::Get_Instance()->Destroy_Instance())
 	{
 		MSG_BOX(L"CManagement Release Failed");

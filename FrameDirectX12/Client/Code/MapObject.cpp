@@ -87,10 +87,7 @@ _int CMapObject::LateUpdate_GameObject(const _float & fTimeDelta)
 	if (m_bIsDrawShadow &&!m_bIsColliderObject )
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 
-//	if(m_bIsDrawShadow)
-//		FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCom), -1);
 
-	
 
 	if (!CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
 		return NO_EVENT;

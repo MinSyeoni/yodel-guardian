@@ -7,9 +7,9 @@
 #include "GraphicDevice.h"
 #include "BackGround.h"
 #include "DynamicCamera.h"
-#include "DirectSound.h"
 #include "LoadingTexture.h"
 #include "LoadingBar.h"
+#include "LogoExoMars.h"
 CScene_Logo::CScene_Logo(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -25,7 +25,7 @@ HRESULT CScene_Logo::Ready_Scene()
 #ifdef _DEBUG
 	COUT_STR("Ready Scene_Logo");
 #endif
-
+	CSoundMgr::Get_Instance()->PlayBGM(L"Bgm.wav");
 	FAILED_CHECK_RETURN(Ready_GameObjectPrototype(), E_FAIL);
 
 	FAILED_CHECK_RETURN(Ready_LayerEnvironment(L"Layer_Environment"), E_FAIL);
@@ -90,6 +90,10 @@ HRESULT CScene_Logo::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_LoadingBar", pGameObject), E_FAIL);
 
+	pGameObject = CLogoExoMars::Create(m_pGraphicDevice, m_pCommandList);
+
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_LogoExoMars", pGameObject), E_FAIL);
 
 	// Prototype - DynamicCamera
 	pGameObject = CDynamicCamera::Create(m_pGraphicDevice, m_pCommandList,
@@ -109,14 +113,7 @@ HRESULT CScene_Logo::Ready_GameObjectPrototype()
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_DynamicCamera", pGameObject), E_FAIL);
 
 
-	CDirectSound::Get_Instance()->LoadDirectSoundFile(L"GUNSHOT");//여기야시영
-	CDirectSound::Get_Instance()->LoadDirectSoundFile(L"ZombiDead");//여기야시영
-	CDirectSound::Get_Instance()->LoadDirectSoundFile(L"Siren");//여기야시영
-	CDirectSound::Get_Instance()->LoadDirectSoundFile(L"Bgm");//여기야시영
 
-
-
-	//CDirectSound::Get_Instance()->PlayDirectSoundEffect(L"Bgm");//여기야시영
 	return S_OK;
 }
 
@@ -162,6 +159,7 @@ HRESULT CScene_Logo::Ready_LayerUI(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_BackGround", L"BackGround", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_LoadingTexture", L"LoadingTexture", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_LoadingBar", L"LoadingBar", nullptr), E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_LogoExoMars", L"BackGround", nullptr), E_FAIL);
 	return S_OK;
 }
 

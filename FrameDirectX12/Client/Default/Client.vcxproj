@@ -196,6 +196,7 @@
     <ClInclude Include="..\Code\LoadingBar.h" />
     <ClInclude Include="..\Code\LoadingTexture.h" />
     <ClInclude Include="..\Code\LobbyDoor.h" />
+    <ClInclude Include="..\Code\LogoExoMars.h" />
     <ClInclude Include="..\Code\MainApp.h" />
     <ClInclude Include="..\Code\MapObject.h" />
     <ClInclude Include="..\Code\BaziorMgr.h" />
@@ -233,6 +234,7 @@
     <ClInclude Include="..\Code\Shepard.h" />
     <ClInclude Include="..\Code\SkyDome.h" />
     <ClInclude Include="..\Code\Sniper.h" />
+    <ClInclude Include="..\Code\SoundMgr.h" />
     <ClInclude Include="..\Code\StaticCamera.h" />
     <ClInclude Include="..\Code\StaticObject.h" />
     <ClInclude Include="..\Code\TagBack.h" />
@@ -286,6 +288,7 @@
     <ClCompile Include="..\Code\LoadingBar.cpp" />
     <ClCompile Include="..\Code\LoadingTexture.cpp" />
     <ClCompile Include="..\Code\LobbyDoor.cpp" />
+    <ClCompile Include="..\Code\LogoExoMars.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\MapObject.cpp" />
     <ClCompile Include="..\Code\BaziorMgr.cpp" />
@@ -323,6 +326,7 @@
     <ClCompile Include="..\Code\Shepard.cpp" />
     <ClCompile Include="..\Code\SkyDome.cpp" />
     <ClCompile Include="..\Code\Sniper.cpp" />
+    <ClCompile Include="..\Code\SoundMgr.cpp" />
     <ClCompile Include="..\Code\StaticCamera.cpp" />
     <ClCompile Include="..\Code\StaticObject.cpp" />
     <ClCompile Include="..\Code\TagBack.cpp" />

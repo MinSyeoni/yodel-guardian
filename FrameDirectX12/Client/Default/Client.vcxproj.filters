@@ -286,6 +286,12 @@
     <Filter Include="07.Scene_Boss\01.ReapearBullet">
       <UniqueIdentifier>{f82705ca-50ad-4a0c-b786-be9e0893fb19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="97.Mgr\01.SoundMgr">
+      <UniqueIdentifier>{0b5d7082-e98b-4355-ab68-704a33608d25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Scene_Logo\00.BackGround\02.EXOMARS">
+      <UniqueIdentifier>{b9dc6931-0dfc-4385-944e-968508c16cd5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -566,6 +572,12 @@
     <ClInclude Include="..\Code\ReapearTube.h">
       <Filter>07.Scene_Boss\01.ReapearTube</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\SoundMgr.h">
+      <Filter>97.Mgr\01.SoundMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\LogoExoMars.h">
+      <Filter>00.Scene_Logo\00.BackGround\02.EXOMARS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -818,6 +830,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\ReapearTube.cpp">
       <Filter>07.Scene_Boss\01.ReapearTube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SoundMgr.cpp">
+      <Filter>97.Mgr\01.SoundMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\LogoExoMars.cpp">
+      <Filter>00.Scene_Logo\00.BackGround\02.EXOMARS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

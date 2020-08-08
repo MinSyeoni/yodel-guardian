@@ -4,7 +4,6 @@
 #include "GraphicDevice.h"
 #include "ObjectMgr.h"
 #include "ColliderMgr.h"
-#include "DirectSound.h"
 #include "Player.h"
 #include "PlayerStatus.h"
 
@@ -141,7 +140,6 @@ void CZombi::Update_ZombiHP()
 	if (m_bIsDeadSound == false && m_eCurState == ZOM_BC_Dead)
 	{
 		m_bIsDeadSound = true;
-		CDirectSound::Get_Instance()->PlayDirectSoundFile(L"ZombiDead");
 	}
 }
 

@@ -7,10 +7,10 @@
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_DownSample.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Effect.cso
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(82,12-69): warning X3206: implicit truncation of vector type
+  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_LightAcc.cso
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(132,12-69): warning X3206: implicit truncation of vector type
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_LightAcc.hlsl(184,16-73): warning X3206: implicit truncation of vector type
   
-  compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_LightAcc.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_Mesh.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_ShadowDepth.cso
   compilation object save succeeded; see C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Bin\Shader_SSAO.cso
@@ -30,16 +30,15 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Bin\Shader\Shader_L
   CubeTex.cpp
   DDSTextureLoader.cpp
   DirectInput.cpp
-  DirectSound.cpp
   DistortionTarget.cpp
   DownSampleTarget.cpp
   Font.cpp
   Frame.cpp
   FrameMgr.cpp
+  Frustom.cpp
   코드를 생성하고 있습니다...
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\AnimationControl.cpp(817): warning C4715: 'Engine::CAniCtrl::Find_BoneOffset': 모든 제어 경로에서 값을 반환하지는 않습니다.
   컴파일하고 있습니다...
-  Frustom.cpp
   GameObject.cpp
   GraphicDevice.cpp
   Info.cpp
@@ -59,10 +58,10 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\Animati
   Renderer.cpp
   Scene.cpp
   Shader.cpp
+  Shader_Blend.cpp
   코드를 생성하고 있습니다...
 C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMesh.cpp(156): warning C4715: 'Engine::CNaviMesh::MoveOn_NaviMesh': 모든 제어 경로에서 값을 반환하지는 않습니다.
   컴파일하고 있습니다...
-  Shader_Blend.cpp
   Shader_Blur.cpp
   Shader_ColorBuffer.cpp
   Shader_Default.cpp
@@ -82,9 +81,9 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   SphereCollider.cpp
   SphereTex.cpp
   SSAOTarget.cpp
+  Target.cpp
   코드를 생성하고 있습니다...
   컴파일하고 있습니다...
-  Target.cpp
   TerrainTex.cpp
   Texture.cpp
   TimeMgr.cpp
@@ -99,8 +98,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   배치 파일이 아닙니다.
           1개 파일이 복사되었습니다.
           1개 파일이 복사되었습니다.
-  다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다.
-          0개 파일이 복사되었습니다.
+          1개 파일이 복사되었습니다.
   .\Engine\Code\AnimationControl.h
   .\Engine\Code\Astar.h
   .\Engine\Code\Base.h
@@ -115,7 +113,6 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   .\Engine\Code\CubeTex.h
   .\Engine\Code\DDSTextureLoader.h
   .\Engine\Code\DirectInput.h
-  .\Engine\Code\DirectSound.h
   .\Engine\Code\DistortionTarget.h
   .\Engine\Code\DownSampleTarget.h
   .\Engine\Code\Font.h
@@ -172,7 +169,7 @@ C:\Users\Huijun\Desktop\Exomas\yodel-guardian\FrameDirectX12\Engine\Code\NaviMes
   .\Engine\Code\Transform.h
   .\Engine\Code\VIBuffer.h
   .\Engine\Code\VlLine.h
-         71개 파일이 복사되었습니다.
+         70개 파일이 복사되었습니다.
   .\Engine\Header\Engine_Const.h
   .\Engine\Header\Engine_Enum.h
   .\Engine\Header\Engine_Function.h

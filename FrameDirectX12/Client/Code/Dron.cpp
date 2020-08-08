@@ -5,7 +5,6 @@
 #include "GraphicDevice.h"
 #include "ObjectMgr.h"
 #include "ColliderMgr.h"
-#include "DirectSound.h"
 #include "Player.h"
 #include "PlayerStatus.h"
 #include "Trigger.h"
@@ -177,11 +176,6 @@ void CDron::Update_DronHP()
 		m_bIsDronState[2] = false;
 		m_eCurState = DRON_DG_Death;
 	}
-	//if (m_bIsDeadSound == false && m_eCurState == ZOM_BC_Dead)
-	//{
-	//	m_bIsDeadSound = true;
-	//	CDirectSound::Get_Instance()->PlayDirectSoundFile(L"ZombiDead");
-	//}
 }
 
 void CDron::Chase_Player(const _float& fTimeDelta)

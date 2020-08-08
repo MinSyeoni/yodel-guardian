@@ -1,7 +1,6 @@
 
 #include "stdafx.h"
 #include "Trigger.h"
-#include "DirectSound.h"
 #include "ObjectMgr.h"
 #include "ColliderMgr.h"
 #include "GraphicDevice.h"
@@ -92,8 +91,7 @@ _int CTrigger::Update_GameObject(const _float & fTimeDelta)
 		{
 			if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCol, pCol, &vShaveDir))
 			{
-				//if (m_tColInfo.iColID == 1)
-				//	CDirectSound::Get_Instance()->PlayDirectSoundFile(L"Siren");
+			
 				m_bIsActive = true;
 			}
 		}

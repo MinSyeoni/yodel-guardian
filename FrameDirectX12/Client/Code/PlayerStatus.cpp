@@ -9,7 +9,6 @@
 #include "DynamicCamera.h"
 #include "Monster.h"
 #include "Aim.h"
-#include "DirectSound.h"
 #include "Reapear.h"
 #include "ReapearTube.h"
 
@@ -991,12 +990,11 @@ void CPlayerStatus::AttackCheck(const _float& fTimeDelta)
             {
                 if (static_cast<CWeapon*>(pSrc)->Get_WeaponType() == CWeapon::RIFLE && static_cast<CWeapon*>(pSrc)->Get_WeaponState() == CWeapon::EQUIP)
                 {
-
                     static_cast<CWeapon*>(pSrc)->CreateShootEffect();
                 }
             }
 
-           // CDirectSound::Get_Instance()->PlayDirectSoundFile(L"GUNSHOT");
+
             ShootingCheck();
             m_fShootingTime = 0.f;
         }
@@ -1019,7 +1017,6 @@ void CPlayerStatus::AttackCheck(const _float& fTimeDelta)
                 }
             }
 
-           // CDirectSound::Get_Instance()->PlayDirectSoundFile(L"GUNSHOT");
             ShootingCheck();
             m_fShootingTime = 0.f;
         }
