@@ -56,8 +56,8 @@ _int CDronBullet::Update_GameObject(const _float& fTimeDelta)
 		return DEAD_OBJ;
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
-	m_pSphereCollider->Update_Collider(&m_pTransCom->m_matWorld);
-	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::COMBAT, m_pSphereCollider);
+	m_pBoxCollider->Update_Collider(&m_pTransCom->m_matWorld);
+	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::COMBAT, m_pBoxCollider);
 
 	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 	if (pPlayer == nullptr)
@@ -74,19 +74,22 @@ _int CDronBullet::Update_GameObject(const _float& fTimeDelta)
 
 _int CDronBullet::LateUpdate_GameObject(const _float& fTimeDelta)
 {
-	//if (!CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
-	//	return NO_EVENT; 
-
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
-	//FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
-	//FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
-	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pSphereCollider), -1);
+	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCollider), -1);
 	
 	_vec3 vShaveDir;
-	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::SPHERE, CColliderMgr::PLAYER))
+	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYER))
 	{
-		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_Spere(pCol, m_pSphereCollider, &vShaveDir))
+		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(pCol, m_pBoxCollider, &vShaveDir))
+		{
+			m_bIsDead = true;
+		}
+	}
+
+	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYERVIEW))
+	{
+		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(pCol, m_pBoxCollider, &vShaveDir))
 		{
 			m_bIsDead = true;
 		}
@@ -100,36 +103,21 @@ void CDronBullet::Render_GameObject(const _float& fTimeDelta)
 	if (m_bIsDead)
 		return;
 
-	//Set_ConstantTable();
-	//m_pShaderCom->Begin_Shader();
-	//m_pMeshCom->Render_Mesh(m_pShaderCom);
 }
 
 void CDronBullet::Render_ShadowDepth(CShader_Shadow* pShader)
 {
-	//Set_ShadowTable(pShader);
-	//m_pMeshCom->Render_ShadowMesh(pShader);
-	//pShader->Set_ShadowFinish();
+
 }
 
 HRESULT CDronBullet::Add_Component()
 {
 	NULL_CHECK_RETURN(m_pComponentMgr, E_FAIL);
 
-	// Shader
-	//m_pShaderCom = static_cast<Engine::CShader_Mesh*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_Mesh", COMPONENTID::ID_STATIC));
-	//NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
-	//m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
-
-	// Buffer
-	//m_pMeshCom = static_cast<Engine::CMesh*>(m_pComponentMgr->Clone_Component(m_tMeshInfo.MeshTag.c_str(), COMPONENTID::ID_STATIC));
-	//NULL_CHECK_RETURN(m_pMeshCom, E_FAIL);
-	//m_mapComponent[ID_STATIC].emplace(L"Com_Mesh", m_pMeshCom);
-
-	// Sphere
-	m_pSphereCollider = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, nullptr, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 1.f, _vec3(1.f, 1.f, 1.f), this));
-	NULL_CHECK_RETURN(m_pSphereCollider, E_FAIL);
-	m_mapComponent[ID_STATIC].emplace(L"Com_SphereCol", m_pSphereCollider);
+	// Box
+	m_pBoxCollider = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, false, nullptr, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(1.f, 1.f, 1.f), this));
+	NULL_CHECK_RETURN(m_pBoxCollider, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCollider);
 
 	return S_OK;
 }

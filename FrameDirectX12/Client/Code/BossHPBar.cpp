@@ -80,7 +80,7 @@ _int CBossHPBar::LateUpdate_GameObject(const _float& fTimeDelta)
 		m_fPreHp -= 15.f * fTimeDelta;
 	}
 
-	m_matHPWorld._41 = m_fPreHp * (0.008f);
+	m_matHPWorld._41 = 0.22f + m_fPreHp * (0.0058f);
 
 	return NO_EVENT;
 }
