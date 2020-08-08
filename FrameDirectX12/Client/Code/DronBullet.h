@@ -5,7 +5,7 @@
 
 namespace Engine
 {
-	class CSphereCollider;
+	class CBoxCollider;
 	class CStaticMesh;
 	class CShader_Mesh;
 }
@@ -37,9 +37,7 @@ private:
 	void						Render_ShadowDepth(CShader_Shadow* pShader);
 
 private:
-	//Engine::CMesh*			m_pMeshCom = nullptr;
-	//Engine::CShader_Mesh*      m_pShaderCom = nullptr;
-	Engine::CSphereCollider*	m_pSphereCollider = nullptr;
+	Engine::CBoxCollider*		m_pBoxCollider = nullptr;
 
 	MeshInfo					m_tMeshInfo;
 	CGameObject*				m_pGameObject = nullptr;

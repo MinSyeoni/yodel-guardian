@@ -38,7 +38,8 @@ HRESULT CBossHPBar::LateInit_GameObject()
 	m_pTransCom->m_vPos.z = 0.01f; 
 
 	CGameObject* pReapear = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Reapear");
-	m_fPreHp = m_fCurHp = dynamic_cast<CReapear*>(pReapear)->Get_CurBossHP();
+	if(pReapear != nullptr)
+		m_fPreHp = m_fCurHp = dynamic_cast<CReapear*>(pReapear)->Get_CurBossHP();
 
 	return S_OK;
 }
@@ -53,7 +54,8 @@ _int CBossHPBar::Update_GameObject(const _float& fTimeDelta)
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
 	CGameObject* pReapear = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Reapear");
-	m_fCurHp = dynamic_cast<CReapear*>(pReapear)->Get_CurBossHP();
+	if (pReapear != nullptr)
+		m_fCurHp = dynamic_cast<CReapear*>(pReapear)->Get_CurBossHP();
 
 	if (m_fPreHp > m_fCurHp)
 	{
@@ -72,7 +74,13 @@ _int CBossHPBar::LateUpdate_GameObject(const _float& fTimeDelta)
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
-	m_matHPWorld._41 = m_fPreHp * (0.008f);
+	if (CDirectInput::Get_Instance()->KEY_PRESSING(DIK_N))
+	{
+		//	if (m_fPreHp > m_fCurHp)
+		m_fPreHp -= 15.f * fTimeDelta;
+	}
+
+	m_matHPWorld._41 = 0.22f + m_fPreHp * (0.0058f);
 
 	return NO_EVENT;
 }

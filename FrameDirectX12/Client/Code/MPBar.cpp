@@ -57,13 +57,13 @@ _int CMPBar::Update_GameObject(const _float& fTimeDelta)
 
 	if (m_iMPType == 0)
 	{
-		if (m_fPreMp > m_fCurMp)
-		{
-			m_fPreMp -= 25.f * fTimeDelta;
+		//if (m_fPreMp > m_fCurMp)
+		//{
+		//	m_fPreMp -= 25.f * fTimeDelta;
 
-			if (m_fPreMp <= m_fCurMp)
+		//	if (m_fPreMp <= m_fCurMp)
 				m_fPreMp = m_fCurMp;
-		}
+		//}
 	}
 	else if (m_iMPType == 1)
 	{
@@ -85,8 +85,8 @@ _int CMPBar::LateUpdate_GameObject(const _float& fTimeDelta)
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
-	m_matMPWorld._41 = m_fPreMp * (0.0028 / 3);
-
+	m_matMPWorld._41 = 0.14 + m_fPreMp * (0.0013 / 3);
+		
 	return NO_EVENT;
 }
 
