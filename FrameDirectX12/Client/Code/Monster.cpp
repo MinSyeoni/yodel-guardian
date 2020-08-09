@@ -8,6 +8,7 @@
 #include "ColliderMgr.h"
 #include "Frustom.h"
 
+#include "QuestUI.h"
 
 CMonster::CMonster(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
 	:CGameObject(pGraphicDevice,pCommandList)

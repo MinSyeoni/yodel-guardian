@@ -172,6 +172,9 @@ HRESULT CMainApp::SetUp_DefaultSetting(CGraphicDevice::WINMODE eMode, const _uin
 	CSoundMgr::Get_Instance()->LoadSoundFile("Bgm.wav");
 	CSoundMgr::Get_Instance()->LoadSoundFile("victory.wav");
 	// ¸ó½ºÅÍ
+	CSoundMgr::Get_Instance()->LoadSoundFile("FlameFire.mp3");
+	CSoundMgr::Get_Instance()->LoadSoundFile("Machine_1.mp3");
+	CSoundMgr::Get_Instance()->LoadSoundFile("Machine_2.mp3");
 	CSoundMgr::Get_Instance()->LoadSoundFile("DronShoot.mp3");
 	CSoundMgr::Get_Instance()->LoadSoundFile("DronBomb.mp3");
 	CSoundMgr::Get_Instance()->LoadSoundFile("ZombiDead.wav");

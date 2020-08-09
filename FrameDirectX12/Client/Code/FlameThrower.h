@@ -69,5 +69,6 @@ private:
 
 	// »ç¿îµå
 	_bool					m_bIsMovingSound = false;
+	_bool					m_bIsFireSound = false;
 };
 

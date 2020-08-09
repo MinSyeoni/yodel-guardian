@@ -66,6 +66,22 @@ _int CScene_Rail::Update_Scene(const _float& fTimeDelta)
 
 _int CScene_Rail::LateUpdate_Scene(const _float& fTimeDelta)
 {
+	// 드론 체크 ㅠㅠㅠ
+	CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"QuestUI");
+	list<CGameObject*>* pDronList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Dron");
+	if (pDronList->size() == 0)
+	{
+		if (pQuestUI != nullptr)
+		{
+			if (!m_bIsNextSound7)
+			{
+				CSoundMgr::Get_Instance()->Play_Effect(L"NextMission.wav");
+				dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE7);
+				m_bIsNextSound7 = true;
+			}
+		}
+	}
+
 	return Engine::CScene::LateUpdate_Scene(fTimeDelta);
 }
 

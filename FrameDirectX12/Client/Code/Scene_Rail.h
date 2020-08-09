@@ -38,5 +38,6 @@ private:
 
 private:
 	MeshInfo		m_tMeshInfo;
+	_bool					m_bIsNextSound7 = false;
 };
 

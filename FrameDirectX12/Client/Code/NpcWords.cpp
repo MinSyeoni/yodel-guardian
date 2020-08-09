@@ -280,7 +280,6 @@ void CNpcWords::Finish_ConverSation()
 		{
 			dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE1);
 			CSoundMgr::Get_Instance()->Play_Effect(L"NextMission.wav");
-			// 카드키 미션창은 여기서 말고 카드키 줍기 직전에 바꿔줘야돼 동료 미션으로 바꿔놓을게 
 		}
 
 		break;

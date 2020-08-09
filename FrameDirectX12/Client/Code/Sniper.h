@@ -48,7 +48,7 @@ private:
 	_matrix* m_pFireMatrix;
 	_matrix* m_pFireMatrixOffset;
 
-
+	_bool		m_bIsNextSound3 = false;	// 사운드용 축가가ㅏ
 private:
 	_float m_fRight;
 	_float m_fUp;

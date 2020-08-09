@@ -118,13 +118,20 @@ void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CFlameThrower::CB_Exit:
 		break;
-	case CFlameThrower::CB_FireLoop:		
+	case CFlameThrower::CB_FireLoop:	
+	{
 		m_fAniDelay = 2500.f;
+
 		Fire_Attak();
+
+		//if (!m_bIsFireSound)
+		//{
+		//	CSoundMgr::Get_Instance()->Play_Effect(L"FlameFire.mp3");
+		//	m_bIsFireSound = true;
+		//}
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, CB_FireLoop))
-		{
 			m_eCurState = CB_Idle;
-		}		
+	}
 		break;
 	case CFlameThrower::CB_FireRecoil:
 		break;
@@ -132,6 +139,7 @@ void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CFlameThrower::CB_Idle: // °¡¸¸È÷ 
 	{
+		m_bIsFireSound = false;
 		m_fAniTime += fTimeDelta;
 		m_bIsHit = false;
 		m_bIsMovingSound = false;
@@ -162,8 +170,8 @@ void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 
 		if (!m_bIsMovingSound)
 		{
-			m_bIsMovingSound = true;
 			CSoundMgr::Get_Instance()->Play_Effect(L"MovingRobot.mp3");
+			m_bIsMovingSound = true;
 		}
 
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, CB_Twitch))

@@ -321,12 +321,19 @@ void CDron::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 
 		m_fAniDelay = 2000.f;
 
+		if (!m_bIsHitSound)
+		{
+			CSoundMgr::Get_Instance()->Play_Effect(L"Machine_1.mp3");
+			m_bIsHitSound = true;
+		}
+
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, DRON_EX_IdleSway))
 		{
 			m_fHitDamage = rand() % 10 + 10.f;
 			m_fCurHp -= m_fHitDamage;
 			m_bIsDronState[2] = false;
 			m_bIsHitBullet = true;
+			m_bIsHitSound = false;
 
 			if (Check_PlayerRange(40.f))
 				m_eCurState = DRON_EX_IdleNoise;

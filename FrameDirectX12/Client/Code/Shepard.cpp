@@ -329,7 +329,11 @@ void CShepard::MoveByAstar(const _float& fTimeDelta)
 		CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"QuestUI");
 		if (pQuestUI != nullptr)
 		{
-			CSoundMgr::Get_Instance()->Play_Effect(L"NextMission.wav");
+			if (!m_bIsNextSound2)
+			{
+				CSoundMgr::Get_Instance()->Play_Effect(L"NextMission.wav");
+				m_bIsNextSound2 = true;
+			}
 			dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE2);
 		}
 
@@ -342,7 +346,11 @@ void CShepard::MoveByAstar(const _float& fTimeDelta)
 		CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"QuestUI");
 		if (pQuestUI != nullptr)
 		{
-			CSoundMgr::Get_Instance()->Play_Effect(L"NextMission.wav");
+			if (!m_bIsNextSound4)
+			{
+				CSoundMgr::Get_Instance()->Play_Effect(L"NextMission.wav");
+				m_bIsNextSound4 = true;
+			}
 			dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE4);
 		}
 
@@ -375,7 +383,11 @@ void CShepard::MoveByAstar(const _float& fTimeDelta)
 					CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"QuestUI");
 					if (pQuestUI != nullptr)
 					{
-						CSoundMgr::Get_Instance()->Play_Effect(L"NextMission.wav");
+						if (!m_bIsNextSound5)
+						{
+							CSoundMgr::Get_Instance()->Play_Effect(L"NextMission.wav");
+							m_bIsNextSound5 = true;
+						}
 						dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE5);
 					}
 					return;

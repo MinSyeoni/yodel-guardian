@@ -104,5 +104,6 @@ private:
 	//여기좀추가햇으
 	_bool					m_bIsDeadSound = false;
 	_bool					m_bIsShootSound = false;
+	_bool					m_bIsHitSound = false;
 };
 

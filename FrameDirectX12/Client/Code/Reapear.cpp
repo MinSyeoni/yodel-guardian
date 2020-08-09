@@ -10,6 +10,8 @@
 #include "BossBack.h"
 #include "QuestUI.h"
 #include "Clear.h"
+#include "InvenUI.h"
+#include "GunUI.h"
 
 CReapear::CReapear(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -287,7 +289,12 @@ void CReapear::AnimationCheck(const _float& fTimeDelta)
 			CGameObject* pBossBack = m_pObjectMgr->Get_GameObject(L"Layer_UI", L"BossBack");
 			if (pBossBack != nullptr)
 				dynamic_cast<CBossBack*>(pBossBack)->Set_ShowUI(false);
-
+			CGameObject* pGunUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"GunUI");
+			if (pGunUI != nullptr)
+				dynamic_cast<CGunUI*>(pGunUI)->Set_ShowUI(false);
+			CGameObject* pInvenList = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"InvenUI");
+			if (pInvenList != nullptr)
+				dynamic_cast<CInvenUI*>(pInvenList)->Set_ShowUI(false);
 			if (!m_bIsClearSound)
 			{
 				CSoundMgr::Get_Instance()->Play_Effect(L"victory.wav");

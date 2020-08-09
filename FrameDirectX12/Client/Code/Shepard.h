@@ -97,6 +97,12 @@ private:
 
 	_bool m_bIsStartConver = false;//플레이어 시야에 들어왓늕ㅣ 
 	_bool m_bIsTalk = false;//플레이어와 대화시작
+
+	_bool			m_bIsNextSound2 = false;		// 추가가ㅏㅏ가
+	_bool			m_bIsNextSound3 = false;		// 추가가ㅏㅏ가
+	_bool			m_bIsNextSound4 = false;		// 추가가ㅏㅏ가
+	_bool			m_bIsNextSound5 = false;
+
 private:
 	virtual void			Free();
 };
