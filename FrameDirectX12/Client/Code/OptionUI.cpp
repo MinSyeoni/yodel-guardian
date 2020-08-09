@@ -9,6 +9,8 @@
 #include "QuestUI.h"
 #include "EquipUI.h"
 #include "MousePoint.h"
+#include "BossHPBar.h"
+#include "BossBack.h"
 
 COptionUI::COptionUI(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -135,6 +137,14 @@ void COptionUI::Show_OtherUI()
 	CGameObject* pMousePoint = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"MouseUI");
 	if (pMousePoint != nullptr)
 		dynamic_cast<CMousePoint*>(pMousePoint)->Set_ShowUI(m_bIsShow);
+
+	CGameObject* pBossHPUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"BossHPBar");
+	if (pBossHPUI != nullptr)
+		dynamic_cast<CBossHPBar*>(pBossHPUI)->Set_ShowUI(!m_bIsShow);
+
+	CGameObject* pBossBackUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"BossBack");
+	if (pBossBackUI != nullptr)
+		dynamic_cast<CBossBack*>(pBossBackUI)->Set_ShowUI(!m_bIsShow);
 }
 
 void COptionUI::Render_GameObject(const _float& fTimeDelta)

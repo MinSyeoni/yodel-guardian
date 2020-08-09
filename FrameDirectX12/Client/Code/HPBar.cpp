@@ -48,19 +48,22 @@ void CHPBar::Init_CharacterHp()
 	case CHPBar::PLAYER_HPBAER:
 	{
 		CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-		m_fPreHp = m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
+		if (pPlayer != nullptr)
+			m_fPreHp = m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
 	}
 	break;
 	case CHPBar::COLLEAGUE_HPBAR:
 	{
 		CGameObject* pShepard = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Shepard");
-		m_fPreHp = m_fCurHp = dynamic_cast<CShepard*>(pShepard)->Get_ShepardCurHP();
+		if(pShepard != nullptr)
+			m_fPreHp = m_fCurHp = dynamic_cast<CShepard*>(pShepard)->Get_ShepardCurHP();
 	}
 	break;
 	case CHPBar::COLLEAGUE2_HPBAR:
 	{		
 		CGameObject* pKen = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Ken");
-		m_fPreHp = m_fCurHp = dynamic_cast<CKen*>(pKen)->Get_KenCurHP();
+		if (pKen != nullptr)
+			m_fPreHp = m_fCurHp = dynamic_cast<CKen*>(pKen)->Get_KenCurHP();
 	}
 	break;
 	default:
@@ -89,19 +92,22 @@ void CHPBar::Set_HP_Damage(const _float& fTimeDelta)
 	case CHPBar::PLAYER_HPBAER:
 	{
 		CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-		m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
+		if (pPlayer != nullptr)
+			m_fCurHp = dynamic_cast<CPlayer*>(pPlayer)->Get_CurHP();
 	}
 	break;
 	case CHPBar::COLLEAGUE_HPBAR:
 	{
 		CGameObject* pShepard = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Shepard");
-		m_fCurHp = dynamic_cast<CShepard*>(pShepard)->Get_ShepardCurHP();
+		if (pShepard != nullptr)
+			m_fCurHp = dynamic_cast<CShepard*>(pShepard)->Get_ShepardCurHP();
 	}
 	break;
 	case CHPBar::COLLEAGUE2_HPBAR:
 	{
 		CGameObject* pKen = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Ken");
-		m_fCurHp = dynamic_cast<CKen*>(pKen)->Get_KenCurHP();
+		if (pKen != nullptr)
+			m_fCurHp = dynamic_cast<CKen*>(pKen)->Get_KenCurHP();
 	}
 	break;
 	default:

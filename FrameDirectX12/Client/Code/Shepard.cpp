@@ -242,16 +242,6 @@ void CShepard::GotoPlayer(const _float& fTimeDelta)
 
 		CNpcWords::WORDS_TYPE eType = CNpcWords::SHEPARD;
 		m_pObjectMgr->Add_GameObject(L"Layer_UI", L"Prototype_NpcBoard", L"NpcBoard", &eType);
-		// 퀘스트 다음걸로 넘기려고 추가했음
-		// 카드키 줍기전이나 npc 대화할 때 넣어주고 type만 바꿔주면 됨
-		list<CGameObject*>* pQuestUIList = m_pObjectMgr->Get_OBJLIST(L"Layer_UI", L"QuestUI");
-		if (pQuestUIList != nullptr)
-		{
-			for (auto& pSrc : *pQuestUIList)
-			{
-				dynamic_cast<CQuestUI*>(pSrc)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE1);
-			}
-		}
 	}
 
 	else
@@ -339,7 +329,7 @@ void CShepard::MoveByAstar(const _float& fTimeDelta)
 		CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"QuestUI");
 		if (pQuestUI != nullptr)
 		{
-			dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE3);
+			dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE2);
 		}
 
 		MovePos = m_vMove3Pos;
@@ -351,7 +341,7 @@ void CShepard::MoveByAstar(const _float& fTimeDelta)
 		CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"QuestUI");
 		if (pQuestUI != nullptr)
 		{
-			dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE5);
+			dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE4);
 		}
 
 		MovePos = m_vMove4Pos;
@@ -383,7 +373,7 @@ void CShepard::MoveByAstar(const _float& fTimeDelta)
 					CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"QuestUI");
 					if (pQuestUI != nullptr)
 					{
-						dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE6);
+						dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE5);
 					}
 					return;
 				}

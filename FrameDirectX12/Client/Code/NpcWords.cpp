@@ -148,8 +148,9 @@ _int CNpcWords::Update_GameObject(const _float& fTimeDelta)
 	Reset_OthersUI(false);
 
 	if (m_bIsDead)
-	{
-		Reset_OthersUI(true);
+	{	
+		m_eWordsType = TYPE_END;
+	//	Reset_OthersUI(true);
 		return DEAD_OBJ;
 	}
 	Next_Conversation(fTimeDelta);
@@ -213,9 +214,8 @@ void CNpcWords::Check_Interaction()
 		break;
 
 	}
-
-
-
+	case CNpcWords::SHEPARD:
+		break;
 	case CNpcWords::ETC:
 		break;
 	case CNpcWords::TYPE_END:
@@ -278,7 +278,8 @@ void CNpcWords::Finish_ConverSation()
 		CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"QuestUI");
 		if (pQuestUI != nullptr)
 		{
-			dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE2);
+			dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE1);
+			// 카드키 미션창은 여기서 말고 카드키 줍기 직전에 바꿔줘야돼 동료 미션으로 바꿔놓을게 
 		}
 
 		break;

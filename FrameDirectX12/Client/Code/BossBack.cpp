@@ -60,6 +60,9 @@ _int CBossBack::LateUpdate_GameObject(const _float& fTimeDelta)
 
 void CBossBack::Render_GameObject(const _float& fTimeDelta)
 {
+	if (!m_bIsShow)
+		return;
+
 	Set_ConstantTable();
 	m_pShaderCom->Begin_Shader();
 	m_pBufferCom->Begin_Buffer();

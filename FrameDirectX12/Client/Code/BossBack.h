@@ -28,6 +28,9 @@ public:
 	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void				Render_GameObject(const _float& fTimeDelta);
 
+public:
+	void						Set_ShowUI(_bool bIsShow) { m_bIsShow = bIsShow; }
+
 private:
 	virtual HRESULT				Add_Component();
 
@@ -40,7 +43,7 @@ private:
 	Engine::CTexture*			m_pTexture = nullptr;
 
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
-
+	_bool						m_bIsShow = true;
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);
 	static CBossBack*			Create(ID3D12Device* pGraphicDevice,

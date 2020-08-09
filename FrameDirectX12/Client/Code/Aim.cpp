@@ -9,6 +9,8 @@
 #include "QuestUI.h"
 #include "MPBar.h"
 #include "NpcWords.h"
+#include "BossBack.h"
+#include "BossHPBar.h"
 
 CAim::CAim(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -64,7 +66,6 @@ _int CAim::LateUpdate_GameObject(const _float& fTimeDelta)
 
 	CGameObject* pNPCUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"NpcBoard");
 	CGameObject* pOptionUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"OptionUI");
-	///ReShow_OtherUI(pOptionUI, pNPCUI);
 
 	if (m_bIsRender == true)
 	{
@@ -74,10 +75,6 @@ _int CAim::LateUpdate_GameObject(const _float& fTimeDelta)
 		{
 			Show_OtherUI(false);
 		}
-		//else
-		//{
-		//	ReShow_OtherUI(pOptionUI, pNPCUI);
-		//}
 
 		if (m_iDrawId != 2)
 			FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
@@ -135,9 +132,13 @@ void CAim::Show_OtherUI(_bool bIsShow)
 	if (pInvenUI != nullptr)
 		dynamic_cast<CInvenUI*>(pInvenUI)->Set_ShowUI(bIsShow);
 
-	CGameObject* pMPBarUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"MPBarUI");
-	if (pMPBarUI != nullptr)
-		dynamic_cast<CMPBar*>(pMPBarUI)->Set_ShowUI(bIsShow);
+	CGameObject* pBossHPUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"BossHPBar");
+	if (pBossHPUI != nullptr)
+		dynamic_cast<CBossHPBar*>(pBossHPUI)->Set_ShowUI(bIsShow);
+
+	CGameObject* pBossBackUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"BossBack");
+	if (pBossBackUI != nullptr)
+		dynamic_cast<CBossBack*>(pBossBackUI)->Set_ShowUI(bIsShow);
 }
 
 void CAim::Render_GameObject(const _float& fTimeDelta)

@@ -136,8 +136,8 @@ void CHPKit::HPKit_Ani()
 	case CHPKit::KIT_OPEN:
 	{
 		m_fAniDelay = 1500.f;
-	//	if(m_pGameObject != nullptr)
-	//		dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
+		if(m_pGameObject != nullptr)
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, KIT_OPEN))
 			m_eState = KIT_ALREADYOPEN;
 	}
@@ -145,8 +145,8 @@ void CHPKit::HPKit_Ani()
 	case CHPKit::KIT_CLOSE:
 	{
 		m_fAniDelay = 1500.f;
-	//	if(m_pGameObject != nullptr)
-	//		dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
+		if(m_pGameObject != nullptr)
+			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, KIT_CLOSE))
 			m_eState = KIT_IDLE;
 	}
