@@ -61,8 +61,6 @@ _int CMedi_Syringe::Update_GameObject(const _float& fTimeDelta)
 	m_pBoxCollider->Update_Collider(&m_pTransCom->m_matWorld);
 	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCollider);
 
-	//ReScale_SphereCol();
-
 	return NO_EVENT;
 }
 
@@ -91,7 +89,6 @@ _int CMedi_Syringe::LateUpdate_GameObject(const _float& fTimeDelta)
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCollider), -1);
-	//FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pShereCol), -1);
 
 	Check_ItemAndMouse();
 
@@ -140,6 +137,8 @@ void CMedi_Syringe::Check_ItemAndMouse()
 		if (pInvenUI != nullptr)
 			dynamic_cast<CInvenUI*>(pInvenUI)->Set_AddItemNum(2, 1);
 
+		CSoundMgr::Get_Instance()->Play_Effect(L"EatItem.mp3");
+
 		m_bIsClick = false;
 		m_bIsDead = true;
 	}
@@ -179,11 +178,6 @@ HRESULT CMedi_Syringe::Add_Component()
 	m_pBoxCollider = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(100.f, 100.f, 100.f), this));
 	NULL_CHECK_RETURN(m_pBoxCollider, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCollider);
-
-	//Sphere
-	//m_pShereCol = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 20.f, _vec3(1.f, 1.f, 1.f), this));
-	//NULL_CHECK_RETURN(m_pShereCol, E_FAIL);
-	//m_mapComponent[ID_STATIC].emplace(L"Com_SphereCol", m_pShereCol);
 
 	return S_OK;
 }

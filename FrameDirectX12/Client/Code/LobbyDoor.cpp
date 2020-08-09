@@ -80,9 +80,15 @@ _int CLobbyDoor::Update_GameObject(const _float & fTimeDelta)
 void CLobbyDoor::OpenTheDoor()
 {
 	if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && !m_bIsOpen && m_bIsCollision)
+	{
+		CSoundMgr::Get_Instance()->Play_Effect(L"DoorOpen.mp3");
 		m_eDoorState = DOOR_OPEN;
+	}
 	else if (!m_bIsCollision && m_bIsOpen)
+	{
+		CSoundMgr::Get_Instance()->Play_Effect(L"DoorClose.mp3");
 		m_eDoorState = DOOR_CLOSE;
+	}
 }
 
 _int CLobbyDoor::LateUpdate_GameObject(const _float & fTimeDelta)
@@ -139,6 +145,7 @@ void CLobbyDoor::LobbyDoor_AniState()
 	case CLobbyDoor::DOOR_OPEN:
 	{
 		m_fAniDelay = 5000.f;
+
 		if(dynamic_cast<CEquipUI*>(m_pGameObject) != nullptr)
 			dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, DOOR_OPEN))
@@ -148,6 +155,7 @@ void CLobbyDoor::LobbyDoor_AniState()
 	case CLobbyDoor::DOOR_CLOSE:
 	{		
 		m_bIsOpen = false;
+
 		m_fAniDelay = 3000.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, DOOR_CLOSE))
 			m_eDoorState = DOOR_IDLE;

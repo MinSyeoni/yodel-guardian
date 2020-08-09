@@ -95,6 +95,7 @@ HRESULT CScene_Stage::Ready_Scene()
 
 	srand((unsigned int)time(0));
 
+	CSoundMgr::Get_Instance()->PlayBGM(L"Stage1ToPassBGM.mp3");
 	FAILED_CHECK_RETURN(Ready_GameObjectPrototype(), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_LayerCamera(L"Layer_Camera"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_LayerEnvironment(L"Layer_Environment"), E_FAIL);

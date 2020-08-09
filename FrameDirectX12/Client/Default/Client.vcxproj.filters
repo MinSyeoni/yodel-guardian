@@ -286,13 +286,14 @@
     <Filter Include="07.Scene_Boss\01.ReapearBullet">
       <UniqueIdentifier>{f82705ca-50ad-4a0c-b786-be9e0893fb19}</UniqueIdentifier>
     </Filter>
-
-
     <Filter Include="03.UI\02.HPMPBar\02.BossHP">
       <UniqueIdentifier>{5c6aec91-3383-4f80-a9e4-6f0162fb23f1}</UniqueIdentifier>
     </Filter>
     <Filter Include="03.UI\02.HPMPBar\03.BossBack">
       <UniqueIdentifier>{1f18ffe8-acf0-44fe-b719-aa56b08d9521}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.UI\11.Clear">
+      <UniqueIdentifier>{6929f5ff-a0b2-4974-9574-006b1afac7a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -574,8 +575,6 @@
     <ClInclude Include="..\Code\ReapearTube.h">
       <Filter>07.Scene_Boss\01.ReapearTube</Filter>
     </ClInclude>
-
-
     <ClInclude Include="..\Code\HPKit.h">
       <Filter>02.Scene_All\01.DynamicObject\02.HPKit</Filter>
     </ClInclude>
@@ -584,6 +583,11 @@
     </ClInclude>
     <ClInclude Include="..\Code\BossBack.h">
       <Filter>03.UI\02.HPMPBar\03.BossBack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\LogoExoMars.h" />
+    <ClInclude Include="..\Code\SoundMgr.h" />
+    <ClInclude Include="..\Code\Clear.h">
+      <Filter>03.UI\11.Clear</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -838,8 +842,6 @@
     <ClCompile Include="..\Code\ReapearTube.cpp">
       <Filter>07.Scene_Boss\01.ReapearTube</Filter>
     </ClCompile>
-
-
     <ClCompile Include="..\Code\HPKit.cpp">
       <Filter>02.Scene_All\01.DynamicObject\02.HPKit</Filter>
     </ClCompile>
@@ -848,6 +850,11 @@
     </ClCompile>
     <ClCompile Include="..\Code\BossBack.cpp">
       <Filter>03.UI\02.HPMPBar\03.BossBack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\LogoExoMars.cpp" />
+    <ClCompile Include="..\Code\SoundMgr.cpp" />
+    <ClCompile Include="..\Code\Clear.cpp">
+      <Filter>03.UI\11.Clear</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

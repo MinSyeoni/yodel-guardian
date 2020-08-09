@@ -98,6 +98,9 @@ private:
 	_uint					m_iAstarID;
 
 	//여기좀추가햇으
-	_bool m_bIsDeadSound = false;
+	_bool					m_bIsDeadSound = false;
+	_bool					m_bIsAtkSound = false;
+	_bool					m_bIsIdleSound = false;
+	_bool					m_bIsHitSound = false;
 };
 

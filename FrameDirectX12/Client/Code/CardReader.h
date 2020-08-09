@@ -54,6 +54,8 @@ private:
 	_bool						m_bIsCollision = false;
 	_bool						m_bIsEquipCard = false;
 
+	_bool						m_bIsTagOnSound = false;
+
 public:
 	virtual CGameObject*		Clone_GameObject(void* prg);
 	static	CCardReader*		Create(ID3D12Device* pGraphicDevice,ID3D12GraphicsCommandList* pCommandList);

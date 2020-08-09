@@ -84,7 +84,10 @@ void CPassageDoor::OpenTheDoor()
 		return;
 
 	if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && m_bIsReaderOn && !m_bIsOpen && m_bIsCollision)
+	{
+		CSoundMgr::Get_Instance()->Play_Effect(L"DoorOpen.mp3");
 		m_eDoorState = PASSAGE_OPEN;
+	}
 	//else if(m_bIsOpen && !m_bIsCollision)
 	//	m_eDoorState = PASSAGE_CLOSE;
 }

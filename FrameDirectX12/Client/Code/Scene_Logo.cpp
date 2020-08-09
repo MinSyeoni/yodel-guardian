@@ -60,6 +60,7 @@ void CScene_Logo::Render_Scene(const _float & fTimeDelta)
 
 	if (true == m_pLoading->Get_Finish()&& KEY_DOWN(DIK_RETURN))
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::BGM);
 		m_pObjectMgr->Clear_Layer();
 		Engine::CScene* pNewScene = CScene_Stage::Create(m_pGraphicDevice, m_pCommandList);
 		Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);

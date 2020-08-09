@@ -17,6 +17,7 @@
 
 #include "BossHPBar.h"
 #include "BossBack.h"
+#include "Clear.h"
 #include "QuestUI.h"
 
 CScene_Boss::CScene_Boss(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
@@ -37,6 +38,7 @@ HRESULT CScene_Boss::Ready_Scene()
 #ifdef _DEBUG
 	COUT_STR("Ready Scene_Boss");
 #endif
+	CSoundMgr::Get_Instance()->PlayBGM(L"BossStageBGM.mp3");
 	FAILED_CHECK_RETURN(Ready_Light(), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_GameObjectPrototype(), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_LayerCamera(L"Layer_Camera"), E_FAIL);
@@ -44,12 +46,15 @@ HRESULT CScene_Boss::Ready_Scene()
 	FAILED_CHECK_RETURN(Ready_LayerGameObject(L"Layer_GameObject"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_LayerUI(L"Layer_UI"), E_FAIL);
 
-	// 엄폐하는 미션으로 바꿈.
+	// 보스 해치워라 미션으로 바꿈.
 	list<CGameObject*>* pQuestUIList = m_pObjectMgr->Get_OBJLIST(L"Layer_UI", L"QuestUI");
 	if (pQuestUIList != nullptr)
 	{
 		for (auto& pSrc : *pQuestUIList)
+		{
+			CSoundMgr::Get_Instance()->Play_Effect(L"NextMission.wav");
 			dynamic_cast<CQuestUI*>(pSrc)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE8);
+		}
 	}
 
 	return S_OK;
@@ -78,6 +83,10 @@ HRESULT CScene_Boss::Ready_GameObjectPrototype()
 {
 	NULL_CHECK_RETURN(m_pObjectMgr, E_FAIL);
 	CGameObject* pGameObject = nullptr;
+
+	pGameObject = CClear::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_ClearUI", pGameObject), E_FAIL);
 
 	pGameObject = CBossBack::Create(m_pGraphicDevice, m_pCommandList);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -340,7 +349,8 @@ HRESULT CScene_Boss::Ready_LayerUI(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_BossHPBar", L"BossHPBar", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MPBarUI", L"MPBarUI", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MouseUI", L"MouseUI", nullptr), E_FAIL);
-	
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_ClearUI", L"ClearUI", nullptr), E_FAIL);
+
 	return S_OK;
 }
 

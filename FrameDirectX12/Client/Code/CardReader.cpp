@@ -76,6 +76,12 @@ _int CCardReader::Update_GameObject(const _float& fTimeDelta)
 			m_bIsReaderOn = true;
 			if (dynamic_cast<CEquipUI*>(m_pGameObject) != nullptr)
 				dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(false);
+
+			if (!m_bIsTagOnSound)
+			{
+				CSoundMgr::Get_Instance()->Play_Effect(L"cardTagOn.wav");
+				m_bIsTagOnSound = true;
+			}
 			m_bIsEquipCard = false;
 		}
 	}

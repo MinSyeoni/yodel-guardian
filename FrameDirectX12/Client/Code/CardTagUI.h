@@ -63,6 +63,8 @@ private:
 	_bool						m_bIsZoom = false;
 	_bool						m_bIsAlreadyZoom = false;
 
+	_bool						m_bIsTagClearSound = false;
+
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);
 	static CCardTagUI*			Create(ID3D12Device* pGraphicDevice,

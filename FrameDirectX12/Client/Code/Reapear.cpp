@@ -9,6 +9,7 @@
 #include "BossHPBar.h"
 #include "BossBack.h"
 #include "QuestUI.h"
+#include "Clear.h"
 
 CReapear::CReapear(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -276,8 +277,24 @@ void CReapear::AnimationCheck(const _float& fTimeDelta)
 	{
 		if (m_eCurAniState == m_ePreAniState && m_pMeshCom->Set_IsAniFinsh())
 		{
-			m_bIsDead = true;
+			// 보스 죽을 때 clear랑 소리 추가할게
+			CGameObject* pClearUI = m_pObjectMgr->Get_GameObject(L"Layer_UI", L"ClearUI");
+			if (pClearUI != nullptr)
+				dynamic_cast<CClear*>(pClearUI)->Set_ShowUI(true);
+			CGameObject* pBossHPBar = m_pObjectMgr->Get_GameObject(L"Layer_UI", L"BossHPBar");
+			if (pBossHPBar != nullptr)
+				dynamic_cast<CBossHPBar*>(pBossHPBar)->Set_ShowUI(false);
+			CGameObject* pBossBack = m_pObjectMgr->Get_GameObject(L"Layer_UI", L"BossBack");
+			if (pBossBack != nullptr)
+				dynamic_cast<CBossBack*>(pBossBack)->Set_ShowUI(false);
 
+			if (!m_bIsClearSound)
+			{
+				CSoundMgr::Get_Instance()->Play_Effect(L"victory.wav");
+				m_bIsClearSound = true;
+			}
+			/////////////////////////////////////
+			m_bIsDead = true;
 		}
 	
 		break;
@@ -346,11 +363,9 @@ void CReapear::DieCheck(const _float& fTimeDelta)
 	{
 		if (m_iHp < 0)
 		{
+			m_iHp = 0;
 			m_eCurAniState = EXIT;
-
 		}
-
-
 	}
 }
 

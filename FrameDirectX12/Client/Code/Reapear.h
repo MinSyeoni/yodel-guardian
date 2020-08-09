@@ -58,7 +58,7 @@ private:
 
 	float m_fTime = 0.f;
 	vector<vector<_matrix>> m_vecMatrix;
-	_int  m_iHp = 100.f;
+	_int  m_iHp = 300.f;
 	
 	ANISTATE m_eCurAniState;
 	ANISTATE m_ePreAniState;
@@ -93,6 +93,7 @@ private:
 	_bool  m_bIsLeftLock = true;
 	_bool  m_bIsRightLock = true;
 
+	_bool				m_bIsClearSound = false;	// 소리 하나 추가할게
 public:
 	virtual CGameObject* Clone_GameObject(void* prg);
 	static CReapear* Create(ID3D12Device* pGraphicDevice,

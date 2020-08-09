@@ -134,8 +134,9 @@ void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	{
 		m_fAniTime += fTimeDelta;
 		m_bIsHit = false;
+		m_bIsMovingSound = false;
 
-		int iRandAni = rand() % 4;
+		int iRandAni = rand() % 3;
 
 		if (iRandAni == 0)
 		{
@@ -156,9 +157,18 @@ void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	}
 		break;
 	case CFlameThrower::CB_Twitch: // Б¤Вы
+	{
 		m_fAniDelay = 18000.f;
+
+		if (!m_bIsMovingSound)
+		{
+			m_bIsMovingSound = true;
+			CSoundMgr::Get_Instance()->Play_Effect(L"MovingRobot.mp3");
+		}
+
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, CB_Twitch))
 			m_eCurState = CB_Idle;	
+	}
 		break;
 	case CFlameThrower::CB_WalkDown:
 		break;

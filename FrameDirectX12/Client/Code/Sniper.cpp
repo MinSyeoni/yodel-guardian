@@ -275,7 +275,8 @@ void CSniper::DropCheck()
 
             CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"QuestUI");
             if (pQuestUI != nullptr)
-            {
+            {	
+                CSoundMgr::Get_Instance()->Play_Effect(L"NextMission.wav");
                 dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE3);
             }
 

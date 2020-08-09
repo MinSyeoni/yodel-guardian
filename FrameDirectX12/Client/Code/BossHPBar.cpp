@@ -74,7 +74,7 @@ _int CBossHPBar::LateUpdate_GameObject(const _float& fTimeDelta)
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
-	m_matHPWorld._41 = 0.22f + m_fPreHp * (0.0058f);
+	m_matHPWorld._41 = 0.22f + m_fPreHp * (0.0058f / 3);
 
 	return NO_EVENT;
 }

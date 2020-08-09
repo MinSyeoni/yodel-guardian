@@ -106,6 +106,8 @@ void CInvenUI::Use_ItemBandage()
 
 			m_iItemNum[0]--;
 
+			CSoundMgr::Get_Instance()->Play_Effect(L"UseBandage.mp3");
+
 			if (pHpBarUIList != nullptr && fCurHP < 314)
 			{
 				for (auto& pSrc : *pHpBarUIList)
@@ -123,6 +125,8 @@ void CInvenUI::Use_ItemBandage()
 	{
 		if (m_iItemNum[1] > 0)		// 약, 동료 체력 회복
 		{
+			CSoundMgr::Get_Instance()->Play_Effect(L"UseMedicine.mp3");
+
 			CGameObject* pShepard = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Shepard");
 			_float fCurShepardHP = dynamic_cast<CShepard*>(pShepard)->Get_ShepardCurHP();
 			CGameObject* pKen = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Ken");
@@ -150,6 +154,7 @@ void CInvenUI::Use_ItemBandage()
 		if (m_iItemNum[2] > 0)		// 주사기, 기력
 		{		
 			m_iItemNum[2]--;
+			CSoundMgr::Get_Instance()->Play_Effect(L"UseSyringe.mp3");
 
 			CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 			_float fCurMP = dynamic_cast<CPlayer*>(pPlayer)->Get_CurMp();

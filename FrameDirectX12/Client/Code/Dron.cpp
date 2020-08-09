@@ -188,6 +188,7 @@ void CDron::Update_DronHP()
 		m_bIsDronState[2] = false;
 		m_eCurState = DRON_DG_Death;
 	}
+
 }
 
 void CDron::Chase_Rotation(_vec3 vPos, const _float& fTimeDelta)
@@ -303,6 +304,7 @@ void CDron::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 			m_fShootDelay += fTimeDelta;
 			if (m_fShootDelay >= 3.f)
 			{
+				m_bIsShootSound = false;
 				m_fShootDelay = 0.f;
 				m_bIsShoot = false;
 			}
@@ -343,6 +345,12 @@ void CDron::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		m_fAniDelay = 300.f;
 		m_pTransCom->m_vPos.y -= 5.f * fTimeDelta;
 
+		if (m_bIsDeadSound == false)
+		{
+			CSoundMgr::Get_Instance()->Play_Effect(L"DronBomb.mp3");
+			m_bIsDeadSound = true;
+		}
+
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, DRON_DG_Death))
 			m_bIsDronState[1] = true;	//dead
 	}
@@ -360,6 +368,11 @@ void CDron::Attak_Player(Engine::CMesh* m_pMeshCom, CDron::DRONSTATE eState)
 		tMeshInfo.Pos = m_pTransCom->m_vPos;
 		if (!m_bIsShoot)
 		{
+			if (!m_bIsShootSound)
+			{
+				CSoundMgr::Get_Instance()->Play_Effect(L"DronShoot.mp3");
+				m_bIsShootSound = true;
+			}
 			CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_GameObject", L"Prototype_DronBullet", L"DronBullet", &tMeshInfo);
 			m_bIsShoot = true;
 		}

@@ -67,6 +67,12 @@ _int CZombi::Update_Zombi(const _float& fTimeDelta, CTransform* pTransform, CMes
 	if (m_bIsZombiState[2])	// m_bIsHit
 		m_eCurState = ZOM_EX_IdleOffset;
 
+	if (!m_bIsIdleSound)
+	{
+		CSoundMgr::Get_Instance()->Play_Effect(L"ZombiIdle.mp3");
+		m_bIsIdleSound = true;
+	}
+
 	return S_OK;
 }
 
@@ -139,6 +145,7 @@ void CZombi::Update_ZombiHP()
 	}
 	if (m_bIsDeadSound == false && m_eCurState == ZOM_BC_Dead)
 	{
+		CSoundMgr::Get_Instance()->Play_Effect(L"ZombiDead.wav");
 		m_bIsDeadSound = true;
 	}
 }
@@ -209,6 +216,7 @@ _bool CZombi::Check_CharacterRange(_float fRange)
 
 _int CZombi::LateUpdate_Zombi(const _float& fTimeDelta, CTransform* pTransform, CMesh* m_pMeshCom)
 {
+
 	Animation_Test(fTimeDelta, m_pMeshCom);
 
 	return S_OK;
@@ -258,6 +266,12 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	{
 		if (m_bIsZombiState[2])	// hit
 		{
+			if (!m_bIsHitSound)
+			{
+				CSoundMgr::Get_Instance()->Play_Effect(L"ZombiHit.wav");
+				m_bIsHitSound = true;
+			}
+
 			m_fSpeed = 15.f;
 		
 			m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(m_pTransCom->m_vDir * -1), m_fSpeed * fTimeDelta);
@@ -290,29 +304,29 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	case CZombi::ZOM_EX_Run:
 	{
 		m_fSpeed = 5.f;
-
-		if (Check_CharacterRange(12.f))
+		
+		m_fAniDelay = 2000.f;
+		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_Run))
 		{
-			m_fAniDelay = 2000.f;
-			int iRandAni = rand() % 2;
-			if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_Run))
+			if (Check_CharacterRange(12.f))
 			{
-				if(iRandAni == 0)
+				int iRandAni = rand() % 2;
+				if (iRandAni == 0)
 					m_eCurState = ZOM_LEFT_ATK;
-				else if(iRandAni == 1)
+				else if (iRandAni == 1)
 					m_eCurState = ZOM_RIGHT_ATK;
 			}
-		}
-		else
-		{
-			if(m_iAstarID == 0)
-				Chase_Character(m_vShepardPos, fTimeDelta);
-			else if (m_iAstarID == 1)
-				Chase_Character(m_vKenPos, fTimeDelta);
 			else
-				Chase_Character(m_vPlayerPos, fTimeDelta);
+			{
+				if (m_iAstarID == 0)
+					Chase_Character(m_vShepardPos, fTimeDelta);
+				else if (m_iAstarID == 1)
+					Chase_Character(m_vKenPos, fTimeDelta);
+				else
+					Chase_Character(m_vPlayerPos, fTimeDelta);
 
-			MoveByAstar(fTimeDelta);
+				MoveByAstar(fTimeDelta);
+			}
 		}
 	}
 		break;
@@ -351,6 +365,12 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	{
 		m_fAniDelay = 6000.f;
 
+		if (!m_bIsAtkSound)
+		{
+			CSoundMgr::Get_Instance()->Play_Effect(L"ZombiAtkL.wav");
+			m_bIsAtkSound = true;
+		}
+
 		Attak_Player(m_pMeshCom, ZOM_LEFT_ATK);
 	}
 		break;
@@ -359,6 +379,12 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	case CZombi::ZOM_RIGHT_ATK:
 	{
 		m_fAniDelay = 6000.f;
+
+		if (!m_bIsAtkSound)
+		{
+			CSoundMgr::Get_Instance()->Play_Effect(L"ZombiAtkR.wav");
+			m_bIsAtkSound = true;
+		}
 
 		Attak_Player(m_pMeshCom, ZOM_RIGHT_ATK);
 	}
@@ -373,7 +399,6 @@ void CZombi::Attak_Player(Engine::CMesh* m_pMeshCom, CZombi::ZOMBISTATE eState)
 	if (!m_bIsZombiState[3])
 	{
 		m_bIsZombiState[3] = true;
-	//	CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_UI", L"Prototype_AttackDamageL", L"AttackDamageL", nullptr);
 		m_fAtkDamage = rand() % 15 + 15.f;
 	}
 	
@@ -381,6 +406,7 @@ void CZombi::Attak_Player(Engine::CMesh* m_pMeshCom, CZombi::ZOMBISTATE eState)
 	{
 		int iRandAni = rand() % 2;
 		m_bIsZombiState[3] = false;
+		m_bIsAtkSound = false;
 
 		if (Check_CharacterRange(12.f))
 		{

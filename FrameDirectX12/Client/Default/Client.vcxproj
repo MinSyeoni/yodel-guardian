@@ -176,6 +176,7 @@
     <ClInclude Include="..\Code\CardKey.h" />
     <ClInclude Include="..\Code\CardReader.h" />
     <ClInclude Include="..\Code\CardTagUI.h" />
+    <ClInclude Include="..\Code\Clear.h" />
     <ClInclude Include="..\Code\CubeObject.h" />
     <ClInclude Include="..\Code\DamageBlood.h" />
     <ClInclude Include="..\Code\DistortionEffect.h" />
@@ -270,6 +271,7 @@
     <ClCompile Include="..\Code\CardKey.cpp" />
     <ClCompile Include="..\Code\CardReader.cpp" />
     <ClCompile Include="..\Code\CardTagUI.cpp" />
+    <ClCompile Include="..\Code\Clear.cpp" />
     <ClCompile Include="..\Code\CubeObject.cpp" />
     <ClCompile Include="..\Code\DamageBlood.cpp" />
     <ClCompile Include="..\Code\DistortionEffect.cpp" />

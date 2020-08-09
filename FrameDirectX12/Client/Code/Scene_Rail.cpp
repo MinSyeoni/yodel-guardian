@@ -50,7 +50,10 @@ HRESULT CScene_Rail::Ready_Scene()
 	if (pQuestUIList != nullptr)
 	{
 		for (auto& pSrc : *pQuestUIList)
+		{
+			CSoundMgr::Get_Instance()->Play_Effect(L"NextMission.wav");
 			dynamic_cast<CQuestUI*>(pSrc)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE6);
+		}
 	}
 
 	return S_OK;
@@ -79,6 +82,7 @@ void CScene_Rail::Render_Scene(const _float& fTimeDelta)
 			if (CTrigger::TRIGGER_BOX == dynamic_cast<CTrigger*>(pSrc)->Get_ColType()
 				&& dynamic_cast<CTrigger*>(pSrc)->Get_IsGoBoss())
 			{
+				CSoundMgr::Get_Instance()->StopSound(CSoundMgr::BGM);
 				m_pObjectMgr->Clear_Layer();
 				Engine::CScene* pNewScene = CScene_Boss::Create(m_pGraphicDevice, m_pCommandList);
 				Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
@@ -89,6 +93,7 @@ void CScene_Rail::Render_Scene(const _float& fTimeDelta)
 
 	if (KEY_DOWN(DIK_PGDN))//½º°×¿ë
 	{
+		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::BGM);
 		m_pObjectMgr->Clear_Layer();
 		Engine::CScene* pNewScene = CScene_Boss::Create(m_pGraphicDevice, m_pCommandList);
 		Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);

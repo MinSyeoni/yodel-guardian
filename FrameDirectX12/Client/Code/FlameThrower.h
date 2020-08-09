@@ -66,5 +66,8 @@ private:
 
 	_float					m_fFireDemage = 10.f;
 	_bool					m_bIsHit = false;
+
+	// »ç¿îµå
+	_bool					m_bIsMovingSound = false;
 };
 

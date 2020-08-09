@@ -166,10 +166,35 @@ HRESULT CMainApp::SetUp_DefaultSetting(CGraphicDevice::WINMODE eMode, const _uin
 	___________________
 	___________________________________________________*/
 	CSoundMgr::Get_Instance()->Ready_SoundDev();
+	// BGM
+	CSoundMgr::Get_Instance()->LoadSoundFile("BossStageBGM.mp3");
+	CSoundMgr::Get_Instance()->LoadSoundFile("Stage1ToPassBGM.mp3");
 	CSoundMgr::Get_Instance()->LoadSoundFile("Bgm.wav");
+	CSoundMgr::Get_Instance()->LoadSoundFile("victory.wav");
+	// 몬스터
+	CSoundMgr::Get_Instance()->LoadSoundFile("DronShoot.mp3");
+	CSoundMgr::Get_Instance()->LoadSoundFile("DronBomb.mp3");
 	CSoundMgr::Get_Instance()->LoadSoundFile("ZombiDead.wav");
-
-
+	CSoundMgr::Get_Instance()->LoadSoundFile("ZombiAtkL.wav");
+	CSoundMgr::Get_Instance()->LoadSoundFile("ZombiAtkR.wav");
+	CSoundMgr::Get_Instance()->LoadSoundFile("ZombiIdle.mp3");
+	CSoundMgr::Get_Instance()->LoadSoundFile("ZombiHit.wav");
+	CSoundMgr::Get_Instance()->LoadSoundFile("MovingRobot.mp3");
+	// 아이템 & 문 & 카드
+	CSoundMgr::Get_Instance()->LoadSoundFile("cardTagOn.wav");
+	CSoundMgr::Get_Instance()->LoadSoundFile("CardClear.mp3");
+	CSoundMgr::Get_Instance()->LoadSoundFile("UseMedicine.mp3");
+	CSoundMgr::Get_Instance()->LoadSoundFile("UseBandage.mp3");
+	CSoundMgr::Get_Instance()->LoadSoundFile("UseSyringe.mp3");
+	CSoundMgr::Get_Instance()->LoadSoundFile("EatItem.mp3");
+	CSoundMgr::Get_Instance()->LoadSoundFile("DoorOpen.mp3");
+	CSoundMgr::Get_Instance()->LoadSoundFile("DoorClose.mp3");
+	// 사이렌
+	CSoundMgr::Get_Instance()->LoadSoundFile("Siren.wav");
+	CSoundMgr::Get_Instance()->LoadSoundFile("LongSiren.wav");
+	// 퀘스트
+	CSoundMgr::Get_Instance()->LoadSoundFile("NextMission.wav");
+	
 	return S_OK;
 }
 

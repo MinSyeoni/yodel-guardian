@@ -61,8 +61,6 @@ _int CMedi_Medicine::Update_GameObject(const _float& fTimeDelta)
 	m_pBoxCollider->Update_Collider(&m_pTransCom->m_matWorld);
 	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCollider);
 
-	//ReScale_SphereCol();
-
 	return NO_EVENT;
 }
 
@@ -140,6 +138,8 @@ void CMedi_Medicine::Check_ItemAndMouse()
 		if (pInvenUI != nullptr)
 			dynamic_cast<CInvenUI*>(pInvenUI)->Set_AddItemNum(1, 1);
 
+		CSoundMgr::Get_Instance()->Play_Effect(L"EatItem.mp3");
+
 		m_bIsClick = false;
 		m_bIsDead = true;
 	}
@@ -179,11 +179,6 @@ HRESULT CMedi_Medicine::Add_Component()
 	m_pBoxCollider = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(100.f, 100.f, 100.f), this));
 	NULL_CHECK_RETURN(m_pBoxCollider, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCollider);
-
-	//Sphere
-	//m_pShereCol = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 20.f, _vec3(1.f, 1.f, 1.f), this));
-	//NULL_CHECK_RETURN(m_pShereCol, E_FAIL);
-	//m_mapComponent[ID_STATIC].emplace(L"Com_SphereCol", m_pShereCol);
 
 	return S_OK;
 }

@@ -188,6 +188,8 @@ void CCardKey::Coliision_CardAndPlayer()
 				static_cast<CMonster*>(pSrc)->Set_IsActiveStart(true);
 		}		
 		dynamic_cast<CCardReader*>(pCardReader)->Set_CardKeyEquip(true);
+
+		CSoundMgr::Get_Instance()->Play_Effect(L"EatItem.mp3");
 		m_bIsDead = true;
 	}
 }

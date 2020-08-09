@@ -159,6 +159,12 @@ void CCardTagUI::CardTagOn_Clear(const _float& fTimeDelta)
 {
 	if (m_bIsTagOn && !m_bIsClear &&!m_bIsAlreadyZoom)
 	{
+		if (!m_bIsTagClearSound)
+		{
+			CSoundMgr::Get_Instance()->Play_Effect(L"CardClear.mp3");
+			m_bIsTagClearSound = true;
+		}
+
 		if (m_fCurTag > 0)
 			m_fCurTag -= 15.f * fTimeDelta;
 		else
