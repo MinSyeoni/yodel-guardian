@@ -30,7 +30,7 @@ HRESULT CGunUI::Ready_GameObject()
 	Add_Component();
 
 	if (m_pGunTag == L"Prototype_Texture_Rifle")
-		m_iCurBullet = m_iMaxBullet = 30;
+		m_iCurBullet = m_iMaxBullet = 300;
 
 	return S_OK;
 }

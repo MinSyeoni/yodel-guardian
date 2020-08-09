@@ -31,7 +31,7 @@ public:
 public:
 	void						Set_ShowUI(_bool bIsShow) { m_bIsShow = bIsShow; }
 	void						Set_CurQUEST_TYPE(QUEST_TYPE iType) { m_eQuestType = iType; }	// 이걸로 퀘스트 정해주면 됌
-
+	QUEST_TYPE					Get_CurQUEST_TYPE() { return m_eQuestType; }
 private:
 	virtual HRESULT				Add_Component();
 

@@ -65,18 +65,21 @@ _int CDron::Update_Dron(const _float& fTimeDelta, CTransform* pTransform, CMesh*
 	if (m_bIsDronState[2])	// m_bIsHit
 		m_eCurState = DRON_EX_IdleSway;
 
-	Update_DronPos();
-	Dron_OnTriggerTest();
+	if (m_eCurState != DRON_EX_IdleNoise)
+	{
+		Update_DronPos(fTimeDelta);
+		Dron_OnTrigger(fTimeDelta);
+	}
 
 	return S_OK;
 }
 
-void CDron::Update_DronPos()
+void CDron::Update_DronPos(const _float& fTimeDelta)
 {
 	if (m_iDrawID == 1)
 	{
 		m_pTransCom->m_vPos.y = 15.f;
-
+		m_fSpeed = 12.f;
 		if(!m_bIsTurn)
 			m_pTransCom->m_vAngle = _vec3{ 0.f, -100.f, 0.f };
 		else
@@ -85,6 +88,7 @@ void CDron::Update_DronPos()
 	else if (m_iDrawID == 2)
 	{
 		m_pTransCom->m_vPos.y = 15.f;
+		m_fSpeed = 8.f;
 		if (!m_bIsTurn)
 			m_pTransCom->m_vAngle = _vec3{ 0.f, -100.f, 0.f };
 		else
@@ -93,6 +97,7 @@ void CDron::Update_DronPos()
 	else if (m_iDrawID == 3)
 	{
 		m_pTransCom->m_vPos.y = 10.f;
+		m_fSpeed = 15.f;
 		if (!m_bIsTurn)
 			m_pTransCom->m_vAngle = _vec3{ 0.f, 80.f, 0.f };
 		else
@@ -100,7 +105,7 @@ void CDron::Update_DronPos()
 	}
 }
 
-void CDron::Dron_OnTriggerTest()
+void CDron::Dron_OnTrigger(const _float& fTimeDelta)
 {
 	_vec3 vChaseDir = _vec3(0.f, 0.f, 0.f);
 	list<CGameObject*>* pTriggerList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Trigger");
@@ -109,63 +114,70 @@ void CDron::Dron_OnTriggerTest()
 		for (auto& pSrc : *pTriggerList)
 		{
 			if (CTrigger::TRIGGER_SPHERE == dynamic_cast<CTrigger*>(pSrc)->Get_ColType()
-				&& m_iDrawID == dynamic_cast<CTrigger*>(pSrc)->Get_ColID() 
-				&& !m_bIsTurn)
+				&& m_iDrawID == dynamic_cast<CTrigger*>(pSrc)->Get_ColID()
+				&& (!m_bIsTurn && !m_bIsAlreadyTurn))
 			{
-				vChaseDir = dynamic_cast<CTrigger*>(pSrc)->Get_ColPos() - m_pTransCom->m_vPos;
-				vChaseDir.Normalize();
-				m_pTransCom->m_vDir = vChaseDir;
+				Chase_Rotation(dynamic_cast<CTrigger*>(pSrc)->Get_ColPos(), fTimeDelta);
 			}
 		}
 	}
 
 	_vec3 vInitDir = m_vInitPos - m_pTransCom->m_vPos;
 	_float fChaseRange = vInitDir.Get_Length();
-	if (fChaseRange <= 1.5f && m_bIsTurn)
+	if (m_bIsTurn && !m_bIsAlreadyTurn)
 	{
-		m_pTransCom->m_vDir *= -1.f;
+		Chase_Rotation(m_vInitPos, fTimeDelta);
+		m_bIsAlreadyTurn = true;
+	}
+	else if (fChaseRange <= 1.5f && m_bIsTurn && m_bIsAlreadyTurn)
+	{
+		m_bIsAlreadyTurn = false;
 		m_bIsTurn = false;
 	}
 }
 
 void CDron::MoveByAstar(const _float& fTimeDelta)
 {
-	//CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
-	//if (pPlayer == nullptr)
-	//	return;
+	CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+	if (pPlayer == nullptr)
+		return;
+	CTransform* pPlayerTranForm = pPlayer->Get_Transform();
+	CNaviMesh* pPlayerNavi = dynamic_cast<CPlayer*>(pPlayer)->Get_Status()->m_pNaviMesh;
+	m_pAstarCom->Start_Aster(m_pTransCom->m_vPos, pPlayerTranForm->m_vPos, m_pNaviMesh->GetIndex(), pPlayerNavi->GetIndex());
+	
+	list<Engine::CCell*>& BestLst = m_pAstarCom->GetBestLst();
 
-	//CTransform* pPlayerTranForm = pPlayer->Get_Transform();
-	//CNaviMesh* pPlayerNavi = dynamic_cast<CPlayer*>(pPlayer)->Get_Status()->m_pNaviMesh;
+	if (!BestLst.empty())
+	{
+		_vec3 vecDir = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
 
-	//m_pAstarCom->Start_Aster(m_pTransCom->m_vPos, pPlayerTranForm->m_vPos, m_pNaviMesh->GetIndex(), pPlayerNavi->GetIndex());
+		BestLst.pop_front();
+		if (!BestLst.empty())
+		{
+			_vec3 vecDir2 = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
 
-	//list<Engine::CCell*>& BestLst = m_pAstarCom->GetBestLst();
+			vecDir = (vecDir + vecDir2) * 0.5;
+			BestLst.pop_front();
+			if (!BestLst.empty())
+			{
+				vecDir2 = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
+				vecDir = (vecDir + vecDir2) * 0.5;
+			}
+		}
 
-	//if (!BestLst.empty())
-	//{
-	//	_vec3 vecDir = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
+		vecDir.Normalize();
+		_vec3 vMovePos;
 
-	//	BestLst.pop_front();
-	//	if (!BestLst.empty())
-	//	{
-	//		_vec3 vecDir2 = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
+		vMovePos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed * fTimeDelta, true);
+		if (m_iDrawID == 1)
+			vMovePos.y = 15.f;
+		else if (m_iDrawID == 2)
+			vMovePos.y = 15.f;
+		else if (m_iDrawID == 3)
+			vMovePos.y = 10.f;
 
-	//		vecDir = (vecDir + vecDir2) * 0.5;
-	//		BestLst.pop_front();
-	//		if (!BestLst.empty())
-	//		{
-	//			vecDir2 = BestLst.front()->m_vPos - m_pTransCom->m_vPos;
-	//			vecDir = (vecDir + vecDir2) * 0.5;
-	//		}
-	//	}
-
-	//	vecDir.Normalize();
-	//	_vec3 vMovePos;
-
-	//	vMovePos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &vecDir, fTimeDelta * m_fSpeed);
-
-	//	m_pTransCom->m_vPos = vMovePos;
-	//}
+		m_pTransCom->m_vPos = vMovePos;
+	}
 }
 
 void CDron::Update_DronHP()
@@ -178,14 +190,12 @@ void CDron::Update_DronHP()
 	}
 }
 
-void CDron::Chase_Player(const _float& fTimeDelta)
+void CDron::Chase_Rotation(_vec3 vPos, const _float& fTimeDelta)
 {
-	m_vChaseDir = (m_vPlayerPos - m_pTransCom->m_vPos);
-
+	m_vChaseDir = (vPos - m_pTransCom->m_vPos);
 	_float fAngle;
 	_vec3  vLook, vRight;
 
-	m_vChaseDir.y = 0.f;
 	m_vChaseDir.Normalize();
 
 	memcpy(&vLook, &m_pTransCom->Get_LookVector(), sizeof(_vec3));
@@ -216,7 +226,6 @@ void CDron::Chase_Player(const _float& fTimeDelta)
 	}
 
 	m_pTransCom->m_vDir = m_vChaseDir;
-//	m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_vChaseDir, m_fSpeed * fTimeDelta);
 }
 
 _bool CDron::Check_PlayerRange(_float fRange)
@@ -237,7 +246,6 @@ _bool CDron::Check_PlayerRange(_float fRange)
 _int CDron::LateUpdate_Dron(const _float& fTimeDelta, CTransform* pTransform, CMesh* m_pMeshCom)
 {
 	Animation_Test(fTimeDelta, m_pMeshCom);
-
 
 	return S_OK;
 }
@@ -268,27 +276,61 @@ void CDron::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CDron::DRON_EX_IdleHoverTwitch:	// 정찰
 	{
-		m_fAniDelay = 6000.f;
-		m_fSpeed = 10.f;
+		m_bIsShoot = false;
+
+		if (m_bIsDronState[2])	// hit
+			m_eCurState = DRON_EX_IdleSway;
+
+		m_fAniDelay = 20000.f;
+
 		m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &m_pTransCom->m_vDir, m_fSpeed * fTimeDelta, true);
 
-		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, DRON_EX_IdleHoverTwitch))		
-			m_eCurState = DRON_EX_IdleNoise;
+		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, DRON_EX_IdleHoverTwitch))
+		{
+			if(Check_PlayerRange(40.f))
+				m_eCurState = DRON_EX_IdleNoise;
+			else
+				m_eCurState = DRON_EX_IdleHoverTwitch;
+		}
 	}
 		break;
 	case CDron::DRON_EX_IdleNoise:		// 공격
 	{
-		m_fAniDelay = 6000.f;
+		m_fAniDelay = 4000.f;
+		
+		if (m_bIsShoot)
+		{
+			m_fShootDelay += fTimeDelta;
+			if (m_fShootDelay >= 3.f)
+			{
+				m_fShootDelay = 0.f;
+				m_bIsShoot = false;
+			}
+		}
 
+		Chase_Rotation(m_vPlayerPos, fTimeDelta);
 		Attak_Player(m_pMeshCom, DRON_EX_IdleNoise);
 	}
 		break;
-	case CDron::DRON_EX_IdleSway:
+	case CDron::DRON_EX_IdleSway:	// 맞을 때
 	{
-		m_fAniDelay = 4000.f;
+		if (m_bIsDronState[1])
+			return;
+
+		m_fAniDelay = 2000.f;
 
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, DRON_EX_IdleSway))
-			m_eCurState = DRON_EX_IdleNoise;
+		{
+			m_fHitDamage = rand() % 10 + 10.f;
+			m_fCurHp -= m_fHitDamage;
+			m_bIsDronState[2] = false;
+			m_bIsHitBullet = true;
+
+			if (Check_PlayerRange(40.f))
+				m_eCurState = DRON_EX_IdleNoise;
+			else
+				m_eCurState = DRON_EX_IdleHoverTwitch;
+		}
 	}
 		break;
 	case CDron::DRON_FlightPose:
@@ -296,6 +338,14 @@ void CDron::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	case CDron::DRON_OLD_Idle:
 		break;
 	case CDron::DRON_DG_Death:
+	{
+		m_bIsDronState[2] = false;
+		m_fAniDelay = 300.f;
+		m_pTransCom->m_vPos.y -= 5.f * fTimeDelta;
+
+		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, DRON_DG_Death))
+			m_bIsDronState[1] = true;	//dead
+	}
 		break;
 	default:
 		break;
@@ -304,23 +354,27 @@ void CDron::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 
 void CDron::Attak_Player(Engine::CMesh* m_pMeshCom, CDron::DRONSTATE eState)
 {
-	if (!m_bIsDronState[3] && !m_bIsShoot)
+	if (!m_bIsDronState[3])
 	{
-		m_bIsDronState[3] = true;
-		m_bIsShoot = true;
-		m_fAtkDamage = rand() % 15 + 15.f;
-
-		// 공격 시 검사
 		MeshInfo tMeshInfo;
 		tMeshInfo.Pos = m_pTransCom->m_vPos;
-		CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_GameObject", L"Prototype_DronBullet", L"DronBullet", &tMeshInfo);
+		if (!m_bIsShoot)
+		{
+			CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_GameObject", L"Prototype_DronBullet", L"DronBullet", &tMeshInfo);
+			m_bIsShoot = true;
+		}
+
+		m_bIsDronState[3] = true;
 	}
 
 	if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, eState))
 	{
 		m_bIsDronState[3] = false;
-		m_bIsShoot = false;	
-		m_eCurState = DRON_EX_IdleHoverTwitch;
+
+		if (Check_PlayerRange(40.f))
+			m_eCurState = DRON_EX_IdleNoise;
+		else
+			m_eCurState = DRON_EX_IdleHoverTwitch;
 	}
 }
 
@@ -328,5 +382,5 @@ void CDron::Release()
 {
 	Safe_Release(m_pTransCom);
 	Safe_Release(m_pNaviMesh);
-//	Safe_Release(m_pAstarCom);
+	Safe_Release(m_pAstarCom);
 }

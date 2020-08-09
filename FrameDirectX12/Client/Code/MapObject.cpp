@@ -66,7 +66,12 @@ _int CMapObject::Update_GameObject(const _float & fTimeDelta)
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
-	if (!m_bIsBigObject && !m_bIsColliderObject)
+	if (m_tMeshInfo.MeshTag == L"passage_box1.X" || m_tMeshInfo.MeshTag == L"passage_box2.X")
+	{
+		m_pBoxCom->Update_Collider(&m_pTransCom->m_matWorld);
+		CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::PASSBOX, m_pBoxCom);
+	}
+	else if (!m_bIsBigObject && !m_bIsColliderObject)
 	{
 		m_pBoxCom->Update_Collider(&m_pTransCom->m_matWorld);
 		CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::BULLETDECAL, m_pBoxCom);
@@ -76,7 +81,7 @@ _int CMapObject::Update_GameObject(const _float & fTimeDelta)
 		m_pBoxCom->Update_Collider(&m_pTransCom->m_matWorld);
 		CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::PLAYERVIEW, m_pBoxCom);
 	}
-
+	
 	return NO_EVENT;
 }
 
@@ -84,10 +89,12 @@ _int CMapObject::LateUpdate_GameObject(const _float & fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pRenderer, -1); 
 
-
-	if (m_bIsDrawShadow &&!m_bIsColliderObject )
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
-
+	if (m_bIsDrawShadow && !m_bIsColliderObject)
+	{
+		FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
+		if (m_tMeshInfo.MeshTag == L"passage_box1.X" || m_tMeshInfo.MeshTag == L"passage_box2.X")
+			FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCom), -1);
+	}
 
 	if (!CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
 		return NO_EVENT;
@@ -97,9 +104,7 @@ _int CMapObject::LateUpdate_GameObject(const _float & fTimeDelta)
 		FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 	}
 	else if (m_bIsColliderObject)
-	{
 		FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCom), -1);
-	}
 
 	return NO_EVENT;
 }

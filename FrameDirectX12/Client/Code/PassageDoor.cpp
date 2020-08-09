@@ -85,8 +85,8 @@ void CPassageDoor::OpenTheDoor()
 
 	if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && m_bIsReaderOn && !m_bIsOpen && m_bIsCollision)
 		m_eDoorState = PASSAGE_OPEN;
-	else if(m_bIsOpen && !m_bIsCollision)
-		m_eDoorState = PASSAGE_CLOSE;
+	//else if(m_bIsOpen && !m_bIsCollision)
+	//	m_eDoorState = PASSAGE_CLOSE;
 }
 
 _int CPassageDoor::LateUpdate_GameObject(const _float & fTimeDelta)

@@ -81,6 +81,7 @@ private:
 	_uint						m_iInitAni;
 	_uint						m_iInitId;
 	_uint						m_iAstarID;
+
 protected:
 	float						m_fDissolve = 1.f;
 	_matrix						m_matDissolve = INIT_MATRIX;

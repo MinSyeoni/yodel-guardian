@@ -52,7 +52,7 @@ HRESULT CSniper::Ready_GameObject(WEAPONSTATE eState)
     
 
     m_eWeaponState = eState;
-    m_iCurBullet = 5.f;
+    m_iCurBullet = 50.f;
     m_iMaxBullet = 50.f;
 
     return S_OK;

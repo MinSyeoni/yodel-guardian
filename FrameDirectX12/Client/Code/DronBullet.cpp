@@ -77,9 +77,21 @@ _int CDronBullet::LateUpdate_GameObject(const _float& fTimeDelta)
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCollider), -1);
-	
+
 	_vec3 vShaveDir;
 	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYER))
+	{
+		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(pCol, m_pBoxCollider, &vShaveDir))
+		{
+			CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
+			if (pPlayer == nullptr)
+				return E_FAIL;
+			dynamic_cast<CPlayer*>(pPlayer)->Set_FlameDamage(10);
+			m_bIsDead = true;
+		}
+	}
+
+	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYERVIEW))
 	{
 		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(pCol, m_pBoxCollider, &vShaveDir))
 		{
@@ -87,7 +99,7 @@ _int CDronBullet::LateUpdate_GameObject(const _float& fTimeDelta)
 		}
 	}
 
-	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PLAYERVIEW))
+	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PASSBOX))
 	{
 		if (!m_bIsDead && CMathMgr::Get_Instance()->Collision_OBB(pCol, m_pBoxCollider, &vShaveDir))
 		{

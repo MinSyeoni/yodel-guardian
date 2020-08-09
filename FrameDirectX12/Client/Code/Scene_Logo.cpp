@@ -25,7 +25,7 @@ HRESULT CScene_Logo::Ready_Scene()
 #ifdef _DEBUG
 	COUT_STR("Ready Scene_Logo");
 #endif
-//	CSoundMgr::Get_Instance()->PlayBGM(L"Bgm.wav");
+	CSoundMgr::Get_Instance()->PlayBGM(L"Bgm.wav");
 	FAILED_CHECK_RETURN(Ready_GameObjectPrototype(), E_FAIL);
 
 	FAILED_CHECK_RETURN(Ready_LayerEnvironment(L"Layer_Environment"), E_FAIL);

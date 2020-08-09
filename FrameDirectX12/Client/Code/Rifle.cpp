@@ -72,7 +72,7 @@ HRESULT CRifle::Ready_GameObject(WEAPONSTATE eState)
     m_pTransCom->m_vAngle = _vec3(0.f, 0.f, 0.f);
     
     m_eWeaponState = eState;
-    m_iCurBullet = 30.f;
+    m_iCurBullet = 300.f;
     m_iMaxBullet = 300.f;
 
     return S_OK;

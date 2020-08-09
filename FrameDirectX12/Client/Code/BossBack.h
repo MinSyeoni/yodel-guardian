@@ -43,7 +43,8 @@ private:
 	Engine::CTexture*			m_pTexture = nullptr;
 
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
-	_bool						m_bIsShow = true;
+	_bool						m_bIsShow = false;
+
 public:
 	virtual CGameObject*		Clone_GameObject(void* pArg);
 	static CBossBack*			Create(ID3D12Device* pGraphicDevice,

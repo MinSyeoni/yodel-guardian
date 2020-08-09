@@ -44,7 +44,7 @@ private:
 
 	CDynamicCamera*				m_pDynamicCamera = nullptr;
 
-	_bool						m_bIsShow = true;
+	_bool						m_bIsShow = false;
 	_matrix						m_matHPWorld = INIT_MATRIX;
 
 	_float						m_fCurHp = 0.f;

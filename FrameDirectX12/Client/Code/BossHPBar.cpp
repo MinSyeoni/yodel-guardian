@@ -74,12 +74,6 @@ _int CBossHPBar::LateUpdate_GameObject(const _float& fTimeDelta)
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
-	if (CDirectInput::Get_Instance()->KEY_PRESSING(DIK_N))
-	{
-		//	if (m_fPreHp > m_fCurHp)
-		m_fPreHp -= 15.f * fTimeDelta;
-	}
-
 	m_matHPWorld._41 = 0.22f + m_fPreHp * (0.0058f);
 
 	return NO_EVENT;

@@ -5,6 +5,11 @@
 #include "GraphicDevice.h"
 #include "DirectInput.h"
 #include "LightMgr.h"
+
+#include "BossHPBar.h"
+#include "BossBack.h"
+#include "QuestUI.h"
+
 CReapear::CReapear(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -146,6 +151,24 @@ _int CReapear::Update_GameObject(const _float& fTimeDelta)
 			m_pTransCom->m_vPos = _vec3(300.f, -450.f, 250.f);
 		}
 	}
+
+	////////////// 여기다 보스 hp 추가할게 위치 바꿔도 됨 ///////////
+	if (m_bIsBattleStart)
+	{
+		list<CGameObject*>* pQuestUIList = m_pObjectMgr->Get_OBJLIST(L"Layer_UI", L"QuestUI");
+		if (pQuestUIList != nullptr)
+		{
+			for (auto& pSrc : *pQuestUIList)
+				dynamic_cast<CQuestUI*>(pSrc)->Set_ShowUI(false);
+		}
+		CGameObject* pBossHPBar = m_pObjectMgr->Get_GameObject(L"Layer_UI", L"BossHPBar");
+		if (pBossHPBar != nullptr)
+			dynamic_cast<CBossHPBar*>(pBossHPBar)->Set_ShowUI(true);
+		CGameObject* pBossBack = m_pObjectMgr->Get_GameObject(L"Layer_UI", L"BossBack");
+		if (pBossBack != nullptr)
+			dynamic_cast<CBossBack*>(pBossBack)->Set_ShowUI(true);
+	}
+	/////////////////////////////////////////////////////////////
 
 	UpdateLight(fTimeDelta);
 	DieCheck(fTimeDelta);

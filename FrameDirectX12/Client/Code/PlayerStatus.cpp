@@ -706,13 +706,21 @@ void CPlayerStatus::CollisionWithObject(const _float& fTimeDelta)
             m_pTransCom->m_matWorld._42 += vShaveDir.y;
             m_pTransCom->m_matWorld._43 += vShaveDir.z;
         }
-     
+
     }
 
+    // 통로 박스용 충돌 하나 만들게 
+    for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::PASSBOX))
+    {
+        if (CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir))
+        {
+            m_pTransCom->m_vPos += vShaveDir;
 
-
-
-
+            m_pTransCom->m_matWorld._41 += vShaveDir.x;
+            m_pTransCom->m_matWorld._42 += vShaveDir.y;
+            m_pTransCom->m_matWorld._43 += vShaveDir.z;
+        }
+    }
 }
 
 void CPlayerStatus::CutSceneCheck()
