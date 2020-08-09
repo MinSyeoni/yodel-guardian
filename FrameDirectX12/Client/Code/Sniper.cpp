@@ -6,6 +6,7 @@
 #include "LightMgr.h"
 #include "Frustom.h"
 #include "DirectInput.h"
+#include "QuestUI.h"
 CSniper::CSniper(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
     :CWeapon(pGraphicDevice, pCommandList)
 {
@@ -271,6 +272,13 @@ void CSniper::DropCheck()
             m_pTransCom->m_vAngle = _vec3(0.f, 0.f, 0.f);
             m_pTransCom->m_vScale = _vec3(1.f, 1.f, 1.f);
             m_bIsLimLight = false;
+
+            CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"QuestUI");
+            if (pQuestUI != nullptr)
+            {
+                dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE4);
+            }
+
         }
 
 

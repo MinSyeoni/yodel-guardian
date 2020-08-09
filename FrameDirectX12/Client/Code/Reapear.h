@@ -29,6 +29,11 @@ public:
 
 	void SetLeftLock() { m_bIsLeftLock = false; };
 	void SetRightLock() { m_bIsRightLock = false; };
+
+
+	// 보스 체력바때문에 추가함
+	_float				Get_CurBossHP() { return m_iHp; }
+
 private:
 	virtual HRESULT Add_Component();
 public:
@@ -53,7 +58,7 @@ private:
 
 	float m_fTime = 0.f;
 	vector<vector<_matrix>> m_vecMatrix;
-	_int  m_iHp = 50.f;
+	_int  m_iHp = 100.f;
 	
 	ANISTATE m_eCurAniState;
 	ANISTATE m_ePreAniState;

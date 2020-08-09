@@ -49,6 +49,7 @@ private:
 
 public:
 	CZombi*						Get_Zombi() { return m_pZombi; };
+	CDron*                      Get_Dron() { return m_pDron; };
 	MONKIND						Get_MONKIND() { return m_eMonName; }
 
 private:

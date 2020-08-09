@@ -65,12 +65,12 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
     }
     else
     {
-        if (m_eEquip == NONE)
+        if (m_eEquip == NONE&&m_eCurScene == NOSCENE)
         {
             m_eCurState = CPlayer::NONEIDLE;
             m_eLegState = CPlayer::NONEIDLE;
         }
-        else 
+        else if(m_eEquip == RIFLE && m_eCurScene == NOSCENE)
         {
             m_eCurState = CPlayer::RIFLEIDLE;
             m_eLegState = CPlayer::RIFLEIDLE;
@@ -131,6 +131,8 @@ _int CPlayerStatus::LateUpdate(const _float& fTimeDelta)
     DamageByMonster(fTimeDelta);
 
     CollisionWithObject(fTimeDelta);
+
+    Test();
     m_ePreState = m_eCurState;
     return S_OK;
 }
@@ -805,11 +807,24 @@ void CPlayerStatus::ShootingCheck()
         CMonster::MONKIND  eMonKind = CMonster::NONAME;
         eMonKind = dynamic_cast<CMonster*>(pMonster)->Get_MONKIND();
 
+        float AttackDamage = 30;
+
+        if (m_eEquip == SNIPER)
+            AttackDamage = 60;
+
         if (eMonKind == CMonster::ZOMBI)
         {
             CZombi* pZombi = dynamic_cast<CMonster*>(pMonster)->Get_Zombi();
-            pZombi->Set_HitDamage(30);
+            pZombi->Set_HitDamage(AttackDamage);
             pZombi->Set_IsHit(true);
+
+        }
+
+        if (eMonKind == CMonster::DRON)
+        {
+            CDron* pDron = dynamic_cast<CMonster*>(pMonster)->Get_Dron();
+            pDron->Set_HitDamage(AttackDamage);
+            pDron->Set_IsHit(true);
 
         }
     }
@@ -1242,4 +1257,19 @@ void CPlayerStatus::HPMpCheck(const _float& fTimeDelta) // BAR 체크 약간 수정
         for (auto& pSrc : *pMpBarUIList)
             dynamic_cast<CMPBar*>(pSrc)->Set_CurMpType(0);
     }
+}
+
+void CPlayerStatus::Test()
+{
+    for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::NPC))
+    {
+        float fDir;
+        if (CMathMgr::Get_Instance()->Collision_ViewAngle(m_pTransCom->m_vPos,m_pTransCom->m_vDir, pCol, 80.f,&fDir))
+        {
+            int i = 0;
+        }
+
+    }
+
+
 }

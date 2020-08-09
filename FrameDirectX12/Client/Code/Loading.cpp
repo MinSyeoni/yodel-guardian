@@ -646,15 +646,7 @@ HRESULT CLoading::Texture_ForStage(void)
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_TerrainN", ID_STATIC, pComponent), E_FAIL);
 
 	// UI 이미지 넣을 것. 
-	//wstring strText = L"";
-	//string strTemp = "";
-
-	//strTemp = to_string(m_iCurBullet);	
-	//strTemp += "	";
-	//strTemp += to_string(m_iMaxBullet);
-
-	//strText.assign(strTemp.begin(), strTemp.end());
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < 9; ++i)
 	{
 		wstring wstrText = L"";
 		string strTemp = "";
@@ -742,6 +734,15 @@ HRESULT CLoading::Texture_ForStage(void)
 	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/card_green.dds", 1);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_CardTag", ID_STATIC, pComponent), E_FAIL);
+
+	// 보스
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/boss.dds", 1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_BossBack", ID_STATIC, pComponent), E_FAIL);
+
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/boss_blood.dds", 1);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_BossBlood", ID_STATIC, pComponent), E_FAIL);
 
 	// e 버튼
 	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Texture/UI/e1.dds", 1);

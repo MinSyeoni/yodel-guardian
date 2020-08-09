@@ -11,6 +11,7 @@
 #include "Zombi.h"
 #include "Monster.h"
 #include "NpcRifle.h"
+#include "QuestUI.h"
 CShepard::CShepard(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
 {
@@ -146,7 +147,7 @@ _int CShepard::Update_GameObject(const _float& fTimeDelta)
 	m_pBoxCollider->Update_Collider(&m_pTransCom->m_matWorld);
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
-
+	if (!m_bIsFinish)
 	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::NPC, m_pBoxCollider);
 	return NO_EVENT;
 }
@@ -241,8 +242,16 @@ void CShepard::GotoPlayer(const _float& fTimeDelta)
 
 		CNpcWords::WORDS_TYPE eType = CNpcWords::SHEPARD;
 		m_pObjectMgr->Add_GameObject(L"Layer_UI", L"Prototype_NpcBoard", L"NpcBoard", &eType);
-
-
+		// 퀘스트 다음걸로 넘기려고 추가했음
+		// 카드키 줍기전이나 npc 대화할 때 넣어주고 type만 바꿔주면 됨
+		list<CGameObject*>* pQuestUIList = m_pObjectMgr->Get_OBJLIST(L"Layer_UI", L"QuestUI");
+		if (pQuestUIList != nullptr)
+		{
+			for (auto& pSrc : *pQuestUIList)
+			{
+				dynamic_cast<CQuestUI*>(pSrc)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE1);
+			}
+		}
 	}
 
 	else
@@ -327,11 +336,23 @@ void CShepard::MoveByAstar(const _float& fTimeDelta)
 	}
 	else if (m_iFightCount == 3)
 	{
+		CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"QuestUI");
+		if (pQuestUI != nullptr)
+		{
+			dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE3);
+		}
+
 		MovePos = m_vMove3Pos;
 		uiNavi = m_uiMove3NaviIndex;
 	}
 	else if (m_iFightCount == 4)
 	{
+
+		CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"QuestUI");
+		if (pQuestUI != nullptr)
+		{
+			dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE5);
+		}
 
 		MovePos = m_vMove4Pos;
 		uiNavi = m_uiMove4NaviIndex;
@@ -345,16 +366,27 @@ void CShepard::MoveByAstar(const _float& fTimeDelta)
 	{
 		m_eCurChapter = PATROLCUT;
 		if (m_iFightCount == 4)
+		{
 			m_bIsFinish = true;
+			m_bIsDead = true;
 
+		}
 		list<CGameObject*> pList = *CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"NpcWeapon");
 		for (auto& pSrc : pList)
 		{
 
 			if (CNpcRifle::SHEPARD == static_cast<CNpcRifle*>(pSrc)->Get_Owner())
 			{
-
-				static_cast<CNpcRifle*>(pSrc)->CreateShootEffect();
+				if (m_bIsFinish)
+				{
+					pSrc->Dead_GameObject();
+					CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"QuestUI");
+					if (pQuestUI != nullptr)
+					{
+						dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE6);
+					}
+					return;
+				}
 
 			}
 

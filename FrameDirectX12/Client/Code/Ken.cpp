@@ -297,8 +297,28 @@ void CKen::MoveByAstar(const _float& fTimeDelta)
 	{
 		m_eCurChapter = PATROLCUT;
 		if (m_iFightCount == 4)
+		{
 			m_bIsFinish = true;
+			m_bIsDead = true;
+			list<CGameObject*> pList = *CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"NpcWeapon");
+			for (auto& pSrc : pList)
+			{
 
+				if (CNpcRifle::KEN == static_cast<CNpcRifle*>(pSrc)->Get_Owner())
+				{
+					if (m_bIsFinish)
+					{
+						pSrc->Dead_GameObject();
+						return;
+					}
+
+				}
+
+
+			}
+
+
+		}
 		return;
 	}
 

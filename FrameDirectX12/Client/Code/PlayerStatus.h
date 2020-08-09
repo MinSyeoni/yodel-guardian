@@ -42,6 +42,8 @@ public:
 	void CoverPositionCheck();
 	void WeaponSwap();
 	void HPMpCheck(const _float& fTimeDelta);
+
+	void Test();
 public:
 	CPlayer::STATE m_eCurState = CPlayer::RIFLEIDLE;
 	CPlayer::STATE m_ePreState = CPlayer::RIFLEIDLE;

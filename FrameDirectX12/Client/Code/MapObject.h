@@ -42,12 +42,12 @@ private:
 
 	MeshInfo					m_tMeshInfo;
 	vector<vector<_matrix>>		m_vecMatrix;
-	Engine::CBoxCollider* m_pBoxCom = nullptr;
+	Engine::CBoxCollider*		m_pBoxCom = nullptr;
 
-	bool                  m_bIsDrawShadow = true;
-	bool                  m_bIsBigObject = false;
+	bool						m_bIsDrawShadow = true;
+	bool						m_bIsBigObject = false;
 
-	bool                  m_bIsColliderObject = false;
+	bool						m_bIsColliderObject = false;
 public:
 	virtual CGameObject*	Clone_GameObject(void* prg);
 	static CMapObject*		Create(ID3D12Device* pGraphicDevice,

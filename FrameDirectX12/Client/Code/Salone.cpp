@@ -164,7 +164,7 @@ void CSalone::FIRTSTTALKCEHCK()
 		{
 			ShowEquipUI(true);
 			m_bIsLimLIght = true;
-			if (KEY_DOWN(DIK_V))
+			if (KEY_DOWN(DIK_E))
 			{
 				CFadeOut::FADETYPE eType = CFadeOut::FIRST;
 				m_bIsLimLIght = false;

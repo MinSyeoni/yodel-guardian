@@ -37,13 +37,11 @@ HRESULT CMapObject::Ready_GameObject()
 
 	m_pTransCom->m_vPos = m_tMeshInfo.Pos;
 	m_pTransCom->m_vScale = m_tMeshInfo.Scale;
-
 	m_pTransCom->m_vAngle = ToDegree(m_tMeshInfo.Rotation);
 
 	m_pBoxCom = static_cast<Engine::CBoxCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, true, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(300.f, 300.f, 300.f), this));
 	NULL_CHECK_RETURN(m_pBoxCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_BoxCol", m_pBoxCom);
-
 
 	m_bIsColliderObject = false;
 
@@ -68,33 +66,40 @@ _int CMapObject::Update_GameObject(const _float & fTimeDelta)
 	if (m_bIsDead)
 		return DEAD_OBJ;
 
-	if(!m_bIsBigObject)
-	m_pBoxCom->Update_Collider(&m_pTransCom->m_matWorld);
-
-	if (!m_bIsBigObject)
-	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::BULLETDECAL, m_pBoxCom);
+	if (!m_bIsBigObject && !m_bIsColliderObject)
+	{
+		m_pBoxCom->Update_Collider(&m_pTransCom->m_matWorld);
+		CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::BULLETDECAL, m_pBoxCom);
+	}
+	else if (m_bIsColliderObject)
+	{
+		m_pBoxCom->Update_Collider(&m_pTransCom->m_matWorld);
+		CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::PLAYERVIEW, m_pBoxCom);
+	}
 
 	return NO_EVENT;
 }
 
 _int CMapObject::LateUpdate_GameObject(const _float & fTimeDelta)
 {
-
-
-
 	NULL_CHECK_RETURN(m_pRenderer, -1); 
+
 
 	if (m_bIsDrawShadow &&!m_bIsColliderObject )
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 
 
-
 	if (!CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
 		return NO_EVENT;
-	if(!m_bIsColliderObject)
-	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 
-
+	if (!m_bIsColliderObject)
+	{
+		FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
+	}
+	else if (m_bIsColliderObject)
+	{
+		FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCom), -1);
+	}
 
 	return NO_EVENT;
 }
@@ -123,22 +128,9 @@ HRESULT CMapObject::Add_Component()
 	if (m_tMeshInfo.MeshTag == L"map1.X" || m_tMeshInfo.MeshTag == L"map1_roof.X" || m_tMeshInfo.MeshTag == L"passage_test.X")
 		m_bIsBigObject = true;
 
-
-
-	//if (m_tMeshInfo.MeshTag == L"map1.X" || m_tMeshInfo.MeshTag == L"map1_roof.X" || m_tMeshInfo.MeshTag == L"passage_test.X")
-	//{
-	//	m_pShaderCom = static_cast<Engine::CShader_Mesh*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_MeshShadow", COMPONENTID::ID_STATIC));
-	//	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
-	//	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
-	//	m_bIsDrawShadow = false;
-	//}
-	//else
-	//{
-		m_pShaderCom = static_cast<Engine::CShader_Mesh*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_Mesh", COMPONENTID::ID_STATIC));
-		NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
-		m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
-	//}
-
+	m_pShaderCom = static_cast<Engine::CShader_Mesh*>(m_pComponentMgr->Clone_Component(L"Prototype_Shader_Mesh", COMPONENTID::ID_STATIC));
+	NULL_CHECK_RETURN(m_pShaderCom, E_FAIL);
+	m_mapComponent[ID_STATIC].emplace(L"Com_Shader", m_pShaderCom);
 
 	// Buffer
 	m_pMeshCom = static_cast<Engine::CMesh*>(m_pComponentMgr->Clone_Component(m_tMeshInfo.MeshTag.c_str(), COMPONENTID::ID_STATIC));
@@ -168,24 +160,18 @@ void CMapObject::Set_ConstantTable()
 
 	if (!m_bIsDrawShadow)
 	{
-
 		_matrix matLightView = CFrustom::Get_Instance()->Get_LightView();
 		_matrix matLightProj = CFrustom::Get_Instance()->Get_LightProj();
 
 		_matrix matLightWVP = m_pTransCom->m_matWorld* matLightView * matLightProj;
 		XMStoreFloat4x4(&tCB_MatrixInfo.matProj, XMMatrixTranspose(matLightWVP));
-
-
 	}
-
 
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
 }
 
 void CMapObject::Set_ShadowTable(CShader_Shadow * pShader)
 {
-
-
 	_matrix matView = INIT_MATRIX;
 	_matrix matProj = INIT_MATRIX;
 

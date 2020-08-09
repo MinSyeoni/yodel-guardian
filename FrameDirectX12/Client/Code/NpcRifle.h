@@ -44,6 +44,7 @@ private:
 	_matrix* m_pFireMatrix;
 	_matrix* m_pFireMatrixOffset;
 
+	_bool m_bIsFinish = false;
 
 private:
 	_float m_fRight;
@@ -53,8 +54,6 @@ private:
 	OWNER m_eOwner = SHEPARD;
 	ANISTATE m_eCurAniState = BASE;
 	ANISTATE m_ePreAniState = BASE;
-
-	_bool  m_bIsFinish = false;
 private:
 	_float m_fLightAccTime = 0.f;
 	_uint m_uiLightIndex;

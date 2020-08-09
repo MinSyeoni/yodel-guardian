@@ -50,7 +50,7 @@ HRESULT CTexture::Ready_Texture(TEXTURETYPE eType, const _tchar * pFileName, con
 		m_vecUpload.push_back(pUpload);
 
 	}
-	CGraphicDevice::Get_Instance()->Wait_ForGpuComplete();
+	
 	Engine::CGraphicDevice::Get_Instance()->End_ResetCmdListThread();
 	return S_OK;
 }

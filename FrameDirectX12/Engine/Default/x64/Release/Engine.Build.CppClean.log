@@ -1,10 +1,10 @@
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\vc142.pdb
+c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\frustom.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\framemgr.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\frame.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\font.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\downsampletarget.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\distortiontarget.obj
-c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\directsound.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\directinput.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\ddstextureloader.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\cubetex.obj
@@ -19,6 +19,7 @@ c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\base.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\astar.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\animationcontrol.obj
+c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\shader_blend.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\shader.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\scene.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\renderer.obj
@@ -38,7 +39,7 @@ c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\info.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\graphicdevice.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\gameobject.obj
-c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\frustom.obj
+c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\target.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\ssaotarget.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\spheretex.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\spherecollider.obj
@@ -58,7 +59,6 @@ c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\shader_default.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\shader_colorbuffer.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\shader_blur.obj
-c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\shader_blend.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\vlline.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\vibuffer.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\transform.obj
@@ -66,7 +66,6 @@ c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\timemgr.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\texture.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\terraintex.obj
-c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\default\x64\release\target.obj
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\release\engine.lib
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\release\engine.exp
 c:\users\huijun\desktop\exomas\yodel-guardian\framedirectx12\engine\release\engine.ipdb

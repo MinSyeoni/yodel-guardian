@@ -479,6 +479,48 @@ _bool CMathMgr::Collision_PlayerViewPoint(_vec3 vRayPos, _vec3 vRayDir, CCollide
 	return Box.Intersects(vRayPos.Get_XMVECTOR(), vRayDir.Get_XMVECTOR(), *fDist);
 }
 
+_bool CMathMgr::Collision_ViewAngle(_vec3 vRayPos, _vec3 vRayDir, CCollider* pDstCollider,float fAngle, float* fDist)
+{
+
+	_vec3 vTargetDir = vRayPos - pDstCollider->Get_WorldPos();
+
+	vTargetDir.Normalize();
+
+
+	float fTargetAngle = XMConvertToDegrees(acosf(vTargetDir.Dot(vRayDir)));
+
+	if (fTargetAngle > fAngle)
+	{
+
+		_matrix matWorld = pDstCollider->Get_WorldMat();
+
+		matWorld = XMMatrixInverse(nullptr, matWorld);
+		vRayDir.TransformNormal(vRayDir, matWorld);
+		vRayPos.TransformCoord(vRayPos, matWorld);
+
+
+
+		vRayDir.Normalize();
+
+		BoundingBox Box;
+
+		_vec3 vMin, vMax;
+		vMin = *pDstCollider->Get_Min();
+		vMax = *pDstCollider->Get_Max();
+
+		Box.CreateFromPoints(Box, vMin.Get_XMVECTOR(), vMax.Get_XMVECTOR());
+
+		return Box.Intersects(vRayPos.Get_XMVECTOR(), vRayDir.Get_XMVECTOR(), *fDist);
+
+	}
+	else
+		return false;
+
+
+
+	return S_OK;
+}
+
 void CMathMgr::Set_Point(OBB * pObb, const _vec3 * pMin, const _vec3 * pMax)
 {
 }

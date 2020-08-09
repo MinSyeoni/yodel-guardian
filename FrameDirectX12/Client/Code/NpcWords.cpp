@@ -11,6 +11,7 @@
 #include "Shepard.h"
 #include "Weapon.h"
 #include "MPBar.h"
+#include "QuestUI.h"
 
 CNpcWords::CNpcWords(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -274,6 +275,11 @@ void CNpcWords::Finish_ConverSation()
 		CGameObject* pShapard = m_pObjectMgr->Get_GameObject(L"Layer_GameObject", L"Shepard");
 		dynamic_cast<CShepard*>(pShapard)->SetChapter(CShepard::ATTACK);
 
+		CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"QuestUI");
+		if (pQuestUI != nullptr)
+		{
+			dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE2);
+		}
 
 		break;
 	}
