@@ -75,7 +75,7 @@ HRESULT CShepard::Ready_GameObject()
 	m_pTransCom->m_vAngle = _vec3(0.f, 180.f, 0.f);
 
 	m_vMove1Pos = _vec3(314.f, 0.f, 220.f);
-	m_vMove2Pos = _vec3(505.f, 0.f, 237.f);
+	m_vMove2Pos = _vec3(505.f, 0.f, 250.f);
 	m_vMove3Pos = _vec3(490.f, 0.f, 475.f);
 	m_vMove4Pos = _vec3(330.f, 0.f, 480.f);
 
@@ -166,8 +166,22 @@ _int CShepard::LateUpdate_GameObject(const _float& fTimeDelta)
 	______________________________________________________________________*/
 	m_pMeshCom->Set_AnimationBlend((int)m_eCurState, (int)m_eLegState);
 	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransformsBlend(fTimeDelta * 3000.f, fTimeDelta * 3000.f);
-	
+	if (m_iFightCount != 4)
+	{
+		_vec3 vShaveDir;
+		for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::OBJECT))
+		{
+			if (pCol->Get_Owner() != this && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir))
+			{
+				m_pTransCom->m_vPos += vShaveDir;
 
+				m_pTransCom->m_matWorld._41 += vShaveDir.x;
+				m_pTransCom->m_matWorld._42 += vShaveDir.y;
+				m_pTransCom->m_matWorld._43 += vShaveDir.z;
+			}
+
+		}
+	}
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_NONALPHA, this), -1);
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_SHADOWDEPTH, this), -1);
 	/*____________________________________________________________________
@@ -327,7 +341,7 @@ void CShepard::MoveByAstar(const _float& fTimeDelta)
 	else if (m_iFightCount == 3)
 	{
 		CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"QuestUI");
-		if (pQuestUI != nullptr)
+		if (pQuestUI != nullptr && !m_bIsSound1)
 		{
 			if (!m_bIsNextSound2)
 			{
@@ -335,6 +349,7 @@ void CShepard::MoveByAstar(const _float& fTimeDelta)
 				m_bIsNextSound2 = true;
 			}
 			dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE2);
+			m_bIsSound1 = true;
 		}
 
 		MovePos = m_vMove3Pos;
@@ -344,7 +359,7 @@ void CShepard::MoveByAstar(const _float& fTimeDelta)
 	{
 
 		CGameObject* pQuestUI = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"QuestUI");
-		if (pQuestUI != nullptr)
+		if (pQuestUI != nullptr&& !m_bIsSound2)
 		{
 			if (!m_bIsNextSound4)
 			{
@@ -352,6 +367,7 @@ void CShepard::MoveByAstar(const _float& fTimeDelta)
 				m_bIsNextSound4 = true;
 			}
 			dynamic_cast<CQuestUI*>(pQuestUI)->Set_CurQUEST_TYPE(CQuestUI::QUEST_TYPE4);
+			m_bIsSound2 = true;
 		}
 
 		MovePos = m_vMove4Pos;
@@ -362,7 +378,7 @@ void CShepard::MoveByAstar(const _float& fTimeDelta)
 		return;
 
 
-	if (_vec3(m_pTransCom->m_vPos - MovePos).Get_Length() < 30.f)
+	if (_vec3(m_pTransCom->m_vPos - MovePos).Get_Length() < 30.f || CDirectInput::Get_Instance()->Key_Down(DIK_NUMLOCK))
 	{
 		m_eCurChapter = PATROLCUT;
 		if (m_iFightCount == 4)
@@ -575,6 +591,15 @@ void CShepard::ShootingCheck(const _float& fTimeDelta,CMonster* pTarget)
 
 
 	}
+
+
+
+}
+
+void CShepard::FightingCheck()
+{
+	//if(m_iFightCount==0)
+
 
 
 

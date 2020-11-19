@@ -96,14 +96,14 @@ void CShader_Effect::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecText
 
 HRESULT CShader_Effect::Create_DescriptorHeaps()
 {
-	D3D12_DESCRIPTOR_HEAP_DESC CBV_HeapDesc;
-	CBV_HeapDesc.NumDescriptors = 1;
-	CBV_HeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
-	CBV_HeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
-	CBV_HeapDesc.NodeMask = 0;
+	//D3D12_DESCRIPTOR_HEAP_DESC CBV_HeapDesc;
+	//CBV_HeapDesc.NumDescriptors = 1;
+	//CBV_HeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
+	//CBV_HeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
+	//CBV_HeapDesc.NodeMask = 0;
 
-	ThrowIfFailed(m_pGraphicDevice->CreateDescriptorHeap(&CBV_HeapDesc,
-		IID_PPV_ARGS(&m_pCBV_DescriptorHeap)));
+	//ThrowIfFailed(m_pGraphicDevice->CreateDescriptorHeap(&CBV_HeapDesc,
+	//	IID_PPV_ARGS(&m_pCBV_DescriptorHeap)));
 
 	return S_OK;
 }
@@ -111,9 +111,9 @@ HRESULT CShader_Effect::Create_DescriptorHeaps()
 HRESULT CShader_Effect::Create_ConstantBufferView()
 {
 	// 물체 n개의 상수 자료를 담을 상수 버퍼.
-	m_pCB_MatrixInfo = new CUploadBuffer<CB_MATRIX_INFO>(m_pGraphicDevice, 1, true);
+	//m_pCB_MatrixInfo = new CUploadBuffer<CB_MATRIX_INFO>(m_pGraphicDevice, 1, true);
 
-	_uint uiCB_ByteSize = INIT_CB_256(CB_MATRIX_INFO);
+	//_uint uiCB_ByteSize = INIT_CB_256(CB_MATRIX_INFO);
 
 	return S_OK;
 }
@@ -195,7 +195,7 @@ D3D12_BLEND_DESC CShader_Effect::Create_BlendState()
 
 	// 블렌드 설정.
 	ZeroMemory(&BlendDesc, sizeof(D3D12_BLEND_DESC));
-	BlendDesc.AlphaToCoverageEnable = FALSE;
+	BlendDesc.AlphaToCoverageEnable = TRUE;
 	BlendDesc.IndependentBlendEnable = FALSE;
 	BlendDesc.RenderTarget[0].BlendEnable = m_bIsAlpha;
 	BlendDesc.RenderTarget[0].LogicOpEnable = FALSE;

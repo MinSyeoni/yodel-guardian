@@ -29,7 +29,8 @@ public:
 	_int					LateUpdate_FlameThrower(const _float& fTimeDelta, CTransform* pTransform, CMesh* m_pMeshCom);
 	void					Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom);
 	void					Release();
-
+	void                    Attack(const _float& fTimeDelta);
+	
 public:
 	const FLAMESTATE&		Get_CurState() { return m_eCurState; }
 	const FLAMESTATE&		Get_PreState() { return m_ePreState; }
@@ -43,7 +44,8 @@ public:
 
 private:
 	void					Chase_Player(const _float& fTimeDelta);
-	void					Fire_Attak();
+	void					Fire_Attak(const _float& fTimeDelta);
+
 
 private:
 	FLAMESTATE						m_eCurState;
@@ -66,9 +68,10 @@ private:
 
 	_float					m_fFireDemage = 10.f;
 	_bool					m_bIsHit = false;
-
+	_float                  m_fAccFireTime = 0.f;
 	// »ç¿îµå
 	_bool					m_bIsMovingSound = false;
 	_bool					m_bIsFireSound = false;
+
 };
 

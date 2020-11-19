@@ -54,12 +54,12 @@ HRESULT CRifle::Ready_GameObject(WEAPONSTATE eState)
 
 
     m_tagSpotLight.m_eType = LIGHTTYPE::D3DLIGHT_SPOT;
-    m_tagSpotLight.m_vDiffuse = _vec4{ 5.0f,5.0f,5.0f,1.0f };
-    m_tagSpotLight.m_vAmbient = _vec4{ 0.3f,0.3f,0.3f,1.0f };
+    m_tagSpotLight.m_vDiffuse = _vec4{ 3.0f,3.0f,3.0f,1.0f };
+    m_tagSpotLight.m_vAmbient = _vec4{ 0.5f,0.5f,0.5f,1.0f };
     m_tagSpotLight.m_vSpecular = _vec4{ 0.4f,0.4f,0.4f,1.0f };
     m_tagSpotLight.m_vDirection = _vec4{ 1.0f,1.0f,-1.f,1.0f };
     m_tagSpotLight.m_vPosition = _vec4{ 300.f,10.f,300.f,0.f };
-    m_tagSpotLight.m_fRange = 50.f;
+    m_tagSpotLight.m_fRange = 120.f;
 
     if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &m_tagSpotLight)))
         return E_FAIL;
@@ -72,8 +72,9 @@ HRESULT CRifle::Ready_GameObject(WEAPONSTATE eState)
     m_pTransCom->m_vAngle = _vec3(0.f, 0.f, 0.f);
     
     m_eWeaponState = eState;
-    m_iCurBullet = 300.f;
+    m_iCurBullet = 50.f;
     m_iMaxBullet = 300.f;
+    m_iFullBullet = 50.f;
 
     return S_OK;
 }
@@ -348,7 +349,7 @@ void CRifle::CreateShootEffect()
     m_vLightDir = vDir;
 
     m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_Effect_GunFire", L"Effect", &vPos);
-
+    CSoundMgr::Get_Instance()->Play_Effect(L"Rifle.ogg");
 
     m_bIsLight = true;
 }

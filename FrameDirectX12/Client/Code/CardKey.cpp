@@ -10,6 +10,7 @@
 #include "Monster.h"
 #include "CardReader.h"
 #include "DirectInput.h"
+#include "Ken.h"
 
 CCardKey::CCardKey(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -164,7 +165,8 @@ void CCardKey::Coliision_CardAndPlayer()
 			if (dynamic_cast<CEquipUI*>(m_pGameObject) != nullptr)
 				dynamic_cast<CEquipUI*>(m_pGameObject)->Set_ShowUI(true);
 
-			if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && !m_bIsEquip)
+			CGameObject* pGameObject = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Ken");
+			if (CDirectInput::Get_Instance()->KEY_DOWN(DIK_E) && !m_bIsEquip&& dynamic_cast<CKen*>(pGameObject)->Get_CurChapter() == CKen::PATROLCUT)
 			{
 				m_bIsEquip = true;
 				m_pObjectMgr->Add_GameObject(L"Layer_Camera", L"CameraZombi", L"ActionCamera", nullptr);//카메라 추가햇어

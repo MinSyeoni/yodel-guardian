@@ -9,7 +9,7 @@ namespace Engine
 	class CStaticMesh;
 	class CShader_Mesh;
 }
-
+class CEffect;
 class CDynamicCamera;
 
 class CDronBullet : public Engine::CGameObject
@@ -42,6 +42,12 @@ private:
 	MeshInfo					m_tMeshInfo;
 	CGameObject*				m_pGameObject = nullptr;
 	_vec3						m_vPlayerPos = _vec3(0.f, 0.f, 0.f);
+	CEffect*                    m_pDronEffect=nullptr;
+
+
+	_uint m_uiLightIndex;
+	D3DLIGHT m_tagLight;
+
 
 public:
 	virtual CGameObject*		Clone_GameObject(void* prg);

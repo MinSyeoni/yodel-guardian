@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include "ObjectMgr.h"
 #include "Renderer.h"
-
+#include "GraphicDevice.h"
 USING(Engine)
 
 CGameObject::CGameObject(ID3D12Device* pGraphicDevice,
@@ -107,19 +107,19 @@ HRESULT CGameObject::Add_Component()
 	return S_OK;
 }
 
-void CGameObject::Compute_ViewZ(const _vec4* pPosInWorld)
+void CGameObject::Compute_ViewZ(const _vec3* pPosInWorld)
 {
-	//_matrix		matView = m_pGraphic_Interface->Get_Transform(CGraphic_Interface::MATRIX_VIEW);
+	_matrix		matView = CGraphicDevice::Get_Instance()->GetViewMatrix();
 
-	//matView = XMMatrixInverse(nullptr, matView);
+	matView = XMMatrixInverse(nullptr, matView);
 
-	//_vec4		vCamPositionInWorld;
+	_vec3		vCamPositionInWorld;
 
-	//memcpy(&vCamPositionInWorld, &matView.r[3], sizeof(_vec4));
+	memcpy(&vCamPositionInWorld, &matView.r[3], sizeof(_vec3));
 
-	//_vec4		vDir = *pPosInWorld - vCamPositionInWorld;
+	_vec3		vDir = _vec3(*pPosInWorld) - vCamPositionInWorld;
 
-	//m_fViewZ = XMVectorGetX(XMVector3Length(vDir));
+	m_fViewZ = vDir.Get_Length();
 }
 
 

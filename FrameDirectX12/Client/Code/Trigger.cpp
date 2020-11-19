@@ -6,6 +6,7 @@
 #include "GraphicDevice.h"
 #include "Monster.h"
 #include "LobbyDoor.h"
+#include "Ken.h"
 
 
 CTrigger::CTrigger(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
@@ -120,7 +121,7 @@ _int CTrigger::LateUpdate_GameObject(const _float & fTimeDelta)
 	case CTrigger::TRIGGER_BOX:
 	{
 		FAILED_CHECK_RETURN(m_pRenderer->Add_ColliderGroup(m_pBoxCol), -1);
-
+		bool bIsDeadTemp = true;
 		if (m_bIsActive && m_tColInfo.iColID != 10)
 		{
 			list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Zombi");
@@ -135,8 +136,23 @@ _int CTrigger::LateUpdate_GameObject(const _float & fTimeDelta)
 
 				if (static_cast<CMonster*>(pSrc)->Get_MONKIND() == CMonster::ZOMBI &&
 					m_tColInfo.iColID == static_cast<CMonster*>(pSrc)->Get_InitID())
-					static_cast<CMonster*>(pSrc)->Set_IsActiveStart(true);
+				{
+					CGameObject* pGameObject = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject",L"Ken");
+
+
+					if (dynamic_cast<CKen*>(pGameObject)->Get_CurChapter() == CKen::PATROLCUT)
+						static_cast<CMonster*>(pSrc)->Set_IsActiveStart(true);
+					else
+					{
+						bIsDeadTemp = false;
+						break;
+					}
+
+				}
+
+				
 			}
+			if(bIsDeadTemp)
 			m_bIsDead = true;
 		}
 		else if (m_bIsActive && m_tColInfo.iColID == 10 && !m_bIsGoBoss)

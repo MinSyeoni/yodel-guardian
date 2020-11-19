@@ -17,8 +17,13 @@
 
 #include "BossHPBar.h"
 #include "BossBack.h"
+
+#include "FadeOut.h"
+
 #include "Clear.h"
+
 #include "QuestUI.h"
+
 
 CScene_Boss::CScene_Boss(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
@@ -349,7 +354,18 @@ HRESULT CScene_Boss::Ready_LayerUI(wstring wstrLayerTag)
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_BossHPBar", L"BossHPBar", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MPBarUI", L"MPBarUI", nullptr), E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_MouseUI", L"MouseUI", nullptr), E_FAIL);
+
+
+
+	CFadeOut::FADETYPE eType = CFadeOut::FADEIN;
+	m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_FadeOut", L"FadeOut", &eType);
+
+
+
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObject(wstrLayerTag, L"Prototype_ClearUI", L"ClearUI", nullptr), E_FAIL);
+
+
+
 
 	return S_OK;
 }

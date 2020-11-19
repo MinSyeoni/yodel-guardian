@@ -410,8 +410,25 @@ void CAniCtrl::Update_NodeHierarchy(_float fAnimationTime,
 
         m_matmouthdisc = matGlobalTransform * Convert_AiToMat4(m_pScene->mRootNode->mTransformation);
     }
+    if (strNodeName == "Flash_2")
+    {
+        const aiVector3D& vScale = Calc_InterPolatedValue_From_Key(fAnimationTime, pNodeAnimation->mNumScalingKeys, pNodeAnimation->mScalingKeys, pNewNodeAnimation->mNumScalingKeys, pNewNodeAnimation->mScalingKeys);
 
+        // Rotation
+        const aiQuaternion& vRotate = Calc_InterPolatedValue_From_Key(fAnimationTime, pNodeAnimation->mNumRotationKeys, pNodeAnimation->mRotationKeys, pNewNodeAnimation->mNumRotationKeys, pNewNodeAnimation->mRotationKeys);
 
+        // Trans
+        const aiVector3D& vTrans = Calc_InterPolatedValue_From_Key(fAnimationTime, pNodeAnimation->mNumPositionKeys, pNodeAnimation->mPositionKeys, pNewNodeAnimation->mNumPositionKeys, pNewNodeAnimation->mPositionKeys);
+
+        // Scale * Rotation * Trans
+        _matrix   matScale = XMMatrixScaling(vScale.x, vScale.y, vScale.z);
+        _matrix   matRotate = Convert_AiToMat3(vRotate.GetMatrix());
+        _matrix   matTrans = XMMatrixTranslation(vTrans.x, vTrans.y, vTrans.z);
+
+        _matrix matGlobalTransform = matNodeTransform * matParentTransform;
+
+        m_matFlash = matGlobalTransform * Convert_AiToMat4(m_pScene->mRootNode->mTransformation);
+    }
     if (pNodeAnimation)
     {
         /*__________________________________________________________________________________________________________

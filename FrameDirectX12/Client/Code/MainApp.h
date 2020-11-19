@@ -43,7 +43,6 @@ private:
 	Engine::CManagement*	m_pManagement		= nullptr;
 	Engine::CRenderer*		m_pRenderer			= nullptr;
 
-	Engine::CFont*   m_pFont_FPS = nullptr;
 	_float         m_fTime = 0.f;
 	_uint         m_uiFPS = 0;
 	_tchar         m_szFPS[MIN_STR] = L"";

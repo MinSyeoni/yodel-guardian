@@ -52,8 +52,9 @@ HRESULT CSniper::Ready_GameObject(WEAPONSTATE eState)
     
 
     m_eWeaponState = eState;
-    m_iCurBullet = 50.f;
+    m_iCurBullet = 10.f;
     m_iMaxBullet = 50.f;
+    m_iFullBullet = 10.f;
 
     return S_OK;
 }
@@ -62,7 +63,7 @@ HRESULT CSniper::LateInit_GameObject()
 {
     m_pShaderCom->Set_Shader_Texture(m_pMeshCom->Get_Texture(), m_pMeshCom->Get_NormalTexture(), m_pMeshCom->Get_SpecularTexture(), m_pMeshCom->Get_EmissiveTexture());
     m_pTransCom->m_vScale = _vec3(1.0f, 1.0f, 1.0f);
-    m_pTransCom->m_vPos = _vec3(609.f, 78.f, 454.f);
+    m_pTransCom->m_vPos = _vec3(609.f, 83.f, 454.f);
     CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 
     if (pPlayer != nullptr)
@@ -86,7 +87,6 @@ HRESULT CSniper::LateInit_GameObject()
 
     m_pFireMatrix = m_pMeshCom->Find_BoneMatrix("Mid_Assembly_Front");//ÃÑ±¸
     m_pFireMatrixOffset = m_pMeshCom->Find_BoneOffset("Mid_Assembly_Front");
-
 
 
     return S_OK;

@@ -589,6 +589,10 @@
     <ClInclude Include="..\Code\Clear.h">
       <Filter>03.UI\11.Clear</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\StoneParticle.h" />
+    <ClInclude Include="..\Code\FlameBullet.h">
+      <Filter>01.Scene_Stage\06.Monster\00.FlameThrower</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -855,6 +859,10 @@
     <ClCompile Include="..\Code\SoundMgr.cpp" />
     <ClCompile Include="..\Code\Clear.cpp">
       <Filter>03.UI\11.Clear</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StoneParticle.cpp" />
+    <ClCompile Include="..\Code\FlameBullet.cpp">
+      <Filter>01.Scene_Stage\06.Monster\00.FlameThrower</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,7 @@
 #include "NpcWords.h"
 #include "PlayerStatus.h"
 #include "Management.h"
+#include "Scene_Rail.h"
 #include "Scene_Stage.h"
 CFadeOut::CFadeOut(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CGameObject(pGraphicDevice, pCommandList)
@@ -115,6 +116,19 @@ _int CFadeOut::Update_GameObject(const _float& fTimeDelta)
 			static_cast<CScene_Stage*>(CManagement::Get_Instance()->Get_CurScene())->SceneChange();
 		}
 
+
+
+
+	}
+	else if (m_eType == FADEOUTSCENEBOSS)
+	{
+
+		m_fTime += fTimeDelta;
+		if (m_fTime > 1.0f)
+		{
+			m_fTime = 1.f;
+			static_cast<CScene_Rail*>(CManagement::Get_Instance()->Get_CurScene())->SceneChange();
+		}
 
 
 

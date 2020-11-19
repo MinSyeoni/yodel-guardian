@@ -10,13 +10,13 @@
 
 #include "QuestUI.h"
 
-CMonster::CMonster(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
-	:CGameObject(pGraphicDevice,pCommandList)
+CMonster::CMonster(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
+	:CGameObject(pGraphicDevice, pCommandList)
 {
-} 
+}
 
 CMonster::CMonster(const CMonster& rhs)
-	:CGameObject(rhs),
+	: CGameObject(rhs),
 	m_tMeshInfo(rhs.m_tMeshInfo),
 	m_pFlameThrower(rhs.m_pFlameThrower),
 	m_pZombi(rhs.m_pZombi)
@@ -45,14 +45,14 @@ HRESULT CMonster::Ready_GameObject()
 	COUT_STR("Success Monster - Clone Mesh");
 #endif
 
-	if(m_tMeshInfo.MeshTag == L"Flamethrower")
+	if (m_tMeshInfo.MeshTag == L"Flamethrower")
 		m_eMonName = FLAMETHROWER;
 	else if (m_tMeshInfo.MeshTag == L"Zombi")
 		m_eMonName = ZOMBI;
 	else if (m_tMeshInfo.MeshTag == L"Dron")
 		m_eMonName = DRON;
 
-	FAILED_CHECK_RETURN(Add_Component(),E_FAIL);
+	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
 	m_pTransCom->m_vPos = m_tMeshInfo.Pos;
 	m_pTransCom->m_vScale = _vec3(0.1f, 0.1f, 0.1f);
@@ -80,7 +80,7 @@ HRESULT CMonster::Ready_GameObject()
 		m_pZombi->Set_Transform(m_pTransCom);
 		m_pZombi->Set_NaviMesh(m_pNaviCom);
 	}
-		break;
+	break;
 	case CMonster::DRON:
 	{
 		m_pDron = new CDron;
@@ -115,18 +115,18 @@ HRESULT CMonster::LateInit_GameObject()
 	case CMonster::FLAMETHROWER:
 		m_pFlameThrower->Late_Initialized();
 		break;
-	case CMonster::ZOMBI:	
+	case CMonster::ZOMBI:
 	{
 		m_pZombi->Set_Astar(m_pAstarCom);
 		m_pZombi->Late_Initialized();
 	}
-		break;
+	break;
 	case CMonster::DRON:
-	{	
+	{
 		m_pDron->Set_Astar(m_pAstarCom);
 		m_pDron->Late_Initialized();
 	}
-		break;
+	break;
 	default:
 		break;
 	}
@@ -134,7 +134,7 @@ HRESULT CMonster::LateInit_GameObject()
 	return S_OK;
 }
 
-_int CMonster::Update_GameObject(const _float & fTimeDelta)
+_int CMonster::Update_GameObject(const _float& fTimeDelta)
 {
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
@@ -143,7 +143,7 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 	m_pBoxCol->Update_Collider(&m_pTransCom->m_matWorld);
-	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::OBJECT, m_pBoxCol);
+	CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::MONSTER, m_pBoxCol);
 
 	_int iCurState = 0;
 	switch (m_eMonName)
@@ -164,6 +164,7 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 			matTemp._42 = 15.f;
 			matTemp._43 = 305.f;
 			m_pTransCom->m_vAngle = _vec3(0.f, -90.f, 0.f);
+			
 		}
 		else if (m_iInitId == 1)
 		{
@@ -171,6 +172,7 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 			matTemp._42 = 15.f;
 			matTemp._43 = 297.f;
 			m_pTransCom->m_vAngle = _vec3(0.f, 90.f, 0.f);
+		
 		}
 		else if (m_iInitId == 3)
 		{
@@ -178,6 +180,7 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 			matTemp._42 = 15.f;
 			matTemp._43 = 335.f;
 			m_pTransCom->m_vAngle = _vec3(0.f, 0.f, 0.f);
+		
 		}
 		else if (m_iInitId == 4)
 		{
@@ -185,23 +188,24 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 			matTemp._42 = 15.f;
 			matTemp._43 = 367.f;
 			m_pTransCom->m_vAngle = _vec3(0.f, 180.f, 0.f);
+
 		}
 
 		if (m_pFlameThrower->IsPlayer_HitFireDemage())
 		{
+		
 			m_pSphereCollider->Update_Collider(&matTemp);
 			CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::COMBAT, m_pSphereCollider);
 		}
-
 		m_pFlameThrower->Update_FlameThrower(fTimeDelta, m_pTransCom, m_pMeshCom);
 		iCurState = m_pFlameThrower->Get_CurState();
 	}
-		break;
+	break;
 	case CMonster::ZOMBI:
 	{
 		if (m_pZombi == nullptr)
 			return E_FAIL;
-		
+
 		// LeftWrist
 		Update_BoneCollider(m_pShereCol[0], "LeftMiddleFinger", CColliderMgr::COMBAT);
 		Update_BoneCollider(m_pShereCol[1], "RightMiddleFinger", CColliderMgr::COMBAT);
@@ -209,12 +213,12 @@ _int CMonster::Update_GameObject(const _float & fTimeDelta)
 		m_pZombi->Update_Zombi(fTimeDelta, m_pTransCom, m_pMeshCom);
 		iCurState = m_pZombi->Get_CurState();
 	}
-		break;
+	break;
 	case CMonster::DRON:
 	{
 		if (m_pDron == nullptr)
 			return E_FAIL;
-	
+
 		// Gun, Cables
 		Update_BoneCollider(m_pShereCol[0], "Gun", CColliderMgr::MONSTER);
 		m_pDron->Update_Dron(fTimeDelta, m_pTransCom, m_pMeshCom);
@@ -250,9 +254,9 @@ void CMonster::Update_BoneCollider(CSphereCollider* pSphereCol, string strBoneNa
 	pSphereCol->Set_IsCol(true);
 }
 
-_int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
+_int CMonster::LateUpdate_GameObject(const _float& fTimeDelta)
 {
-	if (!m_bIsActive)	
+	if (!m_bIsActive)
 		return E_FAIL;
 
 	if (!CFrustom::Get_Instance()->FrustomCulling(m_pMeshCom->Get_MeshComponent()->Get_MinPos(), m_pMeshCom->Get_MeshComponent()->Get_MaxPos(), m_pTransCom->m_matWorld))
@@ -290,7 +294,7 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 				}
 			}
 		}
-		
+
 		m_pFlameThrower->LateUpdate_FlameThrower(fTimeDelta, m_pTransCom, m_pMeshCom);
 	}
 	break;
@@ -305,14 +309,14 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 		{
 			m_fDissolve -= 1.f * fTimeDelta;
 			m_matDissolve._11 = m_fDissolve;
-			
+
 			if (m_fDissolve <= -0.5f)
-				m_bIsDead = true;	
+				m_bIsDead = true;
 		}
 	}
 	break;
 	case CMonster::DRON:
-	{		
+	{
 		if (m_pDron == nullptr)
 			return E_FAIL;
 
@@ -355,11 +359,25 @@ _int CMonster::LateUpdate_GameObject(const _float & fTimeDelta)
 			}
 		}
 	}
+	
+	for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::MONSTER))
+	{
+		if (CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCol, pCol, &vShaveDir))
+		{
+			if (pCol != m_pBoxCol)
+			{
+				m_pTransCom->m_vPos += vShaveDir;
 
+				m_pTransCom->m_matWorld._41 += vShaveDir.x;
+				m_pTransCom->m_matWorld._42 += vShaveDir.y;
+				m_pTransCom->m_matWorld._43 += vShaveDir.z;
+			}
+		}
+	}
 	return NO_EVENT;
 }
 
-void CMonster::Render_GameObject(const _float & fTimeDelta)
+void CMonster::Render_GameObject(const _float& fTimeDelta)
 {
 	if (!m_bIsActive)
 		return;
@@ -407,7 +425,7 @@ HRESULT CMonster::Add_Component()
 	m_pShereCol[0] = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 20.f, _vec3(1.f, 1.f, 1.f), this));
 	NULL_CHECK_RETURN(m_pShereCol[0], E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_SphereCol1", m_pShereCol[0]);
-	
+
 	m_pShereCol[1] = static_cast<Engine::CSphereCollider*>(m_pComponentMgr->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, m_pMeshCom, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 20.f, _vec3(1.f, 1.f, 1.f), this));
 	NULL_CHECK_RETURN(m_pShereCol[1], E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_SphereCol2", m_pShereCol[1]);
@@ -428,14 +446,14 @@ void CMonster::Set_ConstantTable()
 {
 	_matrix matView = INIT_MATRIX;
 	_matrix matProj = INIT_MATRIX;
-	
+
 	CB_MATRIX_INFO	tCB_MatrixInfo;
 	ZeroMemory(&tCB_MatrixInfo, sizeof(CB_MATRIX_INFO));
 
 	matView = CGraphicDevice::Get_Instance()->GetViewMatrix();
 	matProj = CGraphicDevice::Get_Instance()->GetProjMatrix();
 
- 	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
+	_matrix matWVP = m_pTransCom->m_matWorld * matView * matProj;
 
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWVP, XMMatrixTranspose(matWVP));
 	XMStoreFloat4x4(&tCB_MatrixInfo.matWorld, XMMatrixTranspose(m_matDissolve));
@@ -445,7 +463,7 @@ void CMonster::Set_ConstantTable()
 	m_pShaderCom->Get_UploadBuffer_MatrixInfo()->CopyData(0, tCB_MatrixInfo);
 }
 
-void CMonster::Render_ShadowDepth(CShader_Shadow * pShader)
+void CMonster::Render_ShadowDepth(CShader_Shadow* pShader)
 {
 	if (!m_bIsActive)	return;
 
@@ -476,7 +494,7 @@ void CMonster::Set_ShadowTable(CShader_Shadow* pShader)
 	pShader->Get_UploadBuffer_ShadowInfo()->CopyData(offset, tCB_MatrixInfo);
 }
 
-CGameObject * CMonster::Clone_GameObject(void * prg)
+CGameObject* CMonster::Clone_GameObject(void* prg)
 {
 	CGameObject* pInstance = new CMonster(*this);
 
@@ -489,7 +507,7 @@ CGameObject * CMonster::Clone_GameObject(void * prg)
 	return pInstance;
 }
 
-CMonster* CMonster::Create(ID3D12Device * pGraphicDevice, ID3D12GraphicsCommandList * pCommandList)
+CMonster* CMonster::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 {
 	CMonster* pInstance = new CMonster(pGraphicDevice, pCommandList);
 

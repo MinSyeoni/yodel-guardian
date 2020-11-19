@@ -223,6 +223,7 @@ void CObjectMgr::Clear_Layer()
 	for_each(m_mapLayer.begin(), m_mapLayer.end(), CDeleteMap());
 
 	m_mapLayer.clear();
+
 }
 
 void CObjectMgr::Clear_Prototype()

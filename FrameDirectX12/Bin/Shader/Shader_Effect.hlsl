@@ -47,8 +47,6 @@ float4 PS_MAIN(VS_TEXTURED_OUTPUT input) : SV_TARGET
 
 	vColor = gTexture.Sample(gsamLinearWrap, uv);
 
-
-	vColor.a = vColor.a * AlphaTimeInfo.x;
 	vColor = vColor * ColorInfo;
 
 

@@ -4,7 +4,9 @@
 #include "GraphicDevice.h"
 #include "ObjectMgr.h"
 #include "ColliderMgr.h"
-
+#include "LightMgr.h"
+#include "FlameBullet.h"
+#include <random>
 CFlameThrower::CFlameThrower()
 {
 	Initialized();
@@ -24,13 +26,16 @@ void CFlameThrower::Initialized()
 
 HRESULT CFlameThrower::Late_Initialized()
 {
-
+	
+	
 	return S_OK;
 }
 
 _int CFlameThrower::Update_FlameThrower(const _float& fTimeDelta, CTransform* pTransform, CMesh* m_pMeshCom)
 {
-	srand((unsigned int)time(0));
+	
+
+	m_pTransCom = pTransform;
 
 	m_fTime += fTimeDelta;
 
@@ -91,11 +96,11 @@ void CFlameThrower::Chase_Player(const _float& fTimeDelta)
 	//	m_eCurState = CB_FireLoop;
 }
 
-void CFlameThrower::Fire_Attak()
+void CFlameThrower::Fire_Attak(const _float& fTimeDelta)
 {
 	//CGameObject* pPlayer = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Player");
 	//pPlayerHP = pPlayer->Get_Transform()->Get_~~HP();
-
+	Attack(fTimeDelta);
 	m_bIsHit = true;
 }
 
@@ -122,7 +127,7 @@ void CFlameThrower::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	{
 		m_fAniDelay = 2500.f;
 
-		Fire_Attak();
+		Fire_Attak(fTimeDelta);
 
 		//if (!m_bIsFireSound)
 		//{
@@ -199,3 +204,89 @@ void CFlameThrower::Release()
 {
 	Safe_Release(m_pTransCom);
 }
+
+void CFlameThrower::Attack(const _float& fTimeDelta)
+{
+	bool bIsFire = false;
+	m_fAccFireTime += fTimeDelta;
+	if (m_fAccFireTime > 0.1f)
+	{
+		bIsFire = true;
+		m_fAccFireTime = 0.f;
+	}
+
+	if (!bIsFire)
+		return;
+	srand((unsigned int)time(0));
+	
+		FlameInfo tInfo;
+		tInfo.vPos = m_pTransCom->m_vPos;
+		tInfo.vPos.y += 8.f;
+		_vec3 randDir = _vec3(0.f, 1.f, 0.f);
+
+		if (m_pTransCom->m_vAngle.y == 90)
+		{
+			randDir.x = 0.f;
+			randDir.x = 0.f;
+			randDir.y = 0.f;
+			randDir.y = 0.f;
+
+			randDir.z = -1.f;
+			tInfo.vPos.z -= 5.f;
+
+			randDir.Normalize();
+		}
+		else if (m_pTransCom->m_vAngle.y == -90)
+		{
+			randDir.x = 0.f;
+			randDir.x = 0.f;
+			randDir.y = 0.f;
+			randDir.y = 0.f;
+
+			randDir.z = 1.f;
+			tInfo.vPos.z += 5.f;
+
+			randDir.Normalize();
+
+
+		}
+		else if (m_pTransCom->m_vAngle.y == 0)
+		{
+			randDir.z = 0.f;
+			randDir.z = 0.f;
+			randDir.y = 0.f;
+			randDir.y = 0.f;
+
+			randDir.x = 1.f;
+			tInfo.vPos.x += 5.f;
+
+			randDir.Normalize();
+
+
+		}
+		else if (m_pTransCom->m_vAngle.y == 180)
+		{
+			randDir.z = 0.f;
+			randDir.z = 0.f;
+			randDir.y = 0.f;
+			randDir.y = 0.f;
+
+			randDir.x = -1.f;
+			tInfo.vPos.x -= 5.f;
+
+			randDir.Normalize();
+
+		}
+		
+		tInfo.vDir = randDir;
+		tInfo.flifeTime = 3;
+		tInfo.fSpeed = 5.f;
+
+		CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_GameObject", L"Prototype_FlameBullet", L"FlameBullet", &tInfo);
+
+
+
+	
+}
+
+

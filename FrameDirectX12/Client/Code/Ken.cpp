@@ -170,8 +170,24 @@ _int CKen::LateUpdate_GameObject(const _float& fTimeDelta)
 	[ Set PipelineState ]
 	______________________________________________________________________*/
 	m_pMeshCom->Set_AnimationBlend((int)m_eCurState, (int)m_eLegState);
-	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransformsBlend(fTimeDelta * 3000.f, fTimeDelta * 3000.f);
+	m_vecMatrix = dynamic_cast<CMesh*>(m_pMeshCom)->ExtractBoneTransformsBlend(fTimeDelta * 3200.f, fTimeDelta * 3200.f);
+	if (m_iFightCount != 4)
+	{
+		_vec3 vShaveDir;
+		for (auto& pCol : CColliderMgr::Get_Instance()->Get_ColliderList(CColliderMgr::BOX, CColliderMgr::OBJECT))
+		{
+			if (pCol->Get_Owner() != this && CMathMgr::Get_Instance()->Collision_OBB(m_pBoxCollider, pCol, &vShaveDir))
+			{
+				m_pTransCom->m_vPos += vShaveDir;
 
+				m_pTransCom->m_matWorld._41 += vShaveDir.x;
+				m_pTransCom->m_matWorld._42 += vShaveDir.y;
+				m_pTransCom->m_matWorld._43 += vShaveDir.z;
+			}
+
+		}
+
+	}
 	return NO_EVENT;
 }
 
@@ -287,13 +303,13 @@ void CKen::MoveByAstar(const _float& fTimeDelta)
 
 		MovePos = m_vMove4Pos;
 		uiNavi = m_uiMove4NaviIndex;
-
+		//ÁýÀ¸·Î
 	}
 	else
 		return;
 
 
-	if (_vec3(m_pTransCom->m_vPos - MovePos).Get_Length() < 30.f)
+	if (_vec3(m_pTransCom->m_vPos - MovePos).Get_Length() < 30.f||CDirectInput::Get_Instance()->Key_Down(DIK_NUMLOCK))
 	{
 		m_eCurChapter = PATROLCUT;
 		if (m_iFightCount == 4)

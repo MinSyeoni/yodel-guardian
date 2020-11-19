@@ -98,22 +98,37 @@ void CScene_Rail::Render_Scene(const _float& fTimeDelta)
 			if (CTrigger::TRIGGER_BOX == dynamic_cast<CTrigger*>(pSrc)->Get_ColType()
 				&& dynamic_cast<CTrigger*>(pSrc)->Get_IsGoBoss())
 			{
-				CSoundMgr::Get_Instance()->StopSound(CSoundMgr::BGM);
-				m_pObjectMgr->Clear_Layer();
-				Engine::CScene* pNewScene = CScene_Boss::Create(m_pGraphicDevice, m_pCommandList);
-				Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
+
+
+				if (!m_bIsMakeFadeOut)
+				{
+					CFadeOut::FADETYPE eType = CFadeOut::FADEOUTSCENEBOSS;
+					m_pObjectMgr->Add_GameObject(L"Layer_GameObject", L"Prototype_FadeOut", L"FadeOut", &eType);
+
+					m_bIsMakeFadeOut = true;
+				}
 				break;
 			}
 		}
+	}
+	if (m_bIsChangeScene)
+	{
+
+		m_pObjectMgr->Clear_Layer();
+		Engine::CScene* pNewScene = CScene_Boss::Create(m_pGraphicDevice, m_pCommandList);
+		Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
 	}
 
 	if (KEY_DOWN(DIK_PGDN))//½º°×¿ë
 	{
 		CSoundMgr::Get_Instance()->StopSound(CSoundMgr::BGM);
+
 		m_pObjectMgr->Clear_Layer();
 		Engine::CScene* pNewScene = CScene_Boss::Create(m_pGraphicDevice, m_pCommandList);
 		Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
+		return;
 	}
+
 
 }
 
@@ -417,9 +432,9 @@ HRESULT CScene_Rail::Ready_Light()
 
 	D3DLIGHT tagLight;
 	tagLight.m_eType = LIGHTTYPE::D3DLIGHT_DIRECTIONAL;
-	tagLight.m_vDiffuse = _vec4{ 0.3f,0.3f,0.3f,1.0f };
-	tagLight.m_vAmbient = _vec4{ 0.2f,0.2f,0.2f,1.0f };
-	tagLight.m_vSpecular = _vec4{ 0.5f,0.5f,0.5f,1.0f };
+	tagLight.m_vDiffuse = _vec4{ 0.2f,0.2f,0.2f,1.0f };
+	tagLight.m_vAmbient = _vec4{ 0.1f,0.1f,0.1f,1.0f };
+	tagLight.m_vSpecular = _vec4{ 0.0f,0.0f,0.0f,1.0f };
 	tagLight.m_vDirection = _vec4{ -1.0f,-1.0f,1.f,1.0f };
 	if (FAILED(CLight_Manager::Get_Instance()->Add_Light(m_pGraphicDevice, m_pCommandList, &tagLight)))
 		return E_FAIL;
@@ -440,5 +455,6 @@ CScene_Rail* CScene_Rail::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCom
 
 void CScene_Rail::Free()
 {
+	
 	Engine::CScene::Free();
 }

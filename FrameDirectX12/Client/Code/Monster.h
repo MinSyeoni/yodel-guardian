@@ -48,25 +48,25 @@ private:
 	virtual HRESULT				Add_Component();
 
 public:
-	CZombi*						Get_Zombi() { return m_pZombi; };
-	CDron*                      Get_Dron() { return m_pDron; };
+	CZombi* Get_Zombi() { return m_pZombi; };
+	CDron* Get_Dron() { return m_pDron; };
 	MONKIND						Get_MONKIND() { return m_eMonName; }
 
 private:
-	Engine::CMesh*				m_pMeshCom = nullptr;
-	Engine::CShader_Dissolve*	m_pShaderCom = nullptr;
-	Engine::CBoxCollider*		m_pBoxCol = nullptr;
-	Engine::CSphereCollider*	m_pSphereCollider = nullptr;
-	Engine::CSphereCollider*	m_pShereCol[3] = {};
-	Engine::CNaviMesh*			m_pNaviCom = nullptr;
-	Engine::CTexture*			m_pDissolveTex = nullptr;
-	Engine::CAstar*				m_pAstarCom = nullptr;
+	Engine::CMesh* m_pMeshCom = nullptr;
+	Engine::CShader_Dissolve* m_pShaderCom = nullptr;
+	Engine::CBoxCollider* m_pBoxCol = nullptr;
+	Engine::CSphereCollider* m_pSphereCollider = nullptr;
+	Engine::CSphereCollider* m_pShereCol[3] = {};
+	Engine::CNaviMesh* m_pNaviCom = nullptr;
+	Engine::CTexture* m_pDissolveTex = nullptr;
+	Engine::CAstar* m_pAstarCom = nullptr;
 
-	CDynamicCamera*				m_pDynamicCamera = nullptr;
+	CDynamicCamera* m_pDynamicCamera = nullptr;
 
-	CFlameThrower*				m_pFlameThrower = nullptr;	
-	CZombi*						m_pZombi = nullptr;
-	CDron*						m_pDron = nullptr;
+	CFlameThrower* m_pFlameThrower = nullptr;
+	CZombi* m_pZombi = nullptr;
+	CDron* m_pDron = nullptr;
 private:
 	MONKIND						m_eMonName = NONAME;
 
@@ -85,10 +85,10 @@ private:
 protected:
 	float						m_fDissolve = 1.f;
 	_matrix						m_matDissolve = INIT_MATRIX;
-
+	_bool   m_bIsCreateEffect = false;
 public:
-	virtual CGameObject*	Clone_GameObject(void* prg);
-	static	CMonster*		Create(ID3D12Device* pGraphicDevice,ID3D12GraphicsCommandList* pCommandList);
+	virtual CGameObject* Clone_GameObject(void* prg);
+	static	CMonster* Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);
 
 private:
 	virtual void			Free();

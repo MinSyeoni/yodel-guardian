@@ -140,17 +140,16 @@ _int CNpcWords::Update_GameObject(const _float& fTimeDelta)
 {
 	FAILED_CHECK_RETURN(Engine::CGameObject::LateInit_GameObject(), E_FAIL);
 
-	if (m_eWordsType == TYPE_END)
-		return E_FAIL;
+	
 
-	m_fAccTime += fTimeDelta * 8.f;
+	m_fAccTime += fTimeDelta * 16.f;
 
 	Reset_OthersUI(false);
 
 	if (m_bIsDead)
 	{	
 		m_eWordsType = TYPE_END;
-	//	Reset_OthersUI(true);
+		Reset_OthersUI(true);
 		return DEAD_OBJ;
 	}
 	Next_Conversation(fTimeDelta);
@@ -254,6 +253,8 @@ void CNpcWords::Finish_ConverSation()
 		static_cast<CPlayer*>(pPlayer)->KeyLockPlayer(false);
 
 		CObjectMgr::Get_Instance()->SetTimeStop(true);
+
+
 
 		break;
 	}

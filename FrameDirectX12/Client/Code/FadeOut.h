@@ -6,7 +6,7 @@
 class CFadeOut : public Engine::CGameObject
 {
 public:
-	enum FADETYPE{FADEOUT,FADEIN,FADEOUTIN,FIRST,SECOND,FADEOUTTOSCENERAIL};
+	enum FADETYPE{FADEOUT,FADEIN,FADEOUTIN,FIRST,SECOND,FADEOUTTOSCENERAIL,FADEOUTSCENEBOSS};
 
 private:
 	explicit CFadeOut(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList);

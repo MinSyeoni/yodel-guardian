@@ -41,6 +41,7 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
     {
         m_pTransCom = pTranscom;
         m_pNaviMesh->SetFirstNavi(m_pTransCom->m_vPos);
+        //m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(0.f, 0.f, 0.f), 0.f);//추가
     }
     LateInit();
 
@@ -53,18 +54,22 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
     if (!m_bIsKeyLock)
     {
         KeyInput();
-        LegKeyInput();
+        LegKeyInput(fTimeDelta);
         Rotation(fTimeDelta);
         StatusUpdate(fTimeDelta);
         PlayerDirection(fTimeDelta);
-        WeaponChange();
-        CheckAim();
-        ReloadCheck();
-        CheckSniping();
         HPMpCheck(fTimeDelta);
+        CheckAim();
+        CheckSniping();
+        ReloadCheck();
+        WeaponChange();
+        CameraShakeCheck();
     }
     else
     {
+        CGameObject* pAim = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_UI", L"Aim");
+        if (pAim != nullptr)
+            dynamic_cast<CAim*>(pAim)->SetRender(false);
         if (m_eEquip == NONE&&m_eCurScene == NOSCENE)
         {
             m_eCurState = CPlayer::NONEIDLE;
@@ -103,6 +108,21 @@ _int CPlayerStatus::UpdateState(const _float& fTimeDelta, CTransform* pTranscom)
     CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::PLAYER, m_pSphereCollider);
 
  //   CColliderMgr::Get_Instance()->Add_Collider(CColliderMgr::PLAYER, m_pBoxCOlliderForView);
+ 
+    if (m_fSpeed >=8.f)
+    {
+        if(m_fSpeed==8.f)
+        m_fFootTime += fTimeDelta;
+        else
+            m_fFootTime += fTimeDelta*3.f;
+    }
+    if (m_fFootTime > 1.0f)
+    {
+        CSoundMgr::Get_Instance()->Play_Effect(L"Step.ogg");
+        m_fFootTime = 0.f;
+    }
+
+
     return NO_EVENT;
 }
 
@@ -132,7 +152,6 @@ _int CPlayerStatus::LateUpdate(const _float& fTimeDelta)
 
     CollisionWithObject(fTimeDelta);
 
-    Test();
     m_ePreState = m_eCurState;
     return S_OK;
 }
@@ -146,7 +165,7 @@ void CPlayerStatus::SetMesh(CMesh* pMesh)
     m_pBoxCOlliderForView = static_cast<Engine::CBoxCollider*>(CComponentMgr::Get_Instance()->Clone_Collider(L"Prototype_BoxCol", COMPONENTID::ID_STATIC, CCollider::COL_BOX, false, nullptr, _vec3(0.f, 10.f, 0.f), _vec3(0.f, 0.f, 0.f), 0.f, _vec3(60.f, 70.f, 60.f), nullptr));
 
 
-    m_pSphereCollider = static_cast<Engine::CSphereCollider*>(CComponentMgr::Get_Instance()->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, nullptr, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 30.f/*여기반지름*/, _vec3(1.f, 1.f, 1.f), nullptr));
+    m_pSphereCollider = static_cast<Engine::CSphereCollider*>(CComponentMgr::Get_Instance()->Clone_Collider(L"Prototype_SphereCol", COMPONENTID::ID_STATIC, CCollider::COL_SPHERE, false, nullptr, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f), 60.f/*여기반지름*/, _vec3(1.f, 1.f, 1.f), nullptr));
 
 
     m_pNaviMesh = static_cast<Engine::CNaviMesh*>(CComponentMgr::Get_Instance()->Clone_Component(L"Mesh_Navi", ID_STATIC));
@@ -207,10 +226,10 @@ void CPlayerStatus::KeyInput()
         m_eLegState = CPlayer::NONEIDLE;
 
     }
-    if ( KEY_PRESSING(DIKEYBOARD_R))
+    if ( KEY_PRESSING(DIKEYBOARD_R)&&  m_eEquip!= NONE && BulletCountCheck())
     {
         m_eCurState = CPlayer::SNIPERRELOAD;
-
+        CSoundMgr::Get_Instance()->Play_Effect(L"WeaponReload.ogg");
         if(!m_bIsCover)
             m_eCurState = CPlayer::COVER_RELOAD;
 
@@ -220,9 +239,9 @@ void CPlayerStatus::KeyInput()
 
 
 
-    if (MOUSE_PRESSING(MOUSEBUTTON::DIM_LB))
+    if (MOUSE_PRESSING(MOUSEBUTTON::DIM_LB) && m_eEquip!=NONE &&ShootingBulletCheck())
     {
-        if (m_eEquip == RIFLE)
+        if (m_eEquip == RIFLE )
         {
             m_eCurState = CPlayer::RIFLEATTACK;
             m_pCamera->Set_CameraShakeType(CDynamicCamera::RIFLE);
@@ -231,7 +250,7 @@ void CPlayerStatus::KeyInput()
 
             m_bIsShoot = true;
         }
-        else if (m_eEquip == SNIPER)
+        else if (m_eEquip == SNIPER )
         {
             if (m_pCamera->Get_ZoomOut())
             {
@@ -261,7 +280,7 @@ void CPlayerStatus::KeyInput()
             m_eCurState = CPlayer::RIFLEDRAW;
             if (m_bIsCover)
                 m_eCurState = CPlayer::COVER_RIFLE_DRAW;
-
+            CSoundMgr::Get_Instance()->Play_Effect(L"Reload.ogg");
             m_pCamera->Set_ZoomInOut(false);
         }
         else if (!m_bIsShoot && m_eEquip == SNIPER) 
@@ -271,7 +290,7 @@ void CPlayerStatus::KeyInput()
 
             if (m_bIsCover)
                 m_eCurState = CPlayer::COVER_SNIPER_HOLSTER;
-
+            CSoundMgr::Get_Instance()->Play_Effect(L"WeaponReload.ogg");
             m_bIsSwapingWeapon = true;
             m_eSwapEquip = RIFLE;
             m_pCamera->Set_ZoomInOut(false);
@@ -289,6 +308,7 @@ void CPlayerStatus::KeyInput()
             if (m_bIsCover)
                 m_eCurState = CPlayer::COVER_SNIPER_DRAW;
             m_pCamera->Set_ZoomInOut(false);
+            CSoundMgr::Get_Instance()->Play_Effect(L"WeaponReload.ogg");
         }
         else if (!m_bIsShoot && m_eEquip == RIFLE)
         {
@@ -297,7 +317,7 @@ void CPlayerStatus::KeyInput()
             m_eSwapEquip = SNIPER;
             if (m_bIsCover)
                 m_eCurState = CPlayer::COVER_RILFE_HOSTER;
-
+            CSoundMgr::Get_Instance()->Play_Effect(L"WeaponReload.ogg");
             m_pCamera->Set_ZoomInOut(false);
         }
     }
@@ -310,6 +330,7 @@ void CPlayerStatus::KeyInput()
     {
         if (m_eEquip == RIFLE)
         {
+            
             m_pCamera->Set_ZoomInOut(false);
             if (!m_bIsShoot)
             {
@@ -358,7 +379,7 @@ void CPlayerStatus::KeyInput()
             if (IsZoom == false)
             {
                 m_bIsZoom = true;
-                m_pCamera->Set_ZoomInOut(true, 30.f);
+                m_pCamera->Set_ZoomInOut(true, 20.f);
             }
             else
             {
@@ -371,7 +392,7 @@ void CPlayerStatus::KeyInput()
 
 }
 
-void CPlayerStatus::LegKeyInput()
+void CPlayerStatus::LegKeyInput(const _float& fTimeDelt)
 {
     if (KEY_PRESSING(DIKEYBOARD_W))
     {
@@ -383,27 +404,27 @@ void CPlayerStatus::LegKeyInput()
             m_pCamera->Set_ZoomInOut(false);
 
             m_eLegState = CPlayer::RIFLEWALKNORTH;
-            m_fSpeed = 5.f;
+            m_fSpeed = 12.f;
 
             if (KEY_PRESSING(DIKEYBOARD_LSHIFT) && m_uiMp > 0)
             {
                 // 기력 추가함 
-                m_uiMp -= 1;
+                m_uiMp -= 10.f*fTimeDelt;
 
                 m_eLegState = CPlayer::RUNNORTH;
-                m_fSpeed = 15.f;
+                m_fSpeed = 25.f;
             }
 
 
         }
-        else if (m_eEquip == NONE)
+        else if (m_eEquip == NONE&&m_eCurState!=CPlayer::RIFLEDRAW&&m_eCurState!=CPlayer::SNIPERDRAW)
         {
             m_pCamera->Set_ZoomInOut(false);
             if (!m_bIsShoot)
                 m_eCurState = CPlayer::NONEWALK;
 
             m_eLegState = CPlayer::NONEWALK;
-            m_fSpeed = 10.f;
+            m_fSpeed = 12.f;
         }
     }
     else if (KEY_PRESSING(DIKEYBOARD_S)&&m_eEquip!=NONE)
@@ -415,13 +436,13 @@ void CPlayerStatus::LegKeyInput()
         m_pCamera->Set_ZoomInOut(false);
 
         m_eLegState = CPlayer::RIFLEWALKSOUTH;
-        m_fSpeed = 5.f;
+        m_fSpeed = 12.f;
 
         if (KEY_PRESSING(DIKEYBOARD_LSHIFT) && m_uiMp > 0)
         {
-            m_uiMp -= 1;
+            m_uiMp -= 10.f * fTimeDelt;
             m_eLegState = CPlayer::RUNSOUTH;
-            m_fSpeed = 15.f;
+            m_fSpeed = 25.f;
         }
     }
     else if (KEY_PRESSING(DIKEYBOARD_A) && m_eEquip != NONE)
@@ -432,13 +453,13 @@ void CPlayerStatus::LegKeyInput()
         m_pCamera->Set_ZoomInOut(false);
 
         m_eLegState = CPlayer::RIFLEWALKWEST;
-        m_fSpeed = 5.f;
+        m_fSpeed = 8.f;
 
         if (KEY_PRESSING(DIKEYBOARD_LSHIFT) && m_uiMp > 0)
         {
-            m_uiMp -= 1;
+            m_uiMp -= 12.f * fTimeDelt;
             m_eLegState = CPlayer::RUNWEST;
-            m_fSpeed = 15.f;
+            m_fSpeed = 25.f;
         }
     }
     else if (KEY_PRESSING(DIKEYBOARD_D) && m_eEquip != NONE)
@@ -449,21 +470,23 @@ void CPlayerStatus::LegKeyInput()
         m_pCamera->Set_ZoomInOut(false);
 
         m_eLegState = CPlayer::RIFLEWALKEAST;
-        m_fSpeed = 5.f;
+        m_fSpeed = 8.f;
 
         if (KEY_PRESSING(DIKEYBOARD_LSHIFT) && m_uiMp > 0)
         {
-            m_uiMp -= 1;
+            m_uiMp -= 12.f * fTimeDelt;
             m_eLegState = CPlayer::RUNEAST;
-            m_fSpeed = 15.f;
+            m_fSpeed = 25.f;
         }
     }
     else
     {
         if (m_eEquip == NONE)
-            m_eLegState = CPlayer::NONEIDLE;
+        m_eLegState = CPlayer::NONEIDLE;
         else
             m_eLegState = CPlayer::RIFLEIDLE;
+
+        m_fSpeed = 0.f;
 
     }
     if (m_bIsCover == true)
@@ -658,7 +681,7 @@ void CPlayerStatus::WeaponChange()
 
 bool CPlayerStatus::WeaponStateCheck(EQUIPTYPE eType)
 {
-    return true;
+
     list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Weapon");
 
     if (pList == nullptr)
@@ -818,7 +841,7 @@ void CPlayerStatus::ShootingCheck()
         float AttackDamage = 30;
 
         if (m_eEquip == SNIPER)
-            AttackDamage = 60;
+            AttackDamage = 110;
 
         if (eMonKind == CMonster::ZOMBI)
         {
@@ -965,7 +988,7 @@ void CPlayerStatus::PlayerDirection(const _float& fTimeDelta)
         _vec3 vUp = _vec3{ 0.f,1.f,0.f };
 
 
-        m_pTransCom->m_vAngle.y += (_float)dwMouseMove * fTimeDelta * 1.5f;
+        m_pTransCom->m_vAngle.y += (_float)dwMouseMove * fTimeDelta *2.5f;
         m_pTransCom->m_vDir = _vec3{ m_pTransCom->m_matWorld._31,m_pTransCom->m_matWorld._32,m_pTransCom->m_matWorld._33 };
         m_pTransCom->m_vDir.y = 0.f;
         m_pTransCom->m_vDir.Normalize();
@@ -1036,6 +1059,7 @@ void CPlayerStatus::AttackCheck(const _float& fTimeDelta)
                 if (static_cast<CWeapon*>(pSrc)->Get_WeaponType() == CWeapon::SNIPER && static_cast<CWeapon*>(pSrc)->Get_WeaponState() == CWeapon::EQUIP)
                 {
 
+                    CSoundMgr::Get_Instance()->Play_Effect(L"Sniper.wav");
                     static_cast<CWeapon*>(pSrc)->CreateShootEffect();
                 }
             }
@@ -1138,14 +1162,14 @@ void CPlayerStatus::ReloadCheck()
 {
     if (m_eCurState == CPlayer::SNIPERRELOAD)
     {
-        if (m_pMesh->Set_IsAniFinsh())
+        if (m_pMesh->Set_IsAniFinsh()&&m_eCurState==m_ePreState)
         {
             m_eCurState = CPlayer::RIFLEIDLE;
 
         }
     }
 
-    if (m_eCurState == CPlayer::COVER_RELOAD)
+    if (m_eCurState == CPlayer::COVER_RELOAD && m_eCurState == m_ePreState)
     {
 
         if (m_pMesh->Set_IsAniFinsh())
@@ -1155,9 +1179,60 @@ void CPlayerStatus::ReloadCheck()
         }
 
     }
+ 
 
 
 
+}
+
+bool CPlayerStatus::BulletCountCheck()
+{
+
+
+    list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Weapon");
+
+    if (pList == nullptr)
+        return FALSE;
+
+    for (auto& pSrc : *pList)
+    {
+        if (CWeapon::EQUIP == dynamic_cast<CWeapon*>(pSrc)->Get_WeaponState())
+        {
+
+            if (dynamic_cast<CWeapon*>(pSrc)->GetMaxBulletCount() < 0)
+                return false;
+            dynamic_cast<CWeapon*>(pSrc)->Reload();
+            return true;
+     
+        }
+
+    }
+    return true;
+}
+
+bool CPlayerStatus::ShootingBulletCheck()
+{
+
+
+
+    list<CGameObject*>* pList = CObjectMgr::Get_Instance()->Get_OBJLIST(L"Layer_GameObject", L"Weapon");
+
+    if (pList == nullptr)
+        return FALSE;
+
+    for (auto& pSrc : *pList)
+    {
+        if (CWeapon::EQUIP == dynamic_cast<CWeapon*>(pSrc)->Get_WeaponState())
+        {
+
+            if (dynamic_cast<CWeapon*>(pSrc)->GetCurBulletCount() <= 0)
+                return false;
+           
+            return true;
+        }
+
+    }
+    return true;
 
 }
 
@@ -1172,7 +1247,7 @@ void CPlayerStatus::CheckSniping()
 
 
         if (m_bIsZoom)
-            m_pCamera->Set_ZoomInOut(true, 30.f);
+            m_pCamera->Set_ZoomInOut(true, 20.f);
     }
     if (m_eCurState == CPlayer::COVER_ATTACKSNIPER && m_pMesh->Set_FindAnimation(2200.f,(int)CPlayer::COVER_ATTACKSNIPER))
     {

@@ -21,7 +21,6 @@ public:
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void	Render_GameObject(const _float& fTimeDelta);
 	virtual void    Render_ShadowDepth(CShader_Shadow* pShader);
-
 	Engine::CNaviMesh* Get_KenNavi() { return m_pNaviCom; }	// 추가함
 	void MonsterCheck(const _float& fTimeDelta);
 	void ChapterCheck(const _float& fTimeDelta);
@@ -38,6 +37,8 @@ public:
 
 	void CollisionWithObject();
 
+	STATE			Get_CurState() { return m_eCurState; };
+	CHAPTER			Get_CurChapter() { return m_eCurChapter; };
 	_float			Get_KenCurHP() { return m_iCurHP; }	// ui 때문에 추가함 나중에 피격할때 플레이어처럼 깎아줘야함
 	void			Set_KenCurHP(_uint iHP);			// UI 때문에 추가함
 
@@ -55,7 +56,8 @@ private:
 	Engine::CShader_Mesh* m_pShaderCom = nullptr;
 	Engine::CAstar* m_pAstarCom = nullptr;
 	Engine::CNaviMesh* m_pNaviCom = nullptr;
-
+public:
+	_uint Get_FightingCount() { return m_iFightCount; };
 
 	CBoxCollider* m_pBoxCollider = nullptr;
 	vector<vector<_matrix>> m_vecMatrix;

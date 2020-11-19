@@ -59,7 +59,8 @@
 #include "Scene_Rail.h"
 #include "Management.h"
 #include "Scene_Boss.h"
-
+#include "StoneParticle.h"
+#include "FlameBullet.h"
 CScene_Stage::CScene_Stage(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
@@ -76,7 +77,7 @@ HRESULT CScene_Stage::Ready_LightInfo()
 {
 	D3DLIGHT tagLight;
 	tagLight.m_eType = LIGHTTYPE::D3DLIGHT_DIRECTIONAL;
-	tagLight.m_vDiffuse = _vec4{ 1.0f,1.0f,1.0f,1.0f };
+	tagLight.m_vDiffuse = _vec4{ 0.5f,0.5f,0.5f,1.0f };
 	tagLight.m_vAmbient = _vec4{ 0.2f,0.2f,0.2f,1.0f };
 	tagLight.m_vSpecular = _vec4{ 0.5f,0.5f,0.5f,1.0f };
 	tagLight.m_vDirection= _vec4{ -1.0f,-1.0f,1.f,1.0f };
@@ -141,6 +142,7 @@ void CScene_Stage::Render_Scene(const _float & fTimeDelta)
 
 		Engine::CScene* pNewScene = CScene_Rail::Create(m_pGraphicDevice, m_pCommandList);
 		Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
+		return;
 	}
 
 	if (KEY_DOWN(DIK_MINUS))//½º°×¿ë
@@ -148,12 +150,14 @@ void CScene_Stage::Render_Scene(const _float & fTimeDelta)
 		m_pObjectMgr->Clear_Layer();
 		Engine::CScene* pNewScene = CScene_Rail::Create(m_pGraphicDevice, m_pCommandList);
 		Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
+		return;
 	}
 	if (KEY_DOWN(DIK_PGDN))//½º°×¿ë
 	{
 		m_pObjectMgr->Clear_Layer();
 		Engine::CScene* pNewScene = CScene_Boss::Create(m_pGraphicDevice, m_pCommandList);
 		Engine::CManagement::Get_Instance()->SetUp_CurrentScene(pNewScene);
+		return;
 	}
 }
 
@@ -362,6 +366,14 @@ HRESULT CScene_Stage::Ready_GameObjectPrototype()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Ken", pGameObject), E_FAIL);
 
+
+	pGameObject = CStonePaticle::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_StoneParticle", pGameObject), E_FAIL);
+
+	pGameObject = CFlameBullet::Create(m_pGraphicDevice, m_pCommandList);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_FlameBullet", pGameObject), E_FAIL);
 
 	return S_OK;
 }

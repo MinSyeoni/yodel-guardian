@@ -101,11 +101,11 @@ void CShader_Mesh::Set_Shader_Texture(vector< ComPtr<ID3D12Resource>> pVecTextur
 {
 
 
-    m_vecTextureType.resize(pVecTexture.size());
+    m_vecTextureType.resize(iMeshCount);
 
     CGraphicDevice::Get_Instance()->Begin_ResetCmdList();;
     D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
-    srvHeapDesc.NumDescriptors = (_uint)(pVecTexture.size() * 4);
+    srvHeapDesc.NumDescriptors = (_uint)(iMeshCount * 4);
     srvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
     srvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
     DEVICE->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(&m_pCBV_DescriptorHeap));

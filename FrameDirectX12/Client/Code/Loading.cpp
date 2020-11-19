@@ -136,7 +136,6 @@ HRESULT CLoading::Load_Shader()
 
 	pComponent = CShader_Terrain::Create(DEVICE, m_pCommandList);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
-
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Shader_Terrain", ID_STATIC, pComponent), E_FAIL);
 
 
@@ -169,6 +168,20 @@ HRESULT CLoading::Load_Effect()
 	NULL_CHECK_RETURN(pObj, E_FAIL);
 	FAILED_CHECK_RETURN(CObjectMgr::Get_Instance()->Add_GameObjectPrototype(L"Prototype_Effect_GunFire", pObj),E_FAIL);
 
+
+	 pObj = CEffect::Create(DEVICE, m_pCommandList, L"../../Data/Effect/DronBullet.dat");
+	NULL_CHECK_RETURN(pObj, E_FAIL);
+	FAILED_CHECK_RETURN(CObjectMgr::Get_Instance()->Add_GameObjectPrototype(L"Prototype_Effect_DronBullet", pObj), E_FAIL);
+
+
+
+	pObj = CEffect::Create(DEVICE, m_pCommandList, L"../../Data/Effect/DronBomb.dat");
+	NULL_CHECK_RETURN(pObj, E_FAIL);
+	FAILED_CHECK_RETURN(CObjectMgr::Get_Instance()->Add_GameObjectPrototype(L"Prototype_Effect_DronBomb", pObj), E_FAIL);
+
+	pObj = CEffect::Create(DEVICE, m_pCommandList, L"../../Data/Effect/Flame.dat");
+	NULL_CHECK_RETURN(pObj, E_FAIL);
+	FAILED_CHECK_RETURN(CObjectMgr::Get_Instance()->Add_GameObjectPrototype(L"Prototype_Effect_Flame", pObj), E_FAIL);
 
 	return S_OK;
 }
@@ -778,7 +791,7 @@ HRESULT CLoading::Texture_ForStage(void)
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Texture_DamageBlood", ID_STATIC, pComponent), E_FAIL);
 
 	/////////////////////////µ¥¸ÞÁö
-	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Effect/Alphablend/Alphablend%d.dds", 8);
+	pComponent = Engine::CTexture::Create(m_pGraphicDev, m_pCommandList, TEXTURETYPE::TEX_NORMAL, L"../../Resource/Effect/Alphablend/Alphablend%d.dds", 9);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	FAILED_CHECK_RETURN(CComponentMgr::Get_Instance()->Add_ComponentPrototype(L"Prototype_Effect_AlphaBlend", ID_STATIC, pComponent), E_FAIL);
 

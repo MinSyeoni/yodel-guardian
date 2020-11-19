@@ -35,7 +35,7 @@ HRESULT CBossHPBar::LateInit_GameObject()
 
 	m_pTransCom->m_vPos.x = _float(2.f / WINCX * WINCX / 2) - 1.f;
 	m_pTransCom->m_vPos.y = _float(-2.f / WINCY * WINCY / 2) + 1.f;
-	m_pTransCom->m_vPos.z = 0.01f; 
+	m_pTransCom->m_vPos.z = 0.f; 
 
 	CGameObject* pReapear = CObjectMgr::Get_Instance()->Get_GameObject(L"Layer_GameObject", L"Reapear");
 	if(pReapear != nullptr)

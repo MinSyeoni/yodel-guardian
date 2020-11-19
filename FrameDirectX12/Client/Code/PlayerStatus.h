@@ -18,7 +18,7 @@ public:
 	void SetMesh(CMesh* m_pMesh);
 	void KeyInput();
 
-	void LegKeyInput();
+	void LegKeyInput(const _float& fTimeDelt);
 
 
 	void WeaponChange();
@@ -36,6 +36,11 @@ public:
 	float Get_Spine() { return m_fSpine; };
 	void CheckAim();
 	void ReloadCheck();
+	bool BulletCountCheck();//장전가능여부
+	bool ShootingBulletCheck();//사격가능여부
+
+
+
 	void CheckSniping();
 	void CoverCheck();
 	void CameraShakeCheck();
@@ -78,7 +83,7 @@ public:
 	_bool m_bIshit = false;
 	_float m_fhitCool = 0.f;
 	_uint m_uiHp = 314;
-	_uint m_uiMp = 300;		// MP량 변경
+	float m_uiMp = 300;		// MP량 변경
 
 	bool m_bIsZoom = false;
 	_bool m_bIsInit = false;
@@ -94,5 +99,6 @@ public:
 	_vec3 m_vCoverPoint;
 	_float m_fCoverAngleY;
 
+	_float m_fFootTime = 0.f;
 };
 

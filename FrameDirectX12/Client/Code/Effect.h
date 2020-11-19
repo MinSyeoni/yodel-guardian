@@ -77,7 +77,7 @@ public:
 	virtual _int				LateUpdate_GameObject(const _float& fTimeDelta);
 	virtual void				Render_GameObject(const _float& fTimeDelta);
 	void LoadFile(wstring strPath);
-
+	void  SetPos(_vec3 vPos);
 private:
 	virtual HRESULT				Add_Component();
 

@@ -64,6 +64,7 @@ public:
     _matrix* Get_CameraMatrix() { return &m_matCamera; };
     _matrix* Get_ChestdiscMatrix() { return &m_matchestdisc; };
     _matrix* Get_mouthdiscMatrix() { return &m_matmouthdisc; };
+    _matrix* Get_flashMatrix()  { return &m_matFlash; };
 private:
     void               Update_NodeHierarchy(_float fAnimationTime,
         const aiNode* pNode,
@@ -130,6 +131,7 @@ private:
 	_matrix            m_matCamera;
     _matrix            m_matchestdisc;
     _matrix            m_matmouthdisc;
+    _matrix            m_matFlash;
 	_float  m_fAngle = 0.f;
 
 private:

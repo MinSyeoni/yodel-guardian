@@ -102,7 +102,7 @@ HRESULT CRenderer::Add_NaviGroup(CNaviMesh* pNavi)
 void CRenderer::Render_Renderer(const _float& fTimeDelta)
 {
 
-    CGraphicDevice::Get_Instance()->Render_Begin(_rgba(1.0f, 1.0f, 1.0f, 1.f));
+    CGraphicDevice::Get_Instance()->Render_Begin(_rgba(0.0f, 0.0f,0.0f, 1.f));
     Render_ShadowDepth(); //그림자깊이 기록.
 
     Render_Priority(fTimeDelta);

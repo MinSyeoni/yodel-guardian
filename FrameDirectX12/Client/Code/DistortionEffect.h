@@ -21,7 +21,7 @@ private:
 
 public:
 	HRESULT			Ready_GameObjectPrototype();
-	virtual HRESULT	Ready_GameObject();
+	virtual HRESULT	Ready_GameObject(_vec3 vPos);
 	virtual HRESULT	LateInit_GameObject();
 	virtual _int	Update_GameObject(const _float& fTimeDelta);
 	virtual _int	LateUpdate_GameObject(const _float& fTimeDelta);
@@ -45,6 +45,8 @@ private:
 	MeshInfo         m_tMeshInfo;
 	_float m_fTime = 0.f;
 	_float m_fSize = 0.01f;
+
+	_vec3 vPos;
 public:
 	virtual CGameObject* Clone_GameObject(void* prg);
 	static CDistortionEffect* Create(ID3D12Device* pGraphicDevice,

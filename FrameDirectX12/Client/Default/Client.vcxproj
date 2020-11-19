@@ -78,8 +78,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>../Bin\</OutDir>
-    <IncludePath>../../libarary/Assimp/include;$(IncludePath)</IncludePath>
-    <LibraryPath>../../libarary/Assimp/lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>../../libarary/Assimp/include;C:\Program Files (x86)\Visual Leak Detector\include;$(IncludePath)</IncludePath>
+    <LibraryPath>../../libarary/Assimp/lib;C:\Program Files (x86)\Visual Leak Detector\lib\Win64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -87,8 +87,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>../Release\</OutDir>
-    <IncludePath>../../libarary/Assimp/include;$(IncludePath)</IncludePath>
-    <LibraryPath>../../libarary/Assimp/lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>../../libarary/Assimp/include;C:\Program Files (x86)\Visual Leak Detector\include;$(IncludePath)</IncludePath>
+    <LibraryPath>../../libarary/Assimp/lib;C:\Program Files (x86)\Visual Leak Detector\lib\Win64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -117,7 +117,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3dcompiler.lib;D3D12.lib;dxgi.lib;dxguid.lib;dinput8.lib;Engine.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3dcompiler.lib;D3D12.lib;dxgi.lib;dxguid.lib;dinput8.lib;Engine.lib;assimp-vc140-mt.lib;vld.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <LargeAddressAware>true</LargeAddressAware>
       <AdditionalLibraryDirectories>../../Reference/Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
@@ -159,7 +159,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3dcompiler.lib;D3D12.lib;dxgi.lib;dxguid.lib;dinput8.lib;Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3dcompiler.lib;D3D12.lib;dxgi.lib;dxguid.lib;dinput8.lib;Engine.lib;vld.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <LargeAddressAware>true</LargeAddressAware>
       <AdditionalLibraryDirectories>../../Reference/Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
@@ -188,6 +188,7 @@
     <ClInclude Include="..\Code\EfffectComponent.h" />
     <ClInclude Include="..\Code\EquipUI.h" />
     <ClInclude Include="..\Code\FadeOut.h" />
+    <ClInclude Include="..\Code\FlameBullet.h" />
     <ClInclude Include="..\Code\FlameThrower.h" />
     <ClInclude Include="..\Code\GlassObject.h" />
     <ClInclude Include="..\Code\GunUI.h" />
@@ -240,6 +241,7 @@
     <ClInclude Include="..\Code\SoundMgr.h" />
     <ClInclude Include="..\Code\StaticCamera.h" />
     <ClInclude Include="..\Code\StaticObject.h" />
+    <ClInclude Include="..\Code\StoneParticle.h" />
     <ClInclude Include="..\Code\TagBack.h" />
     <ClInclude Include="..\Code\Terrain.h" />
     <ClInclude Include="..\Code\TrailEffect.h" />
@@ -283,6 +285,7 @@
     <ClCompile Include="..\Code\EfffectComponent.cpp" />
     <ClCompile Include="..\Code\EquipUI.cpp" />
     <ClCompile Include="..\Code\FadeOut.cpp" />
+    <ClCompile Include="..\Code\FlameBullet.cpp" />
     <ClCompile Include="..\Code\FlameThrower.cpp" />
     <ClCompile Include="..\Code\GlassObject.cpp" />
     <ClCompile Include="..\Code\GunUI.cpp" />
@@ -335,6 +338,7 @@
     <ClCompile Include="..\Code\SoundMgr.cpp" />
     <ClCompile Include="..\Code\StaticCamera.cpp" />
     <ClCompile Include="..\Code\StaticObject.cpp" />
+    <ClCompile Include="..\Code\StoneParticle.cpp" />
     <ClCompile Include="..\Code\TagBack.cpp" />
     <ClCompile Include="..\Code\Terrain.cpp" />
     <ClCompile Include="..\Code\TrailEffect.cpp" />

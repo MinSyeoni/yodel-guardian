@@ -184,6 +184,11 @@ void CDron::Update_DronHP()
 {
 	if (m_fCurHp <= 0.f)
 	{
+		if (!m_bIsCreateEffect)
+		{
+			CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_GameObject", L"Prototype_Effect_DronBomb", L"Effect", &m_pTransCom->m_vPos);
+			m_bIsCreateEffect = true;
+		}
 		m_fCurHp = 0.f;
 		m_bIsDronState[2] = false;
 		m_eCurState = DRON_DG_Death;
@@ -375,13 +380,14 @@ void CDron::Attak_Player(Engine::CMesh* m_pMeshCom, CDron::DRONSTATE eState)
 		tMeshInfo.Pos = m_pTransCom->m_vPos;
 		if (!m_bIsShoot)
 		{
-			if (!m_bIsShootSound)
-			{
-				CSoundMgr::Get_Instance()->Play_Effect(L"DronShoot.mp3");
-				m_bIsShootSound = true;
-			}
 			CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_GameObject", L"Prototype_DronBullet", L"DronBullet", &tMeshInfo);
 			m_bIsShoot = true;
+		}
+
+		if (!m_bIsShootSound)
+		{
+			CSoundMgr::Get_Instance()->Play_Effect(L"DronShoot.mp3");
+			m_bIsShootSound = true;
 		}
 
 		m_bIsDronState[3] = true;

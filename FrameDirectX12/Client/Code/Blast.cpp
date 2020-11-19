@@ -100,7 +100,7 @@ _int CBlast::Update_GameObject(const _float& fTimeDelta)
 	______________________________________________________________________*/
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 	_matrix matScale = XMMatrixScaling(4.f, 4.f, 4.f);
-	_matrix matRotY = XMMatrixRotationY(ToDegree(-60.f));
+	_matrix matRotY = XMMatrixRotationY(ToDegree(60.f));
 	m_pTransCom->m_matWorld = matScale * matRotY **m_matBone * m_pReaper->m_matWorld;
 
 

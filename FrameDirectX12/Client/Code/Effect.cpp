@@ -77,7 +77,9 @@ HRESULT CEffect::LateInit_GameObject()
 
 _int CEffect::Update_GameObject(const _float& fTimeDelta)
 {
-
+	if (m_bIsDead)
+  return DEAD_OBJ;
+	;
 
 	for (int i = 0; i < m_pEffectList.size();)
 	{
@@ -102,6 +104,7 @@ _int CEffect::Update_GameObject(const _float& fTimeDelta)
 _int CEffect::LateUpdate_GameObject(const _float& fTimeDelta)
 {
 
+
 	for (int i = 0; i < m_pEffectList.size();)
 	{
 		int iDead = m_pEffectList[i]->LateUpdate_GameObject(fTimeDelta);
@@ -122,6 +125,18 @@ _int CEffect::LateUpdate_GameObject(const _float& fTimeDelta)
 
 void CEffect::Render_GameObject(const _float& fTimeDelta)
 {
+}
+
+void CEffect::SetPos(_vec3 vPos)
+{
+	for (int i = 0; i < m_pEffectList.size();i++)
+	{
+		m_pEffectList[i]->SetPos(vPos);
+	}
+
+
+	return;
+
 }
 
 HRESULT CEffect::Add_Component()

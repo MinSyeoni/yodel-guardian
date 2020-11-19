@@ -232,6 +232,13 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombi::ZOM_CB_CombatActive:
 	{
+		if (!m_bIsCreateEffect)
+		{
+			m_bIsCreateEffect = true;
+			_vec3 vPos = m_pTransCom->m_vPos;
+			CObjectMgr::Get_Instance()->Add_GameObject(L"Layer_GameObject", L"Prototype_DistortEffect", L"DistortEffect", &vPos);
+
+		}
 		m_fAniDelay = 12000.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_CB_CombatActive))
 			m_eCurState = ZOM_EX_IdleOffset;
@@ -250,6 +257,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombi::ZOM_DG_GetUpBack:
 	{
+	
 		m_fAniDelay = 20000.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_DG_GetUpBack))
 			m_eCurState = ZOM_EX_IdleOffset;
@@ -257,6 +265,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 	break;
 	case CZombi::ZOM_DG_GetUpFront:
 	{
+		
 		m_fAniDelay = 20000.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_DG_GetUpFront))
 			m_eCurState = ZOM_EX_IdleOffset;
@@ -272,7 +281,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 				m_bIsHitSound = true;
 			}
 
-			m_fSpeed = 15.f;
+			m_fSpeed = 30.f;
 		
 			m_pTransCom->m_vPos = m_pNaviMesh->MoveOn_NaviMesh(&m_pTransCom->m_vPos, &_vec3(m_pTransCom->m_vDir * -1), m_fSpeed * fTimeDelta);
 			
@@ -303,7 +312,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombi::ZOM_EX_Run:
 	{
-		m_fSpeed = 5.f;
+		m_fSpeed = 20.f;
 		
 		m_fAniDelay = 2000.f;
 		if (dynamic_cast<CMesh*>(m_pMeshCom)->Set_FindAnimation(m_fAniDelay, ZOM_EX_Run))
@@ -332,7 +341,7 @@ void CZombi::Animation_Test(const _float& fTimeDelta, CMesh* m_pMeshCom)
 		break;
 	case CZombi::ZOM_EX_WalkSlow:
 	{
-		m_fSpeed = 5.f;
+		m_fSpeed = 10.f;
 
 		if (m_iAstarID == 0)
 			Chase_Character(m_vShepardPos, fTimeDelta);

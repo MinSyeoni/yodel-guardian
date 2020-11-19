@@ -32,7 +32,7 @@ HRESULT CQuestUI::LateInit_GameObject()
 {
 	for(int i = 0; i < 9; ++i)
 		m_pShaderCom[i]->Set_Shader_Texture(m_pTexture[i]->Get_Texture());	
-
+	m_bIsShow = false;
 	return S_OK;
 }
 
@@ -57,6 +57,8 @@ _int CQuestUI::LateUpdate_GameObject(const _float& fTimeDelta)
 
 	FAILED_CHECK_RETURN(m_pRenderer->Add_Renderer(CRenderer::RENDER_UI, this), -1);
 
+	if (CDirectInput::Get_Instance()->Key_Pressing(DIK_F6))
+		m_bIsShow = false;
 
 	return NO_EVENT;
 }

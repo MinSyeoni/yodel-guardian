@@ -42,7 +42,7 @@ HRESULT CEffectComponent::Ready_GameObjectPrototype(EFFECTDATA tData, _vec3 vSta
 
 
 	}
-	
+	if(!tData.bIsUvInfinite)
 	m_fRandZ = rand() % 360;
 
 	m_pTransCom->m_vPos =  vStartPos + m_tEffectData.vOriPos;
@@ -92,6 +92,9 @@ _int CEffectComponent::Update_GameObject(const _float& fTimeDelta)
 
 _int CEffectComponent::LateUpdate_GameObject(const _float& fTimeDelta)
 {
+
+	
+
 	NULL_CHECK_RETURN(m_pRenderer, -1);
 
 	if(m_tEffectData.fStartTime<m_fAccTime)
@@ -154,7 +157,9 @@ void CEffectComponent::BillBoard()
 
 
 	m_pTransCom->m_matWorld = matTemp* matBill * m_pTransCom->m_matWorld;
-
+	_vec3 vPos;
+	memcpy(&vPos, &m_pTransCom->m_matWorld._41, sizeof(_vec3));
+	Compute_ViewZ(&vPos);
 }
 
 void CEffectComponent::SpriteAnimation()
@@ -169,7 +174,7 @@ void CEffectComponent::SpriteAnimation()
 		if (m_iSpriteRow >= m_tEffectData.iUvHeight)
 		{
 			m_iSpriteRow = 0;
-              
+            if(!m_tEffectData.bIsUvInfinite)
 			m_bIsDead = true;
 			
 		}
@@ -307,6 +312,7 @@ CGameObject* CEffectComponent::Clone_GameObject(void* pArg)
 CEffectComponent* CEffectComponent::Create(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList, EFFECTDATA tData, _vec3 vStartPos)
 {
 	CEffectComponent* pComponent = new CEffectComponent(pGraphicDevice,pCommandList);
+
 
 	if(FAILED(pComponent->Ready_GameObjectPrototype(tData,  vStartPos)))
 		return nullptr;

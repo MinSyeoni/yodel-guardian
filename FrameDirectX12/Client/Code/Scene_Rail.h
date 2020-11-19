@@ -13,7 +13,7 @@ public:
 	virtual _int	Update_Scene(const _float& fTimeDelta);
 	virtual _int	LateUpdate_Scene(const _float& fTimeDelta);
 	virtual void	Render_Scene(const _float& fTimeDelta);
-
+	void   SceneChange() { m_bIsChangeScene = true; }
 private:
 	HRESULT			Ready_GameObjectPrototype();
 private:
@@ -37,6 +37,8 @@ private:
 	virtual void		Free();
 
 private:
+	bool            m_bIsMakeFadeOut = false;
+	bool            m_bIsChangeScene = false;
 	MeshInfo		m_tMeshInfo;
 	_bool					m_bIsNextSound7 = false;
 };

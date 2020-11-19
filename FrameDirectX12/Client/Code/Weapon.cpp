@@ -56,6 +56,24 @@ void CWeapon::Render_LimLight(CShader_LimLight* pShader)
 	pShader->Set_LimFinish();
 }
 
+void CWeapon::Reload()
+{
+	int iBullet = (m_iFullBullet - m_iCurBullet);
+
+	if (m_iMaxBullet - iBullet > 0)
+		m_iMaxBullet -= iBullet;
+	else
+	{
+		iBullet = m_iMaxBullet;
+		m_iMaxBullet = 0;
+
+	}
+	m_iCurBullet += iBullet;
+
+
+
+}
+
 void CWeapon::Set_ConstantTable()
 {
 	_matrix matRotY = XMMatrixRotationY(XMConvertToRadians(-90));

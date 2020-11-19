@@ -12,6 +12,8 @@
 #include "ComponentMgr.h"
 #include "Renderer.h"
 #include "BaziorMgr.h"
+#include "DirectInput.h"
+#include "Frustom.h"
 #define MAX_LOADSTRING 100
 
 // 전역 변수:
@@ -277,7 +279,11 @@ _ulong Release_Singleton()
 	COUT_STR("-------------------------");
 #endif
 	_ulong dwRefCnt = 0;
-
+	if (dwRefCnt = Engine::CDirectInput::Get_Instance()->Destroy_Instance())
+	{
+		MSG_BOX(L"CFrameMgr Release Failed");
+		return dwRefCnt;
+	}
 	if (dwRefCnt = Engine::CFrameMgr::Get_Instance()->Destroy_Instance())
 	{
 		MSG_BOX(L"CFrameMgr Release Failed");
@@ -336,6 +342,17 @@ _ulong Release_Singleton()
 	{
 			return dwRefCnt;
 	}
+	if (dwRefCnt = CSoundMgr::Get_Instance()->Destroy_Instance())
+	{
 
+		return dwRefCnt;
+
+	}
+	if (dwRefCnt = CFrustom::Get_Instance()->Destroy_Instance())
+	{
+
+
+		return dwRefCnt;
+	}
 	return 0;
 }

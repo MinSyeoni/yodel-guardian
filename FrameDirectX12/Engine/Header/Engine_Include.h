@@ -1,8 +1,9 @@
 #ifndef Engine_Include_h__
 #define Engine_Include_h__
 
-#include "vld.h"
+
 // #include <Windows.h>
+//#include <vld.h>
 #include <iostream>
 #include <array>
 #include <vector>
@@ -69,11 +70,7 @@ ______________________________________________________________________*/
 /*____________________________________________________________________
 DirectSound
 ______________________________________________________________________*/
-#include <mmsystem.h>
-#include <dsound.h>
-#pragma comment(lib, "dsound.lib")
-#pragma comment(lib, "dxguid.lib")
-#pragma comment(lib, "winmm.lib")
+
 
 
 /*_______//ÆùÆ® ¿ë 

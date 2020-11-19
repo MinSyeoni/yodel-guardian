@@ -31,7 +31,7 @@ HRESULT CMainApp::Ready_MainApp()
 {
 	srand(unsigned int(time(nullptr)));
 
-	FAILED_CHECK_RETURN(SetUp_DefaultSetting(CGraphicDevice::MODE_WIN, WINCX, WINCY), E_FAIL);
+	FAILED_CHECK_RETURN(SetUp_DefaultSetting(CGraphicDevice::MODE_FULL, WINCX, WINCY), E_FAIL);
 	FAILED_CHECK_RETURN(SetUp_ComponentPrototype(), E_FAIL);
 	FAILED_CHECK_RETURN(SetUp_Resource(),E_FAIL);
 	FAILED_CHECK_RETURN(SetUp_Font(),E_FAIL);
@@ -76,9 +76,6 @@ HRESULT CMainApp::SetUp_Font()
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	m_pObjectMgr->Add_GameObjectPrototype(L"Prototype_Font_NPC", pGameObject);
 
-
-	m_pFont_FPS = static_cast<CFont*>(CObjectMgr::Get_Instance()->Get_NewGameObject(L"Prototype_Font_NetmarbleLight", L"fuck", nullptr));
-	FAILED_CHECK_RETURN(m_pFont_FPS->Ready_GameObjectClone(L"", _vec2(1400.f, 850.f), D2D1::ColorF::SpringGreen), E_FAIL);
 	return S_OK;
 }
 _int CMainApp::Update_MainApp(const _float & fTimeDelta)
@@ -91,19 +88,6 @@ _int CMainApp::Update_MainApp(const _float & fTimeDelta)
 	Engine::CDirectInput::Get_Instance()->SetUp_InputState();
 
 
-	m_pFont_FPS->Update_GameObject(fTimeDelta);
-
-	m_fTime += fTimeDelta;
-	++m_uiFPS;
-
-	if (m_fTime >= 1.0f)
-	{
-		m_fTime = 0.0f;
-		m_uiFPS = 0;
-	}
-
-	//CSoundMgr::Get_Instance()->Update_SoundDev();
-
 
 	return m_pManagement->Update_Management(fTimeDelta);
 }
@@ -112,7 +96,6 @@ _int CMainApp::LateUpdate_MainApp(const _float & fTimeDelta)
 {
 	NULL_CHECK_RETURN(m_pManagement, -1);
 
-	m_pFont_FPS->LateUpdate_GameObject(fTimeDelta);
 
 	return m_pManagement->LateUpdate_Management(fTimeDelta);
 }
@@ -197,7 +180,14 @@ HRESULT CMainApp::SetUp_DefaultSetting(CGraphicDevice::WINMODE eMode, const _uin
 	CSoundMgr::Get_Instance()->LoadSoundFile("LongSiren.wav");
 	// 퀘스트
 	CSoundMgr::Get_Instance()->LoadSoundFile("NextMission.wav");
-	
+
+	//플레이어 
+	CSoundMgr::Get_Instance()->LoadSoundFile("WeaponReload.ogg");
+	CSoundMgr::Get_Instance()->LoadSoundFile("Step.ogg");
+	CSoundMgr::Get_Instance()->LoadSoundFile("Sniper.wav");
+	CSoundMgr::Get_Instance()->LoadSoundFile("Rifle.ogg");
+
+
 	return S_OK;
 }
 
@@ -308,6 +298,6 @@ CMainApp * CMainApp::Create()
 
 void CMainApp::Free()
 {
-	Safe_Release(m_pFont_FPS);
+//	Safe_Release(m_pFont_FPS);
 	
 }

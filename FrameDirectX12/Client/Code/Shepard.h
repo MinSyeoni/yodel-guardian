@@ -35,7 +35,7 @@ public:
 	void MoveDirectionCheck(const _float& fTimeDelta,_vec3 vTargetPos);
 	void ReloadCheck();
 	void ShootingCheck(const _float& fTimeDelta,CMonster* pMonster);
-
+	void FightingCheck();
 	void CollisionWithObject();
 
 	Engine::CNaviMesh* Get_ShepardNavi() { return m_pNaviCom; }	// 추가함
@@ -98,10 +98,20 @@ private:
 	_bool m_bIsStartConver = false;//플레이어 시야에 들어왓늕ㅣ 
 	_bool m_bIsTalk = false;//플레이어와 대화시작
 
+
+
+
+
+	_bool m_bIsSound1 = false;
+	_bool m_bIsSound2 = false;
+private:
+
+
 	_bool			m_bIsNextSound2 = false;		// 추가가ㅏㅏ가
 	_bool			m_bIsNextSound3 = false;		// 추가가ㅏㅏ가
 	_bool			m_bIsNextSound4 = false;		// 추가가ㅏㅏ가
 	_bool			m_bIsNextSound5 = false;
+
 
 private:
 	virtual void			Free();

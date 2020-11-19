@@ -27,7 +27,7 @@ HRESULT CDistortionEffect::Ready_GameObjectPrototype()
 	return S_OK;
 }
 
-HRESULT CDistortionEffect::Ready_GameObject()
+HRESULT CDistortionEffect::Ready_GameObject(_vec3 vPos)
 {
 
 	NULL_CHECK_RETURN(m_pComponentMgr, E_FAIL);
@@ -35,14 +35,15 @@ HRESULT CDistortionEffect::Ready_GameObject()
 
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 	// Buffer
-	m_pMeshCom = static_cast<Engine::CMesh*>(m_pComponentMgr->Clone_Component(m_tMeshInfo.MeshTag.c_str(), COMPONENTID::ID_STATIC));
+	m_pMeshCom = static_cast<Engine::CMesh*>(m_pComponentMgr->Clone_Component(L"DistortDisk", COMPONENTID::ID_STATIC));
 	NULL_CHECK_RETURN(m_pMeshCom, E_FAIL);
 	m_mapComponent[ID_STATIC].emplace(L"Com_Mesh", m_pMeshCom);
 
 
-	m_pTransCom->m_vPos = m_tMeshInfo.Pos;
-	m_pTransCom->m_vScale = m_tMeshInfo.Scale;
-	m_pTransCom->m_vAngle = m_tMeshInfo.Rotation;
+	m_pTransCom->m_vPos = vPos;
+	m_pTransCom->m_vPos.y += 0.1f;
+	m_pTransCom->m_vScale = _vec3(0.7f, 0.7f, 0.7f);
+	m_pTransCom->m_vAngle = _vec3(0.f, 0.f, 0.f);
 
 
 
@@ -71,17 +72,16 @@ _int CDistortionEffect::Update_GameObject(const _float& fTimeDelta)
 
 	if (m_bIsDead)
 		return DEAD_OBJ;
-	m_fTime += fTimeDelta *5.f;
+	m_fTime += fTimeDelta;
 
-	
-
+	if (m_fTime > 6.0f)
+		m_bIsDead = true;
 	/*____________________________________________________________________
 	TransCom - Update WorldMatrix.
 	______________________________________________________________________*/
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 
 
-	BillBoard();
 
 	return NO_EVENT;
 }
@@ -180,7 +180,7 @@ void CDistortionEffect::Set_ConstantTableDistort()
 
 	CB_DISTORT_INFO tCB_DistortInfo;
 	ZeroMemory(&tCB_DistortInfo, sizeof(CB_DISTORT_INFO));
-	tCB_DistortInfo.DistorScale = _vec4(m_fTime, 0.f, 0.f, 1.f);
+	tCB_DistortInfo.DistorScale = _vec4(m_fTime, m_fTime, 0.f, 1.f);
 
 	m_pDistortShaderCom->Get_UploadBuffer_DistortInfo()->CopyData(0, tCB_DistortInfo);
 }
@@ -198,10 +198,9 @@ CGameObject* CDistortionEffect::Clone_GameObject(void* prg)
 {
 	CGameObject* pInstance = new CDistortionEffect(*this);
 
-	MeshInfo tMeshInfo = *reinterpret_cast<MeshInfo*>(prg);
-	static_cast<CDistortionEffect*>(pInstance)->SetMeshInfo(tMeshInfo);
+	_vec3 vPos = *reinterpret_cast<_vec3*>(prg);
 
-	if (FAILED(pInstance->Ready_GameObject()))
+	if (FAILED(static_cast<CDistortionEffect*>(pInstance)->Ready_GameObject(vPos)))
 		return nullptr;
 
 	return pInstance;

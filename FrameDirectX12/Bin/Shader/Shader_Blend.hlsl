@@ -44,6 +44,7 @@ float4 PS_MAIN(VS_OUTPUT input) : SV_TARGET
     float4 vDistortion = gDestortionTexture.Sample(gsamLinearWrap, input.uv);
 
     float2 DistUV = vDistortion.xy * 0.02f;
+    DistUV = (DistUV * 2.f - 1.f);
 
     DistUV = DistUV + input.uv;
     DistUV += vDistortion.z * 0.02;
@@ -52,7 +53,7 @@ float4 PS_MAIN(VS_OUTPUT input) : SV_TARGET
     float4 vShadeInfo = gShadeTexture.Sample(gsamLinearWrap, DistUV);
     float4 vBlurInfo = gBlurTexture.Sample(gsamLinearWrap, DistUV) * 1.5f;
     float4 vEmissiveInfo = gEmissiveTexture.Sample(gsamLinearWrap, DistUV) * 2.f;
-    float4 vSSaoInfo = gSSAOTexture.Sample(gsamLinearWrap, DistUV) * 1.5f;
+    float4 vSSaoInfo = gSSAOTexture.Sample(gsamLinearWrap, DistUV) * 3.0f;
     if(OptionList.x>0.5)
     OutColor = (vAlbedoInfo * vShadeInfo *(vSSaoInfo)) +( vSpecInfo* OptionList.y) + vBlurInfo + (vEmissiveInfo* OptionList.z);
     else

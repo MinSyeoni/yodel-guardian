@@ -31,6 +31,8 @@ public:
 	void ScaleAnimation();
 	void FadeInAnimation();
 	void FadeOutAnimation();
+
+	void SetPos(_vec3 vPos) { m_pTransCom->m_vPos = vPos; };
 private:
 	virtual HRESULT				Add_Component();
 

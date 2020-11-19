@@ -37,7 +37,7 @@ float4 PS_MAIN(VS_OUTPUT input) : SV_TARGET
     gauss = gDepthTexture.Sample(gsamLinearWrap, input.uv);
     float4 Normal = gNormalTexture.Sample(gsamLinearWrap, input.uv);
     
-    float Color = gauss.r * (Normal.g) * 0.7f;
+    float Color = gauss.r * (Normal.g) * 0.3f;
     
     OutColor = float4(Color.rrr, 1.f);
     

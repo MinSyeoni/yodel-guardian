@@ -140,10 +140,12 @@ _float CPlayer::Get_CurMp()
 
 void CPlayer::Set_CurMP(_uint iMP)
 {
-	if (m_pStatus->m_uiMp < 300)	// 약간 수정
-		m_pStatus->m_uiMp += iMP;
+	if (m_pStatus->m_uiMp < 300.f)	// 약간 수정
+		m_pStatus->m_uiMp += (float)iMP;
 	else
-		m_pStatus->m_uiMp = 300;
+		m_pStatus->m_uiMp = 300.f;
+	if (m_pStatus->m_uiMp > 300.f)
+		m_pStatus->m_uiMp = 300.f;//살짝만 추가
 }
 
 _float CPlayer::Get_CurHP()

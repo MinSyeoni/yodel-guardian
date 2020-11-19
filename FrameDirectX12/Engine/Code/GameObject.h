@@ -34,7 +34,7 @@ public:
 	virtual void    Render_LimLight(CShader_LimLight* pShader);
 protected:
 	virtual HRESULT Add_Component();
-	void			Compute_ViewZ(const _vec4* pPosInWorld);
+	void			Compute_ViewZ(const _vec3* pPosInWorld);
 private:
 	CComponent* Find_Component(wstring wstrComponentTag, const COMPONENTID& eID);
 

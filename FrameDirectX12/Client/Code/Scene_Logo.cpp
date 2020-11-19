@@ -10,6 +10,7 @@
 #include "LoadingTexture.h"
 #include "LoadingBar.h"
 #include "LogoExoMars.h"
+#include "Scene_Rail.h"
 CScene_Logo::CScene_Logo(ID3D12Device* pGraphicDevice, ID3D12GraphicsCommandList* pCommandList)
 	: Engine::CScene(pGraphicDevice, pCommandList)
 {
